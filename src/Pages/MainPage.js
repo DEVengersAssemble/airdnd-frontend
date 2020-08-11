@@ -24,6 +24,7 @@ const MainPage = () => {
     <div>
       <p>Main</p>
       <Toggle checked={toggleState} handleClick={handleClick} />
+      <div></div>
       <DropDown
         title="월"
         options={['1', '2', '3', '4', '5']}
