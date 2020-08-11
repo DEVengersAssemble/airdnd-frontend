@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Toggle from '../Components/Global/Toggle';
 import DropDown from '../Components/Global/DropDown';
+import DropDownWithFocus from '../Components/Global/DropDownWithFocus';
 
 const MainPage = () => {
   // Toggle
@@ -33,6 +34,12 @@ const MainPage = () => {
         optionSelected={optionSelected}
         clickOption={clickOption}
       />
+      <div></div>
+      <DropDownWithFocus
+        name="일"
+        title="일"
+        options={['1', '2', '3', '4', '5', '6', '7']}
+      ></DropDownWithFocus>
     </div>
   );
 };
