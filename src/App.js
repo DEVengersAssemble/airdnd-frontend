@@ -4,9 +4,10 @@ import ResetStyle from './StyledComponents/ResetStyle';
 
 function App() {
   return (
-    <ResetStyle>
+    <>
       <MainRouter />
-    </ResetStyle>
+      <ResetStyle />
+    </>
   );
 }
 
