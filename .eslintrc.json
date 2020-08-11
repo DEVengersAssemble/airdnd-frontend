@@ -1,46 +1,16 @@
 {
-<<<<<<< HEAD
-    "env": {
-        "browser": true,
-        "es2020": true
-    },
-    "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended"
-    ],
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": 11,
-        "sourceType": "module"
-    },
-    "plugins": [
-        "react"
-    ],
-    "rules": {
-    }
-}
-=======
   "env": {
-      "browser": true,
-      "es2020": true
+    "browser": true,
+    "es2020": true
   },
-  "extends": [
-      "eslint:recommended",
-      "plugin:react/recommended"
-  ],
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
   "parserOptions": {
-      "ecmaFeatures": {
-          "jsx": true
-      },
-      "ecmaVersion": 11,
-      "sourceType": "module"
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 11,
+    "sourceType": "module"
   },
-  "plugins": [
-      "react"
-  ],
-  "rules": {
-  }
+  "plugins": ["react"],
+  "rules": {}
 }
->>>>>>> 1f2b484162d1248335d14d2af0a699240fefb2b4
