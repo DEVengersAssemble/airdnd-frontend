@@ -1,6 +1,6 @@
 import React from 'react';
 import MainRouter from './Routers/MainRouter';
-import ResetStyle from './StyledComponents/ResetStyle';
+import ResetStyle from './ResetStyle';
 
 function App() {
   return (

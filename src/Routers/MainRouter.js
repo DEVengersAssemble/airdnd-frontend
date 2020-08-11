@@ -5,15 +5,17 @@ import SearchPage from '../Pages/SearchPage';
 import DetailPage from '../Pages/DetailPage';
 import ReservationPage from '../Pages/ReservationPage';
 import Mypage from '../Pages/Mypage';
+import Modal from '../Components/Global/Modal';
 
 const MainRouter = () => {
   return (
     <Switch>
       <Route path="/" component={MainPage} exact />
-      <Route path="/SearchPage" component={SearchPage} />
-      <Route path="/DetailPage" component={DetailPage} exact />
-      <Route path="/ReservationPage" component={ReservationPage} />
+      <Route path="/Search" component={SearchPage} />
+      <Route path="/Detail" component={DetailPage} exact />
+      <Route path="/Reservation" component={ReservationPage} />
       <Route path="/Mypage" component={Mypage} />
+      <Route path="/Modal" component={Modal} />
       <Route
         render={({ location }) => (
           <div>
