@@ -4,7 +4,9 @@ import MainPage from '../Pages/MainPage';
 import SearchPage from '../Pages/SearchPage';
 import DetailPage from '../Pages/DetailPage';
 import ReservationPage from '../Pages/ReservationPage';
-import Mypage from '../Pages/Mypage';
+import TripsPage from '../Pages/TripsPage';
+import MessagePage from '../Pages/MessagePage';
+import WishlistsPage from '../Pages/WishlistsPage';
 
 const MainRouter = () => {
   return (
@@ -13,7 +15,9 @@ const MainRouter = () => {
       <Route path="/SearchPage" component={SearchPage} />
       <Route path="/DetailPage" component={DetailPage} exact />
       <Route path="/ReservationPage" component={ReservationPage} />
-      <Route path="/Mypage" component={Mypage} />
+      <Route path="/message" component={MessagePage} />
+      <Route path="/trips" component={TripsPage} />
+      <Route path="/wishlists" component={WishlistsPage} />
       <Route
         render={({ location }) => (
           <div>
