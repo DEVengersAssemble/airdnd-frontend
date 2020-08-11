@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react';
 import styled from 'styled-components';
 
@@ -21,3 +22,7 @@ const StButton = () => {
 };
 
 export default StButton;
+=======
+//
+//
+>>>>>>> 95b3152b3c1b998773a9cd92105f735d454cef7b
