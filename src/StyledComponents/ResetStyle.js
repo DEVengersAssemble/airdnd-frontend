@@ -2,9 +2,7 @@ import { createGlobalStyle } from 'styled-components';
 
 const ResetStyle = createGlobalStyle`
 
-html {
-  font-size: 10px;
-}
+
   
 * {
   box-sizing: border-box;
@@ -150,6 +148,10 @@ button {
 svg,
 path {
   pointer-events: none;
+}
+
+html {
+  font-size: 10px;
 }
 
 `;
