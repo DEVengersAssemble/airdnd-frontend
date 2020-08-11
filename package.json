@@ -32,7 +32,11 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": ["react-app","airbnb","prettier"],
+    "extends": [
+      "react-app",
+      "airbnb",
+      "prettier"
+    ],
     "rules": {
       "react/jsx-filename-extension": 0,
       "react/jsx-one-expression-per-line": 0
@@ -51,7 +55,7 @@
     ]
   },
   "devDependencies": {
-    "eslint": "^7.6.0",
+    "eslint": "6.6.0",
     "prettier": "2.0.5"
   }
 }
