@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Calendar = () => {
+const TextInput = () => {
   return <div></div>;
 };
 
-export default Calendar;
+export default TextInput;
