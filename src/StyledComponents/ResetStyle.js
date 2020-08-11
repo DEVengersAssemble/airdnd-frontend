@@ -1,9 +1,13 @@
-// import styled, { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 
-// const ResetStyle = createGlobalStyle`
-//   body {
-//     color: red;
-//   }
-// `;
+const ResetStyle = createGlobalStyle`
+  html {
+    font-size: 10px;
+  }
 
-// export default ResetStyle;
+  body {
+    /* color: red; */
+  }
+`;
+
+export default ResetStyle;
