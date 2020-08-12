@@ -29,7 +29,7 @@ const StRatingWrapper = styled.div`
 const StStarIcon = styled(AiFillStar)`
   margin-right: 0.4rem;
   color: ${props => props.theme.main};
-  font-size: ${props => props.scale * 1.2 + 'rem'};
+  font-size: ${props => (props.scale * 1.2).toFixed(1) + 'rem'};
 `;
 
 const StRatingGrade = styled.span`
