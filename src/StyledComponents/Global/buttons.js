@@ -1,15 +1,35 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-const fontStyles = css`
-  ${({ fontSize }) => css`
-    font-size: fontSize;
+const borders = btnType => {
+  switch (btnType) {
+    case 'color':
+    case 'underlined':
+      return css`
+        border: none;
+      `;
+    case 'oval':
+      return css`
+        border-radius: 30px;
+      `;
+    case 'circle':
+      return css`
+        border-radius: 50%;
+      `;
+  }
+};
+
+const borderStyles = css`
+  ${({ btnType, border }) => css`
+    ${borders(btnType)};
+    border: ${border && border};
   `}
 `;
 
-const borderStyles = css`
-  ${({ border }) => css`
-    border: border;
+const fontStyles = css`
+  ${({ btnType, fontSize }) => css`
+    font-size: ${fontSize};
+    text-decoration: ${btnType === 'underlined' && 'underline'};
   `}
 `;
 
@@ -19,8 +39,21 @@ const colorStyles = css`
     css`
       background: ${color};
       color: #fff;
-      border: none;
     `}
+`;
+
+const sizeStyles = css`
+  ${({ btnType, width, height }) => css`
+    ${
+      btnType === 'circle' &&
+      css`
+        width: 32px;
+        height: 32px;
+      `
+    }
+    width: ${width};
+    height: ${height};
+  `}
 `;
 
 const StBtn = styled.button`
@@ -34,128 +67,35 @@ const StBtn = styled.button`
   padding: 1rem;
   ${fontStyles};
   ${borderStyles};
-`;
-
-const StColorBtn = styled(StBtn)`
-  border: none;
   ${colorStyles};
-  ${fontStyles};
-  ${borderStyles};
+  ${sizeStyles}
 `;
 
-const StUnderlinedBtn = styled(StBtn)`
-  border: none;
-  text-decoration: underline;
-  ${fontStyles};
-  ${borderStyles};
-`;
-
-const StOvalBtn = styled(StBtn)`
-  border-radius: 30px;
-  ${fontStyles};
-  ${borderStyles};
-`;
-
-const StCircleBtn = styled(StBtn)`
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  /* box-shadow: 1px 1px 5px 0 #ddd; */
-  ${fontStyles};
-  ${borderStyles};
-  ${colorStyles};
-`;
-
-const StButton = ({ children, border, width, height, fontSize }) => {
+const StButton = ({
+  children,
+  btnType,
+  color,
+  border,
+  width,
+  height,
+  fontSize,
+}) => {
   return (
-    <StBtn border={border} width={width} height={height} fontSize={fontSize}>
+    <StBtn
+      btnType={btnType}
+      color={color}
+      border={border}
+      width={width}
+      height={height}
+      fontSize={fontSize}
+    >
       {children}
     </StBtn>
   );
 };
 
-const StUnderlinedButton = ({ children, border, width, height, fontSize }) => {
-  return (
-    <StUnderlinedBtn
-      border={border}
-      width={width}
-      height={height}
-      fontSize={fontSize}
-    >
-      {children}
-    </StUnderlinedBtn>
-  );
-};
-
-const StCircleButton = ({
-  children,
-  color,
-  border,
-  width,
-  height,
-  fontSize,
-}) => {
-  return (
-    <StCircleBtn
-      color={color}
-      border={border}
-      width={width}
-      height={height}
-      fontSize={fontSize}
-    >
-      {children}
-    </StCircleBtn>
-  );
-};
-
-const StOvalButton = ({ children, border, width, height, fontSize }) => {
-  return (
-    <StOvalBtn
-      border={border}
-      width={width}
-      height={height}
-      fontSize={fontSize}
-    >
-      {children}
-    </StOvalBtn>
-  );
-};
-
-const StColorButton = ({
-  children,
-  color,
-  border,
-  width,
-  height,
-  fontSize,
-}) => {
-  return (
-    <StColorBtn
-      color={color}
-      border={border}
-      width={width}
-      height={height}
-      fontSize={fontSize}
-    >
-      {children}
-    </StColorBtn>
-  );
-};
-
 StButton.defaultProps = {
-  border: '1px solid #181818',
-  fontSize: '1.6rem',
+  // fontSize: '1.6rem',
 };
 
-StCircleButton.defaultProps = {
-  width: '32px',
-  height: '32px',
-};
-
-export {
-  StButton,
-  StColorButton,
-  StUnderlinedButton,
-  StCircleButton,
-  StOvalButton,
-};
+export default StButton;

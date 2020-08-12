@@ -1,32 +1,30 @@
 import React from 'react';
-import {
-  StButton,
-  StColorButton,
-  StUnderlinedButton,
-  StCircleButton,
-  StOvalButton,
-} from '../StyledComponents/Global/buttons';
+import StButton from '../StyledComponents/Global/buttons';
 
 const SearchPage = () => {
   return (
     <>
       <div>Search</div>
       <StButton>This is button</StButton>
-      <StColorButton color={'black'}>This is button</StColorButton>
-      <StUnderlinedButton>This is button</StUnderlinedButton>
-      <StCircleButton>T</StCircleButton>
-      <StOvalButton>This is button</StOvalButton>
-      <StButton>This is button</StButton>
-      <StColorButton fontSize={'2rem'} color={'orange'}>
+      <StButton fontSize={'1.2rem'}>This is button</StButton>
+      <StButton width={'30%'}>This is button</StButton>
+      <StButton btnType={'color'} color={'black'}>
         This is button
-      </StColorButton>
-      <StUnderlinedButton border={'3px solid red'}>
+      </StButton>
+      <StButton btnType={'color'} color={'orangered'}>
         This is button
-      </StUnderlinedButton>
-      <StCircleButton color={'pink'} width={'50px'} height={'50px'}>
+      </StButton>
+      <StButton btnType="underlined">This is button</StButton>
+      <StButton btnType={'oval'} color={'pink'}>
+        This is button
+      </StButton>
+      <StButton btnType={'oval'} border={'3px solid black'}>
+        This is button
+      </StButton>
+      <StButton btnType={'circle'}>T</StButton>
+      <StButton btnType={'circle'} color={'red'}>
         T
-      </StCircleButton>
-      <StOvalButton>This is button</StOvalButton>
+      </StButton>
     </>
   );
 };
