@@ -3,6 +3,7 @@ import Modal from '../Components/Global/Modal';
 import ModalFooter from '../Components/Global/ModalFooter';
 import styled from 'styled-components';
 import Popup from '../Components/Global/Popup';
+import Profile from '../Components/Global/Profile';
 
 const DetailPage = () => {
   const [modalState, setModalState] = useState('none');
@@ -27,15 +28,19 @@ const DetailPage = () => {
       </Modal>
 
       <PopupWrapper>
-        <button onClick={onPopup}>각자 알아서 추가</button>
-        <Popup popupState={popupState}>children</Popup>
+        <button onClick={onPopup}>popup</button>
+        <Popup popupState={popupState}>
+          <ModalFooter>test</ModalFooter>
+        </Popup>
       </PopupWrapper>
+
+      <Profile isSupperhost="true" mark="true" lastName="haeun" />
     </>
   );
 };
 
-export default DetailPage;
-
 const PopupWrapper = styled.div`
   position: relative;
 `;
+
+export default DetailPage;

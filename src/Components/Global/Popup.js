@@ -26,6 +26,8 @@ export default Popup;
 const PopupBox = styled.div`
   display: ${props => props.popupState || 'none'};
   position: absolute;
+  min-width: 100px;
+  min-height: 100px;
   top: ${props => props.top || '5.4rem'};
   left: ${props => props.left || '0'};
   padding: ${props => props.padding || '2rem'};
