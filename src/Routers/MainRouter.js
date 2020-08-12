@@ -7,7 +7,6 @@ import ReservationPage from '../Pages/ReservationPage';
 import TripsPage from '../Pages/TripsPage';
 import MessagePage from '../Pages/MessagePage';
 import WishlistsPage from '../Pages/WishlistsPage';
-import Modal from '../Components/Global/Modal';
 
 const MainRouter = () => {
   return (
