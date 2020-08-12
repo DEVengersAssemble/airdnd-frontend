@@ -34,8 +34,9 @@ const SearchPage = () => {
         T
       </Button>
       <hr></hr>
-      <NextButton></NextButton>
-      <PrevButton></PrevButton>
+      <NextButton styleType="transparent"></NextButton>
+      <PrevButton styleType="shadowed"></PrevButton>
+      <PrevButton styleType="plane"></PrevButton>
       <PlusButton></PlusButton>
       <MinusButton disabled></MinusButton>
     </div>
