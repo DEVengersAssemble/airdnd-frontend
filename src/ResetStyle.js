@@ -1,7 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
 const ResetStyle = createGlobalStyle`
-
 * {
   box-sizing: border-box;
 }
@@ -111,6 +110,8 @@ section {
 body {
   line-height: 1;
   color: #181818;
+  font-size: 16px;
+  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
 }
 ol,
 ul {
@@ -142,16 +143,13 @@ button {
   margin: -1px;
   clip: rect(0, 0, 0, 0);
 }
-
-svg,
+${'' /* svg,
 path {
   pointer-events: none;
-}
-
+} */}
 html {
   font-size: 10px;
 }
-  
 `;
 
 export default ResetStyle;

@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Calendar = () => {
+const Message = () => {
   return <div></div>;
 };
 
-export default Calendar;
+export default Message;
