@@ -1,9 +1,13 @@
 import React from 'react';
-import Button from '../Global/Button';
+import { StBtn } from '../Global/Button';
 import styled from 'styled-components';
 
+const FilterBtn = styled(StBtn)`
+  margin-right: 1rem;
+`;
+
 const FilterButton = ({ children }) => {
-  return <Button btnType="oval">{children}</Button>;
+  return <FilterBtn btnType="oval">{children}</FilterBtn>;
 };
 
 const FilterList = () => {
