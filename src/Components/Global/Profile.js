@@ -6,16 +6,16 @@ import imgPath from '../../Assets/Img/profile.png';
 // lastName 반드시 넣어주세요.
 const Profile = ({ size, isSupperhost, mark, profileImg, lastName }) => {
   return (
-    <ProfileLink size={size}>
+    <StProfileLink size={size}>
       {isSupperhost && mark && lastName && (
         <span className="a11yHidden">
-          {lastName}님은 슈퍼호스트입니다. {lastName}님에 대해 자세히
-          알아보세요.
+          {`${lastName}님은 슈퍼호스트입니다. ${lastName}님에 대해 자세히
+          알아보세요.`}
         </span>
       )}
-      <PropfileImg profileImg={profileImg} />
+      <StPropfileImg profileImg={profileImg} />
       {isSupperhost && mark && (
-        <SuperHostMark
+        <StSuperHostMark
           viewBox="0 0 14 24"
           role="presentation"
           aria-hidden="true"
@@ -34,13 +34,13 @@ const Profile = ({ size, isSupperhost, mark, profileImg, lastName }) => {
             d="m7 24c-2.2060547 0-4-1.7939453-4-3.9990234 0-2.2060547 1.7939453-4.0009766 4-4.0009766s4 1.7949219 4 4.0009766c0 2.2050781-1.7939453 3.9990234-4 3.9990234zm0-7c-1.6542969 0-3 1.3466797-3 3.0009766 0 1.6533203 1.3457031 2.9990234 3 2.9990234s3-1.3457031 3-2.9990234c0-1.6542969-1.3457031-3.0009766-3-3.0009766zm.0039062-1.8242188c-.4560547 0-.9121094-.1064453-1.2617188-.3164062l-5.0458984-3.8642578c-.4697265-.3642578-.696289-.8525391-.696289-1.4951172v-8c.0009766-.3730469.1679688-.7529297.4580078-1.0429688.2900391-.2905273.6689453-.4570312 1.0410156-.4570312h.0019531 10.9990235c.7851562 0 1.5.7148438 1.5 1.5v7.9277344c-.0009766.6762695-.2421875 1.2177734-.6953125 1.5668945l-5.0009766 3.8325195c-.3505859.2333985-.8251953.3486328-1.2998047.3486328zm-5.5058593-14.1757812c-.1044922 0-.2324219.0625-.3330078.1635742-.1015625.1020508-.1650391.230957-.1650391.3374024v7.9990234c0 .3305664.0888672.5341797.3066406.703125l4.9970703 3.8310547c.3330078.1953125 1.0859375.2001953 1.4208984-.0205078l4.9716797-3.8125c.2001954-.1542969.3027344-.4155274.303711-.7749024v-7.9267578c0-.2285156-.2714844-.4995117-.5-.4995117h-11-.0009766s0 0-.0009765 0z"
             fill="#484848"
           ></path>
-        </SuperHostMark>
+        </StSuperHostMark>
       )}
-    </ProfileLink>
+    </StProfileLink>
   );
 };
 
-const ProfileLink = styled.a`
+const StProfileLink = styled.a`
   position: relative;
   display: inline-block;
   width: ${props => props.size || '5.6rem'};
@@ -48,7 +48,7 @@ const ProfileLink = styled.a`
   cursor: pointer;
 `;
 
-const PropfileImg = styled.div`
+const StPropfileImg = styled.div`
   width: 100%;
   height: 100%;
   border-radius: 50%;
@@ -58,7 +58,7 @@ const PropfileImg = styled.div`
   background-position: center;
 `;
 
-const SuperHostMark = styled.svg`
+const StSuperHostMark = styled.svg`
   position: absolute;
   right: -8px;
   bottom: 0;
