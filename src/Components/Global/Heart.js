@@ -55,7 +55,8 @@ const EmptyHeart = () => {
   );
 };
 
-const Heart = () => {
+// eslint-disable-next-line react/prop-types
+const Heart = ({ check, onClickHeart }) => {
   return (
     <HeartBlock>
       <HeartLabel>
@@ -68,6 +69,4 @@ const Heart = () => {
   );
 };
 
-export { HeartBlock, HeartLabel, HeartInput, HeartIcon, EmptyHeart, FillHeart };
-
-export default EmptyHeartBackground;
+export default Heart;

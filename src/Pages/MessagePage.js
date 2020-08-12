@@ -1,7 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
+import {
+  HeartBlock,
+  HeartLabel,
+  HeartInput,
+  HeartIcon,
+  EmptyHeart,
+  FillHeart,
+} from '../StyledComponents/Global/Heart';
 
 const MessagePage = () => {
-  return <div>메시지 페이지</div>;
+  const [check, setCheck] = useState(false);
+  const onClickHeart = e => {
+    setCheck(e.target.checked);
+  };
+
+  return (
+    <HeartBlock>
+      <HeartLabel>
+        <HeartInput type="checkbox" onClick={onClickHeart} />
+        <HeartIcon checked={check}>
+          {check ? <FillHeart /> : <EmptyHeart />}
+        </HeartIcon>
+      </HeartLabel>
+    </HeartBlock>
+  );
 };
 
 export default MessagePage;
