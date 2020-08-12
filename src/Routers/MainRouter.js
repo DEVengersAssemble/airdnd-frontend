@@ -19,7 +19,6 @@ const MainRouter = () => {
       <Route path="/message" component={MessagePage} />
       <Route path="/trips" component={TripsPage} />
       <Route path="/wishlists" component={WishlistsPage} />
-      <Route path="/Modal" component={Modal} />
       <Route
         render={({ location }) => (
           <div>
