@@ -2,6 +2,7 @@ import React from 'react';
 import { StBtn } from './Button';
 import { MdNavigateBefore, MdNavigateNext } from 'react-icons/md';
 import styled, { css } from 'styled-components';
+import theme from '../../style/theme';
 
 // styleType: transparent, plane
 const NextButton = ({ styleType, ...rest }) => {
@@ -40,7 +41,7 @@ const styleTypes = {
   plane: css`
     border: none;
     &:hover {
-      background: #eee;
+      background: ${theme.lightGray};
     }
     &:disabled {
       cursor: not-allowed;
@@ -53,11 +54,11 @@ const StSlideButton = styled(StBtn)`
     ${styleTypes[styleType]};
     ${styleType !== 'plane' &&
     css`
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      box-shadow: 2px 2px 5px #ddd;
+      border: 1px solid ${theme.lightGray};
+      box-shadow: 2px 2px 5px ${theme.shadow};
       transition: 0.3s;
       &:hover {
-        box-shadow: 5px 5px 5px #ddd;
+        box-shadow: 5px 5px 5px ${theme.shadow};
         transition: 0.3s;
         transform: scale(1.1);
       }

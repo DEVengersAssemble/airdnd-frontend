@@ -13,14 +13,14 @@ const SearchPage = () => {
       </Button>
       <Button fontSize={'1rem'}>This is button</Button>
       <Button width={'30%'}>This is button</Button>
-      <Button btnType={'color'} color="black">
+      <Button btnType={'color'} color="darkRed">
         This is button
       </Button>
-      <Button btnType={'color'} color={'orangered'}>
+      <Button btnType={'color'} color={'green'}>
         This is button
       </Button>
       <Button btnType="underlined">This is button</Button>
-      <Button btnType={'oval'} color={'pink'}>
+      <Button btnType={'oval'} color={'deepGreen'}>
         This is button
       </Button>
       <Button btnType={'oval'} border={'1px solid green'}>
@@ -30,7 +30,7 @@ const SearchPage = () => {
         This is button
       </Button>
       <Button btnType={'circle'}>T</Button>
-      <Button btnType={'circle'} color={'red'}>
+      <Button btnType={'circle'} color={'main'}>
         T
       </Button>
       <hr></hr>

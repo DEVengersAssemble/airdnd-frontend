@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import theme from '../../style/theme';
 
 // btnType: color, underlined, circle, oval
 const Button = ({
@@ -29,10 +30,10 @@ const Button = ({
 
 const hovers = {
   default: css`
-    background: #afafaf33;
+    background: ${theme.lightGray};
   `,
   oval: css`
-    border: 1px solid #181818;
+    border: 1px solid ${theme.black};
   `,
 };
 
@@ -56,7 +57,7 @@ const borders = btnType => {
       `;
     case 'oval':
       return css`
-        border: 1px solid #bbb;
+        border: 1px solid ${theme.lightGray};
         border-radius: 30px;
       `;
     case 'circle':
@@ -65,7 +66,7 @@ const borders = btnType => {
       `;
     default:
       return css`
-        border: 1px solid #181818;
+        border: 1px solid ${theme.black};
       `;
   }
 };
@@ -88,8 +89,8 @@ const colorStyles = css`
   ${({ color }) =>
     color &&
     css`
-      background: ${color};
-      color: #fff;
+      background: ${theme[color]};
+      color: ${theme.white};
       border: none;
     `}
 `;
@@ -125,7 +126,7 @@ export const StBtn = styled.button`
   ${hoverStyles};
 
   &:focus {
-    box-shadow: 0px 0px 0px 2px white, 0px 0px 0px 4px black;
+    box-shadow: 0px 0px 0px 2px ${theme.white}, 0px 0px 0px 4px ${theme.black};
   }
 `;
 
