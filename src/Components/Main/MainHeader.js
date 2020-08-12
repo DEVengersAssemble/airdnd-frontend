@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import Logo from './Logo';
+import Navigation from './Navigation';
 
 const StMainHeader = styled.header`
   box-sizing: border-box;
@@ -31,6 +32,9 @@ const MainHeader = () => {
   return (
     <StMainHeader>
       <Logo></Logo>
+      <StNavSearchWrapper>
+        <Navigation></Navigation>
+      </StNavSearchWrapper>
     </StMainHeader>
   );
 };
