@@ -1,10 +1,10 @@
 import { createGlobalStyle } from 'styled-components';
 
 const ResetStyle = createGlobalStyle`
-  
 * {
   box-sizing: border-box;
 }
+
 html,
 body,
 div,
