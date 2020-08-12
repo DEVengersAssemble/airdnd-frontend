@@ -4,6 +4,7 @@ import ModalFooter from '../Components/Global/ModalFooter';
 import styled from 'styled-components';
 import Popup from '../Components/Global/Popup';
 import Profile from '../Components/Global/Profile';
+import Rating from '../Components/Global/Rating';
 
 const DetailPage = () => {
   const [modalState, setModalState] = useState('none');
@@ -35,6 +36,8 @@ const DetailPage = () => {
       </PopupWrapper>
 
       <Profile isSupperhost="true" mark="true" lastName="haeun" />
+
+      <Rating scale="1.4" rate="4.55" count="67" />
     </>
   );
 };
