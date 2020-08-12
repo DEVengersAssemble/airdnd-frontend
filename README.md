@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 # Front-end
-=======
-=======
->>>>>>> 312cfe7f7d285a2bd37857b0bbb1ffd1e24d7d6f
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
