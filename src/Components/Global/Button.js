@@ -1,8 +1,8 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import theme from '../../style/theme';
-
 // btnType: color, underlined, circle, oval
+// hover: default, border, none
 const Button = ({
   children,
   btnType,
@@ -11,6 +11,7 @@ const Button = ({
   width,
   height,
   fontSize,
+  hover,
   ...rest
 }) => {
   return (
@@ -21,13 +22,13 @@ const Button = ({
       width={width}
       height={height}
       fontSize={fontSize}
+      hover={hover}
       {...rest}
     >
       {children}
     </StBtn>
   );
 };
-
 const hovers = {
   default: css`
     background: ${theme.lightGray};
@@ -35,19 +36,23 @@ const hovers = {
   oval: css`
     border: 1px solid ${theme.black};
   `,
+  none: null,
 };
-
 const hoverStyles = css`
-  ${({ btnType, color }) =>
-    !color &&
+  ${({ btnType, hover }) =>
     css`
       &:hover {
         ${(btnType === 'underlined' || !btnType) && hovers.default}
         ${btnType === 'oval' && hovers.oval};
       }
+      ${hover &&
+      css`
+        &:hover {
+          ${hover}
+        }
+      `}
     `}
 `;
-
 const borders = btnType => {
   switch (btnType) {
     case 'color':
@@ -70,31 +75,27 @@ const borders = btnType => {
       `;
   }
 };
-
 const borderStyles = css`
   ${({ btnType, border }) => css`
     ${borders(btnType)};
     border: ${border && border};
   `}
 `;
-
 const fontStyles = css`
   ${({ btnType, fontSize }) => css`
     font-size: ${fontSize};
     text-decoration: ${btnType === 'underlined' && 'underline'};
   `}
 `;
-
 const colorStyles = css`
   ${({ color }) =>
     color &&
     css`
-      background: ${theme[color]};
+      background: ${theme[color] || 'transparent'};
       color: ${theme.white};
       border: none;
     `}
 `;
-
 const sizeStyles = css`
   ${({ btnType, width, height }) => css`
     ${
@@ -109,7 +110,6 @@ const sizeStyles = css`
     height: ${height};
   `}
 `;
-
 export const StBtn = styled.button`
   display: inline-flex;
   justify-content: center;
@@ -120,14 +120,12 @@ export const StBtn = styled.button`
   padding: 1rem 2rem;
   overflow: hidden;
   ${fontStyles};
-  ${borderStyles};
   ${colorStyles};
   ${sizeStyles};
+  ${borderStyles};
   ${hoverStyles};
-
   &:focus {
     box-shadow: 0px 0px 0px 2px ${theme.white}, 0px 0px 0px 4px ${theme.black};
   }
 `;
-
 export default Button;

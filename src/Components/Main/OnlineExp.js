@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-
+import Button from '../Global/Button';
 const StOnlineExpWrapper = styled.div`
   background: rgb(0, 0, 0);
   height: 800px;
@@ -30,9 +30,7 @@ const StContent = styled.p`
   white-space: normal;
 `;
 
-const StButtonWrapper = styled.div`
-  width: 110px;
-`;
+const StButtonWrapper = styled.div``;
 
 const StGridWrapper = styled.div`
   display: grid;
@@ -82,10 +80,35 @@ const StGridItem = styled.div`
     grid-column-start: 3;
     grid-column-end: 5;
   }
+
+  @media ${props => props.theme.iPad} {
+    &:nth-child(1) {
+      grid-row-start: 1;
+      grid-row-end: 3;
+      grid-column-start: 1;
+      grid-column-end: 2;
+    }
+    &:nth-child(2) {
+      grid-row-start: 1;
+      grid-row-end: 2;
+      grid-column-start: 2;
+      grid-column-end: 3;
+    }
+    &:nth-child(3) {
+      grid-row-start: 2;
+      grid-row-end: 3;
+      grid-column-start: 2;
+      grid-column-end: 3;
+    }
+    &:nth-child(4) {
+      display: none;
+    }
+  }
 `;
 
 const StGridItemImg = styled.img`
   width: 100%;
+  height: 100%;
   object-fit: cover;
   border-radius: 16px 16px 20px 20px;
   position: absolute;
@@ -122,7 +145,13 @@ const OnlineExp = () => {
           </StContent>
         </StContentWrapper>
         <StButtonWrapper>
-          <button>더 알아보기</button>
+          <Button
+            color="color"
+            border="1px solid white"
+            hover={{ background: 'darkgray', 'font-weight': '500' }}
+          >
+            모두 둘러보기
+          </Button>
         </StButtonWrapper>
       </StUpperWrapper>
       <StGridWrapper>
