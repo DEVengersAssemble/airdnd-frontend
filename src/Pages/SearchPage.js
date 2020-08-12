@@ -1,5 +1,5 @@
 import React from 'react';
-import StButton from '../StyledComponents/Global/buttons';
+import StButton from '../Components/Global/Button';
 
 const SearchPage = () => {
   return (
