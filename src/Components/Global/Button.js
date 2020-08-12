@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import theme from '../../style/theme';
 
 // btnType: color, underlined, circle, oval
+// hover: default, border, none
 const Button = ({
   children,
   btnType,
@@ -11,6 +12,7 @@ const Button = ({
   width,
   height,
   fontSize,
+  hover,
   ...rest
 }) => {
   return (
@@ -21,6 +23,7 @@ const Button = ({
       width={width}
       height={height}
       fontSize={fontSize}
+      hover={hover}
       {...rest}
     >
       {children}
@@ -38,13 +41,18 @@ const hovers = {
 };
 
 const hoverStyles = css`
-  ${({ btnType, color }) =>
-    !color &&
+  ${({ btnType, hover }) =>
     css`
       &:hover {
         ${(btnType === 'underlined' || !btnType) && hovers.default}
         ${btnType === 'oval' && hovers.oval};
       }
+      ${hover &&
+      css`
+        &:hover {
+          ${hover}
+        }
+      `}
     `}
 `;
 
@@ -89,7 +97,7 @@ const colorStyles = css`
   ${({ color }) =>
     color &&
     css`
-      background: ${theme[color]};
+      background: ${theme[color] || 'transparent'};
       color: ${theme.white};
       border: none;
     `}
@@ -120,9 +128,9 @@ export const StBtn = styled.button`
   padding: 1rem 2rem;
   overflow: hidden;
   ${fontStyles};
-  ${borderStyles};
   ${colorStyles};
   ${sizeStyles};
+  ${borderStyles};
   ${hoverStyles};
 
   &:focus {
