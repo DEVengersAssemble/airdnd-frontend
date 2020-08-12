@@ -2,10 +2,6 @@ import React from 'react';
 import { StBtn } from '../Global/Button';
 import styled from 'styled-components';
 
-const FilterBtn = styled(StBtn)`
-  margin-right: 1rem;
-`;
-
 const FilterButton = ({ children }) => {
   return <FilterBtn btnType="oval">{children}</FilterBtn>;
 };
@@ -20,5 +16,9 @@ const FilterList = () => {
     </>
   );
 };
+
+const FilterBtn = styled(StBtn)`
+  margin: 3rem 1rem 5rem 0;
+`;
 
 export default FilterList;
