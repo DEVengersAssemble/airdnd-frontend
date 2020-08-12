@@ -12,7 +12,7 @@ const StMainHeader = styled.header`
   background: lightgray;
   height: 80px;
   padding: 20px 80px 15px 80px;
-  background: black;
+  background: transparent;
 `;
 
 const StNavSearchWrapper = styled.div`

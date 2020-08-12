@@ -3,6 +3,7 @@ import Toggle from '../Components/Global/Toggle';
 import DropDown from '../Components/Global/DropDown';
 import DropDownWithFocus from '../Components/Global/DropDownWithFocus';
 import MainHeader from '../Components/Main/MainHeader';
+import Background from '../Components/Main/Background';
 
 const MainPage = () => {
   // Toggle
@@ -21,9 +22,11 @@ const MainPage = () => {
   // const clickOption = option => {
   //   setOptionSelected(option);
   // };
-
   return (
     <div>
+      <MainHeader></MainHeader>
+
+      <Background></Background>
       {/* <p>Main</p>
       <Toggle checked={toggleState} handleClick={handleClick} />
       <div></div>
@@ -42,7 +45,6 @@ const MainPage = () => {
         title="일"
         options={['1', '2', '3', '4', '5', '6', '7']}
       ></DropDownWithFocus> */}
-      <MainHeader></MainHeader>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Mypage = () => {
+const Trips = () => {
   return <div></div>;
 };
 
-export default Mypage;
+export default Trips;

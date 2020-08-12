@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Calendar = () => {
+const Wishlists = () => {
   return <div></div>;
 };
 
-export default Calendar;
+export default Wishlists;
