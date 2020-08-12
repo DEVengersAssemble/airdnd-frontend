@@ -1,35 +1,43 @@
 import React from 'react';
-import StButton from '../Components/Global/Button';
+import Button from '../Components/Global/Button';
+import CounterButton from '../Components/Global/CounterButton';
+import { NextButton, PrevButton } from '../Components/Global/SlideButton';
 
 const SearchPage = () => {
   return (
-    <>
+    <div>
       <div>Search</div>
-      <StButton>This is button</StButton>
-      <StButton width="20rem" height="5rem">
+      <Button>This is button</Button>
+      <Button width="20rem" height="5rem">
         This is button
-      </StButton>
-      <StButton fontSize={'1rem'}>This is button</StButton>
-      <StButton width={'30%'}>This is button</StButton>
-      <StButton btnType={'color'} color={'black'}>
+      </Button>
+      <Button fontSize={'1rem'}>This is button</Button>
+      <Button width={'30%'}>This is button</Button>
+      <Button btnType={'color'} color="black">
         This is button
-      </StButton>
-      <StButton btnType={'color'} color={'orangered'}>
+      </Button>
+      <Button btnType={'color'} color={'orangered'}>
         This is button
-      </StButton>
-      <StButton btnType="underlined">This is button</StButton>
-      <StButton btnType={'oval'} color={'pink'}>
+      </Button>
+      <Button btnType="underlined">This is button</Button>
+      <Button btnType={'oval'} color={'pink'}>
         This is button
-      </StButton>
-      <StButton btnType={'oval'} border={'1px solid green'}>
+      </Button>
+      <Button btnType={'oval'} border={'1px solid green'}>
         This is button
-      </StButton>
-      <StButton btnType={'oval'}>This is button</StButton>
-      <StButton btnType={'circle'}>T</StButton>
-      <StButton btnType={'circle'} color={'red'}>
+      </Button>
+      <Button btnType={'oval'} fontSize="2rem">
+        This is button
+      </Button>
+      <Button btnType={'circle'}>T</Button>
+      <Button btnType={'circle'} color={'red'}>
         T
-      </StButton>
-    </>
+      </Button>
+      <hr></hr>
+      <NextButton></NextButton>
+      <PrevButton></PrevButton>
+      <CounterButton></CounterButton>
+    </div>
   );
 };
 

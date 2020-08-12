@@ -1,6 +1,30 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
+// btnType: color, underlined, circle, oval
+const Button = ({
+  children,
+  btnType,
+  color,
+  border,
+  width,
+  height,
+  fontSize,
+}) => {
+  return (
+    <StBtn
+      btnType={btnType}
+      color={color}
+      border={border}
+      width={width}
+      height={height}
+      fontSize={fontSize}
+    >
+      {children}
+    </StBtn>
+  );
+};
+
 const hovers = {
   default: css`
     background: #afafaf33;
@@ -37,6 +61,10 @@ const borders = btnType => {
       return css`
         border-radius: 50%;
       `;
+    default:
+      return css`
+        border: 1px solid #181818;
+      `;
   }
 };
 
@@ -71,6 +99,7 @@ const sizeStyles = css`
       css`
         width: 32px;
         height: 32px;
+        padding: 0;
       `
     }
     width: ${width};
@@ -78,43 +107,20 @@ const sizeStyles = css`
   `}
 `;
 
-const StBtn = styled.button`
+export const StBtn = styled.button`
   display: inline-flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   outline: none;
   border-radius: 8px;
-  border: 1px solid #181818;
   padding: 1rem;
+  overflow: hidden;
   ${fontStyles};
   ${borderStyles};
   ${colorStyles};
-  ${sizeStyles}
-  ${hoverStyles}
+  ${sizeStyles};
+  ${hoverStyles};
 `;
 
-const StButton = ({
-  children,
-  btnType,
-  color,
-  border,
-  width,
-  height,
-  fontSize,
-}) => {
-  return (
-    <StBtn
-      btnType={btnType}
-      color={color}
-      border={border}
-      width={width}
-      height={height}
-      fontSize={fontSize}
-    >
-      {children}
-    </StBtn>
-  );
-};
-
-export default StButton;
+export default Button;
