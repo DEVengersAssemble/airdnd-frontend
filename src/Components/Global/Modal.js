@@ -2,15 +2,14 @@ import React from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import { GrClose } from 'react-icons/gr';
 
-// header, footer 보이게 하고 싶으면 "flex"를 전달하세요.
+// header를 보이게 하고 싶으면 header="flex"를 전달하세요.
+// footer를 보이게 하고 싶으면 ModalFooter를 따로 불러서 사용하세요.
 const Modal = ({
   children,
   width,
   height,
   header,
-  footer,
   title,
-  footerText,
   modalState,
   setModalState,
 }) => {
@@ -34,9 +33,6 @@ const Modal = ({
           <h2>{title}</h2>
         </StModalHeader>
         {children}
-        <StModalFooter footer={footer}>
-          <StFooterBtn type="button">{footerText}</StFooterBtn>
-        </StModalFooter>
       </StModalDiv>
     </StModalDimmed>
   );
@@ -122,35 +118,13 @@ const area = css`
   width: 100%;
   min-height: 64px;
   font-size: 1.6rem;
-  font-weight: 800;
 `;
 
 const StModalHeader = styled.header`
-  ${area};
   display: ${props => props.header || 'none'};
   border-bottom: 1px solid #ebebeb;
-`;
-
-const StModalFooter = styled.footer`
+  font-weight: 800;
   ${area};
-  position: absolute;
-  bottom: 0;
-  display: ${props => props.footer || 'none'};
-  border-top: 1px solid #ebebeb;
-`;
-
-const StFooterBtn = styled.button`
-  border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
-  font-size: 1.6rem;
-  text-decoration: underline;
-  outline: none;
-  &:hover,
-  &:focus {
-    font-weight: 800;
-    background-color: #eee;
-  }
 `;
 
 export default Modal;
