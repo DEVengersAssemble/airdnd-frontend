@@ -3,11 +3,31 @@ import styled, { css, keyframes } from 'styled-components';
 import { GrClose } from 'react-icons/gr';
 
 // header, footer 보이게 하고 싶으면 "flex"를 전달하세요.
-const Modal = ({ children, width, height, header, footer, title, button }) => {
+const Modal = ({
+  children,
+  width,
+  height,
+  header,
+  footer,
+  title,
+  footerText,
+  modalState,
+  setModalState,
+}) => {
+  const onDelete = e => {
+    if (typeof e.target.className !== 'string') return;
+    if (!e.target.className.includes('dimmed')) return;
+    setModalState('none');
+  };
+
   return (
-    <StModalDimed>
+    <StModalDimmed
+      modalState={modalState}
+      onClick={onDelete}
+      className="dimmed"
+    >
       <StModalDiv width={width} height={height}>
-        <StModalCloseBtn>
+        <StModalCloseBtn type="button" onClick={() => setModalState('none')}>
           <StCloseIcon />
         </StModalCloseBtn>
         <StModalHeader header={header}>
@@ -15,14 +35,15 @@ const Modal = ({ children, width, height, header, footer, title, button }) => {
         </StModalHeader>
         {children}
         <StModalFooter footer={footer}>
-          <StFooterBtn>{button}</StFooterBtn>
+          <StFooterBtn type="button">{footerText}</StFooterBtn>
         </StModalFooter>
       </StModalDiv>
-    </StModalDimed>
+    </StModalDimmed>
   );
 };
 
-const StModalDimed = styled.div`
+const StModalDimmed = styled.div`
+  display: ${props => props.modalState};
   position: fixed;
   z-index: 100;
   left: 0;
@@ -87,7 +108,7 @@ const StModalCloseBtn = styled.button`
 
 const StCloseIcon = styled(GrClose)`
   & > path {
-    /* stroke: red !important; */
+    /* stroke: red; */
     stroke-width: 2.5;
   }
 `;

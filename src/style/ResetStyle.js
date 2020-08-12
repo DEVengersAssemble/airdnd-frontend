@@ -1,10 +1,10 @@
 import { createGlobalStyle } from 'styled-components';
 
 const ResetStyle = createGlobalStyle`
-  
 * {
   box-sizing: border-box;
 }
+
 html,
 body,
 div,
@@ -145,6 +145,12 @@ button {
 }
 html {
   font-size: 10px;
+}
+@media screen and (max-width: 1000px) {
+  html {
+    background-color: #eee;
+    font-size: 8px;
+  }
 }
 `;
 
