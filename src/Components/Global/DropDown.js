@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { MdKeyboardArrowUp, MdKeyboardArrowDown } from 'react-icons/md';
@@ -50,7 +49,6 @@ const StOptions = styled.ul`
 
 const StOptionItem = styled.li`
   cursor: pointer;
-
   width: 100%;
   height: 30px;
   background: lightgray;
