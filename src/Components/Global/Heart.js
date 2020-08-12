@@ -1,31 +1,23 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { BsHeart, BsHeartFill as FillHeart } from 'react-icons/bs';
+import { IoMdHeartEmpty, IoMdHeart as HeartFill } from 'react-icons/io';
 
-const hover = css`
-  &:hover {
-    background: #eeeeee;
-  }
-`;
-
+// 공통 라벨 스타일
 const HeartLabel = styled.label`
   position: relative;
   display: inline-block;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
   font-size: 2rem;
-  ${hover}
 `;
 
+// 공통 인풋 스타일
 const HeartInput = styled.input`
   display: none;
 `;
 
-const HeartIcon = styled.span`
-  position: absolute;
-  top: 1.1rem;
-  left: 1rem;
+// checked일 때 하트 색상
+const checked = css`
   ${props =>
     props.checked &&
     css`
@@ -33,44 +25,41 @@ const HeartIcon = styled.span`
     `}
 `;
 
-const EmptyHeartBorder = styled(BsHeart)`
+// 공통 아이콘 스타일
+const HeartIcon = styled.div`
   position: absolute;
-  right: 0.05rem;
+  ${checked}
+  cursor: pointer;
 `;
 
-const EmptyHeartBackground = styled(FillHeart)`
+const HeartEmptyBorder = styled(IoMdHeartEmpty)`
+  position: absolute;
+  color: black;
+`;
+
+const HeartEmptyBackground = styled(HeartFill)`
   color: white;
+  /* color: blue; */
 `;
 
-const EmptyHeart = () => {
+const HeartEmpty = () => {
   return (
     <>
-      <EmptyHeartBackground />
-      <EmptyHeartBorder />
+      <HeartEmptyBorder />
+      <HeartEmptyBackground />
     </>
   );
 };
 
-const SearchHeart = ({ check, onClickSearchHeart }) => {
+const Heart = ({ hover, borderColor, check, onHeart }) => {
   return (
-    <HeartLabel>
-      <HeartInput type="checkbox" onClick={onClickSearchHeart} />
+    <HeartLabel hover="hover">
+      <HeartInput type="checkbox" checked={check} onClick={onHeart} />
       <HeartIcon checked={check}>
-        {check ? <FillHeart /> : <EmptyHeart />}
+        {check ? <HeartFill /> : <HeartEmpty borderColor={borderColor} />}
       </HeartIcon>
     </HeartLabel>
   );
 };
 
-const RecentSearchHeart = ({ rsCheck, onClickRsHeart }) => {
-  return (
-    <HeartLabel>
-      <HeartInput type="checkbox" onClick={onClickRsHeart} />
-      <HeartIcon checked={rsCheck}>
-        {rsCheck ? <FillHeart /> : <EmptyHeart />}
-      </HeartIcon>
-    </HeartLabel>
-  );
-};
-
-export { SearchHeart, RecentSearchHeart };
+export default Heart;
