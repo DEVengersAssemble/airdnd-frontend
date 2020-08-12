@@ -1,27 +1,35 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
+// import { SearchHeart, RecentSearchHeart } from '../Components/Global/Heart';
 import {
-  HeartBlock,
-  HeartLabel,
-  HeartInput,
-  HeartIcon,
-  EmptyHeart,
-  FillHeart,
-} from '../StyledComponents/Global/Heart';
+  SearchHeart,
+  RecentSearchHeart,
+} from '../Components/Global/HeartBackup';
+
+const HeartBlock = styled.div`
+  width: 512px;
+  margin: 0 auto;
+  margin-top: 4rem;
+  border: 1px solid black;
+  padding: 1rem;
+`;
 
 const MessagePage = () => {
   const [check, setCheck] = useState(false);
-  const onClickHeart = e => {
+  const [rsCheck, setRsCheck] = useState(false);
+
+  const onClickSearchHeart = e => {
     setCheck(e.target.checked);
+  };
+
+  const onClickRsHeart = e => {
+    setRsCheck(e.target.checked);
   };
 
   return (
     <HeartBlock>
-      <HeartLabel>
-        <HeartInput type="checkbox" onClick={onClickHeart} />
-        <HeartIcon checked={check}>
-          {check ? <FillHeart /> : <EmptyHeart />}
-        </HeartIcon>
-      </HeartLabel>
+      <SearchHeart check={check} onClickSearchHeart={onClickSearchHeart} />
+      <RecentSearchHeart check={rsCheck} onClickRsHeart={onClickRsHeart} />
     </HeartBlock>
   );
 };
