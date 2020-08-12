@@ -2,27 +2,44 @@ import React from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import { GrClose } from 'react-icons/gr';
 
-// header, footer 보이게 하고 싶으면 "flex"를 전달하세요.
-const Modal = ({ children, width, height, header, footer, title, button }) => {
+// header를 보이게 하고 싶으면 header="flex"를 전달하세요.
+// footer를 보이게 하고 싶으면 ModalFooter를 따로 불러서 사용하세요.
+const Modal = ({
+  children,
+  width,
+  height,
+  header,
+  title,
+  modalState,
+  setModalState,
+}) => {
+  const onDelete = e => {
+    if (typeof e.target.className !== 'string') return;
+    if (!e.target.className.includes('dimmed')) return;
+    setModalState('none');
+  };
+
   return (
-    <StModalDimed>
+    <StModalDimmed
+      modalState={modalState}
+      onClick={onDelete}
+      className="dimmed"
+    >
       <StModalDiv width={width} height={height}>
-        <StModalCloseBtn>
+        <StModalCloseBtn type="button" onClick={() => setModalState('none')}>
           <StCloseIcon />
         </StModalCloseBtn>
         <StModalHeader header={header}>
           <h2>{title}</h2>
         </StModalHeader>
         {children}
-        <StModalFooter footer={footer}>
-          <StFooterBtn>{button}</StFooterBtn>
-        </StModalFooter>
       </StModalDiv>
-    </StModalDimed>
+    </StModalDimmed>
   );
 };
 
-const StModalDimed = styled.div`
+const StModalDimmed = styled.div`
+  display: ${props => props.modalState};
   position: fixed;
   z-index: 100;
   left: 0;
@@ -87,7 +104,7 @@ const StModalCloseBtn = styled.button`
 
 const StCloseIcon = styled(GrClose)`
   & > path {
-    /* stroke: red !important; */
+    /* stroke: red; */
     stroke-width: 2.5;
   }
 `;
@@ -101,35 +118,13 @@ const area = css`
   width: 100%;
   min-height: 64px;
   font-size: 1.6rem;
-  font-weight: 800;
 `;
 
 const StModalHeader = styled.header`
-  ${area};
   display: ${props => props.header || 'none'};
   border-bottom: 1px solid #ebebeb;
-`;
-
-const StModalFooter = styled.footer`
+  font-weight: 800;
   ${area};
-  position: absolute;
-  bottom: 0;
-  display: ${props => props.footer || 'none'};
-  border-top: 1px solid #ebebeb;
-`;
-
-const StFooterBtn = styled.button`
-  border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
-  font-size: 1.6rem;
-  text-decoration: underline;
-  outline: none;
-  &:hover,
-  &:focus {
-    font-weight: 800;
-    background-color: #eee;
-  }
 `;
 
 export default Modal;
