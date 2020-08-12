@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from '../Components/Global/Button';
-import CounterButton from '../Components/Global/CounterButton';
+import { PlusButton, MinusButton } from '../Components/Global/CounterButton';
 import { NextButton, PrevButton } from '../Components/Global/SlideButton';
 
 const SearchPage = () => {
@@ -36,7 +36,8 @@ const SearchPage = () => {
       <hr></hr>
       <NextButton></NextButton>
       <PrevButton></PrevButton>
-      <CounterButton></CounterButton>
+      <PlusButton></PlusButton>
+      <MinusButton disabled></MinusButton>
     </div>
   );
 };

@@ -10,6 +10,7 @@ const Button = ({
   width,
   height,
   fontSize,
+  ...rest
 }) => {
   return (
     <StBtn
@@ -19,6 +20,7 @@ const Button = ({
       width={width}
       height={height}
       fontSize={fontSize}
+      {...rest}
     >
       {children}
     </StBtn>
