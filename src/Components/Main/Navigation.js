@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const StNav = styled.nav`
   height: 80px;
-  background: yellowgreen;
+  background: ${props => props.theme.deepGreen};
 `;
 
 const StList = styled.ul`

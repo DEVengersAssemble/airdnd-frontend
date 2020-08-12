@@ -143,10 +143,6 @@ button {
   margin: -1px;
   clip: rect(0, 0, 0, 0);
 }
-${'' /* svg,
-path {
-  pointer-events: none;
-} */}
 html {
   font-size: 10px;
 }
