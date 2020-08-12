@@ -1,12 +1,39 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import theme from '../../style/theme';
+
+// btnType: color, underlined, circle, oval
+const Button = ({
+  children,
+  btnType,
+  color,
+  border,
+  width,
+  height,
+  fontSize,
+  ...rest
+}) => {
+  return (
+    <StBtn
+      btnType={btnType}
+      color={color}
+      border={border}
+      width={width}
+      height={height}
+      fontSize={fontSize}
+      {...rest}
+    >
+      {children}
+    </StBtn>
+  );
+};
 
 const hovers = {
   default: css`
-    background: #afafaf33;
+    background: ${theme.lightGray};
   `,
   oval: css`
-    border: 1px solid #181818;
+    border: 1px solid ${theme.black};
   `,
 };
 
@@ -30,12 +57,16 @@ const borders = btnType => {
       `;
     case 'oval':
       return css`
-        border: 1px solid #bbb;
+        border: 1px solid ${theme.gray};
         border-radius: 30px;
       `;
     case 'circle':
       return css`
         border-radius: 50%;
+      `;
+    default:
+      return css`
+        border: 1px solid ${theme.black};
       `;
   }
 };
@@ -58,8 +89,8 @@ const colorStyles = css`
   ${({ color }) =>
     color &&
     css`
-      background: ${color};
-      color: #fff;
+      background: ${theme[color]};
+      color: ${theme.white};
       border: none;
     `}
 `;
@@ -71,6 +102,7 @@ const sizeStyles = css`
       css`
         width: 32px;
         height: 32px;
+        padding: 0;
       `
     }
     width: ${width};
@@ -78,43 +110,24 @@ const sizeStyles = css`
   `}
 `;
 
-const StBtn = styled.button`
+export const StBtn = styled.button`
   display: inline-flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   outline: none;
   border-radius: 8px;
-  border: 1px solid #181818;
-  padding: 1rem;
+  padding: 1rem 2rem;
+  overflow: hidden;
   ${fontStyles};
   ${borderStyles};
   ${colorStyles};
-  ${sizeStyles}
-  ${hoverStyles}
+  ${sizeStyles};
+  ${hoverStyles};
+
+  &:focus {
+    box-shadow: 0px 0px 0px 2px ${theme.white}, 0px 0px 0px 4px ${theme.black};
+  }
 `;
 
-const StButton = ({
-  children,
-  btnType,
-  color,
-  border,
-  width,
-  height,
-  fontSize,
-}) => {
-  return (
-    <StBtn
-      btnType={btnType}
-      color={color}
-      border={border}
-      width={width}
-      height={height}
-      fontSize={fontSize}
-    >
-      {children}
-    </StBtn>
-  );
-};
-
-export default StButton;
+export default Button;
