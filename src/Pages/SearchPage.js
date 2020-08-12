@@ -1,13 +1,19 @@
 import React from 'react';
-import FilterList from '../Components/Search/FilterList';
+import styled from 'styled-components';
+import SearchResult from '../Components/Search/SearchResult';
+import SearchMap from '../Components/Search/SearchMap';
 
 const SearchPage = () => {
   return (
-    <div>
-      <div>Search</div>
-      <FilterList />
-    </div>
+    <StWrapper>
+      <SearchResult />
+      <SearchMap>blabla</SearchMap>
+    </StWrapper>
   );
 };
+
+const StWrapper = styled.div`
+  display: flex;
+`;
 
 export default SearchPage;
