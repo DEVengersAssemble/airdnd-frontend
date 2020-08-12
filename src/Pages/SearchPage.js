@@ -1,36 +1,19 @@
 import React from 'react';
-import StButton from '../Components/Global/Button';
+import styled from 'styled-components';
+import SearchResult from '../Components/Search/SearchResult';
+import SearchMap from '../Components/Search/SearchMap';
 
 const SearchPage = () => {
   return (
-    <>
-      <div>Search</div>
-      <StButton>This is button</StButton>
-      <StButton width="20rem" height="5rem">
-        This is button
-      </StButton>
-      <StButton fontSize={'1rem'}>This is button</StButton>
-      <StButton width={'30%'}>This is button</StButton>
-      <StButton btnType={'color'} color={'black'}>
-        This is button
-      </StButton>
-      <StButton btnType={'color'} color={'orangered'}>
-        This is button
-      </StButton>
-      <StButton btnType="underlined">This is button</StButton>
-      <StButton btnType={'oval'} color={'pink'}>
-        This is button
-      </StButton>
-      <StButton btnType={'oval'} border={'1px solid green'}>
-        This is button
-      </StButton>
-      <StButton btnType={'oval'}>This is button</StButton>
-      <StButton btnType={'circle'}>T</StButton>
-      <StButton btnType={'circle'} color={'red'}>
-        T
-      </StButton>
-    </>
+    <StWrapper>
+      <SearchResult />
+      <SearchMap>blabla</SearchMap>
+    </StWrapper>
   );
 };
+
+const StWrapper = styled.div`
+  display: flex;
+`;
 
 export default SearchPage;
