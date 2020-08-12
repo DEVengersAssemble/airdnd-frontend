@@ -123,6 +123,10 @@ export const StBtn = styled.button`
   ${colorStyles};
   ${sizeStyles};
   ${hoverStyles};
+
+  &:focus {
+    box-shadow: 0px 0px 0px 2px white, 0px 0px 0px 4px black;
+  }
 `;
 
 export default Button;

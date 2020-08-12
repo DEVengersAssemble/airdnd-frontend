@@ -3,7 +3,7 @@ import { StBtn } from './Button';
 import { MdNavigateBefore, MdNavigateNext } from 'react-icons/md';
 import styled, { css } from 'styled-components';
 
-// styleType: transparent, shadowed, plane
+// styleType: transparent, plane
 const NextButton = ({ styleType, ...rest }) => {
   return (
     <StSlideButton
@@ -33,22 +33,8 @@ const PrevButton = ({ styleType, ...rest }) => {
 const styleTypes = {
   transparent: css`
     opacity: 0.8;
-    transition: 0.3s;
-    border: 1px solid rgba(0, 0, 0, 0.08);
     &:hover {
-      transition: 0.3s;
-      transform: scale(1.1);
       opacity: 1;
-    }
-  `,
-  shadowed: css`
-    transition: 0.3s;
-    border: 1px solid #eee;
-    box-shadow: 2px 2px 5px #ddd;
-    &:hover {
-      transition: 0.3s;
-      transform: scale(1.1);
-      box-shadow: 5px 5px 5px #ddd;
     }
   `,
   plane: css`
@@ -56,13 +42,27 @@ const styleTypes = {
     &:hover {
       background: #eee;
     }
+    &:disabled {
+      cursor: not-allowed;
+    }
   `,
 };
 
 const StSlideButton = styled(StBtn)`
   ${({ styleType }) => css`
     ${styleTypes[styleType]};
-  `}
+    ${styleType !== 'plane' &&
+    css`
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 2px 2px 5px #ddd;
+      transition: 0.3s;
+      &:hover {
+        box-shadow: 5px 5px 5px #ddd;
+        transition: 0.3s;
+        transform: scale(1.1);
+      }
+    `}
+  `};
 `;
 
 export { NextButton, PrevButton };
