@@ -35,22 +35,28 @@ const StHome = styled.li`
 const StDetailWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  padding: 0 1.7rem;
 `;
 
 const StDetail = styled.span`
   color: ${theme.darkGray};
   font-size: 1.4rem;
+  padding: 2px 0;
 `;
 
 const StTitle = styled.span`
   color: ${theme.black};
   font-size: 1.8rem;
+  padding: 8px 0;
 `;
 
 const StLine = styled.hr`
-  width: 50px;
-  text-align: left;
+  width: 35px;
   margin-left: 0;
+  text-align: left;
+  border-width: 0;
+  border-bottom: 1px solid ${theme.gray};
+  margin-bottom: 9px;
 `;
 
 export default Home;
