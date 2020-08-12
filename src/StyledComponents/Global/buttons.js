@@ -1,6 +1,26 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
+const hovers = {
+  default: css`
+    background: #afafaf33;
+  `,
+  oval: css`
+    border: 1px solid #181818;
+  `,
+};
+
+const hoverStyles = css`
+  ${({ btnType, color }) =>
+    !color &&
+    css`
+      &:hover {
+        ${(btnType === 'underlined' || !btnType) && hovers.default}
+        ${btnType === 'oval' && hovers.oval};
+      }
+    `}
+`;
+
 const borders = btnType => {
   switch (btnType) {
     case 'color':
@@ -10,6 +30,7 @@ const borders = btnType => {
       `;
     case 'oval':
       return css`
+        border: 1px solid #bbb;
         border-radius: 30px;
       `;
     case 'circle':
@@ -39,6 +60,7 @@ const colorStyles = css`
     css`
       background: ${color};
       color: #fff;
+      border: none;
     `}
 `;
 
@@ -69,6 +91,7 @@ const StBtn = styled.button`
   ${borderStyles};
   ${colorStyles};
   ${sizeStyles}
+  ${hoverStyles}
 `;
 
 const StButton = ({
@@ -92,10 +115,6 @@ const StButton = ({
       {children}
     </StBtn>
   );
-};
-
-StButton.defaultProps = {
-  // fontSize: '1.6rem',
 };
 
 export default StButton;
