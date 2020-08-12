@@ -57,7 +57,7 @@ const borders = btnType => {
       `;
     case 'oval':
       return css`
-        border: 1px solid ${theme.lightGray};
+        border: 1px solid ${theme.gray};
         border-radius: 30px;
       `;
     case 'circle':
@@ -117,7 +117,7 @@ export const StBtn = styled.button`
   cursor: pointer;
   outline: none;
   border-radius: 8px;
-  padding: 1rem;
+  padding: 1rem 2rem;
   overflow: hidden;
   ${fontStyles};
   ${borderStyles};
