@@ -22,9 +22,10 @@ const StNav = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  background: lightyellow;
+  background: tomato;
   width: 100%;
   height: 8rem;
+  z-index: 100;
 `;
 
 export default SearchPage;

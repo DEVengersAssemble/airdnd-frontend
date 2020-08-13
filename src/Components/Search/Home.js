@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import theme from '../../style/theme';
 import Carousel from '../Global/Carousel';
+import Rating from '../Global/Rating';
 
 const Home = () => {
   return (
@@ -14,6 +15,7 @@ const Home = () => {
         <StDetail>
           최대 인원 2명 ﹒ 침실 1개 ﹒ 침대 2개 ﹒ 단독 사용 욕실 1개
         </StDetail>
+        <Rating scale="1.4" rate="4.79" count="24" className="rating" />
       </StDetailWrapper>
     </StHome>
   );
@@ -36,6 +38,12 @@ const StDetailWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0 1.7rem;
+  position: relative;
+  .rating {
+    position: absolute;
+    bottom: 0;
+    left: 1.7rem;
+  }
 `;
 
 const StDetail = styled.span`
