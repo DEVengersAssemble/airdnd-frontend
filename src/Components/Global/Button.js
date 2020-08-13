@@ -3,7 +3,6 @@ import styled, { css } from 'styled-components';
 import theme from '../../style/theme';
 
 // btnType: color, underlined, circle, oval
-// hover: default, border, none
 const Button = ({
   children,
   btnType,
@@ -31,30 +30,25 @@ const Button = ({
   );
 };
 
-const hovers = {
-  default: css`
-    background: ${theme.lightGray};
-  `,
-  oval: css`
-    border: 1px solid ${theme.black};
-  `,
+const hovers = btnType => {
+  switch (btnType) {
+    case 'color':
+    case 'underlined':
+      return css`
+        background: ${theme.lightGray};
+      `;
+    case 'oval':
+      return css`
+        border: 1px solid ${theme.black};
+      `;
+    case 'circle':
+      return css`
+        border-radius: 50%;
+      `;
+    default:
+      return null;
+  }
 };
-
-const hoverStyles = css`
-  ${({ btnType, hover }) =>
-    css`
-      &:hover {
-        ${(btnType === 'underlined' || !btnType) && hovers.default}
-        ${btnType === 'oval' && hovers.oval};
-      }
-      ${hover &&
-      css`
-        &:hover {
-          ${hover}
-        }
-      `}
-    `}
-`;
 
 const borders = btnType => {
   switch (btnType) {
@@ -78,6 +72,21 @@ const borders = btnType => {
       `;
   }
 };
+
+const hoverStyles = css`
+  ${({ btnType, hover }) =>
+    css`
+      &:hover {
+        ${hovers(btnType)};
+      }
+      ${hover &&
+      css`
+        &:hover {
+          ${hover}
+        }
+      `}
+    `}
+`;
 
 const borderStyles = css`
   ${({ btnType, border }) => css`
