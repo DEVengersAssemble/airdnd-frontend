@@ -110,7 +110,7 @@ section {
 body {
   line-height: 1;
   color: #181818;
-  font-size: 16px;
+  font-size: 1.6rem;
   font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
 }
 ol,
@@ -146,10 +146,10 @@ button {
 html {
   font-size: 10px;
 }
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 768px) {
   html {
     background-color: #eee;
-    font-size: 8px;
+    font-size: 9px;
   }
 }
 `;
