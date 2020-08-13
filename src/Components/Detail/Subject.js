@@ -21,12 +21,12 @@ const Subject = () => {
         <StDot>·</StDot>
         <StLocationLink>Cheiu, 제주도, 한국</StLocationLink>
         <StButton>
-          <MdShare />
+          <FiShare />
           공유하기
         </StButton>
         <StButton>♡ 저장</StButton>
       </StLinkWrapper>
-      <HomePhotos></HomePhotos>
+      <HomePhotos />
     </StDetailTitle>
   );
 };
@@ -37,11 +37,13 @@ const inlineFlex = css`
 `;
 
 const StDetailTitle = styled.section`
-  /* background-color: #ddd; */
-  max-width: 1120px;
-  margin: 2.4rem auto 0;
+  background-color: #f5f9e8;
+  max-width: 1200px;
+  padding: 0 40px;
+  margin: 0 auto;
   & h2 {
-    margin-bottom: 0.4rem;
+    padding-top: 2.4rem;
+    margin-bottom: 0.5rem;
     font-size: 2.6rem;
     line-height: 30px;
     font-weight: 600;
