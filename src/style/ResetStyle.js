@@ -1,10 +1,10 @@
 import { createGlobalStyle } from 'styled-components';
 
 const ResetStyle = createGlobalStyle`
-  
 * {
   box-sizing: border-box;
 }
+
 html,
 body,
 div,
@@ -110,7 +110,7 @@ section {
 body {
   line-height: 1;
   color: #181818;
-  font-size: 16px;
+  font-size: 1.6rem;
   font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
 }
 ol,
@@ -143,12 +143,14 @@ button {
   margin: -1px;
   clip: rect(0, 0, 0, 0);
 }
-${'' /* svg,
-path {
-  pointer-events: none;
-} */}
 html {
   font-size: 10px;
+}
+@media screen and (max-width: 768px) {
+  html {
+    background-color: #eee;
+    font-size: 9px;
+  }
 }
 `;
 

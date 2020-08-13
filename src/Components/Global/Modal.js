@@ -1,28 +1,77 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import { GrClose } from 'react-icons/gr';
 
-// header, footer 보이게 하고 싶으면 "flex"를 전달하세요.
-const Modal = ({ children, width, height, header, footer, title, button }) => {
+// header를 보이게 하고 싶으면 header를 전달하세요.
+// footer를 보이게 하고 싶으면 ModalFooter를 따로 불러서 사용하세요.
+// modalState에 불리언 값을 전달해서 모달을 켜고 끄세요.
+const Modal = ({
+  children,
+  width,
+  height,
+  header,
+  title,
+  modalState,
+  setModalState,
+}) => {
+  const [animate, setAnimate] = useState(false);
+  const [visible, setVisible] = useState(modalState);
+
+  useEffect(() => {
+    if (visible && !modalState) {
+      setAnimate(true);
+      setTimeout(() => setAnimate(false), 250);
+    }
+    setVisible(modalState);
+  }, [modalState, visible]);
+
+  if (!visible && !animate) return '';
+
+  const onDelete = e => {
+    if (typeof e.target.className !== 'string') return;
+    if (!e.target.className.includes('dimmed')) return;
+    setModalState(false);
+  };
+
+  const onBtnDelete = () => setModalState(false);
+
   return (
-    <StModalDimed>
-      <StModalDiv width={width} height={height}>
-        <StModalCloseBtn>
+    <StModalDimmed
+      modalState={modalState}
+      onClick={onDelete}
+      className="dimmed"
+      animate={animate}
+    >
+      <StModalDiv width={width} height={height} animate={animate}>
+        <StModalCloseBtn type="button" onClick={onBtnDelete}>
           <StCloseIcon />
         </StModalCloseBtn>
-        <StModalHeader header={header}>
-          <h2>{title}</h2>
-        </StModalHeader>
+        {header && <StModalHeader>{title && <h2>{title}</h2>}</StModalHeader>}
         {children}
-        <StModalFooter footer={footer}>
-          <StFooterBtn>{button}</StFooterBtn>
-        </StModalFooter>
       </StModalDiv>
-    </StModalDimed>
+    </StModalDimmed>
   );
 };
 
-const StModalDimed = styled.div`
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+
+const fadeOut = keyframes`
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+`;
+
+const StModalDimmed = styled.div`
   position: fixed;
   z-index: 100;
   left: 0;
@@ -31,16 +80,32 @@ const StModalDimed = styled.div`
   height: 100vh;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.53);
+  animation-name: ${fadeIn};
+  animation-duration: 0.4s;
+  animation-fill-mode: forwards;
+
+  ${({ animate }) =>
+    animate &&
+    css`
+      animation-name: ${fadeOut};
+    `}
 `;
 
 const slideUp = keyframes`
   0% {
     transform: translateY(100%);
-    opacity: 0;
   }
   100% {
     transform: none;
-    opacity: 1;
+  }
+`;
+
+const slideDown = keyframes`
+  0% {
+    transform: none;
+  }
+  100% {
+    transform: translateY(100%);
   }
 `;
 
@@ -61,6 +126,12 @@ const StModalDiv = styled.div`
   animation-duration: 0.4s;
   animation-timing-function: ease-out;
   animation-fill-mode: forwards;
+
+  ${({ animate }) =>
+    animate &&
+    css`
+      animation-name: ${slideDown};
+    `}
 `;
 
 const StModalCloseBtn = styled.button`
@@ -87,7 +158,7 @@ const StModalCloseBtn = styled.button`
 
 const StCloseIcon = styled(GrClose)`
   & > path {
-    /* stroke: red !important; */
+    /* stroke: red; */
     stroke-width: 2.5;
   }
 `;
@@ -101,35 +172,12 @@ const area = css`
   width: 100%;
   min-height: 64px;
   font-size: 1.6rem;
-  font-weight: 800;
 `;
 
 const StModalHeader = styled.header`
   ${area};
-  display: ${props => props.header || 'none'};
   border-bottom: 1px solid #ebebeb;
-`;
-
-const StModalFooter = styled.footer`
-  ${area};
-  position: absolute;
-  bottom: 0;
-  display: ${props => props.footer || 'none'};
-  border-top: 1px solid #ebebeb;
-`;
-
-const StFooterBtn = styled.button`
-  border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
-  font-size: 1.6rem;
-  text-decoration: underline;
-  outline: none;
-  &:hover,
-  &:focus {
-    font-weight: 800;
-    background-color: #eee;
-  }
+  font-weight: 800;
 `;
 
 export default Modal;

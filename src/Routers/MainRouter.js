@@ -7,7 +7,6 @@ import ReservationPage from '../Pages/ReservationPage';
 import TripsPage from '../Pages/TripsPage';
 import MessagePage from '../Pages/MessagePage';
 import WishlistsPage from '../Pages/WishlistsPage';
-import Modal from '../Components/Global/Modal';
 
 const MainRouter = () => {
   return (
@@ -19,7 +18,6 @@ const MainRouter = () => {
       <Route path="/message" component={MessagePage} />
       <Route path="/trips" component={TripsPage} />
       <Route path="/wishlists" component={WishlistsPage} />
-      <Route path="/Modal" component={Modal} />
       <Route
         render={({ location }) => (
           <div>
