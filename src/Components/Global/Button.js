@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import theme from '../../style/theme';
+
 // btnType: color, underlined, circle, oval
 const Button = ({
   children,
@@ -11,6 +12,7 @@ const Button = ({
   height,
   fontSize,
   hover,
+  padding,
   ...rest
 }) => {
   return (
@@ -22,6 +24,7 @@ const Button = ({
       height={height}
       fontSize={fontSize}
       hover={hover}
+      padding={padding}
       {...rest}
     >
       {children}

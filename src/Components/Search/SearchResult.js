@@ -15,7 +15,7 @@ const SearchResult = () => {
 };
 
 const StWrapper = styled.div`
-  width: 860px;
+  width: 840px;
   padding: 2rem;
 `;
 

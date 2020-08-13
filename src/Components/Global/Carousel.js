@@ -2,8 +2,8 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import theme from '../../style/theme';
 
-const Carousel = ({ size }) => {
-  return <StWrapper size={size}></StWrapper>;
+const Carousel = ({ size, ...rest }) => {
+  return <StWrapper size={size} {...rest}></StWrapper>;
 };
 
 const sizes = {
@@ -16,8 +16,8 @@ const sizes = {
     height: '180px',
   },
   small: {
-    width: '155px',
-    height: '107px',
+    width: '148px',
+    height: '97px',
   },
 };
 
