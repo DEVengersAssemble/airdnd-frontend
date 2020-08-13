@@ -9,7 +9,7 @@ const Rating = ({ scale, rate, count, starSize }) => {
 
   return (
     <StRatingWrapper scale={scale}>
-      <StStarIcon scale={scale} starSize={starSize} />
+      <StStarIcon scale={scale} starsize={starSize} />
       <span className="a11yHidden">
         {`후기 ${filteredNumber}개로부터 5점 만점에 ${rate}점을 받은 숙소입니다.`}
       </span>
@@ -30,7 +30,7 @@ const StStarIcon = styled(AiFillStar)`
   margin-right: 0.4rem;
   color: ${props => props.theme.main};
   font-size: ${props =>
-    props.starSize || (props.scale * 1.2).toFixed(1) + 'rem'};
+    props.starsize || (props.scale * 1.2).toFixed(1) + 'rem'};
 `;
 
 const StRatingGrade = styled.span`
