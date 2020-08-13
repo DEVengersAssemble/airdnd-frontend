@@ -10,6 +10,7 @@ const HeartBlock = styled.div`
   margin: 10rem auto;
   padding: 5rem;
   border: 1px solid black;
+  background: url('https://a0.muscache.com/im/pictures/f8e414db-bbde-4b19-9450-81f0d6479b0c.jpg?im_w=1200');
   /* background-color: lightgoldenrodyellow; */
 `;
 
@@ -45,10 +46,16 @@ const MessagePage = () => {
         <Heart size="large" bgColor="main" stroke="white" />
       </HeartGroup>
       <HeartGroup>
-        <CkHeart hover checked={check} onChange={onChangeHeart} />
+        <CkHeart hover={true} checked={check} onChange={onChangeHeart} />
       </HeartGroup>
       <HeartGroup>
-        <CkHeart size="large" checked={check} onChange={onChangeHeart} />
+        <CkHeart
+          size="large"
+          ckType={true}
+          hover={false}
+          checked={check}
+          onChange={onChangeHeart}
+        />
       </HeartGroup>
     </HeartBlock>
   );

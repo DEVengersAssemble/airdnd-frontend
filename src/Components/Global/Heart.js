@@ -1,10 +1,11 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { rgba } from 'polished';
 import { TiHeartFullOutline as HeartIcon } from 'react-icons/ti';
 
 const sizes = {
   large: {
-    strokeWidth: '2px',
+    strokeWidth: '1.5px',
     fontSize: '3rem',
   },
   medium: {
@@ -12,7 +13,7 @@ const sizes = {
     fontSize: '2.5rem',
   },
   small: {
-    strokeWidth: '2px',
+    strokeWidth: '3px',
     fontSize: '2rem',
   },
 };
@@ -29,31 +30,32 @@ const colors = {
 };
 
 const defaultColorStyles = css`
-  ${({ bgColor, stroke }) => css`
-    color: ${colors[bgColor]};
-    & > svg > path {
-      stroke: ${colors[stroke]};
-    }
-  `}
-`;
-/* 호버있는하트 ? 호버가트루면 체크드인지?이런디자인:저런디자인 : 호버가펄스면 체크드?다른디자인: 또다른디자인 */
-const hoverColorStyles = css`
-  ${({ hover, checked }) =>
-    hover
+  ${({ bgColor, stroke, ckType, checked }) =>
+    ckType
       ? checked
         ? css`
             color: ${colors.main};
             & > svg > path {
-              stroke: ${colors.main};
+              stroke: ${colors.white};
             }
           `
         : css`
-            color: ${colors.white};
+            color: ${rgba(colors.black, 0.5)};
             & > svg > path {
-              stroke: ${colors.black};
+              stroke: ${colors.white};
             }
           `
-      : checked
+      : css`
+          color: ${colors[bgColor]};
+          & > svg > path {
+            stroke: ${colors[stroke]};
+          }
+        `}
+`;
+
+const hoverColorStyles = css`
+  ${({ hover, checked }) =>
+    hover && checked
       ? css`
           color: ${colors.main};
           & > svg > path {
@@ -61,9 +63,9 @@ const hoverColorStyles = css`
           }
         `
       : css`
-          color: ${colors.black};
+          color: ${colors.white};
           & > svg > path {
-            stroke: ${colors.white};
+            stroke: ${colors.black};
           }
         `}
 `;
@@ -113,40 +115,42 @@ const StCkDiv = styled.div`
   ${hoverStyles}
 `;
 
-const Heart = ({ size, bgColor, stroke, hover, checked }) => {
-  return checked ? (
-    <StCkDiv
+const Heart = ({ size, bgColor, stroke, ckType, hover, checked }) => {
+  return hover ? (
+    <StCkDiv // hover={true}
       size={size}
       bgColor={bgColor}
       stroke={stroke}
+      ckType={ckType}
       hover={hover} // CkHeart의 hover기능 props 여부에 따라 hover 적용, 없으면 무시
       checked={checked} // checked=true, checked=false
     >
       <HeartIcon />
     </StCkDiv>
   ) : (
-    <StDiv
+    <StDiv // default heart
       size={size}
       bgColor={bgColor}
       stroke={stroke}
-      hover={hover} // CkHeart의 hover기능 props 여부에 따라 hover 적용, 없으면 무시
-      checked={checked} // checked=true, checked=false
+      ckType={ckType}
+      hover={hover} // hover={false}
+      checked={checked}
     >
       <HeartIcon />
     </StDiv>
   );
 };
 
-const CkHeart = ({ hover, checked, onChange }) => {
+const CkHeart = ({ ckType, hover, checked, onChange }) => {
   return (
     <StHeartLabel hover={hover} onChange={onChange}>
       <StHeartInput type="checkbox" />
       {hover ? (
-        // hover기능이 있는 defaultHeart
-        <Heart size="large" hover={hover} checked={checked} />
+        // hover=true
+        <Heart size="large" ckType={ckType} hover={hover} checked={checked} />
       ) : (
-        // hover기능이 없는 defaultHeart
-        <Heart size="large" checked={checked} />
+        // hover=false
+        <Heart size="large" ckType={ckType} checked={checked} />
       )}
     </StHeartLabel>
   );
