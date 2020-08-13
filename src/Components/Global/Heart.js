@@ -157,3 +157,33 @@ const CkHeart = ({ ckType, hover, checked, onChange }) => {
 };
 
 export { Heart, CkHeart };
+
+/**
+  <HeartGroup>
+    <Heart size="small" bgColor="main" />
+    <Heart size="medium" bgColor="main" />
+    <Heart size="large" bgColor="main" />
+  </HeartGroup>
+  <HeartGroup>
+    <Heart size="small" bgColor="white" stroke="black" />
+    <Heart size="medium" bgColor="white" stroke="black" />
+    <Heart size="large" bgColor="white" stroke="black" />
+  </HeartGroup>
+  <HeartGroup>
+    <Heart size="small" bgColor="main" stroke="white" />
+    <Heart size="medium" bgColor="main" stroke="white" />
+    <Heart size="large" bgColor="main" stroke="white" />
+  </HeartGroup>
+  <HeartGroup>
+    <CkHeart hover={true} checked={check} onChange={onChangeHeart} />
+  </HeartGroup>
+  <HeartGroup>
+    <CkHeart
+      size="large"
+      ckType={true}
+      hover={false}
+      checked={check}
+      onChange={onChangeHeart}
+    />
+  </HeartGroup>
+ */
