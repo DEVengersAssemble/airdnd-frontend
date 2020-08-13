@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import { GrClose } from 'react-icons/gr';
 
-// header를 보이게 하고 싶으면 header="flex"를 전달하세요.
+// header를 보이게 하고 싶으면 header를 전달하세요.
 // footer를 보이게 하고 싶으면 ModalFooter를 따로 불러서 사용하세요.
+// modalState에 불리언 값을 전달해서 모달을 켜고 끄세요.
 const Modal = ({
   children,
   width,
@@ -13,33 +14,64 @@ const Modal = ({
   modalState,
   setModalState,
 }) => {
+  const [animate, setAnimate] = useState(false);
+  const [visible, setVisible] = useState(modalState);
+
+  useEffect(() => {
+    if (visible && !modalState) {
+      setAnimate(true);
+      setTimeout(() => setAnimate(false), 250);
+    }
+    setVisible(modalState);
+  }, [modalState, visible]);
+
+  if (!visible && !animate) return '';
+
   const onDelete = e => {
     if (typeof e.target.className !== 'string') return;
     if (!e.target.className.includes('dimmed')) return;
-    setModalState('none');
+    setModalState(false);
   };
+
+  const onBtnDelete = () => setModalState(false);
 
   return (
     <StModalDimmed
       modalState={modalState}
       onClick={onDelete}
       className="dimmed"
+      animate={animate}
     >
-      <StModalDiv width={width} height={height}>
-        <StModalCloseBtn type="button" onClick={() => setModalState('none')}>
+      <StModalDiv width={width} height={height} animate={animate}>
+        <StModalCloseBtn type="button" onClick={onBtnDelete}>
           <StCloseIcon />
         </StModalCloseBtn>
-        <StModalHeader header={header}>
-          <h2>{title}</h2>
-        </StModalHeader>
+        {header && <StModalHeader>{title && <h2>{title}</h2>}</StModalHeader>}
         {children}
       </StModalDiv>
     </StModalDimmed>
   );
 };
 
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+
+const fadeOut = keyframes`
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+`;
+
 const StModalDimmed = styled.div`
-  display: ${props => props.modalState};
   position: fixed;
   z-index: 100;
   left: 0;
@@ -48,16 +80,32 @@ const StModalDimmed = styled.div`
   height: 100vh;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.53);
+  animation-name: ${fadeIn};
+  animation-duration: 0.4s;
+  animation-fill-mode: forwards;
+
+  ${({ animate }) =>
+    animate &&
+    css`
+      animation-name: ${fadeOut};
+    `}
 `;
 
 const slideUp = keyframes`
   0% {
     transform: translateY(100%);
-    opacity: 0;
   }
   100% {
     transform: none;
-    opacity: 1;
+  }
+`;
+
+const slideDown = keyframes`
+  0% {
+    transform: none;
+  }
+  100% {
+    transform: translateY(100%);
   }
 `;
 
@@ -78,6 +126,12 @@ const StModalDiv = styled.div`
   animation-duration: 0.4s;
   animation-timing-function: ease-out;
   animation-fill-mode: forwards;
+
+  ${({ animate }) =>
+    animate &&
+    css`
+      animation-name: ${slideDown};
+    `}
 `;
 
 const StModalCloseBtn = styled.button`
@@ -121,10 +175,9 @@ const area = css`
 `;
 
 const StModalHeader = styled.header`
-  display: ${props => props.header || 'none'};
+  ${area};
   border-bottom: 1px solid #ebebeb;
   font-weight: 800;
-  ${area};
 `;
 
 export default Modal;
