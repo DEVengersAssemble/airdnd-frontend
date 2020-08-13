@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import Logo from './Logo';
 import Navigation from './Navigation';
+import SettingButton from './SettingButton';
 
 const StMainHeader = styled.header`
   box-sizing: border-box;
@@ -18,14 +19,19 @@ const StMainHeader = styled.header`
 
 const StNavSearchWrapper = styled.div`
   box-sizing: border-box;
-  background: lightgreen;
+  /* background: lightgreen; */
   position: absolute;
+  top: 0;
+  left: calc(50vw - 350px);
   width: 700px;
   height: 150px;
   display: flex;
   justify-content: center;
-  top: 0;
-  left: calc(50vw - 350px);
+  padding-top: 20px;
+`;
+
+const StSettingButtonWrapper = styled.div`
+  /* background: lightblue; */
 `;
 
 const MainHeader = () => {
@@ -35,6 +41,9 @@ const MainHeader = () => {
       <StNavSearchWrapper>
         <Navigation></Navigation>
       </StNavSearchWrapper>
+      <StSettingButtonWrapper>
+        <SettingButton></SettingButton>
+      </StSettingButtonWrapper>
     </StMainHeader>
   );
 };

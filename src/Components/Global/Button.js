@@ -1,7 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import theme from '../../style/theme';
-
 // btnType: color, underlined, circle, oval
 // hover: default, border, none
 const Button = ({
@@ -30,7 +29,6 @@ const Button = ({
     </StBtn>
   );
 };
-
 const hovers = {
   default: css`
     background: ${theme.lightGray};
@@ -38,8 +36,8 @@ const hovers = {
   oval: css`
     border: 1px solid ${theme.black};
   `,
+  none: null,
 };
-
 const hoverStyles = css`
   ${({ btnType, hover }) =>
     css`
@@ -55,7 +53,6 @@ const hoverStyles = css`
       `}
     `}
 `;
-
 const borders = btnType => {
   switch (btnType) {
     case 'color':
@@ -78,21 +75,18 @@ const borders = btnType => {
       `;
   }
 };
-
 const borderStyles = css`
   ${({ btnType, border }) => css`
     ${borders(btnType)};
     border: ${border && border};
   `}
 `;
-
 const fontStyles = css`
   ${({ btnType, fontSize }) => css`
     font-size: ${fontSize};
     text-decoration: ${btnType === 'underlined' && 'underline'};
   `}
 `;
-
 const colorStyles = css`
   ${({ color }) =>
     color &&
@@ -102,7 +96,6 @@ const colorStyles = css`
       border: none;
     `}
 `;
-
 const sizeStyles = css`
   ${({ btnType, width, height }) => css`
     ${
@@ -117,7 +110,6 @@ const sizeStyles = css`
     height: ${height};
   `}
 `;
-
 export const StBtn = styled.button`
   display: inline-flex;
   justify-content: center;
@@ -132,10 +124,8 @@ export const StBtn = styled.button`
   ${sizeStyles};
   ${borderStyles};
   ${hoverStyles};
-
   &:focus {
     box-shadow: 0px 0px 0px 2px ${theme.white}, 0px 0px 0px 4px ${theme.black};
   }
 `;
-
 export default Button;
