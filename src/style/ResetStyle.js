@@ -135,6 +135,9 @@ table {
 button {
   background-color: #fff;
 }
+a {
+  cursor: pointer;
+}
 .a11yHidden {
   position: absolute;
   width: 1px;
