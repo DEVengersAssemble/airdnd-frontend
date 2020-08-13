@@ -76,14 +76,8 @@ const hoverStyles = css`
   ${({ btnType, hover }) =>
     css`
       &:hover {
-        ${hovers(btnType)};
+        ${hover ? hover : hovers(btnType)};
       }
-      ${hover &&
-      css`
-        &:hover {
-          ${hover}
-        }
-      `}
     `}
 `;
 
@@ -112,17 +106,10 @@ const colorStyles = css`
 `;
 
 const sizeStyles = css`
-  ${({ btnType, width, height }) => css`
-    ${
-      btnType === 'circle' &&
-      css`
-        width: 32px;
-        height: 32px;
-        padding: 0;
-      `
-    }
-    width: ${width};
-    height: ${height};
+  ${({ btnType, width, height, padding }) => css`
+    width: ${btnType === 'circle' ? '32px' : width};
+    height: ${btnType === 'circle' ? '32px' : height};
+    padding: ${btnType === 'circle' ? '0' : padding};
   `}
 `;
 
