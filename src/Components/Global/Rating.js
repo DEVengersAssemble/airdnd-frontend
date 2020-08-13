@@ -5,7 +5,7 @@ import { AiFillStar } from 'react-icons/ai';
 // scale은 폰트크기로, rem 단위에서 '숫자만' 전달하세요
 const Rating = ({ scale, rate, count }) => {
   const regExp = /\d/g;
-  const filteredNumber = count.match(regExp).join('');
+  const filteredNumber = (count + '').match(regExp).join('');
 
   return (
     <StRatingWrapper scale={scale}>
@@ -23,7 +23,7 @@ const StRatingWrapper = styled.div`
   display: inline-flex;
   align-items: center;
   line-height: ${props => (props.scale * 1.4).toFixed(1)}rem;
-  font-size: ${props => props.scale || '1.8'}rem;
+  font-size: ${props => props.scale}rem;
 `;
 
 const StStarIcon = styled(AiFillStar)`
@@ -41,5 +41,11 @@ const StReviewCount = styled.span`
   font-weight: 400;
   color: #717171;
 `;
+
+Rating.defaultProps = {
+  scale: 1.4,
+  rate: 0,
+  count: 0,
+};
 
 export default Rating;
