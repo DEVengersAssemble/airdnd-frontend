@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import HomeList from './HomeList';
 import FilterList from './FilterList';
 import RecentHomeList from './RecentHomeList';
+import SearchPagenation from './SearchPagenation';
 
 const SearchResult = () => {
   return (
@@ -12,13 +13,14 @@ const SearchResult = () => {
       <FilterList />
       <HomeList />
       <RecentHomeList />
+      <SearchPagenation />
     </StWrapper>
   );
 };
 
 const StWrapper = styled.div`
   width: 840px;
-  padding: 5rem 2rem;
+  padding: 5rem 2rem 1rem;
 `;
 
 const StHeader = styled.h2`
