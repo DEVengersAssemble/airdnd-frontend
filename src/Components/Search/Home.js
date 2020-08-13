@@ -6,7 +6,7 @@ import Carousel from '../Global/Carousel';
 const Home = () => {
   return (
     <StHome>
-      <Carousel />
+      <Carousel size="large" />
       <StDetailWrapper>
         <StDetail>MongMong-Toto의 호텔 객실</StDetail>
         <StTitle>Pia Resort Hotel Corner Studio Room</StTitle>
