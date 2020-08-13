@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import Logo from './Logo';
 import Navigation from './Navigation';
 import SettingButton from './SettingButton';
+import MyPageButton from './MyPageButton';
 
 const StMainHeader = styled.header`
   box-sizing: border-box;
@@ -31,7 +32,7 @@ const StNavSearchWrapper = styled.div`
 `;
 
 const StSettingButtonWrapper = styled.div`
-  /* background: lightblue; */
+  height: 40px;
 `;
 
 const MainHeader = () => {
@@ -43,6 +44,7 @@ const MainHeader = () => {
       </StNavSearchWrapper>
       <StSettingButtonWrapper>
         <SettingButton></SettingButton>
+        <MyPageButton></MyPageButton>
       </StSettingButtonWrapper>
     </StMainHeader>
   );
