@@ -1,65 +1,155 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { IoMdHeartEmpty, IoMdHeart as HeartFill } from 'react-icons/io';
+import { TiHeartFullOutline as HeartIcon } from 'react-icons/ti';
 
-// 공통 라벨 스타일
-const HeartLabel = styled.label`
-  position: relative;
-  display: inline-block;
-  width: 2rem;
-  height: 2rem;
-  font-size: 2rem;
+const sizes = {
+  large: {
+    strokeWidth: '2px',
+    fontSize: '3rem',
+  },
+  medium: {
+    strokeWidth: '2px',
+    fontSize: '2.5rem',
+  },
+  small: {
+    strokeWidth: '2px',
+    fontSize: '2rem',
+  },
+};
+
+const colors = {
+  main: '#FF385C',
+  gray: '#717171',
+  black: '#222222',
+  lightGray: '#F7F7F7',
+  white: '#FFFFFF',
+  deepgreen: '#01797e',
+  green: '#008489',
+  darkred: '#C03515',
+};
+
+const defaultColorStyles = css`
+  ${({ bgColor, stroke }) => css`
+    color: ${colors[bgColor]};
+    & > svg > path {
+      stroke: ${colors[stroke]};
+    }
+  `}
+`;
+/* 호버있는하트 ? 호버가트루면 체크드인지?이런디자인:저런디자인 : 호버가펄스면 체크드?다른디자인: 또다른디자인 */
+const hoverColorStyles = css`
+  ${({ hover, checked }) =>
+    hover
+      ? checked
+        ? css`
+            color: ${colors.main};
+            & > svg > path {
+              stroke: ${colors.main};
+            }
+          `
+        : css`
+            color: ${colors.white};
+            & > svg > path {
+              stroke: ${colors.black};
+            }
+          `
+      : checked
+      ? css`
+          color: ${colors.main};
+          & > svg > path {
+            stroke: ${colors.main};
+          }
+        `
+      : css`
+          color: ${colors.black};
+          & > svg > path {
+            stroke: ${colors.white};
+          }
+        `}
 `;
 
-// 공통 인풋 스타일
-const HeartInput = styled.input`
-  display: none;
+const sizeStyles = css`
+  ${({ size }) => css`
+    font-size: ${sizes[size].fontSize};
+    & > svg > path {
+      stroke-width: ${sizes[size].strokeWidth};
+    }
+  `}
 `;
 
-// checked일 때 하트 색상
-const checked = css`
-  ${props =>
-    props.checked &&
+const hoverStyles = css`
+  ${({ hover }) =>
+    hover &&
     css`
-      color: #ff385c;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 5rem;
+      height: 5rem;
+      &:hover {
+        width: 5rem;
+        height: 5rem;
+        border-radius: 50%;
+        background-color: ${colors.lightGray};
+      }
     `}
 `;
 
-// 공통 아이콘 스타일
-const HeartIcon = styled.div`
-  position: absolute;
-  ${checked}
-  cursor: pointer;
+// default heart
+const StDiv = styled.div`
+  ${defaultColorStyles}
+  ${sizeStyles}
+  ${hoverStyles}
+`;
+const StHeartLabel = styled.label``;
+const StHeartInput = styled.input`
+  display: none;
 `;
 
-const HeartEmptyBorder = styled(IoMdHeartEmpty)`
-  position: absolute;
-  color: black;
+// CkHeartDiv
+const StCkDiv = styled.div`
+  ${hoverColorStyles}
+  ${sizeStyles}
+  ${hoverStyles}
 `;
 
-const HeartEmptyBackground = styled(HeartFill)`
-  color: white;
-  /* color: blue; */
-`;
-
-const HeartEmpty = () => {
-  return (
-    <>
-      <HeartEmptyBorder />
-      <HeartEmptyBackground />
-    </>
+const Heart = ({ size, bgColor, stroke, hover, checked }) => {
+  return checked ? (
+    <StCkDiv
+      size={size}
+      bgColor={bgColor}
+      stroke={stroke}
+      hover={hover} // CkHeart의 hover기능 props 여부에 따라 hover 적용, 없으면 무시
+      checked={checked} // checked=true, checked=false
+    >
+      <HeartIcon />
+    </StCkDiv>
+  ) : (
+    <StDiv
+      size={size}
+      bgColor={bgColor}
+      stroke={stroke}
+      hover={hover} // CkHeart의 hover기능 props 여부에 따라 hover 적용, 없으면 무시
+      checked={checked} // checked=true, checked=false
+    >
+      <HeartIcon />
+    </StDiv>
   );
 };
 
-const Heart = ({ hover, borderColor, check, onHeart }) => {
+const CkHeart = ({ hover, checked, onChange }) => {
   return (
-    <HeartLabel hover="hover">
-      <HeartInput type="checkbox" checked={check} onClick={onHeart} />
-      <HeartIcon checked={check}>
-        {check ? <HeartFill /> : <HeartEmpty borderColor={borderColor} />}
-      </HeartIcon>
-    </HeartLabel>
+    <StHeartLabel hover={hover} onChange={onChange}>
+      <StHeartInput type="checkbox" />
+      {hover ? (
+        // hover기능이 있는 defaultHeart
+        <Heart size="large" hover={hover} checked={checked} />
+      ) : (
+        // hover기능이 없는 defaultHeart
+        <Heart size="large" checked={checked} />
+      )}
+    </StHeartLabel>
   );
 };
 
-export default Heart;
+export { Heart, CkHeart };

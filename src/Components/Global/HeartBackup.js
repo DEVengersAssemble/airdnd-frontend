@@ -1,76 +1,99 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { BsHeart, BsHeartFill as FillHeart } from 'react-icons/bs';
+import { IoIosHeart } from 'react-icons/io';
 
-const hover = css`
-  &:hover {
-    background: #eeeeee;
-  }
+const sizes = {
+  large: {
+    fontSize: '3rem',
+  },
+  medium: {
+    fontSize: '2.5rem',
+  },
+  small: {
+    fontSize: '2rem',
+  },
+};
+
+const sizeStyles = css`
+  ${({ size }) => css`
+    font-size: ${sizes[size].fontSize};
+  `}
 `;
 
-const HeartLabel = styled.label`
-  position: relative;
-  display: inline-block;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  font-size: 2rem;
-  ${hover}
-`;
-
-const HeartInput = styled.input`
-  display: none;
-`;
-
-const HeartIcon = styled.span`
-  position: absolute;
-  top: 1.1rem;
-  left: 1rem;
-  ${props =>
-    props.checked &&
+const BgColorStyles = css`
+  ${({ checked }) =>
+    checked &&
     css`
-      color: #ff385c;
+      color: ${({ theme }) => theme.palette.main};
     `}
 `;
 
-const EmptyHeartBorder = styled(BsHeart)`
-  position: absolute;
-  right: 0.05rem;
+const hoverStyles = css`
+  ${({ hover }) =>
+    hover &&
+    css`
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 5rem;
+      line-height: 5rem;
+      border-radius: 50%;
+      position: relative;
+      top: 0.4rem;
+      &:hover {
+        width: 5rem;
+        line-height: 5rem;
+        border-radius: 50%;
+        background-color: ${({ theme }) => theme.palette.lightGray};
+      }
+    `}
 `;
 
-const EmptyHeartBackground = styled(FillHeart)`
-  color: white;
+const strokeStyles = css`
+  ${({ checked }) =>
+    checked &&
+    css`
+      & > svg > path {
+        color: blue;
+        stroke: red;
+        stroke-width: 1rem;
+      }
+    `}
 `;
 
-const EmptyHeart = () => {
+const StHeartLabel = styled.label`
+  /* common */
+  /* hover */
+  ${hoverStyles}
+`;
+const StHeartInput = styled.input`
+  /* common */
+  display: none;
+`;
+
+const StHeartIcon = styled.span`
+  /* common */
+  cursor: pointer;
+  /* size */
+  ${sizeStyles}
+  /* color */
+  ${BgColorStyles}
+  ${strokeStyles}
+`;
+
+const StHeart = ({ size, hover, position, ...rest }) => {
   return (
-    <>
-      <EmptyHeartBackground />
-      <EmptyHeartBorder />
-    </>
+    <StHeartLabel hover={hover}>
+      <StHeartInput {...rest} />
+      <StHeartIcon size={size} position={position} {...rest}>
+        {rest.checked ? <IoIosHeart /> : <IoIosHeart />}
+      </StHeartIcon>
+    </StHeartLabel>
   );
 };
 
-const SearchHeart = ({ check, onClickSearchHeart }) => {
-  return (
-    <HeartLabel>
-      <HeartInput type="checkbox" onClick={onClickSearchHeart} />
-      <HeartIcon checked={check}>
-        {check ? <FillHeart /> : <EmptyHeart />}
-      </HeartIcon>
-    </HeartLabel>
-  );
-};
+const Heart = ({ size, hover, position, ...rest }) => (
+  <StHeart size={size} hover={hover} position={position} {...rest} />
+);
 
-const RecentSearchHeart = ({ rsCheck, onClickRsHeart }) => {
-  return (
-    <HeartLabel>
-      <HeartInput type="checkbox" onClick={onClickRsHeart} />
-      <HeartIcon checked={rsCheck}>
-        {rsCheck ? <FillHeart /> : <EmptyHeart />}
-      </HeartIcon>
-    </HeartLabel>
-  );
-};
-
-export { SearchHeart, RecentSearchHeart };
+export default Heart;

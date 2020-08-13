@@ -1,46 +1,56 @@
 import React, { useState } from 'react';
-import styled, { ThemeProvider } from 'styled-components';
-import Heart from '../Components/Global/Heart';
+import styled from 'styled-components';
+import { Heart, CkHeart } from '../Components/Global/Heart';
+// import HeartBackup from '../Components/Global/HeartBackup';
 
 const HeartBlock = styled.div`
-  width: 512px;
-  margin: 0 auto;
-  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  width: 756px;
+  margin: 10rem auto;
+  padding: 5rem;
   border: 1px solid black;
-  padding: 1rem;
-  background-color: lightcoral;
+  /* background-color: lightgoldenrodyellow; */
 `;
+
 const HeartGroup = styled.div`
+  display: flex;
   & + & {
-    margin-top: 1rem;
+    margin-top: 5rem;
   }
 `;
 
 const MessagePage = () => {
   const [check, setCheck] = useState(false);
 
-  const onHeart = e => {
+  const onChangeHeart = e => {
     setCheck(e.target.checked);
   };
 
   return (
-    <ThemeProvider
-      theme={{
-        palette: {
-          main: '#ff385c',
-          white: '#aaaaaa',
-          dark: '#181818',
-        },
-      }}
-    >
-      <HeartBlock>
-        <HeartGroup>
-          <Heart check={check} onHeart={onHeart} />
-          <Heart hover borderColor="white" check={check} onHeart={onHeart} />
-          <Heart check={check} onHeart={onHeart} />
-        </HeartGroup>
-      </HeartBlock>
-    </ThemeProvider>
+    <HeartBlock>
+      <HeartGroup>
+        <Heart size="small" bgColor="main" />
+        <Heart size="medium" bgColor="main" />
+        <Heart size="large" bgColor="main" />
+      </HeartGroup>
+      <HeartGroup>
+        <Heart size="small" bgColor="white" stroke="black" />
+        <Heart size="medium" bgColor="white" stroke="black" />
+        <Heart size="large" bgColor="white" stroke="black" />
+      </HeartGroup>
+      <HeartGroup>
+        <Heart size="small" bgColor="main" stroke="white" />
+        <Heart size="medium" bgColor="main" stroke="white" />
+        <Heart size="large" bgColor="main" stroke="white" />
+      </HeartGroup>
+      <HeartGroup>
+        <CkHeart hover checked={check} onChange={onChangeHeart} />
+      </HeartGroup>
+      <HeartGroup>
+        <CkHeart size="large" checked={check} onChange={onChangeHeart} />
+      </HeartGroup>
+    </HeartBlock>
   );
 };
 
