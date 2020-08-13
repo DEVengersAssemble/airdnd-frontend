@@ -34,10 +34,10 @@ const Button = ({
 
 const hovers = btnType => {
   switch (btnType) {
-    case 'color':
+    case undefined:
     case 'underlined':
       return css`
-        background: ${theme.lightGray};
+        background: ${theme.shadow};
       `;
     case 'oval':
       return css`
