@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Modal from '../Components/Global/Modal';
 import ModalFooter from '../Components/Global/ModalFooter';
+import Popup from '../Components/Global/Popup';
 import styled from 'styled-components';
 import Profile from '../Components/Global/Profile';
 import Rating from '../Components/Global/Rating';
@@ -10,13 +11,29 @@ import { MdShare } from 'react-icons/md';
 import Button from '../Components/Global/Button';
 
 const DetailPage = () => {
-  const [modalState, setModalState] = useState('none');
-  const [popupState, setPopupState] = useState('none');
-  const onModal = () => setModalState('display');
-  const onPopup = () => setPopupState('display');
+  const [modalState, setModalState] = useState(false);
+  const [popupState, setPopupState] = useState(false);
+
+  const onModal = () => setModalState(true);
+  const onPopup = () => setPopupState(true);
 
   return (
     <main>
+      <button onClick={onModal}>modal button</button>
+      <PopupWrapper>
+        <button onClick={onPopup}>popup</button>
+        <Popup popupState={popupState}>
+          <ModalFooter>test</ModalFooter>
+        </Popup>
+      </PopupWrapper>
+      <Modal
+        title="modal"
+        header
+        footer="flex"
+        footerText="test"
+        modalState={modalState}
+        setModalState={setModalState}
+      ></Modal>
       <section>
         <h2>S9[공항 1.7km, 5분] 퀸베드 1개 프리미엄 레지던스,제주의 중심</h2>
         <div>
@@ -65,5 +82,9 @@ const DetailPage = () => {
     </main>
   );
 };
+
+const PopupWrapper = styled.div`
+  position: relative;
+`;
 
 export default DetailPage;
