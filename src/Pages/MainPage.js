@@ -9,7 +9,9 @@ const MainPage = () => {
   return (
     <main>
       <MainHeader></MainHeader>
+
       <Background></Background>
+
       <Category></Category>
       <OnlineExp></OnlineExp>
       <Footer></Footer>

@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import Button from '../Global/Button';
 import { FaWonSign, FaFacebookF, FaTwitter, FaInstagram } from 'react-icons/fa';
 import { FiGlobe } from 'react-icons/fi';

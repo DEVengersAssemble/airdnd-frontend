@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const StNav = styled.nav`
   height: 80px;
-  background: ${props => props.theme.deepGreen};
+  /* background: ${props => props.theme.deepGreen}; */
 `;
 
 const StList = styled.ul`
@@ -16,9 +16,40 @@ const StItemLabel = styled.label`
   display: block;
 `;
 
-const StItemInput = styled.input``;
+const StItemSpan = styled.span`
+  /* background: lightgray; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  padding: 12px 24px;
+  color: white;
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0;
+    width: 18px;
+    height: 2px;
+    background: white;
+    border-radius: 1px;
+    transform: scaleX(0);
+    transition: 0.25s transform cubic-bezier(0, 0, 0.1, 1);
+  }
+`;
 
-const StItemSpan = styled.span``;
+const StItemInput = styled.input`
+  display: none;
+  &:hover + ${StItemSpan}::before {
+    transform: scaleX(0.5);
+    transition: 0.25s transform cubic-bezier(0, 0, 0.1, 1);
+  }
+  &:checked + ${StItemSpan}::before {
+    transform: scaleX(1.3);
+    transition: 0.25s transform cubic-bezier(0, 0, 0.1, 1);
+  }
+`;
 
 const Navigation = () => {
   return (
@@ -26,7 +57,12 @@ const Navigation = () => {
       <StList>
         <StItem>
           <StItemLabel>
-            <StItemInput type="radio" name="nav" value="short-term-stay" />
+            <StItemInput
+              type="radio"
+              name="nav"
+              value="short-term-stay"
+              defaultChecked
+            />
             <StItemSpan>숙소</StItemSpan>
           </StItemLabel>
         </StItem>
@@ -39,6 +75,7 @@ const Navigation = () => {
         <StItem>
           <StItemLabel>
             <StItemInput type="radio" name="nav" value="experience" />
+
             <StItemSpan>체험</StItemSpan>
           </StItemLabel>
         </StItem>
