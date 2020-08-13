@@ -27,7 +27,7 @@ const StWrapper = styled.div`
   position: relative;
 `;
 
-const StHomeWrapper = styled.div`
+const StHomeWrapper = styled.ul`
   display: flex;
   justify-content: space-between;
   margin: 2rem 0;

@@ -18,7 +18,7 @@ const FilterList = () => {
 };
 
 const FilterBtn = styled(StBtn)`
-  margin: 3rem 1rem 5rem 0;
+  margin: 2rem 1rem 2rem 0;
 `;
 
 export default FilterList;

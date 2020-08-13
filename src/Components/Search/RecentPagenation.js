@@ -18,7 +18,6 @@ const StWrapper = styled.div`
   right: 0;
   display: flex;
   align-items: center;
-  /* width: 150px; */
 
   & > * {
     margin-left: 1rem;

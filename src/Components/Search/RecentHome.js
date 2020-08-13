@@ -15,7 +15,7 @@ const RecentHome = () => {
   );
 };
 
-const StWrapper = styled.div`
+const StWrapper = styled.li`
   width: 148px;
   height: 190px;
 

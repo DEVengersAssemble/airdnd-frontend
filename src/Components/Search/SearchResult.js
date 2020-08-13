@@ -7,6 +7,8 @@ import RecentHomeList from './RecentHomeList';
 const SearchResult = () => {
   return (
     <StWrapper>
+      <StSpan>숙박 279건 · 게스트 1명</StSpan>
+      <StHeader>제주도의 숙소</StHeader>
       <FilterList />
       <HomeList />
       <RecentHomeList />
@@ -16,7 +18,17 @@ const SearchResult = () => {
 
 const StWrapper = styled.div`
   width: 840px;
-  padding: 2rem;
+  padding: 5rem 2rem;
+`;
+
+const StHeader = styled.h2`
+  font-size: 3.2rem;
+  font-weight: 800;
+  margin: 1rem 0;
+`;
+
+const StSpan = styled.span`
+  font-size: 1.4rem;
 `;
 
 export default SearchResult;
