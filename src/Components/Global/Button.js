@@ -1,7 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import theme from '../../style/theme';
-
 // btnType: color, underlined, circle, oval
 const Button = ({
   children,
@@ -141,7 +140,6 @@ export const StBtn = styled.button`
   ${sizeStyles};
   ${borderStyles};
   ${hoverStyles};
-
   &:focus {
     box-shadow: 0px 0px 0px 2px ${theme.white}, 0px 0px 0px 4px ${theme.black};
   }

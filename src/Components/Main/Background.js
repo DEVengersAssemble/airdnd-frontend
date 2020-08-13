@@ -1,19 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
+import Button from '../Global/Button';
 
 const StBackgroundWrapper = styled.div`
-  position: relative;
   z-index: -1;
   height: 650px;
   background-size: cover;
   background-image: url('https://a0.muscache.com/im/pictures/3da6b6d9-3351-4ddf-b88c-127f0fda7bdf.jpg?im_w=1440');
+  padding: 275px 80px 0 80px;
 `;
 
-const StDomesticTripSection = styled.section`
-  position: absolute;
-  top: 275px;
-  left: 80px;
-`;
+const StDomesticTripSection = styled.section``;
 
 const StDomesticTripHeader = styled.h2`
   color: white;
@@ -40,7 +37,7 @@ const Background = () => {
         <StDomesticTripContent>
           그동안 몰랐던 국내 여행지의 아름다움을 발견해보세요.
         </StDomesticTripContent>
-        <button>알아보기</button>
+        <Button border="none">알아보기</Button>
       </StDomesticTripSection>
     </StBackgroundWrapper>
   );
