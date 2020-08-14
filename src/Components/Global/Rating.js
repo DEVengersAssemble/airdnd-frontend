@@ -3,11 +3,13 @@ import styled from 'styled-components';
 import { AiFillStar } from 'react-icons/ai';
 
 // scale은 폰트크기로, rem 단위에서 '숫자만' 전달하세요
+
 const Rating = ({ scale, rate, count, starSize }) => {
   const regExp = /\d/g;
   const filteredNumber = (count + '').match(regExp).join('');
 
   return (
+
     <StRatingWrapper scale={scale}>
       <StStarIcon scale={scale} starsize={starSize} />
       <span className="a11yHidden">
