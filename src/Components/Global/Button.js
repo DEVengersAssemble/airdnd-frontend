@@ -14,6 +14,7 @@ const Button = ({
   hover,
   padding,
   focus,
+  transform,
   ...rest
 }) => {
   return (
@@ -27,6 +28,7 @@ const Button = ({
       hover={hover}
       padding={padding}
       focus={focus}
+      transform={transform}
       {...rest}
     >
       {children}
@@ -95,7 +97,7 @@ const borderStyles = css`
 
 const fontStyles = css`
   ${({ btnType, fontSize }) => css`
-    font-size: ${fontSize};
+    font-size: ${fontSize || '1.6rem'};
     text-decoration: ${btnType === 'underlined' && 'underline'};
   `}
 `;
@@ -129,6 +131,17 @@ const focusStyles = css`
     `}
 `;
 
+const transformStyles = css`
+  ${({ transform }) =>
+    transform &&
+    css`
+      transition: 0.2s;
+      &:active {
+        transform: scale(0.94);
+      }
+    `}
+`;
+
 export const StBtn = styled.button`
   display: inline-flex;
   justify-content: center;
@@ -137,13 +150,15 @@ export const StBtn = styled.button`
   outline: none;
   border-radius: 8px;
   padding: ${props => props.padding || '1rem 2rem'};
+  font-weight: ${props => props.weight || '400'};
   overflow: hidden;
   ${fontStyles};
   ${colorStyles};
   ${sizeStyles};
   ${borderStyles};
   ${hoverStyles};
-  ${focusStyles}
+  ${focusStyles};
+  ${transformStyles};
 `;
 
 export default Button;
