@@ -2,7 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StNav = styled.nav`
-  height: 80px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 20px;
   /* background: ${props => props.theme.deepGreen}; */
 `;
 
