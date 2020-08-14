@@ -1,15 +1,166 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const StSearchForm = styled.form`
   background: ${({ theme }) => theme.white};
   width: 100%;
   height: 66px;
   border-radius: 32px;
+  overflow: hidden;
+  display: flex;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 16px 32px, rgba(0, 0, 0, 0.1) 0px 3px 8px;
+
+  color: ${({ theme }) => theme.black};
+`;
+
+const StTextWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  height: 36px;
+`;
+
+const StFormItemWrapper = styled.div`
+  width: ${({ width }) => width};
+  height: 100%;
+  outline: none;
+  &:not(:first-child) ${StTextWrapper}::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -14px;
+    display: block;
+    height: 100%;
+    width: 1px;
+    background: ${({ theme }) => theme.gray};
+  }
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.07);
+    border-radius: 32px;
+    ${StTextWrapper}::before {
+      display: none;
+    }
+  }
+
+  &:hover + & {
+    ${StTextWrapper}::before {
+      display: none;
+    }
+  }
+
+  &:focus-within {
+    background: white;
+    border-radius: 32px;
+    box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.3);
+    ${StTextWrapper}::before {
+      display: none;
+    }
+  }
+
+  &:focus-within + & {
+    ${StTextWrapper}::before {
+      display: none;
+    }
+  }
+  ${({ place }) =>
+    place ||
+    css`
+      display: flex;
+      align-items: center;
+      padding-left: 14px;
+      cursor: pointer;
+    `}
+`;
+
+const StPlaceLabel = styled.label`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 28px;
+  cursor: pointer;
+  &:hover {
+    background: rgba(0, 0, 0, 0.07);
+    border-radius: 32px;
+    & ${StTextWrapper}::before {
+      display: none;
+    }
+  }
+  &:focus-within {
+    background: white;
+    border-radius: 32px;
+    box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.3);
+    & ${StTextWrapper}::before {
+      display: none;
+    }
+  }
+`;
+
+const StPlaceInput = styled.input`
+  background: transparent;
+  width: 100%;
+  font-size: 14px;
+  line-height: 18px;
+  padding: 0;
+  outline: none;
+  border: none;
+  &::-webkit-input-placeholder {
+    color: ${({ theme }) => theme.darkGray};
+  }
+  &::-moz-placeholder {
+    color: ${({ theme }) => theme.darkGray};
+  }
+  &::-ms-placeholder {
+    color: ${({ theme }) => theme.darkGray};
+  }
+  &::placeholder {
+    color: ${({ theme }) => theme.darkGray};
+  }
+`;
+
+const StTypeText = styled.p`
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: bold;
+`;
+
+const StContentText = styled.p`
+  font-size: 14px;
+  line-height: 18px;
+  color: ${({ theme }) => theme.darkGray};
 `;
 
 const SearchForm = () => {
-  return <StSearchForm></StSearchForm>;
+  return (
+    <StSearchForm>
+      <StFormItemWrapper width="30%" tabIndex="0" place>
+        <StPlaceLabel>
+          <StTextWrapper>
+            <StTypeText>위치</StTypeText>
+            <StPlaceInput placeholder="어디로 여행가세요?"></StPlaceInput>
+          </StTextWrapper>
+        </StPlaceLabel>
+      </StFormItemWrapper>
+      <StFormItemWrapper width="20%" tabIndex="0">
+        <StTextWrapper>
+          <StTypeText>체크인</StTypeText>
+          <StContentText>날짜 추가</StContentText>
+        </StTextWrapper>
+      </StFormItemWrapper>
+      <StFormItemWrapper width="20%" tabIndex="0">
+        <StTextWrapper>
+          <StTypeText>체크아웃</StTypeText>
+          <StContentText>날짜 추가</StContentText>
+        </StTextWrapper>
+      </StFormItemWrapper>
+      <StFormItemWrapper width="30%" tabIndex="0">
+        <StTextWrapper>
+          <StTypeText>인원</StTypeText>
+          <StContentText>게스트 추가</StContentText>
+        </StTextWrapper>
+      </StFormItemWrapper>
+    </StSearchForm>
+  );
 };
 
 export default SearchForm;

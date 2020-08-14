@@ -28,7 +28,6 @@ const StNavSearchWrapper = styled.div`
   top: 0;
   left: calc(50vw - 425px);
   width: 850px;
-  /* width: 80%; */
   display: flex;
   flex-direction: column;
 
