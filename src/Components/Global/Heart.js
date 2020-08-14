@@ -94,7 +94,10 @@ const StDiv = styled.div`
   ${hoverStyles}
 `;
 
-const StHeartLabel = styled.label``;
+const StHeartLabel = styled.label`
+  cursor: pointer;
+`;
+
 const StHeartInput = styled.input`
   display: none;
 `;
