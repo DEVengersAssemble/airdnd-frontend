@@ -144,6 +144,7 @@ button {
   clip: rect(0, 0, 0, 0);
 }
 #modal {
+  display: none; /* ui 작업하는 동안에는 display: none 적용 */
   background: rgba(0, 0, 0, 0.25);
   position: fixed;
   left: 0;

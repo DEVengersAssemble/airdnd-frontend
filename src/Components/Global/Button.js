@@ -13,6 +13,7 @@ const Button = ({
   fontSize,
   hover,
   padding,
+  focus,
   ...rest
 }) => {
   return (
@@ -25,6 +26,7 @@ const Button = ({
       fontSize={fontSize}
       hover={hover}
       padding={padding}
+      focus
       {...rest}
     >
       {children}
@@ -116,6 +118,17 @@ const sizeStyles = css`
   `}
 `;
 
+const focusStyles = css`
+  ${({ focus }) =>
+    focus &&
+    css`
+      &:focus {
+        box-shadow: 0px 0px 0px 2px ${theme.white},
+          0px 0px 0px 4px ${theme.black};
+      }
+    `}
+`;
+
 export const StBtn = styled.button`
   display: inline-flex;
   justify-content: center;
@@ -130,9 +143,7 @@ export const StBtn = styled.button`
   ${sizeStyles};
   ${borderStyles};
   ${hoverStyles};
-  &:focus {
-    box-shadow: 0px 0px 0px 2px ${theme.white}, 0px 0px 0px 4px ${theme.black};
-  }
+  ${focusStyles}
 `;
 
 export default Button;
