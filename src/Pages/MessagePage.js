@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import Heart from '../Components/Global/Heart';
+// import Heart from '../Components/Global/Heart';
 // import HeartBackup from '../Components/Global/HeartBackup';
 const HeartBlock = styled.div`
   display: flex;
