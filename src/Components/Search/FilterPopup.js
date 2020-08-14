@@ -20,35 +20,43 @@ const RefundPopup = popupState => {
 };
 
 const RoomTypePopup = popupState => {
+  const [check, setCheck] = React.useState(false);
+
+  const onChange = e => {
+    setCheck(e.target.checked);
+  };
   return (
     <FilterPopup left="15.7rem" popupState={true}>
       <StCheckboxList>
         <StCheckboxWrapper>
-          <Checkbox />
-          <StContentWrapper className="roomType">
-            <StLargeSpan>집 전체</StLargeSpan>
-            <StSmallSpan>집 전체를 단독으로 사용합니다</StSmallSpan>
-          </StContentWrapper>
+          <StCheckbox value checked={check} onChange={onChange}>
+            <StContentWrapper className="roomType">
+              <StLargeSpan>집 전체</StLargeSpan>
+              <StSmallSpan>집 전체를 단독으로 사용합니다</StSmallSpan>
+            </StContentWrapper>
+          </StCheckbox>
         </StCheckboxWrapper>
         <StCheckboxWrapper>
-          <Checkbox />
-          <StContentWrapper className="roomType">
-            <StLargeSpan>개인실</StLargeSpan>
-            <StSmallSpan>
-              침실은 단독으로 쓰고, 이외의 공간은 호스트나 다른 게스트와 함께
-              이용할 수도 있습니다
-            </StSmallSpan>
-          </StContentWrapper>
+          <StCheckbox value checked={check} onChange={onChange}>
+            <StContentWrapper className="roomType">
+              <StLargeSpan>개인실</StLargeSpan>
+              <StSmallSpan>
+                침실은 단독으로 쓰고, 이외의 공간은 호스트나 다른 게스트와 함께
+                이용할 수도 있습니다
+              </StSmallSpan>
+            </StContentWrapper>
+          </StCheckbox>
         </StCheckboxWrapper>
         <StCheckboxWrapper>
-          <Checkbox checked />
-          <StContentWrapper className="roomType">
-            <StLargeSpan>다인실</StLargeSpan>
-            <StSmallSpan>
-              사적 공간 없이, 침실이나 욕실 등을 호스트나 다른 게스트와 함께
-              이용합니다
-            </StSmallSpan>
-          </StContentWrapper>
+          <StCheckbox value checked={check} onChange={onChange}>
+            <StContentWrapper className="roomType">
+              <StLargeSpan>다인실</StLargeSpan>
+              <StSmallSpan>
+                사적 공간 없이, 침실이나 욕실 등을 호스트나 다른 게스트와 함께
+                이용합니다
+              </StSmallSpan>
+            </StContentWrapper>
+          </StCheckbox>
         </StCheckboxWrapper>
       </StCheckboxList>
     </FilterPopup>
@@ -154,6 +162,13 @@ const StCheckboxList = styled.ul`
 `;
 const StCheckboxWrapper = styled.li`
   margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+`;
+
+const StCheckbox = styled(Checkbox)`
+  & > * {
+  }
   display: flex;
   align-items: center;
 `;

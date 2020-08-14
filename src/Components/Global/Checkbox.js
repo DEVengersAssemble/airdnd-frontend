@@ -86,12 +86,12 @@ const StCheckBoxText = styled.span`
   ${dragDisable}
 `;
 
-const Checkbox = ({ value, map, checked, ...event }) => {
+const Checkbox = ({ children, value, map, checked, ...event }) => {
   return (
     <StCheckBoxLabel map={map} {...event}>
       <StCheckBoxInput type="checkbox" />
       {checked ? <StCheckBox map={map} /> : <StCheckBoxOutLine map={map} />}
-      {value && <StCheckBoxText map={map}>{value}</StCheckBoxText>}
+      {value && <StCheckBoxText map={map}>{children}</StCheckBoxText>}
     </StCheckBoxLabel>
   );
 };

@@ -79,21 +79,24 @@ const StLine = styled.hr`
 const Heart = styled(CkHeart)`
   position: absolute;
   top: 1rem;
-  right: 0;
+  right: -1.2rem;
 `;
 
 const StPriceWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-flow: flex-end;
   position: absolute;
   bottom: 0;
-  right: 0;
+  right: -12.7rem;
 `;
 
 const StLargePrice = styled.span`
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.5rem;
+  text-align: right;
 `;
 
 const StSmallPrice = styled.span`
-  display: block;
   text-decoration: underline;
   font-size: 1.4rem;
   color: ${theme.darkGray};
