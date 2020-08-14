@@ -19,7 +19,7 @@ const Home = () => {
         <Rating scale="1.4" rate="4.79" count="24" className="rating" />
         <StPriceWrapper>
           <StLargePrice>
-            <strong>₩12,928</strong>/1박
+            <strong>₩12,928</strong> / 1박
           </StLargePrice>
           <StSmallPrice>총 요금: ₩12,928</StSmallPrice>
         </StPriceWrapper>
@@ -36,11 +36,6 @@ const StHome = styled.li`
   padding: 2rem 0;
   border-top: 1px solid ${theme.shadow};
   position: relative;
-
-  /* &:focus {
-    border: 1px solid black;
-    border-radius: 8px;
-  } */
 `;
 
 const StDetailWrapper = styled.div`
@@ -48,6 +43,7 @@ const StDetailWrapper = styled.div`
   flex-direction: column;
   padding: 0 1.7rem;
   position: relative;
+  flex-grow: 1;
   .rating {
     position: absolute;
     bottom: 0;
@@ -88,7 +84,7 @@ const StPriceWrapper = styled.div`
   flex-flow: flex-end;
   position: absolute;
   bottom: 0;
-  right: -12.7rem;
+  right: 0;
 `;
 
 const StLargePrice = styled.span`

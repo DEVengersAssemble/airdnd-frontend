@@ -29,15 +29,15 @@ const RoomTypePopup = popupState => {
     <FilterPopup left="15.7rem" popupState={true}>
       <StCheckboxList>
         <StCheckboxWrapper>
-          <StCheckbox value checked={check} onChange={onChange}>
+          <Checkbox value checked={check} onChange={onChange}>
             <StContentWrapper className="roomType">
               <StLargeSpan>집 전체</StLargeSpan>
               <StSmallSpan>집 전체를 단독으로 사용합니다</StSmallSpan>
             </StContentWrapper>
-          </StCheckbox>
+          </Checkbox>
         </StCheckboxWrapper>
         <StCheckboxWrapper>
-          <StCheckbox value checked={check} onChange={onChange}>
+          <Checkbox value checked={check} onChange={onChange}>
             <StContentWrapper className="roomType">
               <StLargeSpan>개인실</StLargeSpan>
               <StSmallSpan>
@@ -45,10 +45,10 @@ const RoomTypePopup = popupState => {
                 이용할 수도 있습니다
               </StSmallSpan>
             </StContentWrapper>
-          </StCheckbox>
+          </Checkbox>
         </StCheckboxWrapper>
         <StCheckboxWrapper>
-          <StCheckbox value checked={check} onChange={onChange}>
+          <Checkbox value checked={check} onChange={onChange}>
             <StContentWrapper className="roomType">
               <StLargeSpan>다인실</StLargeSpan>
               <StSmallSpan>
@@ -56,7 +56,7 @@ const RoomTypePopup = popupState => {
                 이용합니다
               </StSmallSpan>
             </StContentWrapper>
-          </StCheckbox>
+          </Checkbox>
         </StCheckboxWrapper>
       </StCheckboxList>
     </FilterPopup>
@@ -158,20 +158,14 @@ const StLargeSpan = styled.span`
 
 const StCheckboxList = styled.ul`
   padding: 2rem;
-  height: 360px;
+  height: 380px;
 `;
 const StCheckboxWrapper = styled.li`
   margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
 `;
 
-const StCheckbox = styled(Checkbox)`
-  & > * {
-  }
-  display: flex;
-  align-items: center;
-`;
+// const StCheckbox = styled(Checkbox)`
+// `;
 
 const StFooter = styled(ModalFooter)`
   padding: 1.5rem 1.5rem 1.5rem 0.5rem;
