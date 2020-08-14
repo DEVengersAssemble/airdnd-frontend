@@ -10,7 +10,9 @@ const theme = {
   green: '#008489',
   darkRed: '#C03515',
 
-  iPad: `(max-width: 768px)`,
+  iPad: '@media screen and (max-width: 768px)',
+  medium: '@media screen and (max-width: 1127px)',
+  large: '@media screen and (max-width: 1200px)',
 };
 
 export default theme;

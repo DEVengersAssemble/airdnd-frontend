@@ -162,6 +162,11 @@ const StReview = styled.li`
     -webkit-line-clamp: 6;
     -webkit-box-orient: vertical; */
   }
+
+  ${({ theme }) => theme.medium} {
+    width: 100%;
+    margin-right: 0;
+  }
 `;
 
 const StRiviewer = styled.div`

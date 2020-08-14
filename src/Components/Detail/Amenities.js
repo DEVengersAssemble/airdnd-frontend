@@ -110,6 +110,11 @@ const StAmenity = styled.li`
   margin-right: 2rem;
   padding-bottom: 16px;
 
+  ${({ theme }) => theme.medium} {
+    width: 100%;
+    margin-right: 0;
+  }
+
   svg {
     width: 24px;
     height: 24px;
