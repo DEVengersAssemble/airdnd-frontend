@@ -24,6 +24,7 @@ const hoverStyle = css`
 `;
 
 const StCheckBoxLabel = styled.label`
+  cursor: pointer;
   &:hover span {
     ${hoverStyle}
   }
@@ -41,10 +42,10 @@ const StCheckBoxInput = styled.input`
 
 const StCheckBoxOutLine = styled.span`
   display: inline-block;
-  width: 3rem;
-  height: 3rem;
+  width: 2.5rem;
+  height: 2.5rem;
   border-radius: 4px;
-  margin: 0.5rem;
+  margin: 0.4rem;
   border: 1px solid ${theme.gray};
   ${({ map }) =>
     map &&
@@ -62,7 +63,7 @@ const StCheckBoxOutLine = styled.span`
 `;
 
 const StCheckBox = styled(MdCheckBox)`
-  font-size: 4rem;
+  font-size: 3.3rem;
   ${({ map }) =>
     map &&
     css`
@@ -74,7 +75,7 @@ const StCheckBoxText = styled.span`
   padding: 0 0.8rem 0 0.8rem;
   font-size: 2rem;
   font-weight: 400;
-  vertical-align: 60%;
+  vertical-align: 47%;
   ${({ map }) =>
     map &&
     css`

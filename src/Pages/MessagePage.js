@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import CheckBox from '../Components/Global/Checkbox';
 import { Heart, CkHeart } from '../Components/Global/Heart';
+import Input from '../Components/Global/Input';
 
 const CheckBoxGroup = styled.div`
   display: flex;
@@ -11,7 +12,21 @@ const CheckBoxGroup = styled.div`
   border: 1px solid black;
 `;
 
-const HeartGroup = styled.div``;
+const HeartGroup = styled.div`
+  display: flex;
+  align-items: center;
+  /* flex-direction: column; */
+  padding: 5rem;
+  border: 1px solid black;
+`;
+
+const InputGroup = styled.div`
+  display: flex;
+  align-items: center;
+  /* flex-direction: column; */
+  padding: 5rem;
+  border: 1px solid black;
+`;
 
 const MessagePage = () => {
   const [check, setCheck] = useState(false);
@@ -66,6 +81,9 @@ const MessagePage = () => {
           onChange={onChangeHeart}
         />
       </HeartGroup>
+      <InputGroup>
+        <Input />
+      </InputGroup>
     </>
   );
 };
