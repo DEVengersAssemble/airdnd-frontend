@@ -143,6 +143,14 @@ button {
   margin: -1px;
   clip: rect(0, 0, 0, 0);
 }
+#modal {
+  background: rgba(0, 0, 0, 0.25);
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+}
 html {
   font-size: 10px;
 }

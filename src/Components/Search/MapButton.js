@@ -22,7 +22,7 @@ const MapZoomButton = () => {
 
 const MapMarkerButton = () => {
   return (
-    <StButton>
+    <StButton boxShadow>
       <FaMapMarkerAlt />
     </StButton>
   );
@@ -30,7 +30,7 @@ const MapMarkerButton = () => {
 
 const MapCloseButton = () => {
   return (
-    <StButton>
+    <StButton boxShadow>
       <GrClose />
     </StButton>
   );
@@ -43,6 +43,7 @@ const StBtnWrapper = styled.div`
   flex-direction: column;
   background: ${theme.white};
   border-radius: 8px;
+  box-shadow: 1px 1px 3px ${theme.shadow};
 
   .plusBtn {
     border-bottom-right-radius: 0;
@@ -58,8 +59,8 @@ const StBtnWrapper = styled.div`
 const StLine = styled.hr`
   border-width: 0;
   margin: 0 auto;
-  width: 34px;
-  border-bottom: 1px solid ${theme.gray};
+  width: 30px;
+  border-bottom: 1px solid ${theme.shadow};
 `;
 
 const StButton = styled(StBtn)`
@@ -68,7 +69,12 @@ const StButton = styled(StBtn)`
   width: 40px;
   height: 40px;
   font-size: 1.7rem;
-  box-shadow: 1px 1px 3px ${theme.shadow};
+
+  ${({ boxShadow }) =>
+    boxShadow &&
+    css`
+      box-shadow: 1px 1px 3px ${theme.shadow};
+    `}
 `;
 
 export { MapZoomButton, MapMarkerButton, MapCloseButton };

@@ -37,7 +37,7 @@ const hovers = btnType => {
     case undefined:
     case 'underlined':
       return css`
-        background: ${theme.shadow};
+        background: ${theme.lightGray};
       `;
     case 'oval':
       return css`
