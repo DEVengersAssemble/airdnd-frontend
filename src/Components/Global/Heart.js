@@ -18,6 +18,56 @@ const sizes = {
     fontSize: '2rem',
   },
 };
+const sizeStyles = css`
+  ${({ size }) => css`
+    font-size: ${sizes[size].fontSize};
+  `}
+`;
+const colorStyles = css`
+  ${({ checked }) =>
+    checked &&
+    css`
+      color: ${({ theme }) => theme.palette.main};
+    `}
+`;
+const hoverStyles = css`
+  ${({ hover }) =>
+    hover &&
+    css`
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 5rem;
+      line-height: 5rem;
+      border-radius: 50%;
+      text-align: ;
+      &:hover {
+        width: 5rem;
+        line-height: 5rem;
+        border-radius: 50%;
+        background-color: ${({ theme }) => theme.palette.lightGray};
+      }
+    `}
+`;
+const borderStyles = css``;
+const StHeartLabel = styled.label`
+  /* common */
+  /* hover */
+  ${hoverStyles}
+`;
+const StHeartInput = styled.input`
+  /* common */
+  display: none;
+`;
+const StHeartIcon = styled.span`
+  /* common */
+  cursor: pointer;
+  /* size */
+  ${sizeStyles}
+  /* color */
+  ${colorStyles}
+  ${borderStyles}
+`;
 
 const defaultColorStyles = css`
   ${({ bgColor, stroke, ckType, checked }) =>

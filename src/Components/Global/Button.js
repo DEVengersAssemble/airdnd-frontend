@@ -1,8 +1,8 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import theme from '../../style/theme';
+
 // btnType: color, underlined, circle, oval
-// hover: default, border, none
 const Button = ({
   children,
   btnType,
@@ -12,6 +12,9 @@ const Button = ({
   height,
   fontSize,
   hover,
+  padding,
+  focus,
+  transform,
   ...rest
 }) => {
   return (
@@ -23,36 +26,36 @@ const Button = ({
       height={height}
       fontSize={fontSize}
       hover={hover}
+      padding={padding}
+      focus={focus}
+      transform={transform}
       {...rest}
     >
       {children}
     </StBtn>
   );
 };
-const hovers = {
-  default: css`
-    background: ${theme.lightGray};
-  `,
-  oval: css`
-    border: 1px solid ${theme.black};
-  `,
-  none: null,
+
+const hovers = btnType => {
+  switch (btnType) {
+    case undefined:
+    case 'underlined':
+      return css`
+        background: ${theme.lightGray};
+      `;
+    case 'oval':
+      return css`
+        border: 1px solid ${theme.black};
+      `;
+    case 'circle':
+      return css`
+        border-radius: 50%;
+      `;
+    default:
+      return null;
+  }
 };
-const hoverStyles = css`
-  ${({ btnType, hover }) =>
-    css`
-      &:hover {
-        ${(btnType === 'underlined' || !btnType) && hovers.default}
-        ${btnType === 'oval' && hovers.oval};
-      }
-      ${hover &&
-      css`
-        &:hover {
-          ${hover}
-        }
-      `}
-    `}
-`;
+
 const borders = btnType => {
   switch (btnType) {
     case 'color':
@@ -75,18 +78,30 @@ const borders = btnType => {
       `;
   }
 };
+
+const hoverStyles = css`
+  ${({ btnType, hover }) =>
+    css`
+      &:hover {
+        ${hover ? hover : hovers(btnType)};
+      }
+    `}
+`;
+
 const borderStyles = css`
   ${({ btnType, border }) => css`
     ${borders(btnType)};
     border: ${border && border};
   `}
 `;
+
 const fontStyles = css`
   ${({ btnType, fontSize }) => css`
-    font-size: ${fontSize};
+    font-size: ${fontSize || '1.6rem'};
     text-decoration: ${btnType === 'underlined' && 'underline'};
   `}
 `;
+
 const colorStyles = css`
   ${({ color }) =>
     color &&
@@ -96,20 +111,37 @@ const colorStyles = css`
       border: none;
     `}
 `;
+
 const sizeStyles = css`
-  ${({ btnType, width, height }) => css`
-    ${
-      btnType === 'circle' &&
-      css`
-        width: 32px;
-        height: 32px;
-        padding: 0;
-      `
-    }
-    width: ${width};
-    height: ${height};
+  ${({ btnType, width, height, padding }) => css`
+    width: ${btnType === 'circle' ? '32px' : width};
+    height: ${btnType === 'circle' ? '32px' : height};
+    padding: ${btnType === 'circle' ? '0' : padding};
   `}
 `;
+
+const focusStyles = css`
+  ${({ focus }) =>
+    focus &&
+    css`
+      &:focus {
+        box-shadow: 0px 0px 0px 2px ${theme.white},
+          0px 0px 0px 4px ${theme.black};
+      }
+    `}
+`;
+
+const transformStyles = css`
+  ${({ transform }) =>
+    transform &&
+    css`
+      transition: 0.2s;
+      &:active {
+        transform: scale(0.94);
+      }
+    `}
+`;
+
 export const StBtn = styled.button`
   display: inline-flex;
   justify-content: center;
@@ -117,15 +149,16 @@ export const StBtn = styled.button`
   cursor: pointer;
   outline: none;
   border-radius: 8px;
-  padding: 1rem 2rem;
+  padding: ${props => props.padding || '1rem 2rem'};
+  font-weight: ${props => props.weight || '400'};
   overflow: hidden;
   ${fontStyles};
   ${colorStyles};
   ${sizeStyles};
   ${borderStyles};
   ${hoverStyles};
-  &:focus {
-    box-shadow: 0px 0px 0px 2px ${theme.white}, 0px 0px 0px 4px ${theme.black};
-  }
+  ${focusStyles};
+  ${transformStyles};
 `;
+
 export default Button;
