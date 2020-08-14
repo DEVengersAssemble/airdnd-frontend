@@ -17,6 +17,10 @@ const sizes = {
     strokeWidth: '3px',
     fontSize: '2rem',
   },
+  smaller: {
+    strokeWidth: '2px',
+    fontSize: '1.6rem',
+  },
 };
 
 const defaultColorStyles = css`
@@ -106,7 +110,7 @@ const StCkDiv = styled.div`
   ${hoverStyles}
 `;
 
-const Heart = ({ size, bgColor, stroke, ckType, hover, checked }) => {
+const Heart = ({ size, bgColor, stroke, ckType, hover, checked, ...rest }) => {
   return hover ? (
     <StCkDiv // hover={true}
       size={size}
@@ -115,6 +119,7 @@ const Heart = ({ size, bgColor, stroke, ckType, hover, checked }) => {
       ckType={ckType}
       hover={hover} // CkHeart의 hover기능 props 여부에 따라 hover 적용, 없으면 무시
       checked={checked} // checked=true, checked=false
+      {...rest}
     >
       <HeartIcon />
     </StCkDiv>
@@ -126,6 +131,7 @@ const Heart = ({ size, bgColor, stroke, ckType, hover, checked }) => {
       ckType={ckType}
       hover={hover} // hover={false}
       checked={checked}
+      {...rest}
     >
       <HeartIcon />
     </StDiv>
@@ -145,6 +151,10 @@ const CkHeart = ({ ckType, hover, checked, ...event }) => {
       )}
     </StHeartLabel>
   );
+};
+
+Heart.defaultProps = {
+  size: 'small',
 };
 
 export { Heart, CkHeart };

@@ -25,7 +25,7 @@ const HomePhotos = () => {
         src="https://a0.muscache.com/im/pictures/d4e1e39c-91c2-48cf-a00a-b64a150558c0.jpg?im_w=1200"
         alt="숙소 사진 5"
       />
-      <StViewerButton>사진 모두 보기</StViewerButton>
+      <StViewerButton transform>사진 모두 보기</StViewerButton>
     </StImgsWrapper>
   );
 };

@@ -7,25 +7,32 @@ import styled from 'styled-components';
 //   <Popup>children</Popup>
 // </PopupWrapper>
 
-const Popup = ({ children, popupState, top, left, padding, radius }) => {
+const Popup = ({
+  children,
+  popupState,
+  top,
+  left,
+  padding,
+  radius,
+  ...rest
+}) => {
   if (!popupState) return '';
 
   return (
-    <PopupBox
+    <StPopupBox
       popupState={popupState}
       top={top}
       left={left}
       padding={padding}
       radius={radius}
+      {...rest}
     >
       {children}
-    </PopupBox>
+    </StPopupBox>
   );
 };
 
-export default Popup;
-
-const PopupBox = styled.div`
+export const StPopupBox = styled.div`
   position: absolute;
   min-width: 100px;
   min-height: 100px;
@@ -40,3 +47,5 @@ const PopupBox = styled.div`
   box-shadow: rgba(0, 0, 0, 0.15) 0px 10px 37px;
   z-index: 10;
 `;
+
+export default Popup;
