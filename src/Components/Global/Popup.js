@@ -25,7 +25,7 @@ const Popup = ({ children, popupState, top, left, padding, radius }) => {
 
 export default Popup;
 
-const PopupBox = styled.div`
+export const PopupBox = styled.div`
   position: absolute;
   min-width: 100px;
   min-height: 100px;
