@@ -1,7 +1,9 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import SearchButton from './SearchButton';
 
 const StSearchForm = styled.form`
+  position: relative;
   background: ${({ theme }) => theme.white};
   width: 100%;
   height: 66px;
@@ -159,6 +161,7 @@ const SearchForm = () => {
           <StContentText>게스트 추가</StContentText>
         </StTextWrapper>
       </StFormItemWrapper>
+      <SearchButton></SearchButton>
     </StSearchForm>
   );
 };
