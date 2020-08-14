@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import CheckBox from '../Components/Global/CheckBox';
+import CheckBox from '../Components/Global/Checkbox';
 
 const CheckBoxGroup = styled.div`
   display: flex;
