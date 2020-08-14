@@ -8,49 +8,52 @@ import ModalFooter from '../Global/ModalFooter';
 
 const RefundPopup = popupState => {
   return (
-    <FilterPopup popupState={popupState}>
+    <FilterPopup popupState={true}>
       <StContentWrapper className="refund">
-        <StSpan>유연한 환불 정책을 제공하는 숙소만 검색 결과에 표시</StSpan>
+        <StSmallSpan>
+          유연한 환불 정책을 제공하는 숙소만 검색 결과에 표시
+        </StSmallSpan>
         <Toggle />
       </StContentWrapper>
     </FilterPopup>
   );
 };
 
-const RoomTypePopup = () => {
+const RoomTypePopup = popupState => {
   return (
-    <FilterPopup left="50rem">
+    <FilterPopup left="14rem" popupState={false}>
       <div></div>
     </FilterPopup>
   );
 };
 
-const PricePopup = () => {
+const PricePopup = popupState => {
   return (
-    <FilterPopup left="50rem">
+    <FilterPopup left="10rem">
       <div></div>
     </FilterPopup>
   );
 };
 
-const SetDatePopup = () => {
+const SetDatePopup = popupState => {
   return (
-    <FilterPopup left="50rem">
-      <div></div>
-    </FilterPopup>
+    <StWrapper>
+      <StPopup left="24rem" popupState={true}>
+        <StContentWrapper className="setDate">
+          <StLargeSpan>요금을 확인하려면 여행 날짜를 입력하세요</StLargeSpan>
+          <Button btnType="color" color="black">
+            날짜 입력
+          </Button>
+        </StContentWrapper>
+      </StPopup>
+    </StWrapper>
   );
 };
 
 const FilterPopup = ({ children, popupState, left }) => {
   return (
     <StWrapper>
-      <StPopup
-        top="-1rem"
-        left={left}
-        padding="0"
-        popupState={popupState}
-        style={style}
-      >
+      <StPopup left={left} popupState={popupState} style={style}>
         {children}
         <StFooter align="space-between" style={style}>
           <Button btnType="underlined" padding="1rem" fontSize="1.6rem">
@@ -73,29 +76,42 @@ const StWrapper = styled.div`
 
 const StPopup = styled(Popup)`
   width: 350px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  top: -1rem;
+  padding: 0;
 `;
 
 const StContentWrapper = styled.div`
   padding: 2rem;
-  display: flex;
 
   &.refund {
+    display: flex;
     height: 165px;
     padding-top: 3rem;
   }
+
+  &.setDate {
+    height: 110px;
+    > * {
+      margin-bottom: 1.3rem;
+      display: block;
+    }
+  }
 `;
 
-const StSpan = styled.span`
+const StSmallSpan = styled.span`
   font-size: 1.4rem;
   line-height: 2rem;
   margin-right: 3rem;
 `;
 
+const StLargeSpan = styled.span`
+  font-size: 1.6rem;
+  line-height: 2rem;
+  margin-right: 3rem;
+`;
+
 const StFooter = styled(ModalFooter)`
-  padding: 1rem 2rem 1rem 1rem;
+  padding: 1.5rem 1.5rem 1.5rem 0.5rem;
 `;
 
 export { RefundPopup, RoomTypePopup, PricePopup, SetDatePopup };
