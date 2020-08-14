@@ -8,13 +8,14 @@ import SearchForm from './SearchForm';
 
 const StMainHeader = styled.header`
   box-sizing: border-box;
+  z-index: 100;
   position: fixed;
   display: flex;
   width: 100%;
   justify-content: space-between;
   margin: 0;
   height: 80px;
-  background: transparent;
+  background: ${({ isScrollTop }) => (isScrollTop ? 'transparent' : 'white')};
   padding: 20px 80px 15px 80px;
   @media ${({ theme }) => theme.iPad} {
     padding: 20px 40px 15px 40px;
@@ -23,7 +24,6 @@ const StMainHeader = styled.header`
 
 const StNavSearchWrapper = styled.div`
   box-sizing: border-box;
-  /* background: lightgreen; */
   position: absolute;
   top: 0;
   left: calc(50vw - 425px);
@@ -48,17 +48,20 @@ const StSettingButtonWrapper = styled.div`
   height: 40px;
 `;
 
-const MainHeader = () => {
+const MainHeader = ({ isScrollTop }) => {
   return (
-    <StMainHeader>
+    <StMainHeader isScrollTop={isScrollTop}>
       <Logo></Logo>
-      <StNavSearchWrapper>
-        <Navigation></Navigation>
-        <SearchForm></SearchForm>
-      </StNavSearchWrapper>
+      {isScrollTop && (
+        <StNavSearchWrapper>
+          <Navigation></Navigation>
+          <SearchForm></SearchForm>
+        </StNavSearchWrapper>
+      )}
+
       <StSettingButtonWrapper>
-        <SettingButton></SettingButton>
-        <MyPageButton></MyPageButton>
+        <SettingButton isScrollTop={isScrollTop}></SettingButton>
+        <MyPageButton isScrollTop={isScrollTop}></MyPageButton>
       </StSettingButtonWrapper>
     </StMainHeader>
   );
