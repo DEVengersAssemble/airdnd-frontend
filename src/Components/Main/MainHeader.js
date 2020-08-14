@@ -3,6 +3,8 @@ import styled, { css } from 'styled-components';
 import Logo from './Logo';
 import Navigation from './Navigation';
 import SettingButton from './SettingButton';
+import MyPageButton from './MyPageButton';
+import SearchForm from './SearchForm';
 
 const StMainHeader = styled.header`
   box-sizing: border-box;
@@ -11,10 +13,12 @@ const StMainHeader = styled.header`
   width: 100%;
   justify-content: space-between;
   margin: 0;
-  background: lightgray;
   height: 80px;
-  padding: 20px 80px 15px 80px;
   background: transparent;
+  padding: 20px 80px 15px 80px;
+  @media ${({ theme }) => theme.iPad} {
+    padding: 20px 40px 15px 40px;
+  }
 `;
 
 const StNavSearchWrapper = styled.div`
@@ -22,16 +26,26 @@ const StNavSearchWrapper = styled.div`
   /* background: lightgreen; */
   position: absolute;
   top: 0;
-  left: calc(50vw - 350px);
-  width: 700px;
-  height: 150px;
+  left: calc(50vw - 425px);
+  width: 850px;
   display: flex;
-  justify-content: center;
-  padding-top: 20px;
+  flex-direction: column;
+
+  @media (max-width: 950px) {
+    width: 80%;
+    top: 70px;
+    left: calc(50vw - 40%);
+  }
+
+  @media ${({ theme }) => theme.iPad} {
+    width: 80%;
+    top: 70px;
+    left: calc(50vw - 40%);
+  }
 `;
 
 const StSettingButtonWrapper = styled.div`
-  /* background: lightblue; */
+  height: 40px;
 `;
 
 const MainHeader = () => {
@@ -40,9 +54,11 @@ const MainHeader = () => {
       <Logo></Logo>
       <StNavSearchWrapper>
         <Navigation></Navigation>
+        <SearchForm></SearchForm>
       </StNavSearchWrapper>
       <StSettingButtonWrapper>
         <SettingButton></SettingButton>
+        <MyPageButton></MyPageButton>
       </StSettingButtonWrapper>
     </StMainHeader>
   );
