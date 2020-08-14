@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Division = ({ children, title, border }) => {
+const Division = ({ children, title, border, padding }) => {
   console.log(title);
   return (
-    <StDivision border={border}>
+    <StDivision border={border} padding={padding}>
       {title && <h3>{title}</h3>}
       {children}
     </StDivision>
@@ -17,6 +17,7 @@ const StDivision = styled.div`
   background-color: #fff;
 
   h3 {
+    padding-bottom: ${props => props.padding || '2.4rem'};
     font-size: 2.2rem;
     font-weight: 600;
   }

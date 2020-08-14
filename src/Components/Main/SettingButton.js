@@ -13,6 +13,9 @@ const StSettingButton = styled(Button)`
     border: none;
     background: rgba(176, 176, 176, 0.4);
   }
+  &:focus {
+    box-shadow: none;
+  }
 `;
 
 const SettingButton = () => {
