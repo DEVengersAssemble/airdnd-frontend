@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import imgPath from '../../Assets/Img/profile.png';
 
 // mark기능을 사용하고 싶으면 mark="true" 라고 적어주세요.
-// lastName 반드시 넣어주세요.
+// lastName 반드시 넣어주세요!!!!!!!!!!!!
 const Profile = ({ size, isSupperhost, mark, profileImg, lastName, href }) => {
   return (
     <StProfileLink size={size} href={href}>
@@ -13,7 +13,10 @@ const Profile = ({ size, isSupperhost, mark, profileImg, lastName, href }) => {
           알아보세요.`}
         </span>
       )}
-      <StPropfileImg profileImg={profileImg} />
+      <StPropfileImg
+        src={profileImg || imgPath}
+        alt={`${lastName}님의 프로필 이미지`}
+      />
       {isSupperhost && mark && (
         <StSuperHostMark
           viewBox="0 0 14 24"
@@ -48,14 +51,15 @@ const StProfileLink = styled.a`
   cursor: pointer;
 `;
 
-const StPropfileImg = styled.div`
+const StPropfileImg = styled.img`
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background-image: url(${props => props.profileImg || imgPath});
+  object-fit: cover;
+  /* background-image: url(${props => props.profileImg || imgPath});
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
+  background-position: center; */
 `;
 
 const StSuperHostMark = styled.svg`

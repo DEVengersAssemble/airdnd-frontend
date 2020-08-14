@@ -19,7 +19,7 @@ const Popup = ({
   if (!popupState) return '';
 
   return (
-    <PopupBox
+    <StPopupBox
       popupState={popupState}
       top={top}
       left={left}
@@ -28,13 +28,11 @@ const Popup = ({
       {...rest}
     >
       {children}
-    </PopupBox>
+    </StPopupBox>
   );
 };
 
-export default Popup;
-
-export const PopupBox = styled.div`
+const StPopupBox = styled.div`
   position: absolute;
   min-width: 100px;
   min-height: 100px;
@@ -49,3 +47,5 @@ export const PopupBox = styled.div`
   box-shadow: rgba(0, 0, 0, 0.15) 0px 10px 37px;
   z-index: 10;
 `;
+
+export default Popup;

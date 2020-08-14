@@ -137,7 +137,7 @@ const transformStyles = css`
     css`
       transition: 0.2s;
       &:active {
-        transform: scale(0.94);
+        transform: scale(${props => props.tarnsScale || '0.94'});
       }
     `}
 `;

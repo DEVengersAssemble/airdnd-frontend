@@ -6,6 +6,7 @@ import { MdShare } from 'react-icons/md';
 import Rating from '../Global/Rating';
 import Button from '../Global/Button';
 import HomePhotos from './HomePhotos';
+import { Heart } from '../Global/Heart';
 
 const Subject = () => {
   return (
@@ -20,11 +21,15 @@ const Subject = () => {
         </StSuperHost>
         <StDot>·</StDot>
         <StLocationLink>Cheiu, 제주도, 한국</StLocationLink>
-        <StButton>
+        <StButton transform>
           <FiShare />
           공유하기
         </StButton>
-        <StButton>♡ 저장</StButton>
+        <StButton transform>
+          <StHeart size="smaller" bgColor="white" stroke="black" />
+          <StHeart size="smaller" bgColor="main" stroke="main" />
+          저장
+        </StButton>
       </StLinkWrapper>
       <HomePhotos />
     </StDetailTitle>
@@ -82,11 +87,15 @@ const StButton = styled(Button)`
   padding: 0.8rem;
   font-size: 14px;
   text-decoration: underline;
-  font-weight: 500;
+  /* font-weight: 500; */
 
   & svg {
     margin-right: 8px;
   }
+`;
+
+const StHeart = styled(Heart)`
+  height: 16px;
 `;
 
 export default Subject;
