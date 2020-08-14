@@ -24,6 +24,7 @@ const hoverStyle = css`
 `;
 
 const StCheckBoxLabel = styled.label`
+  cursor: pointer;
   &:hover span {
     ${hoverStyle}
   }
