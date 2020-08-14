@@ -10,6 +10,7 @@ const PlusButton = ({ ...rest }) => {
       btnType="circle"
       fontSize="1.7rem"
       border={`1px solid ${theme.lightGray}`}
+      focus
       {...rest}
     >
       <FiPlus strokeWidth="3px" />
@@ -23,6 +24,7 @@ const MinusButton = ({ ...rest }) => {
       btnType="circle"
       fontSize="1.7rem"
       border={`1px solid ${theme.lightGray}`}
+      focus
       {...rest}
     >
       <FiMinus strokeWidth="3px" />

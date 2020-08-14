@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 // Popup 사용방법
 // <PopupWrapper>  << 여기에 position: relative; 해야함
@@ -7,7 +7,15 @@ import styled from 'styled-components';
 //   <Popup>children</Popup>
 // </PopupWrapper>
 
-const Popup = ({ children, popupState, top, left, padding, radius }) => {
+const Popup = ({
+  children,
+  popupState,
+  top,
+  left,
+  padding,
+  radius,
+  ...rest
+}) => {
   if (!popupState) return '';
 
   return (
@@ -17,6 +25,7 @@ const Popup = ({ children, popupState, top, left, padding, radius }) => {
       left={left}
       padding={padding}
       radius={radius}
+      {...rest}
     >
       {children}
     </PopupBox>
@@ -25,7 +34,7 @@ const Popup = ({ children, popupState, top, left, padding, radius }) => {
 
 export default Popup;
 
-const PopupBox = styled.div`
+export const PopupBox = styled.div`
   position: absolute;
   min-width: 100px;
   min-height: 100px;
