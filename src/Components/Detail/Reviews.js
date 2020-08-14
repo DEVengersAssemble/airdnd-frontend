@@ -101,7 +101,7 @@ const Reviews = () => {
           </p>
         </StReview>
       </ul>
-      <Button padding="13px 23px" transform>
+      <Button padding="13px 23px" transition>
         후기 5개 모두 보기
       </Button>
     </Division>
@@ -163,7 +163,7 @@ const StReview = styled.li`
     -webkit-box-orient: vertical; */
   }
 
-  ${({ theme }) => theme.medium} {
+  @media ${({ theme }) => theme.medium} {
     width: 100%;
     margin-right: 0;
   }

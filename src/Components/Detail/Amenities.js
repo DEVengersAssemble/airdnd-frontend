@@ -92,7 +92,7 @@ const Amenities = () => {
           <span>세탁기</span>
         </StAmenity>
       </StAmenityList>
-      <Button padding="13px 23px" transform>
+      <Button padding="13px 23px" transition>
         편의시설 25개 모두 보기
       </Button>
     </Division>
@@ -110,7 +110,7 @@ const StAmenity = styled.li`
   margin-right: 2rem;
   padding-bottom: 16px;
 
-  ${({ theme }) => theme.medium} {
+  @media ${({ theme }) => theme.medium} {
     width: 100%;
     margin-right: 0;
   }

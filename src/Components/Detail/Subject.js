@@ -21,11 +21,11 @@ const Subject = () => {
         </StSuperHost>
         <StDot>·</StDot>
         <StLocationLink>Cheiu, 제주도, 한국</StLocationLink>
-        <StButton transform>
+        <StButton transition>
           <FiShare />
           공유하기
         </StButton>
-        <StButton transform>
+        <StButton transition>
           <StHeart size="smaller" bgColor="white" stroke="black" />
           <StHeart size="smaller" bgColor="main" stroke="main" />
           저장
@@ -42,7 +42,7 @@ const inlineFlex = css`
 `;
 
 const StDetailTitle = styled.section`
-  background-color: #f5f9e8;
+  /* background-color: #f5f9e8; */
   max-width: 1200px;
   padding: 0 40px;
   margin: 0 auto;

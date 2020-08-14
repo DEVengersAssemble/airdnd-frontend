@@ -112,6 +112,7 @@ body {
   color: #222222;
   font-size: 1.6rem;
   font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+  line-height: 20px;
 }
 ol,
 ul {
@@ -134,8 +135,10 @@ table {
 }
 button {
   background-color: #fff;
+  cursor: pointer;
 }
-a, button {
+a {
+  color: #222222;
   cursor: pointer;
 }
 .a11yHidden {
