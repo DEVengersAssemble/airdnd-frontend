@@ -4,9 +4,9 @@ import imgPath from '../../Assets/Img/profile.png';
 
 // mark기능을 사용하고 싶으면 mark="true" 라고 적어주세요.
 // lastName 반드시 넣어주세요.
-const Profile = ({ size, isSupperhost, mark, profileImg, lastName }) => {
+const Profile = ({ size, isSupperhost, mark, profileImg, lastName, href }) => {
   return (
-    <StProfileLink size={size}>
+    <StProfileLink size={size} href={href}>
       {isSupperhost && mark && lastName && (
         <span className="a11yHidden">
           {`${lastName}님은 슈퍼호스트입니다. ${lastName}님에 대해 자세히

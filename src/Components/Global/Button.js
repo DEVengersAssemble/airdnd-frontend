@@ -136,7 +136,7 @@ export const StBtn = styled.button`
   cursor: pointer;
   outline: none;
   border-radius: 8px;
-  padding: 1rem 2rem;
+  padding: ${props => props.padding || '1rem 2rem'};
   overflow: hidden;
   ${fontStyles};
   ${colorStyles};

@@ -109,7 +109,7 @@ section {
 }
 body {
   line-height: 1;
-  color: #181818;
+  color: #222222;
   font-size: 1.6rem;
   font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
 }
@@ -134,6 +134,9 @@ table {
 }
 button {
   background-color: #fff;
+}
+a, button {
+  cursor: pointer;
 }
 .a11yHidden {
   position: absolute;
