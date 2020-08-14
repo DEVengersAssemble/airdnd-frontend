@@ -1,14 +1,13 @@
 import React from 'react';
 import Popup from '../Global/Popup';
-import styled, { css } from 'styled-components';
-import theme from '../../style/theme';
+import styled from 'styled-components';
 import Button from '../Global/Button';
 import Toggle from '../Global/Toggle';
 import ModalFooter from '../Global/ModalFooter';
 
 const RefundPopup = popupState => {
   return (
-    <FilterPopup popupState={true}>
+    <FilterPopup popupState={false}>
       <StContentWrapper className="refund">
         <StSmallSpan>
           유연한 환불 정책을 제공하는 숙소만 검색 결과에 표시
@@ -29,7 +28,7 @@ const RoomTypePopup = popupState => {
 
 const PricePopup = popupState => {
   return (
-    <FilterPopup left="10rem">
+    <FilterPopup left="10rem" popupState={false}>
       <div></div>
     </FilterPopup>
   );
@@ -38,7 +37,7 @@ const PricePopup = popupState => {
 const SetDatePopup = popupState => {
   return (
     <StWrapper>
-      <StPopup left="24rem" popupState={true}>
+      <StPopup left="24rem" popupState={false}>
         <StContentWrapper className="setDate">
           <StLargeSpan>요금을 확인하려면 여행 날짜를 입력하세요</StLargeSpan>
           <Button btnType="color" color="black">
