@@ -26,7 +26,7 @@ const Button = ({
       fontSize={fontSize}
       hover={hover}
       padding={padding}
-      focus
+      focus={focus}
       {...rest}
     >
       {children}
