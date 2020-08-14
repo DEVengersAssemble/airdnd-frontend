@@ -109,7 +109,7 @@ const StWrapper = styled.div`
 `;
 
 const StPopup = styled(Popup)`
-  width: 360px;
+  width: 365px;
   top: -1rem;
   padding: 0;
 `;
@@ -158,14 +158,11 @@ const StLargeSpan = styled.span`
 
 const StCheckboxList = styled.ul`
   padding: 2rem;
-  height: 380px;
+  height: 360px;
 `;
 const StCheckboxWrapper = styled.li`
   margin-bottom: 1rem;
 `;
-
-// const StCheckbox = styled(Checkbox)`
-// `;
 
 const StFooter = styled(ModalFooter)`
   padding: 1.5rem 1.5rem 1.5rem 0.5rem;
