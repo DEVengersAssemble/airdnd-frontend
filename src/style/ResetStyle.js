@@ -109,7 +109,7 @@ section {
 }
 body {
   line-height: 1;
-  color: #181818;
+  color: #222222;
   font-size: 1.6rem;
   font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
 }
@@ -135,6 +135,9 @@ table {
 button {
   background-color: #fff;
 }
+a, button {
+  cursor: pointer;
+}
 .a11yHidden {
   position: absolute;
   width: 1px;
@@ -142,6 +145,15 @@ button {
   overflow: hidden;
   margin: -1px;
   clip: rect(0, 0, 0, 0);
+}
+#modal {
+  display: none; /* ui 작업하는 동안에는 display: none 적용 */
+  background: rgba(0, 0, 0, 0.25);
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
 }
 html {
   font-size: 10px;

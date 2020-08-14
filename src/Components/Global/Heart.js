@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { rgba } from 'polished';
 import { TiHeartFullOutline as HeartIcon } from 'react-icons/ti';
+import theme from '../../style/theme';
 
 const sizes = {
   large: {
@@ -18,37 +19,26 @@ const sizes = {
   },
 };
 
-const colors = {
-  main: '#FF385C',
-  gray: '#717171',
-  black: '#222222',
-  lightGray: '#F7F7F7',
-  white: '#FFFFFF',
-  deepgreen: '#01797e',
-  green: '#008489',
-  darkred: '#C03515',
-};
-
 const defaultColorStyles = css`
   ${({ bgColor, stroke, ckType, checked }) =>
     ckType
       ? checked
         ? css`
-            color: ${colors.main};
+            color: ${theme.main};
             & > svg > path {
-              stroke: ${colors.white};
+              stroke: ${theme.white};
             }
           `
         : css`
-            color: ${rgba(colors.black, 0.5)};
+            color: ${rgba(theme.black, 0.5)};
             & > svg > path {
-              stroke: ${colors.white};
+              stroke: ${theme.white};
             }
           `
       : css`
-          color: ${colors[bgColor]};
+          color: ${theme[bgColor]};
           & > svg > path {
-            stroke: ${colors[stroke]};
+            stroke: ${theme[stroke]};
           }
         `}
 `;
@@ -57,15 +47,15 @@ const hoverColorStyles = css`
   ${({ hover, checked }) =>
     hover && checked
       ? css`
-          color: ${colors.main};
+          color: ${theme.main};
           & > svg > path {
-            stroke: ${colors.main};
+            stroke: ${theme.main};
           }
         `
       : css`
-          color: ${colors.white};
+          color: ${theme.white};
           & > svg > path {
-            stroke: ${colors.black};
+            stroke: ${theme.black};
           }
         `}
 `;
@@ -92,7 +82,7 @@ const hoverStyles = css`
         width: 5rem;
         height: 5rem;
         border-radius: 50%;
-        background-color: ${colors.lightGray};
+        background-color: ${theme.lightGray};
       }
     `}
 `;
@@ -103,6 +93,7 @@ const StDiv = styled.div`
   ${sizeStyles}
   ${hoverStyles}
 `;
+
 const StHeartLabel = styled.label``;
 const StHeartInput = styled.input`
   display: none;
@@ -141,9 +132,9 @@ const Heart = ({ size, bgColor, stroke, ckType, hover, checked }) => {
   );
 };
 
-const CkHeart = ({ ckType, hover, checked, onChange }) => {
+const CkHeart = ({ ckType, hover, checked, ...event }) => {
   return (
-    <StHeartLabel hover={hover} onChange={onChange}>
+    <StHeartLabel hover={hover} {...event}>
       <StHeartInput type="checkbox" />
       {hover ? (
         // hover=true
