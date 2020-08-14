@@ -22,65 +22,6 @@ const HeartGroup = styled.div`
 `;
 
 const MessagePage = () => {
-  const [check, setCheck] = useState(false);
-  const onChangeHeart = e => {
-    setCheck(e.target.checked);
-  };
-  return (
-    <ThemeProvider
-      theme={{
-        palette: {
-          main: '#FF385C',
-          gray: '#717171',
-          black: '#222222',
-          lightGray: '#F7F7F7',
-          white: '#FFFFFF',
-          deepgreen: '#01797e',
-          green: '#008489',
-          darkred: '#C03515',
-        },
-      }}
-    >
-      <HeartBlock>
-        <HeartGroup>
-          <Heart size="small" type="checkbox" checked />
-        </HeartGroup>
-        <HeartGroup>
-          <Heart
-            size="small"
-            type="checkbox"
-            checked={check}
-            onChange={onChangeHeart}
-          />
-        </HeartGroup>
-        <HeartGroup>
-          <Heart
-            size="medium"
-            hover={true}
-            position={true}
-            type="checkbox"
-            checked={check}
-            onChange={onChangeHeart}
-          />
-        </HeartGroup>
-        <HeartGroup>
-          <Heart
-            size="small"
-            border={true}
-            type="checkbox"
-            checked={check}
-            onChange={onChangeHeart}
-          />
-          <Heart
-            size="medium"
-            border={true}
-            type="checkbox"
-            checked={check}
-            onChange={onChangeHeart}
-          />
-        </HeartGroup>
-      </HeartBlock>
-    </ThemeProvider>
-  );
+  return <div></div>;
 };
 export default MessagePage;
