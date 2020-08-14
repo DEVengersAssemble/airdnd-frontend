@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import theme from '../../style/theme';
 import Carousel from '../Global/Carousel';
 import Rating from '../Global/Rating';
+import { CkHeart } from '../Global/Heart';
 
 const Home = () => {
   return (
@@ -16,7 +17,14 @@ const Home = () => {
           최대 인원 2명 ﹒ 침실 1개 ﹒ 침대 2개 ﹒ 단독 사용 욕실 1개
         </StDetail>
         <Rating scale="1.4" rate="4.79" count="24" className="rating" />
+        <StPriceWrapper>
+          <StLargePrice>
+            <strong>₩12,928</strong>/1박
+          </StLargePrice>
+          <StSmallPrice>총 요금: ₩12,928</StSmallPrice>
+        </StPriceWrapper>
       </StDetailWrapper>
+      <Heart ckType hover checked={false} />
     </StHome>
   );
 };
@@ -26,7 +34,8 @@ const StHome = styled.li`
   display: flex;
   width: 100%;
   padding: 2rem 0;
-  border-top: 1px solid ${theme.gray};
+  border-top: 1px solid ${theme.shadow};
+  position: relative;
 
   /* &:focus {
     border: 1px solid black;
@@ -65,6 +74,29 @@ const StLine = styled.hr`
   border-width: 0;
   border-bottom: 1px solid ${theme.gray};
   margin-bottom: 9px;
+`;
+
+const Heart = styled(CkHeart)`
+  position: absolute;
+  top: 1rem;
+  right: 0;
+`;
+
+const StPriceWrapper = styled.div`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+`;
+
+const StLargePrice = styled.span`
+  margin-bottom: 0.8rem;
+`;
+
+const StSmallPrice = styled.span`
+  display: block;
+  text-decoration: underline;
+  font-size: 1.4rem;
+  color: ${theme.darkGray};
 `;
 
 export default Home;
