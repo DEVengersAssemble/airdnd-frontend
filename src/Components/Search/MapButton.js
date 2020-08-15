@@ -69,6 +69,7 @@ const StButton = styled(StBtn)`
   width: 40px;
   height: 40px;
   font-size: 1.7rem;
+  position: relative;
 
   ${({ boxShadow }) =>
     boxShadow &&

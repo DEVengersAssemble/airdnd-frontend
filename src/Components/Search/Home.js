@@ -37,13 +37,13 @@ const Home = () => {
 const StWrapper = styled.li`
   list-style: none;
   border-top: 1px solid ${theme.shadow};
+  padding: 2rem 0;
 `;
 
 const StHome = styled.a`
   text-decoration: none;
   display: flex;
   width: 100%;
-  padding: 2rem 0;
   position: relative;
 `;
 

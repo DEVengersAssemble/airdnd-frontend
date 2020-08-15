@@ -1,31 +1,37 @@
-import React, { useEffect } from 'react';
-import styled from 'styled-components';
-// import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
+import React from 'react';
+import { compose, withProps } from 'recompose';
+import {
+  withScriptjs,
+  withGoogleMap,
+  GoogleMap,
+  FusionTablesLayer,
+} from 'react-google-maps';
 
-// const Map = () => {
-// let map;
-// const { google } = window;
-
-// const initMap = () => {
-//   map = new google.maps.Map(document.getElementById('map'), {
-//     center: { lat: -34.397, lng: 150.644 },
-//     zoom: 8,
-//   });
-// };
-
-// useEffect(() => {
-//   initMap();
-// }, []);
-
-// return <GoogleMap id="map"></GoogleMap>;
-// };
-
-const Map = ({ children, ...rest }) => {
-  return <StWrapper {...rest}>{children}</StWrapper>;
-};
-
-const StWrapper = styled.div``;
-
-// 디자인 커스터마이징 할 수 있게 스타일 컴포넌트로 내보내주세요~
+const Map = compose(
+  withProps({
+    googleMapURL:
+      'https://maps.googleapis.com/maps/api/js?key=AIzaSyCqryK5lMUxY0i_-Zu1cUrgW3_Geg4BrWA&v=3.exp&libraries=geometry,drawing,places',
+    loadingElement: <div style={{ width: '100%', height: `100%` }} />,
+    containerElement: <div style={{ width: '100%', height: `100%` }} />,
+    mapElement: <div style={{ width: '100%', height: `100%` }} />,
+  }),
+  withScriptjs,
+  withGoogleMap,
+)(props => (
+  <GoogleMap
+    defaultZoom={14}
+    defaultCenter={{ lat: 37.550533, lng: 127.041504 }}
+  >
+    <FusionTablesLayer
+      url="http://googlemaps.github.io/js-v2-samples/ggeoxml/cta.kml"
+      options={{
+        query: {
+          select: `Geocodable address`,
+          from: `1mZ53Z70NsChnBMm-qEYmSDOvLXgrreLTkQUvvg`,
+        },
+      }}
+    />
+  </GoogleMap>
+));
 
 export default Map;
