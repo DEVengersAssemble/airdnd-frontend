@@ -1,11 +1,12 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { lighten } from 'polished';
+import { darken, lighten } from 'polished';
 import theme from '../../style/theme';
 
 const hoverStyle = css`
   &:hover {
-    border-color: ${theme.green};
+    border-color: ${({ borderColor }) =>
+      borderColor ? theme.green : theme.black};
   }
 `;
 
@@ -17,17 +18,29 @@ const StInput = styled.input`
   border: 1px solid ${lighten(0.2, theme.gray)};
   ${hoverStyle};
   border-radius: 4px;
-  padding: 1rem;
-  width: 100%; /* full design, search design */
+  padding: 1.6rem 1rem;
+  width: 100%;
+  &::placeholder {
+    color: ${darken(0.3, theme.darkGray)};
+    font-size: 1.6rem;
+    font-weight: 300;
+  }
 `;
 
-const StLabelDiv = styled.div``;
+const StLabelName = styled.div`
+  padding: 1rem 0;
+  font-size: 1.6rem;
+`;
 
-const Input = ({ children, type, placeholder }) => {
+const Input = ({ children, borderColor, type, placeholder }) => {
   return (
     <StLabel>
-      <StLabelDiv>{children}</StLabelDiv>
-      <StInput type={type} placeholder={placeholder} />
+      {children && <StLabelName>{children}</StLabelName>}
+      <StInput
+        borderColor={borderColor}
+        type={type}
+        placeholder={placeholder}
+      />
     </StLabel>
   );
 };
