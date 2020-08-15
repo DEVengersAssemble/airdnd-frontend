@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import CheckBox from '../Components/Global/Checkbox';
 import { Heart, CkHeart } from '../Components/Global/Heart';
-import Input from '../Components/Global/Input';
+import { Input, NewInput } from '../Components/Global/Input';
 
 const CheckBoxGroup = styled.div`
   display: flex;
@@ -93,10 +93,10 @@ const MessagePage = () => {
         <Input borderNone placeholder="보더 논" />
       </InputGroup>
       <InputGroup>
-        <Input short placeholder="쇼트 인풋" />
+        <Input message placeholder="메시지를 입력하세요." />
       </InputGroup>
       <InputGroup>
-        <Input message placeholder="메시지를 입력하세요." />
+        <NewInput text="이름" type placeholder="이름" />
       </InputGroup>
     </>
   );

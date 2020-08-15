@@ -61,6 +61,35 @@ const StLabelName = styled.div`
   font-weight: 400;
 `;
 
+const StNewLabel = styled.label`
+  width: 100%;
+  padding: 1.4rem 1rem 0rem;
+  border: 1px solid ${darken(0.2, theme.gray)};
+  border-radius: 8px;
+  &:focus-within {
+    border: 1px solid ${theme.black};
+  }
+`;
+
+const StNewInput = styled.input`
+  position: relative;
+  top: -1rem;
+  width: 100%;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: 300;
+  outline: none;
+`;
+
+const StNewName = styled.div`
+  position: relative;
+  top: -0.6rem;
+  left: 0.1rem;
+  color: ${darken(0.6, theme.gray)};
+  font-size: 1.2rem;
+  font-weight: 200;
+`;
+
 const Input = ({
   children,
   message,
@@ -85,9 +114,25 @@ const Input = ({
   );
 };
 
+const NewInput = ({ text, type, placeholder }) => {
+  return (
+    <>
+      <StNewLabel>
+        <StNewName>{text}</StNewName>
+        <StNewInput type={type} placeholder={placeholder} />
+      </StNewLabel>
+    </>
+  );
+};
+
 Input.defaultProps = {
   type: 'text',
   placeholder: '',
 };
 
-export default Input;
+NewInput.defaultProps = {
+  type: 'text',
+  placeholder: '',
+};
+
+export { Input, NewInput };
