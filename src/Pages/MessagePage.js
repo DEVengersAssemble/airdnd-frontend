@@ -82,11 +82,11 @@ const MessagePage = () => {
         />
       </HeartGroup>
       <InputGroup>
-        <Input type value="" placeholder="">
+        <Input type placeholder="이메일 주소">
           <div>칠드런 props</div>
         </Input>
-        <Input type value="" placeholder="패스워드" />
-        <Input type="password" />
+        <Input type placeholder="이름" />
+        <Input type="password" placeholder="패스워드" />
       </InputGroup>
     </>
   );

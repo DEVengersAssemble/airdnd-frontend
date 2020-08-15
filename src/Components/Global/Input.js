@@ -23,18 +23,17 @@ const StInput = styled.input`
 
 const StLabelDiv = styled.div``;
 
-const Input = ({ children, type, value, placeholder }) => {
+const Input = ({ children, type, placeholder }) => {
   return (
     <StLabel>
       <StLabelDiv>{children}</StLabelDiv>
-      <StInput type={type} value={value} placeholder={placeholder} />
+      <StInput type={type} placeholder={placeholder} />
     </StLabel>
   );
 };
 
 Input.defaultProps = {
   type: 'text',
-  value: '',
   placeholder: '',
 };
 
