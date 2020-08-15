@@ -24,7 +24,11 @@ const focusStyle = css`
     !borderNone &&
     css`
       &:focus {
-        border: ${({ message }) => message && `2px solid ${theme.black}`};
+        ${({ message }) =>
+          message &&
+          css`
+            border: 2px solid ${theme.black};
+          `};
         border-color: ${({ focusBorderColor }) =>
           focusBorderColor ? theme.green : theme.black};
       }
@@ -45,8 +49,8 @@ const StInput = styled.input`
   font-size: 1.6rem;
   font-weight: 300;
   outline: none;
-  ${borderStyle};
   ${placeholderStyle};
+  ${borderStyle};
   ${focusStyle};
   ${borderNone}
 `;
@@ -67,7 +71,7 @@ const Input = ({
   placeholder,
 }) => {
   return (
-    <StLabel message={message} short={short}>
+    <StLabel short={short}>
       {children && <StLabelName>{children}</StLabelName>}
       <StInput
         short={short}

@@ -85,12 +85,15 @@ const MessagePage = () => {
         <Input type placeholder="이메일 주소">
           <div>이메일 주소</div>
         </Input>
+        <Input type focusBorderColor placeholder="이메일 주소">
+          <div>이메일 주소</div>
+        </Input>
         <Input focusBorderColor type placeholder="이름" />
         <Input type="password" placeholder="패스워드" />
-        <Input borderNone type="password" placeholder="패스워드" />
+        <Input borderNone placeholder="보더 논" />
       </InputGroup>
       <InputGroup>
-        <Input short placeholder="메시지를 입력하세요." />
+        <Input short placeholder="쇼트 인풋" />
       </InputGroup>
       <InputGroup>
         <Input message placeholder="메시지를 입력하세요." />
