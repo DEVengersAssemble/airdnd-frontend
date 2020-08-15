@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import CheckBox from '../Components/Global/Checkbox';
 import { Heart, CkHeart } from '../Components/Global/Heart';
 import Input from '../Components/Global/Input';
-import { MdNoEncryption } from 'react-icons/md';
 
 const CheckBoxGroup = styled.div`
   display: flex;
@@ -89,6 +88,12 @@ const MessagePage = () => {
         <Input focusBorderColor type placeholder="이름" />
         <Input type="password" placeholder="패스워드" />
         <Input type="password" placeholder="패스워드" />
+      </InputGroup>
+      <InputGroup>
+        <Input short placeholder="메시지를 입력하세요." />
+      </InputGroup>
+      <InputGroup>
+        <Input message placeholder="메시지를 입력하세요." />
       </InputGroup>
     </>
   );
