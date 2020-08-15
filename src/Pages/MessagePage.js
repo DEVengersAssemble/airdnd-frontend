@@ -23,7 +23,7 @@ const HeartGroup = styled.div`
 const InputGroup = styled.div`
   display: flex;
   align-items: center;
-  /* flex-direction: column; */
+  flex-direction: column;
   padding: 5rem;
   border: 1px solid black;
 `;
@@ -82,7 +82,11 @@ const MessagePage = () => {
         />
       </HeartGroup>
       <InputGroup>
-        <Input />
+        <Input type value="" placeholder="">
+          <div>칠드런 props</div>
+        </Input>
+        <Input type value="" placeholder="패스워드" />
+        <Input type="password" />
       </InputGroup>
     </>
   );
