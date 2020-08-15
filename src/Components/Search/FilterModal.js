@@ -110,12 +110,12 @@ const CheckboxFilter = () => {
 
 const FilterModal = () => {
   return (
-    <StModal modalState={true} header title="필터 추가하기">
+    <StModal modalState={false} header title="필터 추가하기">
       <StFilterList>
-        <CheckboxFilter />
         <ToggleFilter />
         <CounterFilter />
         <MoreFilters />
+        <CheckboxFilter />
       </StFilterList>
       <StFooter align="space-between">
         <Button btnType="underlined" hover="background: none">
@@ -141,17 +141,20 @@ const StModal = styled(Modal)`
 `;
 
 const StFilterList = styled.ul`
-  padding: 3rem 5rem;
+  padding: 3rem 5rem 0;
   display: flex;
   flex-direction: column;
-  max-height: calc(100% -64px);
+  max-height: 77.5rem;
   overflow: auto;
+
+  & *:nth-last-child(1) {
+    border: none;
+  }
 `;
 
 const StFilterWrapper = styled.li`
   display: flex;
   justify-content: space-between;
-  align-items: ${({ align }) => align};
   flex-direction: ${({ direction }) => direction || 'column'};
   padding: 4rem 0;
   border-bottom: 1px solid ${theme.shadow};

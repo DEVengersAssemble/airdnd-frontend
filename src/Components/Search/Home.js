@@ -7,34 +7,43 @@ import { CkHeart } from '../Global/Heart';
 
 const Home = () => {
   return (
-    <StHome>
-      <Carousel size="large" />
-      <StDetailWrapper>
-        <StDetail>MongMong-Toto의 호텔 객실</StDetail>
-        <StTitle>Pia Resort Hotel Corner Studio Room</StTitle>
-        <StLine></StLine>
-        <StDetail>
-          최대 인원 2명 ﹒ 침실 1개 ﹒ 침대 2개 ﹒ 단독 사용 욕실 1개
-        </StDetail>
-        <Rating scale="1.4" rate="4.79" count="24" className="rating" />
-        <StPriceWrapper>
-          <StLargePrice>
-            <strong>₩12,928</strong> / 1박
-          </StLargePrice>
-          <StSmallPrice>총 요금: ₩12,928</StSmallPrice>
-        </StPriceWrapper>
-      </StDetailWrapper>
-      <Heart ckType hover checked={false} />
-    </StHome>
+    <StWrapper>
+      <StHome
+        target="_blank"
+        href="https://www.airbnb.co.kr/rooms/36094960?adults=1&location=%EB%A7%88%EB%93%9C%EB%A6%AC%EB%93%9C&source_impression_id=p3_1597324281_lNy0Q31ggfi0f1St&check_in=2020-09-26&guests=1&check_out=2020-09-30"
+      >
+        <Carousel size="large" />
+        <StDetailWrapper>
+          <StDetail>MongMong-Toto의 호텔 객실</StDetail>
+          <StTitle>Pia Resort Hotel Corner Studio Room</StTitle>
+          <StLine></StLine>
+          <StDetail>
+            최대 인원 2명 ﹒ 침실 1개 ﹒ 침대 2개 ﹒ 단독 사용 욕실 1개
+          </StDetail>
+          <Rating scale="1.4" rate="4.79" count="24" className="rating" />
+          <StPriceWrapper>
+            <StLargePrice>
+              <strong>₩12,928</strong> / 1박
+            </StLargePrice>
+            <StSmallPrice>총 요금: ₩12,928</StSmallPrice>
+          </StPriceWrapper>
+        </StDetailWrapper>
+        <Heart ckType hover checked={false} />
+      </StHome>
+    </StWrapper>
   );
 };
 
-const StHome = styled.li`
+const StWrapper = styled.li`
   list-style: none;
+  border-top: 1px solid ${theme.shadow};
+`;
+
+const StHome = styled.a`
+  text-decoration: none;
   display: flex;
   width: 100%;
   padding: 2rem 0;
-  border-top: 1px solid ${theme.shadow};
   position: relative;
 `;
 
