@@ -7,6 +7,7 @@ import Button from '../Global/Button';
 import Toggle from '../Global/Toggle';
 import { MinusButton, PlusButton } from '../Global/CounterButton';
 import Checkbox from '../Global/Checkbox';
+import { GrFormDown } from 'react-icons/gr';
 
 const ToggleFilter = () => {
   return (
@@ -26,7 +27,7 @@ const MoreFilters = () => {
   return (
     <StFilterWrapper>
       <StTitle>편의시설 더 보기</StTitle>
-      <StContentWrapper align="center" margin="4rem 0 2rem">
+      <StContentWrapper align="center" margin="0 0 2rem">
         <StContentWrapper direction="column">
           <StLargeSpan>슈퍼호스트</StLargeSpan>
           <StSmallSpan>슈퍼호스트의 숙소에 머물러보세요</StSmallSpan>
@@ -57,15 +58,15 @@ const CounterFilter = () => {
   return (
     <StFilterWrapper>
       <StTitle>침실과 침대</StTitle>
-      <StContentWrapper align="center" margin="4rem 0 0">
+      <StContentWrapper align="center" margin="0 0 2rem">
         <StLargeSpan>침대 수</StLargeSpan>
         <Counter />
       </StContentWrapper>
-      <StContentWrapper align="center" margin="2rem 0 0">
+      <StContentWrapper align="center" margin="0 0 2rem">
         <StLargeSpan>침실 수</StLargeSpan>
         <Counter />
       </StContentWrapper>
-      <StContentWrapper align="center" margin="2rem 0 0">
+      <StContentWrapper align="center">
         <StLargeSpan>욕실 수</StLargeSpan>
         <Counter />
       </StContentWrapper>
@@ -78,10 +79,31 @@ const CheckboxFilter = () => {
     <StFilterWrapper>
       <StTitle>편의 시설</StTitle>
       <StCheckboxList>
-        <Checkbox value>
+        <StCheckbox value>
           <StLargeSpan>주방</StLargeSpan>
-        </Checkbox>
+        </StCheckbox>
+        <StCheckbox value>
+          <StLargeSpan>주방</StLargeSpan>
+        </StCheckbox>
+        <StCheckbox value>
+          <StLargeSpan>주방</StLargeSpan>
+        </StCheckbox>
+        <StCheckbox value>
+          <StLargeSpan>주방</StLargeSpan>
+        </StCheckbox>
+        <StCheckbox value>
+          <StLargeSpan>주방</StLargeSpan>
+        </StCheckbox>
       </StCheckboxList>
+      <Button
+        btnType="underlined"
+        width="fit-content"
+        padding="1rem 0 0"
+        hover="background: none"
+      >
+        편의시설 모두 보기
+        <GrFormDown />
+      </Button>
     </StFilterWrapper>
   );
 };
@@ -90,10 +112,10 @@ const FilterModal = () => {
   return (
     <StModal modalState={true} header title="필터 추가하기">
       <StFilterList>
+        <CheckboxFilter />
         <ToggleFilter />
         <CounterFilter />
         <MoreFilters />
-        <CheckboxFilter />
       </StFilterList>
       <StFooter align="space-between">
         <Button btnType="underlined" hover="background: none">
@@ -122,6 +144,8 @@ const StFilterList = styled.ul`
   padding: 3rem 5rem;
   display: flex;
   flex-direction: column;
+  max-height: calc(100% -64px);
+  overflow: auto;
 `;
 
 const StFilterWrapper = styled.li`
@@ -136,6 +160,7 @@ const StFilterWrapper = styled.li`
 const StTitle = styled.h3`
   font-size: 2.2rem;
   font-weight: 600;
+  margin-bottom: 3rem;
 `;
 
 const StContentWrapper = styled.div`
@@ -173,12 +198,13 @@ const StLink = styled.a`
 `;
 
 const StCheckboxList = styled.ul`
-  padding: 2rem;
-  height: 360px;
+  display: flex;
+  flex-wrap: wrap;
 `;
 
-const StCheckboxWrapper = styled.li`
-  margin-bottom: 1rem;
+const StCheckbox = styled(Checkbox)`
+  width: 30rem;
+  margin: 0 4rem 1rem 0;
 `;
 
 const StFooter = styled(ModalFooter)`
