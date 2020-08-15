@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { darken, lighten } from 'polished';
 import theme from '../../style/theme';
 
@@ -61,17 +61,35 @@ const StLabelName = styled.div`
   font-weight: 400;
 `;
 
-const StNewLabel = styled.label`
+const nameMove = keyframes`
+  100% {
+    position: relative;
+    top: -0.6rem;
+    left: 0.1rem;
+    color: ${darken(0.6, theme.gray)};
+    font-size: 1.2rem;
+    font-weight: 200;
+  }
+`;
+
+const StSearchLabel = styled.label`
   width: 100%;
-  padding: 1.4rem 1rem 0rem;
-  border: 1px solid ${darken(0.2, theme.gray)};
+  padding: 1.6rem 1rem 0rem;
+  border: 1px solid ${theme.gray};
   border-radius: 8px;
   &:focus-within {
     border: 1px solid ${theme.black};
   }
+  &:focus-within div {
+    animation-name: ${nameMove};
+    animation-duration: 0.2s;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+  }
 `;
 
-const StNewInput = styled.input`
+const StSearchInput = styled.input`
+  background: none;
   position: relative;
   top: -1rem;
   width: 100%;
@@ -81,12 +99,8 @@ const StNewInput = styled.input`
   outline: none;
 `;
 
-const StNewName = styled.div`
-  position: relative;
-  top: -0.6rem;
-  left: 0.1rem;
-  color: ${darken(0.6, theme.gray)};
-  font-size: 1.2rem;
+const StSearchName = styled.div`
+  color: ${darken(0.5, theme.gray)};
   font-weight: 200;
 `;
 
@@ -114,13 +128,13 @@ const Input = ({
   );
 };
 
-const NewInput = ({ text, type, placeholder }) => {
+const SearchInput = ({ text, type, placeholder }) => {
   return (
     <>
-      <StNewLabel>
-        <StNewName>{text}</StNewName>
-        <StNewInput type={type} placeholder={placeholder} />
-      </StNewLabel>
+      <StSearchLabel>
+        <StSearchName>{text}</StSearchName>
+        <StSearchInput type={type} placeholder={placeholder} />
+      </StSearchLabel>
     </>
   );
 };
@@ -130,9 +144,9 @@ Input.defaultProps = {
   placeholder: '',
 };
 
-NewInput.defaultProps = {
+SearchInput.defaultProps = {
   type: 'text',
   placeholder: '',
 };
 
-export { Input, NewInput };
+export { Input, SearchInput };
