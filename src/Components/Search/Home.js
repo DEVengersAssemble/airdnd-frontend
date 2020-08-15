@@ -96,6 +96,9 @@ const StSmallPrice = styled.span`
   text-decoration: underline;
   font-size: 1.4rem;
   color: ${theme.darkGray};
+  &:hover {
+    color: ${theme.black};
+  }
 `;
 
 export default Home;

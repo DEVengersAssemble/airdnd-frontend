@@ -26,7 +26,7 @@ const RoomTypePopup = popupState => {
     setCheck(e.target.checked);
   };
   return (
-    <FilterPopup left="15.7rem" popupState={true}>
+    <FilterPopup left="15.7rem" popupState={false}>
       <StCheckboxList>
         <StCheckboxWrapper>
           <Checkbox value checked={check} onChange={onChange}>
@@ -65,7 +65,7 @@ const RoomTypePopup = popupState => {
 
 const PricePopup = popupState => {
   return (
-    <FilterPopup left="10rem" popupState={false}>
+    <FilterPopup left="27rem" popupState={true}>
       <div></div>
     </FilterPopup>
   );
@@ -74,7 +74,7 @@ const PricePopup = popupState => {
 const SetDatePopup = popupState => {
   return (
     <StWrapper>
-      <StPopup left="24rem" popupState={false}>
+      <StPopup left="27rem" popupState={false}>
         <StContentWrapper className="setDate">
           <StLargeSpan>요금을 확인하려면 여행 날짜를 입력하세요</StLargeSpan>
           <Button btnType="color" color="black">
@@ -160,6 +160,7 @@ const StCheckboxList = styled.ul`
   padding: 2rem;
   height: 360px;
 `;
+
 const StCheckboxWrapper = styled.li`
   margin-bottom: 1rem;
 `;
