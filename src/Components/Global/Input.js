@@ -20,11 +20,15 @@ const placeholderStyle = css`
 `;
 
 const focusStyle = css`
-  &:focus {
-    border: ${({ message }) => message && `2px solid ${theme.black}`};
-    border-color: ${({ focusBorderColor }) =>
-      focusBorderColor ? theme.green : theme.black};
-  }
+  ${({ borderNone }) =>
+    !borderNone &&
+    css`
+      &:focus {
+        border: ${({ message }) => message && `2px solid ${theme.black}`};
+        border-color: ${({ focusBorderColor }) =>
+          focusBorderColor ? theme.green : theme.black};
+      }
+    `};
 `;
 
 const borderNone = css`
