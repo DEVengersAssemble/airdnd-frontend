@@ -199,9 +199,9 @@ const StSiteLink = styled.a`
   }
 `;
 
-const Footer = () => {
+const Footer = ({ ...rest }) => {
   return (
-    <StFooter>
+    <StFooter {...rest}>
       <StUpperWrapper>
         <StContentSection>
           <StContentTitle>소개</StContentTitle>

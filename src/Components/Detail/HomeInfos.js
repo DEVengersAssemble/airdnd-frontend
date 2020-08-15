@@ -21,7 +21,7 @@ const HomeInfos = () => {
 };
 
 const StHomeInfos = styled.div`
-  background-color: #e8f9f9;
+  /* background-color: #e8f9f9; */
   display: flex;
   max-width: 1200px;
   padding: 0 40px;

@@ -10,7 +10,7 @@ const ReservationBox = () => {
 };
 
 const StWarpper = styled.div`
-  background-color: #f9eae8;
+  /* background-color: #f9eae8; */
   position: relative;
   margin-left: 8%;
   width: 34%;

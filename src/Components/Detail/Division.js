@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Division = ({ children, title, border, padding }) => {
-  console.log(title);
   return (
     <StDivision border={border} padding={padding}>
       {title && <h3>{title}</h3>}

@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StBtn } from '../Global/Button';
 import styled from 'styled-components';
+import {
+  RefundPopup,
+  RoomTypePopup,
+  PricePopup,
+  SetDatePopup,
+} from './FilterPopup';
 
 const FilterButton = ({ children }) => {
-  return (
-    <FilterBtn btnType="oval" focus>
-      {children}
-    </FilterBtn>
-  );
+  // const onClick = () => {
+
+  // }
+
+  return <FilterBtn btnType="oval">{children}</FilterBtn>;
 };
 
 const FilterList = () => {
@@ -17,6 +23,10 @@ const FilterList = () => {
       <FilterButton>숙소 유형</FilterButton>
       <FilterButton>요금</FilterButton>
       <FilterButton>필터 추가하기</FilterButton>
+      <RefundPopup />
+      <RoomTypePopup />
+      <PricePopup />
+      <SetDatePopup />
     </>
   );
 };

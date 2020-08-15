@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Subject from '../Components/Detail/Subject';
 import HomeInfos from '../Components/Detail/HomeInfos';
 import FullsizeWrapper from '../Components/Detail/FullsizeWrapper';
+import HomeFooter from '../Components/Detail/HomeFooter';
 
 const DetailPage = () => {
   const [modalState, setModalState] = useState(false);
@@ -14,11 +15,12 @@ const DetailPage = () => {
   return (
     <>
       <TestHeader />
-      <StMain>
+      <main>
         <Subject />
         <HomeInfos />
         <FullsizeWrapper />
-      </StMain>
+        <HomeFooter />
+      </main>
     </>
   );
 };
@@ -26,10 +28,6 @@ const DetailPage = () => {
 const TestHeader = styled.header`
   height: 8rem;
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.18);
-`;
-
-const StMain = styled.main`
-  background-color: #efeaf7;
 `;
 
 export default DetailPage;
