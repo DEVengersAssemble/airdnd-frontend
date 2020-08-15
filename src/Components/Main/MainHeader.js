@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import Logo from './Logo';
 import Navigation from './Navigation';
 import SettingButton from './SettingButton';
@@ -22,6 +22,47 @@ const StMainHeader = styled.header`
   }
 `;
 
+const fadeIn = keyframes`
+  0% {
+    display: block;
+    top: -100px;
+  }
+  25% {
+    top: 0px;
+
+  }
+  50% {
+    top: 100px;
+  }
+  75% {
+    top: 200px;
+  }
+  100% {
+    top: 300px;
+    display: none;
+  }
+`;
+
+const fadeOut = keyframes`
+  0% {
+    display: block;
+    top: 300px;
+  }
+  25% {
+    top: 200px;
+  }
+  50% {
+    top: 100px;
+  }
+  75% {
+    top: 0px;
+  }
+  100% {
+    top: -100px;
+    display: none;
+  }
+`;
+
 const StNavSearchWrapper = styled.div`
   box-sizing: border-box;
   position: absolute;
@@ -30,7 +71,14 @@ const StNavSearchWrapper = styled.div`
   width: 850px;
   display: flex;
   flex-direction: column;
-
+  animation: ${({ isScrollTop }) =>
+    isScrollTop
+      ? css`
+          ${fadeOut} 2s;
+        `
+      : css`
+          ${fadeIn} 2s;
+        `};
   @media (max-width: 950px) {
     width: 80%;
     top: 70px;
@@ -48,16 +96,15 @@ const StSettingButtonWrapper = styled.div`
   height: 40px;
 `;
 
-const MainHeader = ({ isScrollTop }) => {
+const MainHeader = ({ isScrollTop, handleClick }) => {
   return (
     <StMainHeader isScrollTop={isScrollTop}>
-      <Logo></Logo>
-      {isScrollTop && (
-        <StNavSearchWrapper>
-          <Navigation></Navigation>
-          <SearchForm></SearchForm>
-        </StNavSearchWrapper>
-      )}
+      <Logo handleClick={handleClick}></Logo>
+
+      <StNavSearchWrapper isScrollTop={isScrollTop}>
+        <Navigation></Navigation>
+        <SearchForm></SearchForm>
+      </StNavSearchWrapper>
 
       <StSettingButtonWrapper>
         <SettingButton isScrollTop={isScrollTop}></SettingButton>

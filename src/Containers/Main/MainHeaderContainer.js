@@ -3,7 +3,15 @@ import MainHeader from '../../Components/Main/MainHeader';
 
 const MainHeaderContainer = () => {
   const [isScrollTop, setIsScrollTop] = useState(false);
-  return <MainHeader isScrollTop={isScrollTop}></MainHeader>;
+  const handleClick = () => {
+    setIsScrollTop(!isScrollTop);
+  };
+  return (
+    <MainHeader
+      isScrollTop={isScrollTop}
+      handleClick={handleClick}
+    ></MainHeader>
+  );
 };
 
 export default MainHeaderContainer;
