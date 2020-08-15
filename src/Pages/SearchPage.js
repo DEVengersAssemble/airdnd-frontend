@@ -2,12 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import SearchResult from '../Components/Search/SearchResult';
 import SearchMap from '../Components/Search/SearchMap';
+import FilterModal from '../Components/Search/FilterModal';
 
 const SearchPage = () => {
   return (
     <StWrapper>
       <StNav></StNav>
       <SearchResult />
+      <FilterModal />
       <SearchMap>blabla</SearchMap>
     </StWrapper>
   );
