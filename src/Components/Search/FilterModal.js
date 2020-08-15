@@ -6,16 +6,7 @@ import ModalFooter from '../Global/ModalFooter';
 import Button from '../Global/Button';
 import Toggle from '../Global/Toggle';
 import { MinusButton, PlusButton } from '../Global/CounterButton';
-
-const Counter = () => {
-  return (
-    <StContentWrapper align="center">
-      <MinusButton />
-      <StLargeSpan>0</StLargeSpan>
-      <PlusButton />
-    </StContentWrapper>
-  );
-};
+import Checkbox from '../Global/Checkbox';
 
 const ToggleFilter = () => {
   return (
@@ -31,19 +22,50 @@ const ToggleFilter = () => {
   );
 };
 
+const MoreFilters = () => {
+  return (
+    <StFilterWrapper>
+      <StTitle>편의시설 더 보기</StTitle>
+      <StContentWrapper align="center" margin="4rem 0 2rem">
+        <StContentWrapper direction="column">
+          <StLargeSpan>슈퍼호스트</StLargeSpan>
+          <StSmallSpan>슈퍼호스트의 숙소에 머물러보세요</StSmallSpan>
+          <StLink>더 알아보기</StLink>
+        </StContentWrapper>
+        <Toggle />
+      </StContentWrapper>
+      <StLargeSpan>장애인 편의시설</StLargeSpan>
+      <StSmallSpan>
+        원활한 이동에 필요한 조건을 갖춘 숙소를 찾아보세요
+      </StSmallSpan>
+      <StLink>숙소에 갖춰진 편의시설을 선택하세요.</StLink>
+    </StFilterWrapper>
+  );
+};
+
+const Counter = () => {
+  return (
+    <StContentWrapper align="center" width="10rem">
+      <MinusButton disabled />
+      <StLargeSpan>0</StLargeSpan>
+      <PlusButton />
+    </StContentWrapper>
+  );
+};
+
 const CounterFilter = () => {
   return (
     <StFilterWrapper>
       <StTitle>침실과 침대</StTitle>
-      <StContentWrapper align="center" margin>
+      <StContentWrapper align="center" margin="4rem 0 0">
         <StLargeSpan>침대 수</StLargeSpan>
         <Counter />
       </StContentWrapper>
-      <StContentWrapper align="center" margin>
+      <StContentWrapper align="center" margin="2rem 0 0">
         <StLargeSpan>침실 수</StLargeSpan>
         <Counter />
       </StContentWrapper>
-      <StContentWrapper align="center" margin>
+      <StContentWrapper align="center" margin="2rem 0 0">
         <StLargeSpan>욕실 수</StLargeSpan>
         <Counter />
       </StContentWrapper>
@@ -51,7 +73,18 @@ const CounterFilter = () => {
   );
 };
 
-const CheckboxFilter = () => {};
+const CheckboxFilter = () => {
+  return (
+    <StFilterWrapper>
+      <StTitle>편의 시설</StTitle>
+      <StCheckboxList>
+        <Checkbox value>
+          <StLargeSpan>주방</StLargeSpan>
+        </Checkbox>
+      </StCheckboxList>
+    </StFilterWrapper>
+  );
+};
 
 const FilterModal = () => {
   return (
@@ -59,6 +92,8 @@ const FilterModal = () => {
       <StFilterList>
         <ToggleFilter />
         <CounterFilter />
+        <MoreFilters />
+        <CheckboxFilter />
       </StFilterList>
       <StFooter align="space-between">
         <Button btnType="underlined" hover="background: none">
@@ -92,6 +127,7 @@ const StFilterList = styled.ul`
 const StFilterWrapper = styled.li`
   display: flex;
   justify-content: space-between;
+  align-items: ${({ align }) => align};
   flex-direction: ${({ direction }) => direction || 'column'};
   padding: 4rem 0;
   border-bottom: 1px solid ${theme.shadow};
@@ -107,12 +143,12 @@ const StContentWrapper = styled.div`
   justify-content: space-between;
   align-items: ${({ align }) => align};
   flex-direction: ${({ direction }) => direction || 'row'};
-  margin-top: ${({ margin }) => margin && '2rem'};
+  margin: ${({ margin }) => margin};
+  width: ${({ width }) => width && '10rem'};
 `;
 
 const spanStyle = css`
   display: block;
-  margin-bottom: 0.3rem;
 `;
 
 const StSmallSpan = styled.span`
@@ -123,6 +159,26 @@ const StSmallSpan = styled.span`
 const StLargeSpan = styled.span`
   font-size: 1.6rem;
   ${spanStyle};
+`;
+
+const StLink = styled.a`
+  font-size: 1.4rem;
+  text-decoration: underline;
+  color: ${theme.darkGray};
+  margin-top: 0.5rem;
+
+  &:hover {
+    color: ${theme.black};
+  }
+`;
+
+const StCheckboxList = styled.ul`
+  padding: 2rem;
+  height: 360px;
+`;
+
+const StCheckboxWrapper = styled.li`
+  margin-bottom: 1rem;
 `;
 
 const StFooter = styled(ModalFooter)`

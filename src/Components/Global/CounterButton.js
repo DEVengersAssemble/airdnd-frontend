@@ -1,5 +1,5 @@
 import React from 'react';
-import { StBtn } from './Button';
+import Button from './Button';
 import { FiPlus, FiMinus } from 'react-icons/fi';
 import styled from 'styled-components';
 import theme from '../../style/theme';
@@ -9,7 +9,7 @@ const PlusButton = ({ ...rest }) => {
     <StCounterButton
       btnType="circle"
       fontSize="1.7rem"
-      border={`1px solid ${theme.lightGray}`}
+      border={`1px solid ${theme.gray}`}
       {...rest}
     >
       <FiPlus strokeWidth="3px" />
@@ -22,7 +22,7 @@ const MinusButton = ({ ...rest }) => {
     <StCounterButton
       btnType="circle"
       fontSize="1.7rem"
-      border={`1px solid ${theme.lightGray}`}
+      border={`1px solid ${theme.gray}`}
       {...rest}
     >
       <FiMinus strokeWidth="3px" />
@@ -30,7 +30,7 @@ const MinusButton = ({ ...rest }) => {
   );
 };
 
-const StCounterButton = styled(StBtn)`
+const StCounterButton = styled(Button)`
   color: ${theme.gray};
 
   &:hover {
