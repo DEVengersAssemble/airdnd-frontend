@@ -2,8 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StNav = styled.nav`
-  height: 80px;
-  /* background: ${props => props.theme.deepGreen}; */
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 20px;
 `;
 
 const StList = styled.ul`
@@ -23,7 +25,7 @@ const StItemSpan = styled.span`
   align-items: center;
   position: relative;
   cursor: pointer;
-  padding: 12px 24px;
+  padding: 10px 12px;
   color: white;
   &::before {
     content: '';

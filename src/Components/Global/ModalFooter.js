@@ -1,8 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const ModalFooter = ({ children, align }) => {
-  return <StModalFooter align={align}>{children}</StModalFooter>;
+const ModalFooter = ({ children, align, ...rest }) => {
+  return (
+    <StModalFooter align={align} {...rest}>
+      {children}
+    </StModalFooter>
+  );
 };
 
 const StModalFooter = styled.footer`

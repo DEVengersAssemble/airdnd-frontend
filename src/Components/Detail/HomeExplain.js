@@ -12,7 +12,7 @@ const HomeExplain = () => {
             최대 인원 1명 · 원룸 · 침대 1개 · 단독 사용 욕실 1개
           </StFeature>
         </StTextWrapper>
-        <Profile isSupperhost="true" mark="true" lastName="haeun" href="/" />
+        <Profile isSupperhost mark lastName="haeun" />
       </StSubTitDiv>
 
       <StExplainList>
@@ -66,8 +66,8 @@ const HomeExplain = () => {
           바랍니다. 공간이 작은원룸형이지만 청결을 우선으로 게스트이용후에 모든
           침구류등을 세탁하여 제공합니다. 즐거운 여행보내시기 바랍니다
         </p>
-        <StMoreBtn type="button">더 읽기</StMoreBtn>
-        <StToHostBtn type="button">호스트에게 연락하기</StToHostBtn>
+        <StMoreBtn>더 읽기</StMoreBtn>
+        <StToHostBtn>호스트에게 연락하기</StToHostBtn>
       </StDescription>
     </>
   );

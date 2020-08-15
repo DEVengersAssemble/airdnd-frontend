@@ -14,7 +14,8 @@ const Button = ({
   hover,
   padding,
   focus,
-  transform,
+  transition,
+  type,
   ...rest
 }) => {
   return (
@@ -28,7 +29,8 @@ const Button = ({
       hover={hover}
       padding={padding}
       focus={focus}
-      transform={transform}
+      transition={transition}
+      type={type || 'button'}
       {...rest}
     >
       {children}
@@ -132,12 +134,12 @@ const focusStyles = css`
 `;
 
 const transformStyles = css`
-  ${({ transform }) =>
-    transform &&
+  ${({ transition }) =>
+    transition &&
     css`
       transition: 0.2s;
       &:active {
-        transform: scale(0.94);
+        transform: scale(${props => props.transScale || '0.94'});
       }
     `}
 `;

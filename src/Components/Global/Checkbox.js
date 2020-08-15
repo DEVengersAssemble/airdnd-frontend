@@ -25,6 +25,8 @@ const hoverStyle = css`
 
 const StCheckBoxLabel = styled.label`
   cursor: pointer;
+  display: flex;
+  align-items: center;
   &:hover span {
     ${hoverStyle}
   }
@@ -42,6 +44,8 @@ const StCheckBoxInput = styled.input`
 
 const StCheckBoxOutLine = styled.span`
   display: inline-block;
+  min-width: 2.5rem;
+  min-height: 2.5rem;
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 4px;
@@ -64,6 +68,8 @@ const StCheckBoxOutLine = styled.span`
 
 const StCheckBox = styled(MdCheckBox)`
   font-size: 3.3rem;
+  min-width: 3.3rem;
+  min-height: 3.3rem;
   ${({ map }) =>
     map &&
     css`
@@ -86,12 +92,12 @@ const StCheckBoxText = styled.span`
   ${dragDisable}
 `;
 
-const Checkbox = ({ value, map, checked, ...event }) => {
+const Checkbox = ({ children, value, map, checked, ...event }) => {
   return (
     <StCheckBoxLabel map={map} {...event}>
       <StCheckBoxInput type="checkbox" />
       {checked ? <StCheckBox map={map} /> : <StCheckBoxOutLine map={map} />}
-      {value && <StCheckBoxText map={map}>{value}</StCheckBoxText>}
+      {value && <StCheckBoxText map={map}>{children}</StCheckBoxText>}
     </StCheckBoxLabel>
   );
 };
