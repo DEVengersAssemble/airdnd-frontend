@@ -1,14 +1,14 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { StBtn } from '../Global/Button';
+import Button from '../Global/Button';
 import { FiPlus, FiMinus } from 'react-icons/fi';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import { GrClose } from 'react-icons/gr';
 import theme from '../../style/theme';
 
-const MapZoomButton = () => {
+const MapZoomButton = ({ top, right }) => {
   return (
-    <StBtnWrapper>
+    <StBtnWrapper top={top} right={right}>
       <StButton className="plusBtn">
         <FiPlus fontSize="2.4rem" />
       </StButton>
@@ -20,17 +20,17 @@ const MapZoomButton = () => {
   );
 };
 
-const MapMarkerButton = () => {
+const MapMarkerButton = ({ top, right }) => {
   return (
-    <StButton boxShadow>
+    <StButton boxShadow top={top} right={right}>
       <FaMapMarkerAlt />
     </StButton>
   );
 };
 
-const MapCloseButton = () => {
+const MapCloseButton = ({ top, left }) => {
   return (
-    <StButton boxShadow>
+    <StButton boxShadow top={top} left={left}>
       <GrClose />
     </StButton>
   );
@@ -44,6 +44,12 @@ const StBtnWrapper = styled.div`
   background: ${theme.white};
   border-radius: 8px;
   box-shadow: 1px 1px 3px ${theme.shadow};
+  position: fixed;
+  z-index: 50;
+  ${({ top, right }) => css`
+    top: ${top};
+    right: ${right};
+  `}
 
   .plusBtn {
     border-bottom-right-radius: 0;
@@ -63,18 +69,26 @@ const StLine = styled.hr`
   border-bottom: 1px solid ${theme.shadow};
 `;
 
-const StButton = styled(StBtn)`
+const StButton = styled(Button)`
   border: none;
   padding: 0;
   width: 40px;
   height: 40px;
   font-size: 1.7rem;
-  position: relative;
+  position: fixed;
+  z-index: 50;
 
-  ${({ boxShadow }) =>
-    boxShadow &&
+  &.plusBtn,
+  &.minusBtn {
+    position: relative;
+  }
+
+  ${({ boxShadow, top, right, left }) =>
     css`
-      box-shadow: 1px 1px 3px ${theme.shadow};
+      top: ${top};
+      right: ${right};
+      left: ${left};
+      ${boxShadow && `box-shadow: 1px 1px 3px ${theme.shadow}`};
     `}
 `;
 

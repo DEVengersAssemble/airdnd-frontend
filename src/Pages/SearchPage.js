@@ -24,11 +24,11 @@ const StWrapper = styled.main`
   display: flex;
   flex-direction: column;
   position: relative;
-  margin-top: 8rem;
 `;
 
 const StContent = styled.div`
   display: flex;
+  /* margin-top: 8rem; */
   /* position: relative; */
 `;
 
@@ -36,7 +36,7 @@ const StNav = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  background: tomato;
+  background: cornflowerblue;
   width: 100%;
   height: 8rem;
   z-index: 100;
