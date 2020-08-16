@@ -2,20 +2,34 @@ import React from 'react';
 import styled from 'styled-components';
 import SearchResult from '../Components/Search/SearchResult';
 import SearchMap from '../Components/Search/SearchMap';
+import FilterModal from '../Components/Search/FilterModal';
+import Footer from '../Components/Main/Footer';
+import Map from '../Components/Global/Map';
 
 const SearchPage = () => {
   return (
     <StWrapper>
       <StNav></StNav>
-      <SearchResult />
-      <SearchMap>blabla</SearchMap>
+      <StContent>
+        <SearchResult />
+        <SearchMap />
+      </StContent>
+      <Footer />
+      <FilterModal />
     </StWrapper>
   );
 };
 
-const StWrapper = styled.div`
+const StWrapper = styled.main`
   display: flex;
+  flex-direction: column;
+  position: relative;
   margin-top: 8rem;
+`;
+
+const StContent = styled.div`
+  display: flex;
+  /* position: relative; */
 `;
 
 const StNav = styled.div`
