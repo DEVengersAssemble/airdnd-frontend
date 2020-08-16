@@ -95,9 +95,9 @@ const StReserveBox = styled.div`
   justify-content: space-between;
   align-items: baseline;
   text-align: left;
-  background-color: ${({ theme }) => theme.white};
+  background-color: ${({ theme }) => theme.color.white};
   padding: 24px;
-  border: 1px solid ${({ theme }) => theme.line};
+  border: 1px solid ${({ theme }) => theme.color.line};
   border-radius: 12px;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
 
@@ -118,7 +118,7 @@ const StButton = styled.button`
   border: none;
   font-size: 14px;
   text-decoration: underline;
-  color: ${({ theme }) => theme.darkGray};
+  color: ${({ theme }) => theme.color.darkGray};
 `;
 
 const StChargeMsg = styled.div`
@@ -154,7 +154,7 @@ const StTotalCharge = styled.div`
   justify-content: space-between;
   margin-top: 16px;
   padding-top: 24px;
-  border-top: 1px solid ${({ theme }) => theme.line};
+  border-top: 1px solid ${({ theme }) => theme.color.line};
 `;
 
 export default ReservationBox;

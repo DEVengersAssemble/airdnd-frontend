@@ -69,7 +69,7 @@ const StDot = styled.span`
 
 const StSuperHost = styled.span`
   ${inlineFlex}
-  color: ${({ theme }) => theme.darkGray};
+  color: ${({ theme }) => theme.size.darkGray};
   
   & svg {
     margin-right: 4px;
@@ -78,7 +78,7 @@ const StSuperHost = styled.span`
 
 const StLocationLink = styled.a`
   flex-grow: 1;
-  color: ${({ theme }) => theme.darkGray};
+  color: ${({ theme }) => theme.size.darkGray};
   text-decoration: underline;
 `;
 

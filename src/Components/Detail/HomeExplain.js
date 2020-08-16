@@ -73,7 +73,7 @@ const HomeExplain = () => {
   );
 };
 
-const line = () => 'border-bottom: 1px solid #ddd;';
+const line = () => 'border-bottom: 1px solid #DDDDDD;';
 
 const StSubTitDiv = styled.div`
   padding-bottom: 2.4rem;
@@ -138,7 +138,7 @@ const StExplain = styled.li`
     float: left;
     font-size: 14px;
     line-height: 2rem;
-    color: ${({ theme }) => theme.darkGray};
+    color: ${({ theme }) => theme.color.darkGray};
   }
 `;
 
@@ -177,7 +177,7 @@ const StMoreBtn = styled.button`
 const StToHostBtn = styled.button`
   display: block;
   margin-top: 3.2rem;
-  color: ${({ theme }) => theme.darkGray};
+  color: ${({ theme }) => theme.color.darkGray};
   ${underlineBtn}
 
   &:hover {

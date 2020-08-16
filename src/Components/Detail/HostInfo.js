@@ -90,7 +90,7 @@ const StHostWrapper = styled.div`
   span {
     font-size: 14px;
     line-height: 1.8rem;
-    color: ${({ theme }) => theme.darkGray};
+    color: ${({ theme }) => theme.color.darkGray};
   }
 `;
 
@@ -107,7 +107,7 @@ const StMarkList = styled.ul`
 
   svg {
     margin-right: 8px;
-    color: ${({ theme }) => theme.main};
+    color: ${({ theme }) => theme.color.main};
   }
 `;
 
@@ -151,7 +151,7 @@ const StWarnWrapper = styled.div`
     height: 24px;
     width: 24px;
     margin-right: 16px;
-    fill: rgb(255, 180, 0);
+    fill: ${({ theme }) => theme.color.yellow};
     vertical-align: -10px;
   }
   em {

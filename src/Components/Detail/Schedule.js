@@ -31,7 +31,7 @@ const StTravelTerm = styled.div`
   margin-bottom: 20px;
   line-height: 18px;
   font-size: 14px;
-  color: #717171;
+  color: ${({ theme }) => theme.color.darkGray};
 `;
 
 const StKeybordBtn = styled(Button)`

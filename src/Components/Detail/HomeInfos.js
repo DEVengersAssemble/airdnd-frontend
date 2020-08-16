@@ -29,7 +29,7 @@ const StHomeInfos = styled.div`
 `;
 
 const StInfosWrapper = styled.div`
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.color.white};
   width: 58%;
 `;
 

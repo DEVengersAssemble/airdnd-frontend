@@ -12,6 +12,7 @@ const theme = {
     lightGreen: '#018A04',
     green: '#008489',
     deepGreen: '#01797E',
+    yellow: '#FFB400',
     black: '#222222',
     realBlack: '#000000',
   },

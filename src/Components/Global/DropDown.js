@@ -15,7 +15,7 @@ const StHeaderWrapper = styled.div`
   justify-content: space-between;
   width: 100%;
   padding: 2px;
-  border: 1px solid ${({ theme }) => theme.color.lightgray};
+  border: 1px solid ${({ theme }) => theme.color.lightGray};
   border-radius: 8px;
   padding: 2px 5px;
 `;
@@ -43,7 +43,7 @@ const StOptions = styled.ul`
   width: 100%;
   height: 150px;
   overflow-y: scroll;
-  border: 1px solid ${({ theme }) => theme.color.lightgray};
+  border: 1px solid ${({ theme }) => theme.color.lightGray};
   border-radius: 8px;
 `;
 
@@ -51,7 +51,7 @@ const StOptionItem = styled.li`
   cursor: pointer;
   width: 100%;
   height: 30px;
-  background: ${({ theme }) => theme.color.lightgray};
+  background: ${({ theme }) => theme.color.lightGray};
   box-sizing: border-box;
   border: none;
   border-radius: 4px;

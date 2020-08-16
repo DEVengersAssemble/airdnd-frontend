@@ -150,7 +150,7 @@ const StModalCloseBtn = styled.button`
   outline: 0;
   background: transparent;
   &:hover {
-    background-color: ${({ theme }) => theme.lightGray};
+    background-color: ${({ theme }) => theme.color.lightGray};
   }
   &:focus {
     border: 2px solid #181818;
@@ -177,7 +177,7 @@ const area = css`
 
 const StModalHeader = styled.header`
   ${area};
-  border-bottom: 1px solid #ebebeb;
+  border-bottom: 1px solid ${({ theme }) => theme.color.line};
   font-weight: 600;
 `;
 

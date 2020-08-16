@@ -76,6 +76,7 @@ const HomeMap = () => {
   );
 };
 
+// const StMap = styled.div`
 const StMap = styled(Map)`
   background-color: #e3e8d6;
   position: relative;
