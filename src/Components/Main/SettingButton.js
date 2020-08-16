@@ -1,12 +1,15 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { rgba } from 'polished';
 import Button from '../Global/Button';
 import { FiGlobe, FiChevronDown } from 'react-icons/fi';
 
 const StSettingButton = styled(Button)`
   color: ${({ isScrollTop }) =>
     isScrollTop
-      ? 'white'
+      ? css`
+          ${({ theme }) => theme.white}
+        `
       : css`
           ${({ theme }) => theme.black}
         `};
@@ -17,6 +20,7 @@ const StSettingButton = styled(Button)`
   &:hover {
     border: none;
     background: rgba(176, 176, 176, 0.25);
+    /* background: ${rgba(`${({ theme }) => theme.black}`, 0.25)}; */
   }
   &:focus {
     box-shadow: none;

@@ -26,7 +26,7 @@ const StLogoIcon = styled.svg`
   ${({ isScrollTop }) =>
     isScrollTop
       ? css`
-          fill: white;
+          fill: ${({ theme }) => theme.white};
         `
       : css`
           fill: ${({ theme }) => theme.main};

@@ -11,22 +11,23 @@ const StToggleButton = styled.button`
   height: 32px;
   border-radius: 28px;
   border: none;
-  background: rgb(176, 176, 176);
+  background: ${({ theme }) => theme.gray};
   cursor: pointer;
   outline: none;
   ${({ checked }) =>
     checked &&
     css`
-      background: rgb(34, 34, 34);
+      background: ${({ theme }) => theme.black};
     `}
 
   &:hover {
-    background-color: rgb(113, 113, 113);
+    background: ${({ theme }) => theme.lightGray};
   }
 
   &:focus {
-    box-shadow: rgb(255, 255, 255) 0px 0px 0px 2px,
-      rgb(34, 34, 34) 0px 0px 0px 4px, rgba(255, 255, 255, 0.5) 0px 0px 0px 5px;
+    box-shadow: ${({ theme }) => theme.white} 0px 0px 0px 2px,
+      ${({ theme }) => theme.black} 0px 0px 0px 4px,
+      rgba(255, 255, 255, 0.5) 0px 0px 0px 5px;
     outline: none;
     transition: box-shadow 0.2s ease 0s;
   }
@@ -54,7 +55,6 @@ const StToggleCircle = styled.span`
     `};
 `;
 
-// eslint-disable-next-line react/prop-types
 const Toggle = ({ checked, handleClick }) => {
   return (
     <StToggleButton checked={checked} onClick={handleClick}>

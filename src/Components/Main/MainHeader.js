@@ -55,15 +55,9 @@ const StNavSearchWrapper = styled.div`
   flex-direction: column;
   animation-duration: 0.2s;
   animation-timing-function: ease-out;
-  ${({ isScrollTop }) =>
-    isScrollTop
-      ? css`
-          animation-name: ${slideUp};
-        `
-      : css`
-          animation-name: ${slideDown};
-        `}
   animation-fill-mode: forwards;
+
+  animation-name: ${({ isScrollTop }) => (isScrollTop ? slideUp : slideDown)};
 
   @media (max-width: 950px) {
     width: 80%;

@@ -10,10 +10,11 @@ const StBackgroundWrapper = styled.div`
   padding: 275px 80px 0 80px;
 `;
 
-const StDomesticTripSection = styled.section``;
+const StDomesticTripSection = styled.section`
+  color: ${({ theme }) => theme.white};
+`;
 
 const StDomesticTripHeader = styled.h2`
-  color: white;
   font-weight: bold;
   font-size: 30px;
   width: 270px;
@@ -22,7 +23,6 @@ const StDomesticTripHeader = styled.h2`
 `;
 
 const StDomesticTripContent = styled.p`
-  color: white;
   font-size: 14px;
   margin-bottom: 15px;
 `;

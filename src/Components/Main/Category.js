@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { rgba } from 'polished';
 
 const StCategoryWrapper = styled.div`
   background: white;
@@ -14,10 +15,10 @@ const StCategoryList = styled.ul`
 
 const StCategoryItem = styled.li`
   width: 32%;
-  background: white;
+  background: ${({ theme }) => theme.white};
   overflow: hidden;
   border-radius: 16px;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+  box-shadow: ${rgba(0.15, `${({ theme }) => theme.black}`)} 0px 2px 8px;
   cursor: pointer;
 `;
 
@@ -42,7 +43,7 @@ const StCatogoryTitle = styled.p`
 const StCategoryContent = styled.p`
   font-size: 14px;
   line-height: 18px;
-  color: rgb(113, 113, 113);
+  color: ${({ theme }) => theme.darkGray};
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: pre-line;

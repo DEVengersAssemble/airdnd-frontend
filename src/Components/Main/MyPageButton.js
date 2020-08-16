@@ -7,7 +7,8 @@ const StMyPageButton = styled(Button)`
   padding: 5px 10px;
   font-size: 16px;
   &:hover {
-    border: ${({ isScrollTop }) => isScrollTop || '1px solid lightgray'};
+    border: ${({ isScrollTop }) =>
+      isScrollTop || `1px solid ${({ theme }) => theme.lightGray}`};
     box-shadow: ${({ isScrollTop }) =>
       isScrollTop || '0px 2px 4px rgba(0, 0, 0, 0.18)'};
   }
@@ -15,13 +16,14 @@ const StMyPageButton = styled(Button)`
     box-shadow: none;
   }
 
-  border: ${({ isScrollTop }) => isScrollTop || '1px solid lightgray'};
+  border: ${({ isScrollTop }) =>
+    isScrollTop || `1px solid ${({ theme }) => theme.lightGray}`};
 `;
 
 const StProfileImg = styled.svg`
   width: 32px;
   height: 32px;
-  fill: ${props => props.theme.darkGray};
+  fill: ${({ theme }) => theme.darkGray};
   margin-left: 8px;
 `;
 

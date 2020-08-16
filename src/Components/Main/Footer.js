@@ -5,7 +5,7 @@ import { FaWonSign, FaFacebookF, FaTwitter, FaInstagram } from 'react-icons/fa';
 import { FiGlobe } from 'react-icons/fi';
 
 const StFooter = styled.footer`
-  background: ${props => props.theme.lightGray};
+  background: ${({{ color }}) => color.black};
   padding: 50px 80px;
   color: ${props => props.theme.black};
   @media ${props => props.theme.iPad} {
