@@ -1,5 +1,6 @@
 const theme = {
   main: '#FF385C',
+  warning: '#D93900',
   black: '#222222',
   darkGray: '#717171',
   gray: '#B0B0B0',
