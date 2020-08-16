@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { darken } from 'polished';
 import theme from '../../style/theme';
 import Button from '../Global/Button';
 import { FaBox } from 'react-icons/fa';
@@ -60,7 +61,7 @@ const MessageHeaderDiv = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid ${theme.gray};
+  border-bottom: 1px solid ${darken(0.1, theme.lightGray)};
   padding-left: 2.5rem;
   padding-right: 2.5rem;
   height: 7.5rem;

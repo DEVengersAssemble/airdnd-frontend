@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { darken } from 'polished';
 import { Airbnb } from '@styled-icons/boxicons-logos/Airbnb';
 import theme from '../style/theme';
 import ChatHeader from '../Components/Message/ChatHeader';
@@ -8,8 +9,11 @@ import MessageHeader from '../Components/Message/MessageHeader';
 import MessageMain from '../Components/Message/MessageMain';
 import DetailHeader from '../Components/Message/DetailHeader';
 import DetailContents from '../Components/Message/DetailContents';
+import DetailCanceledContents from '../Components/Message/DetailCanceledContents';
 
 const MessagePage = () => {
+  const [canceled, setCanceled] = useState(true);
+  console.log(setCanceled);
   return (
     <MessagePageWrapper>
       <Header>
@@ -26,7 +30,7 @@ const MessagePage = () => {
         </MessageWrapper>
         <DetailWrapper>
           <DetailHeader />
-          <DetailContents />
+          {canceled ? <DetailContents /> : <DetailCanceledContents />}
         </DetailWrapper>
       </MessageMainWrapper>
     </MessagePageWrapper>
@@ -38,9 +42,10 @@ const MessagePageWrapper = styled.div``;
 const Header = styled.div`
   display: flex;
   align-items: center;
+  border-bottom: 1px solid ${darken(0.1, theme.lightGray)};
+  box-shadow: 1px 0 0.4rem ${theme.shadow};
+  padding-left: 2rem;
   color: ${theme.main};
-  border-bottom: 1px solid ${theme.gray};
-  box-shadow: 1px 0 0.5rem ${theme.shadow};
   height: 8rem;
 `;
 
@@ -49,7 +54,8 @@ const MessageMainWrapper = styled.div`
 `;
 
 const ChattingWrapper = styled.div`
-  border-right: 1px solid ${theme.gray};
+  border-right: 1px solid ${darken(0.1, theme.lightGray)};
+  height: calc(100vh - 8rem);
   min-width: 37.5rem;
   width: 37.5rem;
 `;
@@ -59,7 +65,8 @@ const MessageWrapper = styled.div`
 `;
 
 const DetailWrapper = styled.div`
-  border-left: 1px solid ${theme.gray};
+  border-left: 1px solid ${darken(0.1, theme.lightGray)};
+  height: calc(100vh - 8rem);
   min-width: 37.5rem;
   width: 37.5rem;
 `;

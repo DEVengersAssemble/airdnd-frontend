@@ -10,6 +10,7 @@ const theme = {
   deepGreen: '#01797E',
   green: '#008489',
   darkRed: '#C03515',
+  lightGreen: '#018A04',
 
   iPad: 'screen and (max-width: 768px)',
   medium: 'screen and (max-width: 1127px)',
