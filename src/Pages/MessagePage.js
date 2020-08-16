@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import CheckBox from '../Components/Global/Checkbox';
 import { Heart, CkHeart } from '../Components/Global/Heart';
-import { Input, SearchInput } from '../Components/Global/Input';
+import { Input, NewInput } from '../Components/Global/Input';
 
 const CheckBoxGroup = styled.div`
   display: flex;
@@ -30,7 +30,7 @@ const InputGroup = styled.div`
 
 const MessagePage = () => {
   const [check, setCheck] = useState(false);
-
+  const [value, setValue] = useState('');
   const onChangeCheckBox = e => {
     setCheck(e.target.checked);
   };
@@ -39,7 +39,9 @@ const MessagePage = () => {
     setCheck(e.target.checked);
   };
 
-  const value = '지도에서 사용할 땐 props에 map을 추가하세요';
+  const onChangeInput = e => {
+    setValue(e.target.value);
+  };
 
   return (
     <>
@@ -82,21 +84,82 @@ const MessagePage = () => {
         />
       </HeartGroup>
       <InputGroup>
-        <Input type placeholder="이메일 주소">
+        <Input placeholder="이메일 주소" value={value} onChange={onChangeInput}>
           <div>이메일 주소</div>
         </Input>
-        <Input type focusBorderColor placeholder="이메일 주소">
+        <Input
+          focusBorderColor
+          placeholder="이메일 주소"
+          value={value}
+          onChange={onChangeInput}
+        >
           <div>이메일 주소</div>
         </Input>
-        <Input focusBorderColor type placeholder="이름" />
-        <Input type="password" placeholder="패스워드" />
-        <Input borderNone placeholder="보더 논" />
+        <Input
+          focusBorderColor
+          placeholder="이름"
+          value={value}
+          onChange={onChangeInput}
+        />
+        <Input
+          type="password"
+          placeholder="패스워드"
+          value={value}
+          onChange={onChangeInput}
+        />
+        <Input
+          borderNone
+          placeholder="보더 논"
+          value={value}
+          onChange={onChangeInput}
+        />
       </InputGroup>
       <InputGroup>
-        <Input message placeholder="메시지를 입력하세요." />
+        <Input
+          message
+          placeholder="메시지를 입력하세요."
+          value={value}
+          onChange={onChangeInput}
+        />
       </InputGroup>
       <InputGroup>
-        <SearchInput text="이름" type placeholder />
+        {/* children은 직접 위치 설정 */}
+        <NewInput short title="이름" value={value} onChange={onChangeInput} />
+      </InputGroup>
+      <InputGroup>
+        <NewInput title="이름" value={value} onChange={onChangeInput}>
+          <div>children: 버튼이나 아이콘은 개인적으로 css작업 필요</div>
+        </NewInput>
+      </InputGroup>
+      <InputGroup>
+        <NewInput
+          title="이름"
+          placeholder="가격"
+          value={value}
+          onChange={onChangeInput}
+        />
+      </InputGroup>
+      <InputGroup>
+        <NewInput
+          title="이름:패딩문제"
+          animation
+          value={value}
+          onChange={onChangeInput}
+        />
+      </InputGroup>
+      <InputGroup>
+        <NewInput title="이름" animation value={value} onChange={onChangeInput}>
+          <div>children: 버튼이나 아이콘은 개인적으로 css작업 필요</div>
+        </NewInput>
+      </InputGroup>
+      <InputGroup>
+        <NewInput
+          title="최저 요금"
+          value={value}
+          short
+          pay="₩"
+          onChange={onChangeInput}
+        />
       </InputGroup>
     </>
   );

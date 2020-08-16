@@ -28,6 +28,7 @@ const focusStyle = css`
           message &&
           css`
             border: 2px solid ${theme.black};
+            padding: 1.2rem 1.4rem;
           `};
         border-color: ${({ focusBorderColor }) =>
           focusBorderColor ? theme.green : theme.black};
@@ -37,6 +38,22 @@ const focusStyle = css`
 
 const borderNone = css`
   border: ${({ borderNone }) => borderNone && 'none'};
+`;
+
+const nameStyle = css`
+  position: relative;
+  top: -0.6rem;
+  left: 0.1rem;
+  color: ${darken(0.6, theme.gray)};
+  font-size: 1.2rem;
+  font-weight: 200;
+`;
+
+const nameMove = keyframes`
+  0%{}
+  100% {
+    ${nameStyle};
+  }
 `;
 
 const StLabel = styled.label`
@@ -52,7 +69,7 @@ const StInput = styled.input`
   ${placeholderStyle};
   ${borderStyle};
   ${focusStyle};
-  ${borderNone}
+  ${borderNone};
 `;
 
 const StLabelName = styled.div`
@@ -61,47 +78,68 @@ const StLabelName = styled.div`
   font-weight: 400;
 `;
 
-const nameMove = keyframes`
-  100% {
-    position: relative;
-    top: -0.6rem;
-    left: 0.1rem;
-    color: ${darken(0.6, theme.gray)};
-    font-size: 1.2rem;
-    font-weight: 200;
-  }
-`;
-
-const StSearchLabel = styled.label`
-  width: 100%;
-  padding: 1.6rem 1rem 0rem;
+const StNewLabel = styled.label`
+  width: ${({ short }) => (short ? '16.8rem' : '100%')};
+  padding: ${({ pay }) => (pay ? '1rem 1rem 0rem' : '1.2rem 1rem 0rem')};
+  height: 5.7rem;
   border: 1px solid ${theme.gray};
   border-radius: 8px;
   &:focus-within {
     border: 1px solid ${theme.black};
   }
   &:focus-within div {
-    animation-name: ${nameMove};
-    animation-duration: 0.2s;
-    animation-timing-function: linear;
-    animation-fill-mode: both;
+    ${({ animation }) =>
+      animation &&
+      css`
+        animation-name: ${nameMove};
+        animation-duration: 0.2s;
+        animation-timing-function: linear;
+        animation-fill-mode: both;
+      `}
   }
 `;
 
-const StSearchInput = styled.input`
+const StNewInput = styled.input`
   background: none;
   position: relative;
-  top: -1rem;
+  top: -0.9rem;
   width: 100%;
   border: none;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: 300;
   outline: none;
+  ${placeholderStyle};
+  ${({ pay }) =>
+    pay &&
+    css`
+      width: 15rem;
+      padding-left: 1.8rem;
+    `}
 `;
 
-const StSearchName = styled.div`
+const StNewName = styled.div`
+  display: inline-block;
   color: ${darken(0.5, theme.gray)};
   font-weight: 200;
+  ${({ animation }) =>
+    !animation &&
+    css`
+      ${nameStyle};
+    `}
+  ${({ value }) =>
+    value &&
+    css`
+      ${nameStyle};
+    `}
+  cursor: pointer;
+`;
+
+const StChildren = styled.span``;
+
+const StPay = styled.div`
+  width: 1rem;
+  height: 1rem;
+  margin-top: -0.8rem;
 `;
 
 const Input = ({
@@ -112,9 +150,11 @@ const Input = ({
   focusBorderColor,
   type,
   placeholder,
+  value,
+  onChange,
 }) => {
   return (
-    <StLabel short={short}>
+    <StLabel New={short}>
       {children && <StLabelName>{children}</StLabelName>}
       <StInput
         short={short}
@@ -123,18 +163,50 @@ const Input = ({
         focusBorderColor={focusBorderColor}
         type={type}
         placeholder={placeholder}
+        value={value}
+        onChange={onChange}
       />
     </StLabel>
   );
 };
 
-const SearchInput = ({ text, type, placeholder }) => {
+const NewInput = ({
+  short,
+  children,
+  title,
+  animation,
+  pay,
+  placeholder,
+  value,
+  onChange,
+  ...rest
+}) => {
+  console.log(rest);
   return (
     <>
-      <StSearchLabel>
-        <StSearchName>{text}</StSearchName>
-        <StSearchInput type={type} placeholder={placeholder} />
-      </StSearchLabel>
+      <StNewLabel short={short} pay={pay} animation={animation} value={value}>
+        <StNewName animation={animation} value={value}>
+          {title}
+        </StNewName>
+        {pay ? (
+          <>
+            <StPay>{pay}</StPay>
+            <StNewInput
+              pay={pay}
+              placeholder={placeholder}
+              value={value}
+              onChange={onChange}
+            />
+          </>
+        ) : (
+          <StNewInput
+            placeholder={placeholder}
+            value={value}
+            onChange={onChange}
+          />
+        )}
+      </StNewLabel>
+      <StChildren>{children}</StChildren>
     </>
   );
 };
@@ -144,9 +216,9 @@ Input.defaultProps = {
   placeholder: '',
 };
 
-SearchInput.defaultProps = {
+NewInput.defaultProps = {
   type: 'text',
   placeholder: '',
 };
 
-export { Input, SearchInput };
+export { Input, NewInput };
