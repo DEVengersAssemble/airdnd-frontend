@@ -5,6 +5,8 @@ import Navigation from './Navigation';
 import SettingButton from './SettingButton';
 import MyPageButton from './MyPageButton';
 import SearchForm from './SearchForm';
+import Button from '../Global/Button';
+import { FiSearch } from 'react-icons/fi';
 
 const StMainHeader = styled.header`
   box-sizing: border-box;
@@ -22,44 +24,24 @@ const StMainHeader = styled.header`
   }
 `;
 
-const fadeIn = keyframes`
-  0% {
-    display: block;
-    top: -100px;
+const slideUp = keyframes`
+  from {
+    transform: scale(0.4, 0.7) translateY(-80px);
   }
-  25% {
-    top: 0px;
-
-  }
-  50% {
-    top: 100px;
-  }
-  75% {
-    top: 200px;
-  }
-  100% {
-    top: 300px;
-    display: none;
+  to {
+    transform: scale(1, 1) translateY(0px);
   }
 `;
 
-const fadeOut = keyframes`
-  0% {
-    display: block;
-    top: 300px;
+const slideDown = keyframes`
+  from {
+    transform: scale(1, 1) translateY(0px);
+    opacity: 0.5;
   }
-  25% {
-    top: 200px;
-  }
-  50% {
-    top: 100px;
-  }
-  75% {
-    top: 0px;
-  }
-  100% {
-    top: -100px;
-    display: none;
+  to {
+    transform: scale(0.4, 0.7) translateY(-80px);
+    opacity: 0;
+    visibility: hidden;
   }
 `;
 
@@ -71,14 +53,18 @@ const StNavSearchWrapper = styled.div`
   width: 850px;
   display: flex;
   flex-direction: column;
-  animation: ${({ isScrollTop }) =>
+  animation-duration: 0.15s;
+  animation-timing-function: ease-out;
+  ${({ isScrollTop }) =>
     isScrollTop
       ? css`
-          ${fadeOut} 2s;
+          animation-name: ${slideUp};
         `
       : css`
-          ${fadeIn} 2s;
-        `};
+          animation-name: ${slideDown};
+        `}
+  animation-fill-mode: forwards;
+
   @media (max-width: 950px) {
     width: 80%;
     top: 70px;
@@ -96,16 +82,56 @@ const StSettingButtonWrapper = styled.div`
   height: 40px;
 `;
 
+const StOnScrollSearchButton = styled(Button)`
+  ${({ isScrollTop }) =>
+    isScrollTop &&
+    css`
+      display: none;
+    `}
+  position: absolute;
+  top: 14px;
+  left: calc(50% - 150px);
+  padding: 10px 10px 10px 20px;
+  color: ${({ theme }) => theme.black};
+  border: 1px solid lightgray;
+  &:hover {
+    border: 1px solid lightgray;
+    transition: box-shadow 0.2s ease;
+    box-shadow: 2px 2px 4px 0px rgba(168, 168, 168, 0.5);
+  }
+`;
+
+const StOnScrollSearchButtonIconWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: ${({ theme }) => theme.main};
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-left: 160px;
+`;
+
 const MainHeader = ({ isScrollTop, handleClick }) => {
   return (
     <StMainHeader isScrollTop={isScrollTop}>
-      <Logo handleClick={handleClick}></Logo>
+      <Logo isScrollTop={isScrollTop} handleClick={handleClick}></Logo>
 
       <StNavSearchWrapper isScrollTop={isScrollTop}>
         <Navigation></Navigation>
         <SearchForm></SearchForm>
       </StNavSearchWrapper>
-
+      <StOnScrollSearchButton
+        btnType="oval"
+        fontSize="14px"
+        isScrollTop={isScrollTop}
+      >
+        검색 시작하기
+        <StOnScrollSearchButtonIconWrapper>
+          <FiSearch />
+        </StOnScrollSearchButtonIconWrapper>
+      </StOnScrollSearchButton>
       <StSettingButtonWrapper>
         <SettingButton isScrollTop={isScrollTop}></SettingButton>
         <MyPageButton isScrollTop={isScrollTop}></MyPageButton>
