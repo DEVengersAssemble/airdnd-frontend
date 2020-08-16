@@ -11,7 +11,6 @@ const StSearchForm = styled.form`
   overflow: hidden;
   display: flex;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 16px 32px, rgba(0, 0, 0, 0.1) 0px 3px 8px;
-
   color: ${({ theme }) => theme.black};
 `;
 
@@ -82,7 +81,6 @@ const StPlaceLabel = styled.label`
   padding-left: 28px;
   cursor: pointer;
   &:hover {
-    background: rgba(0, 0, 0, 0.07);
     border-radius: 32px;
     & ${StTextWrapper}::before {
       display: none;
@@ -91,7 +89,6 @@ const StPlaceLabel = styled.label`
   &:focus-within {
     background: white;
     border-radius: 32px;
-    box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.3);
     & ${StTextWrapper}::before {
       display: none;
     }
