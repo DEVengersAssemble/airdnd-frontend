@@ -72,9 +72,10 @@ const DropDown = ({
   toggleOpen,
   optionSelected,
   clickOption,
+  ...rest
 }) => {
   return (
-    <StDropDownWrapper>
+    <StDropDownWrapper {...rest}>
       <StHeaderWrapper onClick={toggleOpen}>
         <StHeader>{optionSelected || title}</StHeader>
         <StIconWrapper>

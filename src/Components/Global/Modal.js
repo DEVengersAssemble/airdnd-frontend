@@ -149,7 +149,7 @@ const StModalCloseBtn = styled.button`
   outline: 0;
   background: transparent;
   &:hover {
-    background-color: #eee;
+    background-color: ${({ theme }) => theme.lightGray};
   }
   &:focus {
     border: 2px solid #181818;

@@ -46,7 +46,7 @@ const StBedroom = styled.div`
   width: 32.1%;
   padding: 2.4rem;
   margin: 0 0.4rem;
-  border: 1px solid #ddd;
+  border: 1px solid ${({ theme }) => theme.line};
   border-radius: 12px;
   fill: currentcolor;
 
