@@ -3,22 +3,30 @@ import styled from 'styled-components';
 import SearchResult from '../Components/Search/SearchResult';
 import SearchMap from '../Components/Search/SearchMap';
 import FilterModal from '../Components/Search/FilterModal';
+import Footer from '../Components/Main/Footer';
 
 const SearchPage = () => {
   return (
     <StWrapper>
       <StNav></StNav>
-      <SearchResult />
+      <StContent>
+        <SearchResult />
+        <SearchMap>blabla</SearchMap>
+      </StContent>
+      <Footer />
       <FilterModal />
-      <SearchMap>blabla</SearchMap>
     </StWrapper>
   );
 };
 
-const StWrapper = styled.div`
+const StWrapper = styled.main`
   display: flex;
+  flex-direction: column;
+  position: relative;
   margin-top: 8rem;
 `;
+
+const StContent = styled.div``;
 
 const StNav = styled.div`
   position: fixed;
