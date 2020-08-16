@@ -1,16 +1,17 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import SearchButton from './SearchButton';
 
 const StSearchForm = styled.form`
-  background: ${({ theme }) => theme.white};
+  position: relative;
+  background: ${({ theme }) => theme.color.white};
   width: 100%;
   height: 66px;
   border-radius: 32px;
   overflow: hidden;
   display: flex;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 16px 32px, rgba(0, 0, 0, 0.1) 0px 3px 8px;
-
-  color: ${({ theme }) => theme.black};
+  color: ${({ theme }) => theme.color.black};
 `;
 
 const StTextWrapper = styled.div`
@@ -31,7 +32,7 @@ const StFormItemWrapper = styled.div`
     display: block;
     height: 100%;
     width: 1px;
-    background: ${({ theme }) => theme.gray};
+    background: ${({ theme }) => theme.color.gray};
   }
 
   &:hover {
@@ -80,7 +81,6 @@ const StPlaceLabel = styled.label`
   padding-left: 28px;
   cursor: pointer;
   &:hover {
-    background: rgba(0, 0, 0, 0.07);
     border-radius: 32px;
     & ${StTextWrapper}::before {
       display: none;
@@ -89,7 +89,6 @@ const StPlaceLabel = styled.label`
   &:focus-within {
     background: white;
     border-radius: 32px;
-    box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.3);
     & ${StTextWrapper}::before {
       display: none;
     }
@@ -105,16 +104,16 @@ const StPlaceInput = styled.input`
   outline: none;
   border: none;
   &::-webkit-input-placeholder {
-    color: ${({ theme }) => theme.darkGray};
+    color: ${({ theme }) => theme.color.darkGray};
   }
   &::-moz-placeholder {
-    color: ${({ theme }) => theme.darkGray};
+    color: ${({ theme }) => theme.color.darkGray};
   }
   &::-ms-placeholder {
-    color: ${({ theme }) => theme.darkGray};
+    color: ${({ theme }) => theme.color.darkGray};
   }
   &::placeholder {
-    color: ${({ theme }) => theme.darkGray};
+    color: ${({ theme }) => theme.color.darkGray};
   }
 `;
 
@@ -127,7 +126,7 @@ const StTypeText = styled.p`
 const StContentText = styled.p`
   font-size: 14px;
   line-height: 18px;
-  color: ${({ theme }) => theme.darkGray};
+  color: ${({ theme }) => theme.color.darkGray};
 `;
 
 const SearchForm = () => {
@@ -159,6 +158,7 @@ const SearchForm = () => {
           <StContentText>게스트 추가</StContentText>
         </StTextWrapper>
       </StFormItemWrapper>
+      <SearchButton></SearchButton>
     </StSearchForm>
   );
 };
