@@ -124,16 +124,16 @@ const MessagePage = () => {
       </InputGroup>
       <InputGroup>
         {/* children은 직접 위치 설정 */}
-        <NewInput short title="이름" value={value} onChange={onChangeInput} />
+        <NewInput short title="이름1" value={value} onChange={onChangeInput} />
       </InputGroup>
       <InputGroup>
-        <NewInput title="이름" value={value} onChange={onChangeInput}>
+        <NewInput title="이름2" value={value} onChange={onChangeInput}>
           <div>children: 버튼이나 아이콘은 개인적으로 css작업 필요</div>
         </NewInput>
       </InputGroup>
       <InputGroup>
         <NewInput
-          title="이름"
+          title="이름3"
           placeholder="가격"
           value={value}
           onChange={onChangeInput}
@@ -141,14 +141,19 @@ const MessagePage = () => {
       </InputGroup>
       <InputGroup>
         <NewInput
-          title="이름:패딩문제"
+          title="이름4"
           animation
           value={value}
           onChange={onChangeInput}
         />
       </InputGroup>
       <InputGroup>
-        <NewInput title="이름" animation value={value} onChange={onChangeInput}>
+        <NewInput
+          title="이름5"
+          animation
+          value={value}
+          onChange={onChangeInput}
+        >
           <div>children: 버튼이나 아이콘은 개인적으로 css작업 필요</div>
         </NewInput>
       </InputGroup>

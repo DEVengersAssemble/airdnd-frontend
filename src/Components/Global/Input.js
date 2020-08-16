@@ -50,7 +50,6 @@ const nameStyle = css`
 `;
 
 const nameMove = keyframes`
-  0%{}
   100% {
     ${nameStyle};
   }
@@ -80,7 +79,7 @@ const StLabelName = styled.div`
 
 const StNewLabel = styled.label`
   width: ${({ short }) => (short ? '16.8rem' : '100%')};
-  padding: ${({ pay }) => (pay ? '1rem 1rem 0rem' : '1.2rem 1rem 0rem')};
+  padding: 1.2rem 1rem 0rem;
   height: 5.7rem;
   border: 1px solid ${theme.gray};
   border-radius: 8px;
@@ -102,7 +101,7 @@ const StNewLabel = styled.label`
 const StNewInput = styled.input`
   background: none;
   position: relative;
-  top: -0.9rem;
+  top: ${({ pay }) => (pay ? '-1.1rem' : '-0.7rem')};
   width: 100%;
   border: none;
   font-size: 1.6rem;
@@ -118,9 +117,10 @@ const StNewInput = styled.input`
 `;
 
 const StNewName = styled.div`
-  display: inline-block;
   color: ${darken(0.5, theme.gray)};
   font-weight: 200;
+  position: relative;
+  top: 0.6rem;
   ${({ animation }) =>
     !animation &&
     css`
@@ -131,7 +131,6 @@ const StNewName = styled.div`
     css`
       ${nameStyle};
     `}
-  cursor: pointer;
 `;
 
 const StChildren = styled.span``;
@@ -139,7 +138,8 @@ const StChildren = styled.span``;
 const StPay = styled.div`
   width: 1rem;
   height: 1rem;
-  margin-top: -0.8rem;
+  margin-top: -0.3rem;
+  vertical-align: sub;
 `;
 
 const Input = ({
