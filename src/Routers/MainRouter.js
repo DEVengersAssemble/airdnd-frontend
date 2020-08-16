@@ -7,6 +7,7 @@ import ReservationPage from '../Pages/ReservationPage';
 import TripsPage from '../Pages/TripsPage';
 import MessagePage from '../Pages/MessagePage';
 import WishlistsPage from '../Pages/WishlistsPage';
+import HowToUseInput from '../Components/Global/HowToUseInput';
 
 const MainRouter = () => {
   return (
@@ -18,6 +19,8 @@ const MainRouter = () => {
       <Route path="/message" component={MessagePage} />
       <Route path="/trips" component={TripsPage} />
       <Route path="/wishlists" component={WishlistsPage} />
+      {/* how to use global component */}
+      <Route path="/HowToUseInput" component={HowToUseInput} />
       <Route
         render={({ location }) => (
           <div>
