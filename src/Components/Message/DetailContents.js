@@ -3,7 +3,7 @@ import styled from 'styled-components';
 // import theme from '../../style/theme';
 
 const DetailContents = () => {
-  return <DetailContentsDiv>detail contents</DetailContentsDiv>;
+  return <DetailContentsDiv>세부 내용</DetailContentsDiv>;
 };
 
 const DetailContentsDiv = styled.div``;

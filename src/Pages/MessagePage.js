@@ -13,18 +13,18 @@ const MessagePage = () => {
     <MessagePageWrapper>
       <Header>Temp Header</Header>
       <MessageMainWrapper>
-        <Chatting>
+        <ChattingWrapper>
           <ChatHeader />
           <ChatMain />
-        </Chatting>
-        <Message>
+        </ChattingWrapper>
+        <MessageWrapper>
           <MessageHeader />
           <MessageMain />
-        </Message>
-        <Detail>
+        </MessageWrapper>
+        <DetailWrapper>
           <DetailHeader />
           <DetailContents />
-        </Detail>
+        </DetailWrapper>
       </MessageMainWrapper>
     </MessagePageWrapper>
   );
@@ -33,7 +33,8 @@ const MessagePage = () => {
 const MessagePageWrapper = styled.div``;
 
 const Header = styled.div`
-  background: ${theme.main};
+  border-bottom: 1px solid ${theme.gray};
+  box-shadow: 1px 0 0.5rem ${theme.shadow};
   height: 8rem;
 `;
 
@@ -41,19 +42,18 @@ const MessageMainWrapper = styled.div`
   display: flex;
 `;
 
-const Chatting = styled.div`
-  background: ${theme.deepGreen};
+const ChattingWrapper = styled.div`
+  border-right: 1px solid ${theme.gray};
   min-width: 37.5rem;
   width: 37.5rem;
 `;
 
-const Message = styled.div`
-  background: ${theme.gray};
+const MessageWrapper = styled.div`
   flex-grow: 1;
 `;
 
-const Detail = styled.div`
-  background: ${theme.darkRed};
+const DetailWrapper = styled.div`
+  border-left: 1px solid ${theme.gray};
   min-width: 37.5rem;
   width: 37.5rem;
 `;
