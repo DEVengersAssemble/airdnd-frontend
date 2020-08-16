@@ -5,10 +5,11 @@ import Button from '../Global/Button';
 import Toggle from '../Global/Toggle';
 import ModalFooter from '../Global/ModalFooter';
 import Checkbox from '../Global/Checkbox';
+import { NewInput } from '../Global/Input';
 
 const RefundPopup = popupState => {
   return (
-    <FilterPopup popupState={false}>
+    <FilterPopup className="refund" popupState={false}>
       <StContentWrapper className="refund">
         <StSmallSpan>
           유연한 환불 정책을 제공하는 숙소만 검색 결과에 표시
@@ -26,7 +27,7 @@ const RoomTypePopup = popupState => {
     setCheck(e.target.checked);
   };
   return (
-    <FilterPopup left="15.7rem" popupState={true}>
+    <FilterPopup className="roomType" left="15.7rem" popupState={false}>
       <StCheckboxList>
         <StCheckboxWrapper>
           <Checkbox value checked={check} onChange={onChange}>
@@ -65,16 +66,38 @@ const RoomTypePopup = popupState => {
 
 const PricePopup = popupState => {
   return (
-    <FilterPopup left="10rem" popupState={false}>
-      <div></div>
+    <FilterPopup className="price" left="25rem" popupState={false}>
+      <StContentWrapper className="price">
+        <StLargeSpan>평균 1박 요금은 ₩78,902입니다</StLargeSpan>
+        <StRangeWrapper>
+          <StRange type="range" />
+        </StRangeWrapper>
+        <StInputWrapper>
+          <NewInput
+            title="최저 요금"
+            value={'12,000'}
+            short
+            pay="₩"
+            // onChange={onChangeInput}
+          />
+          <span>―</span>
+          <NewInput
+            title="최고 요금"
+            value={'+1,000,000'}
+            short
+            pay="₩"
+            // onChange={onChangeInput}
+          />
+        </StInputWrapper>
+      </StContentWrapper>
     </FilterPopup>
   );
 };
 
 const SetDatePopup = popupState => {
   return (
-    <StWrapper>
-      <StPopup left="24rem" popupState={false}>
+    <StWrapper className="setDate">
+      <StPopup left="27rem" popupState={false}>
         <StContentWrapper className="setDate">
           <StLargeSpan>요금을 확인하려면 여행 날짜를 입력하세요</StLargeSpan>
           <Button btnType="color" color="black">
@@ -86,16 +109,23 @@ const SetDatePopup = popupState => {
   );
 };
 
-const FilterPopup = ({ children, popupState, left }) => {
+const FilterPopup = ({ children, popupState, left, className }) => {
   return (
-    <StWrapper>
+    <StWrapper className={className}>
       <StPopup left={left} popupState={popupState}>
         {children}
         <StFooter align="space-between">
           <Button btnType="underlined" padding="1rem" fontSize="1.6rem">
             지우기
           </Button>
-          <Button btnType="color" color="black" fontSize="1.4rem">
+          <Button
+            btnType="color"
+            color="black"
+            padding="1rem 1.5rem"
+            fontSize="1.4rem"
+            hover="background: #000"
+            transition
+          >
             저장
           </Button>
         </StFooter>
@@ -104,14 +134,24 @@ const FilterPopup = ({ children, popupState, left }) => {
   );
 };
 
+const sizes = {
+  refund: '350px',
+  roomType: '365px',
+  setDate: '350px',
+  price: '430px',
+};
+
 const StWrapper = styled.div`
   position: relative;
+  ${({ className }) => css`
+    width: ${sizes[className]};
+  `}
 `;
 
 const StPopup = styled(Popup)`
-  width: 365px;
   top: -1rem;
   padding: 0;
+  width: 100%;
 `;
 
 const StContentWrapper = styled.div`
@@ -123,6 +163,14 @@ const StContentWrapper = styled.div`
     padding-top: 3rem;
   }
 
+  &.roomType {
+    padding: 1rem;
+    height: 100%;
+    & > * {
+      margin: 0 0 0.3rem;
+    }
+  }
+
   &.setDate {
     height: 110px;
     & > * {
@@ -130,12 +178,8 @@ const StContentWrapper = styled.div`
     }
   }
 
-  &.roomType {
-    padding: 1rem;
-    height: 100%;
-    & > * {
-      margin: 0 0 0.3rem;
-    }
+  &.price {
+    height: 330px;
   }
 `;
 
@@ -160,8 +204,34 @@ const StCheckboxList = styled.ul`
   padding: 2rem;
   height: 360px;
 `;
+
 const StCheckboxWrapper = styled.li`
   margin-bottom: 1rem;
+`;
+
+const StInputWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  & > * {
+    margin: 0 1rem;
+  }
+
+  & > span {
+    margin: 0 0 0 0.5rem;
+  }
+`;
+
+const StRangeWrapper = styled.div`
+  background: cornflowerblue;
+  height: 10rem;
+  margin: 2rem 0;
+`;
+
+const StRange = styled.input`
+  width: 100%;
 `;
 
 const StFooter = styled(ModalFooter)`

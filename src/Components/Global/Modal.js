@@ -13,6 +13,7 @@ const Modal = ({
   title,
   modalState,
   setModalState,
+  ...rest
 }) => {
   const [animate, setAnimate] = useState(false);
   const [visible, setVisible] = useState(modalState);
@@ -42,7 +43,7 @@ const Modal = ({
       className="dimmed"
       animate={animate}
     >
-      <StModalDiv width={width} height={height} animate={animate}>
+      <StModalDiv width={width} height={height} animate={animate} {...rest}>
         <StModalCloseBtn type="button" onClick={onBtnDelete}>
           <StCloseIcon />
         </StModalCloseBtn>

@@ -1,11 +1,11 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import Button from '../Global/Button';
 const StOnlineExpWrapper = styled.div`
-  background: rgb(0, 0, 0);
+  background: ${({ theme }) => theme.color.realBlack};
   height: 800px;
   padding: 65px 80px;
-  color: white;
+  color: ${({ theme }) => theme.color.white};
 `;
 
 const StUpperWrapper = styled.div`
@@ -42,7 +42,7 @@ const StGridWrapper = styled.div`
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
 
-  @media ${props => props.theme.iPad} {
+  @media ${({ theme }) => theme.size.iPad} {
     grid-template-rows: repeat(2, 1fr);
     grid-template-columns: 2fr 1fr;
   }
@@ -81,7 +81,7 @@ const StGridItem = styled.div`
     grid-column-end: 5;
   }
 
-  @media ${props => props.theme.iPad} {
+  @media ${({ theme }) => theme.size.iPad} {
     &:nth-child(1) {
       grid-row-start: 1;
       grid-row-end: 3;
@@ -118,7 +118,7 @@ const StGridItemContentWrapper = styled.div`
   position: absolute;
   bottom: 0;
   left: 0;
-  background: ${props => props.theme.black};
+  background: ${({ theme }) => theme.color.black};
   min-height: 76px;
   width: 100%;
   padding: 10px 30% 10px 16px;
@@ -129,7 +129,7 @@ const StGridItemContentWrapper = styled.div`
 `;
 
 const StGridItemContent = styled.p`
-  color: white;
+  color: ${({ theme }) => theme.color.white};
 `;
 
 const OnlineExp = () => {

@@ -20,7 +20,7 @@ const SearchResult = () => {
 
 const StWrapper = styled.div`
   width: 840px;
-  padding: 5rem 2rem 1rem;
+  padding: 5rem 2rem 3rem;
 `;
 
 const StHeader = styled.h2`
