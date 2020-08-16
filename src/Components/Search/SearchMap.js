@@ -6,17 +6,37 @@ import Map from '../Global/Map';
 const SearchMap = ({ children }) => {
   return (
     <StWrapper>
-      <MapZoomButton top="10rem" right="2rem" />
-      <MapMarkerButton top="20rem" right="2rem" />
-      <MapCloseButton top="10rem" left="86rem" />
+      <StStickyWrapper>
+        <MapCloseButton />
+        <StBtnSetWrapper>
+          <MapZoomButton />
+          <MapMarkerButton />
+        </StBtnSetWrapper>
+      </StStickyWrapper>
       <Map />
     </StWrapper>
   );
 };
 
-const StWrapper = styled.div`
-  /* position: relative; */
-  flex-grow: 100;
+const StWrapper = styled.aside`
+  width: calc(100vw - 840px);
 `;
 
+const StStickyWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: inherit;
+  height: 100vh;
+  position: absolute;
+`;
+
+const StBtnSetWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  top: 10rem;
+  right: 2rem;
+  height: fit-content;
+  position: sticky;
+  z-index: 10;
+`;
 export default SearchMap;

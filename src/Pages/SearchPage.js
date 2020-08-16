@@ -37,6 +37,7 @@ const StNav = styled.div`
   top: 0;
   left: 0;
   background: cornflowerblue;
+  /* opacity: 0.5; */
   width: 100%;
   height: 8rem;
   z-index: 100;

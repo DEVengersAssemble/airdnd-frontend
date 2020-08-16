@@ -6,31 +6,37 @@ import { FaMapMarkerAlt } from 'react-icons/fa';
 import { GrClose } from 'react-icons/gr';
 import theme from '../../style/theme';
 
-const MapZoomButton = ({ top, right }) => {
+const MapZoomButton = () => {
   return (
-    <StBtnWrapper top={top} right={right}>
-      <StButton className="plusBtn">
+    <StBtnWrapper>
+      <StButton className="plusBtn" position="relative">
         <FiPlus fontSize="2.4rem" />
       </StButton>
       <StLine />
-      <StButton className="minusBtn">
+      <StButton className="minusBtn" position="relative">
         <FiMinus fontSize="2.4rem" />
       </StButton>
     </StBtnWrapper>
   );
 };
 
-const MapMarkerButton = ({ top, right }) => {
+const MapMarkerButton = () => {
   return (
-    <StButton boxShadow top={top} right={right}>
+    <StButton boxShadow>
       <FaMapMarkerAlt />
     </StButton>
   );
 };
 
-const MapCloseButton = ({ top, left }) => {
+const MapCloseButton = () => {
   return (
-    <StButton boxShadow top={top} left={left}>
+    <StButton
+      boxShadow
+      top="10rem"
+      left="2rem"
+      position="sticky"
+      margin="0 2rem 81px"
+    >
       <GrClose />
     </StButton>
   );
@@ -44,12 +50,6 @@ const StBtnWrapper = styled.div`
   background: ${theme.white};
   border-radius: 8px;
   box-shadow: 1px 1px 3px ${theme.shadow};
-  position: fixed;
-  z-index: 50;
-  ${({ top, right }) => css`
-    top: ${top};
-    right: ${right};
-  `}
 
   .plusBtn {
     border-bottom-right-radius: 0;
@@ -75,19 +75,15 @@ const StButton = styled(Button)`
   width: 40px;
   height: 40px;
   font-size: 1.7rem;
-  position: fixed;
-  z-index: 50;
+  z-index: 10;
 
-  &.plusBtn,
-  &.minusBtn {
-    position: relative;
-  }
-
-  ${({ boxShadow, top, right, left }) =>
+  ${({ boxShadow, top, right, left, position, margin }) =>
     css`
       top: ${top};
       right: ${right};
       left: ${left};
+      position: ${position};
+      margin: ${margin};
       ${boxShadow && `box-shadow: 1px 1px 3px ${theme.shadow}`};
     `}
 `;
