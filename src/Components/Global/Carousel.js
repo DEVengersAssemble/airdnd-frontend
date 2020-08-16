@@ -1,11 +1,14 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import theme from '../../style/theme';
+import { PrevButton, NextButton } from './SlideButton';
 
 const Carousel = ({ size, ...rest }) => {
   return (
     <StWrapper size={size} {...rest}>
       <StBadge>슈퍼호스트</StBadge>
+      <StPrevBtn styleType="transparent" />
+      <StNextBtn styleType="transparent" />
     </StWrapper>
   );
 };
@@ -21,7 +24,7 @@ const sizes = {
   },
   small: {
     width: '148px',
-    height: '97px',
+    height: '105px',
   },
 };
 
@@ -54,4 +57,17 @@ const StBadge = styled.div`
   top: 1rem;
   left: 1rem;
 `;
+
+const StPrevBtn = styled(PrevButton)`
+  position: absolute;
+  top: calc(50% - 16px);
+  left: 1rem;
+`;
+
+const StNextBtn = styled(NextButton)`
+  position: absolute;
+  top: calc(50% - 16px);
+  right: 1rem;
+`;
+
 export default Carousel;

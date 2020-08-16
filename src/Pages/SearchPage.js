@@ -4,6 +4,7 @@ import SearchResult from '../Components/Search/SearchResult';
 import SearchMap from '../Components/Search/SearchMap';
 import FilterModal from '../Components/Search/FilterModal';
 import Footer from '../Components/Main/Footer';
+import Map from '../Components/Global/Map';
 
 const SearchPage = () => {
   return (
@@ -11,7 +12,7 @@ const SearchPage = () => {
       <StNav></StNav>
       <StContent>
         <SearchResult />
-        <SearchMap>blabla</SearchMap>
+        <SearchMap />
       </StContent>
       <Footer />
       <FilterModal />
@@ -26,7 +27,10 @@ const StWrapper = styled.main`
   margin-top: 8rem;
 `;
 
-const StContent = styled.div``;
+const StContent = styled.div`
+  display: flex;
+  /* position: relative; */
+`;
 
 const StNav = styled.div`
   position: fixed;

@@ -9,14 +9,16 @@ const SearchMap = ({ children }) => {
       {/* <MapZoomButton />
       <MapMarkerButton />
       <MapCloseButton /> */}
-      <Map isMarkerShown />
+      <Map />
     </StWrapper>
   );
 };
 
 const StWrapper = styled.div`
   flex-grow: 100;
-  /* position: fixed; */
+  position: relative;
+  /* top: 0;
+  right: 0; */
 `;
 
 export default SearchMap;

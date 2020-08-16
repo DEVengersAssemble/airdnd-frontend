@@ -83,7 +83,7 @@ const StLine = styled.hr`
 
 const Heart = styled(CkHeart)`
   position: absolute;
-  top: 1rem;
+  top: -1.2rem;
   right: -1.2rem;
 `;
 
