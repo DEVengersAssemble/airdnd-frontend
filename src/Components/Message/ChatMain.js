@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-// import theme from '../../style/theme';
+import { darken } from 'polished';
+import theme from '../../style/theme';
 import ChatListItem from '../Message/ChatListItem';
 
 const ChatMain = () => {
@@ -22,20 +23,40 @@ const ChatMain = () => {
         <ChatListItem />
         <ChatListItem />
         <ChatListItem />
+        <ChatListItem />
+        <ChatListItem />
+        <ChatListItem />
+        <ChatListItem />
+        <ChatListItem />
+        <ChatListItem />
+        <ChatListItem />
+        <ChatListItem />
+        <ChatListItem />
+        <ChatListItem />
+        <ChatListItem />
       </ChatLists>
     </ChatMainWrapper>
   );
 };
 
 const ChatMainWrapper = styled.div`
+  position: absolute;
+  top: 15.5rem;
+  left: 0rem;
+  width: 37.5rem;
+  min-width: 37.5rem;
+  height: 100vh;
+  max-height: calc(100vh - 15.5rem);
+  border-right: 1px solid ${darken(0.1, theme.lightGray)};
   padding: 1.2rem 1.4rem;
+  overflow: scroll;
 `;
 
 const ChatLists = styled.ul`
   display: flex;
   flex-direction: column;
   & > li + li {
-    margin-top: 2rem;
+    margin-top: 0.5rem;
   }
 `;
 

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { darken } from 'polished';
 import theme from '../../style/theme';
 import Button from '../Global/Button';
 import { FaBox } from 'react-icons/fa';
@@ -12,22 +11,24 @@ import { FaBox } from 'react-icons/fa';
  * Button type: 세부사항 숨기기, 자세히 알아보기
  * Tooltip 만들기
  */
-const MessageHeader = () => {
+
+const MsgSection = () => {
   const [clicked, setClicked] = useState(false);
   const onClick = () => {
     setClicked(!clicked);
   };
+
   return (
-    <MessageHeaderDiv>
-      <MessageHeaderTitle>호스트닉네임</MessageHeaderTitle>
-      <MessageHeaderButtonWrapper>
+    <MsgSectionWrapper>
+      <MsgSectionTitle>호스트닉네임</MsgSectionTitle>
+      <MsgButtonWrapper>
         <Button
           btnType="circle"
           border="none"
           hover={{ backgroundColor: theme.lightGray }}
           style={{ width: '4rem', height: '4rem' }}
         >
-          <MessageStorageIcon />
+          <MsgStorageIcon />
         </Button>
         {clicked ? (
           <Button
@@ -52,28 +53,29 @@ const MessageHeader = () => {
             세부사항 숨기기
           </Button>
         )}
-      </MessageHeaderButtonWrapper>
-    </MessageHeaderDiv>
+      </MsgButtonWrapper>
+    </MsgSectionWrapper>
   );
 };
 
-const MessageHeaderDiv = styled.div`
+const MsgSectionWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid ${darken(0.1, theme.lightGray)};
+  width: 100%;
+  min-width: 37.5rem;
+  height: 7.5rem;
   padding-left: 2.5rem;
   padding-right: 2.5rem;
-  height: 7.5rem;
 `;
 
-const MessageHeaderTitle = styled.h2`
+const MsgSectionTitle = styled.h2`
   color: ${theme.black};
   font-size: 1.8rem;
   font-weight: bold;
 `;
 
-const MessageHeaderButtonWrapper = styled.div`
+const MsgButtonWrapper = styled.div`
   display: flex;
   align-items: center;
   & > Button + Button {
@@ -81,8 +83,8 @@ const MessageHeaderButtonWrapper = styled.div`
   }
 `;
 
-const MessageStorageIcon = styled(FaBox)`
+const MsgStorageIcon = styled(FaBox)`
   font-size: 1.45rem;
 `;
 
-export default MessageHeader;
+export default MsgSection;

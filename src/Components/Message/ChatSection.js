@@ -15,10 +15,10 @@ import { MdFilterList } from 'react-icons/md';
  * Popup 컴포넌트 삽입하기
  */
 
-const ChatHeader = () => {
+const ChatSection = () => {
   return (
-    <ChatHeaderDiv>
-      <ChatHeaderTitle>메시지 주고받기</ChatHeaderTitle>
+    <ChatSectionWrapper>
+      <ChatSectionTitle>메시지 주고받기</ChatSectionTitle>
       <Button
         btnType="circle"
         border="none"
@@ -27,21 +27,23 @@ const ChatHeader = () => {
       >
         <ChatMenubuttonIcon />
       </Button>
-    </ChatHeaderDiv>
+    </ChatSectionWrapper>
   );
 };
 
-const ChatHeaderDiv = styled.div`
+const ChatSectionWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid ${darken(0.1, theme.lightGray)};
+  border-right: 1px solid ${darken(0.1, theme.lightGray)};
+  width: 37.5rem;
+  min-width: 37.5rem;
+  height: 7.5rem;
   padding-left: 2.5rem;
   padding-right: 2.5rem;
-  height: 7.5rem;
 `;
 
-const ChatHeaderTitle = styled.h2`
+const ChatSectionTitle = styled.h2`
   color: ${theme.black};
   font-size: 1.8rem;
   font-weight: bold;
@@ -50,4 +52,5 @@ const ChatHeaderTitle = styled.h2`
 const ChatMenubuttonIcon = styled(MdFilterList)`
   font-size: 2rem;
 `;
-export default ChatHeader;
+
+export default ChatSection;

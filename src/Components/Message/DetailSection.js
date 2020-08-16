@@ -11,7 +11,7 @@ import { MdClear } from 'react-icons/md';
  * focus,transition,type,...rest
  */
 
-const DetailHeader = () => {
+const DetailSection = () => {
   return (
     <DetailHeaderDiv>
       <DetailHeaderTitle>세부 내용</DetailHeaderTitle>
@@ -31,10 +31,12 @@ const DetailHeaderDiv = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid ${darken(0.1, theme.lightGray)};
+  border-left: 1px solid ${darken(0.1, theme.lightGray)};
+  width: 37.5rem;
+  min-width: 37.5rem;
+  height: 7.5rem;
   padding-left: 2.5rem;
   padding-right: 2.5rem;
-  height: 7.5rem;
 `;
 
 const DetailHeaderTitle = styled.h2`
@@ -47,4 +49,4 @@ const DetailClearIcon = styled(MdClear)`
   font-size: 2.5rem;
 `;
 
-export default DetailHeader;
+export default DetailSection;
