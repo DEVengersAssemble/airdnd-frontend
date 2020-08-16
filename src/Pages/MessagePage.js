@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Airbnb } from '@styled-icons/boxicons-logos/Airbnb';
 import theme from '../style/theme';
 import ChatHeader from '../Components/Message/ChatHeader';
 import ChatMain from '../Components/Message/ChatMain';
@@ -11,7 +12,9 @@ import DetailContents from '../Components/Message/DetailContents';
 const MessagePage = () => {
   return (
     <MessagePageWrapper>
-      <Header>Temp Header</Header>
+      <Header>
+        <Airbnb size="4.5rem" />
+      </Header>
       <MessageMainWrapper>
         <ChattingWrapper>
           <ChatHeader />
@@ -33,6 +36,9 @@ const MessagePage = () => {
 const MessagePageWrapper = styled.div``;
 
 const Header = styled.div`
+  display: flex;
+  align-items: center;
+  color: ${theme.main};
   border-bottom: 1px solid ${theme.gray};
   box-shadow: 1px 0 0.5rem ${theme.shadow};
   height: 8rem;
