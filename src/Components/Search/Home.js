@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import theme from '../../style/theme';
 import Carousel from '../Global/Carousel';
 import Rating from '../Global/Rating';
 import { CkHeart } from '../Global/Heart';
@@ -36,7 +35,7 @@ const Home = () => {
 
 const StWrapper = styled.li`
   list-style: none;
-  border-top: 1px solid ${theme.shadow};
+  border-top: 1px solid ${({ theme }) => theme.color.shadow};
   padding: 2rem 0;
 `;
 
@@ -61,13 +60,13 @@ const StDetailWrapper = styled.div`
 `;
 
 const StDetail = styled.span`
-  color: ${theme.darkGray};
+  color: ${({ theme }) => theme.color.darkGray};
   font-size: 1.4rem;
   padding: 2px 0;
 `;
 
 const StTitle = styled.span`
-  color: ${theme.black};
+  color: ${({ theme }) => theme.color.black};
   font-size: 1.8rem;
   padding: 8px 0;
 `;
@@ -77,7 +76,7 @@ const StLine = styled.hr`
   margin-left: 0;
   text-align: left;
   border-width: 0;
-  border-bottom: 1px solid ${theme.gray};
+  border-bottom: 1px solid ${({ theme }) => theme.color.gray};
   margin-bottom: 9px;
 `;
 
@@ -104,9 +103,9 @@ const StLargePrice = styled.span`
 const StSmallPrice = styled.span`
   text-decoration: underline;
   font-size: 1.4rem;
-  color: ${theme.darkGray};
+  color: ${({ theme }) => theme.color.darkGray};
   &:hover {
-    color: ${theme.black};
+    color: ${({ theme }) => theme.color.black};
   }
 `;
 

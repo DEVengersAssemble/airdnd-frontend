@@ -1,6 +1,5 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import theme from '../../style/theme';
 import { PrevButton, NextButton } from './SlideButton';
 
 const Carousel = ({ size, ...rest }) => {
@@ -37,7 +36,7 @@ const sizeStyles = css`
 
 const StWrapper = styled.div`
   position: relative;
-  border: 1px solid ${theme.lightGray};
+  border: 1px solid ${({ theme }) => theme.color.lightGray};
   border-radius: 8px;
   background: pink;
 
@@ -49,7 +48,7 @@ const StBadge = styled.div`
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  background: ${theme.lightGray};
+  background: ${({ theme }) => theme.color.lightGray};
   border-radius: 3px;
   padding: 0.2rem 0.8rem;
   font-size: 1.3rem;

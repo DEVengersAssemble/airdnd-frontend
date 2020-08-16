@@ -4,7 +4,6 @@ import { StBtn } from '../Global/Button';
 import { FiPlus, FiMinus } from 'react-icons/fi';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import { GrClose } from 'react-icons/gr';
-import theme from '../../style/theme';
 
 const MapZoomButton = () => {
   return (
@@ -41,9 +40,9 @@ const StBtnWrapper = styled.div`
   width: fit-content;
   display: flex;
   flex-direction: column;
-  background: ${theme.white};
+  background: ${({ theme }) => theme.color.white};
   border-radius: 8px;
-  box-shadow: 1px 1px 3px ${theme.shadow};
+  box-shadow: 1px 1px 3px ${({ theme }) => theme.color.shadow};
 
   .plusBtn {
     border-bottom-right-radius: 0;
@@ -60,7 +59,7 @@ const StLine = styled.hr`
   border-width: 0;
   margin: 0 auto;
   width: 30px;
-  border-bottom: 1px solid ${theme.shadow};
+  border-bottom: 1px solid ${({ theme }) => theme.color.shadow};
 `;
 
 const StButton = styled(StBtn)`
@@ -74,7 +73,7 @@ const StButton = styled(StBtn)`
   ${({ boxShadow }) =>
     boxShadow &&
     css`
-      box-shadow: 1px 1px 3px ${theme.shadow};
+      box-shadow: 1px 1px 3px ${({ theme }) => theme.color.shadow};
     `}
 `;
 

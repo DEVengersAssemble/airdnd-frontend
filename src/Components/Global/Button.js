@@ -1,6 +1,5 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import theme from '../../style/theme';
 
 // btnType: color(배경색 있는 버튼), underlined(밑줄 있는 버튼), circle(원형 버튼), oval(타원형 버튼)
 const Button = ({
@@ -45,11 +44,11 @@ const hovers = btnType => {
     case undefined:
     case 'underlined':
       return css`
-        background: ${theme.lightGray};
+        background: ${({ theme }) => theme.color.lightGray};
       `;
     case 'oval':
       return css`
-        border: 1px solid ${theme.black};
+        border: 1px solid ${({ theme }) => theme.color.black};
       `;
     case 'circle':
       return css`
@@ -69,7 +68,7 @@ const borders = btnType => {
       `;
     case 'oval':
       return css`
-        border: 1px solid ${theme.gray};
+        border: 1px solid ${({ theme }) => theme.color.gray};
         border-radius: 30px;
       `;
     case 'circle':
@@ -78,7 +77,7 @@ const borders = btnType => {
       `;
     default:
       return css`
-        border: 1px solid ${theme.black};
+        border: 1px solid ${({ theme }) => theme.color.black};
       `;
   }
 };
@@ -108,11 +107,11 @@ const fontStyles = css`
 `;
 
 const colorStyles = css`
-  ${({ color }) =>
+  ${({ color, theme }) =>
     color &&
     css`
-      background: ${theme[color] || 'transparent'};
-      color: ${theme.white};
+      background: ${theme.color[color] || 'transparent'};
+      color: ${theme.color.white};
       border: none;
     `}
 `;
@@ -126,12 +125,12 @@ const sizeStyles = css`
 `;
 
 const focusStyles = css`
-  ${({ focus }) =>
+  ${({ focus, theme }) =>
     focus &&
     css`
       &:focus {
-        box-shadow: 0px 0px 0px 2px ${theme.white},
-          0px 0px 0px 4px ${theme.black};
+        box-shadow: 0px 0px 0px 2px ${theme.color.white},
+          0px 0px 0px 4px ${theme.color.black};
       }
     `}
 `;

@@ -1,5 +1,4 @@
 import React from 'react';
-import theme from '../../style/theme';
 import styled, { css } from 'styled-components';
 import Modal from '../Global/Modal';
 import ModalFooter from '../Global/ModalFooter';
@@ -157,7 +156,7 @@ const StFilterWrapper = styled.li`
   justify-content: space-between;
   flex-direction: ${({ direction }) => direction || 'column'};
   padding: 4rem 0;
-  border-bottom: 1px solid ${theme.shadow};
+  border-bottom: 1px solid ${({ theme }) => theme.color.shadow};
 `;
 
 const StTitle = styled.h3`
@@ -192,11 +191,11 @@ const StLargeSpan = styled.span`
 const StLink = styled.a`
   font-size: 1.4rem;
   text-decoration: underline;
-  color: ${theme.darkGray};
+  color: ${({ theme }) => theme.color.darkGray};
   margin-top: 0.5rem;
 
   &:hover {
-    color: ${theme.black};
+    color: ${({ theme }) => theme.color.black};
   }
 `;
 
