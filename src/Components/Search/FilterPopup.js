@@ -5,6 +5,7 @@ import Button from '../Global/Button';
 import Toggle from '../Global/Toggle';
 import ModalFooter from '../Global/ModalFooter';
 import Checkbox from '../Global/Checkbox';
+import { NewInput } from '../Global/Input';
 
 const RefundPopup = popupState => {
   return (
@@ -65,9 +66,29 @@ const RoomTypePopup = popupState => {
 
 const PricePopup = popupState => {
   return (
-    <FilterPopup className="price" left="25rem" popupState={true}>
+    <FilterPopup className="price" left="25rem" popupState={false}>
       <StContentWrapper className="price">
         <StLargeSpan>평균 1박 요금은 ₩78,902입니다</StLargeSpan>
+        <StRangeWrapper>
+          <StRange type="range" />
+        </StRangeWrapper>
+        <StInputWrapper>
+          <NewInput
+            title="최저 요금"
+            value={'12,000'}
+            short
+            pay="₩"
+            // onChange={onChangeInput}
+          />
+          <span>―</span>
+          <NewInput
+            title="최고 요금"
+            value={'+1,000,000'}
+            short
+            pay="₩"
+            // onChange={onChangeInput}
+          />
+        </StInputWrapper>
       </StContentWrapper>
     </FilterPopup>
   );
@@ -102,6 +123,7 @@ const FilterPopup = ({ children, popupState, left, className }) => {
             color="black"
             padding="1rem 1.5rem"
             fontSize="1.4rem"
+            hover="background: #000"
             transition
           >
             저장
@@ -157,7 +179,7 @@ const StContentWrapper = styled.div`
   }
 
   &.price {
-    height: 300px;
+    height: 330px;
   }
 `;
 
@@ -185,6 +207,31 @@ const StCheckboxList = styled.ul`
 
 const StCheckboxWrapper = styled.li`
   margin-bottom: 1rem;
+`;
+
+const StInputWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  & > * {
+    margin: 0 1rem;
+  }
+
+  & > span {
+    margin: 0 0 0 0.5rem;
+  }
+`;
+
+const StRangeWrapper = styled.div`
+  background: cornflowerblue;
+  height: 10rem;
+  margin: 2rem 0;
+`;
+
+const StRange = styled.input`
+  width: 100%;
 `;
 
 const StFooter = styled(ModalFooter)`
