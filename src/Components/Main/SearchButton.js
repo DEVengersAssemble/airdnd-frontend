@@ -16,7 +16,7 @@ const StSearchButton = styled(Button)`
     outline: none;
   }
   color: white;
-  background: ${({ theme }) => theme.main};
+  background: ${({ theme }) => theme.color.main};
 `;
 
 const StSearchButtonText = styled.span`

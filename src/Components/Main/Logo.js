@@ -13,10 +13,10 @@ const StLogoLink = styled.a`
   ${({ isScrollTop }) =>
     isScrollTop
       ? css`
-          color: white;
+          color: ${({ theme }) => theme.color.white};
         `
       : css`
-          color: ${({ theme }) => theme.main};
+          color: ${({ theme }) => theme.color.main};
         `}
 `;
 
@@ -26,10 +26,10 @@ const StLogoIcon = styled.svg`
   ${({ isScrollTop }) =>
     isScrollTop
       ? css`
-          fill: ${({ theme }) => theme.white};
+          fill: ${({ theme }) => theme.color.white};
         `
       : css`
-          fill: ${({ theme }) => theme.main};
+          fill: ${({ theme }) => theme.color.main};
         `};
   margin-right: 5px;
 `;
@@ -38,10 +38,10 @@ const StLogoTitle = styled.h1`
   ${({ isScrollTop }) =>
     isScrollTop
       ? css`
-          color: white;
+          color: ${({ theme }) => theme.color.white};
         `
       : css`
-          color: ${({ theme }) => theme.main};
+          color: ${({ theme }) => theme.color.main};
         `};
   font-size: 25px;
   font-weight: bold;

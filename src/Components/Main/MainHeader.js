@@ -19,7 +19,7 @@ const StMainHeader = styled.header`
   height: 80px;
   background: ${({ isScrollTop }) => (isScrollTop ? 'transparent' : 'white')};
   padding: 20px 80px 15px 80px;
-  @media ${({ theme }) => theme.iPad} {
+  @media ${({ theme }) => theme.size.iPad} {
     padding: 20px 40px 15px 40px;
   }
 `;
@@ -86,10 +86,10 @@ const StOnScrollSearchButton = styled(Button)`
   top: 14px;
   left: calc(50% - 150px);
   padding: 10px 10px 10px 20px;
-  color: ${({ theme }) => theme.black};
-  border: 1px solid lightgray;
+  color: ${({ theme }) => theme.color.black};
+  border: 1px solid ${({ theme }) => theme.color.lightGray};
   &:hover {
-    border: 1px solid lightgray;
+    border: 1px solid ${({ theme }) => theme.color.lightGray};
     transition: box-shadow 0.2s ease;
     box-shadow: 2px 2px 4px 0px rgba(168, 168, 168, 0.5);
   }
@@ -99,8 +99,8 @@ const StOnScrollSearchButtonIconWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: ${({ theme }) => theme.main};
-  color: white;
+  background: ${({ theme }) => theme.color.main};
+  color: ${({ theme }) => theme.color.white};
   width: 30px;
   height: 30px;
   border-radius: 50%;

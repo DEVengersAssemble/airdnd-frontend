@@ -11,7 +11,7 @@ const StBackgroundWrapper = styled.div`
 `;
 
 const StDomesticTripSection = styled.section`
-  color: ${({ theme }) => theme.white};
+  color: ${({ theme }) => theme.color.white};
 `;
 
 const StDomesticTripHeader = styled.h2`

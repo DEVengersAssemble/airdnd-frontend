@@ -11,17 +11,17 @@ const StToggleButton = styled.button`
   height: 32px;
   border-radius: 28px;
   border: none;
-  background: ${({ theme }) => theme.gray};
+  background: ${({ theme }) => theme.color.gray};
   cursor: pointer;
   outline: none;
   ${({ checked }) =>
     checked &&
     css`
-      background: ${({ theme }) => theme.black};
+      background: ${({ theme }) => theme.color.black};
     `}
 
   &:hover {
-    background: ${({ theme }) => theme.lightGray};
+    background: ${({ theme }) => theme.color.lightGray};
   }
 
   &:focus {
@@ -51,7 +51,7 @@ const StToggleCircle = styled.span`
     checked &&
     css`
       transform: translate3d(16px, 0px, 0px);
-      color: rgb(34, 34, 34);
+      color: $({(theme) => theme.color.black});
     `};
 `;
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import Button from '../Global/Button';
 import { FaBars } from 'react-icons/fa';
 
@@ -8,7 +8,7 @@ const StMyPageButton = styled(Button)`
   font-size: 16px;
   &:hover {
     border: ${({ isScrollTop }) =>
-      isScrollTop || `1px solid ${({ theme }) => theme.lightGray}`};
+      isScrollTop || `1px solid ${({ theme }) => theme.color.lightGray}`};
     box-shadow: ${({ isScrollTop }) =>
       isScrollTop || '0px 2px 4px rgba(0, 0, 0, 0.18)'};
   }
@@ -17,13 +17,13 @@ const StMyPageButton = styled(Button)`
   }
 
   border: ${({ isScrollTop }) =>
-    isScrollTop || `1px solid ${({ theme }) => theme.lightGray}`};
+    isScrollTop || `1px solid ${({ theme }) => theme.color.lightGray}`};
 `;
 
 const StProfileImg = styled.svg`
   width: 32px;
   height: 32px;
-  fill: ${({ theme }) => theme.darkGray};
+  fill: ${({ theme }) => theme.color.darkGray};
   margin-left: 8px;
 `;
 
