@@ -17,7 +17,7 @@ const MainHeaderContainer = () => {
 
   const handleClick = e => {
     e.preventDefault();
-    setIsScrollTop(prevIsScrollTop => !prevIsScrollTop);
+    window.scrollTo({ top: 0 });
   };
   return (
     <MainHeader
