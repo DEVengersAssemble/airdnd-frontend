@@ -45,7 +45,9 @@ const HostInfo = () => {
       <StSafetyWrapper>
         <span>응답률: 100%</span>
         <span>응답시간: 몇 시간 이내</span>
-        <Button padding="13px 23px">호스트에게 연락하기</Button>
+        <Button padding="13px 23px" transition>
+          호스트에게 연락하기
+        </Button>
         <StWarnWrapper>
           <svg
             viewBox="0 0 24 24"

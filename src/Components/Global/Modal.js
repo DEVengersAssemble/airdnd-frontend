@@ -177,7 +177,7 @@ const area = css`
 const StModalHeader = styled.header`
   ${area};
   border-bottom: 1px solid #ebebeb;
-  font-weight: 800;
+  font-weight: 600;
 `;
 
 export default Modal;
