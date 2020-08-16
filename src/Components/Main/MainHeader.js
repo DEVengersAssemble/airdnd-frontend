@@ -26,7 +26,7 @@ const StMainHeader = styled.header`
 
 const slideUp = keyframes`
   from {
-    transform: scale(0.4, 0.7) translateY(-80px);
+    transform: scale(0.3, 0.75) translateY(-80px);
   }
   to {
     transform: scale(1, 1) translateY(0px);
@@ -39,7 +39,7 @@ const slideDown = keyframes`
     opacity: 0.5;
   }
   to {
-    transform: scale(0.4, 0.7) translateY(-80px);
+    transform: scale(0.3, 0.75) translateY(-80px);
     opacity: 0;
     visibility: hidden;
   }
@@ -53,7 +53,7 @@ const StNavSearchWrapper = styled.div`
   width: 850px;
   display: flex;
   flex-direction: column;
-  animation-duration: 0.15s;
+  animation-duration: 0.2s;
   animation-timing-function: ease-out;
   ${({ isScrollTop }) =>
     isScrollTop
@@ -113,11 +113,10 @@ const StOnScrollSearchButtonIconWrapper = styled.div`
   margin-left: 160px;
 `;
 
-const MainHeader = ({ isScrollTop, handleClick }) => {
+const MainHeader = ({ isScrollTop, handleLogoClick, handleSearchBtnClick }) => {
   return (
     <StMainHeader isScrollTop={isScrollTop}>
-      <Logo isScrollTop={isScrollTop} handleClick={handleClick}></Logo>
-
+      <Logo isScrollTop={isScrollTop} handleLogoClick={handleLogoClick}></Logo>
       <StNavSearchWrapper isScrollTop={isScrollTop}>
         <Navigation></Navigation>
         <SearchForm></SearchForm>
@@ -126,6 +125,7 @@ const MainHeader = ({ isScrollTop, handleClick }) => {
         btnType="oval"
         fontSize="14px"
         isScrollTop={isScrollTop}
+        onClick={handleSearchBtnClick}
       >
         검색 시작하기
         <StOnScrollSearchButtonIconWrapper>
