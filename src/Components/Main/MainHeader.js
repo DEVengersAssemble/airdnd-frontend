@@ -2,9 +2,10 @@ import React from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import Logo from './Logo';
 import Navigation from './Navigation';
-import SettingButton from './SettingButton';
+import SettingContainer from '../../Containers/Main/SettingContainer';
 import MyPageButton from './MyPageButton';
 import SearchForm from './SearchForm';
+import SettingPopup from './SettingPopup';
 import Button from '../Global/Button';
 import { FiSearch } from 'react-icons/fi';
 
@@ -82,8 +83,9 @@ const StNavSearchWrapper = styled.div`
   }
 `;
 
-const StSettingButtonWrapper = styled.div`
+const StButtonGroupWrapper = styled.div`
   height: 40px;
+  display: flex;
 `;
 
 const StOnScrollSearchButton = styled(Button)`
@@ -144,10 +146,11 @@ const MainHeader = ({
           <FiSearch />
         </StOnScrollSearchButtonIconWrapper>
       </StOnScrollSearchButton>
-      <StSettingButtonWrapper>
-        <SettingButton isScrollTop={isScrollTop}></SettingButton>
+      <StButtonGroupWrapper>
+        <SettingContainer isScrollTop={isScrollTop} />
         <MyPageButton isScrollTop={isScrollTop}></MyPageButton>
-      </StSettingButtonWrapper>
+        <SettingPopup></SettingPopup>
+      </StButtonGroupWrapper>
     </StMainHeader>
   );
 };

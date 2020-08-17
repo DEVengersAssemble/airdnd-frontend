@@ -25,9 +25,13 @@ const StSettingButton = styled(Button)`
   }
 `;
 
-const SettingButton = ({ isScrollTop }) => {
+const SettingButton = ({ isScrollTop, togglePopup }) => {
   return (
-    <StSettingButton btnType="oval" isScrollTop={isScrollTop}>
+    <StSettingButton
+      btnType="oval"
+      isScrollTop={isScrollTop}
+      onClick={togglePopup}
+    >
       <FiGlobe style={{ marginRight: '2px' }} />
       <FiChevronDown />
     </StSettingButton>

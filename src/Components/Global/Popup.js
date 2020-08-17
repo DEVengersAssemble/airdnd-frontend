@@ -12,6 +12,7 @@ const Popup = ({
   popupState,
   top,
   left,
+  right,
   padding,
   radius,
   ...rest
@@ -23,6 +24,7 @@ const Popup = ({
       popupState={popupState}
       top={top}
       left={left}
+      right={right}
       padding={padding}
       radius={radius}
       {...rest}
@@ -37,7 +39,8 @@ const StPopupBox = styled.div`
   min-width: 100px;
   min-height: 100px;
   top: ${props => props.top || '5.4rem'};
-  left: ${props => props.left || '0'};
+  left: ${props => props.left};
+  right: ${props => props.right};
   padding: ${props => props.padding || '2rem'};
   overflow-y: auto;
   overflow-x: hidden;
