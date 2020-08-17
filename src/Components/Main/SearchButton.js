@@ -17,11 +17,18 @@ const StSearchButton = styled(Button)`
   }
   color: white;
   background: ${({ theme }) => theme.color.main};
+
+  @media ${({ theme }) => theme.size.iPad} {
+    padding: 16px;
+  }
 `;
 
 const StSearchButtonText = styled.span`
   font-size: 16px;
   margin: 4px 0 0 6px;
+  @media ${({ theme }) => theme.size.iPad} {
+    display: none;
+  }
 `;
 
 const SearchButton = () => {
