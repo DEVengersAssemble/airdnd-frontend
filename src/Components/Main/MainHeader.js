@@ -65,7 +65,7 @@ const StNavSearchWrapper = styled.div`
     left: calc(50vw - 40%);
   }
 
-  @media ${({ theme }) => theme.iPad} {
+  @media ${({ theme }) => theme.size.iPad} {
     width: 80%;
     top: 70px;
     left: calc(50vw - 40%);
