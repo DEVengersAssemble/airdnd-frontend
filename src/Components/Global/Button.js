@@ -50,10 +50,6 @@ const hovers = btnType => {
       return css`
         border: 1px solid ${({ theme }) => theme.color.black};
       `;
-    case 'circle':
-      return css`
-        border-radius: 50%;
-      `;
     default:
       return null;
   }
@@ -74,6 +70,7 @@ const borders = btnType => {
     case 'circle':
       return css`
         border-radius: 50%;
+        border: 1px solid ${({ theme }) => theme.color.gray};
       `;
     default:
       return css`

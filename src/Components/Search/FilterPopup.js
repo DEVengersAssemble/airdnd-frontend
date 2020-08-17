@@ -6,6 +6,7 @@ import Toggle from '../Global/Toggle';
 import ModalFooter from '../Global/ModalFooter';
 import Checkbox from '../Global/Checkbox';
 import { NewInput } from '../Global/Input';
+import { GiHamburgerMenu } from 'react-icons/gi';
 
 const RefundPopup = popupState => {
   return (
@@ -66,11 +67,26 @@ const RoomTypePopup = popupState => {
 
 const PricePopup = popupState => {
   return (
-    <FilterPopup className="price" left="25rem" popupState={false}>
+    <FilterPopup className="price" left="25rem" popupState={true}>
       <StContentWrapper className="price">
         <StLargeSpan>평균 1박 요금은 ₩78,902입니다</StLargeSpan>
         <StRangeWrapper>
-          <StRange type="range" />
+          <StRangeBar>
+            <StButton btnType="circle" left="0">
+              <StIcon />
+            </StButton>
+            <StButton btnType="circle" right="0">
+              <StIcon />
+            </StButton>
+          </StRangeBar>
+          <StGraph>
+            <StStick />
+            <StStick />
+            <StStick />
+            <StStick />
+            <StStick />
+            <StStick />
+          </StGraph>
         </StRangeWrapper>
         <StInputWrapper>
           <NewInput
@@ -225,13 +241,43 @@ const StInputWrapper = styled.div`
 `;
 
 const StRangeWrapper = styled.div`
-  background: cornflowerblue;
   height: 10rem;
   margin: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  flex-flow: column-reverse;
 `;
 
-const StRange = styled.input`
+const StGraph = styled.ul`
+  display: flex;
+`;
+
+const StStick = styled.li`
+  width: 5px;
+  height: 3rem;
+  margin: 0 1px;
+  border-radius: 1px;
+  background: ${({ theme }) => theme.color.gray};
+`;
+
+const StRangeBar = styled.div`
   width: 100%;
+  height: 3px;
+  background: ${({ theme }) => theme.color.gray};
+  position: relative;
+  display: flex;
+  align-items: center;
+`;
+
+const StButton = styled(Button)`
+  position: absolute;
+  right: ${({ right }) => right};
+  left: ${({ left }) => left};
+`;
+
+const StIcon = styled(GiHamburgerMenu)`
+  color: ${({ theme }) => theme.color.gray};
+  transform: rotate(90deg);
 `;
 
 const StFooter = styled(ModalFooter)`

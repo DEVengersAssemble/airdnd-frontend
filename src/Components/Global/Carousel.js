@@ -77,6 +77,7 @@ const StBadge = styled.div`
   font-weight: 600;
   top: 1rem;
   left: 1rem;
+  z-index: 3;
 `;
 
 const StCircleWrapper = styled.div`
