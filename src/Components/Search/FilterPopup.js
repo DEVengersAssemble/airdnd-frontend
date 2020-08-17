@@ -220,7 +220,7 @@ const StInputWrapper = styled.div`
   }
 
   & > span {
-    margin: 0 0 0 0.5rem;
+    margin: 0;
   }
 `;
 

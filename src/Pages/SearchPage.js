@@ -4,7 +4,6 @@ import SearchResult from '../Components/Search/SearchResult';
 import SearchMap from '../Components/Search/SearchMap';
 import FilterModal from '../Components/Search/FilterModal';
 import Footer from '../Components/Main/Footer';
-import Map from '../Components/Global/Map';
 
 const SearchPage = () => {
   return (

@@ -1,13 +1,27 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { PrevButton, NextButton } from './SlideButton';
 
 const Carousel = ({ size, ...rest }) => {
   return (
     <StWrapper size={size} {...rest}>
       <StBadge>슈퍼호스트</StBadge>
-      <StPrevBtn styleType="transparent" />
-      <StNextBtn styleType="transparent" />
+      <StImageList>
+        <StImageWrapper size={size}>
+          <StImage src="https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large" />
+        </StImageWrapper>
+        <StImageWrapper size={size}>
+          <StImage src="https://a0.muscache.com/im/pictures/3276d8ad-d455-4c59-923c-3f6926301a93.jpg?aki_policy=large" />
+        </StImageWrapper>
+        <StImageWrapper size={size}>
+          <StImage src="https://a0.muscache.com/im/pictures/2013c2de-4727-4cd9-b9cd-77d85238d440.jpg?aki_policy=large" />
+        </StImageWrapper>
+        <StImageWrapper size={size}>
+          <StImage src="https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large" />
+        </StImageWrapper>
+        <StImageWrapper size={size}>
+          <StImage src="https://a0.muscache.com/im/pictures/3276d8ad-d455-4c59-923c-3f6926301a93.jpg?aki_policy=large" />
+        </StImageWrapper>
+      </StImageList>
       <StCircleWrapper>
         <StCircle color="lightGray" />
         <StCircle color="gray" />
@@ -46,6 +60,7 @@ const StWrapper = styled.div`
   border: 1px solid ${({ theme }) => theme.color.lightGray};
   border-radius: 8px;
   background: pink;
+  /* overflow: hidden; */
 
   ${sizeStyles};
 `;
@@ -64,18 +79,6 @@ const StBadge = styled.div`
   left: 1rem;
 `;
 
-const StPrevBtn = styled(PrevButton)`
-  position: absolute;
-  top: calc(50% - 16px);
-  left: 1rem;
-`;
-
-const StNextBtn = styled(NextButton)`
-  position: absolute;
-  top: calc(50% - 16px);
-  right: 1rem;
-`;
-
 const StCircleWrapper = styled.div`
   position: absolute;
   bottom: 0;
@@ -85,12 +88,27 @@ const StCircleWrapper = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
 const StCircle = styled.div`
   margin: 1rem 0.3rem;
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: ${({ color, theme }) => theme[color]};
+  background: ${({ color, theme }) => theme.color[color]};
+`;
+
+const StImageList = styled.ul`
+  display: flex;
+`;
+
+const StImageWrapper = styled.li`
+  ${sizeStyles};
+`;
+
+const StImage = styled.img`
+  object-fit: cover;
+  width: inherit;
+  height: inherit;
 `;
 
 export default Carousel;
