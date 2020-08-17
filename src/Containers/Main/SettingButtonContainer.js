@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import SettingButton from '../../Components/Main/SettingButton';
 import SettingPopup from '../../Components/Main/SettingPopup';
 
-const SettingContainer = ({ isScrollTop }) => {
+const SettingButtonContainer = ({ isScrollTop }) => {
   const [popupVisible, setPopupVisible] = useState(false);
 
   const closePopup = () => {
@@ -10,6 +10,7 @@ const SettingContainer = ({ isScrollTop }) => {
   };
 
   const togglePopup = () => {
+    console.log('=====toggle');
     setPopupVisible(prevState => !prevState);
   };
 
@@ -27,4 +28,4 @@ const SettingContainer = ({ isScrollTop }) => {
   );
 };
 
-export default SettingContainer;
+export default SettingButtonContainer;

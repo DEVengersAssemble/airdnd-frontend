@@ -2,10 +2,9 @@ import React from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import Logo from './Logo';
 import Navigation from './Navigation';
-import SettingContainer from '../../Containers/Main/SettingContainer';
-import MyPageButton from './MyPageButton';
+import SettingButtonContainer from '../../Containers/Main/SettingButtonContainer';
+import MyPageButtonContainer from '../../Containers/Main/MyPageButtonContainer';
 import SearchForm from './SearchForm';
-import SettingPopup from './SettingPopup';
 import Button from '../Global/Button';
 import { FiSearch } from 'react-icons/fi';
 
@@ -147,9 +146,8 @@ const MainHeader = ({
         </StOnScrollSearchButtonIconWrapper>
       </StOnScrollSearchButton>
       <StButtonGroupWrapper>
-        <SettingContainer isScrollTop={isScrollTop} />
-        <MyPageButton isScrollTop={isScrollTop}></MyPageButton>
-        <SettingPopup></SettingPopup>
+        <SettingButtonContainer isScrollTop={isScrollTop} />
+        <MyPageButtonContainer isScrollTop={isScrollTop} />
       </StButtonGroupWrapper>
     </StMainHeader>
   );
