@@ -14,6 +14,18 @@ const ChatMain = () => {
         <ChatListItem />
         <ChatListItem />
         <ChatListItem />
+        <ChatListItem />
+        <ChatListItem />
+        <ChatListItem />
+        <ChatListItem />
+        <ChatListItem />
+        <ChatListItem />
+        <ChatListItem />
+        <ChatListItem />
+        <ChatListItem />
+        <ChatListItem />
+        <ChatListItem />
+        <ChatListItem />
       </ChatLists>
     </ChatMainWrapper>
   );

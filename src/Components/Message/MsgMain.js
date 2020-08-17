@@ -21,6 +21,13 @@ const MsgMain = () => {
         <MsgItems>채팅내역</MsgItems>
         <MsgItems>채팅내역</MsgItems>
         <MsgItems>채팅내역</MsgItems>
+        <MsgItems>채팅내역</MsgItems>
+        <MsgItems>채팅내역</MsgItems>
+        <MsgItems>채팅내역</MsgItems>
+        <MsgItems>채팅내역</MsgItems>
+        <MsgItems>채팅내역</MsgItems>
+        <MsgItems>채팅내역</MsgItems>
+        <MsgItems>채팅내역</MsgItems>
       </MsgInbox>
       <MsgInputOuter>
         <MsgInputInner>
@@ -42,7 +49,7 @@ const MsgMain = () => {
 const MsgMainWrapper = styled.div`
   width: calc(100vw - 75rem);
   min-width: 37.5rem;
-  position: relative;
+  position: absolute;
   top: 15.5rem;
   left: 37.5rem;
 `;
@@ -60,6 +67,7 @@ const MsgItems = styled.div`
   width: 100%;
   max-width: 57rem;
   min-width: 37.5rem;
+  padding: 2.5rem;
 `;
 
 const MsgInputOuter = styled.div`
@@ -73,8 +81,9 @@ const MsgInputInner = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  max-width: 57rem;
+  max-width: 57.5rem;
   min-width: 37.5rem;
+  padding: 0rem 2.5rem;
   & > label {
     margin-left: 1rem;
   }

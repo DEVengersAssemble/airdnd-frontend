@@ -21,5 +21,6 @@ const MessageMainWrapper = () => {
 const MessageMainWrapperDiv = styled.div`
   display: flex;
   position: relative;
+  z-index: -1;
 `;
 export default MessageMainWrapper;
