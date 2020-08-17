@@ -2,7 +2,6 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { darken } from 'polished';
 import { MdCheckBox } from 'react-icons/md';
-import theme from '../../style/theme';
 
 const dragDisable = css`
   -webkit-touch-callout: none; /* iOS Safari */
@@ -14,11 +13,11 @@ const dragDisable = css`
 `;
 
 const hoverStyle = css`
-  border-color: ${theme.black};
-  ${({ map }) =>
+  border-color: ${({ theme }) => theme.color.black};
+  ${({ map, theme }) =>
     map &&
     css`
-      color: ${darken(0.4, theme.gray)};
+      color: ${darken(0.4, theme.color.gray)};
       font-weight: 600;
     `}
 `;
@@ -50,8 +49,8 @@ const StCheckBoxOutLine = styled.span`
   height: 2.5rem;
   border-radius: 4px;
   margin: 0.4rem;
-  border: 1px solid ${theme.gray};
-  ${({ map }) =>
+  border: 1px solid ${({ theme }) => theme.color.gray};
+  ${({ map, theme }) =>
     map &&
     css`
       display: inline-block;
@@ -59,7 +58,7 @@ const StCheckBoxOutLine = styled.span`
       height: 2.5rem;
       border-radius: 4px;
       margin: 0.4rem;
-      border: 1px solid ${theme.gray};
+      border: 1px solid ${theme.color.gray};
     `}
   &:hover {
     ${hoverStyle}
