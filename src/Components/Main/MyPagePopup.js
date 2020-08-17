@@ -48,8 +48,13 @@ const StMyPageOptionList = styled.ul`
         `}
 `;
 
-const StMyPageOptionLink = styled.a`
-  display: block;
+const StMyPageOptionButton = styled.button`
+  display: inline-flex;
+  justify-content: flex-start;
+  outline: none;
+  border: none;
+  font-weight: inherit;
+  width: 100%;
   padding: 1rem 0 1rem 2rem;
   &:hover {
     background: ${({ theme }) => theme.color.lightGray};
@@ -76,44 +81,44 @@ const MyPagePopup = ({ popupVisible, closePopup, isLoggedIn }) => {
           {!isLoggedIn && (
             <>
               <StMyPageOptionItem>
-                <StMyPageOptionLink>로그인</StMyPageOptionLink>
+                <StMyPageOptionButton>로그인</StMyPageOptionButton>
               </StMyPageOptionItem>
               <StMyPageOptionItem>
-                <StMyPageOptionLink>회원가입</StMyPageOptionLink>
+                <StMyPageOptionButton>회원가입</StMyPageOptionButton>
               </StMyPageOptionItem>
             </>
           )}
           {isLoggedIn && (
             <>
               <StMyPageOptionItem>
-                <StMyPageOptionLink>메시지</StMyPageOptionLink>
+                <StMyPageOptionButton>메시지</StMyPageOptionButton>
               </StMyPageOptionItem>
               <StMyPageOptionItem>
-                <StMyPageOptionLink>여행</StMyPageOptionLink>
+                <StMyPageOptionButton>여행</StMyPageOptionButton>
               </StMyPageOptionItem>
               <StMyPageOptionItem>
-                <StMyPageOptionLink>저장목록</StMyPageOptionLink>
+                <StMyPageOptionButton>저장목록</StMyPageOptionButton>
               </StMyPageOptionItem>
             </>
           )}
 
           <StMyPageOptionItem>
-            <StMyPageOptionLink>숙소 호스트 되기</StMyPageOptionLink>
+            <StMyPageOptionButton>숙소 호스트 되기</StMyPageOptionButton>
           </StMyPageOptionItem>
           <StMyPageOptionItem>
-            <StMyPageOptionLink>체험 호스팅하기</StMyPageOptionLink>
+            <StMyPageOptionButton>체험 호스팅하기</StMyPageOptionButton>
           </StMyPageOptionItem>
           {isLoggedIn && (
             <StMyPageOptionItem>
-              <StMyPageOptionLink>계정</StMyPageOptionLink>
+              <StMyPageOptionButton>계정</StMyPageOptionButton>
             </StMyPageOptionItem>
           )}
           <StMyPageOptionItem>
-            <StMyPageOptionLink>도움말</StMyPageOptionLink>
+            <StMyPageOptionButton>도움말</StMyPageOptionButton>
           </StMyPageOptionItem>
           {isLoggedIn && (
             <StMyPageOptionItem>
-              <StMyPageOptionLink>로그아웃</StMyPageOptionLink>
+              <StMyPageOptionButton>로그아웃</StMyPageOptionButton>
             </StMyPageOptionItem>
           )}
         </StMyPageOptionList>
