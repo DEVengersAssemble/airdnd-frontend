@@ -91,7 +91,7 @@ const BookmarkListModal = () => {
 const NewBookmarkModal = () => {
   return (
     <Modal
-      modalState={true}
+      modalState={false}
       width="520px"
       height="305px"
       title="목록 이름 작성하기"

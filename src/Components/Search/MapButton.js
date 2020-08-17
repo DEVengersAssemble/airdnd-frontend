@@ -4,6 +4,15 @@ import Button from '../Global/Button';
 import { FiPlus, FiMinus } from 'react-icons/fi';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import { GrClose } from 'react-icons/gr';
+import Checkbox from '../Global/Checkbox';
+
+const MapCheckbox = () => {
+  return (
+    <StCheckbox map value boxShadow checked={true}>
+      지도를 움직이며 검색하기
+    </StCheckbox>
+  );
+};
 
 const MapZoomButton = () => {
   return (
@@ -87,4 +96,16 @@ const StButton = styled(Button)`
     `}
 `;
 
-export { MapZoomButton, MapMarkerButton, MapCloseButton };
+const StCheckbox = styled(Checkbox)`
+  z-index: 10;
+  top: 10rem;
+  position: sticky;
+  height: 40px;
+  margin: 0 0 91px;
+  border-radius: 8px;
+  padding: 0 1rem;
+  ${({ boxShadow, theme }) =>
+    boxShadow && `box-shadow: 1px 1px 3px ${theme.color.shadow}`};
+`;
+
+export { MapZoomButton, MapMarkerButton, MapCloseButton, MapCheckbox };

@@ -1,6 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { MapZoomButton, MapMarkerButton, MapCloseButton } from './MapButton';
+import {
+  MapZoomButton,
+  MapMarkerButton,
+  MapCloseButton,
+  MapCheckbox,
+} from './MapButton';
 import Map from '../Global/Map';
 
 const SearchMap = ({ children }) => {
@@ -8,6 +13,7 @@ const SearchMap = ({ children }) => {
     <StWrapper>
       <StStickyWrapper>
         <MapCloseButton />
+        <MapCheckbox />
         <StBtnSetWrapper>
           <MapZoomButton />
           <MapMarkerButton />

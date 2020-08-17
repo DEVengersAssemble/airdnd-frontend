@@ -67,7 +67,7 @@ const RoomTypePopup = popupState => {
 
 const PricePopup = popupState => {
   return (
-    <FilterPopup className="price" left="25rem" popupState={true}>
+    <FilterPopup className="price" left="25rem" popupState={false}>
       <StContentWrapper className="price">
         <StLargeSpan>평균 1박 요금은 ₩78,902입니다</StLargeSpan>
         <StRangeWrapper>
