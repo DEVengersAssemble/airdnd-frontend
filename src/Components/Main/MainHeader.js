@@ -17,7 +17,16 @@ const StMainHeader = styled.header`
   justify-content: space-between;
   margin: 0;
   height: 80px;
-  background: ${({ isScrollTop }) => (isScrollTop ? 'transparent' : 'white')};
+  background: ${({ isScrollTop }) =>
+    isScrollTop
+      ? 'transparent'
+      : css`
+          ${({ theme }) => theme.color.white}
+        `};
+  border: ${({ isScrollTop }) =>
+    !isScrollTop && css`1px solid ${({ theme }) => theme.color.line}`};
+  box-shadow: ${({ isScrollTop }) =>
+    !isScrollTop && css`0px 2px 4px rgba(0,0,0,0.3)`};
   padding: 20px 80px 15px 80px;
   @media ${({ theme }) => theme.size.iPad} {
     padding: 20px 40px 15px 40px;
