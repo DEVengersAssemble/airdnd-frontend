@@ -1,11 +1,11 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-const Carousel = ({ size, ...rest }) => {
+const Carousel = ({ size, img, ...rest }) => {
   return (
     <StWrapper size={size} {...rest}>
       <StBadge>슈퍼호스트</StBadge>
-      <StImageList>
+      <StImageList img={img} size={size}>
         <StImageWrapper size={size}>
           <StImage src="https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large" />
         </StImageWrapper>
@@ -35,23 +35,23 @@ const Carousel = ({ size, ...rest }) => {
 
 const sizes = {
   large: {
-    width: '300px',
-    height: '200px',
+    width: '300',
+    height: '200',
   },
   medium: {
-    width: '270px',
-    height: '180px',
+    width: '270',
+    height: '180',
   },
   small: {
-    width: '148px',
-    height: '105px',
+    width: '148',
+    height: '105',
   },
 };
 
 const sizeStyles = css`
   ${({ size }) => css`
-    width: ${sizes[size].width};
-    height: ${sizes[size].height};
+    width: ${`${sizes[size].width}px`};
+    height: ${`${sizes[size].height}px`};
   `}
 `;
 
@@ -99,6 +99,9 @@ const StCircle = styled.div`
 
 const StImageList = styled.ul`
   display: flex;
+  transform: ${({ img, size }) =>
+    `translate3d(-${img * sizes[size].width}px, 0, 0)`};
+  transition: 0.3s;
 `;
 
 const StImageWrapper = styled.li`
