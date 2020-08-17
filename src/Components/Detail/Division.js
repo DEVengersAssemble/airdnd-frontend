@@ -12,8 +12,8 @@ const Division = ({ children, title, border, padding }) => {
 
 const StDivision = styled.div`
   padding: 48px 0;
-  border-bottom: ${props => props.border || '1px solid #ddd'};
-  background-color: #fff;
+  border-bottom: ${props => props.border || '1px solid #DDDDDD'};
+  background-color: ${({ theme }) => theme.color.white};
 
   h3 {
     padding-bottom: ${props => props.padding || '2.4rem'};

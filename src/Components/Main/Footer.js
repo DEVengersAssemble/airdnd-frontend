@@ -5,17 +5,17 @@ import { FaWonSign, FaFacebookF, FaTwitter, FaInstagram } from 'react-icons/fa';
 import { FiGlobe } from 'react-icons/fi';
 
 const StFooter = styled.footer`
-  background: ${props => props.theme.lightGray};
+  background: ${({ theme }) => theme.color.lightGray};
   padding: 50px 80px;
-  color: ${props => props.theme.black};
-  @media ${props => props.theme.iPad} {
+  color: ${({ theme }) => theme.color.black};
+  @media ${({ theme }) => theme.size.iPad} {
     padding: 50px 40px;
   }
 `;
 
 const StUpperWrapper = styled.div`
   display: flex;
-  @media ${props => props.theme.iPad} {
+  @media ${({ theme }) => theme.size.iPad} {
     flex-direction: column;
   }
 `;
@@ -23,8 +23,8 @@ const StUpperWrapper = styled.div`
 const StContentSection = styled.section`
   width: 25%;
   padding-bottom: 48px;
-  border-bottom: 1px solid #dddddd;
-  @media ${props => props.theme.iPad} {
+  border-bottom: 1px solid ${({ theme }) => theme.color.lightGray};
+  @media ${({ theme }) => theme.size.iPad} {
     width: 100%;
     padding-bottom: 24px;
     margin-bottom: 24px;
@@ -54,7 +54,6 @@ const StContentList = styled.ul`
 const StContentItem = styled.li`
   padding: 3px 0px;
   margin: 5px 0;
-
   width: 100%;
   @media ${props => props.theme.iPad} {
     width: 33.3333%;
@@ -102,7 +101,7 @@ const StCopyRight = styled.p`
 
 const StRuleList = styled.ul`
   display: flex;
-  @media ${props => props.theme.iPad} {
+  @media ${({ theme }) => theme.size.iPad} {
     justify-content: center;
   }
 `;
@@ -117,7 +116,7 @@ const StRuleLink = styled.a`
   }
   &:hover {
     text-decoration: underline;
-    color: ${props => props.theme.darkGray};
+    color: ${({ theme }) => theme.color.darkGray};
     cursor: pointer;
   }
 `;
@@ -157,7 +156,7 @@ const StSettingButton = styled(Button)`
   line-height: 16px;
   &:hover {
     background: transparent;
-    color: ${props => props.theme.darkGray};
+    color: ${({ theme }) => theme.color.darkGray};
   }
 `;
 
@@ -172,7 +171,7 @@ const StSiteLinkList = styled.ul`
   justify-content: space-between;
   align-items: center;
   margin-left: 50px;
-  @media ${props => props.theme.iPad} {
+  @media ${({ theme }) => theme.size.iPad} {
     margin-left: 70px;
   }
 `;
@@ -195,7 +194,7 @@ const StSiteLink = styled.a`
     color: inherit;
   }
   &:hover {
-    color: ${props => props.theme.darkGray};
+    color: ${({ theme }) => theme.color.darkGray};
   }
 `;
 

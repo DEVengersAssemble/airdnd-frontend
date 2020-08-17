@@ -90,7 +90,7 @@ const StButton = styled.button`
   font-size: 1.6rem;
   font-weight: 600;
   text-decoration: underline;
-  color: #717171;
+  color: ${({ theme }) => theme.color.darkGray};
   outline: none;
 
   &:hover {

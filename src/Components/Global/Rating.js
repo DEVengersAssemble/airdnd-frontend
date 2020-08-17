@@ -29,7 +29,7 @@ const StRatingWrapper = styled.div`
 
 const StStarIcon = styled(AiFillStar)`
   margin-right: 0.4rem;
-  color: ${props => props.theme.main};
+  color: ${props => props.theme.color.main};
   font-size: ${props =>
     props.starsize || (props.scale * 1.2).toFixed(1) + 'rem'};
 `;
@@ -41,7 +41,7 @@ const StRatingGrade = styled.span`
 const StReviewCount = styled.span`
   padding-left: 0.4rem;
   font-weight: 400;
-  color: #717171;
+  color: ${({ theme }) => theme.color.darkGray};
 `;
 
 Rating.defaultProps = {

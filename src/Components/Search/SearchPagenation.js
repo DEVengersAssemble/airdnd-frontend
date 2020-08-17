@@ -1,7 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { NextButton } from '../Global/SlideButton';
-import theme from '../../style/theme';
 
 const SearchPagenation = () => {
   return (
@@ -59,7 +58,7 @@ const StBlackSpan = styled.span`
 const StGraySpan = styled.span`
   display: block;
   font-size: 1.2rem;
-  color: ${theme.gray};
+  color: ${({ theme }) => theme.color.gray};
 `;
 
 export default SearchPagenation;

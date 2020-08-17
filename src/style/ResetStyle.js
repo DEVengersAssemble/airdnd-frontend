@@ -140,6 +140,7 @@ button {
 a {
   color: #222222;
   cursor: pointer;
+  text-decoration: none;
 }
 .a11yHidden {
   position: absolute;

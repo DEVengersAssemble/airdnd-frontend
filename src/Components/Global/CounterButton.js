@@ -2,14 +2,13 @@ import React from 'react';
 import Button from './Button';
 import { FiPlus, FiMinus } from 'react-icons/fi';
 import styled from 'styled-components';
-import theme from '../../style/theme';
 
-const PlusButton = ({ ...rest }) => {
+const PlusButton = ({ theme, ...rest }) => {
   return (
     <StCounterButton
       btnType="circle"
       fontSize="1.7rem"
-      border={`1px solid ${theme.gray}`}
+      border={`1px solid ${theme.color.gray}`}
       {...rest}
     >
       <FiPlus strokeWidth="3px" />
@@ -17,12 +16,12 @@ const PlusButton = ({ ...rest }) => {
   );
 };
 
-const MinusButton = ({ ...rest }) => {
+const MinusButton = ({ theme, ...rest }) => {
   return (
     <StCounterButton
       btnType="circle"
       fontSize="1.7rem"
-      border={`1px solid ${theme.gray}`}
+      border={`1px solid ${theme.color.gray}`}
       {...rest}
     >
       <FiMinus strokeWidth="3px" />
@@ -31,16 +30,16 @@ const MinusButton = ({ ...rest }) => {
 };
 
 const StCounterButton = styled(Button)`
-  color: ${theme.gray};
+  color: ${({ theme }) => theme.color.gray};
 
   &:hover {
-    color: ${theme.black};
-    border: 1px solid ${theme.black};
+    color: ${({ theme }) => theme.color.black};
+    border: 1px solid ${({ theme }) => theme.color.black};
   }
 
   &:disabled {
-    color: ${theme.shadow};
-    border: 1px solid ${theme.shadow};
+    color: ${({ theme }) => theme.color.shadow};
+    border: 1px solid ${({ theme }) => theme.color.shadow};
     cursor: not-allowed;
   }
 `;

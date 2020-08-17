@@ -28,21 +28,21 @@ const defaultColorStyles = css`
     ckType
       ? checked
         ? css`
-            color: ${theme.main};
+            color: ${theme.color.main};
             & > svg > path {
-              stroke: ${theme.white};
+              stroke: ${theme.color.white};
             }
           `
         : css`
-            color: ${rgba(theme.black, 0.5)};
+            color: ${rgba(theme.color.black, 0.5)};
             & > svg > path {
-              stroke: ${theme.white};
+              stroke: ${theme.color.white};
             }
           `
       : css`
-          color: ${theme[bgColor]};
+          color: ${theme.color[bgColor]};
           & > svg > path {
-            stroke: ${theme[stroke]};
+            stroke: ${theme.color[stroke]};
           }
         `}
 `;
@@ -51,15 +51,15 @@ const hoverColorStyles = css`
   ${({ hover, checked }) =>
     hover && checked
       ? css`
-          color: ${theme.main};
+          color: ${theme.color.main};
           & > svg > path {
-            stroke: ${theme.main};
+            stroke: ${theme.color.main};
           }
         `
       : css`
-          color: ${theme.white};
+          color: ${theme.color.white};
           & > svg > path {
-            stroke: ${theme.black};
+            stroke: ${theme.color.black};
           }
         `}
 `;
@@ -86,7 +86,7 @@ const hoverStyles = css`
         width: 5rem;
         height: 5rem;
         border-radius: 50%;
-        background-color: ${theme.lightGray};
+        background-color: ${theme.color.lightGray};
       }
     `}
 `;

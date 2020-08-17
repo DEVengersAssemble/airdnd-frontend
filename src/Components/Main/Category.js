@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StCategoryWrapper = styled.div`
-  background: white;
+  background: ${({ theme }) => theme.color.white};
   height: 410px;
   padding: 30px 80px 70px 80px;
 `;
@@ -14,7 +14,7 @@ const StCategoryList = styled.ul`
 
 const StCategoryItem = styled.li`
   width: 32%;
-  background: white;
+  background: ${({ theme }) => theme.color.white};
   overflow: hidden;
   border-radius: 16px;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
@@ -42,7 +42,7 @@ const StCatogoryTitle = styled.p`
 const StCategoryContent = styled.p`
   font-size: 14px;
   line-height: 18px;
-  color: rgb(113, 113, 113);
+  color: ${({ theme }) => theme.color.darkGray};
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: pre-line;

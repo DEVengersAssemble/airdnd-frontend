@@ -4,7 +4,6 @@ import Button from '../Global/Button';
 import { FiPlus, FiMinus } from 'react-icons/fi';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import { GrClose } from 'react-icons/gr';
-import theme from '../../style/theme';
 
 const MapZoomButton = () => {
   return (
@@ -47,9 +46,9 @@ const StBtnWrapper = styled.div`
   width: fit-content;
   display: flex;
   flex-direction: column;
-  background: ${theme.white};
+  background: ${({ theme }) => theme.color.white};
   border-radius: 8px;
-  box-shadow: 1px 1px 3px ${theme.shadow};
+  box-shadow: 1px 1px 3px ${({ theme }) => theme.color.shadow};
 
   .plusBtn {
     border-bottom-right-radius: 0;
@@ -66,7 +65,7 @@ const StLine = styled.hr`
   border-width: 0;
   margin: 0 auto;
   width: 30px;
-  border-bottom: 1px solid ${theme.shadow};
+  border-bottom: 1px solid ${({ theme }) => theme.color.shadow};
 `;
 
 const StButton = styled(Button)`
@@ -77,14 +76,14 @@ const StButton = styled(Button)`
   font-size: 1.7rem;
   z-index: 10;
 
-  ${({ boxShadow, top, right, left, position, margin }) =>
+  ${({ boxShadow, top, right, left, position, margin, theme }) =>
     css`
       top: ${top};
       right: ${right};
       left: ${left};
       position: ${position};
       margin: ${margin};
-      ${boxShadow && `box-shadow: 1px 1px 3px ${theme.shadow}`};
+      ${boxShadow && `box-shadow: 1px 1px 3px ${theme.color.shadow}`};
     `}
 `;
 
