@@ -2,6 +2,7 @@ import React from 'react';
 import Modal from './Modal';
 import ModalFooter from './ModalFooter';
 import Button from './Button';
+import { NewInput } from './Input';
 import styled from 'styled-components';
 
 const BookmarkListModal = () => {
@@ -96,13 +97,21 @@ const NewBookmarkModal = () => {
       title="목록 이름 작성하기"
       header
     >
+      <StContentWrapper padding>
+        <NewInput
+          title="이름"
+          animation
+          value="다낭, 베트남"
+          // onChange={onChangeInput}
+        />
+        <StSpan>최대 50자</StSpan>
+      </StContentWrapper>
       <ModalFooter>
         <Button
           btnType="color"
           color="black"
           hover="background: #000"
           width="100%"
-          fontWeight="500"
         >
           새로 만들기
         </Button>
@@ -145,10 +154,17 @@ const StCount = styled.span`
   font-size: 1.4rem;
 `;
 
+const StSpan = styled.span`
+  font-size: 12px;
+  color: ${({ theme }) => theme.color.gray};
+  margin-top: 1rem;
+`;
+
 const StContentWrapper = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
+  padding: ${({ padding }) => padding && '4rem 2rem'};
 `;
 
 export { BookmarkListModal, NewBookmarkModal };
