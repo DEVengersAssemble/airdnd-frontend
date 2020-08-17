@@ -5,6 +5,7 @@ import {
   MapMarkerButton,
   MapCloseButton,
   MapCheckbox,
+  MapFilterButton,
 } from './MapButton';
 import Map from '../Global/Map';
 
@@ -26,6 +27,9 @@ const SearchMap = ({ children }) => {
 
 const StWrapper = styled.aside`
   width: calc(100vw - 840px);
+  @media ${({ theme }) => theme.size.medium} {
+    display: none;
+  }
 `;
 
 const StStickyWrapper = styled.div`

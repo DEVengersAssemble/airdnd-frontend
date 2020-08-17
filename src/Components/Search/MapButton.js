@@ -4,7 +4,16 @@ import Button from '../Global/Button';
 import { FiPlus, FiMinus } from 'react-icons/fi';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import { GrClose } from 'react-icons/gr';
+import { GoSettings } from 'react-icons/go';
 import Checkbox from '../Global/Checkbox';
+
+const MapFilterButton = () => {
+  return (
+    <StButton boxShadow top="20rem" position="sticky">
+      <StFilterIcon />
+    </StButton>
+  );
+};
 
 const MapCheckbox = () => {
   return (
@@ -43,7 +52,7 @@ const MapCloseButton = () => {
       top="10rem"
       left="2rem"
       position="sticky"
-      margin="0 2rem 91px"
+      margin="0 0 91px 2rem"
     >
       <GrClose />
     </StButton>
@@ -103,9 +112,18 @@ const StCheckbox = styled(Checkbox)`
   height: 40px;
   margin: 0 0 91px;
   border-radius: 8px;
-  padding: 0 1rem;
+  padding: 0 0.5rem;
   ${({ boxShadow, theme }) =>
     boxShadow && `box-shadow: 1px 1px 3px ${theme.color.shadow}`};
 `;
 
-export { MapZoomButton, MapMarkerButton, MapCloseButton, MapCheckbox };
+const StFilterIcon = styled(GoSettings)`
+  transform: rotate(90deg);
+`;
+export {
+  MapZoomButton,
+  MapMarkerButton,
+  MapCloseButton,
+  MapCheckbox,
+  MapFilterButton,
+};
