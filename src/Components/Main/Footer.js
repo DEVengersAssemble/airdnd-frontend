@@ -55,7 +55,7 @@ const StContentItem = styled.li`
   padding: 3px 0px;
   margin: 5px 0;
   width: 100%;
-  @media ${props => props.theme.iPad} {
+  @media ${({ theme }) => theme.size.iPad} {
     width: 33.3333%;
   }
 `;
@@ -70,7 +70,7 @@ const StContentItemLink = styled.a`
   }
   &:hover {
     text-decoration: underline;
-    color: ${props => props.theme.darkGray};
+    color: ${({ theme }) => theme.color.darkGray};
     cursor: pointer;
   }
 `;
@@ -81,14 +81,14 @@ const StLowerWrapper = styled.div`
   padding-top: 10px;
   margin-top: 20px;
   font-size: 14px;
-  @media ${props => props.theme.iPad} {
+  @media ${({ theme }) => theme.size.iPad} {
     flex-direction: column-reverse;
     width: 100%;
   }
 `;
 
 const StLowerLeftWrapper = styled.div`
-  @media ${props => props.theme.iPad} {
+  @media ${({ theme }) => theme.size.iPad} {
     text-align: center;
     width: 100%;
   }
@@ -130,7 +130,7 @@ const StDot = styled.span`
 `;
 
 const StLowerRightWrapper = styled.div`
-  @media ${props => props.theme.iPad} {
+  @media ${({ theme }) => theme.size.iPad} {
     text-align: center;
     width: 100%;
     margin-bottom: 30px;
