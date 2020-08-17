@@ -11,6 +11,7 @@ const StSearchButton = styled(Button)`
   font-weight: 500;
   padding: 14px 18px;
   border: none;
+  z-index: 10;
   &:hover {
     border: none;
     outline: none;

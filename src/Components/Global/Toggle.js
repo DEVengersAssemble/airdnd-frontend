@@ -25,8 +25,8 @@ const StToggleButton = styled.button`
   }
 
   &:focus {
-    box-shadow: ${({ theme }) => theme.white} 0px 0px 0px 2px,
-      ${({ theme }) => theme.black} 0px 0px 0px 4px,
+    box-shadow: ${({ theme }) => theme.color.white} 0px 0px 0px 2px,
+      ${({ theme }) => theme.color.black} 0px 0px 0px 4px,
       rgba(255, 255, 255, 0.5) 0px 0px 0px 5px;
     outline: none;
     transition: box-shadow 0.2s ease 0s;
@@ -43,7 +43,7 @@ const StToggleCircle = styled.span`
   align-items: center;
   width: 28px;
   height: 28px;
-  background: white;
+  background: ${({ theme }) => theme.color.white};
   font-size: 28px;
   border-radius: 50%;
   transition: 0.4s;
@@ -51,7 +51,7 @@ const StToggleCircle = styled.span`
     checked &&
     css`
       transform: translate3d(16px, 0px, 0px);
-      color: $({(theme) => theme.color.black});
+      color: ${({ theme }) => theme.color.black};
     `};
 `;
 

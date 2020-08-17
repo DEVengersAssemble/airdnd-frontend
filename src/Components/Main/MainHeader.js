@@ -16,7 +16,8 @@ const StMainHeader = styled.header`
   width: 100%;
   justify-content: space-between;
   margin: 0;
-  height: 80px;
+  height: ${({ isSearchBtnClicked }) =>
+    isSearchBtnClicked ? '160px' : '80px'};
   background: ${({ isScrollTop }) =>
     isScrollTop
       ? 'transparent'
@@ -62,10 +63,10 @@ const StNavSearchWrapper = styled.div`
   width: 850px;
   display: flex;
   flex-direction: column;
+  z-index: -100;
   animation-duration: 0.2s;
   animation-timing-function: ease-out;
   animation-fill-mode: forwards;
-
   animation-name: ${({ isScrollTop }) => (isScrollTop ? slideUp : slideDown)};
 
   @media (max-width: 950px) {
@@ -116,9 +117,17 @@ const StOnScrollSearchButtonIconWrapper = styled.div`
   margin-left: 160px;
 `;
 
-const MainHeader = ({ isScrollTop, handleLogoClick, handleSearchBtnClick }) => {
+const MainHeader = ({
+  isScrollTop,
+  handleLogoClick,
+  isSearchBtnClicked,
+  handleSearchBtnClick,
+}) => {
   return (
-    <StMainHeader isScrollTop={isScrollTop}>
+    <StMainHeader
+      isScrollTop={isScrollTop}
+      isSearchBtnClicked={isSearchBtnClicked}
+    >
       <Logo isScrollTop={isScrollTop} handleLogoClick={handleLogoClick}></Logo>
       <StNavSearchWrapper isScrollTop={isScrollTop}>
         <Navigation></Navigation>
