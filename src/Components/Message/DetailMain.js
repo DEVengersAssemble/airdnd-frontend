@@ -1,58 +1,63 @@
-// import React from 'react';
-// import styled from 'styled-components';
-// // import theme from '../../style/theme';
+import React from 'react';
+import styled from 'styled-components';
+import theme from '../../style/theme';
+import { darken } from 'polished';
 
-// const DetailMain = () => {
-//   return (
-//     <DetailMainDiv>
-//       <div>세부 내용</div>
-//       <div>세부 내용</div>
-//       <div>세부 내용</div>
-//       <div>세부 내용</div>
-//       <div>세부 내용</div>
-//       <div>세부 내용</div>
-//       <div>세부 내용</div>
-//       <div>세부 내용</div>
-//       <div>세부 내용</div>
-//       <div>세부 내용</div>
-//       <div>세부 내용</div>
-//       <div>세부 내용</div>
-//       <div>세부 내용</div>
-//       <div>세부 내용</div>
-//       <div>세부 내용</div>
-//       <div>세부 내용</div>
-//       <div>세부 내용</div>
-//       <div>세부 내용</div>
-//       <div>세부 내용</div>
-//       <div>세부 내용</div>
-//       <div>세부 내용</div>
-//       <div>세부 내용</div>
-//       <div>세부 내용</div>
-//       <div>세부 내용</div>
-//       <div>세부 내용</div>
-//       <div>세부 내용</div>
-//       <div>세부 내용</div>
-//       <div>세부 내용</div>
-//       <div>세부 내용</div>
-//       <div>세부 내용</div>
-//       <div>세부 내용</div>
-//       <div>세부 내용</div>
-//       <div>세부 내용</div>
-//       <div>세부 내용</div>
-//       <div>세부 내용</div>
-//       <div>세부 내용</div>
-//       <div>세부 내용</div>
-//       <div>세부 내용</div>
-//       <div>세부 내용</div>
-//       <div>세부 내용</div>
-//     </DetailMainDiv>
-//   );
-// };
+const DetailMain = () => {
+  return (
+    <DetailMainWrapper>
+      <div>세부 내용</div>
+      <div>세부 내용</div>
+      <div>세부 내용</div>
+      <div>세부 내용</div>
+      <div>세부 내용</div>
+      <div>세부 내용</div>
+      <div>세부 내용</div>
+      <div>세부 내용</div>
+      <div>세부 내용</div>
+      <div>세부 내용</div>
+      <div>세부 내용</div>
+      <div>세부 내용</div>
+      <div>세부 내용</div>
+      <div>세부 내용</div>
+      <div>세부 내용</div>
+      <div>세부 내용</div>
+      <div>세부 내용</div>
+      <div>세부 내용</div>
+      <div>세부 내용</div>
+      <div>세부 내용</div>
+      <div>세부 내용</div>
+      <div>세부 내용</div>
+      <div>세부 내용</div>
+      <div>세부 내용</div>
+      <div>세부 내용</div>
+      <div>세부 내용</div>
+      <div>세부 내용</div>
+      <div>세부 내용</div>
+      <div>세부 내용</div>
+      <div>세부 내용</div>
+      <div>세부 내용</div>
+      <div>세부 내용</div>
+      <div>세부 내용</div>
+      <div>세부 내용</div>
+      <div>세부 내용</div>
+      <div>세부 내용</div>
+      <div>세부 내용</div>
+      <div>세부 내용</div>
+      <div>세부 내용</div>
+      <div>세부 내용</div>
+    </DetailMainWrapper>
+  );
+};
 
-// const DetailMainDiv = styled.div`
-//   position: relative;
-//   top: 7.5rem;
-//   right: 1rem;
-// `;
+const DetailMainWrapper = styled.div`
+  border-left: 1px solid ${darken(0.1, theme.lightGray)};
+  min-width: 37.5rem;
+  position: relative;
+  top: 15.5rem;
+  left: 37.5rem;
+  max-height: calc(100vh - 15.5rem);
+  overflow: scroll;
+`;
 
-// export default DetailMain;
+export default DetailMain;

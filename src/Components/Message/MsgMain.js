@@ -21,44 +21,6 @@ const MsgMain = () => {
         <MsgItems>채팅내역</MsgItems>
         <MsgItems>채팅내역</MsgItems>
         <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
       </MsgInbox>
       <MsgInputOuter>
         <MsgInputInner>

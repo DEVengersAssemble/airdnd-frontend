@@ -13,7 +13,7 @@ const MessageMainWrapper = () => {
     <MessageMainWrapperDiv>
       <ChatMain />
       <MsgMain />
-      {/* {canceled ? <DetailCanceledMain /> : <DetailMain />} */}
+      {canceled ? <DetailCanceledMain /> : <DetailMain />}
     </MessageMainWrapperDiv>
   );
 };
