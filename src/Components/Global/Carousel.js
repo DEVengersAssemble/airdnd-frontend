@@ -1,11 +1,11 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-const Carousel = ({ size, img, ...rest }) => {
+const Carousel = ({ size, img, transition, ...rest }) => {
   return (
     <StWrapper size={size} {...rest}>
       <StBadge>슈퍼호스트</StBadge>
-      <StImageList img={img} size={size}>
+      <StImageList img={img} size={size} transition={transition}>
         <StImageWrapper size={size}>
           <StImage src="https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large" />
         </StImageWrapper>
@@ -60,7 +60,7 @@ const StWrapper = styled.div`
   border: 1px solid ${({ theme }) => theme.color.lightGray};
   border-radius: 8px;
   background: pink;
-  /* overflow: hidden; */
+  overflow: hidden;
 
   ${sizeStyles};
 `;
@@ -99,9 +99,10 @@ const StCircle = styled.div`
 
 const StImageList = styled.ul`
   display: flex;
-  transform: ${({ img, size }) =>
-    `translate3d(-${img * sizes[size].width}px, 0, 0)`};
-  transition: 0.3s;
+  ${({ img, size, transition }) => css`
+    transform: ${`translate3d(-${img * sizes[size].width}px, 0, 0)`};
+    transition: ${transition && '0.3s'};
+  `};
 `;
 
 const StImageWrapper = styled.li`
