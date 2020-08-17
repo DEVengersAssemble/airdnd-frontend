@@ -19,14 +19,13 @@ const StItemLabel = styled.label`
 `;
 
 const StItemSpan = styled.span`
-  /* background: lightgray; */
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   cursor: pointer;
   padding: 10px 12px;
-  color: white;
+  color: ${({ theme }) => theme.color.white};
   &::before {
     content: '';
     display: block;
@@ -34,7 +33,7 @@ const StItemSpan = styled.span`
     bottom: 0;
     width: 18px;
     height: 2px;
-    background: white;
+    background: ${({ theme }) => theme.color.white};
     border-radius: 1px;
     transform: scaleX(0);
     transition: 0.25s transform cubic-bezier(0, 0, 0.1, 1);

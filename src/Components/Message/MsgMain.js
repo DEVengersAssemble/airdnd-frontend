@@ -4,6 +4,7 @@ import theme from '../../style/theme';
 import { Input } from '../Global/Input';
 import Button from '../Global/Button';
 import { AiOutlinePicture } from 'react-icons/ai';
+
 const MsgMain = () => {
   return (
     <MsgMainWrapper>
@@ -34,7 +35,9 @@ const MsgMain = () => {
           <Button
             btnType="circle"
             border="none"
-            hover={{ backgroundColor: theme.lightGray }}
+            hover={{
+              backgroundColor: theme.color.lightGray,
+            }}
             style={{ width: '4rem', height: '4rem' }}
           >
             <MsgImageUploadIcon />

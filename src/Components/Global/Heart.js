@@ -2,7 +2,6 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { rgba } from 'polished';
 import { TiHeartFullOutline as HeartIcon } from 'react-icons/ti';
-import theme from '../../style/theme';
 
 const sizes = {
   large: {
@@ -24,42 +23,42 @@ const sizes = {
 };
 
 const defaultColorStyles = css`
-  ${({ bgColor, stroke, ckType, checked }) =>
+  ${({ bgColor, stroke, ckType, checked, theme }) =>
     ckType
       ? checked
         ? css`
-            color: ${theme.main};
+            color: ${theme.color.main};
             & > svg > path {
-              stroke: ${theme.white};
+              stroke: ${theme.color.white};
             }
           `
         : css`
-            color: ${rgba(theme.black, 0.5)};
+            color: ${rgba(theme.color.black, 0.5)};
             & > svg > path {
-              stroke: ${theme.white};
+              stroke: ${theme.color.white};
             }
           `
       : css`
-          color: ${theme[bgColor]};
+          color: ${theme.color[bgColor]};
           & > svg > path {
-            stroke: ${theme[stroke]};
+            stroke: ${theme.color[stroke]};
           }
         `}
 `;
 
 const hoverColorStyles = css`
-  ${({ hover, checked }) =>
+  ${({ hover, checked, theme }) =>
     hover && checked
       ? css`
-          color: ${theme.main};
+          color: ${theme.color.main};
           & > svg > path {
-            stroke: ${theme.main};
+            stroke: ${theme.color.main};
           }
         `
       : css`
-          color: ${theme.white};
+          color: ${theme.color.white};
           & > svg > path {
-            stroke: ${theme.black};
+            stroke: ${theme.color.black};
           }
         `}
 `;
@@ -74,7 +73,7 @@ const sizeStyles = css`
 `;
 
 const hoverStyles = css`
-  ${({ hover }) =>
+  ${({ hover, theme }) =>
     hover &&
     css`
       display: flex;
@@ -86,7 +85,7 @@ const hoverStyles = css`
         width: 5rem;
         height: 5rem;
         border-radius: 50%;
-        background-color: ${theme.lightGray};
+        background-color: ${theme.color.lightGray};
       }
     `}
 `;
@@ -161,33 +160,3 @@ Heart.defaultProps = {
 };
 
 export { Heart, CkHeart };
-
-/**
-  <HeartGroup>
-    <Heart size="small" bgColor="main" />
-    <Heart size="medium" bgColor="main" />
-    <Heart size="large" bgColor="main" />
-  </HeartGroup>
-  <HeartGroup>
-    <Heart size="small" bgColor="white" stroke="black" />
-    <Heart size="medium" bgColor="white" stroke="black" />
-    <Heart size="large" bgColor="white" stroke="black" />
-  </HeartGroup>
-  <HeartGroup>
-    <Heart size="small" bgColor="main" stroke="white" />
-    <Heart size="medium" bgColor="main" stroke="white" />
-    <Heart size="large" bgColor="main" stroke="white" />
-  </HeartGroup>
-  <HeartGroup>
-    <CkHeart hover={true} checked={check} onChange={onChangeHeart} />
-  </HeartGroup>
-  <HeartGroup>
-    <CkHeart
-      size="large"
-      ckType={true}
-      hover={false}
-      checked={check}
-      onChange={onChangeHeart}
-    />
-  </HeartGroup>
- */

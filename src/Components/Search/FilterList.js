@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StBtn } from '../Global/Button';
+import Button from '../Global/Button';
 import styled from 'styled-components';
 import {
   RefundPopup,
@@ -31,8 +31,9 @@ const FilterList = () => {
   );
 };
 
-const FilterBtn = styled(StBtn)`
+const FilterBtn = styled(Button)`
   margin: 2rem 1rem 2rem 0;
+  font-size: 14px;
 `;
 
 export default FilterList;

@@ -18,7 +18,7 @@ const DetailSection = () => {
       <Button
         btnType="circle"
         border="none"
-        hover={{ backgroundColor: theme.lightGray }}
+        hover={{ backgroundColor: theme.color.lightGray }}
         style={{ width: '3.5rem', height: '3.5rem' }}
       >
         <DetailClearIcon />
@@ -31,7 +31,7 @@ const DetailHeaderDiv = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-left: 1px solid ${darken(0.1, theme.lightGray)};
+  border-left: 1px solid ${({ theme }) => darken(0.1, theme.color.lightGray)};
   width: 37.5rem;
   min-width: 37.5rem;
   height: 7.5rem;
@@ -40,7 +40,7 @@ const DetailHeaderDiv = styled.div`
 `;
 
 const DetailHeaderTitle = styled.h2`
-  color: ${theme.black};
+  color: ${({ theme }) => theme.color.black};
   font-size: 1.8rem;
   font-weight: bold;
 `;

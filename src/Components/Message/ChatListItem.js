@@ -21,7 +21,9 @@ const ChatListItem = () => {
         <ReservationWrapper>
           <ReservedState
             style={{
-              color: complete ? `${theme.lightGreen}` : `${theme.darkGray}`,
+              color: `${
+                complete ? theme.color.lightGreen : theme.color.darkGray
+              }`,
             }}
           >
             완료
@@ -39,7 +41,7 @@ const ChatListItemLi = styled.li`
   align-items: flex-start;
   border: none;
   border-radius: 12px;
-  background: ${theme.lightGray};
+  background: ${({ theme }) => theme.color.lightGray};
   padding: 1rem;
 `;
 
@@ -70,7 +72,7 @@ const LastChat = styled.span`
 `;
 
 const LastChatDate = styled.span`
-  color: ${theme.darkGray};
+  color: ${({ theme }) => theme.color.darkGray};
   font-size: 1.3rem;
   font-weight: 300;
 `;
@@ -79,13 +81,16 @@ const ReservationWrapper = styled.div`
   font-size: 1rem;
   font-weight: 200;
 `;
+
 const ReservedState = styled.span`
   font-size: 1.4rem;
   font-weight: 400;
 `;
+
 const ReservedDate = styled.span`
-  color: ${theme.darkGray};
+  color: ${({ theme }) => theme.color.darkGray};
   font-size: 1.3rem;
   font-weight: 400;
 `;
+
 export default ChatListItem;

@@ -22,7 +22,7 @@ const ChatSection = () => {
       <Button
         btnType="circle"
         border="none"
-        hover={{ backgroundColor: theme.lightGray }}
+        hover={{ backgroundColor: theme.color.lightGray }}
         style={{ width: '4rem', height: '4rem' }}
       >
         <ChatMenubuttonIcon />
@@ -35,7 +35,7 @@ const ChatSectionWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-right: 1px solid ${darken(0.1, theme.lightGray)};
+  border-right: 1px solid ${({ theme }) => darken(0.1, theme.color.lightGray)};
   width: 37.5rem;
   min-width: 37.5rem;
   height: 7.5rem;
@@ -44,7 +44,7 @@ const ChatSectionWrapper = styled.div`
 `;
 
 const ChatSectionTitle = styled.h2`
-  color: ${theme.black};
+  color: ${({ theme }) => theme.color.black};
   font-size: 1.8rem;
   font-weight: bold;
 `;

@@ -163,7 +163,7 @@ const StReview = styled.li`
     -webkit-box-orient: vertical; */
   }
 
-  @media ${({ theme }) => theme.medium} {
+  @media ${({ theme }) => theme.size.medium} {
     width: 100%;
     margin-right: 0;
   }
@@ -180,7 +180,7 @@ const StRiviewer = styled.div`
     font-weight: 600;
 
     div {
-      color: #717171;
+      color: ${({ theme }) => theme.color.darkGray};
       font-weight: 400;
       font-size: 14px;
     }

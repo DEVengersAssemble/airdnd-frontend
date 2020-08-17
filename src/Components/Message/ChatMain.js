@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { darken } from 'polished';
-import theme from '../../style/theme';
 import ChatListItem from '../Message/ChatListItem';
 
 const ChatMain = () => {
@@ -39,7 +38,7 @@ const ChatMainWrapper = styled.div`
   min-width: 37.5rem;
   height: 100vh;
   max-height: calc(100vh - 15.5rem);
-  border-right: 1px solid ${darken(0.1, theme.lightGray)};
+  border-right: 1px solid ${({ theme }) => darken(0.1, theme.color.lightGray)};
   padding: 1.2rem 1.4rem;
   overflow: scroll;
 `;

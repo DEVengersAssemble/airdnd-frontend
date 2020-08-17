@@ -1,8 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import theme from '../../style/theme';
 
-// btnType: color, underlined, circle, oval
+// btnType: color(배경색 있는 버튼), underlined(밑줄 있는 버튼), circle(원형 버튼), oval(타원형 버튼)
 const Button = ({
   children,
   btnType,
@@ -11,8 +10,9 @@ const Button = ({
   width,
   height,
   fontSize,
-  hover,
+  fontWeight,
   padding,
+  hover,
   focus,
   transition,
   type,
@@ -21,16 +21,17 @@ const Button = ({
   return (
     <StBtn
       btnType={btnType}
-      color={color}
-      border={border}
-      width={width}
-      height={height}
-      fontSize={fontSize}
-      hover={hover}
-      padding={padding}
-      focus={focus}
-      transition={transition}
-      type={type || 'button'}
+      color={color} // 'black'
+      border={border} // 'none', '3px solid gray'
+      width={width} // '3rem'
+      height={height} // '3rem'
+      fontSize={fontSize} // '2rem'
+      fontWeight={fontWeight} // '700'
+      padding={padding} // '0'
+      hover={hover} // 'background: gray'
+      focus={focus} // true
+      transition={transition} // true
+      type={type || 'button'} // 'submit'
       {...rest}
     >
       {children}
@@ -43,11 +44,11 @@ const hovers = btnType => {
     case undefined:
     case 'underlined':
       return css`
-        background: ${theme.lightGray};
+        background: ${({ theme }) => theme.color.lightGray};
       `;
     case 'oval':
       return css`
-        border: 1px solid ${theme.black};
+        border: 1px solid ${({ theme }) => theme.color.black};
       `;
     case 'circle':
       return css`
@@ -67,7 +68,7 @@ const borders = btnType => {
       `;
     case 'oval':
       return css`
-        border: 1px solid ${theme.gray};
+        border: 1px solid ${({ theme }) => theme.color.gray};
         border-radius: 30px;
       `;
     case 'circle':
@@ -76,7 +77,7 @@ const borders = btnType => {
       `;
     default:
       return css`
-        border: 1px solid ${theme.black};
+        border: 1px solid ${({ theme }) => theme.color.black};
       `;
   }
 };
@@ -98,18 +99,19 @@ const borderStyles = css`
 `;
 
 const fontStyles = css`
-  ${({ btnType, fontSize }) => css`
+  ${({ btnType, fontSize, fontWeight }) => css`
     font-size: ${fontSize || '1.6rem'};
+    font-weight: ${fontWeight || '400'};
     text-decoration: ${btnType === 'underlined' && 'underline'};
   `}
 `;
 
 const colorStyles = css`
-  ${({ color }) =>
+  ${({ color, theme }) =>
     color &&
     css`
-      background: ${theme[color] || 'transparent'};
-      color: ${theme.white};
+      background: ${theme.color[color] || 'transparent'};
+      color: ${theme.color.white};
       border: none;
     `}
 `;
@@ -118,28 +120,28 @@ const sizeStyles = css`
   ${({ btnType, width, height, padding }) => css`
     width: ${btnType === 'circle' ? '32px' : width};
     height: ${btnType === 'circle' ? '32px' : height};
-    padding: ${btnType === 'circle' ? '0' : padding};
+    padding: ${btnType === 'circle' ? '0' : padding ? padding : '1rem 2rem'};
   `}
 `;
 
 const focusStyles = css`
-  ${({ focus }) =>
+  ${({ focus, theme }) =>
     focus &&
     css`
       &:focus {
-        box-shadow: 0px 0px 0px 2px ${theme.white},
-          0px 0px 0px 4px ${theme.black};
+        box-shadow: 0px 0px 0px 2px ${theme.color.white},
+          0px 0px 0px 4px ${theme.color.black};
       }
     `}
 `;
 
-const transformStyles = css`
+const transitionStyles = css`
   ${({ transition }) =>
     transition &&
     css`
       transition: 0.2s;
       &:active {
-        transform: scale(${props => props.transScale || '0.94'});
+        transform: scale(0.94);
       }
     `}
 `;
@@ -151,8 +153,6 @@ export const StBtn = styled.button`
   cursor: pointer;
   outline: none;
   border-radius: 8px;
-  padding: ${props => props.padding || '1rem 2rem'};
-  font-weight: ${props => props.weight || '400'};
   overflow: hidden;
   ${fontStyles};
   ${colorStyles};
@@ -160,7 +160,7 @@ export const StBtn = styled.button`
   ${borderStyles};
   ${hoverStyles};
   ${focusStyles};
-  ${transformStyles};
+  ${transitionStyles};
 `;
 
 export default Button;

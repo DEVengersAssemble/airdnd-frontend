@@ -21,7 +21,7 @@ const StModalFooter = styled.footer`
   position: absolute;
   left: 0;
   bottom: 0;
-  border-top: 1px solid #ebebeb;
+  border-top: 1px solid ${({ theme }) => theme.color.line};
   font-weight: 600;
 `;
 

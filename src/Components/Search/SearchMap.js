@@ -6,17 +6,19 @@ import Map from '../Global/Map';
 const SearchMap = ({ children }) => {
   return (
     <StWrapper>
-      <MapZoomButton />
+      {/* <MapZoomButton />
       <MapMarkerButton />
-      <MapCloseButton />
+      <MapCloseButton /> */}
       <Map />
     </StWrapper>
   );
 };
 
 const StWrapper = styled.div`
-  background: seagreen;
   flex-grow: 100;
+  position: relative;
+  /* top: 0;
+  right: 0; */
 `;
 
 export default SearchMap;

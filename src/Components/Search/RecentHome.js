@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import theme from '../../style/theme';
 import Carousel from '../Global/Carousel';
 import Rating from '../Global/Rating';
 
@@ -30,7 +29,7 @@ const StWrapper = styled.li`
 
 const StSpan = styled.span`
   display: block;
-  color: ${theme.black};
+  color: ${({ theme }) => theme.color.black};
   font-size: 1.6rem;
   line-height: 1.7rem;
   text-overflow: ellipsis;

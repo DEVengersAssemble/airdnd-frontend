@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import theme from '../../style/theme';
 import { darken } from 'polished';
 
 const DetailMain = () => {
@@ -51,7 +50,7 @@ const DetailMain = () => {
 };
 
 const DetailMainWrapper = styled.div`
-  border-left: 1px solid ${darken(0.1, theme.lightGray)};
+  border-left: 1px solid ${({ theme }) => darken(0.1, theme.color.lightGray)};
   min-width: 37.5rem;
   position: absolute;
   top: 15.5rem;

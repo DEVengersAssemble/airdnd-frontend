@@ -24,7 +24,7 @@ const BgColorStyles = css`
   ${({ checked }) =>
     checked &&
     css`
-      color: ${({ theme }) => theme.palette.main};
+      color: ${({ theme }) => theme.color.main};
     `}
 `;
 
@@ -44,7 +44,7 @@ const hoverStyles = css`
         width: 5rem;
         line-height: 5rem;
         border-radius: 50%;
-        background-color: ${({ theme }) => theme.palette.lightGray};
+        background-color: ${({ theme }) => theme.color.lightGray};
       }
     `}
 `;

@@ -17,7 +17,7 @@ const StFooter = styled(Footer)`
 `;
 
 const StFooterWrapper = styled.div`
-  background-color: ${({ theme }) => theme.lightGray};
+  background-color: ${({ theme }) => theme.color.lightGray};
 `;
 
 export default HomeFooter;

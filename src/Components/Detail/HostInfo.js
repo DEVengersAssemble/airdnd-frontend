@@ -45,7 +45,9 @@ const HostInfo = () => {
       <StSafetyWrapper>
         <span>응답률: 100%</span>
         <span>응답시간: 몇 시간 이내</span>
-        <Button padding="13px 23px">호스트에게 연락하기</Button>
+        <Button padding="13px 23px" transition>
+          호스트에게 연락하기
+        </Button>
         <StWarnWrapper>
           <svg
             viewBox="0 0 24 24"
@@ -88,7 +90,7 @@ const StHostWrapper = styled.div`
   span {
     font-size: 14px;
     line-height: 1.8rem;
-    color: ${({ theme }) => theme.darkGray};
+    color: ${({ theme }) => theme.color.darkGray};
   }
 `;
 
@@ -105,7 +107,7 @@ const StMarkList = styled.ul`
 
   svg {
     margin-right: 8px;
-    color: ${({ theme }) => theme.main};
+    color: ${({ theme }) => theme.color.main};
   }
 `;
 
@@ -149,7 +151,7 @@ const StWarnWrapper = styled.div`
     height: 24px;
     width: 24px;
     margin-right: 16px;
-    fill: rgb(255, 180, 0);
+    fill: ${({ theme }) => theme.color.yellow};
     vertical-align: -10px;
   }
   em {

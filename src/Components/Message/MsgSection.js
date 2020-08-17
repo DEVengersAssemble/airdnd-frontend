@@ -25,7 +25,7 @@ const MsgSection = () => {
         <Button
           btnType="circle"
           border="none"
-          hover={{ backgroundColor: theme.lightGray }}
+          hover={{ backgroundColor: theme.color.lightGray }}
           style={{ width: '4rem', height: '4rem' }}
         >
           <MsgStorageIcon />
@@ -33,8 +33,8 @@ const MsgSection = () => {
         {clicked ? (
           <Button
             btnType="oval"
-            border={`1px solid ${theme.gray}`}
-            hover={{ border: `1px solid ${theme.black}` }}
+            border={`1px solid ${theme.color.gray}`}
+            hover={{ border: `1px solid ${theme.color.black}` }}
             fontSize="1.2rem"
             style={{ fontWeight: '400' }}
             onClick={onClick}
@@ -44,10 +44,13 @@ const MsgSection = () => {
         ) : (
           <Button
             btnType="oval"
-            border={`2px solid ${theme.black}`}
+            border={`2px solid ${theme.color.black}`}
             hover="none"
             fontSize="1.2rem"
-            style={{ backgroundColor: theme.lightGray, fontWeight: '600' }}
+            style={{
+              backgroundColor: `${theme.color.lightGray}`,
+              fontWeight: '600',
+            }}
             onClick={onClick}
           >
             세부사항 숨기기
@@ -70,7 +73,7 @@ const MsgSectionWrapper = styled.div`
 `;
 
 const MsgSectionTitle = styled.h2`
-  color: ${theme.black};
+  color: ${({ theme }) => theme.color.black};
   font-size: 1.8rem;
   font-weight: bold;
 `;

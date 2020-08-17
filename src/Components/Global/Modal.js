@@ -13,6 +13,7 @@ const Modal = ({
   title,
   modalState,
   setModalState,
+  ...rest
 }) => {
   const [animate, setAnimate] = useState(false);
   const [visible, setVisible] = useState(modalState);
@@ -42,7 +43,7 @@ const Modal = ({
       className="dimmed"
       animate={animate}
     >
-      <StModalDiv width={width} height={height} animate={animate}>
+      <StModalDiv width={width} height={height} animate={animate} {...rest}>
         <StModalCloseBtn type="button" onClick={onBtnDelete}>
           <StCloseIcon />
         </StModalCloseBtn>
@@ -149,7 +150,7 @@ const StModalCloseBtn = styled.button`
   outline: 0;
   background: transparent;
   &:hover {
-    background-color: #eee;
+    background-color: ${({ theme }) => theme.color.lightGray};
   }
   &:focus {
     border: 2px solid #181818;
@@ -176,8 +177,8 @@ const area = css`
 
 const StModalHeader = styled.header`
   ${area};
-  border-bottom: 1px solid #ebebeb;
-  font-weight: 800;
+  border-bottom: 1px solid ${({ theme }) => theme.color.line};
+  font-weight: 600;
 `;
 
 export default Modal;

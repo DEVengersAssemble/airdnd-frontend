@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import theme from '../../style/theme';
 
-const DetailCanceledMain = () => {
+const DetailCanceledMain = ({ theme }) => {
   return <div></div>;
 };
 
