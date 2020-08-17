@@ -6,18 +6,15 @@ import { FaBars } from 'react-icons/fa';
 const StMyPageButton = styled(Button)`
   padding: 5px 10px;
   font-size: 16px;
+  border: 1px solid ${({ theme }) => theme.color.line};
   &:hover {
-    border: ${({ isScrollTop }) =>
-      isScrollTop || `1px solid ${({ theme }) => theme.color.lightGray}`};
+    border: 1px solid ${({ theme }) => theme.color.line};
     box-shadow: ${({ isScrollTop }) =>
-      isScrollTop || '0px 2px 4px rgba(0, 0, 0, 0.18)'};
+      isScrollTop || '2px 2px 4px rgba(0, 0, 0, 0.18)'};
   }
   &:focus {
     box-shadow: none;
   }
-
-  border: ${({ isScrollTop }) =>
-    isScrollTop || `1px solid ${({ theme }) => theme.color.lightGray}`};
 `;
 
 const StProfileImg = styled.svg`

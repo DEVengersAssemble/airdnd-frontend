@@ -87,9 +87,9 @@ const StOnScrollSearchButton = styled(Button)`
   left: calc(50% - 150px);
   padding: 10px 10px 10px 20px;
   color: ${({ theme }) => theme.color.black};
-  border: 1px solid ${({ theme }) => theme.color.lightGray};
+  border: 1px solid ${({ theme }) => theme.color.line};
   &:hover {
-    border: 1px solid ${({ theme }) => theme.color.lightGray};
+    border: 1px solid ${({ theme }) => theme.color.line};
     transition: box-shadow 0.2s ease;
     box-shadow: 2px 2px 4px 0px rgba(168, 168, 168, 0.5);
   }
