@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { StBtn } from '../Global/Button';
+import Button from '../Global/Button';
 import { FiPlus, FiMinus } from 'react-icons/fi';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import { GrClose } from 'react-icons/gr';
@@ -8,11 +8,11 @@ import { GrClose } from 'react-icons/gr';
 const MapZoomButton = () => {
   return (
     <StBtnWrapper>
-      <StButton className="plusBtn">
+      <StButton className="plusBtn" position="relative">
         <FiPlus fontSize="2.4rem" />
       </StButton>
       <StLine />
-      <StButton className="minusBtn">
+      <StButton className="minusBtn" position="relative">
         <FiMinus fontSize="2.4rem" />
       </StButton>
     </StBtnWrapper>
@@ -29,7 +29,13 @@ const MapMarkerButton = () => {
 
 const MapCloseButton = () => {
   return (
-    <StButton boxShadow>
+    <StButton
+      boxShadow
+      top="10rem"
+      left="2rem"
+      position="sticky"
+      margin="0 2rem 91px"
+    >
       <GrClose />
     </StButton>
   );
@@ -62,18 +68,22 @@ const StLine = styled.hr`
   border-bottom: 1px solid ${({ theme }) => theme.color.shadow};
 `;
 
-const StButton = styled(StBtn)`
+const StButton = styled(Button)`
   border: none;
   padding: 0;
   width: 40px;
   height: 40px;
   font-size: 1.7rem;
-  position: relative;
+  z-index: 10;
 
-  ${({ boxShadow }) =>
-    boxShadow &&
+  ${({ boxShadow, top, right, left, position, margin, theme }) =>
     css`
-      box-shadow: 1px 1px 3px ${({ theme }) => theme.color.shadow};
+      top: ${top};
+      right: ${right};
+      left: ${left};
+      position: ${position};
+      margin: ${margin};
+      ${boxShadow && `box-shadow: 1px 1px 3px ${theme.color.shadow}`};
     `}
 `;
 

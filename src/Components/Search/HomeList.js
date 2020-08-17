@@ -1,14 +1,14 @@
 import React from 'react';
 import Home from './Home';
 import styled from 'styled-components';
+import HomeContainer from '../../Containers/Search/HomeContainer';
 
 const HomeList = () => {
   return (
     <StWrapper>
-      <Home />
-      <Home />
-      <Home />
-      <Home />
+      <HomeContainer />
+      <HomeContainer />
+      <HomeContainer />
     </StWrapper>
   );
 };

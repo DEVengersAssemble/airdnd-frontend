@@ -21,6 +21,7 @@ const SearchResult = () => {
 const StWrapper = styled.div`
   width: 840px;
   padding: 5rem 2rem 3rem;
+  margin-top: 8rem;
 `;
 
 const StHeader = styled.h2`
