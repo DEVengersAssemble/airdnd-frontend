@@ -5,25 +5,11 @@ import ChatListItem from '../Message/ChatListItem';
 import ChatListsNothing from '../Message/ChatListsNothing';
 
 const ChatMain = () => {
-  const ChatNothing = false;
+  const ChatNothing = true;
   return (
     <ChatMainWrapper>
       {ChatNothing ? (
         <ChatLists>
-          <ChatListItem />
-          <ChatListItem />
-          <ChatListItem />
-          <ChatListItem />
-          <ChatListItem />
-          <ChatListItem />
-          <ChatListItem />
-          <ChatListItem />
-          <ChatListItem />
-          <ChatListItem />
-          <ChatListItem />
-          <ChatListItem />
-          <ChatListItem />
-          <ChatListItem />
           <ChatListItem />
           <ChatListItem />
           <ChatListItem />

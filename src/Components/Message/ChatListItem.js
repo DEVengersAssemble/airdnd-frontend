@@ -68,18 +68,18 @@ const LastChatInner = styled.div`
 
 const LastChat = styled.span`
   font-size: 1.4rem;
-  ${ellipsis('18rem')};
+  ${ellipsis('17.8rem')};
 `;
 
 const LastChatDate = styled.span`
   color: ${({ theme }) => theme.color.darkGray};
   font-size: 1.3rem;
-  font-weight: 300;
+  font-weight: light;
 `;
 
 const ReservationWrapper = styled.div`
   font-size: 1rem;
-  font-weight: 200;
+  font-weight: light;
 `;
 
 const ReservedState = styled.span`
