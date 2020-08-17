@@ -255,14 +255,14 @@ const StGraph = styled.ul`
 const StStick = styled.li`
   width: 5px;
   height: 3rem;
-  margin: 0 1px;
+  margin: 0 1px -1px;
   border-radius: 1px;
   background: ${({ theme }) => theme.color.gray};
 `;
 
 const StRangeBar = styled.div`
   width: 100%;
-  height: 3px;
+  height: 2px;
   background: ${({ theme }) => theme.color.gray};
   position: relative;
   display: flex;

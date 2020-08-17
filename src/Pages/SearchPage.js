@@ -4,6 +4,10 @@ import SearchResult from '../Components/Search/SearchResult';
 import SearchMap from '../Components/Search/SearchMap';
 import FilterModal from '../Components/Search/FilterModal';
 import Footer from '../Components/Main/Footer';
+import {
+  BookmarkListModal,
+  NewBookmarkModal,
+} from '../Components/Global/BookmarkModal';
 
 const SearchPage = () => {
   return (
@@ -15,6 +19,8 @@ const SearchPage = () => {
       </StContent>
       <Footer />
       <FilterModal />
+      <BookmarkListModal />
+      <NewBookmarkModal />
     </StWrapper>
   );
 };
