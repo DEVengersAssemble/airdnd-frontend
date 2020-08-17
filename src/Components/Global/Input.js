@@ -1,11 +1,10 @@
 import React from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import { darken, lighten } from 'polished';
-import theme from '../../style/theme';
 
 const borderStyle = css`
   border: 1px solid
-    ${({ message }) =>
+    ${({ message, theme }) =>
       message ? darken(0.1, theme.color.gray) : lighten(0.2, theme.color.gray)};
   border-radius: ${({ message }) => (message ? '2.2rem' : '4px')};
   padding: ${({ message }) => (message ? '1.3rem 1.5rem' : '1.6rem 1rem')};
@@ -13,14 +12,14 @@ const borderStyle = css`
 
 const placeholderStyle = css`
   &::placeholder {
-    color: ${darken(0.3, theme.color.darkGray)};
+    color: ${({ theme }) => darken(0.3, theme.color.darkGray)};
     font-size: 1.6rem;
     font-weight: 300;
   }
 `;
 
 const focusStyle = css`
-  ${({ borderNone }) =>
+  ${({ borderNone, theme }) =>
     !borderNone &&
     css`
       &:focus {
@@ -30,7 +29,7 @@ const focusStyle = css`
             border: 2px solid ${theme.color.black};
             padding: 1.2rem 1.4rem;
           `};
-        border-color: ${({ focusBorderColor }) =>
+        border-color: ${({ focusBorderColor, theme }) =>
           focusBorderColor ? theme.color.green : theme.color.black};
       }
     `};
@@ -44,7 +43,7 @@ const nameStyle = css`
   position: relative;
   top: -0.6rem;
   left: 0.1rem;
-  color: ${darken(0.6, theme.color.gray)};
+  color: ${({ theme }) => darken(0.6, theme.color.gray)};
   font-size: 1.2rem;
   font-weight: 200;
 `;
@@ -81,10 +80,10 @@ const StNewLabel = styled.label`
   width: ${({ short }) => (short ? '16.8rem' : '100%')};
   padding: 1.2rem 1rem 0rem;
   height: 5.7rem;
-  border: 1px solid ${theme.color.gray};
+  border: 1px solid ${({ theme }) => theme.color.gray};
   border-radius: 8px;
   &:focus-within {
-    border: 1px solid ${theme.color.black};
+    border: 1px solid ${({ theme }) => theme.color.black};
   }
   &:focus-within div {
     ${({ animation }) =>
@@ -117,7 +116,7 @@ const StNewInput = styled.input`
 `;
 
 const StNewName = styled.div`
-  color: ${darken(0.5, theme.color.gray)};
+  color: ${({ theme }) => darken(0.5, theme.color.gray)};
   font-weight: 200;
   position: relative;
   top: 0.6rem;
