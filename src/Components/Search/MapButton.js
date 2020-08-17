@@ -35,7 +35,7 @@ const MapCloseButton = () => {
       top="10rem"
       left="2rem"
       position="sticky"
-      margin="0 2rem 81px"
+      margin="0 2rem 91px"
     >
       <GrClose />
     </StButton>

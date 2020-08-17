@@ -9,6 +9,13 @@ const Carousel = ({ size, ...rest }) => {
       <StBadge>슈퍼호스트</StBadge>
       <StPrevBtn styleType="transparent" />
       <StNextBtn styleType="transparent" />
+      <StCircleWrapper>
+        <StCircle color="lightGray" />
+        <StCircle color="gray" />
+        <StCircle color="gray" />
+        <StCircle color="gray" />
+        <StCircle color="gray" />
+      </StCircleWrapper>
     </StWrapper>
   );
 };
@@ -68,6 +75,23 @@ const StNextBtn = styled(NextButton)`
   position: absolute;
   top: calc(50% - 16px);
   right: 1rem;
+`;
+
+const StCircleWrapper = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const StCircle = styled.div`
+  margin: 1rem 0.3rem;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: ${({ color, theme }) => theme[color]};
 `;
 
 export default Carousel;

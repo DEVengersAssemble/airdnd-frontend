@@ -38,5 +38,8 @@ const StBtnSetWrapper = styled.div`
   height: fit-content;
   position: sticky;
   z-index: 10;
+  & > *:nth-child(1) {
+    margin-bottom: 1rem;
+  }
 `;
 export default SearchMap;

@@ -28,8 +28,6 @@ const StWrapper = styled.main`
 
 const StContent = styled.div`
   display: flex;
-  /* margin-top: 8rem; */
-  /* position: relative; */
 `;
 
 const StNav = styled.div`
