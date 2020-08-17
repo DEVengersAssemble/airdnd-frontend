@@ -41,7 +41,7 @@ const StNav = styled.div`
   left: 0;
   background: white;
   border-bottom: 1px solid gray;
-  /* opacity: 0.5; */
+  opacity: 0.5;
   width: 100%;
   height: 8rem;
   z-index: 100;

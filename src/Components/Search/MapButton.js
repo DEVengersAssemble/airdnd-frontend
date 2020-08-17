@@ -1,11 +1,27 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import Button from '../Global/Button';
-import { FiPlus, FiMinus } from 'react-icons/fi';
+import { FiPlus, FiMinus, FiMap } from 'react-icons/fi';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import { GrClose } from 'react-icons/gr';
 import { GoSettings } from 'react-icons/go';
 import Checkbox from '../Global/Checkbox';
+
+const MapButton = () => {
+  return (
+    <StMapButton
+      btnType="oval"
+      color="black"
+      hover={css`
+        transform: scale(1.05);
+        box-shadow: 0 3px 5px ${({ theme }) => theme.color.gray};
+      `}
+      transition
+    >
+      <FiMap /> <span>지도</span>
+    </StMapButton>
+  );
+};
 
 const MapFilterButton = () => {
   return (
@@ -105,6 +121,18 @@ const StButton = styled(Button)`
     `}
 `;
 
+const StMapButton = styled(Button)`
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & > span {
+    padding-left: 1rem;
+    font-size: 1.4rem;
+  }
+`;
+
 const StCheckbox = styled(Checkbox)`
   z-index: 10;
   top: 10rem;
@@ -121,6 +149,7 @@ const StFilterIcon = styled(GoSettings)`
   transform: rotate(90deg);
 `;
 export {
+  MapButton,
   MapZoomButton,
   MapMarkerButton,
   MapCloseButton,

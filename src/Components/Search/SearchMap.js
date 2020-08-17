@@ -6,6 +6,7 @@ import {
   MapCloseButton,
   MapCheckbox,
   MapFilterButton,
+  MapButton,
 } from './MapButton';
 import Map from '../Global/Map';
 
@@ -16,6 +17,7 @@ const SearchMap = ({ children }) => {
         <MapCloseButton />
         <MapCheckbox />
         <StBtnSetWrapper>
+          <MapButton />
           <MapZoomButton />
           <MapMarkerButton />
         </StBtnSetWrapper>
