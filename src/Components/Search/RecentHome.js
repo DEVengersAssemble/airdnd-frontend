@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Carousel from '../Global/Carousel';
 import Rating from '../Global/Rating';
 import { PrevButton, NextButton } from '../Global/SlideButton';
+import { CkHeart } from '../Global/Heart';
 
 const RecentHome = () => {
   return (
@@ -18,6 +19,7 @@ const RecentHome = () => {
         <StSpan>호텔 객실 Mongmong-Toto</StSpan>
         <StSpan>Clean private shower gold room</StSpan>
       </StHome>
+      <Heart ckType checked={false} />
     </StWrapper>
   );
 };
@@ -63,6 +65,12 @@ const StNextBtn = styled(NextButton)`
   top: calc(105px / 2 - 16px);
   left: calc(148px - 1rem - 32px);
   z-index: 5;
+`;
+
+const Heart = styled(CkHeart)`
+  position: absolute;
+  top: 0.7rem;
+  right: 0.5rem;
 `;
 
 export default RecentHome;
