@@ -6,19 +6,21 @@ const StSearchForm = styled.form`
   position: relative;
   background: ${({ theme }) => theme.color.white};
   width: 100%;
-  height: 68px;
+  height: 66px;
   border-radius: 32px;
   display: flex;
+  color: ${({ theme }) => theme.color.black};
+
   ${({ isSearchBtnClicked }) =>
     isSearchBtnClicked
       ? css`
           border: 1px solid ${({ theme }) => theme.color.line};
         `
       : css`
+          border: 1px solid transparent;
           box-shadow: rgba(0, 0, 0, 0.15) 0px 16px 32px,
             rgba(0, 0, 0, 0.1) 0px 3px 8px;
         `};
-  color: ${({ theme }) => theme.color.black};
 `;
 
 const StTextWrapper = styled.div`
@@ -29,7 +31,8 @@ const StTextWrapper = styled.div`
 
 const StFormItemWrapper = styled.div`
   width: ${({ width }) => width};
-  height: 100%;
+  height: 68px;
+  margin-top: -2px;
   outline: none;
   &:not(:first-child) ${StTextWrapper}::before {
     content: '';
@@ -45,6 +48,8 @@ const StFormItemWrapper = styled.div`
   &:hover {
     background: rgba(0, 0, 0, 0.07);
     border-radius: 32px;
+    margin-top: -1px;
+    height: 66px;
     ${StTextWrapper}::before {
       display: none;
     }
@@ -59,6 +64,8 @@ const StFormItemWrapper = styled.div`
   &:focus-within {
     background: white;
     border-radius: 32px;
+    height: 68px;
+    margin-top: -2px;
     box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.3);
     ${StTextWrapper}::before {
       display: none;
