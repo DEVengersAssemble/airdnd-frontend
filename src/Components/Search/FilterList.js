@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Button from '../Global/Button';
 import styled, { css } from 'styled-components';
 import {
@@ -7,32 +7,33 @@ import {
   PricePopup,
   SetDatePopup,
 } from './FilterPopup';
+import { FilterButtonContainer } from '../../Containers/Search/FilterListContainer';
 
-const FilterButton = ({ children }) => {
-  // const onClick = () => {
-
-  // }
-
-  return <FilterBtn btnType="oval">{children}</FilterBtn>;
+export const FilterButton = ({ children, text, onClick }) => {
+  return (
+    <StFilterWrapper>
+      <FilterBtn btnType="oval" onClick={onClick}>
+        {text}
+      </FilterBtn>
+      {children}
+    </StFilterWrapper>
+  );
 };
 
-const FilterList = () => {
+export const FilterList = () => {
   return (
     <StWrapper>
-      <StFilterWrapper>
-        <FilterButton>유연한 환불 정책</FilterButton>
+      <FilterButtonContainer text="유연한 환불 정책">
         <RefundPopup size="350px" />
-      </StFilterWrapper>
-      <StFilterWrapper>
-        <FilterButton>숙소 유형</FilterButton>
+      </FilterButtonContainer>
+      <FilterButtonContainer text="숙소 유형">
         <RoomTypePopup size="365px" />
-      </StFilterWrapper>
-      <StFilterWrapper>
-        <FilterButton>요금</FilterButton>
+      </FilterButtonContainer>
+      <FilterButtonContainer text="요금">
         <PricePopup size="430px" />
         <SetDatePopup size="350px" />
-      </StFilterWrapper>
-      <FilterButton>필터 추가하기</FilterButton>
+      </FilterButtonContainer>
+      <FilterButtonContainer text="필터 추가하기" />
     </StWrapper>
   );
 };
@@ -49,5 +50,3 @@ const StWrapper = styled.div`
 const StFilterWrapper = styled.div`
   position: relative;
 `;
-
-export default FilterList;

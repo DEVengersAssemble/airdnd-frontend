@@ -10,8 +10,8 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 
 const RefundPopup = ({ popupState, size }) => {
   return (
-    <FilterPopup className="refund" popupState={false} size={size}>
-      <StContentWrapper className="refund">
+    <FilterPopup popupState={popupState} size={size}>
+      <StContentWrapper content="refund">
         <StSmallSpan>
           유연한 환불 정책을 제공하는 숙소만 검색 결과에 표시
         </StSmallSpan>
@@ -28,11 +28,11 @@ const RoomTypePopup = ({ popupState, size }) => {
     setCheck(e.target.checked);
   };
   return (
-    <FilterPopup className="roomType" popupState={false} size={size}>
+    <FilterPopup popupState={popupState} size={size}>
       <StCheckboxList>
         <StCheckboxWrapper>
           <Checkbox value checked={check} onChange={onChange}>
-            <StContentWrapper className="roomType">
+            <StContentWrapper content="roomType">
               <StLargeSpan>집 전체</StLargeSpan>
               <StSmallSpan>집 전체를 단독으로 사용합니다</StSmallSpan>
             </StContentWrapper>
@@ -40,7 +40,7 @@ const RoomTypePopup = ({ popupState, size }) => {
         </StCheckboxWrapper>
         <StCheckboxWrapper>
           <Checkbox value checked={check} onChange={onChange}>
-            <StContentWrapper className="roomType">
+            <StContentWrapper content="roomType">
               <StLargeSpan>개인실</StLargeSpan>
               <StSmallSpan>
                 침실은 단독으로 쓰고, 이외의 공간은 호스트나 다른 게스트와 함께
@@ -51,7 +51,7 @@ const RoomTypePopup = ({ popupState, size }) => {
         </StCheckboxWrapper>
         <StCheckboxWrapper>
           <Checkbox value checked={check} onChange={onChange}>
-            <StContentWrapper className="roomType">
+            <StContentWrapper content="roomType">
               <StLargeSpan>다인실</StLargeSpan>
               <StSmallSpan>
                 사적 공간 없이, 침실이나 욕실 등을 호스트나 다른 게스트와 함께
@@ -67,8 +67,8 @@ const RoomTypePopup = ({ popupState, size }) => {
 
 const PricePopup = ({ popupState, size }) => {
   return (
-    <FilterPopup className="price" popupState={false} size={size}>
-      <StContentWrapper className="price">
+    <FilterPopup popupState={popupState} size={size}>
+      <StContentWrapper content="price">
         <StLargeSpan>평균 1박 요금은 ₩78,902입니다</StLargeSpan>
         <StRangeWrapper>
           <StRangeBar>
@@ -112,8 +112,8 @@ const PricePopup = ({ popupState, size }) => {
 
 const SetDatePopup = ({ popupState, size }) => {
   return (
-    <StPopup popupState={false} size={size}>
-      <StContentWrapper className="setDate">
+    <StPopup popupState={popupState} size={size}>
+      <StContentWrapper content="setDate">
         <StLargeSpan>요금을 확인하려면 여행 날짜를 입력하세요</StLargeSpan>
         <Button btnType="color" color="black">
           날짜 입력
@@ -152,33 +152,36 @@ const StPopup = styled(Popup)`
   width: ${({ size }) => size};
 `;
 
-const StContentWrapper = styled.div`
-  padding: 2rem;
-
-  &.refund {
+const contentStyles = {
+  refund: css`
     display: flex;
     height: 165px;
     padding-top: 3rem;
-  }
-
-  &.roomType {
+  `,
+  roomType: css`
     padding: 1rem;
     height: 100%;
     & > * {
       margin: 0 0 0.3rem;
     }
-  }
-
-  &.setDate {
+  `,
+  setDate: css`
     height: 110px;
     & > * {
       margin-bottom: 1.3rem;
     }
-  }
-
-  &.price {
+  `,
+  price: css`
     height: 330px;
-  }
+  `,
+};
+
+const StContentWrapper = styled.div`
+  padding: 2rem;
+  ${({ content }) =>
+    css`
+      ${contentStyles[content]}
+    `}
 `;
 
 const spanStyle = css`
@@ -200,7 +203,7 @@ const StLargeSpan = styled.span`
 
 const StCheckboxList = styled.ul`
   padding: 2rem;
-  height: 360px;
+  height: 380px;
 `;
 
 const StCheckboxWrapper = styled.li`
