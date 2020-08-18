@@ -117,7 +117,7 @@ const StButton = styled(Button)`
 
 const StMapButton = styled(Button)`
   z-index: 10;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   position: fixed;
@@ -128,6 +128,10 @@ const StMapButton = styled(Button)`
   & > span {
     padding-left: 1rem;
     font-size: 1.4rem;
+  }
+
+  @media ${({ theme }) => theme.size.medium} {
+    display: flex;
   }
 `;
 
