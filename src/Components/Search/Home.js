@@ -53,6 +53,10 @@ const StWrapper = styled.li`
   border-top: 1px solid ${({ theme }) => theme.color.shadow};
   padding: 2rem 0;
   position: relative;
+
+  @media ${({ theme }) => theme.size.medium} {
+    width: 100%;
+  }
 `;
 
 const StHome = styled.a`

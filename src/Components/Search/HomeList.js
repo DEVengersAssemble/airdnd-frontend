@@ -1,5 +1,4 @@
 import React from 'react';
-import Home from './Home';
 import styled from 'styled-components';
 import HomeContainer from '../../Containers/Search/HomeContainer';
 
