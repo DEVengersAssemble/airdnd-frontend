@@ -17,7 +17,7 @@ const StMainHeader = styled.header`
   justify-content: space-between;
   margin: 0;
   height: ${({ isSearchBtnClicked }) =>
-    isSearchBtnClicked ? '160px' : '80px'};
+    isSearchBtnClicked ? '200px' : '80px'};
   background: ${({ isScrollTop }) =>
     isScrollTop
       ? 'transparent'
@@ -67,7 +67,8 @@ const StNavSearchWrapper = styled.div`
   animation-duration: 0.2s;
   animation-timing-function: ease-out;
   animation-fill-mode: forwards;
-  animation-name: ${({ isScrollTop }) => (isScrollTop ? slideUp : slideDown)};
+  animation-name: ${({ isScrollTop, isSearchBtnClicked }) =>
+    isScrollTop || isSearchBtnClicked ? slideUp : slideDown};
 
   @media (max-width: 950px) {
     width: 80%;
@@ -88,8 +89,8 @@ const StButtonGroupWrapper = styled.div`
 `;
 
 const StOnScrollSearchButton = styled(Button)`
-  ${({ isScrollTop }) =>
-    isScrollTop &&
+  ${({ isScrollTop, isSearchBtnClicked }) =>
+    (isScrollTop || isSearchBtnClicked) &&
     css`
       display: none;
     `}
@@ -130,14 +131,22 @@ const MainHeader = ({
       isSearchBtnClicked={isSearchBtnClicked}
     >
       <Logo isScrollTop={isScrollTop} handleLogoClick={handleLogoClick}></Logo>
-      <StNavSearchWrapper isScrollTop={isScrollTop}>
-        <Navigation></Navigation>
+      <StNavSearchWrapper
+        isScrollTop={isScrollTop}
+        isSearchBtnClicked={isSearchBtnClicked}
+      >
+        <Navigation
+          isScrollTop={isScrollTop}
+          isSearchBtnClicked={isSearchBtnClicked}
+        ></Navigation>
         <SearchForm></SearchForm>
       </StNavSearchWrapper>
+
       <StOnScrollSearchButton
         btnType="oval"
         fontSize="14px"
         isScrollTop={isScrollTop}
+        isSearchBtnClicked={isSearchBtnClicked}
         onClick={handleSearchBtnClick}
       >
         검색 시작하기
@@ -145,6 +154,7 @@ const MainHeader = ({
           <FiSearch />
         </StOnScrollSearchButtonIconWrapper>
       </StOnScrollSearchButton>
+
       <StButtonGroupWrapper>
         <SettingButtonContainer isScrollTop={isScrollTop} />
         <MyPageButtonContainer isScrollTop={isScrollTop} />
