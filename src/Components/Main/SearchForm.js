@@ -6,11 +6,18 @@ const StSearchForm = styled.form`
   position: relative;
   background: ${({ theme }) => theme.color.white};
   width: 100%;
-  height: 66px;
+  height: 68px;
   border-radius: 32px;
-  overflow: hidden;
   display: flex;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 16px 32px, rgba(0, 0, 0, 0.1) 0px 3px 8px;
+  ${({ isSearchBtnClicked }) =>
+    isSearchBtnClicked
+      ? css`
+          border: 1px solid ${({ theme }) => theme.color.line};
+        `
+      : css`
+          box-shadow: rgba(0, 0, 0, 0.15) 0px 16px 32px,
+            rgba(0, 0, 0, 0.1) 0px 3px 8px;
+        `};
   color: ${({ theme }) => theme.color.black};
 `;
 
@@ -129,9 +136,9 @@ const StContentText = styled.p`
   color: ${({ theme }) => theme.color.darkGray};
 `;
 
-const SearchForm = () => {
+const SearchForm = ({ isSearchBtnClicked }) => {
   return (
-    <StSearchForm>
+    <StSearchForm isSearchBtnClicked={isSearchBtnClicked}>
       <StFormItemWrapper width="30%" tabIndex="0" place>
         <StPlaceLabel>
           <StTextWrapper>

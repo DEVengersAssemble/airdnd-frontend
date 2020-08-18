@@ -17,7 +17,7 @@ const StMainHeader = styled.header`
   justify-content: space-between;
   margin: 0;
   height: ${({ isSearchBtnClicked }) =>
-    isSearchBtnClicked ? '200px' : '80px'};
+    isSearchBtnClicked ? '180px' : '80px'};
   background: ${({ isScrollTop }) =>
     isScrollTop
       ? 'transparent'
@@ -139,7 +139,7 @@ const MainHeader = ({
           isScrollTop={isScrollTop}
           isSearchBtnClicked={isSearchBtnClicked}
         ></Navigation>
-        <SearchForm></SearchForm>
+        <SearchForm isSearchBtnClicked={isSearchBtnClicked}></SearchForm>
       </StNavSearchWrapper>
 
       <StOnScrollSearchButton
