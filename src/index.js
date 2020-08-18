@@ -5,12 +5,21 @@ import { ThemeProvider } from 'styled-components';
 import theme from './style/theme';
 import App from './App';
 
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import rootReducer from './Modules';
+import { composeWithDevTools } from 'redux-devtools-extension';
+
+const store = createStore(rootReducer, composeWithDevTools());
+
 ReactDOM.render(
-  <BrowserRouter>
-    <ThemeProvider theme={theme}>
-      <App />
-    </ThemeProvider>
-  </BrowserRouter>,
+  <Provider store={store}>
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
+    </BrowserRouter>
+  </Provider>,
   document.getElementById('root'),
 );
 
