@@ -14,7 +14,7 @@ const MapButton = () => {
       color="black"
       hover={css`
         transform: scale(1.05);
-        box-shadow: 0 3px 5px ${({ theme }) => theme.color.gray};
+        box-shadow: 0 3px 5px ${({ theme }) => theme.color.lightGray};
       `}
       transition
     >
@@ -63,13 +63,7 @@ const MapMarkerButton = () => {
 
 const MapCloseButton = () => {
   return (
-    <StButton
-      boxShadow
-      top="10rem"
-      left="2rem"
-      position="sticky"
-      margin="0 0 91px 2rem"
-    >
+    <StButton boxShadow position="sticky" top="10rem" margin="0 0 91px 0">
       <GrClose />
     </StButton>
   );
@@ -126,6 +120,10 @@ const StMapButton = styled(Button)`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: fixed;
+  bottom: 5rem;
+  left: calc(50% - 46px);
+  border: none;
 
   & > span {
     padding-left: 1rem;
@@ -135,12 +133,14 @@ const StMapButton = styled(Button)`
 
 const StCheckbox = styled(Checkbox)`
   z-index: 10;
-  top: 10rem;
   position: sticky;
+  top: 10rem;
   height: 40px;
   margin: 0 0 91px;
   border-radius: 8px;
   padding: 0 0.5rem;
+  margin-left: -2rem;
+
   ${({ boxShadow, theme }) =>
     boxShadow && `box-shadow: 1px 1px 3px ${theme.color.shadow}`};
 `;

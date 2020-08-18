@@ -17,7 +17,6 @@ const SearchMap = ({ children }) => {
         <MapCloseButton />
         <MapCheckbox />
         <StBtnSetWrapper>
-          <MapButton />
           <MapZoomButton />
           <MapMarkerButton />
         </StBtnSetWrapper>
@@ -40,6 +39,8 @@ const StStickyWrapper = styled.div`
   width: inherit;
   height: 100vh;
   position: absolute;
+  top: 10rem;
+  padding: 0 0 0 2rem;
 `;
 
 const StBtnSetWrapper = styled.div`
