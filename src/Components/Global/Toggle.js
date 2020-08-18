@@ -1,6 +1,5 @@
 import React from 'react';
 import { MdDone } from 'react-icons/md';
-
 import styled, { css } from 'styled-components';
 
 const StToggleButton = styled.button`
@@ -19,11 +18,9 @@ const StToggleButton = styled.button`
     css`
       background: ${({ theme }) => theme.color.black};
     `}
-
   &:hover {
-    background: ${({ theme }) => theme.color.lightGray};
+    background: ${({ theme }) => theme.color.gray};
   }
-
   &:focus {
     box-shadow: ${({ theme }) => theme.color.white} 0px 0px 0px 2px,
       ${({ theme }) => theme.color.black} 0px 0px 0px 4px,
@@ -62,5 +59,4 @@ const Toggle = ({ checked, handleClick }) => {
     </StToggleButton>
   );
 };
-
 export default Toggle;
