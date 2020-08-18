@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { PrevButton, NextButton } from './SlideButton';
 
+// size 필수: superLarge, large, medium, small
 const Carousel = ({
   img,
   isClicked,
@@ -56,6 +57,10 @@ const Carousel = ({
 };
 
 const sizes = {
+  superLarge: {
+    width: '327',
+    height: '184',
+  },
   large: {
     width: '300',
     height: '200',

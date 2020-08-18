@@ -8,9 +8,9 @@ import Checkbox from '../Global/Checkbox';
 import { NewInput } from '../Global/Input';
 import { GiHamburgerMenu } from 'react-icons/gi';
 
-const RefundPopup = popupState => {
+const RefundPopup = ({ popupState, size }) => {
   return (
-    <FilterPopup className="refund" popupState={false}>
+    <FilterPopup className="refund" popupState={false} size={size}>
       <StContentWrapper className="refund">
         <StSmallSpan>
           유연한 환불 정책을 제공하는 숙소만 검색 결과에 표시
@@ -21,14 +21,14 @@ const RefundPopup = popupState => {
   );
 };
 
-const RoomTypePopup = popupState => {
+const RoomTypePopup = ({ popupState, size }) => {
   const [check, setCheck] = React.useState(false);
 
   const onChange = e => {
     setCheck(e.target.checked);
   };
   return (
-    <FilterPopup className="roomType" left="15.7rem" popupState={false}>
+    <FilterPopup className="roomType" popupState={false} size={size}>
       <StCheckboxList>
         <StCheckboxWrapper>
           <Checkbox value checked={check} onChange={onChange}>
@@ -65,9 +65,9 @@ const RoomTypePopup = popupState => {
   );
 };
 
-const PricePopup = popupState => {
+const PricePopup = ({ popupState, size }) => {
   return (
-    <FilterPopup className="price" left="25rem" popupState={false}>
+    <FilterPopup className="price" popupState={false} size={size}>
       <StContentWrapper className="price">
         <StLargeSpan>평균 1박 요금은 ₩78,902입니다</StLargeSpan>
         <StRangeWrapper>
@@ -110,64 +110,46 @@ const PricePopup = popupState => {
   );
 };
 
-const SetDatePopup = popupState => {
+const SetDatePopup = ({ popupState, size }) => {
   return (
-    <StWrapper className="setDate">
-      <StPopup left="27rem" popupState={false}>
-        <StContentWrapper className="setDate">
-          <StLargeSpan>요금을 확인하려면 여행 날짜를 입력하세요</StLargeSpan>
-          <Button btnType="color" color="black">
-            날짜 입력
-          </Button>
-        </StContentWrapper>
-      </StPopup>
-    </StWrapper>
+    <StPopup popupState={false} size={size}>
+      <StContentWrapper className="setDate">
+        <StLargeSpan>요금을 확인하려면 여행 날짜를 입력하세요</StLargeSpan>
+        <Button btnType="color" color="black">
+          날짜 입력
+        </Button>
+      </StContentWrapper>
+    </StPopup>
   );
 };
 
-const FilterPopup = ({ children, popupState, left, className }) => {
+const FilterPopup = ({ children, popupState, size }) => {
   return (
-    <StWrapper className={className}>
-      <StPopup left={left} popupState={popupState}>
-        {children}
-        <StFooter align="space-between">
-          <Button btnType="underlined" padding="1rem" fontSize="1.6rem">
-            지우기
-          </Button>
-          <Button
-            btnType="color"
-            color="black"
-            padding="1rem 1.5rem"
-            fontSize="1.4rem"
-            hover="background: #000"
-            transition
-          >
-            저장
-          </Button>
-        </StFooter>
-      </StPopup>
-    </StWrapper>
+    <StPopup popupState={popupState} size={size}>
+      {children}
+      <StFooter align="space-between">
+        <Button btnType="underlined" padding="1rem" fontSize="1.6rem">
+          지우기
+        </Button>
+        <Button
+          btnType="color"
+          color="black"
+          padding="1rem 1.5rem"
+          fontSize="1.4rem"
+          hover="background: #000"
+          transition
+        >
+          저장
+        </Button>
+      </StFooter>
+    </StPopup>
   );
 };
-
-const sizes = {
-  refund: '350px',
-  roomType: '365px',
-  setDate: '350px',
-  price: '430px',
-};
-
-const StWrapper = styled.div`
-  position: relative;
-  ${({ className }) => css`
-    width: ${sizes[className]};
-  `}
-`;
 
 const StPopup = styled(Popup)`
-  top: -1rem;
+  top: 7rem;
   padding: 0;
-  width: 100%;
+  width: ${({ size }) => size};
 `;
 
 const StContentWrapper = styled.div`
