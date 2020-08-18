@@ -136,7 +136,7 @@ const FilterModal = () => {
 
 const StModal = styled(Modal)`
   width: 780px;
-  height: 920px;
+  height: 92vh;
 `;
 
 const StFilterList = styled.ul`

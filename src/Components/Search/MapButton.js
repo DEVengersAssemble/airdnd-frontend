@@ -1,18 +1,52 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { StBtn } from '../Global/Button';
-import { FiPlus, FiMinus } from 'react-icons/fi';
+import Button from '../Global/Button';
+import { FiPlus, FiMinus, FiMap } from 'react-icons/fi';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import { GrClose } from 'react-icons/gr';
+import { GoSettings } from 'react-icons/go';
+import Checkbox from '../Global/Checkbox';
+
+const MapButton = () => {
+  return (
+    <StMapButton
+      btnType="oval"
+      color="black"
+      hover={css`
+        transform: scale(1.05);
+        box-shadow: 0 3px 5px ${({ theme }) => theme.color.lightGray};
+      `}
+      transition
+    >
+      <FiMap /> <span>지도</span>
+    </StMapButton>
+  );
+};
+
+const MapFilterButton = () => {
+  return (
+    <StButton boxShadow top="20rem" position="sticky">
+      <StFilterIcon />
+    </StButton>
+  );
+};
+
+const MapCheckbox = () => {
+  return (
+    <StCheckbox map value boxShadow checked={true}>
+      지도를 움직이며 검색하기
+    </StCheckbox>
+  );
+};
 
 const MapZoomButton = () => {
   return (
     <StBtnWrapper>
-      <StButton className="plusBtn">
+      <StButton className="plusBtn" position="relative">
         <FiPlus fontSize="2.4rem" />
       </StButton>
       <StLine />
-      <StButton className="minusBtn">
+      <StButton className="minusBtn" position="relative">
         <FiMinus fontSize="2.4rem" />
       </StButton>
     </StBtnWrapper>
@@ -29,7 +63,7 @@ const MapMarkerButton = () => {
 
 const MapCloseButton = () => {
   return (
-    <StButton boxShadow>
+    <StButton boxShadow position="sticky" top="10rem" margin="0 0 91px 0">
       <GrClose />
     </StButton>
   );
@@ -62,19 +96,67 @@ const StLine = styled.hr`
   border-bottom: 1px solid ${({ theme }) => theme.color.shadow};
 `;
 
-const StButton = styled(StBtn)`
+const StButton = styled(Button)`
   border: none;
   padding: 0;
   width: 40px;
   height: 40px;
   font-size: 1.7rem;
-  position: relative;
+  z-index: 10;
 
-  ${({ boxShadow }) =>
-    boxShadow &&
+  ${({ boxShadow, top, right, left, position, margin, theme }) =>
     css`
-      box-shadow: 1px 1px 3px ${({ theme }) => theme.color.shadow};
+      top: ${top};
+      right: ${right};
+      left: ${left};
+      position: ${position};
+      margin: ${margin};
+      ${boxShadow && `box-shadow: 1px 1px 3px ${theme.color.shadow}`};
     `}
 `;
 
-export { MapZoomButton, MapMarkerButton, MapCloseButton };
+const StMapButton = styled(Button)`
+  z-index: 10;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 5rem;
+  left: calc(50% - 46px);
+  border: none;
+
+  & > span {
+    padding-left: 1rem;
+    font-size: 1.4rem;
+  }
+
+  @media ${({ theme }) => theme.size.medium} {
+    display: flex;
+  }
+`;
+
+const StCheckbox = styled(Checkbox)`
+  z-index: 10;
+  position: sticky;
+  top: 10rem;
+  height: 40px;
+  margin: 0 0 91px;
+  border-radius: 8px;
+  padding: 0 0.5rem;
+  margin-left: -2rem;
+
+  ${({ boxShadow, theme }) =>
+    boxShadow && `box-shadow: 1px 1px 3px ${theme.color.shadow}`};
+`;
+
+const StFilterIcon = styled(GoSettings)`
+  transform: rotate(90deg);
+`;
+export {
+  MapButton,
+  MapZoomButton,
+  MapMarkerButton,
+  MapCloseButton,
+  MapCheckbox,
+  MapFilterButton,
+};

@@ -6,6 +6,7 @@ import Toggle from '../Global/Toggle';
 import ModalFooter from '../Global/ModalFooter';
 import Checkbox from '../Global/Checkbox';
 import { NewInput } from '../Global/Input';
+import { GiHamburgerMenu } from 'react-icons/gi';
 
 const RefundPopup = popupState => {
   return (
@@ -70,7 +71,22 @@ const PricePopup = popupState => {
       <StContentWrapper className="price">
         <StLargeSpan>평균 1박 요금은 ₩78,902입니다</StLargeSpan>
         <StRangeWrapper>
-          <StRange type="range" />
+          <StRangeBar>
+            <StButton btnType="circle" left="0">
+              <StIcon />
+            </StButton>
+            <StButton btnType="circle" right="0">
+              <StIcon />
+            </StButton>
+          </StRangeBar>
+          <StGraph>
+            <StStick />
+            <StStick />
+            <StStick />
+            <StStick />
+            <StStick />
+            <StStick />
+          </StGraph>
         </StRangeWrapper>
         <StInputWrapper>
           <NewInput
@@ -220,18 +236,48 @@ const StInputWrapper = styled.div`
   }
 
   & > span {
-    margin: 0 0 0 0.5rem;
+    margin: 0;
   }
 `;
 
 const StRangeWrapper = styled.div`
-  background: cornflowerblue;
   height: 10rem;
   margin: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  flex-flow: column-reverse;
 `;
 
-const StRange = styled.input`
+const StGraph = styled.ul`
+  display: flex;
+`;
+
+const StStick = styled.li`
+  width: 5px;
+  height: 3rem;
+  margin: 0 1px -1px;
+  border-radius: 1px;
+  background: ${({ theme }) => theme.color.gray};
+`;
+
+const StRangeBar = styled.div`
   width: 100%;
+  height: 2px;
+  background: ${({ theme }) => theme.color.gray};
+  position: relative;
+  display: flex;
+  align-items: center;
+`;
+
+const StButton = styled(Button)`
+  position: absolute;
+  right: ${({ right }) => right};
+  left: ${({ left }) => left};
+`;
+
+const StIcon = styled(GiHamburgerMenu)`
+  color: ${({ theme }) => theme.color.gray};
+  transform: rotate(90deg);
 `;
 
 const StFooter = styled(ModalFooter)`
