@@ -28,7 +28,6 @@ const DetailMain = () => {
 };
 
 const DetailMainWrapper = styled.div`
-  background: lightgray;
   position: absolute;
   top: 15.5rem;
   left: calc(100vw - 37.5rem);
