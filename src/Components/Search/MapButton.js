@@ -33,7 +33,7 @@ const MapFilterButton = () => {
 
 const MapCheckbox = () => {
   return (
-    <StCheckbox map value boxShadow checked={true}>
+    <StCheckbox map="map" value boxShadow checked={true}>
       지도를 움직이며 검색하기
     </StCheckbox>
   );
@@ -121,7 +121,7 @@ const StMapButton = styled(Button)`
   justify-content: center;
   align-items: center;
   position: fixed;
-  bottom: 5rem;
+  bottom: 3rem;
   left: calc(50% - 46px);
   border: none;
 
