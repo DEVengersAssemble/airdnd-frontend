@@ -1,34 +1,56 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { PrevButton, NextButton } from './SlideButton';
 
-const Carousel = ({ size, img, transition, ...rest }) => {
+const Carousel = ({
+  img,
+  isClicked,
+  transition,
+  slideNext,
+  slidePrev,
+  resetCarousel,
+  size,
+  ...rest
+}) => {
+  React.useEffect(() => {
+    if (!isClicked) return;
+    resetCarousel();
+  }, [isClicked]);
+
   return (
     <StWrapper size={size} {...rest}>
-      <StBadge>슈퍼호스트</StBadge>
-      <StImageList img={img} size={size} transition={transition}>
-        <StImageWrapper size={size}>
-          <StImage src="https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large" />
-        </StImageWrapper>
-        <StImageWrapper size={size}>
-          <StImage src="https://a0.muscache.com/im/pictures/3276d8ad-d455-4c59-923c-3f6926301a93.jpg?aki_policy=large" />
-        </StImageWrapper>
-        <StImageWrapper size={size}>
-          <StImage src="https://a0.muscache.com/im/pictures/2013c2de-4727-4cd9-b9cd-77d85238d440.jpg?aki_policy=large" />
-        </StImageWrapper>
-        <StImageWrapper size={size}>
-          <StImage src="https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large" />
-        </StImageWrapper>
-        <StImageWrapper size={size}>
-          <StImage src="https://a0.muscache.com/im/pictures/3276d8ad-d455-4c59-923c-3f6926301a93.jpg?aki_policy=large" />
-        </StImageWrapper>
-      </StImageList>
-      <StCircleWrapper>
-        <StCircle color="lightGray" />
-        <StCircle color="gray" />
-        <StCircle color="gray" />
-        <StCircle color="gray" />
-        <StCircle color="gray" />
-      </StCircleWrapper>
+      <StPrevBtn styleType="transparent" onClick={slidePrev} />
+      <StNextBtn styleType="transparent" onClick={slideNext} />
+      <StLink
+        target="_blank"
+        href="https://www.airbnb.co.kr/rooms/36094960?adults=1&location=%EB%A7%88%EB%93%9C%EB%A6%AC%EB%93%9C&source_impression_id=p3_1597324281_lNy0Q31ggfi0f1St&check_in=2020-09-26&guests=1&check_out=2020-09-30"
+      >
+        <StBadge>슈퍼호스트</StBadge>
+        <StImageList img={img} size={size} transition={transition}>
+          <StImageWrapper size={size}>
+            <StImage src="https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large" />
+          </StImageWrapper>
+          <StImageWrapper size={size}>
+            <StImage src="https://a0.muscache.com/im/pictures/3276d8ad-d455-4c59-923c-3f6926301a93.jpg?aki_policy=large" />
+          </StImageWrapper>
+          <StImageWrapper size={size}>
+            <StImage src="https://a0.muscache.com/im/pictures/2013c2de-4727-4cd9-b9cd-77d85238d440.jpg?aki_policy=large" />
+          </StImageWrapper>
+          <StImageWrapper size={size}>
+            <StImage src="https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large" />
+          </StImageWrapper>
+          <StImageWrapper size={size}>
+            <StImage src="https://a0.muscache.com/im/pictures/3276d8ad-d455-4c59-923c-3f6926301a93.jpg?aki_policy=large" />
+          </StImageWrapper>
+        </StImageList>
+        <StCircleWrapper>
+          <StCircle color="lightGray" />
+          <StCircle color="gray" />
+          <StCircle color="gray" />
+          <StCircle color="gray" />
+          <StCircle color="gray" />
+        </StCircleWrapper>
+      </StLink>
     </StWrapper>
   );
 };
@@ -50,6 +72,7 @@ const sizes = {
 
 const sizeStyles = css`
   ${({ size }) => css`
+    min-width: ${`${sizes[size].width}px`};
     width: ${`${sizes[size].width}px`};
     height: ${`${sizes[size].height}px`};
   `}
@@ -61,7 +84,6 @@ const StWrapper = styled.div`
   border-radius: 8px;
   background: pink;
   overflow: hidden;
-
   ${sizeStyles};
 `;
 
@@ -115,5 +137,21 @@ const StImage = styled.img`
   width: inherit;
   height: inherit;
 `;
+
+const StPrevBtn = styled(PrevButton)`
+  position: absolute;
+  top: calc(50% - 16px);
+  left: 1rem;
+  z-index: 5;
+`;
+
+const StNextBtn = styled(NextButton)`
+  position: absolute;
+  top: calc(50% - 16px);
+  right: 1rem;
+  z-index: 5;
+`;
+
+const StLink = styled.a``;
 
 export default Carousel;
