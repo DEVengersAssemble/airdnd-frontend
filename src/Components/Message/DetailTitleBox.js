@@ -15,13 +15,12 @@ const DetailTitleBox = () => {
 };
 
 const DtTitleBoxWrapper = styled.div`
-  border: 1px solid red;
   padding: 4.5rem 2.5rem 4rem;
 `;
 
 const DtTitleBoxSection = styled.section`
   font-size: 1.2rem;
-  font-weight: light:
+  font-weight: light;
 `;
 
 const DitTitleBoxLocation = styled.span`

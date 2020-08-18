@@ -31,6 +31,7 @@ const DetailMainWrapper = styled.div`
   position: absolute;
   top: 15.5rem;
   left: calc(100vw - 37.5rem);
+  width: 37.5rem;
   min-width: 37.5rem;
   height: 100vh;
   max-height: calc(100vh - 15.5rem);
@@ -38,6 +39,12 @@ const DetailMainWrapper = styled.div`
   overflow: scroll;
 `;
 
-const DetailMainInnerWrapper = styled.div``;
+const DetailMainInnerWrapper = styled.div`
+  & > div + div {
+    border-top: 5px solid ${({ theme }) => darken(0.1, theme.color.lightGray)};
+    border-bottom: 5px solid
+      ${({ theme }) => darken(0.1, theme.color.lightGray)};
+  }
+`;
 
 export default DetailMain;

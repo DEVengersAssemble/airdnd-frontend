@@ -34,6 +34,10 @@ const Carousel = ({ size, img, transition, ...rest }) => {
 };
 
 const sizes = {
+  superLarge: {
+    width: '327',
+    height: '184',
+  },
   large: {
     width: '300',
     height: '200',
