@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import HomeList from './HomeList';
-import FilterList from './FilterList';
+import { FilterListContainer } from '../../Containers/Search/FilterListContainer';
 import RecentHomeList from './RecentHomeList';
 import SearchPagenation from './SearchPagenation';
 import { MapButton } from './MapButton';
@@ -11,7 +11,7 @@ const SearchResult = () => {
     <StWrapper>
       <StSpan>숙박 279건 · 게스트 1명</StSpan>
       <StHeader>제주도의 숙소</StHeader>
-      <FilterList />
+      <FilterListContainer />
       <HomeList />
       <RecentHomeList />
       <SearchPagenation />
