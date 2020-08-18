@@ -6,17 +6,18 @@ import ChatListsNothing from '../Message/ChatListsNothing';
 
 const ChatMain = () => {
   const ChatNothing = true;
+
   return (
     <ChatMainWrapper>
       {ChatNothing ? (
+        <ChatListsNothing />
+      ) : (
         <ChatLists>
           <ChatListItem />
           <ChatListItem />
           <ChatListItem />
           <ChatListItem />
         </ChatLists>
-      ) : (
-        <ChatListsNothing />
       )}
     </ChatMainWrapper>
   );

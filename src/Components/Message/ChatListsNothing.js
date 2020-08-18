@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { darken } from 'polished';
 import Button from '../Global/Button';
 
 const ChatListsNothing = () => {
@@ -32,7 +33,8 @@ const ChatNothingTitle = styled.h3`
 
 const ChatNothingText = styled.p`
   padding-bottom: 1rem;
-  font-weight: 300;
+  color: ${({ theme }) => darken(0.1, theme.color.gray)};
+  font-weight: light;
   text-align: center;
 `;
 
