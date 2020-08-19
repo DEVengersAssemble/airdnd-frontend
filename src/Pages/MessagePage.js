@@ -20,7 +20,7 @@ const MessagePage = () => {
 };
 
 const MessagePageWrapper = styled.div`
-  display: flex;
+  /* display: flex; */
   position: absolute;
 `;
 
