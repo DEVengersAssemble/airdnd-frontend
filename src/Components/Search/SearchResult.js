@@ -11,14 +11,8 @@ const SearchResult = ({ mapState, openMap }) => {
     <StWrapper mapState={mapState}>
       <StSpan>숙박 279건 · 게스트 1명</StSpan>
       <StHeader>제주도의 숙소</StHeader>
-<<<<<<< HEAD
-      <FilterListContainer />
-      <HomeListContainer />
-      {/* <HomeList /> */}
-=======
       <FilterListContainer mapState={mapState} openMap={openMap} />
       <HomeListContainer mapState={mapState} />
->>>>>>> 6a1609d90b758efe188037199a8a2f0f4c5fb230
       <RecentHomeList />
       <SearchPagenation />
       <FloatingMapButton />

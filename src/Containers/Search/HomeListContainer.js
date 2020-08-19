@@ -8,16 +8,6 @@ import {
 } from './BookmarkModalContainer';
 
 const HomeListContainer = () => {
-<<<<<<< HEAD
-  const homes = useSelector(state => state.search.homes);
-  console.log('homes: ', homes);
-  return (
-    <>
-      {homes.map(home => {
-        console.log('home: ', home);
-        return <Home key={home.homeId} home={home} />;
-      })}
-=======
   const { homes } = useSelector(state => state.search);
   const [listModalState, setListModalState] = useState(false);
   const [newModalState, setNewModalState] = useState(false);
@@ -55,7 +45,6 @@ const HomeListContainer = () => {
         newModalState={newModalState}
         closeNewModal={closeNewModal}
       />
->>>>>>> 6a1609d90b758efe188037199a8a2f0f4c5fb230
     </>
   );
 };

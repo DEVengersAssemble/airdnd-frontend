@@ -79,7 +79,7 @@ const StFormItemWrapper = styled.div`
     }
   }
   ${({ name }) =>
-    name === 'place' ||
+    name === 'location' ||
     css`
       display: flex;
       align-items: center;
@@ -144,11 +144,19 @@ const StContentText = styled.p`
   color: ${({ theme }) => theme.color.darkGray};
 `;
 
-const SearchForm = ({ isSearchBtnClicked, type, changeType, closePopup }) => {
+const SearchForm = ({
+  isSearchBtnClicked,
+  type,
+  changeType,
+  closePopup,
+  searchData,
+  changeSearchData,
+}) => {
+  const { location, checkIn, checkOut, flexibleDate, guests } = searchData;
   return (
     <StSearchForm isSearchBtnClicked={isSearchBtnClicked}>
       <StFormItemWrapper
-        name="place"
+        name="location"
         width="30%"
         tabIndex="0"
         onClick={e => changeType(e)}
@@ -157,8 +165,12 @@ const SearchForm = ({ isSearchBtnClicked, type, changeType, closePopup }) => {
           <StTextWrapper>
             <StTypeText>위치</StTypeText>
             <StPlaceInput
-              name="place"
+              value={location}
+              name="location"
               placeholder="어디로 여행가세요?"
+              onChange={e => {
+                changeSearchData(e.target.name, e.target.value);
+              }}
             ></StPlaceInput>
           </StTextWrapper>
         </StPlaceLabel>
@@ -168,7 +180,7 @@ const SearchForm = ({ isSearchBtnClicked, type, changeType, closePopup }) => {
         ></SearchPlacePopup>
       </StFormItemWrapper>
       <StFormItemWrapper
-        name="checkin"
+        name="checkIn"
         width="20%"
         tabIndex="0"
         onClick={e => changeType(e)}
@@ -179,7 +191,7 @@ const SearchForm = ({ isSearchBtnClicked, type, changeType, closePopup }) => {
         </StTextWrapper>
       </StFormItemWrapper>
       <StFormItemWrapper
-        name="checkout"
+        name="checkOut"
         width="20%"
         tabIndex="0"
         onClick={e => changeType(e)}
@@ -191,7 +203,7 @@ const SearchForm = ({ isSearchBtnClicked, type, changeType, closePopup }) => {
         </StTextWrapper>
       </StFormItemWrapper>
       <StFormItemWrapper
-        name="guest"
+        name="guests"
         width="30%"
         tabIndex="0"
         onClick={e => changeType(e)}
