@@ -12,7 +12,7 @@ const SearchResult = ({ mapState, openMap }) => {
       <StSpan>숙박 279건 · 게스트 1명</StSpan>
       <StHeader>제주도의 숙소</StHeader>
       <FilterListContainer mapState={mapState} openMap={openMap} />
-      <HomeListContainer />
+      <HomeListContainer mapState={mapState} />
       <RecentHomeList />
       <SearchPagenation />
       <FloatingMapButton />
