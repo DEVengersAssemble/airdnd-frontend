@@ -5,7 +5,7 @@ import Profile from '../Global/Profile';
 import Button from '../Global/Button';
 import { AiFillFlag } from 'react-icons/ai';
 
-const MsgItem = ({ host }) => {
+const MsgItem = ({ host, onClickFlagModal }) => {
   return (
     <MsgItemWrapper>
       <MsgProfileWrapper>
@@ -24,20 +24,16 @@ const MsgItem = ({ host }) => {
       </MsgItemInner>
       <MsgButtonWrapper>
         {host && (
-          <Button
+          <StMsgButton
             btnType="circle"
             border="none"
             hover={{
               backgroundColor: theme.color.lightGray,
             }}
-            style={{
-              width: '4rem',
-              height: '4rem',
-              color: theme.color.darkGray,
-            }}
+            onClickFlagModal={onClickFlagModal}
           >
             <AiFillFlag />
-          </Button>
+          </StMsgButton>
         )}
       </MsgButtonWrapper>
     </MsgItemWrapper>
@@ -59,6 +55,12 @@ const MsgItemInner = styled.div`
 
 const MsgButtonWrapper = styled.div`
   align-self: center;
+`;
+
+const StMsgButton = styled(Button)`
+  width: 4rem;
+  height: 4rem;
+  color: ${({ theme }) => theme.color.darkGray};
 `;
 
 const MsgSendUserWrapper = styled.div`

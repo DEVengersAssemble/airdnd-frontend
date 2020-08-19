@@ -4,16 +4,24 @@ import ChatMain from '../../Components/Message/ChatMain';
 import MsgMain from '../../Components/Message/MsgMain';
 import DetailCanceledMain from '../../Components/Message/DetailCanceledMain';
 import DetailMain from './DetailMain';
+import ChatFlagModal from './MessageModal';
 
 const MessageMainWrapper = () => {
   const [canceled, setCanceled] = React.useState(false);
   console.log(setCanceled); // 전역 관리
 
+  const [openFlagModal, setFlagModal] = React.useState(false);
+
+  const onClickFlagModal = () => {
+    setFlagModal(openFlagModal);
+  };
+
   return (
     <MessageMainWrapperDiv>
       <ChatMain />
-      <MsgMain />
+      <MsgMain onClickFlagModal={onClickFlagModal} />
       {canceled ? <DetailCanceledMain /> : <DetailMain />}
+      <ChatFlagModal openFlagModal={openFlagModal} />
     </MessageMainWrapperDiv>
   );
 };

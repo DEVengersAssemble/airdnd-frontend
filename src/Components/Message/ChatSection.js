@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { darken } from 'polished';
 import theme from '../../style/theme';
 import Button from '../Global/Button';
-import ChatPopup from './ChatPopup';
+import ChatFilterPopup from './MessagePopup';
 import { MdFilterList } from 'react-icons/md';
 
 /**
@@ -27,13 +27,14 @@ const ChatSection = () => {
       <ChatSectionTitle>메시지 주고받기</ChatSectionTitle>
       <StChatFilterButton
         btnType="circle"
-        border="none"
+        border={openPopup ? '2px solid black' : 'none'}
         hover={{ backgroundColor: theme.color.lightGray }}
         onClick={onClickPopup}
+        openPopup={openPopup}
       >
         <ChatFilterButtonIcon />
       </StChatFilterButton>
-      <ChatPopup openPopup={openPopup} />
+      <ChatFilterPopup openPopup={openPopup} />
     </ChatSectionWrapper>
   );
 };
@@ -59,6 +60,8 @@ const ChatSectionTitle = styled.h2`
 const StChatFilterButton = styled(Button)`
   width: 4rem;
   height: 4rem;
+  background-color: ${({ theme, openPopup }) =>
+    openPopup && theme.color.lightGray};
 `;
 
 const ChatFilterButtonIcon = styled(MdFilterList)`

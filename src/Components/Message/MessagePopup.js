@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Popup from '../Global/Popup';
 import Button from '../Global/Button';
 
-const ChatPopup = ({ openPopup }) => {
+const ChatFilterPopup = ({ openPopup }) => {
   return (
     <PopupWrapper>
       <Popup
@@ -37,7 +37,7 @@ const ChatPopup = ({ openPopup }) => {
 
 const PopupWrapper = styled.div`
   position: absolute;
-  z-index: 1;
+  z-index: 9999;
 `;
 
 const StButton = styled(Button)`
@@ -59,4 +59,4 @@ const StPopupButtonText = styled.div`
   font-size: 1.5rem;
   font-weight: light;
 `;
-export default ChatPopup;
+export default ChatFilterPopup;
