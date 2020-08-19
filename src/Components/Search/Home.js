@@ -4,20 +4,20 @@ import Rating from '../Global/Rating';
 import { CkHeart } from '../Global/Heart';
 import CarouselContainer from '../../Containers/Global/CarouselContainer';
 
-const Home = ({
-  home,
-  isSuperhost,
-  isBookmarked,
-  image,
-  imageCount,
-  subTitle,
-  title,
-  feature,
-  rating,
-  reviewCount,
-  price,
-  location,
-}) => {
+const Home = ({ home, openListModal }) => {
+  const {
+    isSuperhost,
+    isBookmarked,
+    image,
+    imageCount,
+    subTitle,
+    title,
+    feature,
+    rating,
+    reviewCount,
+    price,
+  } = home;
+
   return (
     <StWrapper>
       <CarouselContainer size="large" />
@@ -38,12 +38,12 @@ const Home = ({
           />
           <StPriceWrapper>
             <StLargePrice>
-              <strong>{price}</strong> / 1박
+              <strong>₩{price.toLocaleString()}</strong> / 1박
             </StLargePrice>
             <StSmallPrice>총 요금: ₩12,928</StSmallPrice>
           </StPriceWrapper>
         </StDetailWrapper>
-        <Heart ckType hover checked={false} />
+        <Heart ckType hover checked={isBookmarked} onClick={openListModal} />
       </StHome>
     </StWrapper>
   );

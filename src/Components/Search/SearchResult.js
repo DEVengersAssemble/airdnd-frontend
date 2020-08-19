@@ -14,7 +14,6 @@ const SearchResult = () => {
       <StHeader>제주도의 숙소</StHeader>
       <FilterListContainer />
       <HomeListContainer />
-      <HomeList />
       <RecentHomeList />
       <SearchPagenation />
       <MapButton />

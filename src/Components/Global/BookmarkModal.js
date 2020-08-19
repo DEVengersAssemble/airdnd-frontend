@@ -5,10 +5,11 @@ import Button from './Button';
 import { NewInput } from './Input';
 import styled from 'styled-components';
 
-const BookmarkListModal = () => {
+const BookmarkListModal = ({ modalState, setModalState, openNewModal }) => {
   return (
     <Modal
-      modalState={false}
+      modalState={modalState}
+      setModalState={setModalState}
       width="520px"
       height="90vh"
       title="목록에 저장하기"
@@ -80,7 +81,12 @@ const BookmarkListModal = () => {
         </StBookmark>
       </StList>
       <ModalFooter>
-        <Button btnType="underlined" width="100%" fontWeight="500">
+        <Button
+          btnType="underlined"
+          width="100%"
+          fontWeight="500"
+          onClick={openNewModal}
+        >
           목록 만들기
         </Button>
       </ModalFooter>
@@ -88,10 +94,11 @@ const BookmarkListModal = () => {
   );
 };
 
-const NewBookmarkModal = () => {
+const NewBookmarkModal = ({ modalState, setModalState }) => {
   return (
     <Modal
-      modalState={false}
+      modalState={modalState}
+      setModalState={setModalState}
       width="520px"
       height="305px"
       title="목록 이름 작성하기"
