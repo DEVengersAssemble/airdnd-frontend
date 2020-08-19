@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Carousel from '../Global/Carousel';
+import CarouselContainer from '../../Containers/Global/CarouselContainer';
 import Rating from '../Global/Rating';
 import { PrevButton, NextButton } from '../Global/SlideButton';
 import { CkHeart } from '../Global/Heart';
@@ -8,13 +8,11 @@ import { CkHeart } from '../Global/Heart';
 const RecentHome = () => {
   return (
     <StWrapper>
-      <StPrevBtn styleType="transparent" size="large" />
-      <StNextBtn styleType="transparent" size="large" />
+      <CarouselContainer className={'carousel'} size="small" />
       <StHome
         target="_blank"
         href="https://www.airbnb.co.kr/rooms/36094960?adults=1&location=%EB%A7%88%EB%93%9C%EB%A6%AC%EB%93%9C&source_impression_id=p3_1597324281_lNy0Q31ggfi0f1St&check_in=2020-09-26&guests=1&check_out=2020-09-30"
       >
-        <Carousel className={'carousel'} size="small" />
         <Rating scale="1.4" rate="4.55" count="67" />
         <StSpan>호텔 객실 Mongmong-Toto</StSpan>
         <StSpan>Clean private shower gold room</StSpan>
