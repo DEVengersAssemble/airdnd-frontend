@@ -2,7 +2,6 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { GrNext } from 'react-icons/gr';
-// FcNext
 
 const StHeader = styled.header`
   display: flex;
@@ -31,7 +30,8 @@ const StNav = styled.nav`
     svg {
       margin: 0 16px;
       vertical-align: -1.5px;
-      5 polyline {
+
+      polyline {
         stroke: ${({ theme }) => theme.color.darkGray};
       }
     }
