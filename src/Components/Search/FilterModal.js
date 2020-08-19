@@ -107,9 +107,14 @@ const CheckboxFilter = () => {
   );
 };
 
-const FilterModal = () => {
+const FilterModal = ({ popupState, onClose }) => {
   return (
-    <StModal modalState={false} header title="필터 추가하기">
+    <StModal
+      modalState={popupState}
+      setModalState={onClose}
+      header
+      title="필터 추가하기"
+    >
       <StFilterList>
         <ToggleFilter />
         <CounterFilter />
@@ -143,10 +148,10 @@ const StFilterList = styled.ul`
   padding: 3rem 5rem 0;
   display: flex;
   flex-direction: column;
-  max-height: 77.5rem;
+  max-height: calc(92vh - 144px);
   overflow: auto;
 
-  & *:nth-last-child(1) {
+  & li:nth-last-child(1) {
     border: none;
   }
 `;

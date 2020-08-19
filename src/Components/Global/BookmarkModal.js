@@ -5,82 +5,41 @@ import Button from './Button';
 import { NewInput } from './Input';
 import styled from 'styled-components';
 
-const BookmarkListModal = () => {
+const BookmarkListModal = ({
+  modalState,
+  setModalState,
+  openNewModal,
+  bookmarkLists,
+}) => {
   return (
     <Modal
-      modalState={false}
+      modalState={modalState}
+      setModalState={setModalState}
       width="520px"
       height="90vh"
       title="목록에 저장하기"
       header
     >
       <StList>
-        <StBookmark>
-          <StImage src="https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small" />
-          <StContentWrapper>
-            <StTitle>서울시 강남구</StTitle>
-            <StCount>숙소 9개</StCount>
-          </StContentWrapper>
-        </StBookmark>
-        <StBookmark>
-          <StImage src="https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small" />
-          <StContentWrapper>
-            <StTitle>서울시 강남구</StTitle>
-            <StCount>숙소 9개</StCount>
-          </StContentWrapper>
-        </StBookmark>
-        <StBookmark>
-          <StImage src="https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small" />
-          <StContentWrapper>
-            <StTitle>서울시 강남구</StTitle>
-            <StCount>숙소 9개</StCount>
-          </StContentWrapper>
-        </StBookmark>
-        <StBookmark>
-          <StImage src="https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small" />
-          <StContentWrapper>
-            <StTitle>서울시 강남구</StTitle>
-            <StCount>숙소 9개</StCount>
-          </StContentWrapper>
-        </StBookmark>
-        <StBookmark>
-          <StImage src="https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small" />
-          <StContentWrapper>
-            <StTitle>서울시 강남구</StTitle>
-            <StCount>숙소 9개</StCount>
-          </StContentWrapper>
-        </StBookmark>
-        <StBookmark>
-          <StImage src="https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small" />
-          <StContentWrapper>
-            <StTitle>서울시 강남구</StTitle>
-            <StCount>숙소 9개</StCount>
-          </StContentWrapper>
-        </StBookmark>
-        <StBookmark>
-          <StImage src="https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small" />
-          <StContentWrapper>
-            <StTitle>서울시 강남구</StTitle>
-            <StCount>숙소 9개</StCount>
-          </StContentWrapper>
-        </StBookmark>
-        <StBookmark>
-          <StImage src="https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small" />
-          <StContentWrapper>
-            <StTitle>서울시 강남구</StTitle>
-            <StCount>숙소 9개</StCount>
-          </StContentWrapper>
-        </StBookmark>
-        <StBookmark>
-          <StImage src="https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small" />
-          <StContentWrapper>
-            <StTitle>서울시 강남구</StTitle>
-            <StCount>숙소 9개</StCount>
-          </StContentWrapper>
-        </StBookmark>
+        {bookmarkLists.map(
+          ({ bookmarkListId, bookmarkListTitle, bookmarks }) => (
+            <StBookmark key={bookmarkListId}>
+              <StImage src={bookmarks[0].images} />
+              <StContentWrapper>
+                <StTitle>{bookmarkListTitle}</StTitle>
+                <StCount>숙소 {bookmarks.length}개</StCount>
+              </StContentWrapper>
+            </StBookmark>
+          ),
+        )}
       </StList>
       <ModalFooter>
-        <Button btnType="underlined" width="100%" fontWeight="500">
+        <Button
+          btnType="underlined"
+          width="100%"
+          fontWeight="500"
+          onClick={openNewModal}
+        >
           목록 만들기
         </Button>
       </ModalFooter>
@@ -88,22 +47,18 @@ const BookmarkListModal = () => {
   );
 };
 
-const NewBookmarkModal = () => {
+const NewBookmarkModal = ({ value, onChange, modalState, setModalState }) => {
   return (
     <Modal
-      modalState={false}
+      modalState={modalState}
+      setModalState={setModalState}
       width="520px"
       height="305px"
       title="목록 이름 작성하기"
       header
     >
       <StContentWrapper padding>
-        <NewInput
-          title="이름"
-          animation
-          value="다낭, 베트남"
-          // onChange={onChangeInput}
-        />
+        <NewInput title="이름" animation value={value} onChange={onChange} />
         <StSpan>최대 50자</StSpan>
       </StContentWrapper>
       <ModalFooter>
