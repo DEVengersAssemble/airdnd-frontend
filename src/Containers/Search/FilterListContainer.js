@@ -1,21 +1,55 @@
-import React, { useState, cloneElement } from 'react';
+import React, { useReducer, Children, cloneElement } from 'react';
 import { FilterList, FilterButton } from '../../Components/Search/FilterList';
 
-const FilterButtonContainer = ({ children, text }) => {
-  const [popupState, setPopupState] = useState(false);
-  const onClick = () => setPopupState(!popupState);
+const popupInit = {
+  refund: false,
+  roomType: false,
+  price: false,
+  setDate: false,
+  modal: false,
+};
+
+const popupReducer = (state, action) => {
+  switch (action.type) {
+    case 'OPEN':
+      return {
+        ...popupInit,
+        [action.name]: true,
+      };
+    case 'CLOSE':
+      return {
+        ...popupInit,
+      };
+    default:
+      return state;
+  }
+};
+
+const FilterButtonContainer = ({
+  children,
+  name,
+  text,
+  popupState,
+  dispatch,
+}) => {
+  const onClick = () => {
+    const type = popupState[name] ? 'CLOSE' : 'OPEN';
+    dispatch({ type, name });
+  };
 
   return (
     <FilterButton text={text} onClick={onClick}>
-      {React.Children.map(children, child => {
-        return React.cloneElement(child, { popupState });
+      {Children.map(children, child => {
+        return cloneElement(child, { popupState: popupState[name] });
       })}
     </FilterButton>
   );
 };
 
 const FilterListContainer = () => {
-  return <FilterList />;
+  const [popupState, dispatch] = useReducer(popupReducer, popupInit);
+
+  return <FilterList popupState={popupState} dispatch={dispatch} />;
 };
 
 export { FilterButtonContainer, FilterListContainer };
