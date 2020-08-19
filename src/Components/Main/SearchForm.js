@@ -144,7 +144,7 @@ const StContentText = styled.p`
   color: ${({ theme }) => theme.color.darkGray};
 `;
 
-const SearchForm = ({ isSearchBtnClicked, type, changeType }) => {
+const SearchForm = ({ isSearchBtnClicked, type, changeType, closePopup }) => {
   return (
     <StSearchForm isSearchBtnClicked={isSearchBtnClicked}>
       <StFormItemWrapper
@@ -162,7 +162,10 @@ const SearchForm = ({ isSearchBtnClicked, type, changeType }) => {
             ></StPlaceInput>
           </StTextWrapper>
         </StPlaceLabel>
-        <SearchPlacePopup type={type}></SearchPlacePopup>
+        <SearchPlacePopup
+          type={type}
+          closePopup={closePopup}
+        ></SearchPlacePopup>
       </StFormItemWrapper>
       <StFormItemWrapper
         name="checkin"

@@ -39,13 +39,11 @@ const StSearchPlaceItem = styled.li`
   }
 `;
 
-const SearchPlacePopup = ({ type }) => {
-  console.log('type: ', type);
+const SearchPlacePopup = ({ type, closePopup }) => {
   const popupRef = useRef();
   const handlePopup = ({ target }) => {
     if (type === 'place' && !popupRef.current.contains(target)) {
-      // closePopup();
-      console.log('!!!!!!');
+      closePopup();
     }
   };
   useEffect(() => {

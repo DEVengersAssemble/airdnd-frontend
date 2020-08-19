@@ -5,12 +5,20 @@ const SearchFormContainer = () => {
   // place,checkin,checkout,guest
   const [type, setType] = useState(null);
 
+  const closePopup = () => {
+    setType(null);
+  };
+
   const changeType = e => {
-    console.log(e.target);
-    console.log(e.target.name);
     setType(e.target.name);
   };
-  return <SearchForm type={type} changeType={changeType}></SearchForm>;
+  return (
+    <SearchForm
+      type={type}
+      changeType={changeType}
+      closePopup={closePopup}
+    ></SearchForm>
+  );
 };
 
 export default SearchFormContainer;

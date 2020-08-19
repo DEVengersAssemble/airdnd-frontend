@@ -4,20 +4,23 @@ import Rating from '../Global/Rating';
 import { CkHeart } from '../Global/Heart';
 import CarouselContainer from '../../Containers/Global/CarouselContainer';
 
-const Home = ({
-  home,
-  isSuperhost,
-  isBookmarked,
-  image,
-  imageCount,
-  subTitle,
-  title,
-  feature,
-  rating,
-  reviewCount,
-  price,
-  location,
-}) => {
+const Home = ({ home }) => {
+  console.log('HOME: ', home);
+  const {
+    // homeId,
+    // isSuperhost,
+    // isBookmarked,
+    // image,
+    // imageCount,
+    subTitle,
+    title,
+    feature,
+    rating,
+    reviewCount,
+    price,
+    // location,
+  } = home;
+
   return (
     <StWrapper>
       <CarouselContainer size="large" />
