@@ -7,7 +7,7 @@ const StSearchForm = styled.form`
   background: ${({ theme }) => theme.color.white};
   width: 100%;
   height: 66px;
-  border-radius: 32px;
+  border-radius: 34px;
   display: flex;
   color: ${({ theme }) => theme.color.black};
 
@@ -47,7 +47,7 @@ const StFormItemWrapper = styled.div`
 
   &:hover {
     background: rgba(0, 0, 0, 0.07);
-    border-radius: 32px;
+    border-radius: 34px;
     margin-top: -1px;
     height: 66px;
     ${StTextWrapper}::before {
@@ -63,7 +63,7 @@ const StFormItemWrapper = styled.div`
 
   &:focus-within {
     background: white;
-    border-radius: 32px;
+    border-radius: 34px;
     height: 68px;
     margin-top: -2px;
     box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.3);
@@ -95,14 +95,14 @@ const StPlaceLabel = styled.label`
   padding-left: 28px;
   cursor: pointer;
   &:hover {
-    border-radius: 32px;
+    border-radius: 34px;
     & ${StTextWrapper}::before {
       display: none;
     }
   }
   &:focus-within {
     background: white;
-    border-radius: 32px;
+    border-radius: 34px;
     & ${StTextWrapper}::before {
       display: none;
     }
