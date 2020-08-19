@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import SearchButton from './SearchButton';
+import SearchPlacePopup from './SearchPlacePopup';
 
 const StSearchForm = styled.form`
   position: relative;
@@ -77,8 +78,8 @@ const StFormItemWrapper = styled.div`
       display: none;
     }
   }
-  ${({ place }) =>
-    place ||
+  ${({ name }) =>
+    name === 'place' ||
     css`
       display: flex;
       align-items: center;
@@ -143,30 +144,55 @@ const StContentText = styled.p`
   color: ${({ theme }) => theme.color.darkGray};
 `;
 
-const SearchForm = ({ isSearchBtnClicked }) => {
+const SearchForm = ({ isSearchBtnClicked, type, changeType }) => {
   return (
     <StSearchForm isSearchBtnClicked={isSearchBtnClicked}>
-      <StFormItemWrapper width="30%" tabIndex="0" place>
+      <StFormItemWrapper
+        name="place"
+        width="30%"
+        tabIndex="0"
+        onClick={e => changeType(e)}
+      >
         <StPlaceLabel>
           <StTextWrapper>
             <StTypeText>위치</StTypeText>
-            <StPlaceInput placeholder="어디로 여행가세요?"></StPlaceInput>
+            <StPlaceInput
+              name="place"
+              placeholder="어디로 여행가세요?"
+            ></StPlaceInput>
           </StTextWrapper>
         </StPlaceLabel>
+        <SearchPlacePopup type={type}></SearchPlacePopup>
       </StFormItemWrapper>
-      <StFormItemWrapper width="20%" tabIndex="0">
+      <StFormItemWrapper
+        name="checkin"
+        width="20%"
+        tabIndex="0"
+        onClick={e => changeType(e)}
+      >
         <StTextWrapper>
           <StTypeText>체크인</StTypeText>
           <StContentText>날짜 추가</StContentText>
         </StTextWrapper>
       </StFormItemWrapper>
-      <StFormItemWrapper width="20%" tabIndex="0">
+      <StFormItemWrapper
+        name="checkout"
+        width="20%"
+        tabIndex="0"
+        onClick={e => changeType(e)}
+      >
+        <SearchPlacePopup></SearchPlacePopup>
         <StTextWrapper>
           <StTypeText>체크아웃</StTypeText>
           <StContentText>날짜 추가</StContentText>
         </StTextWrapper>
       </StFormItemWrapper>
-      <StFormItemWrapper width="30%" tabIndex="0">
+      <StFormItemWrapper
+        name="guest"
+        width="30%"
+        tabIndex="0"
+        onClick={e => changeType(e)}
+      >
         <StTextWrapper>
           <StTypeText>인원</StTypeText>
           <StContentText>게스트 추가</StContentText>

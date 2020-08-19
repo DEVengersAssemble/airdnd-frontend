@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import Logo from './Logo';
 import Navigation from './Navigation';
+import SearchFormContainer from '../../Containers/Main/SearchFormContainer';
 import SettingButtonContainer from '../../Containers/Main/SettingButtonContainer';
 import MyPageButtonContainer from '../../Containers/Main/MyPageButtonContainer';
 import SearchForm from './SearchForm';
@@ -141,7 +142,7 @@ const MainHeader = ({
           isScrollTop={isScrollTop}
           isSearchBtnClicked={isSearchBtnClicked}
         ></Navigation>
-        <SearchForm isSearchBtnClicked={isSearchBtnClicked}></SearchForm>
+        <SearchFormContainer isSearchBtnClicked={isSearchBtnClicked} />
       </StNavSearchWrapper>
 
       <StOnScrollSearchButton
