@@ -1,6 +1,11 @@
-const proxy = require('http-proxy-middleware');
+const { createProxyMiddleware } = require('http-proxy-middleware');
 
-module.exports = function(app) {
-  app.use(proxy('/api/autocomplete',{target:'https://www.airbnb.co.kr'})),
-  app.use(proxy('/api/server',{target:'http://localhost:8080'})),
-}
+module.exports = function (app) {
+  app.use(
+    '/api/autocomplete',
+    createProxyMiddleware({
+      target: 'https://www.airbnb.co.kr',
+      changeOrigin: true,
+    }),
+  );
+};
