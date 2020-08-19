@@ -17,8 +17,6 @@ const SearchPage = () => {
         <SearchMap />
       </StContent>
       <Footer />
-      <BookmarkListModal />
-      <NewBookmarkModal />
     </StWrapper>
   );
 };

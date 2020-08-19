@@ -5,7 +5,12 @@ import Button from './Button';
 import { NewInput } from './Input';
 import styled from 'styled-components';
 
-const BookmarkListModal = ({ modalState, setModalState, openNewModal }) => {
+const BookmarkListModal = ({
+  modalState,
+  setModalState,
+  openNewModal,
+  bookmarkLists,
+}) => {
   return (
     <Modal
       modalState={modalState}
@@ -16,69 +21,17 @@ const BookmarkListModal = ({ modalState, setModalState, openNewModal }) => {
       header
     >
       <StList>
-        <StBookmark>
-          <StImage src="https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small" />
-          <StContentWrapper>
-            <StTitle>서울시 강남구</StTitle>
-            <StCount>숙소 9개</StCount>
-          </StContentWrapper>
-        </StBookmark>
-        <StBookmark>
-          <StImage src="https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small" />
-          <StContentWrapper>
-            <StTitle>서울시 강남구</StTitle>
-            <StCount>숙소 9개</StCount>
-          </StContentWrapper>
-        </StBookmark>
-        <StBookmark>
-          <StImage src="https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small" />
-          <StContentWrapper>
-            <StTitle>서울시 강남구</StTitle>
-            <StCount>숙소 9개</StCount>
-          </StContentWrapper>
-        </StBookmark>
-        <StBookmark>
-          <StImage src="https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small" />
-          <StContentWrapper>
-            <StTitle>서울시 강남구</StTitle>
-            <StCount>숙소 9개</StCount>
-          </StContentWrapper>
-        </StBookmark>
-        <StBookmark>
-          <StImage src="https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small" />
-          <StContentWrapper>
-            <StTitle>서울시 강남구</StTitle>
-            <StCount>숙소 9개</StCount>
-          </StContentWrapper>
-        </StBookmark>
-        <StBookmark>
-          <StImage src="https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small" />
-          <StContentWrapper>
-            <StTitle>서울시 강남구</StTitle>
-            <StCount>숙소 9개</StCount>
-          </StContentWrapper>
-        </StBookmark>
-        <StBookmark>
-          <StImage src="https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small" />
-          <StContentWrapper>
-            <StTitle>서울시 강남구</StTitle>
-            <StCount>숙소 9개</StCount>
-          </StContentWrapper>
-        </StBookmark>
-        <StBookmark>
-          <StImage src="https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small" />
-          <StContentWrapper>
-            <StTitle>서울시 강남구</StTitle>
-            <StCount>숙소 9개</StCount>
-          </StContentWrapper>
-        </StBookmark>
-        <StBookmark>
-          <StImage src="https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small" />
-          <StContentWrapper>
-            <StTitle>서울시 강남구</StTitle>
-            <StCount>숙소 9개</StCount>
-          </StContentWrapper>
-        </StBookmark>
+        {bookmarkLists.map(
+          ({ bookmarkListId, bookmarkListTitle, bookmarks }) => (
+            <StBookmark key={bookmarkListId}>
+              <StImage src={bookmarks[0].images} />
+              <StContentWrapper>
+                <StTitle>{bookmarkListTitle}</StTitle>
+                <StCount>숙소 {bookmarks.length}개</StCount>
+              </StContentWrapper>
+            </StBookmark>
+          ),
+        )}
       </StList>
       <ModalFooter>
         <Button

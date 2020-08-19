@@ -16,7 +16,7 @@ const initialState = {
       isSuperhost: true,
       isBookmarked: true,
       image:
-        'https://www.airbnb.co.kr/rooms/36094960?adults=1&location=%EB%A7%88%EB%93%9C%EB%A6%AC%EB%93%9C&source_impression_id=p3_1597324281_lNy0Q31ggfi0f1St&check_in=2020-09-26&guests=1&check_out=2020-09-30', // 첫번째 이미지만
+        'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small', // 첫번째 이미지만
       imageCount: 3, // 이미지 개수
       subTitle: 'MongMong-Toto의 호텔 객실',
       title: 'Pia Resort Hotel Corner Studio Room',
@@ -46,7 +46,7 @@ const initialState = {
       isSuperhost: true,
       isBookmarked: false,
       image:
-        'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large',
+        'https://a0.muscache.com/im/pictures/3276d8ad-d455-4c59-923c-3f6926301a93.jpg?aki_policy=large',
       imageCount: 3, // 이미지 개수
       subTitle: 'MongMong-Toto의 호텔 객실이답',
       title: 'Pia Resort Hotel Corner Studio Room 기기',
