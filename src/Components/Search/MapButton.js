@@ -9,7 +9,15 @@ import Checkbox from '../Global/Checkbox';
 
 const MapButton = () => {
   return (
-    <StMapButton
+    <Button border="none" fontSize="1.4rem">
+      <FiMap /> <StSpan>지도 표시하기</StSpan>
+    </Button>
+  );
+};
+
+const FloatingMapButton = () => {
+  return (
+    <StFloatingMapButton
       btnType="oval"
       color="black"
       hover={css`
@@ -19,7 +27,7 @@ const MapButton = () => {
       transition
     >
       <FiMap /> <span>지도</span>
-    </StMapButton>
+    </StFloatingMapButton>
   );
 };
 
@@ -115,7 +123,7 @@ const StButton = styled(Button)`
     `}
 `;
 
-const StMapButton = styled(Button)`
+const StFloatingMapButton = styled(Button)`
   z-index: 10;
   display: none;
   justify-content: center;
@@ -133,6 +141,10 @@ const StMapButton = styled(Button)`
   @media ${({ theme }) => theme.size.medium} {
     display: flex;
   }
+`;
+
+const StSpan = styled.span`
+  padding: 0.2rem 0 0 1rem;
 `;
 
 const StCheckbox = styled(Checkbox)`
@@ -154,6 +166,7 @@ const StFilterIcon = styled(GoSettings)`
 `;
 export {
   MapButton,
+  FloatingMapButton,
   MapZoomButton,
   MapMarkerButton,
   MapCloseButton,

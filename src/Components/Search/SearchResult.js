@@ -4,19 +4,20 @@ import HomeList from './HomeList';
 import { FilterListContainer } from '../../Containers/Search/FilterListContainer';
 import RecentHomeList from './RecentHomeList';
 import SearchPagenation from './SearchPagenation';
-import { MapButton } from './MapButton';
+import { MapButton, FloatingMapButton } from './MapButton';
 import HomeListContainer from '../../Containers/Search/HomeListContainer';
 
 const SearchResult = () => {
   return (
     <StWrapper>
+      {/* <MapButton /> */}
       <StSpan>숙박 279건 · 게스트 1명</StSpan>
       <StHeader>제주도의 숙소</StHeader>
       <FilterListContainer />
       <HomeListContainer />
       <RecentHomeList />
       <SearchPagenation />
-      <MapButton />
+      <FloatingMapButton />
     </StWrapper>
   );
 };
