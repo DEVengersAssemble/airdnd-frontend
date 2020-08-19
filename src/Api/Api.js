@@ -1,3 +1,5 @@
+const { CheckBox } = require("styled-icons/material-rounded");
+
 const initialState = {
   currentUser: {
     id: 0,
@@ -43,6 +45,19 @@ const initialState = {
       },
     ],
   },
+  // main page에 있는 검색 결과
+  // searchHistory
+  searchHistory: {
+    location: '',
+    checkin: '',
+    checkout: '',
+    flexibleDate: 0,
+    guests: {
+      adult: 0,
+      child: 0,
+      infant: 0
+    }
+  }
   homeDetailPage: {
     id: 0,
     host: {

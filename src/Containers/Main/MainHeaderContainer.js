@@ -2,24 +2,24 @@ import React, { useState, useEffect } from 'react';
 import MainHeader from '../../Components/Main/MainHeader';
 
 const MainHeaderContainer = () => {
-  const [isScrollTop, setIsScrollTop] = useState(true);
+  const [isScrollTop, setIsScrollTop] = useState(window.scrollY === 0);
   const [isSearchBtnClicked, setIsSearchBtnClicked] = useState(false);
-  console.log('isScrollTop', isScrollTop);
-  console.log('isSearchBtnClicked', isSearchBtnClicked);
 
   const onScroll = e => {
-    console.log(window.scrollY);
     setIsScrollTop(e && window.scrollY < 20);
     setIsSearchBtnClicked(false);
   };
 
   useEffect(() => {
     window.addEventListener('scroll', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+    };
   }, []);
 
   const handleLogoClick = e => {
     e.preventDefault();
-    window.scrollTo({ top: 0 });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleSearchBtnClick = () => {
@@ -29,7 +29,7 @@ const MainHeaderContainer = () => {
     <MainHeader
       isScrollTop={isScrollTop}
       isSearchBtnClicked={isSearchBtnClicked}
-      handleClick={handleLogoClick}
+      handleLogoClick={handleLogoClick}
       handleSearchBtnClick={handleSearchBtnClick}
     ></MainHeader>
   );
