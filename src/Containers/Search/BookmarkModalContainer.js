@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   BookmarkListModal,
   NewBookmarkModal,
@@ -22,8 +22,14 @@ const BookmarkListModalContainer = ({
 };
 
 const NewBookmarkModalContainer = ({ newModalState, closeNewModal }) => {
+  const { place } = useSelector(state => state.searchHistory);
+  const [value, setValue] = useState(place);
+  const onChange = ({ target }) => setValue(target.value);
+
   return (
     <NewBookmarkModal
+      value={value}
+      onChange={onChange}
       modalState={newModalState}
       setModalState={closeNewModal}
     />

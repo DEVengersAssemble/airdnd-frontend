@@ -47,7 +47,7 @@ const BookmarkListModal = ({
   );
 };
 
-const NewBookmarkModal = ({ modalState, setModalState }) => {
+const NewBookmarkModal = ({ value, onChange, modalState, setModalState }) => {
   return (
     <Modal
       modalState={modalState}
@@ -58,12 +58,7 @@ const NewBookmarkModal = ({ modalState, setModalState }) => {
       header
     >
       <StContentWrapper padding>
-        <NewInput
-          title="이름"
-          animation
-          value="다낭, 베트남"
-          // onChange={onChangeInput}
-        />
+        <NewInput title="이름" animation value={value} onChange={onChange} />
         <StSpan>최대 50자</StSpan>
       </StContentWrapper>
       <ModalFooter>
