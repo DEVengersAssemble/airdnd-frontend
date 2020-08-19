@@ -2,17 +2,21 @@ import React from 'react';
 import styled from 'styled-components';
 import { lighten } from 'polished';
 import { FaLock } from 'react-icons/fa';
-import theme from '../../style/theme';
 import Modal from '../Global/Modal';
 import Button from '../Global/Button';
 
 const ChatFlagModal = () => {
+  const [modal, setModal] = React.useState(false);
+  const onClickDelete = () => {
+    setModal(!modal);
+  };
+
   return (
     <StFlagModal
       width="55rem"
       height="50rem"
-      modalState="true"
-      setModalState="false"
+      modalState={modal}
+      setModalState={onClickDelete}
     >
       <StFlagModalTitle>어떤 문제가 있나요?</StFlagModalTitle>
       <StFlagModalSub>
