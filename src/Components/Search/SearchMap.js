@@ -10,24 +10,63 @@ import {
 } from './MapButton';
 import Map from '../Global/Map';
 
-const SearchMap = ({ children }) => {
+const SearchMap = ({ closeMap, mapState }) => {
   return (
-    <StWrapper>
+    <StWrapper mapState={mapState}>
       <StStickyWrapper>
-        <MapCloseButton />
+        <MapCloseButton closeMap={closeMap} />
         <MapCheckbox />
         <StBtnSetWrapper>
           <MapZoomButton />
           <MapMarkerButton />
         </StBtnSetWrapper>
       </StStickyWrapper>
-      <Map />
+      {/* <Map /> */}
+      <Map
+        googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqryK5lMUxY0i_-Zu1cUrgW3_Geg4BrWA&v=3.exp&libraries=geometry,drawing,places"
+        loadingElement={
+          <div
+            style={{
+              width: '100%',
+              height: `100vh`,
+              position: 'sticky',
+              top: '0',
+            }}
+          />
+        }
+        containerElement={
+          <div
+            style={{
+              width: '100%',
+              height: `100vh`,
+              position: 'sticky',
+              top: '0',
+            }}
+          />
+        }
+        mapElement={
+          <div
+            style={{
+              width: '100%',
+              height: `100vh`,
+              position: 'sticky',
+              top: '0',
+            }}
+          />
+        }
+
+        // loadingElement={<div style={{ height: `100%` }} />}
+        // containerElement={<div style={{ height: `400px` }} />}
+        // mapElement={<div style={{ height: `100%` }} />}
+      />
     </StWrapper>
   );
 };
 
 const StWrapper = styled.aside`
   width: calc(100vw - 840px);
+  display: ${({ mapState }) => (mapState ? 'block' : 'none')};
+
   @media ${({ theme }) => theme.size.medium} {
     display: none;
   }
