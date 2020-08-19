@@ -29,8 +29,8 @@ const ChatFlagModal = () => {
     <StFlagModal
       width="55rem"
       height="fit-content"
-      modalState="true"
-      // modalState={modal}
+      // modalState="true"
+      modalState={modal}
       setModalState={onClickDelete}
     >
       <StFlagModalTitle>어떤 문제가 있나요?</StFlagModalTitle>

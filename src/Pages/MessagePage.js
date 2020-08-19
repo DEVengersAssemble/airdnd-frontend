@@ -5,6 +5,7 @@ import { Airbnb } from '@styled-icons/boxicons-logos/Airbnb';
 import MessageSubHeader from '../Components/Message/MessageSubHeader';
 import MessageMainWrapper from '../Components/Message/MessageMainWrapper';
 import ChatFlagModal from '../Components/Message/MessageModal';
+import DetailPdfModal from '../Components/Message/DetailModal';
 
 const MessagePage = () => {
   return (
@@ -17,6 +18,7 @@ const MessagePage = () => {
       <MessageSubHeader />
       <MessageMainWrapper />
       <ChatFlagModal />
+      <DetailPdfModal />
     </MessagePageWrapper>
   );
 };
