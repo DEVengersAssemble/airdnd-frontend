@@ -96,4 +96,5 @@ const DtAdrsButtonText = styled.div`
   padding-left: 1rem;
   font-size: 1.4rem;
 `;
+
 export default DetailReservedHomeLinkBox;

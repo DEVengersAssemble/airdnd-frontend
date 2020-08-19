@@ -45,6 +45,10 @@ const DetailMainInnerWrapper = styled.div`
     border-bottom: 3px solid
       ${({ theme }) => darken(0.1, theme.color.lightGray)};
   }
+  & > :last-child {
+    border: none;
+    padding-bottom: 7rem;
+  }
 `;
 
 export default DetailMain;
