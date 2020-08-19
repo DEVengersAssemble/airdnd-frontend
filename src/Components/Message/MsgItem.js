@@ -24,20 +24,15 @@ const MsgItem = ({ host }) => {
       </MsgItemInner>
       <MsgButtonWrapper>
         {host && (
-          <Button
+          <StMsgButton
             btnType="circle"
             border="none"
             hover={{
               backgroundColor: theme.color.lightGray,
             }}
-            style={{
-              width: '4rem',
-              height: '4rem',
-              color: theme.color.darkGray,
-            }}
           >
             <AiFillFlag />
-          </Button>
+          </StMsgButton>
         )}
       </MsgButtonWrapper>
     </MsgItemWrapper>
@@ -59,6 +54,12 @@ const MsgItemInner = styled.div`
 
 const MsgButtonWrapper = styled.div`
   align-self: center;
+`;
+
+const StMsgButton = styled(Button)`
+  width: 4rem;
+  height: 4rem;
+  color: ${({ theme }) => theme.color.darkGray};
 `;
 
 const MsgSendUserWrapper = styled.div`

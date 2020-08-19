@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import { lighten } from 'polished';
 import Button from '../Global/Button';
@@ -20,15 +21,17 @@ const DetailReservedHomeLinkBox = () => {
             </DtAdrsAddrestWrapper>
           )}
         </DtAdrsInnerWrapper>
-        <StButton>
-          <DtAdrsButtonWrapper>
-            <DtAdrsButtonInnerWrapper>
-              <FaDoorOpen />
-              <DtAdrsButtonText>숙소 보기</DtAdrsButtonText>
-            </DtAdrsButtonInnerWrapper>
-            <MdKeyboardArrowRight />
-          </DtAdrsButtonWrapper>
-        </StButton>
+        <Link to="/detail" target="_blank">
+          <StButton>
+            <DtAdrsButtonWrapper>
+              <DtAdrsButtonInnerWrapper>
+                <FaDoorOpen />
+                <DtAdrsButtonText>숙소 보기</DtAdrsButtonText>
+              </DtAdrsButtonInnerWrapper>
+              <MdKeyboardArrowRight />
+            </DtAdrsButtonWrapper>
+          </StButton>
+        </Link>
       </DtAdrsOuterWrapper>
     </DtAdrsWrapper>
   );

@@ -9,6 +9,7 @@ const SubRouter = () => {
       <Route exact path="/Reservation" />
       <Route path="/Reservation/HouseRules" component={HouseRules} />
       <Route path="/Reservation/GuestInfo" component={GuestInfo} />
+      <Route exact path="/message" />
       <Route
         render={({ location }) => (
           <div>
