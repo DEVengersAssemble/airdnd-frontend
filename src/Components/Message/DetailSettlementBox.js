@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { lighten } from 'polished';
 import Button from '../Global/Button';
@@ -30,15 +31,17 @@ const DetailSettlementBox = () => {
             <MdKeyboardArrowRight />
           </DtSettlementButtonWrapper>
         </StButton>
-        <StButton>
-          <DtSettlementButtonWrapper>
-            <DtSettlementButtonInnerWrapper>
-              <MdReceipt />
-              <DtSettlementButtonText>영수증 받기</DtSettlementButtonText>
-            </DtSettlementButtonInnerWrapper>
-            <MdKeyboardArrowRight />
-          </DtSettlementButtonWrapper>
-        </StButton>
+        <Link to="/receipt" target="_blank">
+          <StButton>
+            <DtSettlementButtonWrapper>
+              <DtSettlementButtonInnerWrapper>
+                <MdReceipt />
+                <DtSettlementButtonText>영수증 받기</DtSettlementButtonText>
+              </DtSettlementButtonInnerWrapper>
+              <MdKeyboardArrowRight />
+            </DtSettlementButtonWrapper>
+          </StButton>
+        </Link>
       </DtSettlementOuterWrapper>
     </DtSettlementWrapper>
   );

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { darken } from 'polished';
 import theme from '../../style/theme';
 import Button from '../Global/Button';
+import ChatFilterPopup from './MessagePopup';
 import { MdFilterList } from 'react-icons/md';
 
 /**
@@ -16,17 +17,24 @@ import { MdFilterList } from 'react-icons/md';
  */
 
 const ChatSection = () => {
+  const [openPopup, setOpenPopup] = React.useState(false);
+  const onClickPopup = () => {
+    setOpenPopup(!openPopup);
+  };
+
   return (
     <ChatSectionWrapper>
       <ChatSectionTitle>메시지 주고받기</ChatSectionTitle>
-      <Button
+      <StChatFilterButton
         btnType="circle"
-        border="none"
+        border={openPopup ? '2px solid black' : 'none'}
         hover={{ backgroundColor: theme.color.lightGray }}
-        style={{ width: '4rem', height: '4rem' }}
+        onClick={onClickPopup}
+        openPopup={openPopup}
       >
-        <ChatMenubuttonIcon />
-      </Button>
+        <ChatFilterButtonIcon />
+      </StChatFilterButton>
+      <ChatFilterPopup openPopup={openPopup} />
     </ChatSectionWrapper>
   );
 };
@@ -49,7 +57,14 @@ const ChatSectionTitle = styled.h2`
   font-weight: bold;
 `;
 
-const ChatMenubuttonIcon = styled(MdFilterList)`
+const StChatFilterButton = styled(Button)`
+  width: 4rem;
+  height: 4rem;
+  background-color: ${({ theme, openPopup }) =>
+    openPopup && theme.color.lightGray};
+`;
+
+const ChatFilterButtonIcon = styled(MdFilterList)`
   font-size: 2rem;
 `;
 

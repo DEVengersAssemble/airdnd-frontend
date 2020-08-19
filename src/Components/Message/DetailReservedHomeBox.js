@@ -21,7 +21,7 @@ const DetailReservedHomeBox = () => {
         경우, 해결 센터를 이용하시기 바랍니다.
       </DtRhBoxDescription>
       <DtRhBoxButtonWrapper>
-        <Link to="/resolutions">
+        <Link to="/resolutions" target="_blank">
           <Button padding="1.3rem 0rem">지급 또는 결제 요청</Button>
         </Link>
       </DtRhBoxButtonWrapper>
@@ -46,8 +46,9 @@ const DetailReservedHomeBox = () => {
               <StLink
                 to="/users/show/hostid"
                 style={{ textDecoration: 'underline' }}
+                target="_blank"
               >
-                행복마루
+                호스트이름
               </StLink>
               님
             </DtRhSimpleInfoHostName>
