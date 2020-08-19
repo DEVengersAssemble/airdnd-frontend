@@ -1,3 +1,14 @@
+// action types
+const SET_RESERVATION = 'user/SET_RESERVATION';
+const SET_BOOKMARKLIST = 'user/SET_BOOKMARKLIST';
+const SET_BOOKMARK = 'user/SET_BOOKMARK';
+
+// action creators
+export const setReservation = payload => ({ type: SET_RESERVATION });
+export const setBookmarkList = payload => ({ type: SET_BOOKMARKLIST });
+export const setBookmark = payload => ({ type: SET_BOOKMARK, payload });
+
+// initialState
 const initialState = {
   id: 0,
   email: '',
@@ -83,11 +94,11 @@ const initialState = {
   ],
 };
 
-const main = (state = initialState, action) => {
+const user = (state = initialState, action) => {
   switch (action.type) {
     default:
       return state;
   }
 };
 
-export default main;
+export default user;
