@@ -1,29 +1,33 @@
 import React from 'react';
 import styled from 'styled-components';
-import HomeList from './HomeList';
 import { FilterListContainer } from '../../Containers/Search/FilterListContainer';
 import RecentHomeList from './RecentHomeList';
 import SearchPagenation from './SearchPagenation';
-import { MapButton } from './MapButton';
+import { FloatingMapButton } from './MapButton';
 import HomeListContainer from '../../Containers/Search/HomeListContainer';
 
-const SearchResult = () => {
+const SearchResult = ({ mapState, openMap }) => {
   return (
-    <StWrapper>
+    <StWrapper mapState={mapState}>
       <StSpan>숙박 279건 · 게스트 1명</StSpan>
       <StHeader>제주도의 숙소</StHeader>
+<<<<<<< HEAD
       <FilterListContainer />
       <HomeListContainer />
       {/* <HomeList /> */}
+=======
+      <FilterListContainer mapState={mapState} openMap={openMap} />
+      <HomeListContainer mapState={mapState} />
+>>>>>>> 6a1609d90b758efe188037199a8a2f0f4c5fb230
       <RecentHomeList />
       <SearchPagenation />
-      <MapButton />
+      <FloatingMapButton />
     </StWrapper>
   );
 };
 
 const StWrapper = styled.div`
-  width: 840px;
+  width: ${({ mapState }) => (mapState ? '840px' : '100vh')};
   padding: 5rem 2rem 3rem;
   margin-top: 8rem;
   position: relative;

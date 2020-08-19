@@ -9,6 +9,7 @@ import {
 } from './FilterPopup';
 import FilterModal from './FilterModal';
 import { FilterButtonContainer } from '../../Containers/Search/FilterListContainer';
+import { MapButton } from './MapButton';
 
 export const FilterButton = ({ children, text, onClick }) => {
   return (
@@ -21,7 +22,7 @@ export const FilterButton = ({ children, text, onClick }) => {
   );
 };
 
-export const FilterList = ({ popupState, dispatch }) => {
+export const FilterList = ({ popupState, mapState, openMap, dispatch }) => {
   return (
     <StWrapper>
       <FilterButtonContainer
@@ -57,17 +58,20 @@ export const FilterList = ({ popupState, dispatch }) => {
       >
         <FilterModal />
       </FilterButtonContainer>
+      <MapButton mapState={mapState} openMap={openMap} />
     </StWrapper>
   );
 };
 
 const FilterBtn = styled(Button)`
-  margin: 2rem 1rem 2rem 0;
+  margin-right: 1rem;
   font-size: 14px;
 `;
 
 const StWrapper = styled.div`
   display: flex;
+  width: 100%;
+  padding: 3rem 0 2rem;
 `;
 
 const StFilterWrapper = styled.div`

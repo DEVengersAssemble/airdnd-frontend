@@ -4,6 +4,7 @@ import Rating from '../Global/Rating';
 import { CkHeart } from '../Global/Heart';
 import CarouselContainer from '../../Containers/Global/CarouselContainer';
 
+<<<<<<< HEAD
 const Home = ({ home }) => {
   console.log('HOME: ', home);
   const {
@@ -12,13 +13,24 @@ const Home = ({ home }) => {
     // isBookmarked,
     // image,
     // imageCount,
+=======
+const Home = ({ home, openListModal }) => {
+  const {
+    isSuperhost,
+    isBookmarked,
+    image,
+    imageCount,
+>>>>>>> 6a1609d90b758efe188037199a8a2f0f4c5fb230
     subTitle,
     title,
     feature,
     rating,
     reviewCount,
     price,
+<<<<<<< HEAD
     // location,
+=======
+>>>>>>> 6a1609d90b758efe188037199a8a2f0f4c5fb230
   } = home;
 
   return (
@@ -41,12 +53,12 @@ const Home = ({ home }) => {
           />
           <StPriceWrapper>
             <StLargePrice>
-              <strong>{price}</strong> / 1박
+              <strong>₩{price.toLocaleString()}</strong> / 1박
             </StLargePrice>
             <StSmallPrice>총 요금: ₩12,928</StSmallPrice>
           </StPriceWrapper>
         </StDetailWrapper>
-        <Heart ckType hover checked={false} />
+        <Heart ckType hover checked={isBookmarked} onClick={openListModal} />
       </StHome>
     </StWrapper>
   );
