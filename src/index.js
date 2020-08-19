@@ -2,15 +2,27 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import ReduxThunk from 'redux-thunk';
+import rootReducer from './Modules';
 import theme from './style/theme';
 import App from './App';
 
+const store = createStore(
+  rootReducer,
+  composeWithDevTools(applyMiddleware(ReduxThunk)),
+);
+
 ReactDOM.render(
-  <BrowserRouter>
-    <ThemeProvider theme={theme}>
-      <App />
-    </ThemeProvider>
-  </BrowserRouter>,
+  <Provider store={store}>
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
+    </BrowserRouter>
+  </Provider>,
   document.getElementById('root'),
 );
 

@@ -1,33 +1,40 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Button from '../Global/Button';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import {
   RefundPopup,
   RoomTypePopup,
   PricePopup,
   SetDatePopup,
 } from './FilterPopup';
+import { FilterButtonContainer } from '../../Containers/Search/FilterListContainer';
 
-const FilterButton = ({ children }) => {
-  // const onClick = () => {
-
-  // }
-
-  return <FilterBtn btnType="oval">{children}</FilterBtn>;
+export const FilterButton = ({ children, text, onClick }) => {
+  return (
+    <StFilterWrapper>
+      <FilterBtn btnType="oval" onClick={onClick}>
+        {text}
+      </FilterBtn>
+      {children}
+    </StFilterWrapper>
+  );
 };
 
-const FilterList = () => {
+export const FilterList = () => {
   return (
-    <>
-      <FilterButton>유연한 환불 정책</FilterButton>
-      <FilterButton>숙소 유형</FilterButton>
-      <FilterButton>요금</FilterButton>
-      <FilterButton>필터 추가하기</FilterButton>
-      <RefundPopup />
-      <RoomTypePopup />
-      <PricePopup />
-      <SetDatePopup />
-    </>
+    <StWrapper>
+      <FilterButtonContainer text="유연한 환불 정책">
+        <RefundPopup size="350px" />
+      </FilterButtonContainer>
+      <FilterButtonContainer text="숙소 유형">
+        <RoomTypePopup size="365px" />
+      </FilterButtonContainer>
+      <FilterButtonContainer text="요금">
+        <PricePopup size="430px" />
+        <SetDatePopup size="350px" />
+      </FilterButtonContainer>
+      <FilterButtonContainer text="필터 추가하기" />
+    </StWrapper>
   );
 };
 
@@ -36,4 +43,10 @@ const FilterBtn = styled(Button)`
   font-size: 14px;
 `;
 
-export default FilterList;
+const StWrapper = styled.div`
+  display: flex;
+`;
+
+const StFilterWrapper = styled.div`
+  position: relative;
+`;

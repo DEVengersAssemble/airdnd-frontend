@@ -1,32 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
-import { PrevButton, NextButton } from '../Global/SlideButton';
 import Rating from '../Global/Rating';
 import { CkHeart } from '../Global/Heart';
 import CarouselContainer from '../../Containers/Global/CarouselContainer';
 
-const Home = ({
-  img,
-  isClicked,
-  transition,
-  slideNext,
-  slidePrev,
-  resetCarousel,
-}) => {
-  React.useEffect(() => {
-    if (!isClicked) return;
-    resetCarousel();
-  }, [isClicked]);
-
+const Home = () => {
   return (
     <StWrapper>
-      <StPrevBtn styleType="transparent" onClick={slidePrev} />
-      <StNextBtn styleType="transparent" onClick={slideNext} />
+      <CarouselContainer size="large" />
       <StHome
         target="_blank"
         href="https://www.airbnb.co.kr/rooms/36094960?adults=1&location=%EB%A7%88%EB%93%9C%EB%A6%AC%EB%93%9C&source_impression_id=p3_1597324281_lNy0Q31ggfi0f1St&check_in=2020-09-26&guests=1&check_out=2020-09-30"
       >
-        <CarouselContainer size="large" img={img} transition={transition} />
         <StDetailWrapper>
           <StDetail>MongMong-Toto의 호텔 객실</StDetail>
           <StTitle>Pia Resort Hotel Corner Studio Room</StTitle>
@@ -53,6 +38,7 @@ const StWrapper = styled.li`
   border-top: 1px solid ${({ theme }) => theme.color.shadow};
   padding: 2rem 0;
   position: relative;
+  display: flex;
 
   @media ${({ theme }) => theme.size.medium} {
     width: 100%;
@@ -127,20 +113,6 @@ const StSmallPrice = styled.span`
   &:hover {
     color: ${({ theme }) => theme.color.black};
   }
-`;
-
-const StPrevBtn = styled(PrevButton)`
-  position: absolute;
-  top: calc(50% - 16px);
-  left: 1rem;
-  z-index: 5;
-`;
-
-const StNextBtn = styled(NextButton)`
-  position: absolute;
-  top: calc(50% - 16px);
-  left: calc(300px - 1rem - 32px);
-  z-index: 5;
 `;
 
 export default Home;
