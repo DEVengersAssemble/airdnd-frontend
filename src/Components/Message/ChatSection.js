@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { darken } from 'polished';
 import theme from '../../style/theme';
 import Button from '../Global/Button';
+import ChatPopup from './ChatPopup';
 import { MdFilterList } from 'react-icons/md';
 
 /**
@@ -16,6 +17,11 @@ import { MdFilterList } from 'react-icons/md';
  */
 
 const ChatSection = () => {
+  const [openPopup, setOpenPopup] = React.useState(false);
+  const onClickPopup = () => {
+    setOpenPopup(!openPopup);
+  };
+
   return (
     <ChatSectionWrapper>
       <ChatSectionTitle>메시지 주고받기</ChatSectionTitle>
@@ -24,9 +30,11 @@ const ChatSection = () => {
         border="none"
         hover={{ backgroundColor: theme.color.lightGray }}
         style={{ width: '4rem', height: '4rem' }}
+        onClick={onClickPopup}
       >
         <ChatMenubuttonIcon />
       </Button>
+      <ChatPopup openPopup={openPopup} />
     </ChatSectionWrapper>
   );
 };
