@@ -10,7 +10,7 @@ const BookmarkListModalContainer = ({
   closeListModal,
   openNewModal,
 }) => {
-  const { bookmarkLists } = useSelector(state => state.main);
+  const { bookmarkLists } = useSelector(state => state.user);
   return (
     <BookmarkListModal
       modalState={listModalState}
@@ -22,7 +22,7 @@ const BookmarkListModalContainer = ({
 };
 
 const NewBookmarkModalContainer = ({ newModalState, closeNewModal }) => {
-  const { place } = useSelector(state => state.searchHistory);
+  const { place } = useSelector(state => state.searchForm);
   const [value, setValue] = useState(place);
   const onChange = ({ target }) => setValue(target.value);
 

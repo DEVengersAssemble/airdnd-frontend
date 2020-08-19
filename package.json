@@ -13,6 +13,7 @@
     "http-proxy-middleware": "^1.0.5",
     "node-sass": "^4.14.1",
     "polished": "^3.6.5",
+    "proxy": "^1.0.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-google-maps": "^9.4.5",
