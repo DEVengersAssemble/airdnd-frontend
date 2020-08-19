@@ -1,4 +1,5 @@
 import React from 'react';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import styled from 'styled-components';
 import { lighten } from 'polished';
 import Button from '../Global/Button';
@@ -6,6 +7,8 @@ import { IoIosCopy } from 'react-icons/io';
 import { MdKeyboardArrowRight, MdLocationOn } from 'react-icons/md';
 
 const DetailAddressBox = () => {
+  const address = '한국, 서울특별시, 성동구, 성수2가3동, 연무장13길, 9';
+
   return (
     <DtAdrsWrapper>
       <DtAdrsOuterWrapper>
@@ -18,15 +21,17 @@ const DetailAddressBox = () => {
             </DtAdrsAddress>
           </DtAdrsAddrestWrapper>
         </DtAdrsInnerWrapper>
-        <StButton>
-          <DtAdrsButtonWrapper>
-            <DtAdrsButtonInnerWrapper>
-              <IoIosCopy />
-              <DtAdrsButtonText>주소 복사하기</DtAdrsButtonText>
-            </DtAdrsButtonInnerWrapper>
-            <MdKeyboardArrowRight />
-          </DtAdrsButtonWrapper>
-        </StButton>
+        <CopyToClipboard text={address}>
+          <StButton>
+            <DtAdrsButtonWrapper>
+              <DtAdrsButtonInnerWrapper>
+                <IoIosCopy />
+                <DtAdrsButtonText>주소 복사하기</DtAdrsButtonText>
+              </DtAdrsButtonInnerWrapper>
+              <MdKeyboardArrowRight />
+            </DtAdrsButtonWrapper>
+          </StButton>
+        </CopyToClipboard>
         <a
           href={`https://www.google.com/maps/place/<homename>/<lang>/<long>`}
           target="_blank"
