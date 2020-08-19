@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import SearchForm from '../../Components/Main/SearchForm';
 
 const SearchFormContainer = () => {
-  // place,checkin,checkout,guest
+  // location,checkIn,checkOut,guests
   const [type, setType] = useState(null);
 
   const closePopup = () => {
