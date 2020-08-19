@@ -43,7 +43,10 @@ const DetailReservedHomeBox = () => {
           <DtRhSimpleInfoHostDataWrapper>
             <DtRhSimpleInfoHostName>
               호스트:{' '}
-              <StLink to="/users/show" style={{ textDecoration: 'underline' }}>
+              <StLink
+                to="/users/show/hostid"
+                style={{ textDecoration: 'underline' }}
+              >
                 행복마루
               </StLink>
               님
