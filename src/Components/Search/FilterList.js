@@ -7,6 +7,7 @@ import {
   PricePopup,
   SetDatePopup,
 } from './FilterPopup';
+import FilterModal from './FilterModal';
 import { FilterButtonContainer } from '../../Containers/Search/FilterListContainer';
 
 export const FilterButton = ({ children, text, onClick }) => {
@@ -53,7 +54,9 @@ export const FilterList = ({ popupState, dispatch }) => {
         text="필터 추가하기"
         popupState={popupState}
         dispatch={dispatch}
-      />
+      >
+        <FilterModal />
+      </FilterButtonContainer>
     </StWrapper>
   );
 };
