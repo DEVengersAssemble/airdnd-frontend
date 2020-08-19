@@ -21,8 +21,9 @@ const SearchResult = ({ mapState, onShowMap }) => {
 };
 
 const StWrapper = styled.div`
-  width: ${({ mapState }) => (mapState ? '840px' : '100vh')};
-  padding: 5rem 2rem 3rem;
+  width: ${({ mapState }) => (mapState ? '840px' : '100%')};
+  padding: ${({ mapState }) =>
+    mapState ? '5rem 2rem 3rem' : '5rem 8rem 3rem'};
   margin-top: 8rem;
   position: relative;
 
