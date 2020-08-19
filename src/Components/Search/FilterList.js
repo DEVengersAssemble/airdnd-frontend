@@ -22,7 +22,7 @@ export const FilterButton = ({ children, text, onClick }) => {
   );
 };
 
-export const FilterList = ({ popupState, mapState, openMap, dispatch }) => {
+export const FilterList = ({ popupState, mapState, onShowMap, dispatch }) => {
   return (
     <StWrapper>
       <FilterButtonContainer
@@ -58,7 +58,7 @@ export const FilterList = ({ popupState, mapState, openMap, dispatch }) => {
       >
         <FilterModal />
       </FilterButtonContainer>
-      <MapButton mapState={mapState} openMap={openMap} />
+      <MapButton mapState={mapState} onShowMap={onShowMap} />
     </StWrapper>
   );
 };

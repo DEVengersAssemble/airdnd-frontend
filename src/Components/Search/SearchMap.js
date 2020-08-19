@@ -10,11 +10,11 @@ import {
 } from './MapButton';
 import Map from '../Global/Map';
 
-const SearchMap = ({ closeMap, mapState }) => {
+const SearchMap = ({ onHideMap, mapState }) => {
   return (
     <StWrapper mapState={mapState}>
       <StStickyWrapper>
-        <MapCloseButton closeMap={closeMap} />
+        <MapCloseButton onHideMap={onHideMap} />
         <MapCheckbox />
         <StBtnSetWrapper>
           <MapZoomButton />

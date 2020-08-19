@@ -55,14 +55,14 @@ const FilterButtonContainer = ({
   );
 };
 
-const FilterListContainer = ({ mapState, openMap }) => {
+const FilterListContainer = ({ mapState, onShowMap }) => {
   const [popupState, dispatch] = useReducer(popupReducer, popupInit);
 
   return (
     <FilterList
       popupState={popupState}
       mapState={mapState}
-      openMap={openMap}
+      onShowMap={onShowMap}
       dispatch={dispatch}
     />
   );

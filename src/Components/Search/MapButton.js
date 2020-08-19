@@ -7,9 +7,9 @@ import { GrClose } from 'react-icons/gr';
 import { GoSettings } from 'react-icons/go';
 import Checkbox from '../Global/Checkbox';
 
-const MapButton = ({ mapState, openMap, ...rest }) => {
+const MapButton = ({ mapState, onShowMap, ...rest }) => {
   return mapState ? null : (
-    <StMapButton border="none" fontSize="1.4rem" onClick={openMap} {...rest}>
+    <StMapButton border="none" fontSize="1.4rem" onClick={onShowMap} {...rest}>
       <FiMap /> <StSpan>지도 표시하기</StSpan>
     </StMapButton>
   );
@@ -69,14 +69,14 @@ const MapMarkerButton = () => {
   );
 };
 
-const MapCloseButton = ({ closeMap }) => {
+const MapCloseButton = ({ onHideMap }) => {
   return (
     <StButton
       boxShadow
       position="sticky"
       top="10rem"
       margin="0 0 91px 0"
-      onClick={closeMap}
+      onClick={onHideMap}
     >
       <GrClose />
     </StButton>

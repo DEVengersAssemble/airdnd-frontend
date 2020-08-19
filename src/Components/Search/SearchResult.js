@@ -6,12 +6,12 @@ import SearchPagenation from './SearchPagenation';
 import { FloatingMapButton } from './MapButton';
 import HomeListContainer from '../../Containers/Search/HomeListContainer';
 
-const SearchResult = ({ mapState, openMap }) => {
+const SearchResult = ({ mapState, onShowMap }) => {
   return (
     <StWrapper mapState={mapState}>
       <StSpan>숙박 279건 · 게스트 1명</StSpan>
       <StHeader>제주도의 숙소</StHeader>
-      <FilterListContainer mapState={mapState} openMap={openMap} />
+      <FilterListContainer mapState={mapState} onShowMap={onShowMap} />
       <HomeListContainer mapState={mapState} />
       <RecentHomeList />
       <SearchPagenation />

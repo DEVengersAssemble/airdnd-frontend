@@ -1,14 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import SearchContent from '../../Components/Search/SearchContent';
 
 const SearchContentContainer = () => {
-  const [mapState, setMapState] = useState(true);
-  const closeMap = () => setMapState(false);
-  const openMap = () => setMapState(true);
-
-  return (
-    <SearchContent mapState={mapState} openMap={openMap} closeMap={closeMap} />
-  );
+  return <SearchContent />;
 };
 
 export default SearchContentContainer;
