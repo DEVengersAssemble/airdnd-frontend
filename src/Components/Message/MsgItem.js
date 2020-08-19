@@ -5,7 +5,7 @@ import Profile from '../Global/Profile';
 import Button from '../Global/Button';
 import { AiFillFlag } from 'react-icons/ai';
 
-const MsgItem = ({ host, onClickFlagModal }) => {
+const MsgItem = ({ host }) => {
   return (
     <MsgItemWrapper>
       <MsgProfileWrapper>
@@ -30,7 +30,6 @@ const MsgItem = ({ host, onClickFlagModal }) => {
             hover={{
               backgroundColor: theme.color.lightGray,
             }}
-            onClickFlagModal={onClickFlagModal}
           >
             <AiFillFlag />
           </StMsgButton>

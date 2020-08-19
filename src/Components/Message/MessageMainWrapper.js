@@ -10,18 +10,12 @@ const MessageMainWrapper = () => {
   const [canceled, setCanceled] = React.useState(false);
   console.log(setCanceled); // 전역 관리
 
-  const [openFlagModal, setFlagModal] = React.useState(false);
-
-  const onClickFlagModal = () => {
-    setFlagModal(openFlagModal);
-  };
-
   return (
     <MessageMainWrapperDiv>
       <ChatMain />
-      <MsgMain onClickFlagModal={onClickFlagModal} />
+      <MsgMain />
       {canceled ? <DetailCanceledMain /> : <DetailMain />}
-      <ChatFlagModal openFlagModal={openFlagModal} />
+      <ChatFlagModal />
     </MessageMainWrapperDiv>
   );
 };

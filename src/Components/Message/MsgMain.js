@@ -6,14 +6,14 @@ import Button from '../Global/Button';
 import { AiOutlinePicture } from 'react-icons/ai';
 import MsgItem from '../Message/MsgItem';
 
-const MsgMain = ({ onClickFlagModal }) => {
+const MsgMain = () => {
   const host = true;
 
   return (
     <MsgMainWrapper>
       <MsgInbox>
         <MsgItems>
-          <MsgItem host={host} onClickFlagModal={onClickFlagModal} />
+          <MsgItem host={host} />
           <MsgItem />
         </MsgItems>
       </MsgInbox>
