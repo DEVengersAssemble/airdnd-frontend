@@ -1,21 +1,36 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { lighten } from 'polished';
 import { FaLock } from 'react-icons/fa';
+import { MdKeyboardArrowLeft } from 'react-icons/md';
 import Modal from '../Global/Modal';
 import Button from '../Global/Button';
 
 const ChatFlagModal = () => {
+  // Radio값 상태로 유지해서 다시 작업(현재 간단한 기능은 기타 선택시 모습)
   const [modal, setModal] = React.useState(false);
+  const [next, setNext] = React.useState(false);
+  const [back, setBack] = React.useState(false);
+
   const onClickDelete = () => {
     setModal(!modal);
+  };
+
+  const onClickNext = () => {
+    setNext(!next);
+  };
+
+  const onClickBack = () => {
+    setBack(!back);
+    setNext(!next);
   };
 
   return (
     <StFlagModal
       width="55rem"
-      height="50rem"
-      modalState={modal}
+      height="fit-content"
+      modalState="true"
+      // modalState={modal}
       setModalState={onClickDelete}
     >
       <StFlagModalTitle>어떤 문제가 있나요?</StFlagModalTitle>
@@ -25,25 +40,55 @@ const ChatFlagModal = () => {
           이정보는 에어비앤비만 볼 수 있습니다.
         </StFlagModalDescription>
       </StFlagModalSub>
-      <StFlagModalRadioWrapper>
-        <StFlagModalLabel>
-          <StFlagModalText>
-            사기 또는 스팸 메시지를 보내는 것 같아요
-          </StFlagModalText>
-          <StFlagModalInput type="radio" name="flag" />
-        </StFlagModalLabel>
-        <StFlagModalLabel>
-          <StFlagModalText>불쾌해요</StFlagModalText>
-          <StFlagModalInput type="radio" name="flag" />
-        </StFlagModalLabel>
-        <StFlagModalLabel>
-          <StFlagModalText>기타</StFlagModalText>
-          <StFlagModalInput type="radio" name="flag" />
-        </StFlagModalLabel>
-      </StFlagModalRadioWrapper>
-      <StFlagButtonWrapper>
-        <StFlagButton border="none" color="green" padding="1.5rem 2.5rem">
-          확인
+      {next ? (
+        <StFlagModalRadioWrapper>
+          <StFlagModalLabel>
+            <StFlagModalText>동네에서 호스팅하는 것이 걱정돼요</StFlagModalText>
+            <StFlagModalInput type="radio" name="etc" />
+          </StFlagModalLabel>
+          <StFlagModalLabel>
+            <StFlagModalText>이 페이지 일부가 잘 보이지 않아요</StFlagModalText>
+            <StFlagModalInput type="radio" name="etc" />
+          </StFlagModalLabel>
+        </StFlagModalRadioWrapper>
+      ) : (
+        <StFlagModalRadioWrapper>
+          <StFlagModalLabel>
+            <StFlagModalText>
+              사기 또는 스팸 메시지를 보내는 것 같아요
+            </StFlagModalText>
+            <StFlagModalInput type="radio" name="flag" />
+          </StFlagModalLabel>
+          <StFlagModalLabel>
+            <StFlagModalText>불쾌해요</StFlagModalText>
+            <StFlagModalInput type="radio" name="flag" />
+          </StFlagModalLabel>
+          <StFlagModalLabel>
+            <StFlagModalText>기타</StFlagModalText>
+            <StFlagModalInput type="radio" name="flag" />
+          </StFlagModalLabel>
+        </StFlagModalRadioWrapper>
+      )}
+      <StFlagButtonWrapper next={next}>
+        {next && (
+          <StBackButton
+            border="none"
+            hover="none"
+            padding="1.5rem 0rem"
+            onClick={onClickBack}
+          >
+            <MdKeyboardArrowLeft />
+            뒤로
+          </StBackButton>
+        )}
+        <StFlagButton
+          border="none"
+          color="green"
+          padding="1.5rem 2.5rem"
+          hover="none"
+          onClick={next ? null : onClickNext}
+        >
+          {next ? '다음' : '확인'}
         </StFlagButton>
       </StFlagButtonWrapper>
     </StFlagModal>
@@ -102,9 +147,19 @@ const StFlagModalText = styled.div`
 const StFlagButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
+  ${({ next }) =>
+    next &&
+    css`
+      justify-content: space-between;
+    `}
 `;
 
 const StFlagButton = styled(Button)`
   border-radius: 3px;
 `;
+
+const StBackButton = styled(Button)`
+  color: ${({ theme }) => theme.color.green};
+`;
+
 export default ChatFlagModal;
