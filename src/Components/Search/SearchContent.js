@@ -1,13 +1,13 @@
 import React from 'react';
 import SearchResult from './SearchResult';
-import SearchMap from './SearchMap';
+import SearchMapContainer from '../../Containers/Search/SearchMapContainer';
 import styled from 'styled-components';
 
-const SearchContent = () => {
+const SearchContent = ({ mapState, closeMap }) => {
   return (
     <StContent>
-      <SearchResult />
-      <SearchMap />
+      <SearchResult mapState={mapState} />
+      <SearchMapContainer closeMap={closeMap} mapState={mapState} />
     </StContent>
   );
 };

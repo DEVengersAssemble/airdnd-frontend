@@ -10,11 +10,11 @@ import {
 } from './MapButton';
 import Map from '../Global/Map';
 
-const SearchMap = ({ children }) => {
+const SearchMap = ({ closeMap, mapState }) => {
   return (
-    <StWrapper>
+    <StWrapper mapState={mapState}>
       <StStickyWrapper>
-        <MapCloseButton />
+        <MapCloseButton closeMap={closeMap} />
         <MapCheckbox />
         <StBtnSetWrapper>
           <MapZoomButton />
@@ -65,6 +65,8 @@ const SearchMap = ({ children }) => {
 
 const StWrapper = styled.aside`
   width: calc(100vw - 840px);
+  display: ${({ mapState }) => (mapState ? 'block' : 'none')};
+
   @media ${({ theme }) => theme.size.medium} {
     display: none;
   }

@@ -69,9 +69,15 @@ const MapMarkerButton = () => {
   );
 };
 
-const MapCloseButton = () => {
+const MapCloseButton = ({ closeMap }) => {
   return (
-    <StButton boxShadow position="sticky" top="10rem" margin="0 0 91px 0">
+    <StButton
+      boxShadow
+      position="sticky"
+      top="10rem"
+      margin="0 0 91px 0"
+      onClick={closeMap}
+    >
       <GrClose />
     </StButton>
   );
