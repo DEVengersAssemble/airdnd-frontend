@@ -42,7 +42,7 @@ const DetailMainWrapper = styled.div`
 const DetailMainInnerWrapper = styled.div`
   & > div + div {
     border-top: 5px solid ${({ theme }) => darken(0.1, theme.color.lightGray)};
-    border-bottom: 5px solid
+    border-bottom: 3px solid
       ${({ theme }) => darken(0.1, theme.color.lightGray)};
   }
 `;
