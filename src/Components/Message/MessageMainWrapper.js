@@ -4,7 +4,6 @@ import ChatMain from '../../Components/Message/ChatMain';
 import MsgMain from '../../Components/Message/MsgMain';
 import DetailCanceledMain from '../../Components/Message/DetailCanceledMain';
 import DetailMain from './DetailMain';
-import ChatFlagModal from './MessageModal';
 
 const MessageMainWrapper = () => {
   const [canceled, setCanceled] = React.useState(false);
@@ -15,7 +14,6 @@ const MessageMainWrapper = () => {
       <ChatMain />
       <MsgMain />
       {canceled ? <DetailCanceledMain /> : <DetailMain />}
-      <ChatFlagModal />
     </MessageMainWrapperDiv>
   );
 };
