@@ -4,7 +4,20 @@ import Rating from '../Global/Rating';
 import { CkHeart } from '../Global/Heart';
 import CarouselContainer from '../../Containers/Global/CarouselContainer';
 
-const Home = () => {
+const Home = ({
+  home,
+  isSuperhost,
+  isBookmarked,
+  image,
+  imageCount,
+  subTitle,
+  title,
+  feature,
+  rating,
+  reviewCount,
+  price,
+  location,
+}) => {
   return (
     <StWrapper>
       <CarouselContainer size="large" />
@@ -13,16 +26,19 @@ const Home = () => {
         href="https://www.airbnb.co.kr/rooms/36094960?adults=1&location=%EB%A7%88%EB%93%9C%EB%A6%AC%EB%93%9C&source_impression_id=p3_1597324281_lNy0Q31ggfi0f1St&check_in=2020-09-26&guests=1&check_out=2020-09-30"
       >
         <StDetailWrapper>
-          <StDetail>MongMong-Toto의 호텔 객실</StDetail>
-          <StTitle>Pia Resort Hotel Corner Studio Room</StTitle>
+          <StDetail>{subTitle}</StDetail>
+          <StTitle>{title}</StTitle>
           <StLine></StLine>
-          <StDetail>
-            최대 인원 2명 ﹒ 침실 1개 ﹒ 침대 2개 ﹒ 단독 사용 욕실 1개
-          </StDetail>
-          <Rating scale="1.4" rate="4.79" count="24" className="rating" />
+          <StDetail>{feature}</StDetail>
+          <Rating
+            scale="1.4"
+            rate={rating}
+            count={reviewCount}
+            className="rating"
+          />
           <StPriceWrapper>
             <StLargePrice>
-              <strong>₩12,928</strong> / 1박
+              <strong>{price}</strong> / 1박
             </StLargePrice>
             <StSmallPrice>총 요금: ₩12,928</StSmallPrice>
           </StPriceWrapper>

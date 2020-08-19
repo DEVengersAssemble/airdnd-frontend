@@ -1,12 +1,13 @@
 import React from 'react';
 import Button from '../Global/Button';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import {
   RefundPopup,
   RoomTypePopup,
   PricePopup,
   SetDatePopup,
 } from './FilterPopup';
+import FilterModal from './FilterModal';
 import { FilterButtonContainer } from '../../Containers/Search/FilterListContainer';
 
 export const FilterButton = ({ children, text, onClick }) => {
@@ -20,20 +21,42 @@ export const FilterButton = ({ children, text, onClick }) => {
   );
 };
 
-export const FilterList = () => {
+export const FilterList = ({ popupState, dispatch }) => {
   return (
     <StWrapper>
-      <FilterButtonContainer text="유연한 환불 정책">
+      <FilterButtonContainer
+        name="refund"
+        text="유연한 환불 정책"
+        popupState={popupState}
+        dispatch={dispatch}
+      >
         <RefundPopup size="350px" />
       </FilterButtonContainer>
-      <FilterButtonContainer text="숙소 유형">
+      <FilterButtonContainer
+        name="roomType"
+        text="숙소 유형"
+        popupState={popupState}
+        dispatch={dispatch}
+      >
         <RoomTypePopup size="365px" />
       </FilterButtonContainer>
-      <FilterButtonContainer text="요금">
+      <FilterButtonContainer
+        name="price"
+        text="요금"
+        popupState={popupState}
+        dispatch={dispatch}
+      >
         <PricePopup size="430px" />
         <SetDatePopup size="350px" />
       </FilterButtonContainer>
-      <FilterButtonContainer text="필터 추가하기" />
+      <FilterButtonContainer
+        name="modal"
+        text="필터 추가하기"
+        popupState={popupState}
+        dispatch={dispatch}
+      >
+        <FilterModal />
+      </FilterButtonContainer>
     </StWrapper>
   );
 };

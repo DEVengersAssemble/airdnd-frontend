@@ -5,6 +5,7 @@ import { FilterListContainer } from '../../Containers/Search/FilterListContainer
 import RecentHomeList from './RecentHomeList';
 import SearchPagenation from './SearchPagenation';
 import { MapButton } from './MapButton';
+import HomeListContainer from '../../Containers/Search/HomeListContainer';
 
 const SearchResult = () => {
   return (
@@ -12,6 +13,7 @@ const SearchResult = () => {
       <StSpan>숙박 279건 · 게스트 1명</StSpan>
       <StHeader>제주도의 숙소</StHeader>
       <FilterListContainer />
+      <HomeListContainer />
       <HomeList />
       <RecentHomeList />
       <SearchPagenation />
