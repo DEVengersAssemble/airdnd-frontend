@@ -6,11 +6,12 @@ import Toggle from '../Global/Toggle';
 import ModalFooter from '../Global/ModalFooter';
 import Checkbox from '../Global/Checkbox';
 import { NewInput } from '../Global/Input';
+import { GiHamburgerMenu } from 'react-icons/gi';
 
-const RefundPopup = popupState => {
+const RefundPopup = ({ popupState, size }) => {
   return (
-    <FilterPopup className="refund" popupState={false}>
-      <StContentWrapper className="refund">
+    <FilterPopup popupState={popupState} size={size}>
+      <StContentWrapper content="refund">
         <StSmallSpan>
           유연한 환불 정책을 제공하는 숙소만 검색 결과에 표시
         </StSmallSpan>
@@ -20,18 +21,18 @@ const RefundPopup = popupState => {
   );
 };
 
-const RoomTypePopup = popupState => {
+const RoomTypePopup = ({ popupState, size }) => {
   const [check, setCheck] = React.useState(false);
 
   const onChange = e => {
     setCheck(e.target.checked);
   };
   return (
-    <FilterPopup className="roomType" left="15.7rem" popupState={false}>
+    <FilterPopup popupState={popupState} size={size}>
       <StCheckboxList>
         <StCheckboxWrapper>
           <Checkbox value checked={check} onChange={onChange}>
-            <StContentWrapper className="roomType">
+            <StContentWrapper content="roomType">
               <StLargeSpan>집 전체</StLargeSpan>
               <StSmallSpan>집 전체를 단독으로 사용합니다</StSmallSpan>
             </StContentWrapper>
@@ -39,7 +40,7 @@ const RoomTypePopup = popupState => {
         </StCheckboxWrapper>
         <StCheckboxWrapper>
           <Checkbox value checked={check} onChange={onChange}>
-            <StContentWrapper className="roomType">
+            <StContentWrapper content="roomType">
               <StLargeSpan>개인실</StLargeSpan>
               <StSmallSpan>
                 침실은 단독으로 쓰고, 이외의 공간은 호스트나 다른 게스트와 함께
@@ -50,7 +51,7 @@ const RoomTypePopup = popupState => {
         </StCheckboxWrapper>
         <StCheckboxWrapper>
           <Checkbox value checked={check} onChange={onChange}>
-            <StContentWrapper className="roomType">
+            <StContentWrapper content="roomType">
               <StLargeSpan>다인실</StLargeSpan>
               <StSmallSpan>
                 사적 공간 없이, 침실이나 욕실 등을 호스트나 다른 게스트와 함께
@@ -64,13 +65,28 @@ const RoomTypePopup = popupState => {
   );
 };
 
-const PricePopup = popupState => {
+const PricePopup = ({ popupState, size }) => {
   return (
-    <FilterPopup className="price" left="25rem" popupState={false}>
-      <StContentWrapper className="price">
+    <FilterPopup popupState={popupState} size={size}>
+      <StContentWrapper content="price">
         <StLargeSpan>평균 1박 요금은 ₩78,902입니다</StLargeSpan>
         <StRangeWrapper>
-          <StRange type="range" />
+          <StRangeBar>
+            <StButton btnType="circle" left="0">
+              <StIcon />
+            </StButton>
+            <StButton btnType="circle" right="0">
+              <StIcon />
+            </StButton>
+          </StRangeBar>
+          <StGraph>
+            <StStick />
+            <StStick />
+            <StStick />
+            <StStick />
+            <StStick />
+            <StStick />
+          </StGraph>
         </StRangeWrapper>
         <StInputWrapper>
           <NewInput
@@ -94,93 +110,78 @@ const PricePopup = popupState => {
   );
 };
 
-const SetDatePopup = popupState => {
+const SetDatePopup = ({ popupState, size }) => {
   return (
-    <StWrapper className="setDate">
-      <StPopup left="27rem" popupState={false}>
-        <StContentWrapper className="setDate">
-          <StLargeSpan>요금을 확인하려면 여행 날짜를 입력하세요</StLargeSpan>
-          <Button btnType="color" color="black">
-            날짜 입력
-          </Button>
-        </StContentWrapper>
-      </StPopup>
-    </StWrapper>
+    <StPopup popupState={popupState} size={size}>
+      <StContentWrapper content="setDate">
+        <StLargeSpan>요금을 확인하려면 여행 날짜를 입력하세요</StLargeSpan>
+        <Button btnType="color" color="black">
+          날짜 입력
+        </Button>
+      </StContentWrapper>
+    </StPopup>
   );
 };
 
-const FilterPopup = ({ children, popupState, left, className }) => {
+const FilterPopup = ({ children, popupState, size }) => {
   return (
-    <StWrapper className={className}>
-      <StPopup left={left} popupState={popupState}>
-        {children}
-        <StFooter align="space-between">
-          <Button btnType="underlined" padding="1rem" fontSize="1.6rem">
-            지우기
-          </Button>
-          <Button
-            btnType="color"
-            color="black"
-            padding="1rem 1.5rem"
-            fontSize="1.4rem"
-            hover="background: #000"
-            transition
-          >
-            저장
-          </Button>
-        </StFooter>
-      </StPopup>
-    </StWrapper>
+    <StPopup popupState={popupState} size={size}>
+      {children}
+      <StFooter align="space-between">
+        <Button btnType="underlined" padding="1rem" fontSize="1.6rem">
+          지우기
+        </Button>
+        <Button
+          btnType="color"
+          color="black"
+          padding="1rem 1.5rem"
+          fontSize="1.4rem"
+          hover="background: #000"
+          transition
+        >
+          저장
+        </Button>
+      </StFooter>
+    </StPopup>
   );
 };
-
-const sizes = {
-  refund: '350px',
-  roomType: '365px',
-  setDate: '350px',
-  price: '430px',
-};
-
-const StWrapper = styled.div`
-  position: relative;
-  ${({ className }) => css`
-    width: ${sizes[className]};
-  `}
-`;
 
 const StPopup = styled(Popup)`
-  top: -1rem;
+  top: 7rem;
   padding: 0;
-  width: 100%;
+  width: ${({ size }) => size};
 `;
 
-const StContentWrapper = styled.div`
-  padding: 2rem;
-
-  &.refund {
+const contentStyles = {
+  refund: css`
     display: flex;
     height: 165px;
     padding-top: 3rem;
-  }
-
-  &.roomType {
+  `,
+  roomType: css`
     padding: 1rem;
     height: 100%;
     & > * {
       margin: 0 0 0.3rem;
     }
-  }
-
-  &.setDate {
+  `,
+  setDate: css`
     height: 110px;
     & > * {
       margin-bottom: 1.3rem;
     }
-  }
-
-  &.price {
+  `,
+  price: css`
     height: 330px;
-  }
+  `,
+};
+
+const StContentWrapper = styled.div`
+  padding: 2rem;
+  ${({ content }) =>
+    css`
+      ${contentStyles[content]}
+    `}
 `;
 
 const spanStyle = css`
@@ -202,7 +203,7 @@ const StLargeSpan = styled.span`
 
 const StCheckboxList = styled.ul`
   padding: 2rem;
-  height: 360px;
+  height: 380px;
 `;
 
 const StCheckboxWrapper = styled.li`
@@ -220,18 +221,48 @@ const StInputWrapper = styled.div`
   }
 
   & > span {
-    margin: 0 0 0 0.5rem;
+    margin: 0;
   }
 `;
 
 const StRangeWrapper = styled.div`
-  background: cornflowerblue;
   height: 10rem;
   margin: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  flex-flow: column-reverse;
 `;
 
-const StRange = styled.input`
+const StGraph = styled.ul`
+  display: flex;
+`;
+
+const StStick = styled.li`
+  width: 5px;
+  height: 3rem;
+  margin: 0 1px -1px;
+  border-radius: 1px;
+  background: ${({ theme }) => theme.color.gray};
+`;
+
+const StRangeBar = styled.div`
   width: 100%;
+  height: 2px;
+  background: ${({ theme }) => theme.color.gray};
+  position: relative;
+  display: flex;
+  align-items: center;
+`;
+
+const StButton = styled(Button)`
+  position: absolute;
+  right: ${({ right }) => right};
+  left: ${({ left }) => left};
+`;
+
+const StIcon = styled(GiHamburgerMenu)`
+  color: ${({ theme }) => theme.color.gray};
+  transform: rotate(90deg);
 `;
 
 const StFooter = styled(ModalFooter)`

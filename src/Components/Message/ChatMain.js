@@ -2,30 +2,23 @@ import React from 'react';
 import styled from 'styled-components';
 import { darken } from 'polished';
 import ChatListItem from '../Message/ChatListItem';
+import ChatListsNothing from '../Message/ChatListsNothing';
 
 const ChatMain = () => {
+  const ChatNothing = true;
+
   return (
     <ChatMainWrapper>
-      <ChatLists>
-        <ChatListItem />
-        <ChatListItem />
-        <ChatListItem />
-        <ChatListItem />
-        <ChatListItem />
-        <ChatListItem />
-        <ChatListItem />
-        <ChatListItem />
-        <ChatListItem />
-        <ChatListItem />
-        <ChatListItem />
-        <ChatListItem />
-        <ChatListItem />
-        <ChatListItem />
-        <ChatListItem />
-        <ChatListItem />
-        <ChatListItem />
-        <ChatListItem />
-      </ChatLists>
+      {ChatNothing ? (
+        <ChatListsNothing />
+      ) : (
+        <ChatLists>
+          <ChatListItem />
+          <ChatListItem />
+          <ChatListItem />
+          <ChatListItem />
+        </ChatLists>
+      )}
     </ChatMainWrapper>
   );
 };

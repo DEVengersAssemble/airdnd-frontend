@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import Button from '../Global/Button';
 import { FaWonSign, FaFacebookF, FaTwitter, FaInstagram } from 'react-icons/fa';
 import { FiGlobe } from 'react-icons/fi';
-
 const StFooter = styled.footer`
   background: ${({ theme }) => theme.color.lightGray};
   padding: 50px 80px;
@@ -12,14 +11,12 @@ const StFooter = styled.footer`
     padding: 50px 40px;
   }
 `;
-
 const StUpperWrapper = styled.div`
   display: flex;
   @media ${({ theme }) => theme.size.iPad} {
     flex-direction: column;
   }
 `;
-
 const StContentSection = styled.section`
   width: 25%;
   padding-bottom: 48px;
@@ -28,7 +25,6 @@ const StContentSection = styled.section`
     width: 100%;
     padding-bottom: 24px;
     margin-bottom: 24px;
-
     &:nth-child(even) ul {
       height: 64px;
     }
@@ -37,29 +33,25 @@ const StContentSection = styled.section`
     }
   }
 `;
-
 const StContentTitle = styled.h4`
   font-weight: 600;
   font-size: 12px;
   line-height: 14px;
   text-transform: uppercase;
 `;
-
 const StContentList = styled.ul`
   margin-top: 10px;
   display: flex;
   flex-wrap: wrap;
 `;
-
 const StContentItem = styled.li`
   padding: 3px 0px;
   margin: 5px 0;
   width: 100%;
-  @media ${props => props.theme.iPad} {
+  @media ${({ theme }) => theme.size.iPad} {
     width: 33.3333%;
   }
 `;
-
 const StContentItemLink = styled.a`
   text-decoration: none;
   font-weight: 400;
@@ -70,44 +62,38 @@ const StContentItemLink = styled.a`
   }
   &:hover {
     text-decoration: underline;
-    color: ${props => props.theme.darkGray};
+    color: ${({ theme }) => theme.color.darkGray};
     cursor: pointer;
   }
 `;
-
 const StLowerWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   padding-top: 10px;
   margin-top: 20px;
   font-size: 14px;
-  @media ${props => props.theme.iPad} {
+  @media ${({ theme }) => theme.size.iPad} {
     flex-direction: column-reverse;
     width: 100%;
   }
 `;
-
 const StLowerLeftWrapper = styled.div`
-  @media ${props => props.theme.iPad} {
+  @media ${({ theme }) => theme.size.iPad} {
     text-align: center;
     width: 100%;
   }
 `;
-
 const StCopyRight = styled.p`
   margin-bottom: 8px;
   font-weight: 500;
 `;
-
 const StRuleList = styled.ul`
   display: flex;
   @media ${({ theme }) => theme.size.iPad} {
     justify-content: center;
   }
 `;
-
 const StRuleItem = styled.li``;
-
 const StRuleLink = styled.a`
   text-decoration: none;
   font-size: 14px;
@@ -120,7 +106,6 @@ const StRuleLink = styled.a`
     cursor: pointer;
   }
 `;
-
 const StDot = styled.span`
   display: flex;
   width: 19px;
@@ -128,9 +113,8 @@ const StDot = styled.span`
   justify-content: center;
   align-items: center;
 `;
-
 const StLowerRightWrapper = styled.div`
-  @media ${props => props.theme.iPad} {
+  @media ${({ theme }) => theme.size.iPad} {
     text-align: center;
     width: 100%;
     margin-bottom: 30px;
@@ -139,14 +123,12 @@ const StLowerRightWrapper = styled.div`
   justify-content: center;
   align-items: center;
 `;
-
 const StSettingButtonWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   margin-right: 20px;
   width: 160px;
 `;
-
 const StSettingButton = styled(Button)`
   background: transparent;
   height: 20px;
@@ -159,13 +141,11 @@ const StSettingButton = styled(Button)`
     color: ${({ theme }) => theme.color.darkGray};
   }
 `;
-
 const StButtonText = styled.span`
   line-height: 18px;
   margin-left: 6px;
   font-weight: 500;
 `;
-
 const StSiteLinkList = styled.ul`
   display: flex;
   justify-content: space-between;
@@ -175,21 +155,18 @@ const StSiteLinkList = styled.ul`
     margin-left: 70px;
   }
 `;
-
 const StSiteLinkItem = styled.li`
   text-align: center;
   & + & {
     margin-left: 20px;
   }
 `;
-
 const StSiteLink = styled.a`
   font-size: 20px;
   line-height: 20px;
   display: flex;
   vertical-align: center;
   cursor: pointer;
-
   &:visited {
     color: inherit;
   }
