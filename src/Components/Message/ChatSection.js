@@ -25,15 +25,14 @@ const ChatSection = () => {
   return (
     <ChatSectionWrapper>
       <ChatSectionTitle>메시지 주고받기</ChatSectionTitle>
-      <Button
+      <StChatFilterButton
         btnType="circle"
         border="none"
         hover={{ backgroundColor: theme.color.lightGray }}
-        style={{ width: '4rem', height: '4rem' }}
         onClick={onClickPopup}
       >
-        <ChatMenubuttonIcon />
-      </Button>
+        <ChatFilterButtonIcon />
+      </StChatFilterButton>
       <ChatPopup openPopup={openPopup} />
     </ChatSectionWrapper>
   );
@@ -57,7 +56,12 @@ const ChatSectionTitle = styled.h2`
   font-weight: bold;
 `;
 
-const ChatMenubuttonIcon = styled(MdFilterList)`
+const StChatFilterButton = styled(Button)`
+  width: 4rem;
+  height: 4rem;
+`;
+
+const ChatFilterButtonIcon = styled(MdFilterList)`
   font-size: 2rem;
 `;
 
