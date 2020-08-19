@@ -31,6 +31,8 @@ const StMainHeader = styled.header`
   padding: 20px 80px 15px 80px;
   @media ${({ theme }) => theme.size.iPad} {
     padding: 20px 40px 15px 40px;
+    height: ${({ isSearchBtnClicked }) =>
+      isSearchBtnClicked ? '250px' : '80px'};
   }
 `;
 
