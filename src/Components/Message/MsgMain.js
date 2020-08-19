@@ -4,31 +4,18 @@ import theme from '../../style/theme';
 import { Input } from '../Global/Input';
 import Button from '../Global/Button';
 import { AiOutlinePicture } from 'react-icons/ai';
+import MsgItem from '../Message/MsgItem';
 
 const MsgMain = () => {
+  const host = true;
+
   return (
     <MsgMainWrapper>
       <MsgInbox>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
-        <MsgItems>채팅내역</MsgItems>
+        <MsgItems>
+          <MsgItem host={host} />
+          <MsgItem />
+        </MsgItems>
       </MsgInbox>
       <MsgInputOuter>
         <MsgInputInner>
@@ -71,6 +58,9 @@ const MsgItems = styled.div`
   max-width: 57rem;
   min-width: 37.5rem;
   padding: 2.5rem;
+  & > div + div {
+    padding-top: 2rem;
+  }
 `;
 
 const MsgInputOuter = styled.div`
