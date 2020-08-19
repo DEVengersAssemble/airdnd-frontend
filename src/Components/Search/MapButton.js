@@ -7,11 +7,11 @@ import { GrClose } from 'react-icons/gr';
 import { GoSettings } from 'react-icons/go';
 import Checkbox from '../Global/Checkbox';
 
-const MapButton = () => {
-  return (
-    <Button border="none" fontSize="1.4rem">
+const MapButton = ({ mapState, openMap, ...rest }) => {
+  return mapState ? null : (
+    <StMapButton border="none" fontSize="1.4rem" onClick={openMap} {...rest}>
       <FiMap /> <StSpan>지도 표시하기</StSpan>
-    </Button>
+    </StMapButton>
   );
 };
 
@@ -127,6 +127,10 @@ const StButton = styled(Button)`
       margin: ${margin};
       ${boxShadow && `box-shadow: 1px 1px 3px ${theme.color.shadow}`};
     `}
+`;
+
+const StMapButton = styled(Button)`
+  margin-left: auto;
 `;
 
 const StFloatingMapButton = styled(Button)`
