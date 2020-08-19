@@ -1,11 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { lighten } from 'polished';
 import { MdKeyboardArrowRight, MdPrint, MdReceipt } from 'react-icons/md';
 import { FaGlobe } from 'react-icons/fa';
 import Profile from '../Global/Profile';
 import Button from '../Global/Button';
-import Modal from '../Global/Modal';
 
 const DetailSubInfoBox = () => {
   return (
@@ -41,24 +41,28 @@ const DetailSubInfoBox = () => {
             <MdKeyboardArrowRight />
           </DtSiButtonWrapper>
         </StButton>
-        <StButton>
-          <DtSiButtonWrapper>
-            <DtSiButtonInnerWrapper>
-              <MdPrint />
-              <DtSiButtonText>세부정보 인쇄하기</DtSiButtonText>
-            </DtSiButtonInnerWrapper>
-            <MdKeyboardArrowRight />
-          </DtSiButtonWrapper>
-        </StButton>
-        <StButton>
-          <DtSiButtonWrapper>
-            <DtSiButtonInnerWrapper>
-              <MdReceipt />
-              <DtSiButtonText>영수증 받기</DtSiButtonText>
-            </DtSiButtonInnerWrapper>
-            <MdKeyboardArrowRight />
-          </DtSiButtonWrapper>
-        </StButton>
+        <Link to="/printsubinfo" target="_blank">
+          <StButton>
+            <DtSiButtonWrapper>
+              <DtSiButtonInnerWrapper>
+                <MdPrint />
+                <DtSiButtonText>세부정보 인쇄하기</DtSiButtonText>
+              </DtSiButtonInnerWrapper>
+              <MdKeyboardArrowRight />
+            </DtSiButtonWrapper>
+          </StButton>
+        </Link>
+        <Link to="/printreceipt" target="_blank">
+          <StButton>
+            <DtSiButtonWrapper>
+              <DtSiButtonInnerWrapper>
+                <MdReceipt />
+                <DtSiButtonText>영수증 받기</DtSiButtonText>
+              </DtSiButtonInnerWrapper>
+              <MdKeyboardArrowRight />
+            </DtSiButtonWrapper>
+          </StButton>
+        </Link>
       </DtSiOuterWrapper>
     </DtSiWrapper>
   );

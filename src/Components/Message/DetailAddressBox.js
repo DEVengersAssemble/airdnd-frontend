@@ -27,15 +27,21 @@ const DetailAddressBox = () => {
             <MdKeyboardArrowRight />
           </DtAdrsButtonWrapper>
         </StButton>
-        <StButton>
-          <DtAdrsButtonWrapper>
-            <DtAdrsButtonInnerWrapper>
-              <MdLocationOn />
-              <DtAdrsButtonText>찾아가는 방법 보기</DtAdrsButtonText>
-            </DtAdrsButtonInnerWrapper>
-            <MdKeyboardArrowRight />
-          </DtAdrsButtonWrapper>
-        </StButton>
+        <a
+          href={`https://www.google.com/maps/place/<homename>/<lang>/<long>`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <StButton>
+            <DtAdrsButtonWrapper>
+              <DtAdrsButtonInnerWrapper>
+                <MdLocationOn />
+                <DtAdrsButtonText>찾아가는 방법 보기</DtAdrsButtonText>
+              </DtAdrsButtonInnerWrapper>
+              <MdKeyboardArrowRight />
+            </DtAdrsButtonWrapper>
+          </StButton>
+        </a>
       </DtAdrsOuterWrapper>
     </DtAdrsWrapper>
   );

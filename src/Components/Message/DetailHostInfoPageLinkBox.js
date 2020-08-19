@@ -13,10 +13,7 @@ const DetailHostInfoPageLinkBox = () => {
         <DtHpLinkInnerWrapper>
           <DtHpLinkTitleWrapper>
             <DtHpLinkTitle>호스트 호스트이름님</DtHpLinkTitle>
-            <StLink
-              to="/users/show/hostId"
-              style={{ textDecoration: 'underline' }}
-            >
+            <StLink to="/users/show/hostId" target="_blank">
               프로필 보기
             </StLink>
           </DtHpLinkTitleWrapper>
@@ -24,15 +21,17 @@ const DetailHostInfoPageLinkBox = () => {
             <Profile />
           </DtHpLinkProfileWrapper>
         </DtHpLinkInnerWrapper>
-        <StButton>
-          <DtHpLinkButtonWrapper>
-            <DtHpLinkButtonInnerWrapper>
-              <MdPhoneIphone />
-              <DtHpLinkButtonText>호스트에게 전화하기</DtHpLinkButtonText>
-            </DtHpLinkButtonInnerWrapper>
-            <MdKeyboardArrowRight />
-          </DtHpLinkButtonWrapper>
-        </StButton>
+        <a href="tel:+8210-6415-4738">
+          <StButton>
+            <DtHpLinkButtonWrapper>
+              <DtHpLinkButtonInnerWrapper>
+                <MdPhoneIphone />
+                <DtHpLinkButtonText>호스트에게 전화하기</DtHpLinkButtonText>
+              </DtHpLinkButtonInnerWrapper>
+              <MdKeyboardArrowRight />
+            </DtHpLinkButtonWrapper>
+          </StButton>
+        </a>
       </DtHpLinkOuterWrapper>
     </DtHpLinkWrapper>
   );
@@ -64,6 +63,7 @@ const DtHpLinkTitle = styled.h3`
 
 const StLink = styled(Link)`
   font-weight: 400;
+  text-decoration: underline;
   color: ${({ theme }) => theme.color.darkGray};
   &:hover {
     color: ${({ theme }) => theme.color.black};
