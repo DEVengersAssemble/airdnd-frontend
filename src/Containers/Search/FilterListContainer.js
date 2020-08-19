@@ -46,9 +46,9 @@ const FilterButtonContainer = ({
       {Children.map(children, child => {
         return cloneElement(child, {
           popupState: popupState[name],
-          ref: popup,
           onClick: offFocus,
           onClose,
+          popup,
         });
       })}
     </FilterButton>
