@@ -28,7 +28,7 @@ const DetailMain = () => {
 };
 
 const DetailMainWrapper = styled.div`
-  position: relative;
+  position: absolute; /* 절대 바꾸지 않기.. position으로 레이아웃 망함ㅠㅠ */
   top: 15.5rem;
   left: calc(100vw - 37.5rem);
   width: 37.5rem;
