@@ -8,9 +8,9 @@ import Checkbox from '../Global/Checkbox';
 import { NewInput } from '../Global/Input';
 import { GiHamburgerMenu } from 'react-icons/gi';
 
-const RefundPopup = ({ popupState, size, toggle, handleClick }) => {
+const RefundPopup = ({ popupState, size, toggle, handleClick, onReset }) => {
   return (
-    <FilterPopup popupState={popupState} size={size}>
+    <FilterPopup popupState={popupState} size={size} onReset={onReset}>
       <StContentWrapper content="refund">
         <StSmallSpan>
           유연한 환불 정책을 제공하는 숙소만 검색 결과에 표시
@@ -21,9 +21,9 @@ const RefundPopup = ({ popupState, size, toggle, handleClick }) => {
   );
 };
 
-const RoomTypePopup = ({ popupState, size, check, onChange }) => {
+const RoomTypePopup = ({ popupState, size, check, onChange, onReset }) => {
   return (
-    <FilterPopup popupState={popupState} size={size}>
+    <FilterPopup popupState={popupState} size={size} onReset={onReset}>
       <StCheckboxList>
         <StCheckboxWrapper>
           <Checkbox
@@ -79,9 +79,10 @@ const PricePopup = ({
   priceTo,
   onChangePriceFrom,
   onChangePriceTo,
+  onReset,
 }) => {
   return (
-    <FilterPopup popupState={popupState} size={size}>
+    <FilterPopup popupState={popupState} size={size} onReset={onReset}>
       <StContentWrapper content="price">
         <StLargeSpan>평균 1박 요금은 ₩78,902입니다</StLargeSpan>
         <StRangeWrapper>
@@ -137,12 +138,17 @@ const SetDatePopup = ({ popupState, size }) => {
   );
 };
 
-const FilterPopup = ({ children, popupState, size }) => {
+const FilterPopup = ({ children, popupState, size, onReset }) => {
   return (
     <StPopup popupState={popupState} size={size}>
       {children}
       <StFooter align="space-between">
-        <Button btnType="underlined" padding="1rem" fontSize="1.6rem">
+        <Button
+          btnType="underlined"
+          padding="1rem"
+          fontSize="1.6rem"
+          onClick={onReset}
+        >
           지우기
         </Button>
         <Button

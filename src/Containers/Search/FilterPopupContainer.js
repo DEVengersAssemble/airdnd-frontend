@@ -9,6 +9,7 @@ import {
 const RefundPopupContainer = ({ popupState, size, onClose }) => {
   const [toggle, setToggle] = useState(false);
   const handleClick = () => setToggle(!toggle);
+  const onReset = () => setToggle(false);
 
   const popup = useRef();
   const closePopup = ({ target }) => {
@@ -31,6 +32,7 @@ const RefundPopupContainer = ({ popupState, size, onClose }) => {
         size={size}
         toggle={toggle}
         handleClick={handleClick}
+        onReset={onReset}
       />
     </div>
   );
@@ -43,6 +45,8 @@ const RoomTypePopupContainer = ({ popupState, size, onClose }) => {
     shared: false,
   });
   const onChange = type => setCheck({ ...check, [type]: !check[type] });
+  const onReset = () =>
+    setCheck({ house: false, private: false, shared: false });
 
   const popup = useRef();
   const closePopup = ({ target }) => {
@@ -65,6 +69,7 @@ const RoomTypePopupContainer = ({ popupState, size, onClose }) => {
         size={size}
         check={check}
         onChange={onChange}
+        onReset={onReset}
       />
     </div>
   );
@@ -75,6 +80,10 @@ const PricePopupContainer = ({ popupState, size, onClose }) => {
   const [priceTo, setPriceTo] = useState(1000000);
   const onChangePriceFrom = ({ target }) => setPriceFrom(target.value);
   const onChangePriceTo = ({ target }) => setPriceTo(target.value);
+  const onReset = () => {
+    setPriceFrom(12000);
+    setPriceTo(1000000);
+  };
 
   const popup = useRef();
   const closePopup = ({ target }) => {
@@ -99,6 +108,7 @@ const PricePopupContainer = ({ popupState, size, onClose }) => {
         onChangePriceFrom={onChangePriceFrom}
         onChangePriceTo={onChangePriceTo}
         size={size}
+        onReset={onReset}
       />
     </div>
   );
