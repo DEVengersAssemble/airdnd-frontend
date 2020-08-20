@@ -17,6 +17,7 @@ const StSearchButton = styled(Button)`
   &:hover {
     border: none;
     outline: none;
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.7);
   }
   color: white;
   background: ${({ theme }) => theme.color.main};
