@@ -71,7 +71,7 @@ const initialState = {
     },
   ],
   filter: [],
-  dataTotal: 290,
+  dataTotal: 190,
   price: [0], // 만원 단위로 숙박 개수
   mapState: true,
 

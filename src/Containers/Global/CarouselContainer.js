@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import Carousel from '../../Components/Global/Carousel';
 
-const CarouselContainer = ({ size }) => {
-  const imgCount = 3;
+const CarouselContainer = ({ image, imageCount, size, isSuperhost }) => {
   const [img, setImg] = useState(1);
   const [transition, setTransition] = useState(true);
   const [isClicked, setIsClicked] = useState(false);
@@ -20,14 +19,14 @@ const CarouselContainer = ({ size }) => {
   };
 
   const resetCarousel = () => {
-    if (img === imgCount + 1)
+    if (img === imageCount + 1)
       setTimeout(() => {
         setImg(1);
         setTransition(false);
       }, 300);
     if (img === 0)
       setTimeout(() => {
-        setImg(imgCount);
+        setImg(imageCount);
         setTransition(false);
       }, 300);
     setIsClicked(false);
@@ -36,6 +35,8 @@ const CarouselContainer = ({ size }) => {
   return (
     <Carousel
       img={img}
+      imagePath={image}
+      isSuperhost={isSuperhost}
       isClicked={isClicked}
       transition={transition}
       resetCarousel={resetCarousel}

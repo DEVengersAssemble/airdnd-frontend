@@ -6,16 +6,26 @@ import SearchPagenation from './SearchPagenation';
 import { FloatingMapButton } from './MapButton';
 import HomeListContainer from '../../Containers/Search/HomeListContainer';
 
-const SearchResult = ({ mapState, onShowMap, location, guestCount }) => {
+const SearchResult = ({
+  mapState,
+  view,
+  openMap,
+  onShowMap,
+  dataTotal,
+  location,
+  guestCount,
+}) => {
   return (
-    <StWrapper mapState={mapState}>
-      <StSpan>숙박 279건 · 게스트 {guestCount}명</StSpan>
+    <StWrapper mapState={mapState} view={view}>
+      <StSpan>
+        숙박 {dataTotal}건 · 게스트 {guestCount}명
+      </StSpan>
       <StHeader>{location}의 숙소</StHeader>
       <FilterListContainer mapState={mapState} onShowMap={onShowMap} />
       <HomeListContainer mapState={mapState} />
       <RecentHomeList />
       <SearchPagenation />
-      <FloatingMapButton />
+      <FloatingMapButton openMap={openMap} />
     </StWrapper>
   );
 };
@@ -28,7 +38,8 @@ const StWrapper = styled.div`
   position: relative;
 
   @media ${({ theme }) => theme.size.medium} {
-    width: 100%;
+    display: ${({ view }) => (view === 'result' ? 'block' : 'none')}
+    width: ${({ view }) => (view === 'result' ? '100%' : '0px')}
   }
 `;
 

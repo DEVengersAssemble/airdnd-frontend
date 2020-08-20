@@ -20,7 +20,12 @@ const Home = ({ home, onClickBookmark, dateDiff }) => {
 
   return (
     <StWrapper>
-      <CarouselContainer size="large" />
+      <CarouselContainer
+        size="large"
+        isSuperhost={isSuperhost}
+        image={image}
+        imageCount={imageCount}
+      />
       <StHome
         target="_blank"
         href="https://www.airbnb.co.kr/rooms/36094960?adults=1&location=%EB%A7%88%EB%93%9C%EB%A6%AC%EB%93%9C&source_impression_id=p3_1597324281_lNy0Q31ggfi0f1St&check_in=2020-09-26&guests=1&check_out=2020-09-30"

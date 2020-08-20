@@ -15,7 +15,7 @@ const MapButton = ({ mapState, onShowMap, ...rest }) => {
   );
 };
 
-const FloatingMapButton = () => {
+const FloatingMapButton = ({ view, openMap }) => {
   return (
     <StFloatingMapButton
       btnType="oval"
@@ -25,6 +25,7 @@ const FloatingMapButton = () => {
         box-shadow: 0 3px 5px ${({ theme }) => theme.color.lightGray};
       `}
       transition
+      onClick={openMap}
     >
       <FiMap /> <span>지도</span>
     </StFloatingMapButton>
@@ -69,7 +70,7 @@ const MapMarkerButton = () => {
   );
 };
 
-const MapCloseButton = ({ onHideMap }) => {
+const MapCloseButton = ({ onHideMap, closeMap }) => {
   return (
     <StButton
       boxShadow
