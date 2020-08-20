@@ -2,6 +2,8 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import SearchButton from './SearchButton';
 import SearchPlacePopup from './SearchPlacePopup';
+import Button from '../Global/Button';
+import { MdClose } from 'react-icons/md';
 
 const StSearchForm = styled.form`
   position: relative;
@@ -31,6 +33,7 @@ const StTextWrapper = styled.div`
 `;
 
 const StFormItemWrapper = styled.div`
+  position: relative;
   width: ${({ width }) => width};
   height: 68px;
   margin-top: -2px;
@@ -147,6 +150,20 @@ const StContentText = styled.p`
   color: ${({ theme }) => theme.color.darkGray};
 `;
 
+const StDeleteBtn = styled(Button)`
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  font-size: 16px;
+  top: calc(50% - 13px);
+  right: ${({ name }) => (name === 'guests' ? '110px' : '15px')};
+  border: none;
+  background: ${({ theme }) => theme.color.shadow};
+  &:hover {
+    background: ${({ theme }) => theme.color.line};
+  }
+`;
+
 const SearchForm = ({
   isSearchBtnClicked,
   type,
@@ -184,6 +201,9 @@ const SearchForm = ({
           locationResult={locationResult}
           changeSearchData={changeSearchData}
         ></SearchPlacePopup>
+        <StDeleteBtn btnType="circle">
+          <MdClose />
+        </StDeleteBtn>
       </StFormItemWrapper>
       <StFormItemWrapper
         name="checkIn"
@@ -195,6 +215,9 @@ const SearchForm = ({
           <StTypeText>체크인</StTypeText>
           <StContentText>날짜 추가</StContentText>
         </StTextWrapper>
+        <StDeleteBtn btnType="circle">
+          <MdClose />
+        </StDeleteBtn>
       </StFormItemWrapper>
       <StFormItemWrapper
         name="checkOut"
@@ -206,6 +229,9 @@ const SearchForm = ({
           <StTypeText>체크아웃</StTypeText>
           <StContentText>날짜 추가</StContentText>
         </StTextWrapper>
+        <StDeleteBtn btnType="circle">
+          <MdClose />
+        </StDeleteBtn>
       </StFormItemWrapper>
       <StFormItemWrapper
         name="guests"
@@ -217,6 +243,9 @@ const SearchForm = ({
           <StTypeText>인원</StTypeText>
           <StContentText>게스트 추가</StContentText>
         </StTextWrapper>
+        <StDeleteBtn btnType="circle" name="guests">
+          <MdClose />
+        </StDeleteBtn>
       </StFormItemWrapper>
       <SearchButton></SearchButton>
     </StSearchForm>
