@@ -2,12 +2,13 @@
 const SET_RESERVATION = 'user/SET_RESERVATION';
 const SET_BOOKMARKLIST = 'user/SET_BOOKMARKLIST';
 const SET_BOOKMARK = 'user/SET_BOOKMARK';
+const UNSET_BOOKMARK = 'user/UNSET_BOOKMARK';
 
 // action creators
 export const setReservation = payload => ({ type: SET_RESERVATION });
 export const setBookmarkList = payload => ({ type: SET_BOOKMARKLIST });
 export const setBookmark = payload => ({ type: SET_BOOKMARK, payload });
-
+export const unsetBookmark = homeId => ({ type: UNSET_BOOKMARK, homeId });
 // initialState
 const initialState = {
   id: 0,
