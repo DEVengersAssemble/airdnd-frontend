@@ -38,8 +38,9 @@ const StWrapper = styled.div`
   position: relative;
 
   @media ${({ theme }) => theme.size.medium} {
-    display: ${({ view }) => (view === 'result' ? 'block' : 'none')}
-    width: ${({ view }) => (view === 'result' ? '100%' : '0px')}
+    display: ${({ view }) => (view === 'result' ? 'block' : 'none')};
+    width: ${({ view }) => (view === 'result' ? '100%' : '0px')};
+    padding: 5rem 2rem 3rem;
   }
 `;
 

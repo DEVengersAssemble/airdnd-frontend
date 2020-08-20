@@ -77,7 +77,10 @@ const MapCloseButton = ({ onHideMap, closeMap }) => {
       position="sticky"
       top="10rem"
       margin="0 0 91px 0"
-      onClick={onHideMap}
+      onClick={() => {
+        onHideMap();
+        closeMap();
+      }}
     >
       <GrClose />
     </StButton>

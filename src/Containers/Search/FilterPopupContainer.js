@@ -9,7 +9,7 @@ import {
 const RefundPopupContainer = ({ popupState, size, onClose }) => {
   const popup = useRef();
   const closePopup = ({ target }) => {
-    if (popupState && !popup.current.contains(target)) return;
+    if (!popupState && !popup.current.contains(target)) return;
     onClose();
   };
 
@@ -22,12 +22,7 @@ const RefundPopupContainer = ({ popupState, size, onClose }) => {
 
   return (
     <div ref={popup}>
-      <RefundPopup
-        popupState={popupState}
-        popup={popup}
-        onClose={onClose}
-        size={size}
-      />
+      <RefundPopup popupState={popupState} onClose={onClose} size={size} />
     </div>
   );
 };
@@ -35,7 +30,8 @@ const RefundPopupContainer = ({ popupState, size, onClose }) => {
 const RoomTypePopupContainer = ({ popupState, size, onClose }) => {
   const popup = useRef();
   const closePopup = ({ target }) => {
-    if (!popupState || popup.current.contains(target)) onClose();
+    if (!popupState && !popup.current.contains(target)) return;
+    onClose();
   };
 
   useEffect(() => {
@@ -47,12 +43,7 @@ const RoomTypePopupContainer = ({ popupState, size, onClose }) => {
 
   return (
     <div ref={popup}>
-      <RoomTypePopup
-        popupState={popupState}
-        popup={popup}
-        onClose={onClose}
-        size={size}
-      />
+      <RoomTypePopup popupState={popupState} onClose={onClose} size={size} />
     </div>
   );
 };
@@ -60,7 +51,8 @@ const RoomTypePopupContainer = ({ popupState, size, onClose }) => {
 const PricePopupContainer = ({ popupState, size, onClose }) => {
   const popup = useRef();
   const closePopup = ({ target }) => {
-    if (!popupState || popup.current.contains(target)) onClose();
+    if (!popupState && !popup.current.contains(target)) return;
+    onClose();
   };
 
   useEffect(() => {
@@ -72,12 +64,7 @@ const PricePopupContainer = ({ popupState, size, onClose }) => {
 
   return (
     <div ref={popup}>
-      <PricePopup
-        popupState={popupState}
-        popup={popup}
-        onClose={onClose}
-        size={size}
-      />
+      <PricePopup popupState={popupState} onClose={onClose} size={size} />
     </div>
   );
 };
@@ -85,7 +72,8 @@ const PricePopupContainer = ({ popupState, size, onClose }) => {
 const SetDatePopupContainer = ({ popupState, size, onClose }) => {
   const popup = useRef();
   const closePopup = ({ target }) => {
-    if (!popupState || popup.current.contains(target)) onClose();
+    if (!popupState && !popup.current.contains(target)) return;
+    onClose();
   };
 
   useEffect(() => {
@@ -97,12 +85,7 @@ const SetDatePopupContainer = ({ popupState, size, onClose }) => {
 
   return (
     <div ref={popup}>
-      <SetDatePopup
-        popupState={popupState}
-        popup={popup}
-        onClose={onClose}
-        size={size}
-      />
+      <SetDatePopup popupState={popupState} onClose={onClose} size={size} />
     </div>
   );
 };

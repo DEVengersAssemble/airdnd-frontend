@@ -1,22 +1,61 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import CarouselContainer from '../../Containers/Global/CarouselContainer';
 import Rating from '../Global/Rating';
 import { CkHeart } from '../Global/Heart';
+import { HomePrice } from './Home';
 
-const HomeCard = () => {
+const HomeCard = ({ home, onClickBookmark, dateDiff }) => {
+  const homeRef = React.useRef();
+  // const { offsetWidth: width } = homeRef.current;
+  let homeWidth = 0;
+  // console.log('fjshfdjf', width);
+  console.log(homeRef);
+  console.log(homeRef.current);
+  console.log(window.innerWidth);
+  const {
+    isSuperhost,
+    isBookmarked,
+    image,
+    imageCount,
+    subTitle,
+    title,
+    rating,
+    reviewCount,
+    price,
+  } = home;
+
+  React.useEffect(() => {
+    console.log(window.innerWidth);
+  }, [window]);
+
   return (
-    <StWrapper>
-      <CarouselContainer className={'carousel'} size="small" />
-      <StHome
+    <StWrapper ref={homeRef}>
+      <CarouselContainer
+        size="responsive"
+        isSuperhost={isSuperhost}
+        image={image}
+        imageCount={imageCount}
+      />
+      <a
+        rel="noopener noreferrer"
         target="_blank"
         href="https://www.airbnb.co.kr/rooms/36094960?adults=1&location=%EB%A7%88%EB%93%9C%EB%A6%AC%EB%93%9C&source_impression_id=p3_1597324281_lNy0Q31ggfi0f1St&check_in=2020-09-26&guests=1&check_out=2020-09-30"
       >
-        <Rating scale="1.4" rate="4.55" count="67" />
-        <StSpan>호텔 객실 Mongmong-Toto</StSpan>
-        <StSpan>Clean private shower gold room</StSpan>
-      </StHome>
-      <Heart ckType checked={false} />
+        {rating ? (
+          <StRating scale="1.4" rate={rating} count={reviewCount} />
+        ) : (
+          <StSpan noRate>아직 후기 없음</StSpan>
+        )}
+        <StSpan>{subTitle}</StSpan>
+        <StSpan>{title}</StSpan>
+        <HomePrice price={price} dateDiff={dateDiff} type="card" />
+      </a>
+      <Heart
+        ckType
+        checked={isBookmarked}
+        onClick={() => onClickBookmark(isBookmarked)}
+      />
     </StWrapper>
   );
 };
@@ -24,36 +63,42 @@ const HomeCard = () => {
 export default HomeCard;
 
 const StWrapper = styled.li`
-  width: 148px;
-  height: 190px;
   position: relative;
+  padding: 1rem 1rem 3rem;
+  width: 20%;
 
-  & > * {
-    margin-bottom: 0.6rem;
+  @media ${({ theme }) => theme.size.large} {
+    width: 25%;
   }
-
-  .carousel {
-    margin-bottom: 0.9rem;
+  @media ${({ theme }) => theme.size.medium} {
+    width: 50%;
   }
 `;
 
-const StHome = styled.a`
-  text-decoration: none;
-  width: 100%;
+const StRating = styled(Rating)`
+  margin: 1rem 0 0.3rem;
 `;
 
 const StSpan = styled.span`
   display: block;
   color: ${({ theme }) => theme.color.black};
   font-size: 1.6rem;
-  line-height: 1.7rem;
+  margin-bottom: 0.3rem;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+
+  ${({ noRate }) =>
+    noRate &&
+    css`
+      color: ${({ theme }) => theme.color.darkGray};
+      margin: 1rem 0 0.3rem;
+      font-size: 1.4rem;
+    `}
 `;
 
 const Heart = styled(CkHeart)`
   position: absolute;
-  top: 0.7rem;
-  right: 0.5rem;
+  top: 1em;
+  right: 1.1em;
 `;

@@ -41,6 +41,111 @@ const initialState = {
     },
     {
       homeId: 3,
+      isSuperhost: false,
+      isBookmarked: false,
+      image:
+        'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large',
+      imageCount: 3, // 이미지 개수
+      subTitle: 'MongMong-Toto의 호텔 객실이지롱',
+      title: 'Pia Resort Hotel Corner Studio Room~~~',
+      feature: '최대 인원 2명 ﹒ 침실 1개 ﹒ 침대 2개 ﹒ 단독 사용 욕실 1개!!!',
+      rating: 3.95,
+      reviewCount: 111,
+      price: 98839,
+      location: { lat: 0, lng: 0 },
+    },
+    {
+      homeId: 4,
+      isSuperhost: true,
+      isBookmarked: false,
+      image:
+        'https://a0.muscache.com/im/pictures/3276d8ad-d455-4c59-923c-3f6926301a93.jpg?aki_policy=large',
+      imageCount: 3, // 이미지 개수
+      subTitle: 'MongMong-Toto의 호텔 객실이답',
+      title: 'Pia Resort Hotel Corner Studio Room 기기',
+      feature: '최대 인원 2명 ﹒ 침실 1개 ﹒ 침대 2개 ﹒ 단독 사용 욕실 1개***',
+      rating: 4.99,
+      reviewCount: 11,
+      price: 30330,
+      location: { lat: 0, lng: 0 },
+    },
+    {
+      homeId: 5,
+      isSuperhost: true,
+      isBookmarked: false,
+      image:
+        'https://a0.muscache.com/im/pictures/3276d8ad-d455-4c59-923c-3f6926301a93.jpg?aki_policy=large',
+      imageCount: 3, // 이미지 개수
+      subTitle: 'MongMong-Toto의 호텔 객실이답',
+      title: 'Pia Resort Hotel Corner Studio Room 기기',
+      feature: '최대 인원 2명 ﹒ 침실 1개 ﹒ 침대 2개 ﹒ 단독 사용 욕실 1개***',
+      rating: 0,
+      reviewCount: 11,
+      price: 30330,
+      location: { lat: 0, lng: 0 },
+    },
+    {
+      homeId: 6,
+      isSuperhost: true,
+      isBookmarked: false,
+      image:
+        'https://a0.muscache.com/im/pictures/3276d8ad-d455-4c59-923c-3f6926301a93.jpg?aki_policy=large',
+      imageCount: 3, // 이미지 개수
+      subTitle: 'MongMong-Toto의 호텔 객실이답',
+      title: 'Pia Resort Hotel Corner Studio Room 기기',
+      feature: '최대 인원 2명 ﹒ 침실 1개 ﹒ 침대 2개 ﹒ 단독 사용 욕실 1개***',
+      rating: 4.99,
+      reviewCount: 11,
+      price: 30330,
+      location: { lat: 0, lng: 0 },
+    },
+    {
+      homeId: 7,
+      isSuperhost: true,
+      isBookmarked: false,
+      image:
+        'https://a0.muscache.com/im/pictures/3276d8ad-d455-4c59-923c-3f6926301a93.jpg?aki_policy=large',
+      imageCount: 3, // 이미지 개수
+      subTitle: 'MongMong-Toto의 호텔 객실이답',
+      title: 'Pia Resort Hotel Corner Studio Room 기기',
+      feature: '최대 인원 2명 ﹒ 침실 1개 ﹒ 침대 2개 ﹒ 단독 사용 욕실 1개***',
+      rating: 4.99,
+      reviewCount: 11,
+      price: 30330,
+      location: { lat: 0, lng: 0 },
+    },
+    {
+      homeId: 8,
+      isSuperhost: true,
+      isBookmarked: false,
+      image:
+        'https://a0.muscache.com/im/pictures/3276d8ad-d455-4c59-923c-3f6926301a93.jpg?aki_policy=large',
+      imageCount: 3, // 이미지 개수
+      subTitle: 'MongMong-Toto의 호텔 객실이답',
+      title: 'Pia Resort Hotel Corner Studio Room 기기',
+      feature: '최대 인원 2명 ﹒ 침실 1개 ﹒ 침대 2개 ﹒ 단독 사용 욕실 1개***',
+      rating: 4.99,
+      reviewCount: 11,
+      price: 30330,
+      location: { lat: 0, lng: 0 },
+    },
+    {
+      homeId: 9,
+      isSuperhost: true,
+      isBookmarked: false,
+      image:
+        'https://a0.muscache.com/im/pictures/3276d8ad-d455-4c59-923c-3f6926301a93.jpg?aki_policy=large',
+      imageCount: 3, // 이미지 개수
+      subTitle: 'MongMong-Toto의 호텔 객실이답',
+      title: 'Pia Resort Hotel Corner Studio Room 기기',
+      feature: '최대 인원 2명 ﹒ 침실 1개 ﹒ 침대 2개 ﹒ 단독 사용 욕실 1개***',
+      rating: 4.99,
+      reviewCount: 11,
+      price: 30330,
+      location: { lat: 0, lng: 0 },
+    },
+    {
+      homeId: 10,
       isSuperhost: true,
       isBookmarked: false,
       image:
@@ -58,7 +163,7 @@ const initialState = {
   homeImage: '', // 캐러셀 버튼 클릭할 때 받아올 이미지
   recentHomes: [
     {
-      homeId: 4,
+      homeId: 5,
       isSuperhost: true,
       isBookmarked: true,
       image:
