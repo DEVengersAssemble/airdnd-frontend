@@ -9,7 +9,8 @@ import {
 const RefundPopupContainer = ({ popupState, size, onClose }) => {
   const popup = useRef();
   const closePopup = ({ target }) => {
-    if (popupState || popup.current.contains(target)) onClose();
+    if (!popupState && !popup.current.contains(target)) return;
+    onClose();
   };
 
   useEffect(() => {
@@ -29,7 +30,8 @@ const RefundPopupContainer = ({ popupState, size, onClose }) => {
 const RoomTypePopupContainer = ({ popupState, size, onClose }) => {
   const popup = useRef();
   const closePopup = ({ target }) => {
-    if (popupState || popup.current.contains(target)) onClose();
+    if (!popupState && !popup.current.contains(target)) return;
+    onClose();
   };
 
   useEffect(() => {
@@ -49,7 +51,8 @@ const RoomTypePopupContainer = ({ popupState, size, onClose }) => {
 const PricePopupContainer = ({ popupState, size, onClose }) => {
   const popup = useRef();
   const closePopup = ({ target }) => {
-    if (popupState || popup.current.contains(target)) onClose();
+    if (!popupState && !popup.current.contains(target)) return;
+    onClose();
   };
 
   useEffect(() => {
@@ -69,7 +72,8 @@ const PricePopupContainer = ({ popupState, size, onClose }) => {
 const SetDatePopupContainer = ({ popupState, size, onClose }) => {
   const popup = useRef();
   const closePopup = ({ target }) => {
-    if (popupState || popup.current.contains(target)) onClose();
+    if (!popupState && !popup.current.contains(target)) return;
+    onClose();
   };
 
   useEffect(() => {
