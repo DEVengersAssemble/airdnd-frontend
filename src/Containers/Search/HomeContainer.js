@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import Home from '../../Components/Search/Home';
 
-const HomeContainer = ({ home, openListModal }) => {
-  return <Home home={home} openListModal={openListModal} />;
+const HomeContainer = ({ home, onClickBookmark }) => {
+  const { dateDiff } = useSelector(state => state.searchForm);
+
+  return (
+    <Home home={home} onClickBookmark={onClickBookmark} dateDiff={dateDiff} />
+  );
 };
 
 export default HomeContainer;

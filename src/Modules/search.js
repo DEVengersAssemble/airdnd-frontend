@@ -1,12 +1,10 @@
 // action type
-const INCREASE = 'counter/INCREASE';
-const DECREASE = 'counter/DECREASE';
-const SET_DIFF = 'counter/SET_DIFF';
+const SHOW_MAP = 'search/SHOW_MAP';
+const HIDE_MAP = 'search/HIDE_MAP';
 
 // action creator
-export const increase = () => ({ type: INCREASE });
-export const decrease = () => ({ type: DECREASE });
-export const setDiff = diff => ({ type: SET_DIFF, diff });
+export const showMap = () => ({ type: SHOW_MAP });
+export const hideMap = () => ({ type: HIDE_MAP });
 
 // initial state
 const initialState = {
@@ -73,8 +71,9 @@ const initialState = {
     },
   ],
   filter: [],
-  dataTotal: 290,
+  dataTotal: 190,
   price: [0], // 만원 단위로 숙박 개수
+  mapState: true,
 
   // map 범위 보낼때
   // mapSend: {
@@ -86,20 +85,15 @@ const initialState = {
 // reducer
 const search = (state = initialState, action) => {
   switch (action.type) {
-    case INCREASE:
+    case SHOW_MAP:
       return {
         ...state,
-        number: state.number + state.diff,
+        mapState: true,
       };
-    case DECREASE:
+    case HIDE_MAP:
       return {
         ...state,
-        number: state.number - state.diff,
-      };
-    case SET_DIFF:
-      return {
-        ...state,
-        diff: action.diff,
+        mapState: false,
       };
     default:
       return state;

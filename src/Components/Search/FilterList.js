@@ -10,6 +10,12 @@ import {
 import FilterModal from './FilterModal';
 import { FilterButtonContainer } from '../../Containers/Search/FilterListContainer';
 import { MapButton } from './MapButton';
+import {
+  RefundPopupContainer,
+  RoomTypePopupContainer,
+  PricePopupContainer,
+  SetDatePopupContainer,
+} from '../../Containers/Search/FilterPopupContainer';
 
 export const FilterButton = ({ children, text, onClick }) => {
   return (
@@ -22,7 +28,7 @@ export const FilterButton = ({ children, text, onClick }) => {
   );
 };
 
-export const FilterList = ({ popupState, mapState, openMap, dispatch }) => {
+export const FilterList = ({ popupState, mapState, onShowMap, dispatch }) => {
   return (
     <StWrapper>
       <FilterButtonContainer
@@ -31,7 +37,7 @@ export const FilterList = ({ popupState, mapState, openMap, dispatch }) => {
         popupState={popupState}
         dispatch={dispatch}
       >
-        <RefundPopup size="350px" />
+        <RefundPopupContainer size="350px" />
       </FilterButtonContainer>
       <FilterButtonContainer
         name="roomType"
@@ -39,7 +45,7 @@ export const FilterList = ({ popupState, mapState, openMap, dispatch }) => {
         popupState={popupState}
         dispatch={dispatch}
       >
-        <RoomTypePopup size="365px" />
+        <RoomTypePopupContainer size="365px" />
       </FilterButtonContainer>
       <FilterButtonContainer
         name="price"
@@ -47,8 +53,8 @@ export const FilterList = ({ popupState, mapState, openMap, dispatch }) => {
         popupState={popupState}
         dispatch={dispatch}
       >
-        <PricePopup size="430px" />
-        <SetDatePopup size="350px" />
+        <PricePopupContainer size="430px" />
+        <SetDatePopupContainer size="350px" />
       </FilterButtonContainer>
       <FilterButtonContainer
         name="modal"
@@ -58,7 +64,7 @@ export const FilterList = ({ popupState, mapState, openMap, dispatch }) => {
       >
         <FilterModal />
       </FilterButtonContainer>
-      <MapButton mapState={mapState} openMap={openMap} />
+      <MapButton mapState={mapState} onShowMap={onShowMap} />
     </StWrapper>
   );
 };

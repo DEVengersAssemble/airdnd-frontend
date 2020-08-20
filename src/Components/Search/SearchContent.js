@@ -3,11 +3,11 @@ import SearchResultContainer from '../../Containers/Search/SearchResultContainer
 import SearchMapContainer from '../../Containers/Search/SearchMapContainer';
 import styled from 'styled-components';
 
-const SearchContent = ({ mapState, openMap, closeMap }) => {
+const SearchContent = ({ view, openMap, closeMap }) => {
   return (
     <StContent>
-      <SearchResultContainer mapState={mapState} openMap={openMap} />
-      <SearchMapContainer closeMap={closeMap} mapState={mapState} />
+      <SearchResultContainer view={view} openMap={openMap} />
+      <SearchMapContainer view={view} closeMap={closeMap} />
     </StContent>
   );
 };

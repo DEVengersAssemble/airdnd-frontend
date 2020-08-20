@@ -1,4 +1,4 @@
-import React, { useRef, useReducer, Children, cloneElement } from 'react';
+import React, { useReducer, Children, cloneElement } from 'react';
 import { FilterList, FilterButton } from '../../Components/Search/FilterList';
 
 const popupInit = {
@@ -32,12 +32,10 @@ const FilterButtonContainer = ({
   popupState,
   dispatch,
 }) => {
-  const popup = useRef();
   const onClick = () =>
     dispatch({ type: popupState[name] ? 'CLOSE' : 'OPEN', name });
   const onClose = () => dispatch({ type: 'CLOSE' });
   const offFocus = ({ target }) => {
-    if (target === popup) return;
     onClose();
   };
 
@@ -48,21 +46,20 @@ const FilterButtonContainer = ({
           popupState: popupState[name],
           onClick: offFocus,
           onClose,
-          popup,
         });
       })}
     </FilterButton>
   );
 };
 
-const FilterListContainer = ({ mapState, openMap }) => {
+const FilterListContainer = ({ mapState, onShowMap }) => {
   const [popupState, dispatch] = useReducer(popupReducer, popupInit);
 
   return (
     <FilterList
       popupState={popupState}
       mapState={mapState}
-      openMap={openMap}
+      onShowMap={onShowMap}
       dispatch={dispatch}
     />
   );
