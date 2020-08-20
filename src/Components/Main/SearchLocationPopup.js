@@ -2,11 +2,11 @@ import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import Popup from '../Global/Popup';
 import { FaMapMarkerAlt } from 'react-icons/fa';
-const StSearchPlacePopupWrapper = styled.div`
+const StSearchLocationPopupWrapper = styled.div`
   position: relative;
 `;
 
-const StSearchPlacePopup = styled(Popup)`
+const StSearchLocationPopup = styled(Popup)`
   top: 14px;
   left: 0;
   border-radius: 20px;
@@ -16,12 +16,12 @@ const StSearchPlacePopup = styled(Popup)`
   color: ${({ theme }) => theme.color.black};
 `;
 
-const StSearchPlaceList = styled.ul`
+const StSearchLocationList = styled.ul`
   display: flex;
   flex-direction: column;
 `;
 
-const StSearchPlaceIconWrapper = styled.span`
+const StSearchLocationIconWrapper = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -34,7 +34,7 @@ const StSearchPlaceIconWrapper = styled.span`
   border-radius: 8px;
 `;
 
-const StSearchPlaceItem = styled.li`
+const StSearchLocationItem = styled.li`
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -48,7 +48,7 @@ const StItemText = styled.span`
   white-space: nowrap;
 `;
 
-const SearchPlacePopup = ({
+const SearchLocationPopup = ({
   type,
   closePopup,
   locationResult,
@@ -68,30 +68,30 @@ const SearchPlacePopup = ({
     };
   }, [locationResult, handlePopup, type]);
   return (
-    <StSearchPlacePopupWrapper ref={popupRef}>
-      <StSearchPlacePopup
+    <StSearchLocationPopupWrapper ref={popupRef}>
+      <StSearchLocationPopup
         popupState={locationResult.length && type === 'location'}
       >
-        <StSearchPlaceList>
+        <StSearchLocationList>
           {locationResult.map((item, index) => {
             return (
-              <StSearchPlaceItem
+              <StSearchLocationItem
                 key={index}
                 onClick={() => {
                   changeSearchData('location', item);
                 }}
               >
-                <StSearchPlaceIconWrapper>
+                <StSearchLocationIconWrapper>
                   <FaMapMarkerAlt></FaMapMarkerAlt>
-                </StSearchPlaceIconWrapper>
+                </StSearchLocationIconWrapper>
                 <StItemText>{item}</StItemText>
-              </StSearchPlaceItem>
+              </StSearchLocationItem>
             );
           })}
-        </StSearchPlaceList>
-      </StSearchPlacePopup>
-    </StSearchPlacePopupWrapper>
+        </StSearchLocationList>
+      </StSearchLocationPopup>
+    </StSearchLocationPopupWrapper>
   );
 };
 
-export default SearchPlacePopup;
+export default SearchLocationPopup;

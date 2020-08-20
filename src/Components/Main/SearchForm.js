@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import SearchButton from './SearchButton';
-import SearchPlacePopup from './SearchPlacePopup';
+import SearchLocationPopup from './SearchLocationPopup';
 import Button from '../Global/Button';
 import { MdClose } from 'react-icons/md';
 
@@ -225,12 +225,12 @@ const SearchForm = ({
             ></StPlaceInput>
           </StTextWrapper>
         </StPlaceLabel>
-        <SearchPlacePopup
+        <SearchLocationPopup
           type={type}
           closePopup={closePopup}
           locationResult={locationResult}
           changeSearchData={changeSearchData}
-        ></SearchPlacePopup>
+        ></SearchLocationPopup>
         {location && (
           <StDeleteBtn
             btnType="circle"
