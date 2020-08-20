@@ -8,7 +8,7 @@ const SubRouter = () => {
   return (
     <Switch>
       <Route exact path="/trips" />
-      <Route path="/trips/upcoming" conponent={TripsUpcoming} />
+      <Route path="/trips/upcoming" component={TripsUpcoming} />
       <Route path="/trips/past" component={TripsPast} />
       <Route path="/trips/canceled" component={TripsCanceled} />
       <Route

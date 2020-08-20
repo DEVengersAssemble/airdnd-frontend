@@ -136,6 +136,7 @@ table {
 button {
   background-color: #fff;
   cursor: pointer;
+  color: #222222;
 }
 a {
   color: #222222;
