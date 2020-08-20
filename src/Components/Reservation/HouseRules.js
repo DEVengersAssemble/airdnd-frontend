@@ -1,7 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StWrapper = styled.div``;
+const StWrapper = styled.main`
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 24px;
+`;
 
 const StTitle = styled.h2`
   font-size: 3.2rem;

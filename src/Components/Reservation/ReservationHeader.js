@@ -6,6 +6,7 @@ import { GrNext } from 'react-icons/gr';
 const StHeader = styled.header`
   display: flex;
   align-items: center;
+  margin-bottom: 36px;
 `;
 
 const StLogo = styled.svg`
