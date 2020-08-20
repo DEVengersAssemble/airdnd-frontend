@@ -3,21 +3,27 @@ import styled from 'styled-components';
 import { darken } from 'polished';
 import ChatListItem from '../Message/ChatListItem';
 import ChatListsNothing from '../Message/ChatListsNothing';
+import { Toast, CanceledToast, CopyToast } from '../Global/Toast';
 
 const ChatMain = () => {
-  const ChatNothing = true;
+  const ChatNothing = false;
 
   return (
     <ChatMainWrapper>
       {ChatNothing ? (
         <ChatListsNothing />
       ) : (
-        <ChatLists>
-          <ChatListItem />
-          <ChatListItem />
-          <ChatListItem />
-          <ChatListItem />
-        </ChatLists>
+        <>
+          <ChatLists>
+            <ChatListItem />
+            <ChatListItem />
+            <ChatListItem />
+            <ChatListItem />
+          </ChatLists>
+          <Toast />
+          <CanceledToast />
+          <CopyToast />
+        </>
       )}
     </ChatMainWrapper>
   );
