@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 // import HomeContainer from '../../Containers/Search/HomeContainer';
 import HomeList from '../../Components/Search/HomeList';
 import {
   BookmarkListModalContainer,
   NewBookmarkModalContainer,
 } from './BookmarkModalContainer';
-import Home from '../../Components/Search/Home';
-import HomeCard from '../../Components/Search/HomeCard';
+import HomeContainer from './HomeContainer';
+import HomeCardContainer from './HomeCardContainer';
 
 const HomeListContainer = ({ mapState }) => {
   const { homes } = useSelector(state => state.search);
+  const dispatch = useDispatch();
   const [listModalState, setListModalState] = useState(false);
   const [newModalState, setNewModalState] = useState(false);
 
@@ -29,13 +30,22 @@ const HomeListContainer = ({ mapState }) => {
     <>
       <HomeList mapState={mapState}>
         {homes.map(home => {
+          const onClickBookmark = bookmark => {
+            if (bookmark) console.log(bookmark);
+            if (!bookmark) openListModal();
+          };
+
           return mapState ? (
-            <Home key={home.homeId} home={home} openListModal={openListModal} />
-          ) : (
-            <HomeCard
+            <HomeContainer
               key={home.homeId}
               home={home}
-              openListModal={openListModal}
+              onClickBookmark={onClickBookmark}
+            />
+          ) : (
+            <HomeCardContainer
+              key={home.homeId}
+              home={home}
+              onClickBookmark={onClickBookmark}
             />
           );
         })}

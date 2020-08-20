@@ -4,7 +4,7 @@ import Rating from '../Global/Rating';
 import { CkHeart } from '../Global/Heart';
 import CarouselContainer from '../../Containers/Global/CarouselContainer';
 
-const Home = ({ home, openListModal }) => {
+const Home = ({ home, onClickBookmark, dateDiff }) => {
   const {
     isSuperhost,
     isBookmarked,
@@ -30,7 +30,7 @@ const Home = ({ home, openListModal }) => {
           <StTitle>{title}</StTitle>
           <StLine></StLine>
           <StDetail>{feature}</StDetail>
-          <Rating
+          <StRating
             scale="1.4"
             rate={rating}
             count={reviewCount}
@@ -40,10 +40,17 @@ const Home = ({ home, openListModal }) => {
             <StLargePrice>
               <strong>₩{price.toLocaleString()}</strong> / 1박
             </StLargePrice>
-            <StSmallPrice>총 요금: ₩12,928</StSmallPrice>
+            <StSmallPrice>
+              총 요금: ₩{(dateDiff * price).toLocaleString()}
+            </StSmallPrice>
           </StPriceWrapper>
         </StDetailWrapper>
-        <Heart ckType hover checked={isBookmarked} onClick={openListModal} />
+        <Heart
+          ckType
+          hover
+          checked={isBookmarked}
+          onClick={() => onClickBookmark(isBookmarked)}
+        />
       </StHome>
     </StWrapper>
   );
@@ -74,11 +81,12 @@ const StDetailWrapper = styled.div`
   padding: 0 1.7rem;
   position: relative;
   flex-grow: 1;
-  .rating {
-    position: absolute;
-    bottom: 0;
-    left: 1.7rem;
-  }
+`;
+
+const StRating = styled(Rating)`
+  position: absolute;
+  bottom: 0;
+  left: 1.7rem;
 `;
 
 const StDetail = styled.span`

@@ -37,11 +37,21 @@ export const setSearchData = data => {
 // });
 // export const setGuests = payload => ({ type: SET_GUESTS, payload });
 
+const getDateDiff = (date1, date2) => {
+  const checkIn = new Date(date1);
+  const checkOut = new Date(date2);
+  const timeDiff = checkOut.getTime() - checkIn.getTime();
+  const dateDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+  console.log(checkIn, checkOut, dateDiff);
+  return dateDiff;
+};
+
 // initialState
 const initialState = {
-  location: '',
-  checkIn: '',
-  checkOut: '',
+  location: '은행사거리',
+  checkIn: '2020/09/02',
+  checkOut: '2020/09/05',
+  dateDiff: getDateDiff('2020/09/02', '2020/09/05'),
   flexibleDate: 0,
   guests: {
     adult: 0,
