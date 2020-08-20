@@ -8,11 +8,28 @@ const FilterModalContainer = ({ popupState, onClose }) => {
   const dispatch = useDispatch();
 
   const [filter, setFilter] = useState(filterApplied.more);
+  const onToggle = name => setFilter({ ...filter, [name]: !filter[name] });
+  const onIncrease = name => {
+    if (filter.bedroom[name] > 15) return;
+    setFilter({
+      ...filter,
+      bedroom: { ...filter.bedroom, [name]: filter.bedroom[name] + 1 },
+    });
+  };
+  const onDecrease = name => {
+    if (!filter.bedroom[name]) return;
+    setFilter({
+      ...filter,
+      bedroom: { ...filter.bedroom, [name]: filter.bedroom[name] - 1 },
+    });
+  };
 
+  const onReset = () => setFilter();
   const onSave = () => {
     dispatch(saveFilter('more', filter));
     onClose();
   };
+
   return (
     <FilterModal
       popupState={popupState}
@@ -20,6 +37,9 @@ const FilterModalContainer = ({ popupState, onClose }) => {
       filter={filter}
       onSave={onSave}
       onClose={onClose}
+      onToggle={onToggle}
+      onIncrease={onIncrease}
+      onDecrease={onDecrease}
     />
   );
 };
