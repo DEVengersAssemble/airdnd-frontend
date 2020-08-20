@@ -6,7 +6,7 @@ const HomeContainer = ({ home, onClickBookmark }) => {
   const { dateDiff } = useSelector(state => state.searchForm);
 
   return (
-    <Home home={home} openListModal={onClickBookmark} dateDiff={dateDiff} />
+    <Home home={home} onClickBookmark={onClickBookmark} dateDiff={dateDiff} />
   );
 };
 

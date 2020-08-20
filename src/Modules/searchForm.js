@@ -41,9 +41,7 @@ const getDateDiff = (date1, date2) => {
   const checkIn = new Date(date1);
   const checkOut = new Date(date2);
   const timeDiff = checkOut.getTime() - checkIn.getTime();
-  const dateDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
-  console.log(checkIn, checkOut, dateDiff);
-  return dateDiff;
+  return Math.ceil(timeDiff / (1000 * 3600 * 24));
 };
 
 // initialState
@@ -54,7 +52,7 @@ const initialState = {
   dateDiff: getDateDiff('2020/09/02', '2020/09/05'),
   flexibleDate: 0,
   guests: {
-    adult: 0,
+    adult: 2,
     child: 0,
     infant: 0,
   },
