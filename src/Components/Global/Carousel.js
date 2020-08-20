@@ -25,7 +25,8 @@ const Carousel = ({
     <StWrapper size={size} {...rest}>
       <StPrevBtn styleType="transparent" onClick={slidePrev} />
       <StNextBtn styleType="transparent" onClick={slideNext} />
-      <StLink
+      <a
+        rel="noopener noreferrer"
         target="_blank"
         href="https://www.airbnb.co.kr/rooms/36094960?adults=1&location=%EB%A7%88%EB%93%9C%EB%A6%AC%EB%93%9C&source_impression_id=p3_1597324281_lNy0Q31ggfi0f1St&check_in=2020-09-26&guests=1&check_out=2020-09-30"
       >
@@ -54,7 +55,7 @@ const Carousel = ({
           <StCircle color="gray" />
           <StCircle color="gray" />
         </StCircleWrapper>
-      </StLink>
+      </a>
     </StWrapper>
   );
 };
@@ -76,14 +77,25 @@ const sizes = {
     width: '148',
     height: '105',
   },
+  responsive: {},
 };
 
 const sizeStyles = css`
-  ${({ size }) => css`
-    min-width: ${`${sizes[size].width}px`};
-    width: ${`${sizes[size].width}px`};
-    height: ${`${sizes[size].height}px`};
-  `}
+  ${({ size }) => {
+    if (size !== 'responsive') {
+      return css`
+        min-width: ${`${sizes[size].width}px`};
+        width: ${`${sizes[size].width}px`};
+        height: ${`${sizes[size].height}px`};
+      `;
+    } else {
+      return css`
+        width: 100%;
+        height: 0;
+        padding-bottom: 75%;
+      `;
+    }
+  }}
 `;
 
 const StWrapper = styled.div`
@@ -159,7 +171,5 @@ const StNextBtn = styled(NextButton)`
   right: 1rem;
   z-index: 5;
 `;
-
-const StLink = styled.a``;
 
 export default Carousel;

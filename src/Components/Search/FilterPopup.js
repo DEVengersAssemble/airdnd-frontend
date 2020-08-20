@@ -147,7 +147,7 @@ const FilterPopup = ({ children, popupState, size }) => {
 };
 
 const StPopup = styled(Popup)`
-  top: 7rem;
+  top: 5rem;
   padding: 0;
   width: ${({ size }) => size};
 `;
