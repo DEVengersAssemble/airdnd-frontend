@@ -43,7 +43,9 @@ const HomeCard = ({ home, onClickBookmark, dateDiff }) => {
 export default HomeCard;
 
 const StWrapper = styled.li`
+  /* background: cornflowerblue; */
   position: relative;
+  padding: 1rem;
   width: 20%;
 
   @media ${({ theme }) => theme.size.large} {
@@ -71,6 +73,6 @@ const StSpan = styled.span`
 
 const Heart = styled(CkHeart)`
   position: absolute;
-  top: 0.7rem;
-  right: 0.5rem;
+  top: 1em;
+  right: 1.1em;
 `;
