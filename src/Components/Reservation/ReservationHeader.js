@@ -19,6 +19,7 @@ const StLogo = styled.svg`
 const StNav = styled.nav`
   display: inline-block;
   margin-left: 48px;
+  font-size: 14px;
 
   li {
     display: inline-flex;
@@ -26,6 +27,10 @@ const StNav = styled.nav`
 
     a {
       color: ${({ theme }) => theme.color.darkGray};
+    }
+
+    .active {
+      color: ${({ theme }) => theme.color.black};
     }
 
     svg {
@@ -66,7 +71,7 @@ const ReservationHeader = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="" activeClassName="active">
+            <NavLink to="/Reservation/Pay" activeClassName="active">
               <GrNext />
               3. 확인 및 결제
             </NavLink>

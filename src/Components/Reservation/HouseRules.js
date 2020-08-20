@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import LuckyChance from '../Global/LuckyChance';
 
 const StWrapper = styled.main`
   max-width: 1080px;
@@ -7,7 +8,12 @@ const StWrapper = styled.main`
   padding: 0 24px;
 `;
 
+const StLeftWrapper = styled.div`
+  width: 58%;
+`;
+
 const StTitle = styled.h2`
+  margin-bottom: 32px;
   font-size: 3.2rem;
   font-weight: 800;
   line-height: 1.125em;
@@ -16,7 +22,10 @@ const StTitle = styled.h2`
 const HouseRules = () => {
   return (
     <StWrapper>
-      <StTitle>숙소 이용규칙 확인하기</StTitle>
+      <StLeftWrapper>
+        <StTitle>숙소 이용규칙 확인하기</StTitle>
+        <LuckyChance />
+      </StLeftWrapper>
     </StWrapper>
   );
 };

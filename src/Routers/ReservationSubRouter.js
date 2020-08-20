@@ -3,13 +3,12 @@ import { Route, Switch } from 'react-router-dom';
 import HouseRules from '../Components/Reservation/HouseRules';
 import GuestInfo from '../Components/Reservation/GuestInfo';
 
-const SubRouter = () => {
+const ReservationSubRouter = () => {
   return (
     <Switch>
-      <Route exact path="/Reservation" />
+      <Route exact path="/Reservation" component={HouseRules} />
       <Route path="/Reservation/HouseRules" component={HouseRules} />
       <Route path="/Reservation/GuestInfo" component={GuestInfo} />
-      <Route exact path="/message" />
       <Route
         render={({ location }) => (
           <div>
@@ -22,4 +21,4 @@ const SubRouter = () => {
   );
 };
 
-export default SubRouter;
+export default ReservationSubRouter;
