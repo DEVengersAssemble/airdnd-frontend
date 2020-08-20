@@ -4,6 +4,19 @@ import Rating from '../Global/Rating';
 import { CkHeart } from '../Global/Heart';
 import CarouselContainer from '../../Containers/Global/CarouselContainer';
 
+export const HomePrice = ({ price, dateDiff }) => {
+  return (
+    <StPriceWrapper>
+      <StLargePrice>
+        <strong>₩{price.toLocaleString()}</strong> / 1박
+      </StLargePrice>
+      <StSmallPrice>
+        총 요금: ₩{(dateDiff * price).toLocaleString()}
+      </StSmallPrice>
+    </StPriceWrapper>
+  );
+};
+
 const Home = ({ home, onClickBookmark, dateDiff }) => {
   const {
     isSuperhost,
@@ -41,14 +54,7 @@ const Home = ({ home, onClickBookmark, dateDiff }) => {
             count={reviewCount}
             className="rating"
           />
-          <StPriceWrapper>
-            <StLargePrice>
-              <strong>₩{price.toLocaleString()}</strong> / 1박
-            </StLargePrice>
-            <StSmallPrice>
-              총 요금: ₩{(dateDiff * price).toLocaleString()}
-            </StSmallPrice>
-          </StPriceWrapper>
+          <HomePrice price={price} dateDiff={dateDiff} />
         </StDetailWrapper>
         <Heart
           ckType

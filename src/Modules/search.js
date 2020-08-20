@@ -73,7 +73,7 @@ const initialState = {
   filter: [],
   dataTotal: 190,
   price: [0], // 만원 단위로 숙박 개수
-  mapState: true,
+  mapState: false,
 
   // map 범위 보낼때
   // mapSend: {
