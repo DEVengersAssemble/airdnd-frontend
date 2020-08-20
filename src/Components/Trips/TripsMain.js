@@ -10,13 +10,25 @@ const TripsMain = () => {
         <TripsMainTitle>여행</TripsMainTitle>
         <TripsMainNav>
           <TripsMainNavList>
-            <Link to="/trips/upcoming">예정된 예약</Link>
+            <Link to="/trips/upcoming">
+              <TripsMainNavItem>
+                <TripsMainNavItemInner>예정된 예약</TripsMainNavItemInner>
+              </TripsMainNavItem>
+            </Link>
           </TripsMainNavList>
           <TripsMainNavList>
-            <Link to="/trips/past">지난 예약</Link>
+            <Link to="/trips/past">
+              <TripsMainNavItem>
+                <TripsMainNavItemInner>이전 예약</TripsMainNavItemInner>
+              </TripsMainNavItem>
+            </Link>
           </TripsMainNavList>
           <TripsMainNavList>
-            <Link to="/trips/canceled">취소됨</Link>
+            <Link to="/trips/canceled">
+              <TripsMainNavItem>
+                <TripsMainNavItemInner>취소됨</TripsMainNavItemInner>
+              </TripsMainNavItem>
+            </Link>
           </TripsMainNavList>
         </TripsMainNav>
         <TripsSubRouter />
@@ -42,8 +54,30 @@ const TripsMainTitle = styled.h2`
   font-weight: bold;
 `;
 
-const TripsMainNav = styled.ul``;
+const TripsMainNav = styled.ul`
+  display: flex;
+  margin-left: -1.5rem;
+`;
 
-const TripsMainNavList = styled.li``;
+const TripsMainNavList = styled.li`
+  margin-right: 1rem;
+  & > a {
+    display: inline-block;
+    :hover {
+      background: ${({ theme }) => theme.color.lightGray};
+    }
+  }
+`;
+
+const TripsMainNavItem = styled.div`
+  padding: 0rem 1.5rem;
+  color: ${({ theme }) => theme.color.darkGray};
+  /* active => color: ${({ theme }) => theme.color.black}; */
+`;
+
+const TripsMainNavItemInner = styled.div`
+  border-bottom: 2px solid black; /* active에만 활성 */
+  line-height: 5rem;
+`;
 
 export default TripsMain;
