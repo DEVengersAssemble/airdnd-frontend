@@ -112,7 +112,10 @@ const StPlaceLabel = styled.label`
 
 const StPlaceInput = styled.input`
   background: transparent;
-  width: 100%;
+  width: 80%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   font-size: 14px;
   line-height: 18px;
   padding: 0;
