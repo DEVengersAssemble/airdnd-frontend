@@ -202,10 +202,14 @@ const SearchForm = ({
   searchData,
   changeSearchData,
   locationResult,
+  handleSubmit,
 }) => {
   const { location, checkIn, checkOut, flexibleDate, guests } = searchData;
   return (
-    <StSearchForm isSearchBtnClicked={isSearchBtnClicked}>
+    <StSearchForm
+      onSubmit={handleSubmit}
+      isSearchBtnClicked={isSearchBtnClicked}
+    >
       <StFormItemWrapper
         name="location"
         width="30%"
@@ -222,6 +226,8 @@ const SearchForm = ({
               onChange={e => {
                 changeSearchData(e.target.name, e.target.value);
               }}
+              autoComplete="off"
+              required
             ></StPlaceInput>
           </StTextWrapper>
         </StPlaceLabel>

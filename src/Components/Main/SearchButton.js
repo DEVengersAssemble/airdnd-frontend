@@ -33,7 +33,7 @@ const StSearchButtonText = styled.span`
 
 const SearchButton = () => {
   return (
-    <StSearchButton btnType="circle">
+    <StSearchButton type="submit" btnType="circle">
       <FiSearch></FiSearch>
       {/* <StSearchButtonText></StSearchButtonText> */}
     </StSearchButton>
