@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { darken } from 'polished';
 import ChatListItem from '../Message/ChatListItem';
 import ChatListsNothing from '../Message/ChatListsNothing';
-import { Toast, CanceledToast, CopyToast } from '../Global/Toast';
 
 const ChatMain = () => {
   const ChatNothing = false;
@@ -20,9 +19,6 @@ const ChatMain = () => {
             <ChatListItem />
             <ChatListItem />
           </ChatLists>
-          <Toast />
-          <CanceledToast />
-          <CopyToast />
         </>
       )}
     </ChatMainWrapper>
