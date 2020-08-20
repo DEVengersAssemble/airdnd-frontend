@@ -6,21 +6,21 @@ import { Link } from 'react-router-dom';
 const TripsMain = () => {
   return (
     <TripsMainWrapper>
-      <h2>여행</h2>
-      <main>
-        <ul>
-          <li>
+      <TripsMainInner>
+        <TripsMainTitle>여행</TripsMainTitle>
+        <TripsMainNav>
+          <TripsMainNavList>
             <Link to="/trips/upcoming">예정된 예약</Link>
-          </li>
-          <li>
+          </TripsMainNavList>
+          <TripsMainNavList>
             <Link to="/trips/past">지난 예약</Link>
-          </li>
-          <li>
+          </TripsMainNavList>
+          <TripsMainNavList>
             <Link to="/trips/canceled">취소됨</Link>
-          </li>
-        </ul>
+          </TripsMainNavList>
+        </TripsMainNav>
         <TripsSubRouter />
-      </main>
+      </TripsMainInner>
     </TripsMainWrapper>
   );
 };
@@ -28,5 +28,22 @@ const TripsMain = () => {
 const TripsMainWrapper = styled.div`
   padding-top: 8rem;
 `;
+
+const TripsMainInner = styled.div`
+  margin-top: 4rem;
+  padding: 0rem 8rem;
+  height: fit-content;
+  min-height: calc(100vh - 12rem);
+`;
+
+const TripsMainTitle = styled.h2`
+  padding-bottom: 5rem;
+  font-size: 3.4rem;
+  font-weight: bold;
+`;
+
+const TripsMainNav = styled.ul``;
+
+const TripsMainNavList = styled.li``;
 
 export default TripsMain;
