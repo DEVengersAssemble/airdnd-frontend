@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 // import HomeContainer from '../../Containers/Search/HomeContainer';
 import HomeList from '../../Components/Search/HomeList';
 import {
@@ -11,7 +11,7 @@ import HomeCardContainer from './HomeCardContainer';
 
 const HomeListContainer = ({ mapState }) => {
   const { homes } = useSelector(state => state.search);
-  const dispatch = useDispatch();
+  const { dateDiff } = useSelector(state => state.searchForm);
   const [listModalState, setListModalState] = useState(false);
   const [newModalState, setNewModalState] = useState(false);
 
@@ -39,12 +39,14 @@ const HomeListContainer = ({ mapState }) => {
             <HomeContainer
               key={home.homeId}
               home={home}
+              dateDiff={dateDiff}
               onClickBookmark={onClickBookmark}
             />
           ) : (
             <HomeCardContainer
               key={home.homeId}
               home={home}
+              dateDiff={dateDiff}
               onClickBookmark={onClickBookmark}
             />
           );
