@@ -2,11 +2,30 @@
 const SHOW_MAP = 'search/SHOW_MAP';
 const HIDE_MAP = 'search/HIDE_MAP';
 const SAVE_FILTER = 'search/SAVE_FILTER';
+const APPLY_TOGGLE_FILTER = 'search/APPLY_TOGGLE_FILTER';
+const APPLY_COUNTER_FILTER = 'search/APPLY_COUNTER_FILTER';
+const APPLY_CHECK_FILTER = 'search/APPLY_CHECK_FILTER';
 
 // action creator
 export const showMap = () => ({ type: SHOW_MAP });
 export const hideMap = () => ({ type: HIDE_MAP });
 export const saveFilter = (name, value) => ({ type: SAVE_FILTER, name, value });
+export const applyToggleFilter = (name, value) => ({
+  type: APPLY_TOGGLE_FILTER,
+  name,
+  value,
+});
+export const applyCounterFilter = (name, value) => ({
+  type: APPLY_COUNTER_FILTER,
+  name,
+  value,
+});
+export const applyCheckFilter = (list, name, value) => ({
+  type: APPLY_CHECK_FILTER,
+  list,
+  name,
+  value,
+});
 
 // initial state
 const initialState = {
@@ -188,34 +207,32 @@ const initialState = {
       priceFrom: 12000,
       priceTo: 1000000,
     },
-    more: {
-      instantBooking: false,
-      bedroom: {
-        bed: 0,
-        room: 0,
-        bathroom: 0,
-      },
-      convenience: false,
-      convenienceList: {
-        주방: false,
-        샴푸: false,
-        난방: true,
-        에어컨: false,
-        다리미: true,
-        // ...
-      },
+    instantBooking: false,
+    bedroom: {
+      bed: 0,
+      room: 0,
+      bathroom: 0,
+    },
+    convenience: false,
+    convenienceList: {
+      주방: false,
+      샴푸: false,
+      난방: true,
+      에어컨: false,
+      다리미: true,
+      // ...
+    },
 
-      facilityList: {
-        헬스장: true,
-        수영장: false,
-        // ...
-      },
+    facilityList: {
+      헬스장: true,
+      수영장: false,
+      // ...
+    },
 
-      hostLangList: {
-        영어: false,
-        프랑스어: false,
-        // ...
-      },
+    hostLangList: {
+      영어: false,
+      프랑스어: false,
+      // ...
     },
   },
   // 필터 추가하기에서 나오는 필터 조건
@@ -310,6 +327,36 @@ const search = (state = initialState, action) => {
         filterApplied: {
           ...state.filterApplied,
           [action.name]: action.value,
+        },
+      };
+    case APPLY_TOGGLE_FILTER:
+      return {
+        ...state,
+        filterApplied: {
+          ...state.filterApplied,
+          [action.name]: action.value,
+        },
+      };
+    case APPLY_COUNTER_FILTER:
+      return {
+        ...state,
+        filterApplied: {
+          ...state.filterApplied,
+          bedroom: {
+            ...state.filterApplied.bedroom,
+            [action.name]: action.value,
+          },
+        },
+      };
+    case APPLY_CHECK_FILTER:
+      return {
+        ...state,
+        filterApplied: {
+          ...state.filterApplied,
+          [action.list]: {
+            ...state.filterApplied[action.list],
+            [action.name]: action.value,
+          },
         },
       };
     default:
