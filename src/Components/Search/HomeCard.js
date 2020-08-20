@@ -26,15 +26,16 @@ const HomeCard = ({ home, onClickBookmark, dateDiff }) => {
         image={image}
         imageCount={imageCount}
       />
-      <StHome
+      <a
+        rel="noopener noreferrer"
         target="_blank"
         href="https://www.airbnb.co.kr/rooms/36094960?adults=1&location=%EB%A7%88%EB%93%9C%EB%A6%AC%EB%93%9C&source_impression_id=p3_1597324281_lNy0Q31ggfi0f1St&check_in=2020-09-26&guests=1&check_out=2020-09-30"
       >
-        <Rating scale="1.4" rate={rating} count={reviewCount} />
+        <StRating scale="1.4" rate={rating} count={reviewCount} />
         <StSpan>{subTitle}</StSpan>
         <StSpan>{title}</StSpan>
         <HomePrice price={price} dateDiff={dateDiff} />
-      </StHome>
+      </a>
       <Heart ckType checked={isBookmarked} onClick={onClickBookmark} />
     </StWrapper>
   );
@@ -43,7 +44,6 @@ const HomeCard = ({ home, onClickBookmark, dateDiff }) => {
 export default HomeCard;
 
 const StWrapper = styled.li`
-  /* background: cornflowerblue; */
   position: relative;
   padding: 1rem;
   width: 20%;
@@ -56,16 +56,17 @@ const StWrapper = styled.li`
   }
 `;
 
-const StHome = styled.a`
-  text-decoration: none;
-  width: 100%;
+const StRating = styled(Rating)`
+  margin: 1rem 0 0.3rem;
 `;
+
+const StPrice = styled(HomePrice)``;
 
 const StSpan = styled.span`
   display: block;
   color: ${({ theme }) => theme.color.black};
   font-size: 1.6rem;
-  line-height: 1.7rem;
+  margin-bottom: 0.3rem;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
