@@ -175,7 +175,34 @@ const initialState = {
       reviewCount: 312,
     },
   ],
-  filter: [],
+  filterApplied: {
+    refund: false,
+    roomType: {
+      house: false,
+      private: false,
+      shared: false,
+    },
+    price: {
+      from: 0,
+      to: 0,
+    },
+    more: {
+      instantBooking: false,
+      bedroom: false,
+      convenience: false,
+      convenienceList: [''],
+      facilityList: [''],
+      hostLang: [''],
+    },
+  },
+  filterCondition: {
+    instantBooking: false,
+    bedroom: false,
+    convenience: false,
+    convenienceList: [''],
+    facilityList: [''],
+    hostLang: [''],
+  },
   dataTotal: 190,
   priceArray: [
     0,
