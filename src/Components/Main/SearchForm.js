@@ -151,6 +151,7 @@ const SearchForm = ({
   closePopup,
   searchData,
   changeSearchData,
+  locationResult,
 }) => {
   const { location, checkIn, checkOut, flexibleDate, guests } = searchData;
   return (
@@ -177,6 +178,8 @@ const SearchForm = ({
         <SearchPlacePopup
           type={type}
           closePopup={closePopup}
+          locationResult={locationResult}
+          changeSearchData={changeSearchData}
         ></SearchPlacePopup>
       </StFormItemWrapper>
       <StFormItemWrapper
@@ -196,7 +199,6 @@ const SearchForm = ({
         tabIndex="0"
         onClick={e => changeType(e)}
       >
-        <SearchPlacePopup></SearchPlacePopup>
         <StTextWrapper>
           <StTypeText>체크아웃</StTypeText>
           <StContentText>날짜 추가</StContentText>

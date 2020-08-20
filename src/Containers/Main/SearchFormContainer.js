@@ -2,16 +2,14 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import SearchForm from '../../Components/Main/SearchForm';
 import { setSearchData } from '../../Modules/searchForm';
-import axios from 'axios';
+import { getLocationAutoComplete } from '../../Api/searchFormApi';
 
-// axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
-
-const SearchFormContainer = () => {
+const SearchFormContainer = ({ isSearchBtnClicked }) => {
   const dispatch = useDispatch();
   const searchData = useSelector(state => state.searchForm);
   console.log('searchData: ', searchData);
   const [locationResult, setLocationResult] = useState([]);
-
+  console.log('locationResult: ', locationResult);
   // location,checkIn,checkOut,guests
   const [type, setType] = useState(null);
 
@@ -23,31 +21,24 @@ const SearchFormContainer = () => {
     setType(e.target.name);
   };
 
-  const getLocationAutoComplete = async value => {
-    const results = await axios.get(
-      `/api/v2/autocompletes?country=KR&key=d306zoyjsyarp7ifhu67rjxn52tv0t20&language=ko&locale=ko&num_results=5&user_input=${value}&api_version=1.1.1&satori_config_token=EhIiJQIiEhUCEiIyEhIyEiEA&vertical_refinement=all&region=-1&options=should_filter_by_vertical_refinement%7Chide_nav_results%7Cshould_show_stays%7Csimple_search`,
-    );
-    console.log(
-      'results: ',
-      results.data.autocomplete_terms.map(term => term.display_name),
-    );
-  };
-  const changeSearchData = (name, value) => {
+  const changeSearchData = async (name, value) => {
     const data = { name, value };
-    console.log('data: ', data);
-    console.log('setSearchData(data): ', setSearchData(data));
-    if (name === 'location') {
-      getLocationAutoComplete(value);
-    }
     dispatch(setSearchData(data));
+
+    if (name === 'location') {
+      const result = await getLocationAutoComplete(value);
+      setLocationResult(result);
+    }
   };
   return (
     <SearchForm
+      isSearchBtnClicked={isSearchBtnClicked}
       type={type}
       changeType={changeType}
       closePopup={closePopup}
       searchData={searchData}
       changeSearchData={changeSearchData}
+      locationResult={locationResult}
     ></SearchForm>
   );
 };

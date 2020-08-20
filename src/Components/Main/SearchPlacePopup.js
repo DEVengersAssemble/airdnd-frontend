@@ -9,19 +9,24 @@ const StSearchPlacePopupWrapper = styled.div`
 const StSearchPlacePopup = styled(Popup)`
   top: 14px;
   left: 0;
-  width: 300px;
+  border-radius: 20px;
   padding: 10px 0;
+  min-height: 0;
+  min-width: 400px;
   color: ${({ theme }) => theme.color.black};
 `;
 
-const StSearchPlaceList = styled.ul``;
+const StSearchPlaceList = styled.ul`
+  display: flex;
+  flex-direction: column;
+`;
 
 const StSearchPlaceIconWrapper = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
   height: 40px;
-  width: 40px;
+  min-width: 40px;
   font-size: 14px;
   margin-right: 10px;
   background: ${({ theme }) => theme.color.line};
@@ -33,16 +38,26 @@ const StSearchPlaceItem = styled.li`
   cursor: pointer;
   display: flex;
   align-items: center;
-  padding: 10px 0 10px 20px;
+  padding: 10px 20px;
   &:hover {
     background: ${({ theme }) => theme.color.lightGray};
   }
 `;
 
-const SearchPlacePopup = ({ type, closePopup }) => {
+const StItemText = styled.span`
+  white-space: nowrap;
+`;
+
+const SearchPlacePopup = ({
+  type,
+  closePopup,
+  locationResult,
+  changeSearchData,
+}) => {
   const popupRef = useRef();
+
   const handlePopup = ({ target }) => {
-    if (type === 'place' && !popupRef.current.contains(target)) {
+    if (type === 'location' && !popupRef.current.contains(target)) {
       closePopup();
     }
   };
@@ -51,41 +66,28 @@ const SearchPlacePopup = ({ type, closePopup }) => {
     return () => {
       document.removeEventListener('click', handlePopup);
     };
-  }, [handlePopup, type]);
+  }, [locationResult, handlePopup, type]);
   return (
     <StSearchPlacePopupWrapper ref={popupRef}>
-      <StSearchPlacePopup popupState={type === 'place'}>
+      <StSearchPlacePopup
+        popupState={locationResult.length && type === 'location'}
+      >
         <StSearchPlaceList>
-          <StSearchPlaceItem>
-            <StSearchPlaceIconWrapper>
-              <FaMapMarkerAlt></FaMapMarkerAlt>
-            </StSearchPlaceIconWrapper>
-            서울시
-          </StSearchPlaceItem>
-          <StSearchPlaceItem>
-            <StSearchPlaceIconWrapper>
-              <FaMapMarkerAlt></FaMapMarkerAlt>
-            </StSearchPlaceIconWrapper>
-            서울시
-          </StSearchPlaceItem>
-          <StSearchPlaceItem>
-            <StSearchPlaceIconWrapper>
-              <FaMapMarkerAlt></FaMapMarkerAlt>
-            </StSearchPlaceIconWrapper>
-            서울시
-          </StSearchPlaceItem>
-          <StSearchPlaceItem>
-            <StSearchPlaceIconWrapper>
-              <FaMapMarkerAlt></FaMapMarkerAlt>
-            </StSearchPlaceIconWrapper>
-            서울시
-          </StSearchPlaceItem>
-          <StSearchPlaceItem>
-            <StSearchPlaceIconWrapper>
-              <FaMapMarkerAlt></FaMapMarkerAlt>
-            </StSearchPlaceIconWrapper>
-            서울시
-          </StSearchPlaceItem>
+          {locationResult.map((item, index) => {
+            return (
+              <StSearchPlaceItem
+                key={index}
+                onClick={() => {
+                  changeSearchData('location', item);
+                }}
+              >
+                <StSearchPlaceIconWrapper>
+                  <FaMapMarkerAlt></FaMapMarkerAlt>
+                </StSearchPlaceIconWrapper>
+                <StItemText>{item}</StItemText>
+              </StSearchPlaceItem>
+            );
+          })}
         </StSearchPlaceList>
       </StSearchPlacePopup>
     </StSearchPlacePopupWrapper>
