@@ -117,7 +117,7 @@ const StPdfModal = styled(Modal)`
 `;
 
 const StPdfModalWrapper = styled.div`
-  padding: 2.5rem 2.5rem;
+  padding: 2.5rem;
 `;
 
 const StPdfModalTitle = styled.h2`
