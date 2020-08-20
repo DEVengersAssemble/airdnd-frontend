@@ -8,9 +8,21 @@ import Checkbox from '../Global/Checkbox';
 import { NewInput } from '../Global/Input';
 import { GiHamburgerMenu } from 'react-icons/gi';
 
-const RefundPopup = ({ popupState, size, toggle, handleClick, onReset }) => {
+const RefundPopup = ({
+  popupState,
+  size,
+  toggle,
+  handleClick,
+  onReset,
+  onSave,
+}) => {
   return (
-    <FilterPopup popupState={popupState} size={size} onReset={onReset}>
+    <FilterPopup
+      popupState={popupState}
+      size={size}
+      onReset={onReset}
+      onSave={onSave}
+    >
       <StContentWrapper content="refund">
         <StSmallSpan>
           유연한 환불 정책을 제공하는 숙소만 검색 결과에 표시
@@ -21,9 +33,21 @@ const RefundPopup = ({ popupState, size, toggle, handleClick, onReset }) => {
   );
 };
 
-const RoomTypePopup = ({ popupState, size, check, onChange, onReset }) => {
+const RoomTypePopup = ({
+  popupState,
+  size,
+  check,
+  onChange,
+  onReset,
+  onSave,
+}) => {
   return (
-    <FilterPopup popupState={popupState} size={size} onReset={onReset}>
+    <FilterPopup
+      popupState={popupState}
+      size={size}
+      onReset={onReset}
+      onSave={onSave}
+    >
       <StCheckboxList>
         <StCheckboxWrapper>
           <Checkbox
@@ -82,12 +106,18 @@ const PricePopup = ({
   onChangePriceFrom,
   onChangePriceTo,
   onReset,
+  onSave,
 }) => {
   return (
-    <FilterPopup popupState={popupState} size={size} onReset={onReset}>
+    <FilterPopup
+      popupState={popupState}
+      size={size}
+      onReset={onReset}
+      onSave={onSave}
+    >
       <StContentWrapper content="price">
         <StLargeSpan>
-          평균 1박 요금은 ₩{averagePrice.toLocaleString()}입니다
+          평균 1박 요금은 ₩{averagePrice.toLocaleString()}입e니다
         </StLargeSpan>
         <StRangeWrapper>
           <StRangeBar>
@@ -139,7 +169,7 @@ const SetDatePopup = ({ popupState, size }) => {
   );
 };
 
-const FilterPopup = ({ children, popupState, size, onReset }) => {
+const FilterPopup = ({ children, popupState, size, onReset, onSave }) => {
   return (
     <StPopup popupState={popupState} size={size}>
       {children}
@@ -159,6 +189,7 @@ const FilterPopup = ({ children, popupState, size, onReset }) => {
           fontSize="1.4rem"
           hover="background: #000"
           transition
+          onClick={onSave}
         >
           저장
         </Button>

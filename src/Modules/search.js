@@ -1,10 +1,12 @@
 // action type
 const SHOW_MAP = 'search/SHOW_MAP';
 const HIDE_MAP = 'search/HIDE_MAP';
+const SAVE_FILTER = 'search/SAVE_FILTER';
 
 // action creator
 export const showMap = () => ({ type: SHOW_MAP });
 export const hideMap = () => ({ type: HIDE_MAP });
+export const saveFilter = (name, value) => ({ type: SAVE_FILTER, name, value });
 
 // initial state
 const initialState = {
@@ -176,15 +178,15 @@ const initialState = {
     },
   ],
   filterApplied: {
-    refund: false,
+    refund: true,
     roomType: {
       house: false,
       private: false,
       shared: false,
     },
     price: {
-      from: 0,
-      to: 0,
+      priceFrom: 12000,
+      priceTo: 1000000,
     },
     more: {
       instantBooking: false,
@@ -195,6 +197,7 @@ const initialState = {
       hostLang: [''],
     },
   },
+  // 필터 추가하기에서 나오는 필터 조건
   filterCondition: {
     instantBooking: false,
     bedroom: false,
@@ -204,6 +207,7 @@ const initialState = {
     hostLang: [''],
   },
   dataTotal: 190,
+  // 2만원 단위로 숙박 개수
   priceArray: [
     0,
     0,
@@ -255,10 +259,10 @@ const initialState = {
     45,
     1,
     3,
-  ], // 2만원 단위로 숙박 개수
+  ],
+  // 1박 평균 가격
   averagePrice: 82094,
   mapState: true,
-
   // map 범위 보낼때
   // mapSend: {
   //   from: { lat: 0, lng: 0 },
@@ -278,6 +282,14 @@ const search = (state = initialState, action) => {
       return {
         ...state,
         mapState: false,
+      };
+    case SAVE_FILTER:
+      return {
+        ...state,
+        filterApplied: {
+          ...state.filterApplied,
+          [action.name]: action.value,
+        },
       };
     default:
       return state;

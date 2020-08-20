@@ -5,10 +5,14 @@ import {
   PricePopup,
   SetDatePopup,
 } from '../../Components/Search/FilterPopup';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { saveFilter } from '../../Modules/search';
 
 const RefundPopupContainer = ({ popupState, size, onClose }) => {
-  const [toggle, setToggle] = useState(false);
+  const { refund } = useSelector(state => state.search.filterApplied);
+  const dispatch = useDispatch();
+
+  const [toggle, setToggle] = useState(refund);
   const handleClick = () => setToggle(!toggle);
   const onReset = () => setToggle(false);
 
@@ -17,6 +21,11 @@ const RefundPopupContainer = ({ popupState, size, onClose }) => {
     if (!popupState || popup.current.contains(target)) return;
     onClose();
     onReset();
+  };
+
+  const onSave = () => {
+    dispatch(saveFilter('refund', toggle));
+    onClose();
   };
 
   useEffect(() => {
@@ -29,23 +38,23 @@ const RefundPopupContainer = ({ popupState, size, onClose }) => {
   return (
     <div ref={popup}>
       <RefundPopup
-        popupState={popupState}
-        onClose={onClose}
         size={size}
         toggle={toggle}
-        handleClick={handleClick}
+        popupState={popupState}
+        onSave={onSave}
+        onClose={onClose}
         onReset={onReset}
+        handleClick={handleClick}
       />
     </div>
   );
 };
 
 const RoomTypePopupContainer = ({ popupState, size, onClose }) => {
-  const [check, setCheck] = useState({
-    house: false,
-    private: false,
-    shared: false,
-  });
+  const { roomType } = useSelector(state => state.search.filterApplied);
+  const dispatch = useDispatch();
+
+  const [check, setCheck] = useState(roomType);
   const onChange = type => setCheck({ ...check, [type]: !check[type] });
   const onReset = () =>
     setCheck({ house: false, private: false, shared: false });
@@ -55,6 +64,11 @@ const RoomTypePopupContainer = ({ popupState, size, onClose }) => {
     if (!popupState || popup.current.contains(target)) return;
     onClose();
     onReset();
+  };
+
+  const onSave = () => {
+    dispatch(saveFilter('roomType', check));
+    onClose();
   };
 
   useEffect(() => {
@@ -67,10 +81,11 @@ const RoomTypePopupContainer = ({ popupState, size, onClose }) => {
   return (
     <div ref={popup}>
       <RoomTypePopup
-        popupState={popupState}
-        onClose={onClose}
         size={size}
         check={check}
+        popupState={popupState}
+        onClose={onClose}
+        onSave={onSave}
         onChange={onChange}
         onReset={onReset}
       />
@@ -79,8 +94,11 @@ const RoomTypePopupContainer = ({ popupState, size, onClose }) => {
 };
 
 const PricePopupContainer = ({ popupState, size, onClose }) => {
-  const [priceFrom, setPriceFrom] = useState(12000);
-  const [priceTo, setPriceTo] = useState(1000000);
+  const { price } = useSelector(state => state.search.filterApplied);
+  const dispatch = useDispatch();
+
+  const [priceFrom, setPriceFrom] = useState(price.priceFrom);
+  const [priceTo, setPriceTo] = useState(price.priceTo);
   const onChangePriceFrom = ({ target }) => setPriceFrom(target.value);
   const onChangePriceTo = ({ target }) => setPriceTo(target.value);
   const onReset = () => {
@@ -96,6 +114,11 @@ const PricePopupContainer = ({ popupState, size, onClose }) => {
     onReset();
   };
 
+  const onSave = () => {
+    dispatch(saveFilter('price', { priceFrom, priceTo }));
+    onClose();
+  };
+
   useEffect(() => {
     document.addEventListener('click', closePopup);
     return () => {
@@ -106,15 +129,16 @@ const PricePopupContainer = ({ popupState, size, onClose }) => {
   return (
     <div ref={popup}>
       <PricePopup
+        size={size}
+        popupState={popupState}
         priceArray={priceArray}
         averagePrice={averagePrice}
-        popupState={popupState}
-        onClose={onClose}
         priceFrom={priceFrom}
-        priceTo={priceTo}
         onChangePriceFrom={onChangePriceFrom}
         onChangePriceTo={onChangePriceTo}
-        size={size}
+        priceTo={priceTo}
+        onSave={onSave}
+        onClose={onClose}
         onReset={onReset}
       />
     </div>
