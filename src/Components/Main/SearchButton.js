@@ -9,7 +9,7 @@ const StSearchButton = styled(Button)`
   right: 12px;
   font-size: 20px;
   font-weight: 500;
-  padding: 0 0;
+  padding: 0;
   width: 40px;
   height: 40px;
   border: none;
@@ -20,10 +20,6 @@ const StSearchButton = styled(Button)`
   }
   color: white;
   background: ${({ theme }) => theme.color.main};
-
-  @media ${({ theme }) => theme.size.iPad} {
-    padding: 16px;
-  }
 `;
 
 const StSearchButtonText = styled.span`
