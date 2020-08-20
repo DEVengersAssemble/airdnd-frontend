@@ -7,9 +7,7 @@ import { getLocationAutoComplete } from '../../Api/searchFormApi';
 const SearchFormContainer = ({ isSearchBtnClicked }) => {
   const dispatch = useDispatch();
   const searchData = useSelector(state => state.searchForm);
-  console.log('searchData: ', searchData);
   const [locationResult, setLocationResult] = useState([]);
-  console.log('locationResult: ', locationResult);
   // location,checkIn,checkOut,guests
   const [type, setType] = useState(null);
 
@@ -24,8 +22,7 @@ const SearchFormContainer = ({ isSearchBtnClicked }) => {
   const changeSearchData = async (name, value) => {
     const data = { name, value };
     dispatch(setSearchData(data));
-
-    if (name === 'location') {
+    if (value && name === 'location') {
       const result = await getLocationAutoComplete(value);
       setLocationResult(result);
     }

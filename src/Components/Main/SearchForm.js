@@ -232,7 +232,13 @@ const SearchForm = ({
           changeSearchData={changeSearchData}
         ></SearchPlacePopup>
         {location && (
-          <StDeleteBtn btnType="circle">
+          <StDeleteBtn
+            btnType="circle"
+            name="location"
+            onClick={() => {
+              changeSearchData('location', '');
+            }}
+          >
             <MdClose />
           </StDeleteBtn>
         )}
@@ -250,7 +256,13 @@ const SearchForm = ({
           </StContentText>
         </StTextWrapper>
         {checkIn && (
-          <StDeleteBtn btnType="circle">
+          <StDeleteBtn
+            btnType="circle"
+            name="checkIn"
+            onClick={() => {
+              changeSearchData('checkIn', '');
+            }}
+          >
             <MdClose />
           </StDeleteBtn>
         )}
@@ -268,7 +280,13 @@ const SearchForm = ({
           </StContentText>
         </StTextWrapper>
         {checkOut && (
-          <StDeleteBtn btnType="circle">
+          <StDeleteBtn
+            btnType="circle"
+            name="checkOut"
+            onClick={() => {
+              changeSearchData('checkOut', '');
+            }}
+          >
             <MdClose />
           </StDeleteBtn>
         )}
@@ -290,7 +308,13 @@ const SearchForm = ({
           </StContentText>
         </StTextWrapper>
         {guests && (
-          <StDeleteBtn btnType="circle" name="guests">
+          <StDeleteBtn
+            btnType="circle"
+            name="guests"
+            onClick={() => {
+              changeSearchData('guests', '');
+            }}
+          >
             <MdClose />
           </StDeleteBtn>
         )}
