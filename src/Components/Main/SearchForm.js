@@ -170,11 +170,14 @@ const StDeleteBtn = styled(Button)`
   height: 26px;
   font-size: 16px;
   top: calc(50% - 13px);
-  right: ${({ name }) => (name === 'guests' ? '55px' : '15px')};
+  right: ${({ name }) => (name === 'guests' ? '65px' : '15px')};
   border: none;
   background: ${({ theme }) => theme.color.shadow};
   &:hover {
     background: ${({ theme }) => theme.color.line};
+  }
+  @media ${({ theme }) => theme.size.iPad} {
+    right: ${({ name }) => (name === 'guests' ? '60px' : '10px')};
   }
 `;
 
@@ -188,8 +191,6 @@ const SearchForm = ({
   locationResult,
 }) => {
   const { location, checkIn, checkOut, flexibleDate, guests } = searchData;
-  console.log(location, checkIn, checkOut, guests);
-  console.log(!!location, !!checkIn, !!checkOut, !!guests);
   return (
     <StSearchForm isSearchBtnClicked={isSearchBtnClicked}>
       <StFormItemWrapper
