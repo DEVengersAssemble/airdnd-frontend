@@ -1,12 +1,12 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Rating from '../Global/Rating';
 import { CkHeart } from '../Global/Heart';
 import CarouselContainer from '../../Containers/Global/CarouselContainer';
 
-export const HomePrice = ({ price, dateDiff }) => {
+export const HomePrice = ({ type, price, dateDiff }) => {
   return (
-    <StPriceWrapper>
+    <StPriceWrapper type={type}>
       <StLargePrice>
         <strong>₩{price.toLocaleString()}</strong> / 1박
       </StLargePrice>
@@ -54,7 +54,7 @@ const Home = ({ home, onClickBookmark, dateDiff }) => {
             count={reviewCount}
             className="rating"
           />
-          <HomePrice price={price} dateDiff={dateDiff} />
+          <HomePrice type="list" price={price} dateDiff={dateDiff} />
         </StDetailWrapper>
         <Heart
           ckType
@@ -131,14 +131,20 @@ const StPriceWrapper = styled.div`
   display: flex;
   flex-direction: column;
   flex-flow: flex-end;
-  position: absolute;
-  bottom: 0;
-  right: 0;
+
+  ${({ type }) => {
+    type === 'list' &&
+      css`
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        text-align: right;
+      `;
+  }}
 `;
 
 const StLargePrice = styled.span`
-  margin-bottom: 0.5rem;
-  text-align: right;
+  margin-bottom: 0.3rem;
 `;
 
 const StSmallPrice = styled.span`

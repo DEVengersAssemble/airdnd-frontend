@@ -79,7 +79,7 @@ const initialState = {
       subTitle: 'MongMong-Toto의 호텔 객실이답',
       title: 'Pia Resort Hotel Corner Studio Room 기기',
       feature: '최대 인원 2명 ﹒ 침실 1개 ﹒ 침대 2개 ﹒ 단독 사용 욕실 1개***',
-      rating: 4.99,
+      rating: 0,
       reviewCount: 11,
       price: 30330,
       location: { lat: 0, lng: 0 },
