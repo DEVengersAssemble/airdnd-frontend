@@ -73,6 +73,8 @@ const RoomTypePopup = ({ popupState, size, check, onChange, onReset }) => {
 };
 
 const PricePopup = ({
+  priceArray,
+  averagePrice,
   popupState,
   size,
   priceFrom,
@@ -84,7 +86,9 @@ const PricePopup = ({
   return (
     <FilterPopup popupState={popupState} size={size} onReset={onReset}>
       <StContentWrapper content="price">
-        <StLargeSpan>평균 1박 요금은 ₩78,902입니다</StLargeSpan>
+        <StLargeSpan>
+          평균 1박 요금은 ₩{averagePrice.toLocaleString()}입니다
+        </StLargeSpan>
         <StRangeWrapper>
           <StRangeBar>
             <StButton btnType="circle" left="0">
@@ -95,12 +99,9 @@ const PricePopup = ({
             </StButton>
           </StRangeBar>
           <StGraph>
-            <StStick />
-            <StStick />
-            <StStick />
-            <StStick />
-            <StStick />
-            <StStick />
+            {priceArray.map((price, i) => (
+              <StStick key={i} height={price} />
+            ))}
           </StGraph>
         </StRangeWrapper>
         <StInputWrapper>
@@ -255,11 +256,12 @@ const StRangeWrapper = styled.div`
 
 const StGraph = styled.ul`
   display: flex;
+  align-items: flex-end;
 `;
 
 const StStick = styled.li`
-  width: 5px;
-  height: 3rem;
+  width: 5%;
+  height: ${({ height }) => `${height * 0.8}px`};
   margin: 0 1px -1px;
   border-radius: 1px;
   background: ${({ theme }) => theme.color.gray};

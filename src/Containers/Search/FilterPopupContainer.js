@@ -1,10 +1,11 @@
-import React, { useEffect, useReducer, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import {
   RefundPopup,
   RoomTypePopup,
   PricePopup,
   SetDatePopup,
 } from '../../Components/Search/FilterPopup';
+import { useSelector } from 'react-redux';
 
 const RefundPopupContainer = ({ popupState, size, onClose }) => {
   const [toggle, setToggle] = useState(false);
@@ -15,6 +16,7 @@ const RefundPopupContainer = ({ popupState, size, onClose }) => {
   const closePopup = ({ target }) => {
     if (!popupState || popup.current.contains(target)) return;
     onClose();
+    onReset();
   };
 
   useEffect(() => {
@@ -52,6 +54,7 @@ const RoomTypePopupContainer = ({ popupState, size, onClose }) => {
   const closePopup = ({ target }) => {
     if (!popupState || popup.current.contains(target)) return;
     onClose();
+    onReset();
   };
 
   useEffect(() => {
@@ -85,10 +88,12 @@ const PricePopupContainer = ({ popupState, size, onClose }) => {
     setPriceTo(1000000);
   };
 
+  const { priceArray, averagePrice } = useSelector(state => state.search);
   const popup = useRef();
   const closePopup = ({ target }) => {
     if (!popupState || popup.current.contains(target)) return;
     onClose();
+    onReset();
   };
 
   useEffect(() => {
@@ -101,6 +106,8 @@ const PricePopupContainer = ({ popupState, size, onClose }) => {
   return (
     <div ref={popup}>
       <PricePopup
+        priceArray={priceArray}
+        averagePrice={averagePrice}
         popupState={popupState}
         onClose={onClose}
         priceFrom={priceFrom}
