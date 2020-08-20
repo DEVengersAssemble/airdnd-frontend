@@ -31,7 +31,7 @@ const Header = styled.div`
   align-items: center;
   border-bottom: 1px solid ${({ theme }) => darken(0.1, theme.color.lightGray)};
   box-shadow: 1px 0 0.4rem ${({ theme }) => theme.color.shadow};
-  padding-left: 2rem;
+  padding-left: 7.5rem;
   color: ${({ theme }) => theme.color.main};
   height: 8rem;
 `;
