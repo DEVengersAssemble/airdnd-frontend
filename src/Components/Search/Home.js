@@ -132,15 +132,14 @@ const StPriceWrapper = styled.div`
   flex-direction: column;
   flex-flow: flex-end;
 
-  ${({ type }) => {
+  ${({ type }) =>
     type === 'list' &&
-      css`
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        text-align: right;
-      `;
-  }}
+    css`
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      text-align: right;
+    `}
 `;
 
 const StLargePrice = styled.span`

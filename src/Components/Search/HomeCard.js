@@ -6,6 +6,13 @@ import { CkHeart } from '../Global/Heart';
 import { HomePrice } from './Home';
 
 const HomeCard = ({ home, onClickBookmark, dateDiff }) => {
+  const homeRef = React.useRef();
+  // const { offsetWidth: width } = homeRef.current;
+  let homeWidth = 0;
+  // console.log('fjshfdjf', width);
+  console.log(homeRef);
+  console.log(homeRef.current);
+  console.log(window.innerWidth);
   const {
     isSuperhost,
     isBookmarked,
@@ -18,8 +25,12 @@ const HomeCard = ({ home, onClickBookmark, dateDiff }) => {
     price,
   } = home;
 
+  React.useEffect(() => {
+    console.log(window.innerWidth);
+  }, [window]);
+
   return (
-    <StWrapper>
+    <StWrapper ref={homeRef}>
       <CarouselContainer
         size="responsive"
         isSuperhost={isSuperhost}
@@ -40,7 +51,11 @@ const HomeCard = ({ home, onClickBookmark, dateDiff }) => {
         <StSpan>{title}</StSpan>
         <HomePrice price={price} dateDiff={dateDiff} type="card" />
       </a>
-      <Heart ckType checked={isBookmarked} onClick={onClickBookmark} />
+      <Heart
+        ckType
+        checked={isBookmarked}
+        onClick={() => onClickBookmark(isBookmarked)}
+      />
     </StWrapper>
   );
 };

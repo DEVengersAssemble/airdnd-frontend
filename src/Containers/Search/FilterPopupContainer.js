@@ -10,8 +10,11 @@ const RefundPopupContainer = ({ popupState, size, onClose }) => {
   const popup = useRef();
   const closePopup = ({ target }) => {
     if (popupState && !popup.current.contains(target)) return;
+    console.log(popup.current);
     onClose();
   };
+
+  console.log(popup);
 
   useEffect(() => {
     document.addEventListener('click', closePopup);
@@ -38,12 +41,12 @@ const RoomTypePopupContainer = ({ popupState, size, onClose }) => {
     if (!popupState || popup.current.contains(target)) onClose();
   };
 
-  useEffect(() => {
-    document.addEventListener('click', closePopup);
-    return () => {
-      document.removeEventListener('click', closePopup);
-    };
-  }, [closePopup]);
+  // useEffect(() => {
+  //   document.addEventListener('click', closePopup);
+  //   return () => {
+  //     document.removeEventListener('click', closePopup);
+  //   };
+  // }, [closePopup]);
 
   return (
     <div ref={popup}>
@@ -63,12 +66,12 @@ const PricePopupContainer = ({ popupState, size, onClose }) => {
     if (!popupState || popup.current.contains(target)) onClose();
   };
 
-  useEffect(() => {
-    document.addEventListener('click', closePopup);
-    return () => {
-      document.removeEventListener('click', closePopup);
-    };
-  }, [closePopup]);
+  // useEffect(() => {
+  //   document.addEventListener('click', closePopup);
+  //   return () => {
+  //     document.removeEventListener('click', closePopup);
+  //   };
+  // }, [closePopup]);
 
   return (
     <div ref={popup}>
@@ -88,12 +91,12 @@ const SetDatePopupContainer = ({ popupState, size, onClose }) => {
     if (!popupState || popup.current.contains(target)) onClose();
   };
 
-  useEffect(() => {
-    document.addEventListener('click', closePopup);
-    return () => {
-      document.removeEventListener('click', closePopup);
-    };
-  }, [closePopup]);
+  // useEffect(() => {
+  //   document.addEventListener('click', closePopup);
+  //   return () => {
+  //     document.removeEventListener('click', closePopup);
+  //   };
+  // }, [closePopup]);
 
   return (
     <div ref={popup}>
