@@ -14,8 +14,8 @@ const DetailBusinessModal = () => {
     <StBusinessModal
       width="55rem"
       height="fit-content"
-      modalState="true"
-      // modalState={modal}
+      // modalState="true"
+      modalState={modal}
       setModalState={onClickDelete}
       header
     >
