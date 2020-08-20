@@ -1,21 +1,30 @@
 import React, { useState } from 'react';
 import Carousel from '../../Components/Global/Carousel';
 
-const CarouselContainer = ({ image, imageCount, size, isSuperhost }) => {
+const CarouselContainer = ({
+  getHomeWidth,
+  image,
+  imageCount,
+  size,
+  isSuperhost,
+}) => {
   const [img, setImg] = useState(1);
   const [transition, setTransition] = useState(true);
   const [isClicked, setIsClicked] = useState(false);
+  const [homeWidth, setHomeWidth] = useState(0);
 
   const slideNext = () => {
     setImg(img + 1);
     setTransition(true);
     setIsClicked(true);
+    // if (size === 'responsive') setHomeWidth(getHomeWidth());
   };
 
   const slidePrev = () => {
     setImg(img - 1);
     setTransition(true);
     setIsClicked(true);
+    // if (size === 'responsive') setHomeWidth(getHomeWidth());
   };
 
   const resetCarousel = () => {
@@ -35,7 +44,11 @@ const CarouselContainer = ({ image, imageCount, size, isSuperhost }) => {
   return (
     <Carousel
       img={img}
+      setHomeWidth={setHomeWidth}
+      getHomeWidth={getHomeWidth}
+      homeWidth={homeWidth}
       imagePath={image}
+      imageCount={imageCount}
       isSuperhost={isSuperhost}
       isClicked={isClicked}
       transition={transition}

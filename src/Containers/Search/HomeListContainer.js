@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-// import HomeContainer from '../../Containers/Search/HomeContainer';
 import HomeList from '../../Components/Search/HomeList';
 import {
   BookmarkListModalContainer,
