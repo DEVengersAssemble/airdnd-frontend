@@ -42,7 +42,7 @@ const StFormItemWrapper = styled.div`
     content: '';
     position: absolute;
     top: 0;
-    left: -14px;
+    left: -20px;
     display: block;
     height: 100%;
     width: 1px;
@@ -74,6 +74,9 @@ const StFormItemWrapper = styled.div`
     ${StTextWrapper}::before {
       display: none;
     }
+    button {
+      display: inline-flex;
+    }
   }
 
   &:focus-within + & {
@@ -86,7 +89,7 @@ const StFormItemWrapper = styled.div`
     css`
       display: flex;
       align-items: center;
-      padding-left: 14px;
+      padding-left: 20px;
       cursor: pointer;
     `}
 `;
@@ -148,15 +151,26 @@ const StContentText = styled.p`
   font-size: 14px;
   line-height: 18px;
   color: ${({ theme }) => theme.color.darkGray};
+  @media ${({ theme }) => theme.size.iPad} {
+    ${({ name }) =>
+      name === 'guests' &&
+      css`
+        width: 80px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      `}
+  }
 `;
 
 const StDeleteBtn = styled(Button)`
   position: absolute;
+  display: none;
   width: 26px;
   height: 26px;
   font-size: 16px;
   top: calc(50% - 13px);
-  right: ${({ name }) => (name === 'guests' ? '110px' : '15px')};
+  right: ${({ name }) => (name === 'guests' ? '55px' : '15px')};
   border: none;
   background: ${({ theme }) => theme.color.shadow};
   &:hover {
@@ -174,6 +188,8 @@ const SearchForm = ({
   locationResult,
 }) => {
   const { location, checkIn, checkOut, flexibleDate, guests } = searchData;
+  console.log(location, checkIn, checkOut, guests);
+  console.log(!!location, !!checkIn, !!checkOut, !!guests);
   return (
     <StSearchForm isSearchBtnClicked={isSearchBtnClicked}>
       <StFormItemWrapper
@@ -201,9 +217,11 @@ const SearchForm = ({
           locationResult={locationResult}
           changeSearchData={changeSearchData}
         ></SearchPlacePopup>
-        <StDeleteBtn btnType="circle">
-          <MdClose />
-        </StDeleteBtn>
+        {location && (
+          <StDeleteBtn btnType="circle">
+            <MdClose />
+          </StDeleteBtn>
+        )}
       </StFormItemWrapper>
       <StFormItemWrapper
         name="checkIn"
@@ -213,11 +231,13 @@ const SearchForm = ({
       >
         <StTextWrapper>
           <StTypeText>체크인</StTypeText>
-          <StContentText>날짜 추가</StContentText>
+          <StContentText>{checkIn || '날짜 추가'}</StContentText>
         </StTextWrapper>
-        <StDeleteBtn btnType="circle">
-          <MdClose />
-        </StDeleteBtn>
+        {checkIn && (
+          <StDeleteBtn btnType="circle">
+            <MdClose />
+          </StDeleteBtn>
+        )}
       </StFormItemWrapper>
       <StFormItemWrapper
         name="checkOut"
@@ -227,11 +247,13 @@ const SearchForm = ({
       >
         <StTextWrapper>
           <StTypeText>체크아웃</StTypeText>
-          <StContentText>날짜 추가</StContentText>
+          <StContentText>{checkOut || '날짜 추가'}</StContentText>
         </StTextWrapper>
-        <StDeleteBtn btnType="circle">
-          <MdClose />
-        </StDeleteBtn>
+        {checkOut && (
+          <StDeleteBtn btnType="circle">
+            <MdClose />
+          </StDeleteBtn>
+        )}
       </StFormItemWrapper>
       <StFormItemWrapper
         name="guests"
@@ -241,11 +263,19 @@ const SearchForm = ({
       >
         <StTextWrapper>
           <StTypeText>인원</StTypeText>
-          <StContentText>게스트 추가</StContentText>
+          <StContentText name="guests">
+            {guests
+              ? `게스트 ${guests.adult + guests.child}명, 유아 ${
+                  guests.child
+                }명`
+              : '게스트 추가'}
+          </StContentText>
         </StTextWrapper>
-        <StDeleteBtn btnType="circle" name="guests">
-          <MdClose />
-        </StDeleteBtn>
+        {guests && (
+          <StDeleteBtn btnType="circle" name="guests">
+            <MdClose />
+          </StDeleteBtn>
+        )}
       </StFormItemWrapper>
       <SearchButton></SearchButton>
     </StSearchForm>

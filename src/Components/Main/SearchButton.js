@@ -5,11 +5,13 @@ import Button from '../Global/Button';
 
 const StSearchButton = styled(Button)`
   position: absolute;
-  top: calc(50% - 26px);
-  right: 10px;
+  top: calc(50% - 21px);
+  right: 12px;
   font-size: 20px;
   font-weight: 500;
-  padding: 14px 18px;
+  padding: 0 0;
+  width: 40px;
+  height: 40px;
   border: none;
   z-index: 10;
   &:hover {
@@ -34,9 +36,9 @@ const StSearchButtonText = styled.span`
 
 const SearchButton = () => {
   return (
-    <StSearchButton btnType="oval">
+    <StSearchButton btnType="circle">
       <FiSearch></FiSearch>
-      <StSearchButtonText>검색</StSearchButtonText>
+      {/* <StSearchButtonText></StSearchButtonText> */}
     </StSearchButton>
   );
 };

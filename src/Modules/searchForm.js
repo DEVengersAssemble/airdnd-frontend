@@ -7,13 +7,9 @@ const SET_GUESTS = 'searchForm/SET_GUESTS';
 
 // action creators
 export const setSearchData = data => {
-  console.log('searchForm..data: ', data);
   const payload = data.value;
-  console.log('data.name: ', data.name);
-  console.log('payload: ', payload);
   switch (data.name) {
     case 'location':
-      console.log('location!!!!');
       return { type: SET_LOCATION, payload };
     case 'checkIn':
       return { type: SET_CHECKIN, payload };
@@ -53,8 +49,8 @@ const initialState = {
   flexibleDate: 0,
   guests: {
     adult: 2,
-    child: 0,
-    infant: 0,
+    child: 1,
+    infant: 1,
   },
 };
 
