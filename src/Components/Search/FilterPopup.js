@@ -21,17 +21,16 @@ const RefundPopup = ({ popupState, size, toggle, handleClick }) => {
   );
 };
 
-const RoomTypePopup = ({ popupState, size }) => {
-  const [check, setCheck] = React.useState(false);
-
-  const onChange = e => {
-    setCheck(e.target.checked);
-  };
+const RoomTypePopup = ({ popupState, size, check, onChange }) => {
   return (
     <FilterPopup popupState={popupState} size={size}>
       <StCheckboxList>
         <StCheckboxWrapper>
-          <Checkbox value checked={check} onChange={onChange}>
+          <Checkbox
+            value
+            checked={check.house}
+            onChange={() => onChange('house')}
+          >
             <StContentWrapper content="roomType">
               <StLargeSpan>집 전체</StLargeSpan>
               <StSmallSpan>집 전체를 단독으로 사용합니다</StSmallSpan>
@@ -39,7 +38,11 @@ const RoomTypePopup = ({ popupState, size }) => {
           </Checkbox>
         </StCheckboxWrapper>
         <StCheckboxWrapper>
-          <Checkbox value checked={check} onChange={onChange}>
+          <Checkbox
+            value
+            checked={check.private}
+            onChange={() => onChange('private')}
+          >
             <StContentWrapper content="roomType">
               <StLargeSpan>개인실</StLargeSpan>
               <StSmallSpan>
@@ -50,7 +53,11 @@ const RoomTypePopup = ({ popupState, size }) => {
           </Checkbox>
         </StCheckboxWrapper>
         <StCheckboxWrapper>
-          <Checkbox value checked={check} onChange={onChange}>
+          <Checkbox
+            value
+            checked={check.shared}
+            onChange={() => onChange('shared')}
+          >
             <StContentWrapper content="roomType">
               <StLargeSpan>다인실</StLargeSpan>
               <StSmallSpan>

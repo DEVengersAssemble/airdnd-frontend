@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useReducer, useState, useRef } from 'react';
 import {
   RefundPopup,
   RoomTypePopup,
@@ -37,6 +37,13 @@ const RefundPopupContainer = ({ popupState, size, onClose }) => {
 };
 
 const RoomTypePopupContainer = ({ popupState, size, onClose }) => {
+  const [check, setCheck] = useState({
+    house: false,
+    private: false,
+    shared: false,
+  });
+  const onChange = type => setCheck({ ...check, [type]: !check[type] });
+
   const popup = useRef();
   const closePopup = ({ target }) => {
     if (!popupState || popup.current.contains(target)) return;
@@ -52,7 +59,13 @@ const RoomTypePopupContainer = ({ popupState, size, onClose }) => {
 
   return (
     <div ref={popup}>
-      <RoomTypePopup popupState={popupState} onClose={onClose} size={size} />
+      <RoomTypePopup
+        popupState={popupState}
+        onClose={onClose}
+        size={size}
+        check={check}
+        onChange={onChange}
+      />
     </div>
   );
 };
