@@ -38,6 +38,7 @@ const StFormItemWrapper = styled.div`
   height: 68px;
   margin-top: -2px;
   outline: none;
+
   &:not(:first-child) ${StTextWrapper}::before {
     content: '';
     position: absolute;
@@ -68,8 +69,8 @@ const StFormItemWrapper = styled.div`
   &:focus-within {
     background: white;
     border-radius: 34px;
-    height: 68px;
-    margin-top: -2px;
+    height: 66px;
+    margin-top: -1px;
     box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.3);
     ${StTextWrapper}::before {
       display: none;
@@ -117,6 +118,8 @@ const StPlaceLabel = styled.label`
 `;
 
 const StPlaceInput = styled.input`
+  position: relative;
+  top: -2px;
   background: transparent;
   width: 80%;
   overflow: hidden;
@@ -124,9 +127,11 @@ const StPlaceInput = styled.input`
   white-space: nowrap;
   font-size: 14px;
   line-height: 18px;
+  margin-top: -10px;
   padding: 0;
   outline: none;
   border: none;
+  font-weight: ${({ value }) => value && 500};
   &::-webkit-input-placeholder {
     color: ${({ theme }) => theme.color.darkGray};
   }
@@ -150,7 +155,15 @@ const StTypeText = styled.p`
 const StContentText = styled.p`
   font-size: 14px;
   line-height: 18px;
-  color: ${({ theme }) => theme.color.darkGray};
+  color: ${({ theme, value }) =>
+    theme && value
+      ? css`
+          ${({ theme }) => theme.color.black}
+        `
+      : css`
+          ${({ theme }) => theme.color.darkGray}
+        `};
+  font-weight: ${({ value }) => value && 500};
   @media ${({ theme }) => theme.size.iPad} {
     ${({ name }) =>
       name === 'guests' &&
@@ -232,7 +245,9 @@ const SearchForm = ({
       >
         <StTextWrapper>
           <StTypeText>체크인</StTypeText>
-          <StContentText>{checkIn || '날짜 추가'}</StContentText>
+          <StContentText value={checkIn}>
+            {checkIn || '날짜 추가'}
+          </StContentText>
         </StTextWrapper>
         {checkIn && (
           <StDeleteBtn btnType="circle">
@@ -248,7 +263,9 @@ const SearchForm = ({
       >
         <StTextWrapper>
           <StTypeText>체크아웃</StTypeText>
-          <StContentText>{checkOut || '날짜 추가'}</StContentText>
+          <StContentText value={checkOut}>
+            {checkOut || '날짜 추가'}
+          </StContentText>
         </StTextWrapper>
         {checkOut && (
           <StDeleteBtn btnType="circle">
@@ -264,7 +281,7 @@ const SearchForm = ({
       >
         <StTextWrapper>
           <StTypeText>인원</StTypeText>
-          <StContentText name="guests">
+          <StContentText value={guests} name="guests">
             {guests
               ? `게스트 ${guests.adult + guests.child}명, 유아 ${
                   guests.child
