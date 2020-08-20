@@ -5,16 +5,21 @@ const HomeList = ({ children, mapState }) => {
   return <StWrapper mapState={mapState}>{children}</StWrapper>;
 };
 
+const fullSizeStyle = css`
+  ${({ mapState }) =>
+    !mapState &&
+    css`
+      display: flex;
+      flex-wrap: wrap;
+    `}
+`;
+
 const StWrapper = styled.ul`
   & *:nth-child(1) {
     border: none;
   }
 
-  ${({ mapState }) =>
-    !mapState &&
-    css`
-      display: flex;
-    `}
+  ${fullSizeStyle}
 `;
 
 export default HomeList;

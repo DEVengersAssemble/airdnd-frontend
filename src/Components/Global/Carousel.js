@@ -76,6 +76,7 @@ const sizes = {
     width: '148',
     height: '105',
   },
+  responsive: {},
 };
 
 const sizeStyles = css`
@@ -92,6 +93,9 @@ const StWrapper = styled.div`
   border-radius: 8px;
   background: ${({ theme }) => theme.color.gray};
   overflow: hidden;
+  width: 100%;
+  height: 0;
+  padding-bottom: 75%;
   ${sizeStyles};
 `;
 
@@ -141,6 +145,9 @@ const StImageWrapper = styled.li`
 `;
 
 const StImage = styled.img`
+  /* width: ; */
+  /* height: 0; */
+  /* padding-bottom: ; */
   object-fit: cover;
   width: inherit;
   height: inherit;
