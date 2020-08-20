@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import TripsSubRouter from '../../Routers/TripsSubRouter';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const TripsMain = () => {
   return (
@@ -10,25 +10,25 @@ const TripsMain = () => {
         <TripsMainTitle>여행</TripsMainTitle>
         <TripsMainNav>
           <TripsMainNavList>
-            <Link to="/trips/upcoming">
+            <StNavLink to="/trips/upcoming" activeClassName="active">
               <TripsMainNavItem>
                 <TripsMainNavItemInner>예정된 예약</TripsMainNavItemInner>
               </TripsMainNavItem>
-            </Link>
+            </StNavLink>
           </TripsMainNavList>
           <TripsMainNavList>
-            <Link to="/trips/past">
+            <StNavLink to="/trips/past" activeClassName="active">
               <TripsMainNavItem>
                 <TripsMainNavItemInner>이전 예약</TripsMainNavItemInner>
               </TripsMainNavItem>
-            </Link>
+            </StNavLink>
           </TripsMainNavList>
           <TripsMainNavList>
-            <Link to="/trips/canceled">
+            <StNavLink to="/trips/canceled" activeClassName="active">
               <TripsMainNavItem>
                 <TripsMainNavItemInner>취소됨</TripsMainNavItemInner>
               </TripsMainNavItem>
-            </Link>
+            </StNavLink>
           </TripsMainNavList>
         </TripsMainNav>
         <TripsSubRouter />
@@ -70,14 +70,25 @@ const TripsMainNavList = styled.li`
   }
 `;
 
+const StNavLink = styled(NavLink)`
+  &.active {
+    &:hover {
+      background: none;
+    }
+    & > div > div {
+      border-bottom: 2px solid ${({ theme }) => theme.color.black};
+      color: ${({ theme }) => theme.color.black};
+      font-weight: bold;
+    }
+  }
+`;
+
 const TripsMainNavItem = styled.div`
   padding: 0rem 1.5rem;
   color: ${({ theme }) => theme.color.darkGray};
-  /* active => color: ${({ theme }) => theme.color.black}; */
 `;
 
 const TripsMainNavItemInner = styled.div`
-  border-bottom: 2px solid black; /* active에만 활성 */
   line-height: 5rem;
 `;
 
