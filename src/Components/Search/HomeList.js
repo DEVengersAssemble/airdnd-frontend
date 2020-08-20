@@ -1,15 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import HomeContainer from '../../Containers/Search/HomeContainer';
 
-const HomeList = () => {
-  return (
-    <StWrapper>
-      <HomeContainer />
-      <HomeContainer />
-      <HomeContainer />
-    </StWrapper>
-  );
+const HomeList = ({ children }) => {
+  return <StWrapper>{children}</StWrapper>;
 };
 
 const StWrapper = styled.ul`

@@ -7,9 +7,17 @@ import { GrClose } from 'react-icons/gr';
 import { GoSettings } from 'react-icons/go';
 import Checkbox from '../Global/Checkbox';
 
-const MapButton = () => {
+const MapButton = ({ mapState, openMap, ...rest }) => {
+  return mapState ? null : (
+    <StMapButton border="none" fontSize="1.4rem" onClick={openMap} {...rest}>
+      <FiMap /> <StSpan>지도 표시하기</StSpan>
+    </StMapButton>
+  );
+};
+
+const FloatingMapButton = () => {
   return (
-    <StMapButton
+    <StFloatingMapButton
       btnType="oval"
       color="black"
       hover={css`
@@ -19,7 +27,7 @@ const MapButton = () => {
       transition
     >
       <FiMap /> <span>지도</span>
-    </StMapButton>
+    </StFloatingMapButton>
   );
 };
 
@@ -61,9 +69,15 @@ const MapMarkerButton = () => {
   );
 };
 
-const MapCloseButton = () => {
+const MapCloseButton = ({ closeMap }) => {
   return (
-    <StButton boxShadow position="sticky" top="10rem" margin="0 0 91px 0">
+    <StButton
+      boxShadow
+      position="sticky"
+      top="10rem"
+      margin="0 0 91px 0"
+      onClick={closeMap}
+    >
       <GrClose />
     </StButton>
   );
@@ -116,6 +130,10 @@ const StButton = styled(Button)`
 `;
 
 const StMapButton = styled(Button)`
+  margin-left: auto;
+`;
+
+const StFloatingMapButton = styled(Button)`
   z-index: 10;
   display: none;
   justify-content: center;
@@ -133,6 +151,10 @@ const StMapButton = styled(Button)`
   @media ${({ theme }) => theme.size.medium} {
     display: flex;
   }
+`;
+
+const StSpan = styled.span`
+  padding: 0.2rem 0 0 1rem;
 `;
 
 const StCheckbox = styled(Checkbox)`
@@ -154,6 +176,7 @@ const StFilterIcon = styled(GoSettings)`
 `;
 export {
   MapButton,
+  FloatingMapButton,
   MapZoomButton,
   MapMarkerButton,
   MapCloseButton,

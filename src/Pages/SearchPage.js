@@ -2,25 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import SearchResult from '../Components/Search/SearchResult';
 import SearchMap from '../Components/Search/SearchMap';
-import FilterModal from '../Components/Search/FilterModal';
 import Footer from '../Components/Main/Footer';
-import {
-  BookmarkListModal,
-  NewBookmarkModal,
-} from '../Components/Global/BookmarkModal';
+import SearchContentContainer from '../Containers/Search/SearchContentContainer';
 
 const SearchPage = () => {
   return (
     <StWrapper>
       <StNav></StNav>
-      <StContent>
-        <SearchResult />
-        <SearchMap />
-      </StContent>
+      <SearchContentContainer />
       <Footer />
-      <FilterModal />
-      <BookmarkListModal />
-      <NewBookmarkModal />
     </StWrapper>
   );
 };
@@ -29,10 +19,6 @@ const StWrapper = styled.main`
   display: flex;
   flex-direction: column;
   position: relative;
-`;
-
-const StContent = styled.div`
-  display: flex;
 `;
 
 const StNav = styled.div`

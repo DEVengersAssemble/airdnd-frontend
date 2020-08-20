@@ -1,17 +1,27 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import SearchButton from './SearchButton';
+import SearchPlacePopup from './SearchPlacePopup';
 
 const StSearchForm = styled.form`
   position: relative;
   background: ${({ theme }) => theme.color.white};
   width: 100%;
   height: 66px;
-  border-radius: 32px;
-  overflow: hidden;
+  border-radius: 34px;
   display: flex;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 16px 32px, rgba(0, 0, 0, 0.1) 0px 3px 8px;
   color: ${({ theme }) => theme.color.black};
+
+  ${({ isSearchBtnClicked }) =>
+    isSearchBtnClicked
+      ? css`
+          border: 1px solid ${({ theme }) => theme.color.line};
+        `
+      : css`
+          border: 1px solid transparent;
+          box-shadow: rgba(0, 0, 0, 0.15) 0px 16px 32px,
+            rgba(0, 0, 0, 0.1) 0px 3px 8px;
+        `};
 `;
 
 const StTextWrapper = styled.div`
@@ -22,7 +32,8 @@ const StTextWrapper = styled.div`
 
 const StFormItemWrapper = styled.div`
   width: ${({ width }) => width};
-  height: 100%;
+  height: 68px;
+  margin-top: -2px;
   outline: none;
   &:not(:first-child) ${StTextWrapper}::before {
     content: '';
@@ -37,7 +48,9 @@ const StFormItemWrapper = styled.div`
 
   &:hover {
     background: rgba(0, 0, 0, 0.07);
-    border-radius: 32px;
+    border-radius: 34px;
+    margin-top: -1px;
+    height: 66px;
     ${StTextWrapper}::before {
       display: none;
     }
@@ -51,7 +64,9 @@ const StFormItemWrapper = styled.div`
 
   &:focus-within {
     background: white;
-    border-radius: 32px;
+    border-radius: 34px;
+    height: 68px;
+    margin-top: -2px;
     box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.3);
     ${StTextWrapper}::before {
       display: none;
@@ -63,8 +78,8 @@ const StFormItemWrapper = styled.div`
       display: none;
     }
   }
-  ${({ place }) =>
-    place ||
+  ${({ name }) =>
+    name === 'location' ||
     css`
       display: flex;
       align-items: center;
@@ -81,14 +96,14 @@ const StPlaceLabel = styled.label`
   padding-left: 28px;
   cursor: pointer;
   &:hover {
-    border-radius: 32px;
+    border-radius: 34px;
     & ${StTextWrapper}::before {
       display: none;
     }
   }
   &:focus-within {
     background: white;
-    border-radius: 32px;
+    border-radius: 34px;
     & ${StTextWrapper}::before {
       display: none;
     }
@@ -129,30 +144,70 @@ const StContentText = styled.p`
   color: ${({ theme }) => theme.color.darkGray};
 `;
 
-const SearchForm = () => {
+const SearchForm = ({
+  isSearchBtnClicked,
+  type,
+  changeType,
+  closePopup,
+  searchData,
+  changeSearchData,
+}) => {
+  const { location, checkIn, checkOut, flexibleDate, guests } = searchData;
   return (
-    <StSearchForm>
-      <StFormItemWrapper width="30%" tabIndex="0" place>
+    <StSearchForm isSearchBtnClicked={isSearchBtnClicked}>
+      <StFormItemWrapper
+        name="location"
+        width="30%"
+        tabIndex="0"
+        onClick={e => changeType(e)}
+      >
         <StPlaceLabel>
           <StTextWrapper>
             <StTypeText>위치</StTypeText>
-            <StPlaceInput placeholder="어디로 여행가세요?"></StPlaceInput>
+            <StPlaceInput
+              value={location}
+              name="location"
+              placeholder="어디로 여행가세요?"
+              onChange={e => {
+                changeSearchData(e.target.name, e.target.value);
+              }}
+            ></StPlaceInput>
           </StTextWrapper>
         </StPlaceLabel>
+        <SearchPlacePopup
+          type={type}
+          closePopup={closePopup}
+        ></SearchPlacePopup>
       </StFormItemWrapper>
-      <StFormItemWrapper width="20%" tabIndex="0">
+      <StFormItemWrapper
+        name="checkIn"
+        width="20%"
+        tabIndex="0"
+        onClick={e => changeType(e)}
+      >
         <StTextWrapper>
           <StTypeText>체크인</StTypeText>
           <StContentText>날짜 추가</StContentText>
         </StTextWrapper>
       </StFormItemWrapper>
-      <StFormItemWrapper width="20%" tabIndex="0">
+      <StFormItemWrapper
+        name="checkOut"
+        width="20%"
+        tabIndex="0"
+        onClick={e => changeType(e)}
+      >
+        <SearchPlacePopup></SearchPlacePopup>
         <StTextWrapper>
           <StTypeText>체크아웃</StTypeText>
           <StContentText>날짜 추가</StContentText>
         </StTextWrapper>
       </StFormItemWrapper>
-      <StFormItemWrapper width="30%" tabIndex="0">
+      <StFormItemWrapper
+        name="guests"
+        width="30%"
+        tabIndex="0"
+        onClick={e => changeType(e)}
+      >
         <StTextWrapper>
           <StTypeText>인원</StTypeText>
           <StContentText>게스트 추가</StContentText>

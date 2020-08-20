@@ -4,7 +4,7 @@ import CarouselContainer from '../../Containers/Global/CarouselContainer';
 import Rating from '../Global/Rating';
 import { CkHeart } from '../Global/Heart';
 
-const RecentHome = () => {
+const HomeCard = () => {
   return (
     <StWrapper>
       <CarouselContainer className={'carousel'} size="small" />
@@ -20,6 +20,8 @@ const RecentHome = () => {
     </StWrapper>
   );
 };
+
+export default HomeCard;
 
 const StWrapper = styled.li`
   width: 148px;
@@ -55,5 +57,3 @@ const Heart = styled(CkHeart)`
   top: 0.7rem;
   right: 0.5rem;
 `;
-
-export default RecentHome;

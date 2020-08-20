@@ -1,11 +1,25 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const StNav = styled.nav`
   display: flex;
   justify-content: center;
   width: 100%;
   padding: 20px;
+  ${({ isScrollTop }) =>
+    isScrollTop
+      ? css`
+          color: ${({ theme }) => theme.color.white};
+          & ${StItemSpan}::before {
+            background: ${({ theme }) => theme.color.white};
+          }
+        `
+      : css`
+          color: ${({ theme }) => theme.color.black};
+          & ${StItemSpan}::before {
+            background: ${({ theme }) => theme.color.black};
+          }
+        `}
 `;
 
 const StList = styled.ul`
@@ -25,7 +39,7 @@ const StItemSpan = styled.span`
   position: relative;
   cursor: pointer;
   padding: 10px 12px;
-  color: ${({ theme }) => theme.color.white};
+
   &::before {
     content: '';
     display: block;
@@ -33,7 +47,6 @@ const StItemSpan = styled.span`
     bottom: 0;
     width: 18px;
     height: 2px;
-    background: ${({ theme }) => theme.color.white};
     border-radius: 1px;
     transform: scaleX(0);
     transition: 0.25s transform cubic-bezier(0, 0, 0.1, 1);
@@ -52,9 +65,9 @@ const StItemInput = styled.input`
   }
 `;
 
-const Navigation = () => {
+const Navigation = ({ isScrollTop, isSearchBtnClicked }) => {
   return (
-    <StNav>
+    <StNav isScrollTop={isScrollTop} isSearchBtnClicked={isSearchBtnClicked}>
       <StList>
         <StItem>
           <StItemLabel>

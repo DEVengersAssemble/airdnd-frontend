@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { lighten } from 'polished';
 import Button from '../Global/Button';
@@ -12,33 +13,39 @@ const DetailAirbnbSupportTeamBox = () => {
         <DtAdrsInnerWrapper>
           <DtAdrsTitle>에어비엔비 지원</DtAdrsTitle>
         </DtAdrsInnerWrapper>
-        <StButton>
-          <DtAdrsButtonWrapper>
-            <DtAdrsButtonInnerWrapper>
-              <MdHelp />
-              <DtAdrsButtonText>도움말 센터</DtAdrsButtonText>
-            </DtAdrsButtonInnerWrapper>
-            <MdKeyboardArrowRight />
-          </DtAdrsButtonWrapper>
-        </StButton>
-        <StButton>
-          <DtAdrsButtonWrapper>
-            <DtAdrsButtonInnerWrapper>
-              <AiFillHome />
-              <DtAdrsButtonText>해결 센터</DtAdrsButtonText>
-            </DtAdrsButtonInnerWrapper>
-            <MdKeyboardArrowRight />
-          </DtAdrsButtonWrapper>
-        </StButton>
-        <StButton>
-          <DtAdrsButtonWrapper>
-            <DtAdrsButtonInnerWrapper>
-              <MdPhoneIphone />
-              <DtAdrsButtonText>호스트에게 전화하기</DtAdrsButtonText>
-            </DtAdrsButtonInnerWrapper>
-            <MdKeyboardArrowRight />
-          </DtAdrsButtonWrapper>
-        </StButton>
+        <Link to="/help" target="_blank">
+          <StButton>
+            <DtAdrsButtonWrapper>
+              <DtAdrsButtonInnerWrapper>
+                <MdHelp />
+                <DtAdrsButtonText>도움말 센터</DtAdrsButtonText>
+              </DtAdrsButtonInnerWrapper>
+              <MdKeyboardArrowRight />
+            </DtAdrsButtonWrapper>
+          </StButton>
+        </Link>
+        <Link to="/resolutions" target="_blank">
+          <StButton>
+            <DtAdrsButtonWrapper>
+              <DtAdrsButtonInnerWrapper>
+                <AiFillHome />
+                <DtAdrsButtonText>해결 센터</DtAdrsButtonText>
+              </DtAdrsButtonInnerWrapper>
+              <MdKeyboardArrowRight />
+            </DtAdrsButtonWrapper>
+          </StButton>
+        </Link>
+        <a href="tel:+8210-6415-4738">
+          <StButton>
+            <DtAdrsButtonWrapper>
+              <DtAdrsButtonInnerWrapper>
+                <MdPhoneIphone />
+                <DtAdrsButtonText>호스트에게 전화하기</DtAdrsButtonText>
+              </DtAdrsButtonInnerWrapper>
+              <MdKeyboardArrowRight />
+            </DtAdrsButtonWrapper>
+          </StButton>
+        </a>
         <StButton>
           <DtAdrsButtonWrapper>
             <DtAdrsButtonInnerWrapper>
