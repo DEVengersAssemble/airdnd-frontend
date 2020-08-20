@@ -46,10 +46,11 @@ const TripsMainInner = styled.div`
   padding: 0rem 8rem;
   height: fit-content;
   min-height: calc(100vh - 12rem);
+  border-bottom: 1px solid ${({ theme }) => theme.color.gray};
 `;
 
 const TripsMainTitle = styled.h2`
-  padding-bottom: 5rem;
+  padding-bottom: 3rem;
   font-size: 3.4rem;
   font-weight: bold;
 `;
