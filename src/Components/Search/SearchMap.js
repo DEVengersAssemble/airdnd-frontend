@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import {
   MapZoomButton,
   MapMarkerButton,
@@ -10,11 +10,11 @@ import {
 } from './MapButton';
 import Map from '../Global/Map';
 
-const SearchMap = ({ closeMap, mapState }) => {
+const SearchMap = ({ onHideMap, mapState, view, closeMap }) => {
   return (
-    <StWrapper mapState={mapState}>
+    <StWrapper mapState={mapState} view={view}>
       <StStickyWrapper>
-        <MapCloseButton closeMap={closeMap} />
+        <MapCloseButton onHideMap={onHideMap} closeMap={closeMap} />
         <MapCheckbox />
         <StBtnSetWrapper>
           <MapZoomButton />
@@ -68,7 +68,8 @@ const StWrapper = styled.aside`
   display: ${({ mapState }) => (mapState ? 'block' : 'none')};
 
   @media ${({ theme }) => theme.size.medium} {
-    display: none;
+    display: ${({ view }) => (view === 'map' ? 'block' : 'none')};
+    width: ${({ view }) => (view === 'map' ? '100%' : '0px')};
   }
 `;
 
