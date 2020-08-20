@@ -6,6 +6,8 @@ import MessageSubHeader from '../Components/Message/MessageSubHeader';
 import MessageMainWrapper from '../Components/Message/MessageMainWrapper';
 import ChatFlagModal from '../Components/Message/MessageModal';
 import DetailPdfModal from '../Components/Message/DetailPdfModal';
+import DetailBusinessModal from '../Components/Message/DetailBusinessModal';
+import DetailSupportModal from '../Components/Message/DetailSupportModal';
 
 const MessagePage = () => {
   return (
@@ -19,6 +21,8 @@ const MessagePage = () => {
       <MessageMainWrapper />
       <ChatFlagModal />
       <DetailPdfModal />
+      <DetailBusinessModal />
+      <DetailSupportModal />
     </MessagePageWrapper>
   );
 };

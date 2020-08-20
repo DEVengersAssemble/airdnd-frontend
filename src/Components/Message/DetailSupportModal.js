@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import Modal from '../../Global/Modal';
-import Button from '../../Global/Button';
+import Modal from '../Global/Modal';
+import Button from '../Global/Button';
 
 const DetailSupportModal = () => {
   return (
