@@ -73,26 +73,16 @@ const CounterFilter = () => {
   );
 };
 
-const CheckboxFilter = () => {
+const CheckboxFilter = ({ title, list, filter }) => {
   return (
     <StFilterWrapper>
-      <StTitle>편의 시설</StTitle>
+      <StTitle>{title}</StTitle>
       <StCheckboxList>
-        <StCheckbox value>
-          <StLargeSpan>주방</StLargeSpan>
-        </StCheckbox>
-        <StCheckbox value>
-          <StLargeSpan>주방</StLargeSpan>
-        </StCheckbox>
-        <StCheckbox value>
-          <StLargeSpan>주방</StLargeSpan>
-        </StCheckbox>
-        <StCheckbox value>
-          <StLargeSpan>주방</StLargeSpan>
-        </StCheckbox>
-        <StCheckbox value>
-          <StLargeSpan>주방</StLargeSpan>
-        </StCheckbox>
+        {list.map((name, i) => (
+          <StCheckbox key={i} value checked={filter[name]}>
+            <StLargeSpan>{name}</StLargeSpan>
+          </StCheckbox>
+        ))}
       </StCheckboxList>
       <Button
         btnType="underlined"
@@ -107,7 +97,16 @@ const CheckboxFilter = () => {
   );
 };
 
-const FilterModal = ({ popupState, onClose }) => {
+const FilterModal = ({ popupState, filterCondition, filter, onClose }) => {
+  const {
+    instantBooking,
+    bedroom,
+    convenience,
+    convenienceList,
+    facilityList,
+    hostLangList,
+  } = filterCondition;
+
   return (
     <StModal
       modalState={popupState}
@@ -116,10 +115,30 @@ const FilterModal = ({ popupState, onClose }) => {
       title="필터 추가하기"
     >
       <StFilterList>
-        <ToggleFilter />
-        <CounterFilter />
-        <MoreFilters />
-        <CheckboxFilter />
+        {instantBooking && <ToggleFilter />}
+        {bedroom && <CounterFilter />}
+        {convenience && <MoreFilters />}
+        {convenienceList && (
+          <CheckboxFilter
+            title="편의 시설"
+            list={convenienceList}
+            filter={filter.convenienceList}
+          />
+        )}
+        {facilityList && (
+          <CheckboxFilter
+            title="시설"
+            list={facilityList}
+            filter={filter.facilityList}
+          />
+        )}
+        {hostLangList && (
+          <CheckboxFilter
+            title="호스트 언어"
+            list={hostLangList}
+            filter={filter.hostLangList}
+          />
+        )}
       </StFilterList>
       <StFooter align="space-between">
         <Button btnType="underlined" hover="background: none">

@@ -10,6 +10,7 @@ import {
   PricePopupContainer,
   SetDatePopupContainer,
 } from '../../Containers/Search/FilterPopupContainer';
+import FilterModalContainer from '../../Containers/Search/FilterModalContainer';
 
 export const FilterButton = ({ children, text, onClick }) => {
   return (
@@ -65,7 +66,7 @@ export const FilterList = ({
         popupState={popupState}
         dispatch={dispatch}
       >
-        <FilterModal />
+        <FilterModalContainer />
       </FilterButtonContainer>
       <MapButton mapState={mapState} onShowMap={onShowMap} />
     </StWrapper>

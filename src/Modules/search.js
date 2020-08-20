@@ -190,21 +190,42 @@ const initialState = {
     },
     more: {
       instantBooking: false,
-      bedroom: false,
+      bedroom: {
+        bed: 0,
+        room: 0,
+        bathroom: 0,
+      },
       convenience: false,
-      convenienceList: [''],
-      facilityList: [''],
-      hostLang: [''],
+      convenienceList: {
+        주방: false,
+        샴푸: false,
+        난방: true,
+        에어컨: false,
+        다리미: true,
+        // ...
+      },
+
+      facilityList: {
+        헬스장: true,
+        수영장: false,
+        // ...
+      },
+
+      hostLangList: {
+        영어: false,
+        프랑스어: false,
+        // ...
+      },
     },
   },
   // 필터 추가하기에서 나오는 필터 조건
   filterCondition: {
-    instantBooking: false,
-    bedroom: false,
-    convenience: false,
-    convenienceList: [''],
-    facilityList: [''],
-    hostLang: [''],
+    instantBooking: true,
+    bedroom: true,
+    convenience: true,
+    convenienceList: ['주방', '샴푸', '난방', '에어컨', '다리미'],
+    facilityList: ['헬스장', '수영장'],
+    hostLangList: ['영어', '프랑스어'],
   },
   dataTotal: 190,
   // 2만원 단위로 숙박 개수
