@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import {
   RefundPopup,
   RoomTypePopup,
@@ -7,6 +7,9 @@ import {
 } from '../../Components/Search/FilterPopup';
 
 const RefundPopupContainer = ({ popupState, size, onClose }) => {
+  const [toggle, setToggle] = useState(false);
+  const handleClick = () => setToggle(!toggle);
+
   const popup = useRef();
   const closePopup = ({ target }) => {
     if (!popupState || popup.current.contains(target)) return;
@@ -22,7 +25,13 @@ const RefundPopupContainer = ({ popupState, size, onClose }) => {
 
   return (
     <div ref={popup}>
-      <RefundPopup popupState={popupState} onClose={onClose} size={size} />
+      <RefundPopup
+        popupState={popupState}
+        onClose={onClose}
+        size={size}
+        toggle={toggle}
+        handleClick={handleClick}
+      />
     </div>
   );
 };
@@ -49,6 +58,11 @@ const RoomTypePopupContainer = ({ popupState, size, onClose }) => {
 };
 
 const PricePopupContainer = ({ popupState, size, onClose }) => {
+  const [priceFrom, setPriceFrom] = useState(12000);
+  const [priceTo, setPriceTo] = useState(1000000);
+  const onChangePriceFrom = ({ target }) => setPriceFrom(target.value);
+  const onChangePriceTo = ({ target }) => setPriceTo(target.value);
+
   const popup = useRef();
   const closePopup = ({ target }) => {
     if (!popupState || popup.current.contains(target)) return;
@@ -64,7 +78,15 @@ const PricePopupContainer = ({ popupState, size, onClose }) => {
 
   return (
     <div ref={popup}>
-      <PricePopup popupState={popupState} onClose={onClose} size={size} />
+      <PricePopup
+        popupState={popupState}
+        onClose={onClose}
+        priceFrom={priceFrom}
+        priceTo={priceTo}
+        onChangePriceFrom={onChangePriceFrom}
+        onChangePriceTo={onChangePriceTo}
+        size={size}
+      />
     </div>
   );
 };

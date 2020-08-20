@@ -8,14 +8,14 @@ import Checkbox from '../Global/Checkbox';
 import { NewInput } from '../Global/Input';
 import { GiHamburgerMenu } from 'react-icons/gi';
 
-const RefundPopup = ({ popupState, size }) => {
+const RefundPopup = ({ popupState, size, toggle, handleClick }) => {
   return (
     <FilterPopup popupState={popupState} size={size}>
       <StContentWrapper content="refund">
         <StSmallSpan>
           유연한 환불 정책을 제공하는 숙소만 검색 결과에 표시
         </StSmallSpan>
-        <Toggle />
+        <Toggle checked={toggle} handleClick={handleClick} />
       </StContentWrapper>
     </FilterPopup>
   );
@@ -65,7 +65,14 @@ const RoomTypePopup = ({ popupState, size }) => {
   );
 };
 
-const PricePopup = ({ popupState, size }) => {
+const PricePopup = ({
+  popupState,
+  size,
+  priceFrom,
+  priceTo,
+  onChangePriceFrom,
+  onChangePriceTo,
+}) => {
   return (
     <FilterPopup popupState={popupState} size={size}>
       <StContentWrapper content="price">
@@ -91,18 +98,18 @@ const PricePopup = ({ popupState, size }) => {
         <StInputWrapper>
           <NewInput
             title="최저 요금"
-            value={'12,000'}
+            value={priceFrom}
             short
             pay="₩"
-            // onChange={onChangeInput}
+            onChange={onChangePriceFrom}
           />
           <span>―</span>
           <NewInput
             title="최고 요금"
-            value={'+1,000,000'}
+            value={priceTo}
             short
             pay="₩"
-            // onChange={onChangeInput}
+            onChange={onChangePriceTo}
           />
         </StInputWrapper>
       </StContentWrapper>

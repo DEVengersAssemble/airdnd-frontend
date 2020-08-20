@@ -1,5 +1,6 @@
 import React, { useReducer, Children, cloneElement } from 'react';
 import { FilterList, FilterButton } from '../../Components/Search/FilterList';
+import { useSelector } from 'react-redux';
 
 const popupInit = {
   refund: false,
@@ -35,16 +36,12 @@ const FilterButtonContainer = ({
   const onClick = () =>
     dispatch({ type: popupState[name] ? 'CLOSE' : 'OPEN', name });
   const onClose = () => dispatch({ type: 'CLOSE' });
-  const offFocus = ({ target }) => {
-    onClose();
-  };
 
   return (
     <FilterButton text={text} onClick={onClick}>
       {Children.map(children, child => {
         return cloneElement(child, {
           popupState: popupState[name],
-          onClick: offFocus,
           onClose,
         });
       })}
@@ -53,6 +50,7 @@ const FilterButtonContainer = ({
 };
 
 const FilterListContainer = ({ mapState, onShowMap }) => {
+  const { dateDiff } = useSelector(state => state.searchForm);
   const [popupState, dispatch] = useReducer(popupReducer, popupInit);
 
   return (
@@ -61,6 +59,7 @@ const FilterListContainer = ({ mapState, onShowMap }) => {
       mapState={mapState}
       onShowMap={onShowMap}
       dispatch={dispatch}
+      dateDiff={dateDiff}
     />
   );
 };
