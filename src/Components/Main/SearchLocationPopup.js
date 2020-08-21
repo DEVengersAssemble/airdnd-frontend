@@ -51,13 +51,21 @@ const StItemText = styled.span`
 
 const SearchLocationPopup = forwardRef(
   (
-    { type, changeType, locationResult, changeSearchData, changeFocus },
+    {
+      type,
+      changeType,
+      searchData,
+      locationResult,
+      changeSearchData,
+      changeFocus,
+    },
     ref,
   ) => {
+    const { location } = searchData;
     return (
       <StSearchLocationPopupWrapper>
         <StSearchLocationPopup
-          popupState={locationResult.length && type === 'location'}
+          popupState={location && locationResult.length && type === 'location'}
         >
           <StSearchLocationList ref={ref}>
             {locationResult.map((item, index) => {

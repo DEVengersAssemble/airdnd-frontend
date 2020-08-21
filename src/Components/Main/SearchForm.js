@@ -236,8 +236,9 @@ const SearchForm = ({
   const guestsWrapperRef = useRef();
 
   const changeFocus = nextRef => {
-    if (nextRef === 'location') locationWrapperRef.current.focus();
-    else if (nextRef === 'checkIn') checkInWrapperRef.current.focus();
+    if (nextRef === 'location') {
+      locationWrapperRef.current.focus();
+    } else if (nextRef === 'checkIn') checkInWrapperRef.current.focus();
     else if (nextRef === 'checkOut') checkOutWrapperRef.current.focus();
     else if (nextRef === 'guests') guestsWrapperRef.current.focus();
   };
@@ -245,33 +246,28 @@ const SearchForm = ({
   const handlePopup = ({ target }) => {
     console.log('===handlePopup');
     console.log(target);
-    if (!locationResetBtnRef.current || !guestsPopupRef.current) {
-      console.log('1111');
-      closePopup();
-      return;
-    } else if (
-      locationListRef.current &&
-      locationListRef.current.contains(target)
-    ) {
-      console.log('2222');
+    if (locationListRef.current && locationListRef.current.contains(target)) {
+      console.log('111');
       changeType('checkIn');
       return;
     } else if (
-      (type === 'location' && !locationResetBtnRef.current.contains(target)) ||
-      (type === 'checkIn' &&
-        !checkInPopupRef.current.contains(target) &&
-        !checkInResetBtnRef.current.contains(target)) ||
-      (type === 'checkOut' &&
-        !checkOutPopupRef.current.contains(target) &&
-        !checkOutResetBtnRef.current.contains(target)) ||
+      (type === 'location' &&
+        !locationResetBtnRef.current.contains(target) &&
+        !locationWrapperRef.current.contains(target)) ||
+      // (type === 'checkIn' &&
+      //   !checkInPopupRef.current.contains(target) &&
+      //   !checkInResetBtnRef.current.contains(target)) ||
+      // (type === 'checkOut' &&
+      //   !checkOutPopupRef.current.contains(target) &&
+      //   !checkOutResetBtnRef.current.contains(target)) ||
       (type === 'guests' &&
         !guestsPopupRef.current.contains(target) &&
         !guestsResetBtnRef.current.contains(target))
     ) {
-      console.log('3333');
+      console.log('222');
       closePopup();
     }
-    console.log('4444');
+    console.log('333');
   };
 
   useEffect(() => {
@@ -290,6 +286,7 @@ const SearchForm = ({
         name="location"
         width="30%"
         tabIndex="0"
+        ref={locationWrapperRef}
         onClick={() => changeType('location')}
       >
         <StPlaceLabel>
@@ -306,7 +303,6 @@ const SearchForm = ({
                 changeAutoComplete(e.target.value);
               }}
               autoComplete="off"
-              ref={locationWrapperRef}
               required
             ></StPlaceInput>
           </StTextWrapper>
@@ -314,6 +310,7 @@ const SearchForm = ({
         <SearchLocationPopup
           type={type}
           changeType={changeType}
+          searchData={searchData}
           locationResult={locationResult}
           changeSearchData={changeSearchData}
           ref={locationListRef}
@@ -326,6 +323,7 @@ const SearchForm = ({
           pointer={type === 'location' && location}
           onClick={() => {
             changeSearchData('location', '');
+            changeFocus('location');
           }}
         >
           <MdClose />
@@ -351,6 +349,7 @@ const SearchForm = ({
           ref={checkInResetBtnRef}
           onClick={() => {
             changeSearchData('checkIn', '');
+            changeFocus('checkIn');
           }}
         >
           <MdClose />
@@ -376,6 +375,7 @@ const SearchForm = ({
           ref={checkOutResetBtnRef}
           onClick={() => {
             changeSearchData('checkOut', '');
+            changeFocus('checkOut');
           }}
         >
           <MdClose />
@@ -403,6 +403,7 @@ const SearchForm = ({
           ref={guestsResetBtnRef}
           onClick={() => {
             changeSearchData('guests', { adult: 0, child: 0, infant: 0 });
+            changeFocus('guests');
           }}
         >
           <MdClose />
