@@ -1,4 +1,5 @@
-import React, { useRef, useEffect } from 'react';
+/* eslint-disable react/display-name */
+import React, { forwardRef } from 'react';
 import styled from 'styled-components';
 import Popup from '../Global/Popup';
 import { FaMapMarkerAlt } from 'react-icons/fa';
@@ -48,50 +49,40 @@ const StItemText = styled.span`
   white-space: nowrap;
 `;
 
-const SearchLocationPopup = ({
-  type,
-  closePopup,
-  locationResult,
-  changeSearchData,
-}) => {
-  const popupRef = useRef();
-
-  const handlePopup = ({ target }) => {
-    if (type === 'location' && !popupRef.current.contains(target)) {
-      closePopup();
-    }
-  };
-  useEffect(() => {
-    document.addEventListener('click', handlePopup);
-    return () => {
-      document.removeEventListener('click', handlePopup);
-    };
-  }, [locationResult, handlePopup, type]);
-  return (
-    <StSearchLocationPopupWrapper ref={popupRef}>
-      <StSearchLocationPopup
-        popupState={locationResult.length && type === 'location'}
-      >
-        <StSearchLocationList>
-          {locationResult.map((item, index) => {
-            return (
-              <StSearchLocationItem
-                key={index}
-                onClick={() => {
-                  changeSearchData('location', item);
-                }}
-              >
-                <StSearchLocationIconWrapper>
-                  <FaMapMarkerAlt></FaMapMarkerAlt>
-                </StSearchLocationIconWrapper>
-                <StItemText>{item}</StItemText>
-              </StSearchLocationItem>
-            );
-          })}
-        </StSearchLocationList>
-      </StSearchLocationPopup>
-    </StSearchLocationPopupWrapper>
-  );
-};
+const SearchLocationPopup = forwardRef(
+  ({ type, locationResult, changeSearchData }, ref) => {
+    console.log(
+      '[popup...result]',
+      locationResult,
+      locationResult.length,
+      !!locationResult.length,
+    );
+    return (
+      <StSearchLocationPopupWrapper ref={ref}>
+        <StSearchLocationPopup
+          popupState={locationResult.length && type === 'location'}
+        >
+          <StSearchLocationList>
+            {locationResult.map((item, index) => {
+              return (
+                <StSearchLocationItem
+                  key={index}
+                  onClick={() => {
+                    changeSearchData('location', item);
+                  }}
+                >
+                  <StSearchLocationIconWrapper>
+                    <FaMapMarkerAlt></FaMapMarkerAlt>
+                  </StSearchLocationIconWrapper>
+                  <StItemText>{item}</StItemText>
+                </StSearchLocationItem>
+              );
+            })}
+          </StSearchLocationList>
+        </StSearchLocationPopup>
+      </StSearchLocationPopupWrapper>
+    );
+  },
+);
 
 export default SearchLocationPopup;

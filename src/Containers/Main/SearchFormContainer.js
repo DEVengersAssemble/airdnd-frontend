@@ -10,15 +10,12 @@ const SearchFormContainer = ({ isSearchBtnClicked }) => {
   const dispatch = useDispatch();
   const searchData = useSelector(state => state.searchForm);
   const [locationResult, setLocationResult] = useState([]);
-  // location,checkIn,checkOut,guests
   const [type, setType] = useState(null);
-
   const closePopup = () => {
     setType(null);
   };
-
-  const changeType = e => {
-    setType(e.target.name);
+  const changeType = type => {
+    setType(type);
   };
 
   const handleSubmit = e => {
@@ -40,11 +37,29 @@ const SearchFormContainer = ({ isSearchBtnClicked }) => {
   const changeSearchData = async (name, value) => {
     const data = { name, value };
     dispatch(setSearchData(data));
+    if (!value) {
+      setLocationResult([]);
+      return;
+    }
     if (value && name === 'location') {
       const result = await getLocationAutoComplete(value);
       setLocationResult(result);
+      setType('location');
     }
   };
+
+  const increaseGuestCount = (guestsData, guestType) => {
+    let { adult, child, infant } = guestsData;
+    if (guestType === 'adult' || !adult) adult++;
+    if (guestType === 'child') {
+      child++;
+    } else if (guestType === 'infant') {
+      infant++;
+    }
+    const value = { adult, child, infant };
+    changeSearchData('guests', value);
+  };
+
   return (
     <SearchForm
       isSearchBtnClicked={isSearchBtnClicked}
@@ -55,6 +70,7 @@ const SearchFormContainer = ({ isSearchBtnClicked }) => {
       changeSearchData={changeSearchData}
       locationResult={locationResult}
       handleSubmit={handleSubmit}
+      increaseGuestCount={increaseGuestCount}
     ></SearchForm>
   );
 };

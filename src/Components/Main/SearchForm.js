@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled, { css } from 'styled-components';
+import Button from '../Global/Button';
 import SearchButton from './SearchButton';
 import SearchLocationPopup from './SearchLocationPopup';
-import Button from '../Global/Button';
+import SearchGuestsPopup from './SearchGuestsPopup';
 import { MdClose } from 'react-icons/md';
 
 const StSearchForm = styled.form`
@@ -176,7 +177,7 @@ const StContentText = styled.p`
   }
 `;
 
-const StDeleteBtn = styled(Button)`
+const StResetBtn = styled(Button)`
   position: absolute;
   display: none;
   width: 26px;
@@ -203,8 +204,46 @@ const SearchForm = ({
   changeSearchData,
   locationResult,
   handleSubmit,
+  increaseGuestCount,
 }) => {
   const { location, checkIn, checkOut, flexibleDate, guests } = searchData;
+  const locationRef = useRef();
+  const locationPopupRef = useRef();
+  const checkInRef = useRef();
+  const checkInPopupRef = useRef();
+  const checkOutRef = useRef();
+  const checkOutPopupRef = useRef();
+  const guestsRef = useRef();
+  const guestsPopupRef = useRef();
+  const handlePopup = ({ target }) => {
+    if (!locationRef.current) {
+      closePopup();
+    } else if (
+      (type === 'location' &&
+        !locationResult &&
+        !locationPopupRef.current.contains(target) &&
+        !locationRef.current.contains(target)) ||
+      (type === 'checkIn' &&
+        !checkInPopupRef.current.contains(target) &&
+        !checkInRef.current.contains(target)) ||
+      (type === 'checkOut' &&
+        !checkOutPopupRef.current.contains(target) &&
+        !checkOutRef.current.contains(target)) ||
+      (type === 'guests' &&
+        !guestsPopupRef.current.contains(target) &&
+        !guestsRef.current.contains(target))
+    ) {
+      console.log('+++++++++');
+      closePopup();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', handlePopup);
+    return () => {
+      document.removeEventListener('click', handlePopup);
+    };
+  }, [handlePopup, type, searchData, locationResult]);
   return (
     <StSearchForm
       onSubmit={handleSubmit}
@@ -214,7 +253,7 @@ const SearchForm = ({
         name="location"
         width="30%"
         tabIndex="0"
-        onClick={e => changeType(e)}
+        onClick={() => changeType('location')}
       >
         <StPlaceLabel>
           <StTextWrapper>
@@ -236,24 +275,26 @@ const SearchForm = ({
           closePopup={closePopup}
           locationResult={locationResult}
           changeSearchData={changeSearchData}
+          ref={locationPopupRef}
         ></SearchLocationPopup>
         {location && (
-          <StDeleteBtn
+          <StResetBtn
             btnType="circle"
             name="location"
+            ref={locationRef}
             onClick={() => {
               changeSearchData('location', '');
             }}
           >
             <MdClose />
-          </StDeleteBtn>
+          </StResetBtn>
         )}
       </StFormItemWrapper>
       <StFormItemWrapper
         name="checkIn"
         width="20%"
         tabIndex="0"
-        onClick={e => changeType(e)}
+        onClick={() => changeType('checkIn')}
       >
         <StTextWrapper>
           <StTypeText>체크인</StTypeText>
@@ -262,22 +303,23 @@ const SearchForm = ({
           </StContentText>
         </StTextWrapper>
         {checkIn && (
-          <StDeleteBtn
+          <StResetBtn
             btnType="circle"
             name="checkIn"
+            ref={checkInRef}
             onClick={() => {
               changeSearchData('checkIn', '');
             }}
           >
             <MdClose />
-          </StDeleteBtn>
+          </StResetBtn>
         )}
       </StFormItemWrapper>
       <StFormItemWrapper
         name="checkOut"
         width="20%"
         tabIndex="0"
-        onClick={e => changeType(e)}
+        onClick={() => changeType('checkOut')}
       >
         <StTextWrapper>
           <StTypeText>체크아웃</StTypeText>
@@ -286,44 +328,53 @@ const SearchForm = ({
           </StContentText>
         </StTextWrapper>
         {checkOut && (
-          <StDeleteBtn
+          <StResetBtn
             btnType="circle"
             name="checkOut"
+            ref={checkOutRef}
             onClick={() => {
               changeSearchData('checkOut', '');
             }}
           >
             <MdClose />
-          </StDeleteBtn>
+          </StResetBtn>
         )}
       </StFormItemWrapper>
       <StFormItemWrapper
         name="guests"
         width="30%"
         tabIndex="0"
-        onClick={e => changeType(e)}
+        onClick={() => changeType('guests')}
       >
         <StTextWrapper>
           <StTypeText>인원</StTypeText>
           <StContentText value={guests} name="guests">
             {guests
               ? `게스트 ${guests.adult + guests.child}명, 유아 ${
-                  guests.child
+                  guests.infant
                 }명`
               : '게스트 추가'}
           </StContentText>
         </StTextWrapper>
         {guests && (
-          <StDeleteBtn
+          <StResetBtn
             btnType="circle"
             name="guests"
+            ref={guestsRef}
             onClick={() => {
-              changeSearchData('guests', '');
+              changeSearchData('guests', { adult: 0, child: 0, infant: 0 });
             }}
           >
             <MdClose />
-          </StDeleteBtn>
+          </StResetBtn>
         )}
+        <SearchGuestsPopup
+          type={type}
+          closePopup={closePopup}
+          searchData={searchData}
+          increaseGuestCount={increaseGuestCount}
+          ref={guestsPopupRef}
+        ></SearchGuestsPopup>
       </StFormItemWrapper>
       <SearchButton></SearchButton>
     </StSearchForm>
