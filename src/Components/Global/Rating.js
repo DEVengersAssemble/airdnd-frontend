@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { AiFillStar } from 'react-icons/ai';
 
 // scale은 폰트크기로, rem 단위에서 '숫자만' 전달하세요
@@ -7,6 +7,8 @@ import { AiFillStar } from 'react-icons/ai';
 const Rating = ({ scale, rate, count, starSize, ...rest }) => {
   const regExp = /\d/g;
   const filteredNumber = (count + '').match(regExp).join('');
+
+  if (!Number(count)) return <StNoReview>아직 후기 없음</StNoReview>;
 
   return (
     <StRatingWrapper scale={scale} {...rest}>
@@ -20,11 +22,20 @@ const Rating = ({ scale, rate, count, starSize, ...rest }) => {
   );
 };
 
+const font = css`
+  line-height: ${props => (props.scale * 1.4).toFixed(1)}rem;
+  font-size: ${props => props.scale}rem;
+`;
+
+const StNoReview = styled.span`
+  ${font};
+  color: ${({ theme }) => theme.color.darkGray};
+`;
+
 const StRatingWrapper = styled.div`
   display: inline-flex;
   align-items: center;
-  line-height: ${props => (props.scale * 1.4).toFixed(1)}rem;
-  font-size: ${props => props.scale}rem;
+  ${font}
 `;
 
 const StStarIcon = styled(AiFillStar)`

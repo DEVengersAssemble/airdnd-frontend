@@ -2,7 +2,6 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { FaCrown } from 'react-icons/fa';
 import { FiShare } from 'react-icons/fi';
-import { MdShare } from 'react-icons/md';
 import Rating from '../Global/Rating';
 import Button from '../Global/Button';
 import HomePhotos from './HomePhotos';
