@@ -202,27 +202,35 @@ const SearchForm = ({
   closePopup,
   searchData,
   changeSearchData,
+  changeAutoComplete,
   locationResult,
   handleSubmit,
   increaseGuestCount,
 }) => {
+  console.log('[SEARCHFORM]', type);
   const { location, checkIn, checkOut, flexibleDate, guests } = searchData;
+  const locationWrapperRef = useRef();
   const locationRef = useRef();
   const locationPopupRef = useRef();
+
+  const checkInWrapperRef = useRef();
   const checkInRef = useRef();
   const checkInPopupRef = useRef();
+
+  const checkOutWrapperRef = useRef();
   const checkOutRef = useRef();
   const checkOutPopupRef = useRef();
+
+  const guestsWrapperRef = useRef();
   const guestsRef = useRef();
   const guestsPopupRef = useRef();
+
   const handlePopup = ({ target }) => {
+    console.log('===handlePopup');
     if (!locationRef.current) {
       closePopup();
     } else if (
-      (type === 'location' &&
-        !locationResult &&
-        !locationPopupRef.current.contains(target) &&
-        !locationRef.current.contains(target)) ||
+      (type === 'location' && !locationRef.current.contains(target)) ||
       (type === 'checkIn' &&
         !checkInPopupRef.current.contains(target) &&
         !checkInRef.current.contains(target)) ||
@@ -233,7 +241,6 @@ const SearchForm = ({
         !guestsPopupRef.current.contains(target) &&
         !guestsRef.current.contains(target))
     ) {
-      console.log('+++++++++');
       closePopup();
     }
   };
@@ -243,7 +250,7 @@ const SearchForm = ({
     return () => {
       document.removeEventListener('click', handlePopup);
     };
-  }, [handlePopup, type, searchData, locationResult]);
+  }, [handlePopup]);
   return (
     <StSearchForm
       onSubmit={handleSubmit}
@@ -262,8 +269,11 @@ const SearchForm = ({
               value={location}
               name="location"
               placeholder="어디로 여행가세요?"
+              onFocus={e => {
+                changeAutoComplete(e.target.value);
+              }}
               onChange={e => {
-                changeSearchData(e.target.name, e.target.value);
+                changeAutoComplete(e.target.value);
               }}
               autoComplete="off"
               required

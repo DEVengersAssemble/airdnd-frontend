@@ -11,8 +11,14 @@ const SearchFormContainer = ({ isSearchBtnClicked }) => {
   const searchData = useSelector(state => state.searchForm);
   const [locationResult, setLocationResult] = useState([]);
   const [type, setType] = useState(null);
+
+  console.log('[type]', type);
   const closePopup = () => {
-    setType(null);
+    console.log('close()');
+    console.log(type);
+
+    setType(() => null);
+    console.log(type);
   };
   const changeType = type => {
     setType(type);
@@ -34,14 +40,18 @@ const SearchFormContainer = ({ isSearchBtnClicked }) => {
     history.push(url);
   };
 
-  const changeSearchData = async (name, value) => {
+  const changeSearchData = (name, value) => {
     const data = { name, value };
     dispatch(setSearchData(data));
+  };
+
+  const changeAutoComplete = async value => {
     if (!value) {
+      dispatch(setSearchData({ name: 'location', value: '' }));
       setLocationResult([]);
       return;
-    }
-    if (value && name === 'location') {
+    } else {
+      dispatch(setSearchData({ name: 'location', value }));
       const result = await getLocationAutoComplete(value);
       setLocationResult(result);
       setType('location');
@@ -68,6 +78,7 @@ const SearchFormContainer = ({ isSearchBtnClicked }) => {
       closePopup={closePopup}
       searchData={searchData}
       changeSearchData={changeSearchData}
+      changeAutoComplete={changeAutoComplete}
       locationResult={locationResult}
       handleSubmit={handleSubmit}
       increaseGuestCount={increaseGuestCount}
