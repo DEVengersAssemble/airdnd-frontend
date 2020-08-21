@@ -9,6 +9,7 @@ import {
 const RefundPopupContainer = ({ popupState, size, onClose }) => {
   const popup = useRef();
   const closePopup = ({ target }) => {
+    console.dir(popup.current);
     if (!popupState && !popup.current.contains(target)) return;
     onClose();
   };

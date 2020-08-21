@@ -1,44 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { lighten } from 'polished';
 // import TripsNone from './TripsNone';
 import TripsSubFooter from './TripsSubFooter';
 import Button from '../Global/Button';
-import Profile from '../Global/Profile';
-import { MdKeyboardArrowRight } from 'react-icons/md';
+import TripsPastCardItem from './TripsPastCardItem';
 
 const TripsPast = () => {
   return (
     <>
-      <div>
-        <div>
-          <img
-            src="https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large"
-            alt="#"
-          />
-          <Profile />
-          <Profile />
-        </div>
-      </div>
-      <div>8월 18일 - 8월 19일 Seoul 및 Seoul-si</div>
-      <div>
-        <Link to="/help" target="_blank">
-          <StButton>
-            <TripsPastButtonWrapper>
-              <TripsPastButtonInnerWrapper>
-                <img
-                  src="https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large"
-                  alt="#"
-                />
-                <TripsPastButtonText>
-                  [헤드오피스] 502호 4인실, 성수역 인근 내 도보 5분거리
-                </TripsPastButtonText>
-              </TripsPastButtonInnerWrapper>
-              <MdKeyboardArrowRight />
-            </TripsPastButtonWrapper>
-          </StButton>
-        </Link>
-      </div>
+      <TripsPastCardWrapper>
+        <TripsPastCardLists>
+          <TripsPastCardItem />
+          <TripsPastCardItem />
+        </TripsPastCardLists>
+      </TripsPastCardWrapper>
       <TripsSubFooter>
         예약 내역을 찾으실 수 없나요?{' '}
         <Button btnType="underlined" hover="none" padding="0" fontSize="1.5rem">
@@ -49,12 +25,16 @@ const TripsPast = () => {
   );
 };
 
-const StButton = styled(Button)``;
+const TripsPastCardWrapper = styled.div`
+  border-top: 1px solid ${({ theme }) => lighten(0.2, theme.color.gray)};
+  border-bottom: 1px solid ${({ theme }) => lighten(0.2, theme.color.gray)};
+  padding: 2rem 0rem;
+`;
 
-const TripsPastButtonWrapper = styled.div``;
-
-const TripsPastButtonInnerWrapper = styled.div``;
-
-const TripsPastButtonText = styled.div``;
+const TripsPastCardLists = styled.ul`
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+`;
 
 export default TripsPast;
