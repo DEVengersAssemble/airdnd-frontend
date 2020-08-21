@@ -101,7 +101,6 @@ const CounterFilter = ({ onIncrease, onDecrease, filter }) => {
 };
 
 const CheckboxFilter = ({ title, listName, list, filter, onCheck }) => {
-  console.log(listName);
   return (
     <StFilterWrapper>
       <StTitle>{title}</StTitle>

@@ -5,6 +5,7 @@ import {
   applyToggleFilter,
   applyCounterFilter,
   applyCheckFilter,
+  resetModalFilter,
 } from '../../Modules/search';
 
 const FilterModalContainer = ({ popupState, onClose }) => {
@@ -16,9 +17,10 @@ const FilterModalContainer = ({ popupState, onClose }) => {
   const onDecrease = (name, value) => dispatch(applyCounterFilter(name, value));
   const onCheck = (list, name, value) =>
     dispatch(applyCheckFilter(list, name, value));
-
-  const onReset = () => {};
-  const onSave = () => {};
+  const onReset = () => dispatch(resetModalFilter());
+  const onSave = () => {
+    onClose();
+  };
 
   return (
     <FilterModal

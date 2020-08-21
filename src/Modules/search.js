@@ -5,6 +5,7 @@ const SAVE_FILTER = 'search/SAVE_FILTER';
 const APPLY_TOGGLE_FILTER = 'search/APPLY_TOGGLE_FILTER';
 const APPLY_COUNTER_FILTER = 'search/APPLY_COUNTER_FILTER';
 const APPLY_CHECK_FILTER = 'search/APPLY_CHECK_FILTER';
+const RESET_MODAL_FILTER = 'search/RESET_MODAL/FILTER';
 
 // action creator
 export const showMap = () => ({ type: SHOW_MAP });
@@ -26,6 +27,38 @@ export const applyCheckFilter = (list, name, value) => ({
   name,
   value,
 });
+export const resetModalFilter = filterCondition => ({
+  type: RESET_MODAL_FILTER,
+  filterCondition,
+});
+
+export const setModalFilter = filterCondition => {
+  const filter = {};
+  const {
+    instantBooking,
+    bedroom,
+    convenience,
+    convenienceList,
+    facilityList,
+    hostLangList,
+  } = filterCondition;
+  if (instantBooking) filter.instantBooking = false;
+  if (bedroom) filter.bedroom = { bed: 0, room: 0, bathroom: 0 };
+  if (convenience) filter.convenience = false;
+  if (convenienceList) {
+    filter.convenienceList = {};
+    convenienceList.forEach(item => (filter.convenienceList[item] = false));
+  }
+  if (facilityList) {
+    filter.facilityList = {};
+    facilityList.forEach(item => (filter.facilityList[item] = false));
+  }
+  if (hostLangList) {
+    filter.hostLangList = {};
+    hostLangList.forEach(item => (filter.hostLangList[item] = false));
+  }
+  return filter;
+};
 
 // initial state
 const initialState = {
@@ -357,6 +390,14 @@ const search = (state = initialState, action) => {
             ...state.filterApplied[action.list],
             [action.name]: action.value,
           },
+        },
+      };
+    case RESET_MODAL_FILTER:
+      return {
+        ...state,
+        filterApplied: {
+          ...state.filterApplied,
+          ...setModalFilter(state.filterCondition),
         },
       };
     default:
