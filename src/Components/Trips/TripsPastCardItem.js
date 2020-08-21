@@ -37,9 +37,14 @@ const TripsPastCardItem = () => {
 };
 
 const TripsPastCardItemWrapper = styled.li`
-  margin-right: 3.2rem;
-  border-radius: 6px;
-  width: 40rem;
+  /* media query 적용필요: 기기별 카드의 width값 변경 */
+  &:nth-child(3n + 2),
+  &:nth-child(3n + 1) {
+    margin-right: 3.3rem;
+  }
+  margin-bottom: 3rem;
+  border-radius: 10px;
+  width: 38rem;
   height: 45rem;
   box-shadow: 0rem 0rem 1rem ${({ theme }) => theme.color.gray};
   &:hover {
@@ -51,9 +56,9 @@ const TripsPastCardItemWrapper = styled.li`
 const TripsPastImgWrapper = styled.div``;
 
 const TripsPastImg = styled.div`
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
-  background: no-repeat center/40rem
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background: no-repeat center/38rem
     url('https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large');
   height: 20rem;
 `;
