@@ -179,7 +179,7 @@ const StContentText = styled.p`
 
 const StResetBtn = styled(Button)`
   position: absolute;
-  display: none;
+  display: inline-flex;
   width: 26px;
   height: 26px;
   font-size: 16px;
@@ -187,6 +187,16 @@ const StResetBtn = styled(Button)`
   right: ${({ name }) => (name === 'guests' ? '65px' : '15px')};
   border: none;
   background: ${({ theme }) => theme.color.shadow};
+  ${({ pointer }) =>
+    pointer
+      ? css`
+          pointer-events: auto;
+          visibility: auto;
+        `
+      : css`
+          pointer-events: none;
+          visibility: hidden;
+        `};
   &:hover {
     background: ${({ theme }) => theme.color.line};
   }
@@ -209,6 +219,8 @@ const SearchForm = ({
 }) => {
   console.log('[SEARCHFORM]', type);
   const { location, checkIn, checkOut, flexibleDate, guests } = searchData;
+  const { adult, child, infant } = guests;
+  const guestCount = adult + child + infant;
   const locationResetBtnRef = useRef();
   const locationListRef = useRef();
   const checkInResetBtnRef = useRef();
@@ -233,9 +245,10 @@ const SearchForm = ({
   const handlePopup = ({ target }) => {
     console.log('===handlePopup');
     console.log(target);
-    if (!locationResetBtnRef.current) {
+    if (!locationResetBtnRef.current || !guestsPopupRef.current) {
       console.log('1111');
       closePopup();
+      return;
     } else if (
       locationListRef.current &&
       locationListRef.current.contains(target)
@@ -306,18 +319,17 @@ const SearchForm = ({
           ref={locationListRef}
           changeFocus={changeFocus}
         ></SearchLocationPopup>
-        {location && (
-          <StResetBtn
-            btnType="circle"
-            name="location"
-            ref={locationResetBtnRef}
-            onClick={() => {
-              changeSearchData('location', '');
-            }}
-          >
-            <MdClose />
-          </StResetBtn>
-        )}
+        <StResetBtn
+          btnType="circle"
+          name="location"
+          ref={locationResetBtnRef}
+          pointer={type === 'location' && location}
+          onClick={() => {
+            changeSearchData('location', '');
+          }}
+        >
+          <MdClose />
+        </StResetBtn>
       </StFormItemWrapper>
       <StFormItemWrapper
         name="checkIn"
@@ -332,18 +344,17 @@ const SearchForm = ({
             {checkIn || '날짜 추가'}
           </StContentText>
         </StTextWrapper>
-        {checkIn && (
-          <StResetBtn
-            btnType="circle"
-            name="checkIn"
-            ref={checkInResetBtnRef}
-            onClick={() => {
-              changeSearchData('checkIn', '');
-            }}
-          >
-            <MdClose />
-          </StResetBtn>
-        )}
+        <StResetBtn
+          btnType="circle"
+          name="checkIn"
+          pointer={type === 'checkIn' && checkIn}
+          ref={checkInResetBtnRef}
+          onClick={() => {
+            changeSearchData('checkIn', '');
+          }}
+        >
+          <MdClose />
+        </StResetBtn>
       </StFormItemWrapper>
       <StFormItemWrapper
         name="checkOut"
@@ -358,18 +369,17 @@ const SearchForm = ({
             {checkOut || '날짜 추가'}
           </StContentText>
         </StTextWrapper>
-        {checkOut && (
-          <StResetBtn
-            btnType="circle"
-            name="checkOut"
-            ref={checkOutResetBtnRef}
-            onClick={() => {
-              changeSearchData('checkOut', '');
-            }}
-          >
-            <MdClose />
-          </StResetBtn>
-        )}
+        <StResetBtn
+          btnType="circle"
+          name="checkOut"
+          pointer={type === 'checkOut' && checkOut}
+          ref={checkOutResetBtnRef}
+          onClick={() => {
+            changeSearchData('checkOut', '');
+          }}
+        >
+          <MdClose />
+        </StResetBtn>
       </StFormItemWrapper>
       <StFormItemWrapper
         name="guests"
@@ -380,26 +390,23 @@ const SearchForm = ({
       >
         <StTextWrapper>
           <StTypeText>인원</StTypeText>
-          <StContentText value={guests} name="guests">
-            {guests
-              ? `게스트 ${guests.adult + guests.child}명, 유아 ${
-                  guests.infant
-                }명`
+          <StContentText value={guestCount} name="guests">
+            {guestCount
+              ? `게스트 ${adult + child}명, 유아 ${infant}명`
               : '게스트 추가'}
           </StContentText>
         </StTextWrapper>
-        {guests && (
-          <StResetBtn
-            btnType="circle"
-            name="guests"
-            ref={guestsResetBtnRef}
-            onClick={() => {
-              changeSearchData('guests', { adult: 0, child: 0, infant: 0 });
-            }}
-          >
-            <MdClose />
-          </StResetBtn>
-        )}
+        <StResetBtn
+          btnType="circle"
+          name="guests"
+          pointer={type === 'guests' && guestCount > 0}
+          ref={guestsResetBtnRef}
+          onClick={() => {
+            changeSearchData('guests', { adult: 0, child: 0, infant: 0 });
+          }}
+        >
+          <MdClose />
+        </StResetBtn>
         <SearchGuestsPopup
           type={type}
           closePopup={closePopup}
