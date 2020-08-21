@@ -209,40 +209,56 @@ const SearchForm = ({
 }) => {
   console.log('[SEARCHFORM]', type);
   const { location, checkIn, checkOut, flexibleDate, guests } = searchData;
-  const locationWrapperRef = useRef();
-  const locationRef = useRef();
-  const locationPopupRef = useRef();
-
-  const checkInWrapperRef = useRef();
-  const checkInRef = useRef();
+  const locationResetBtnRef = useRef();
+  const locationListRef = useRef();
+  const checkInResetBtnRef = useRef();
   const checkInPopupRef = useRef();
-
-  const checkOutWrapperRef = useRef();
-  const checkOutRef = useRef();
+  const checkOutResetBtnRef = useRef();
   const checkOutPopupRef = useRef();
-
-  const guestsWrapperRef = useRef();
-  const guestsRef = useRef();
+  const guestsResetBtnRef = useRef();
   const guestsPopupRef = useRef();
+
+  const locationWrapperRef = useRef();
+  const checkInWrapperRef = useRef();
+  const checkOutWrapperRef = useRef();
+  const guestsWrapperRef = useRef();
+
+  const changeFocus = nextRef => {
+    if (nextRef === 'location') locationWrapperRef.current.focus();
+    else if (nextRef === 'checkIn') checkInWrapperRef.current.focus();
+    else if (nextRef === 'checkOut') checkOutWrapperRef.current.focus();
+    else if (nextRef === 'guests') guestsWrapperRef.current.focus();
+  };
 
   const handlePopup = ({ target }) => {
     console.log('===handlePopup');
-    if (!locationRef.current) {
+    console.log(target);
+    if (!locationResetBtnRef.current) {
+      console.log('1111');
       closePopup();
     } else if (
-      (type === 'location' && !locationRef.current.contains(target)) ||
+      locationListRef.current &&
+      locationListRef.current.contains(target)
+    ) {
+      console.log('2222');
+      changeType('checkIn');
+      return;
+    } else if (
+      (type === 'location' && !locationResetBtnRef.current.contains(target)) ||
       (type === 'checkIn' &&
         !checkInPopupRef.current.contains(target) &&
-        !checkInRef.current.contains(target)) ||
+        !checkInResetBtnRef.current.contains(target)) ||
       (type === 'checkOut' &&
         !checkOutPopupRef.current.contains(target) &&
-        !checkOutRef.current.contains(target)) ||
+        !checkOutResetBtnRef.current.contains(target)) ||
       (type === 'guests' &&
         !guestsPopupRef.current.contains(target) &&
-        !guestsRef.current.contains(target))
+        !guestsResetBtnRef.current.contains(target))
     ) {
+      console.log('3333');
       closePopup();
     }
+    console.log('4444');
   };
 
   useEffect(() => {
@@ -251,6 +267,7 @@ const SearchForm = ({
       document.removeEventListener('click', handlePopup);
     };
   }, [handlePopup]);
+
   return (
     <StSearchForm
       onSubmit={handleSubmit}
@@ -276,22 +293,24 @@ const SearchForm = ({
                 changeAutoComplete(e.target.value);
               }}
               autoComplete="off"
+              ref={locationWrapperRef}
               required
             ></StPlaceInput>
           </StTextWrapper>
         </StPlaceLabel>
         <SearchLocationPopup
           type={type}
-          closePopup={closePopup}
+          changeType={changeType}
           locationResult={locationResult}
           changeSearchData={changeSearchData}
-          ref={locationPopupRef}
+          ref={locationListRef}
+          changeFocus={changeFocus}
         ></SearchLocationPopup>
         {location && (
           <StResetBtn
             btnType="circle"
             name="location"
-            ref={locationRef}
+            ref={locationResetBtnRef}
             onClick={() => {
               changeSearchData('location', '');
             }}
@@ -304,6 +323,7 @@ const SearchForm = ({
         name="checkIn"
         width="20%"
         tabIndex="0"
+        ref={checkInWrapperRef}
         onClick={() => changeType('checkIn')}
       >
         <StTextWrapper>
@@ -316,7 +336,7 @@ const SearchForm = ({
           <StResetBtn
             btnType="circle"
             name="checkIn"
-            ref={checkInRef}
+            ref={checkInResetBtnRef}
             onClick={() => {
               changeSearchData('checkIn', '');
             }}
@@ -329,6 +349,7 @@ const SearchForm = ({
         name="checkOut"
         width="20%"
         tabIndex="0"
+        ref={checkOutWrapperRef}
         onClick={() => changeType('checkOut')}
       >
         <StTextWrapper>
@@ -341,7 +362,7 @@ const SearchForm = ({
           <StResetBtn
             btnType="circle"
             name="checkOut"
-            ref={checkOutRef}
+            ref={checkOutResetBtnRef}
             onClick={() => {
               changeSearchData('checkOut', '');
             }}
@@ -354,6 +375,7 @@ const SearchForm = ({
         name="guests"
         width="30%"
         tabIndex="0"
+        ref={guestsWrapperRef}
         onClick={() => changeType('guests')}
       >
         <StTextWrapper>
@@ -370,7 +392,7 @@ const SearchForm = ({
           <StResetBtn
             btnType="circle"
             name="guests"
-            ref={guestsRef}
+            ref={guestsResetBtnRef}
             onClick={() => {
               changeSearchData('guests', { adult: 0, child: 0, infant: 0 });
             }}

@@ -14,14 +14,12 @@ const SearchFormContainer = ({ isSearchBtnClicked }) => {
 
   console.log('[type]', type);
   const closePopup = () => {
-    console.log('close()');
-    console.log(type);
-
     setType(() => null);
-    console.log(type);
   };
+
   const changeType = type => {
-    setType(type);
+    console.log('changeType', type);
+    setType(() => type);
   };
 
   const handleSubmit = e => {

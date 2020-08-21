@@ -50,20 +50,24 @@ const StItemText = styled.span`
 `;
 
 const SearchLocationPopup = forwardRef(
-  ({ type, closePopup, locationResult, changeSearchData }, ref) => {
+  (
+    { type, changeType, locationResult, changeSearchData, changeFocus },
+    ref,
+  ) => {
     return (
-      <StSearchLocationPopupWrapper ref={ref}>
+      <StSearchLocationPopupWrapper>
         <StSearchLocationPopup
           popupState={locationResult.length && type === 'location'}
         >
-          <StSearchLocationList>
+          <StSearchLocationList ref={ref}>
             {locationResult.map((item, index) => {
               return (
                 <StSearchLocationItem
                   key={index}
                   onClick={() => {
                     changeSearchData('location', item);
-                    closePopup();
+                    changeType('checkIn');
+                    changeFocus('checkIn');
                   }}
                 >
                   <StSearchLocationIconWrapper>
