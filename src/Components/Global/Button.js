@@ -1,43 +1,50 @@
-import React from 'react';
+/* eslint-disable react/display-name */
+import React, { forwardRef } from 'react';
 import styled, { css } from 'styled-components';
 
 // btnType: color(배경색 있는 버튼), underlined(밑줄 있는 버튼), circle(원형 버튼), oval(타원형 버튼)
-const Button = ({
-  children,
-  btnType,
-  color,
-  border,
-  width,
-  height,
-  fontSize,
-  fontWeight,
-  padding,
-  hover,
-  focus,
-  transition,
-  type,
-  ...rest
-}) => {
-  return (
-    <StBtn
-      btnType={btnType}
-      color={color} // 'black'
-      border={border} // 'none', '3px solid gray'
-      width={width} // '3rem'
-      height={height} // '3rem'
-      fontSize={fontSize} // '2rem'
-      fontWeight={fontWeight} // '700'
-      padding={padding} // '0'
-      hover={hover} // 'background: gray'
-      focus={focus} // true
-      transition={transition} // true
-      type={type || 'button'} // 'submit'
-      {...rest}
-    >
-      {children}
-    </StBtn>
-  );
-};
+const Button = forwardRef(
+  (
+    {
+      children,
+      btnType,
+      color,
+      border,
+      width,
+      height,
+      fontSize,
+      fontWeight,
+      padding,
+      hover,
+      focus,
+      transition,
+      type,
+      ...rest
+    },
+    ref,
+  ) => {
+    return (
+      <StBtn
+        ref={ref}
+        btnType={btnType}
+        color={color} // 'black'
+        border={border} // 'none', '3px solid gray'
+        width={width} // '3rem'
+        height={height} // '3rem'
+        fontSize={fontSize} // '2rem'
+        fontWeight={fontWeight} // '700'
+        padding={padding} // '0'
+        hover={hover} // 'background: gray'
+        focus={focus} // true
+        transition={transition} // true
+        type={type || 'button'} // 'submit'
+        {...rest}
+      >
+        {children}
+      </StBtn>
+    );
+  },
+);
 
 const hovers = btnType => {
   switch (btnType) {
