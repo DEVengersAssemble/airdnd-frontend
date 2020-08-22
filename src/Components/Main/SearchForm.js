@@ -216,6 +216,7 @@ const SearchForm = ({
   locationResult,
   handleSubmit,
   increaseGuestCount,
+  decreaseGuestCount,
 }) => {
   console.log('[SEARCHFORM]', type);
   const { location, checkIn, checkOut, flexibleDate, guests } = searchData;
@@ -413,6 +414,7 @@ const SearchForm = ({
           closePopup={closePopup}
           searchData={searchData}
           increaseGuestCount={increaseGuestCount}
+          decreaseGuestCount={decreaseGuestCount}
           ref={guestsPopupRef}
         ></SearchGuestsPopup>
       </StFormItemWrapper>

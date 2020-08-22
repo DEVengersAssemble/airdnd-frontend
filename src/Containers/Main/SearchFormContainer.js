@@ -68,6 +68,15 @@ const SearchFormContainer = ({ isSearchBtnClicked }) => {
     changeSearchData('guests', value);
   };
 
+  const decreaseGuestCount = (guestsData, guestType) => {
+    let { adult, child, infant } = guestsData;
+    if (guestType === 'adult') adult--;
+    else if (guestType === 'child') child--;
+    else if (guestType === 'infant') infant--;
+    const value = { adult, child, infant };
+    changeSearchData('guests', value);
+  };
+
   return (
     <SearchForm
       isSearchBtnClicked={isSearchBtnClicked}
@@ -80,6 +89,7 @@ const SearchFormContainer = ({ isSearchBtnClicked }) => {
       locationResult={locationResult}
       handleSubmit={handleSubmit}
       increaseGuestCount={increaseGuestCount}
+      decreaseGuestCount={decreaseGuestCount}
     ></SearchForm>
   );
 };

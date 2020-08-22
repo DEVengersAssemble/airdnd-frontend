@@ -69,8 +69,9 @@ const StSearchGuestsCount = styled.span`
 `;
 
 const SearchGuestsPopup = forwardRef(
-  ({ type, searchData, increaseGuestCount }, ref) => {
-    const { adult, child, infant } = searchData.guests;
+  ({ type, searchData, increaseGuestCount, decreaseGuestCount }, ref) => {
+    const { guests } = searchData;
+    const { adult, child, infant } = guests;
 
     return (
       <StSearchGuestsPopupWrapper ref={ref}>
@@ -86,6 +87,7 @@ const SearchGuestsPopup = forwardRef(
                   btnType="circle"
                   minusBtn
                   guestCount={adult}
+                  onClick={() => decreaseGuestCount(guests, 'adult')}
                 >
                   <FiMinus></FiMinus>
                 </StSearchGuestsCountBtn>
@@ -93,7 +95,7 @@ const SearchGuestsPopup = forwardRef(
 
                 <StSearchGuestsCountBtn
                   btnType="circle"
-                  onClick={() => increaseGuestCount(searchData.guests, 'adult')}
+                  onClick={() => increaseGuestCount(guests, 'adult')}
                 >
                   <FiPlus></FiPlus>
                 </StSearchGuestsCountBtn>
@@ -109,6 +111,7 @@ const SearchGuestsPopup = forwardRef(
                   btnType="circle"
                   minusBtn
                   guestCount={child}
+                  onClick={() => decreaseGuestCount(guests, 'child')}
                 >
                   <FiMinus></FiMinus>
                 </StSearchGuestsCountBtn>
@@ -131,11 +134,11 @@ const SearchGuestsPopup = forwardRef(
                   btnType="circle"
                   minusBtn
                   guestCount={infant}
+                  onClick={() => decreaseGuestCount(guests, 'infant')}
                 >
                   <FiMinus></FiMinus>
                 </StSearchGuestsCountBtn>
                 <StSearchGuestsCount>{infant}</StSearchGuestsCount>
-
                 <StSearchGuestsCountBtn
                   btnType="circle"
                   onClick={() =>
