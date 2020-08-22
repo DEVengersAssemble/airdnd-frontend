@@ -48,9 +48,9 @@ const initialState = {
   dateDiff: getDateDiff('2020/09/02', '2020/09/05'),
   flexibleDate: 0,
   guests: {
-    adult: 2,
-    child: 1,
-    infant: 1,
+    adult: 0,
+    child: 0,
+    infant: 0,
   },
 };
 

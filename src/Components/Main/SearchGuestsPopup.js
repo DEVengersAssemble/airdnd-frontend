@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
 import React, { forwardRef } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Popup from '../Global/Popup';
 import Button from '../Global/Button';
 import { FiPlus, FiMinus } from 'react-icons/fi';
@@ -13,43 +13,60 @@ const StSearchGuestsPopup = styled(Popup)`
   right: 0px;
   border-radius: 20px;
   padding: 20px;
-  min-width: 400px;
-  min-height: 240px;
+  min-width: 360px;
+  color: ${({ theme }) => theme.color.black};
 `;
 
 const StSearchGuestsList = styled.ul`
-  display: block;
+  display: flex;
   flex-direction: column;
   width: 100%;
+  height: 100%;
 `;
 
 const StSearchGuestsItem = styled.li`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: lightblue;
+  padding: 10px 0;
   width: 100%;
+  &:not(:last-child) {
+    border-bottom: 1px solid ${({ theme }) => theme.color.line};
+  }
 `;
 
-const StSearchGuestsTextWrapper = styled.div`
-  background: lightgreen;
-`;
+const StSearchGuestsTextWrapper = styled.div``;
 
 const StSearchGuestsType = styled.p`
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 500;
+  margin-bottom: 8px;
 `;
 
 const StSearchGuestsTypeAge = styled.p`
-  font-size: 16px;
+  font-size: 14px;
   color: ${({ theme }) => theme.color.darkGray};
 `;
 
-const StSearchGuestsCountWrapper = styled.div`
-  background: lightpink;
+const StSearchGuestsCountWrapper = styled.div``;
+
+const StSearchGuestsCountBtn = styled(Button)`
+  border-color: ${({ theme }) => theme.color.gray};
+  ${({ minusBtn, guestCount }) =>
+    minusBtn &&
+    !guestCount &&
+    css`
+      border-color: ${({ theme }) => theme.color.line};
+      color: ${({ theme }) => theme.color.line};
+      cursor: not-allowed;
+    `}
 `;
 
-const StSearchGuestsCountBtn = styled(Button)``;
+const StSearchGuestsCount = styled.span`
+  display: inline-block;
+  text-align: center;
+  width: 30px;
+`;
 
 const SearchGuestsPopup = forwardRef(
   ({ type, searchData, increaseGuestCount }, ref) => {
@@ -65,10 +82,15 @@ const SearchGuestsPopup = forwardRef(
                 <StSearchGuestsTypeAge>만 13세 이상</StSearchGuestsTypeAge>
               </StSearchGuestsTextWrapper>
               <StSearchGuestsCountWrapper>
-                <StSearchGuestsCountBtn btnType="circle">
+                <StSearchGuestsCountBtn
+                  btnType="circle"
+                  minusBtn
+                  guestCount={adult}
+                >
                   <FiMinus></FiMinus>
                 </StSearchGuestsCountBtn>
-                {adult}
+                <StSearchGuestsCount>{adult}</StSearchGuestsCount>
+
                 <StSearchGuestsCountBtn
                   btnType="circle"
                   onClick={() => increaseGuestCount(searchData.guests, 'adult')}
@@ -77,18 +99,20 @@ const SearchGuestsPopup = forwardRef(
                 </StSearchGuestsCountBtn>
               </StSearchGuestsCountWrapper>
             </StSearchGuestsItem>
-          </StSearchGuestsList>
-          <StSearchGuestsList>
             <StSearchGuestsItem>
               <StSearchGuestsTextWrapper>
                 <StSearchGuestsType>어린이</StSearchGuestsType>
                 <StSearchGuestsTypeAge>2~12세</StSearchGuestsTypeAge>
               </StSearchGuestsTextWrapper>
               <StSearchGuestsCountWrapper>
-                <StSearchGuestsCountBtn btnType="circle">
+                <StSearchGuestsCountBtn
+                  btnType="circle"
+                  minusBtn
+                  guestCount={child}
+                >
                   <FiMinus></FiMinus>
                 </StSearchGuestsCountBtn>
-                {child}
+                <StSearchGuestsCount>{child}</StSearchGuestsCount>
                 <StSearchGuestsCountBtn
                   btnType="circle"
                   onClick={() => increaseGuestCount(searchData.guests, 'child')}
@@ -97,18 +121,21 @@ const SearchGuestsPopup = forwardRef(
                 </StSearchGuestsCountBtn>
               </StSearchGuestsCountWrapper>
             </StSearchGuestsItem>
-          </StSearchGuestsList>
-          <StSearchGuestsList>
             <StSearchGuestsItem>
               <StSearchGuestsTextWrapper>
                 <StSearchGuestsType>유아</StSearchGuestsType>
                 <StSearchGuestsTypeAge>2세 미만</StSearchGuestsTypeAge>
               </StSearchGuestsTextWrapper>
               <StSearchGuestsCountWrapper>
-                <StSearchGuestsCountBtn btnType="circle">
+                <StSearchGuestsCountBtn
+                  btnType="circle"
+                  minusBtn
+                  guestCount={infant}
+                >
                   <FiMinus></FiMinus>
                 </StSearchGuestsCountBtn>
-                {infant}
+                <StSearchGuestsCount>{infant}</StSearchGuestsCount>
+
                 <StSearchGuestsCountBtn
                   btnType="circle"
                   onClick={() =>
