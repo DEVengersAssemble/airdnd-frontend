@@ -9,7 +9,7 @@ import { MdKeyboardArrowRight } from 'react-icons/md';
 const TripsPastCardItem = () => {
   return (
     <TripsPastCardItemWrapper>
-      <Link to="/schedules">
+      <Link to="/schedule">
         <TripsPastImgWrapper>
           <TripsPastImg />
           <TripsProfileWrapper>
@@ -21,36 +21,42 @@ const TripsPastCardItem = () => {
           <TripsPastCheckInOut>8월 18일 - 8월 19일</TripsPastCheckInOut>
           <TripsPastLocation>Seoul 및 Seoul-si</TripsPastLocation>
         </TripsPastCkLcWrapper>
-        <StButton>
-          <TripsPastButtonWrapper>
-            <TripsPastButtonInnerWrapper>
-              <TripsPastImgInButton
-                src="https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large"
-                alt="#"
-              />
-              <TripsPastButtonText>
-                [헤드오피스] 502호 4인실, 성수역 인근 내 도보 5분거리
-              </TripsPastButtonText>
-            </TripsPastButtonInnerWrapper>
-            <MdKeyboardArrowRight />
-          </TripsPastButtonWrapper>
-        </StButton>
-        <StButton>
-          <TripsPastButtonWrapper>
-            <TripsPastButtonInnerWrapper>
-              <TripsPastImgInButton
-                src="https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large"
-                alt="#"
-              />
-              <TripsPastButtonText>
-                [헤드오피스] 502호 4인실, 성수역 인근 내 도보 5분거리
-              </TripsPastButtonText>
-            </TripsPastButtonInnerWrapper>
-            <MdKeyboardArrowRight />
-          </TripsPastButtonWrapper>
-        </StButton>
+        <Link to="/schedule/1">
+          <StButton>
+            <TripsPastButtonWrapper>
+              <TripsPastButtonInnerWrapper>
+                <TripsPastImgInButton
+                  src="https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large"
+                  alt="#"
+                />
+                <TripsPastButtonText>
+                  [헤드오피스] 502호 4인실, 성수역 인근 내 도보 5분거리
+                </TripsPastButtonText>
+              </TripsPastButtonInnerWrapper>
+              <MdKeyboardArrowRight />
+            </TripsPastButtonWrapper>
+          </StButton>
+        </Link>
+        <Link to="/schedues/2">
+          <StButton>
+            <TripsPastButtonWrapper>
+              <TripsPastButtonInnerWrapper>
+                <TripsPastImgInButton
+                  src="https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large"
+                  alt="#"
+                />
+                <TripsPastButtonText>
+                  [헤드오피스] 502호 4인실, 성수역 인근 내 도보 5분거리
+                </TripsPastButtonText>
+              </TripsPastButtonInnerWrapper>
+              <MdKeyboardArrowRight />
+            </TripsPastButtonWrapper>
+          </StButton>
+        </Link>
       </Link>
-      <StMoreButton border="none">여행 계획 더보기</StMoreButton>
+      <Link to="/schedule">
+        <StMoreButton border="none">여행 계획 더보기</StMoreButton>
+      </Link>
     </TripsPastCardItemWrapper>
   );
 };
@@ -61,7 +67,7 @@ const TripsPastCardItemWrapper = styled.li`
   &:nth-child(3n + 1) {
     margin-right: 3.3rem;
   }
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
   border-radius: 10px;
   width: 38rem;
   height: 45rem;
