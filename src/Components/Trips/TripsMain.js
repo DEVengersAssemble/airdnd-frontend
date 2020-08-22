@@ -9,8 +9,8 @@ const TripsMain = () => {
       <TripsMainInner>
         <TripsMainTitle>여행</TripsMainTitle>
         <TripsMainNav>
-          <TripsMainNavList activeClassName="active">
-            <StNavLink to="/trips/upcoming">
+          <TripsMainNavList>
+            <StNavLink to="/trips/upcoming" activeClassName={'active'}>
               <TripsMainNavItem>
                 <TripsMainNavItemInner>예정된 예약</TripsMainNavItemInner>
               </TripsMainNavItem>
@@ -72,9 +72,13 @@ const TripsMainNavList = styled.li`
 
 const StNavLink = styled(NavLink)`
   &.active {
-    /* background: black; */
+    &:hover {
+      background: none;
+    }
     & > div > div {
       border-bottom: 2px solid ${({ theme }) => theme.color.black};
+      color: ${({ theme }) => theme.color.black};
+      font-weight: bold;
     }
   }
 `;
@@ -82,11 +86,9 @@ const StNavLink = styled(NavLink)`
 const TripsMainNavItem = styled.div`
   padding: 0rem 1.5rem;
   color: ${({ theme }) => theme.color.darkGray};
-  /* active => color: ${({ theme }) => theme.color.black}; */
 `;
 
 const TripsMainNavItemInner = styled.div`
-  /* border-bottom: 2px solid black; active에만 활성 */
   line-height: 5rem;
 `;
 
