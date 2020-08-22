@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { lighten } from 'polished';
+import { lighten, ellipsis } from 'polished';
 import Button from '../Global/Button';
 import Profile from '../Global/Profile';
 import { MdKeyboardArrowRight } from 'react-icons/md';
@@ -9,14 +9,32 @@ import { MdKeyboardArrowRight } from 'react-icons/md';
 const TripsPastCardItem = () => {
   return (
     <TripsPastCardItemWrapper>
-      <TripsPastImgWrapper>
-        <TripsPastImg />
-        <Profile />
-        <Profile />
-      </TripsPastImgWrapper>
-      <TripsPastCheckInOut>8월 18일 - 8월 19일</TripsPastCheckInOut>
-      <TripsPastLocation>Seoul 및 Seoul-si</TripsPastLocation>
-      <Link to="/help" target="_blank">
+      <Link to="/schedules">
+        <TripsPastImgWrapper>
+          <TripsPastImg />
+          <TripsProfileWrapper>
+            <Profile lastName="김" size="4.3rem" />
+            <Profile lastName="김" size="4.3rem" />
+          </TripsProfileWrapper>
+        </TripsPastImgWrapper>
+        <TripsPastCkLcWrapper>
+          <TripsPastCheckInOut>8월 18일 - 8월 19일</TripsPastCheckInOut>
+          <TripsPastLocation>Seoul 및 Seoul-si</TripsPastLocation>
+        </TripsPastCkLcWrapper>
+        <StButton>
+          <TripsPastButtonWrapper>
+            <TripsPastButtonInnerWrapper>
+              <TripsPastImgInButton
+                src="https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large"
+                alt="#"
+              />
+              <TripsPastButtonText>
+                [헤드오피스] 502호 4인실, 성수역 인근 내 도보 5분거리
+              </TripsPastButtonText>
+            </TripsPastButtonInnerWrapper>
+            <MdKeyboardArrowRight />
+          </TripsPastButtonWrapper>
+        </StButton>
         <StButton>
           <TripsPastButtonWrapper>
             <TripsPastButtonInnerWrapper>
@@ -32,6 +50,7 @@ const TripsPastCardItem = () => {
           </TripsPastButtonWrapper>
         </StButton>
       </Link>
+      <StMoreButton border="none">여행 계획 더보기</StMoreButton>
     </TripsPastCardItemWrapper>
   );
 };
@@ -53,7 +72,9 @@ const TripsPastCardItemWrapper = styled.li`
   }
 `;
 
-const TripsPastImgWrapper = styled.div``;
+const TripsPastImgWrapper = styled.div`
+  position: relative;
+`;
 
 const TripsPastImg = styled.div`
   border-top-left-radius: 10px;
@@ -63,12 +84,44 @@ const TripsPastImg = styled.div`
   height: 20rem;
 `;
 
-const TripsPastCheckInOut = styled.div``;
+const TripsProfileWrapper = styled.div`
+  position: absolute;
+  top: 14rem;
+  left: 1.5rem;
+  & > :first-child {
+    position: absolute;
+    left: 3rem;
+    z-index: 1;
+  }
+  & > :first-child > :first-child {
+    border: 1px solid ${({ theme }) => theme.color.white};
+  }
+  & > :last-child > :first-child {
+    border: 1px solid ${({ theme }) => theme.color.white};
+  }
+`;
 
-const TripsPastLocation = styled.div``;
+const TripsPastCkLcWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 2rem 1rem;
+`;
+
+const TripsPastCheckInOut = styled.div`
+  color: ${({ theme }) => lighten(0.1, theme.color.darkGray)};
+  font-size: 1.25rem;
+  font-weight: 400;
+`;
+
+const TripsPastLocation = styled.div`
+  padding: 0.5rem 0rem 0rem;
+  font-size: 2.2rem;
+  font-weight: 600;
+`;
 
 const StButton = styled(Button)`
   width: 100%;
+  height: 6rem;
   border: none;
   border-radius: 0px;
   padding: 0rem;
@@ -76,14 +129,17 @@ const StButton = styled(Button)`
 
 const TripsPastButtonWrapper = styled.div`
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  padding: 1.8rem 0rem;
+  padding: 1rem 0rem;
   width: calc(100% - 4rem);
-  border-top: 1px solid ${({ theme }) => lighten(0.1, theme.color.gray)};
+  font-size: 2rem;
+  font-weight: bold;
 `;
 
 const TripsPastButtonInnerWrapper = styled.div`
   display: flex;
+  align-items: center;
 `;
 
 const TripsPastImgInButton = styled.img`
@@ -95,6 +151,18 @@ const TripsPastImgInButton = styled.img`
 const TripsPastButtonText = styled.div`
   padding-left: 1rem;
   font-size: 1.4rem;
+  font-weight: 400;
+  ${ellipsis('28rem')};
+`;
+
+const StMoreButton = styled(Button)`
+  width: 100%;
+  height: 5.6rem;
+  border-top: 1px solid ${({ theme }) => lighten(0.2, theme.color.gray)};
+  border-radius: 0;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  font-size: 1.5rem;
 `;
 
 export default TripsPastCardItem;

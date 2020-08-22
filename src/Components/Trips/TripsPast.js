@@ -13,12 +13,6 @@ const TripsPast = () => {
         <TripsPastCardLists>
           <TripsPastCardItem />
           <TripsPastCardItem />
-          <TripsPastCardItem />
-          <TripsPastCardItem />
-          <TripsPastCardItem />
-          <TripsPastCardItem />
-          <TripsPastCardItem />
-          <TripsPastCardItem />
         </TripsPastCardLists>
       </TripsPastCardWrapper>
       <TripsSubFooter>
