@@ -1,8 +1,21 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Rating from '../Global/Rating';
 import { CkHeart } from '../Global/Heart';
 import CarouselContainer from '../../Containers/Global/CarouselContainer';
+
+export const HomePrice = ({ type, price, dateDiff }) => {
+  return (
+    <StPriceWrapper type={type}>
+      <StLargePrice>
+        <strong>₩{price.toLocaleString()}</strong> / 1박
+      </StLargePrice>
+      <StSmallPrice>
+        총 요금: ₩{(dateDiff * price).toLocaleString()}
+      </StSmallPrice>
+    </StPriceWrapper>
+  );
+};
 
 const Home = ({ home, onClickBookmark, dateDiff }) => {
   const {
@@ -41,14 +54,7 @@ const Home = ({ home, onClickBookmark, dateDiff }) => {
             count={reviewCount}
             className="rating"
           />
-          <StPriceWrapper>
-            <StLargePrice>
-              <strong>₩{price.toLocaleString()}</strong> / 1박
-            </StLargePrice>
-            <StSmallPrice>
-              총 요금: ₩{(dateDiff * price).toLocaleString()}
-            </StSmallPrice>
-          </StPriceWrapper>
+          <HomePrice type="list" price={price} dateDiff={dateDiff} />
         </StDetailWrapper>
         <Heart
           ckType
@@ -125,14 +131,19 @@ const StPriceWrapper = styled.div`
   display: flex;
   flex-direction: column;
   flex-flow: flex-end;
-  position: absolute;
-  bottom: 0;
-  right: 0;
+
+  ${({ type }) =>
+    type === 'list' &&
+    css`
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      text-align: right;
+    `}
 `;
 
 const StLargePrice = styled.span`
-  margin-bottom: 0.5rem;
-  text-align: right;
+  margin-bottom: 0.3rem;
 `;
 
 const StSmallPrice = styled.span`

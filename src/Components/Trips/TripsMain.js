@@ -1,32 +1,93 @@
 import React from 'react';
 import styled from 'styled-components';
 import TripsSubRouter from '../../Routers/TripsSubRouter';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const TripsMain = () => {
   return (
     <TripsMainWrapper>
-      <h2>여행</h2>
-      <main>
-        <ul>
-          <li>
-            <Link to="/trips/upcoming">예정된 예약</Link>
-          </li>
-          <li>
-            <Link to="/trips/past">지난 예약</Link>
-          </li>
-          <li>
-            <Link to="/trips/canceled">취소됨</Link>
-          </li>
-        </ul>
+      <TripsMainInner>
+        <TripsMainTitle>여행</TripsMainTitle>
+        <TripsMainNav>
+          <TripsMainNavList activeClassName="active">
+            <StNavLink to="/trips/upcoming">
+              <TripsMainNavItem>
+                <TripsMainNavItemInner>예정된 예약</TripsMainNavItemInner>
+              </TripsMainNavItem>
+            </StNavLink>
+          </TripsMainNavList>
+          <TripsMainNavList>
+            <StNavLink to="/trips/past" activeClassName="active">
+              <TripsMainNavItem>
+                <TripsMainNavItemInner>이전 예약</TripsMainNavItemInner>
+              </TripsMainNavItem>
+            </StNavLink>
+          </TripsMainNavList>
+          <TripsMainNavList>
+            <StNavLink to="/trips/canceled" activeClassName="active">
+              <TripsMainNavItem>
+                <TripsMainNavItemInner>취소됨</TripsMainNavItemInner>
+              </TripsMainNavItem>
+            </StNavLink>
+          </TripsMainNavList>
+        </TripsMainNav>
         <TripsSubRouter />
-      </main>
+      </TripsMainInner>
     </TripsMainWrapper>
   );
 };
 
 const TripsMainWrapper = styled.div`
   padding-top: 8rem;
+`;
+
+const TripsMainInner = styled.div`
+  margin-top: 4rem;
+  padding: 0rem 8rem;
+  height: fit-content;
+  min-height: calc(100vh - 12rem);
+  border-bottom: 1px solid ${({ theme }) => theme.color.gray};
+`;
+
+const TripsMainTitle = styled.h2`
+  padding-bottom: 3rem;
+  font-size: 3.4rem;
+  font-weight: bold;
+`;
+
+const TripsMainNav = styled.ul`
+  display: flex;
+  margin-left: -1.5rem;
+`;
+
+const TripsMainNavList = styled.li`
+  margin-right: 1rem;
+  & > a {
+    display: inline-block;
+    :hover {
+      background: ${({ theme }) => theme.color.lightGray};
+    }
+  }
+`;
+
+const StNavLink = styled(NavLink)`
+  &.active {
+    /* background: black; */
+    & > div > div {
+      border-bottom: 2px solid ${({ theme }) => theme.color.black};
+    }
+  }
+`;
+
+const TripsMainNavItem = styled.div`
+  padding: 0rem 1.5rem;
+  color: ${({ theme }) => theme.color.darkGray};
+  /* active => color: ${({ theme }) => theme.color.black}; */
+`;
+
+const TripsMainNavItemInner = styled.div`
+  /* border-bottom: 2px solid black; active에만 활성 */
+  line-height: 5rem;
 `;
 
 export default TripsMain;
