@@ -14,8 +14,6 @@ const TripsPast = () => {
           <TripsPastCardItem />
           <TripsPastCardItem />
           <TripsPastCardItem />
-          <TripsPastCardItem />
-          <TripsPastCardItem />
         </TripsPastCardLists>
       </TripsPastCardWrapper>
       <TripsSubFooter>
@@ -31,7 +29,7 @@ const TripsPast = () => {
 const TripsPastCardWrapper = styled.div`
   border-top: 1px solid ${({ theme }) => lighten(0.2, theme.color.gray)};
   border-bottom: 1px solid ${({ theme }) => lighten(0.2, theme.color.gray)};
-  padding: 2rem 0rem 1rem 0rem;
+  padding: 2.5rem 0rem 1rem 0rem;
 `;
 
 const TripsPastCardLists = styled.ul`
