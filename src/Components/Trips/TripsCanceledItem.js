@@ -26,7 +26,7 @@ const TripsCanceledItem = () => {
                 </TripsCanceledCkLc>
               </TripsCanceledTextWrapper>
             </TripsCanceledButtonInnerWrapper>
-            <MdKeyboardArrowRight />
+            <MdKeyboardArrowRight style={{ fontSize: '2.5rem' }} />
           </TripsCanceledButtonWrapper>
         </StButton>
       </Link>
