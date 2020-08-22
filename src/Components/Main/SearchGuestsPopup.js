@@ -52,6 +52,9 @@ const StSearchGuestsCountWrapper = styled.div``;
 
 const StSearchGuestsCountBtn = styled(Button)`
   border-color: ${({ theme }) => theme.color.gray};
+  &:hover {
+    border-color: ${({ theme }) => theme.color.black};
+  }
   ${({ minusBtn, guestCount }) =>
     minusBtn &&
     !guestCount &&
@@ -59,6 +62,9 @@ const StSearchGuestsCountBtn = styled(Button)`
       border-color: ${({ theme }) => theme.color.line};
       color: ${({ theme }) => theme.color.line};
       cursor: not-allowed;
+      &:hover {
+        border-color: ${({ theme }) => theme.color.line};
+      }
     `}
 `;
 
