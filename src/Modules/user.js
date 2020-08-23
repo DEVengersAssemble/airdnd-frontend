@@ -62,7 +62,7 @@ const initialState = {
           ],
         },
         {
-          homeId: 0,
+          homeId: 1,
           subTitle: '',
           title: '',
           feature: '',
@@ -72,7 +72,7 @@ const initialState = {
           images: [''],
         },
         {
-          homeId: 0,
+          homeId: 2,
           subTitle: '',
           title: '',
           feature: '',
@@ -88,7 +88,7 @@ const initialState = {
       bookmarkListTitle: '유럽도 다시 가고싶당',
       bookmarks: [
         {
-          homeId: 0,
+          homeId: 3,
           subTitle: '',
           title: '',
           feature: '',
