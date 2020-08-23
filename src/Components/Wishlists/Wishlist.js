@@ -1,28 +1,32 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
 const Wishlist = () => {
   // 기능구현하면서 넘겨주는 props가 바뀔 수 있음
-  // const homeCount = 1;
+  const homeCount = 1;
   // const homeCount = 2;
-  const homeCount = 3;
+  // const homeCount = 3;
 
+  // Link id변경 필요
   return (
     <WishlistCardWrapper>
-      <WishlistImgWrapper>
-        <WishlistImg homeCount={homeCount} />
-        {homeCount === 1 ? null : (
-          <WishlistSubImgWrapper homeCount={homeCount}>
-            <WishlistSubImg homeCount={homeCount} />
-            {homeCount >= 3 ? <WishlistSubMoreImg /> : <AltImg />}
-          </WishlistSubImgWrapper>
-        )}
-      </WishlistImgWrapper>
-      <WishlistContent>
-        <WishlistCheckInOut>날짜 상관없음</WishlistCheckInOut>
-        <WishlistTitle>서울특별시</WishlistTitle>
-        <WishlistHomeCount>숙소 2개</WishlistHomeCount>
-      </WishlistContent>
+      <Link to={homeCount === 1 ? '/detail' : '/wishlist/1'}>
+        <WishlistImgWrapper>
+          <WishlistImg homeCount={homeCount} />
+          {homeCount === 1 ? null : (
+            <WishlistSubImgWrapper homeCount={homeCount}>
+              <WishlistSubImg homeCount={homeCount} />
+              {homeCount >= 3 ? <WishlistSubMoreImg /> : <AltImg />}
+            </WishlistSubImgWrapper>
+          )}
+        </WishlistImgWrapper>
+        <WishlistContent>
+          <WishlistCheckInOut>날짜 상관없음</WishlistCheckInOut>
+          <WishlistTitle>서울특별시</WishlistTitle>
+          <WishlistHomeCount>숙소 2개</WishlistHomeCount>
+        </WishlistContent>
+      </Link>
     </WishlistCardWrapper>
   );
 };
