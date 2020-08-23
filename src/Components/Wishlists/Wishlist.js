@@ -22,7 +22,6 @@ const Wishlist = () => {
           )}
         </WishlistImgWrapper>
         <WishlistContent>
-          <WishlistCheckInOut>날짜 상관없음</WishlistCheckInOut>
           <WishlistTitle>서울특별시</WishlistTitle>
           <WishlistHomeCount>숙소 2개</WishlistHomeCount>
         </WishlistContent>

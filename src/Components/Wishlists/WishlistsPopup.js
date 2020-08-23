@@ -31,10 +31,14 @@ const WishlistsPopup = ({ openPopup, onClickPopup }) => {
           // onChange={onChangeInput}
         />
         <StDropDown
-          width="100%"
           name="개인정보 설정"
           title="개인정보 설정"
           options={['전체공개', '비공개']}
+          width="100%"
+          height="5.7rem"
+          padding="1rem 0.5rem"
+          radius="8px"
+          outline="black"
         />
       </PopupMain>
       <PopupFooter>
