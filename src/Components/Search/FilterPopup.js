@@ -20,8 +20,9 @@ const RefundPopup = ({
     <FilterPopup
       popupState={popupState}
       size={size}
-      onReset={onReset}
+      value={toggle}
       onSave={onSave}
+      onReset={() => onReset(false)}
     >
       <StContentWrapper content="refund">
         <StSmallSpan>
@@ -117,7 +118,7 @@ const PricePopup = ({
     >
       <StContentWrapper content="price">
         <StLargeSpan>
-          평균 1박 요금은 ₩{averagePrice.toLocaleString()}입e니다
+          평균 1박 요금은 ₩{averagePrice.toLocaleString()}입니다
         </StLargeSpan>
         <StRangeWrapper>
           <StRangeBar>
@@ -169,7 +170,14 @@ const SetDatePopup = ({ popupState, size }) => {
   );
 };
 
-const FilterPopup = ({ children, popupState, size, onReset, onSave }) => {
+const FilterPopup = ({
+  children,
+  popupState,
+  size,
+  value,
+  onReset,
+  onSave,
+}) => {
   return (
     <StPopup popupState={popupState} size={size}>
       {children}
@@ -179,6 +187,7 @@ const FilterPopup = ({ children, popupState, size, onReset, onSave }) => {
           padding="1rem"
           fontSize="1.6rem"
           onClick={onReset}
+          disabled={!value}
         >
           지우기
         </Button>

@@ -14,18 +14,22 @@ const RefundPopupContainer = ({ popupState, size, onClose }) => {
 
   const [toggle, setToggle] = useState(refund);
   const handleClick = () => setToggle(!toggle);
-  const onReset = () => setToggle(false);
+  const onReset = state => setToggle(state);
 
   const popup = useRef();
   const closePopup = ({ target }) => {
     if (!popupState || popup.current.contains(target)) return;
     onClose();
-    onReset();
+    onReset(refund);
   };
+
+  console.log('refund', refund);
+  console.log('toggle', toggle);
 
   const onSave = () => {
     dispatch(saveFilter('refund', toggle));
     onClose();
+    console.log('===========saved');
   };
 
   useEffect(() => {
@@ -53,6 +57,8 @@ const RefundPopupContainer = ({ popupState, size, onClose }) => {
 const RoomTypePopupContainer = ({ popupState, size, onClose }) => {
   const { roomType } = useSelector(state => state.search.filterApplied);
   const dispatch = useDispatch();
+
+  console.log(roomType);
 
   const [check, setCheck] = useState(roomType);
   const onChange = type => setCheck({ ...check, [type]: !check[type] });
