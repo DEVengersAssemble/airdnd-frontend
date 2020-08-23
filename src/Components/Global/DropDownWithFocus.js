@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { MdKeyboardArrowDown } from 'react-icons/md';
+
 const StDropDownWrapper = styled.div`
   position: relative;
   box-sizing: border-box;
@@ -8,6 +9,7 @@ const StDropDownWrapper = styled.div`
   background: ${({ theme }) => theme.color.white};
   z-index: 0;
 `;
+
 const StDropDownSelect = styled.select`
   box-sizing: border-box;
   width: 100%;
@@ -39,6 +41,7 @@ const StDropDownSelect = styled.select`
           }
         `}
 `;
+
 const StDropDownOption = styled.option`
   box-sizing: border-box;
   display: block;
@@ -46,6 +49,7 @@ const StDropDownOption = styled.option`
   min-height: 12px;
   padding: 0px 2px 1px;
 `;
+
 const StDropDownIconWrapper = styled.span`
   box-sizing: border-box;
   position: absolute;
@@ -59,6 +63,7 @@ const StDropDownIconWrapper = styled.span`
   font-size: 24px;
   z-index: -1;
 `;
+
 const DropDownWithFocus = ({
   name,
   title,
