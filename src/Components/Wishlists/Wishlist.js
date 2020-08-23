@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
+import { ellipsis } from 'polished';
 
 const Wishlist = () => {
   // 기능구현하면서 넘겨주는 props가 바뀔 수 있음
@@ -22,7 +23,7 @@ const Wishlist = () => {
           )}
         </WishlistImgWrapper>
         <WishlistContent>
-          <WishlistTitle>서울특별시</WishlistTitle>
+          <WishlistTitle>흐앙 놀러가자ㅠㅠ 코로나님 꺼져주세여</WishlistTitle>
           <WishlistHomeCount>숙소 2개</WishlistHomeCount>
         </WishlistContent>
       </Link>
@@ -102,17 +103,20 @@ const AltImg = styled.div`
 `;
 
 const WishlistContent = styled.div`
-  padding: 2rem;
+  padding: 0rem 2rem;
 `;
 
 const WishlistTitle = styled.div`
-  padding: 0.5rem 0rem;
-  font-size: 2rem;
+  padding: 2.5rem 0rem 0rem;
+  font-size: 2.5rem;
   font-weight: 500;
+  line-height: 2.5rem;
+  ${ellipsis('36rem')};
 `;
 
 const WishlistHomeCount = styled.div`
-  font-size: 1.4rem;
+  font-size: 1.8rem;
+  padding: 1rem 0rem;
 `;
 
 export default Wishlist;
