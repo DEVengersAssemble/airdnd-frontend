@@ -26,7 +26,6 @@ const StProfileImg = styled.svg`
 `;
 
 const MyPageButton = ({ isScrollTop, togglePopup }) => {
-  console.log('toggle: ', togglePopup);
   return (
     <StMyPageButton
       btnType="oval"
