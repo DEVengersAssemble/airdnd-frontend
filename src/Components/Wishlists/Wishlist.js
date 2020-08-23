@@ -4,8 +4,8 @@ import styled, { css } from 'styled-components';
 
 const Wishlist = () => {
   // 기능구현하면서 넘겨주는 props가 바뀔 수 있음
-  const homeCount = 1;
-  // const homeCount = 2;
+  // const homeCount = 1;
+  const homeCount = 2;
   // const homeCount = 3;
 
   // Link id변경 필요
@@ -103,12 +103,6 @@ const AltImg = styled.div`
 
 const WishlistContent = styled.div`
   padding: 2rem;
-`;
-
-const WishlistCheckInOut = styled.div`
-  color: ${({ theme }) => theme.color.darkGray};
-  font-size: 1.2rem;
-  font-weight: 400;
 `;
 
 const WishlistTitle = styled.div`
