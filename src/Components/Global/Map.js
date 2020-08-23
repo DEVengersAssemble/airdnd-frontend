@@ -44,16 +44,10 @@ const Map = compose(
   }),
   withScriptjs,
   withGoogleMap,
-)(({ location, getCenter, center }) => {
-  React.useEffect(() => {
-    center = getCenter(location);
-  }, []);
-
-  console.log(center);
-
+)(({ center }) => {
   return (
     <GoogleMap
-      defaultZoom={13}
+      defaultZoom={15}
       defaultCenter={{
         lat: center.lat,
         lng: center.lng,
