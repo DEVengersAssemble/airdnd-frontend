@@ -24,7 +24,7 @@ const WishlistsMain = () => {
             >
               목록 만들기
             </Button>
-            <WishlistsPopup openPopup={openPopup} />
+            <WishlistsPopup openPopup={openPopup} onClickPopup={onClickPopup} />
           </PopupWrapper>
         </WishlistsTitleWrapper>
         <WishlistsItems>
