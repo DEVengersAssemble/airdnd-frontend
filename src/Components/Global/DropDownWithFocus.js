@@ -37,7 +37,7 @@ const StDropDownSelect = styled.select`
         `
       : css`
           &:focus {
-            border: 1px solid ${({ theme }) => theme.color.dropDownGreen};
+            border: 1px solid ${({ theme }) => theme.color.black};
             border-radius: ${({ radius }) => radius || '4px'};
           }
         `}
