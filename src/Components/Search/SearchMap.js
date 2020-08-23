@@ -1,14 +1,11 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import {
   MapZoomButton,
   MapMarkerButton,
   MapCloseButton,
   MapCheckbox,
-  MapFilterButton,
-  MapButton,
 } from './MapButton';
-import Map from '../Global/Map';
 import MapContainer from '../../Containers/Global/MapContainer';
 
 const SearchMap = ({ onHideMap, mapState, view, closeMap }) => {
