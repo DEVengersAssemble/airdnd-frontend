@@ -2,14 +2,30 @@ import React from 'react';
 import styled from 'styled-components';
 import Button from '../Global/Button';
 import Wishlist from './Wishlist';
+import WishlistsPopup from './WishlistsPopup';
 
 const WishlistsMain = () => {
+  const [openPopup, setOpenPopup] = React.useState(false);
+  const onClickPopup = () => {
+    setOpenPopup(!openPopup);
+  };
+
   return (
     <WishlistsMainWrapper>
       <WishlistsMainInner>
         <WishlistsTitleWrapper>
           <WishlistsTitle>저장 목록</WishlistsTitle>
-          <Button padding="1.2rem 2rem">목록 만들기</Button>
+          <PopupWrapper>
+            <Button
+              padding="1.2rem 2rem"
+              transition="1rem"
+              onClick={onClickPopup}
+              openPopup={openPopup}
+            >
+              목록 만들기
+            </Button>
+            <WishlistsPopup openPopup={openPopup} />
+          </PopupWrapper>
         </WishlistsTitleWrapper>
         <WishlistsItems>
           <Wishlist />
@@ -41,6 +57,10 @@ const WishlistsTitleWrapper = styled.div`
 const WishlistsTitle = styled.h2`
   font-size: 3.4rem;
   font-weight: bold;
+`;
+
+const PopupWrapper = styled.div`
+  position: relative;
 `;
 
 const WishlistsItems = styled.ul`
