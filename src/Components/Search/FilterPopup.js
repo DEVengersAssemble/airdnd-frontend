@@ -8,30 +8,54 @@ import Checkbox from '../Global/Checkbox';
 import { NewInput } from '../Global/Input';
 import { GiHamburgerMenu } from 'react-icons/gi';
 
-const RefundPopup = ({ popupState, size }) => {
+const RefundPopup = ({
+  popupState,
+  size,
+  toggle,
+  handleClick,
+  onReset,
+  onSave,
+}) => {
   return (
-    <FilterPopup popupState={popupState} size={size}>
+    <FilterPopup
+      popupState={popupState}
+      size={size}
+      value={toggle}
+      onSave={onSave}
+      onReset={() => onReset(false)}
+    >
       <StContentWrapper content="refund">
         <StSmallSpan>
           유연한 환불 정책을 제공하는 숙소만 검색 결과에 표시
         </StSmallSpan>
-        <Toggle />
+        <Toggle checked={toggle} handleClick={handleClick} />
       </StContentWrapper>
     </FilterPopup>
   );
 };
 
-const RoomTypePopup = ({ popupState, size }) => {
-  const [check, setCheck] = React.useState(false);
-
-  const onChange = e => {
-    setCheck(e.target.checked);
-  };
+const RoomTypePopup = ({
+  popupState,
+  size,
+  check,
+  onChange,
+  onReset,
+  onSave,
+}) => {
   return (
-    <FilterPopup popupState={popupState} size={size}>
+    <FilterPopup
+      popupState={popupState}
+      size={size}
+      onReset={onReset}
+      onSave={onSave}
+    >
       <StCheckboxList>
         <StCheckboxWrapper>
-          <Checkbox value checked={check} onChange={onChange}>
+          <Checkbox
+            value
+            checked={check.house}
+            onChange={() => onChange('house')}
+          >
             <StContentWrapper content="roomType">
               <StLargeSpan>집 전체</StLargeSpan>
               <StSmallSpan>집 전체를 단독으로 사용합니다</StSmallSpan>
@@ -39,7 +63,11 @@ const RoomTypePopup = ({ popupState, size }) => {
           </Checkbox>
         </StCheckboxWrapper>
         <StCheckboxWrapper>
-          <Checkbox value checked={check} onChange={onChange}>
+          <Checkbox
+            value
+            checked={check.private}
+            onChange={() => onChange('private')}
+          >
             <StContentWrapper content="roomType">
               <StLargeSpan>개인실</StLargeSpan>
               <StSmallSpan>
@@ -50,7 +78,11 @@ const RoomTypePopup = ({ popupState, size }) => {
           </Checkbox>
         </StCheckboxWrapper>
         <StCheckboxWrapper>
-          <Checkbox value checked={check} onChange={onChange}>
+          <Checkbox
+            value
+            checked={check.shared}
+            onChange={() => onChange('shared')}
+          >
             <StContentWrapper content="roomType">
               <StLargeSpan>다인실</StLargeSpan>
               <StSmallSpan>
@@ -65,11 +97,29 @@ const RoomTypePopup = ({ popupState, size }) => {
   );
 };
 
-const PricePopup = ({ popupState, size }) => {
+const PricePopup = ({
+  priceArray,
+  averagePrice,
+  popupState,
+  size,
+  priceFrom,
+  priceTo,
+  onChangePriceFrom,
+  onChangePriceTo,
+  onReset,
+  onSave,
+}) => {
   return (
-    <FilterPopup popupState={popupState} size={size}>
+    <FilterPopup
+      popupState={popupState}
+      size={size}
+      onReset={onReset}
+      onSave={onSave}
+    >
       <StContentWrapper content="price">
-        <StLargeSpan>평균 1박 요금은 ₩78,902입니다</StLargeSpan>
+        <StLargeSpan>
+          평균 1박 요금은 ₩{averagePrice.toLocaleString()}입니다
+        </StLargeSpan>
         <StRangeWrapper>
           <StRangeBar>
             <StButton btnType="circle" left="0">
@@ -80,29 +130,26 @@ const PricePopup = ({ popupState, size }) => {
             </StButton>
           </StRangeBar>
           <StGraph>
-            <StStick />
-            <StStick />
-            <StStick />
-            <StStick />
-            <StStick />
-            <StStick />
+            {priceArray.map((price, i) => (
+              <StStick key={i} height={price} />
+            ))}
           </StGraph>
         </StRangeWrapper>
         <StInputWrapper>
           <NewInput
             title="최저 요금"
-            value={'12,000'}
+            value={priceFrom}
             short
             pay="₩"
-            // onChange={onChangeInput}
+            onChange={onChangePriceFrom}
           />
           <span>―</span>
           <NewInput
             title="최고 요금"
-            value={'+1,000,000'}
+            value={priceTo}
             short
             pay="₩"
-            // onChange={onChangeInput}
+            onChange={onChangePriceTo}
           />
         </StInputWrapper>
       </StContentWrapper>
@@ -123,12 +170,25 @@ const SetDatePopup = ({ popupState, size }) => {
   );
 };
 
-const FilterPopup = ({ children, popupState, size }) => {
+const FilterPopup = ({
+  children,
+  popupState,
+  size,
+  value,
+  onReset,
+  onSave,
+}) => {
   return (
     <StPopup popupState={popupState} size={size}>
       {children}
       <StFooter align="space-between">
-        <Button btnType="underlined" padding="1rem" fontSize="1.6rem">
+        <Button
+          btnType="underlined"
+          padding="1rem"
+          fontSize="1.6rem"
+          onClick={onReset}
+          disabled={!value}
+        >
           지우기
         </Button>
         <Button
@@ -138,6 +198,7 @@ const FilterPopup = ({ children, popupState, size }) => {
           fontSize="1.4rem"
           hover="background: #000"
           transition
+          onClick={onSave}
         >
           저장
         </Button>
@@ -235,11 +296,12 @@ const StRangeWrapper = styled.div`
 
 const StGraph = styled.ul`
   display: flex;
+  align-items: flex-end;
 `;
 
 const StStick = styled.li`
-  width: 5px;
-  height: 3rem;
+  width: 5%;
+  height: ${({ height }) => `${height * 0.8}px`};
   margin: 0 1px -1px;
   border-radius: 1px;
   background: ${({ theme }) => theme.color.gray};

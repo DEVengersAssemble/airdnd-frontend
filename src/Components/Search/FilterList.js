@@ -1,12 +1,6 @@
 import React from 'react';
 import Button from '../Global/Button';
 import styled from 'styled-components';
-import {
-  RefundPopup,
-  RoomTypePopup,
-  PricePopup,
-  SetDatePopup,
-} from './FilterPopup';
 import FilterModal from './FilterModal';
 import { FilterButtonContainer } from '../../Containers/Search/FilterListContainer';
 import { MapButton } from './MapButton';
@@ -16,6 +10,7 @@ import {
   PricePopupContainer,
   SetDatePopupContainer,
 } from '../../Containers/Search/FilterPopupContainer';
+import FilterModalContainer from '../../Containers/Search/FilterModalContainer';
 
 export const FilterButton = ({ children, text, onClick }) => {
   return (
@@ -28,7 +23,13 @@ export const FilterButton = ({ children, text, onClick }) => {
   );
 };
 
-export const FilterList = ({ popupState, mapState, onShowMap, dispatch }) => {
+export const FilterList = ({
+  popupState,
+  mapState,
+  onShowMap,
+  dispatch,
+  dateDiff,
+}) => {
   return (
     <StWrapper>
       <FilterButtonContainer
@@ -53,8 +54,11 @@ export const FilterList = ({ popupState, mapState, onShowMap, dispatch }) => {
         popupState={popupState}
         dispatch={dispatch}
       >
-        <PricePopupContainer size="430px" />
-        <SetDatePopupContainer size="350px" />
+        {dateDiff ? (
+          <PricePopupContainer size="430px" />
+        ) : (
+          <SetDatePopupContainer size="350px" />
+        )}
       </FilterButtonContainer>
       <FilterButtonContainer
         name="modal"
@@ -62,7 +66,7 @@ export const FilterList = ({ popupState, mapState, onShowMap, dispatch }) => {
         popupState={popupState}
         dispatch={dispatch}
       >
-        <FilterModal />
+        <FilterModalContainer />
       </FilterButtonContainer>
       <MapButton mapState={mapState} onShowMap={onShowMap} />
     </StWrapper>
