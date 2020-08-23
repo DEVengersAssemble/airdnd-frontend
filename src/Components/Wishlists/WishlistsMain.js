@@ -15,6 +15,10 @@ const WishlistsMain = () => {
           <Wishlist />
           <Wishlist />
           <Wishlist />
+          <Wishlist />
+          <Wishlist />
+          <Wishlist />
+          <Wishlist />
         </WishlistsItems>
       </WishlistsMainInner>
     </WishlistsMainWrapper>

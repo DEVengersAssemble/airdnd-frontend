@@ -2,9 +2,10 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 
 const Wishlist = () => {
+  // 기능구현하면서 넘겨주는 props가 바뀔 수 있음
   // const homeCount = 1;
-  const homeCount = 2;
-  // const homeCount = 3;
+  // const homeCount = 2;
+  const homeCount = 3;
 
   return (
     <WishlistCardWrapper>
@@ -13,18 +14,22 @@ const Wishlist = () => {
         {homeCount === 1 ? null : (
           <WishlistSubImgWrapper homeCount={homeCount}>
             <WishlistSubImg homeCount={homeCount} />
-            {homeCount >= 3 ? <WishlistSubImg /> : <AltImg />}
+            {homeCount >= 3 ? <WishlistSubMoreImg /> : <AltImg />}
           </WishlistSubImgWrapper>
         )}
-        <WishlistContent></WishlistContent>
       </WishlistImgWrapper>
+      <WishlistContent>
+        <WishlistCheckInOut>날짜 상관없음</WishlistCheckInOut>
+        <WishlistTitle>서울특별시</WishlistTitle>
+        <WishlistHomeCount>숙소 2개</WishlistHomeCount>
+      </WishlistContent>
     </WishlistCardWrapper>
   );
 };
 
 const WishlistCardWrapper = styled.li`
   width: 40rem;
-  height: 30rem;
+  height: 31rem;
   &:nth-child(3n + 2),
   &:nth-child(3n + 1) {
     margin-right: 3.3rem;
@@ -79,6 +84,13 @@ const WishlistSubImg = styled.div`
     url('https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large');
 `;
 
+const WishlistSubMoreImg = styled.div`
+  width: 14rem;
+  height: 9.75rem;
+  background: no-repeat center / 100%
+    url('https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large');
+`;
+
 const AltImg = styled.div`
   width: 14rem;
   height: 9.75rem;
@@ -86,6 +98,24 @@ const AltImg = styled.div`
     url('https://media.glassdoor.com/sql/391850/airbnb-squarelogo-1459271200583.png');
 `;
 
-const WishlistContent = styled.div``;
+const WishlistContent = styled.div`
+  padding: 2rem;
+`;
+
+const WishlistCheckInOut = styled.div`
+  color: ${({ theme }) => theme.color.darkGray};
+  font-size: 1.2rem;
+  font-weight: 400;
+`;
+
+const WishlistTitle = styled.div`
+  padding: 0.5rem 0rem;
+  font-size: 2rem;
+  font-weight: 500;
+`;
+
+const WishlistHomeCount = styled.div`
+  font-size: 1.4rem;
+`;
 
 export default Wishlist;
