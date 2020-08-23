@@ -7,7 +7,9 @@ const TripsMain = () => {
   return (
     <TripsMainWrapper>
       <TripsMainInner>
-        <TripsMainTitle>여행</TripsMainTitle>
+        <TripsMainTitleWrapper>
+          <TripsMainTitle>여행</TripsMainTitle>
+        </TripsMainTitleWrapper>
         <TripsMainNav>
           <TripsMainNavList>
             <StNavLink to="/trips/upcoming" activeClassName={'active'}>
@@ -49,8 +51,11 @@ const TripsMainInner = styled.div`
   border-bottom: 1px solid ${({ theme }) => theme.color.gray};
 `;
 
+const TripsMainTitleWrapper = styled.div`
+  padding: 1.2rem 0rem;
+`;
+
 const TripsMainTitle = styled.h2`
-  padding-bottom: 3rem;
   font-size: 3.4rem;
   font-weight: bold;
 `;
@@ -58,6 +63,7 @@ const TripsMainTitle = styled.h2`
 const TripsMainNav = styled.ul`
   display: flex;
   margin-left: -1.5rem;
+  margin-top: 2rem;
 `;
 
 const TripsMainNavList = styled.li`
