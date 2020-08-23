@@ -1,14 +1,23 @@
 // action types
 const SET_RESERVATION = 'user/SET_RESERVATION';
-const SET_BOOKMARKLIST = 'user/SET_BOOKMARKLIST';
-const SET_BOOKMARK = 'user/SET_BOOKMARK';
-const UNSET_BOOKMARK = 'user/UNSET_BOOKMARK';
+const ADD_BOOKMARKLIST = 'user/ADD_BOOKMARKLIST';
+const ADD_BOOKMARK = 'user/ADD_BOOKMARK';
+const REMOVE_BOOKMARK = 'user/REMOVE_BOOKMARK';
 
 // action creators
 export const setReservation = payload => ({ type: SET_RESERVATION });
-export const setBookmarkList = payload => ({ type: SET_BOOKMARKLIST });
-export const setBookmark = payload => ({ type: SET_BOOKMARK, payload });
-export const unsetBookmark = homeId => ({ type: UNSET_BOOKMARK, homeId });
+export const addBookmarkList = (title, nextId) => ({
+  type: ADD_BOOKMARKLIST,
+  title,
+  nextId,
+});
+export const addBookmark = (homeId, bookmarkListId) => ({
+  type: ADD_BOOKMARK,
+  homeId,
+  bookmarkListId,
+});
+export const removeBookmark = homeId => ({ type: REMOVE_BOOKMARK, homeId });
+
 // initialState
 const initialState = {
   id: 0,
@@ -53,7 +62,7 @@ const initialState = {
           ],
         },
         {
-          homeId: 0,
+          homeId: 1,
           subTitle: '',
           title: '',
           feature: '',
@@ -63,7 +72,7 @@ const initialState = {
           images: [''],
         },
         {
-          homeId: 0,
+          homeId: 2,
           subTitle: '',
           title: '',
           feature: '',
@@ -79,7 +88,7 @@ const initialState = {
       bookmarkListTitle: '유럽도 다시 가고싶당',
       bookmarks: [
         {
-          homeId: 0,
+          homeId: 3,
           subTitle: '',
           title: '',
           feature: '',
@@ -97,6 +106,34 @@ const initialState = {
 
 const user = (state = initialState, action) => {
   switch (action.type) {
+    case ADD_BOOKMARKLIST:
+      return {
+        ...state,
+        bookmarkLists: state.bookmarkLists.concat({
+          bookmarkListId: action.nextId,
+          bookmarkListTitle: action.title,
+          bookmarks: [],
+        }),
+      };
+    case ADD_BOOKMARK:
+      return {
+        ...state,
+        bookmarkLists: state.bookmarkLists.map(list =>
+          list.bookmarkListId === action.bookmarkListId
+            ? {
+                ...list,
+                bookmarks: [...list.bookmarks, { homeId: action.homeId }],
+              }
+            : list,
+        ),
+      };
+    case REMOVE_BOOKMARK:
+      return {
+        ...state,
+        bookmarkLists: state.bookmarkLists.map(list =>
+          list.bookmarks.filter(({ homeId }) => homeId !== action.homeId),
+        ),
+      };
     default:
       return state;
   }

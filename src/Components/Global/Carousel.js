@@ -7,6 +7,9 @@ const Carousel = ({
   img,
   imageCount,
   imagePath,
+  setHomeWidth,
+  getHomeWidth,
+  homeWidth,
   isSuperhost,
   isClicked,
   transition,
@@ -17,34 +20,42 @@ const Carousel = ({
   ...rest
 }) => {
   React.useEffect(() => {
+    console.log(imageCount);
+    if (size === 'responsive') setHomeWidth(getHomeWidth());
     if (!isClicked) return;
     resetCarousel();
+    console.log(homeWidth);
   }, [isClicked]);
 
   return (
-    <StWrapper size={size} {...rest}>
+    <StWrapper size={size} homeWidth={homeWidth} {...rest}>
       <StPrevBtn styleType="transparent" onClick={slidePrev} />
       <StNextBtn styleType="transparent" onClick={slideNext} />
-      <a
+      <StLink
         rel="noopener noreferrer"
         target="_blank"
         href="https://www.airbnb.co.kr/rooms/36094960?adults=1&location=%EB%A7%88%EB%93%9C%EB%A6%AC%EB%93%9C&source_impression_id=p3_1597324281_lNy0Q31ggfi0f1St&check_in=2020-09-26&guests=1&check_out=2020-09-30"
       >
         {isSuperhost && <StBadge>슈퍼호스트</StBadge>}
-        <StImageList img={img} size={size} transition={transition}>
-          <StImageWrapper size={size}>
+        <StImageList
+          img={img}
+          imageCount={imageCount}
+          size={size}
+          transition={transition}
+        >
+          <StImageWrapper size={size} imageCount={imageCount}>
             <StImage src="https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large" />
           </StImageWrapper>
-          <StImageWrapper size={size}>
+          <StImageWrapper size={size} imageCount={imageCount}>
             <StImage src="https://a0.muscache.com/im/pictures/3276d8ad-d455-4c59-923c-3f6926301a93.jpg?aki_policy=large" />
           </StImageWrapper>
-          <StImageWrapper size={size}>
+          <StImageWrapper size={size} imageCount={imageCount}>
             <StImage src="https://a0.muscache.com/im/pictures/2013c2de-4727-4cd9-b9cd-77d85238d440.jpg?aki_policy=large" />
           </StImageWrapper>
-          <StImageWrapper size={size}>
+          <StImageWrapper size={size} imageCount={imageCount}>
             <StImage src="https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large" />
           </StImageWrapper>
-          <StImageWrapper size={size}>
+          <StImageWrapper size={size} imageCount={imageCount}>
             <StImage src="https://a0.muscache.com/im/pictures/3276d8ad-d455-4c59-923c-3f6926301a93.jpg?aki_policy=large" />
           </StImageWrapper>
         </StImageList>
@@ -55,7 +66,7 @@ const Carousel = ({
           <StCircle color="gray" />
           <StCircle color="gray" />
         </StCircleWrapper>
-      </a>
+      </StLink>
     </StWrapper>
   );
 };
@@ -77,7 +88,6 @@ const sizes = {
     width: '148',
     height: '105',
   },
-  responsive: {},
 };
 
 const sizeStyles = css`
@@ -105,6 +115,10 @@ const StWrapper = styled.div`
   background: ${({ theme }) => theme.color.gray};
   overflow: hidden;
   ${sizeStyles};
+`;
+
+const StLink = styled.a`
+  /* text-decoration: none; */
 `;
 
 const StBadge = styled.div`
@@ -142,14 +156,29 @@ const StCircle = styled.div`
 
 const StImageList = styled.ul`
   display: flex;
-  ${({ img, size, transition }) => css`
-    transform: ${`translate3d(-${img * sizes[size].width}px, 0, 0)`};
-    transition: ${transition && '0.3s'};
-  `};
+  ${({ img, imageCount, size, transition, homeWidth }) => {
+    if (size !== 'responsive') {
+      return css`
+        transform: ${`translate3d(-${img * sizes[size].width}px, 0, 0)`};
+        transition: ${transition && '0.3s'};
+      `;
+    } else {
+      return css`
+        transform: ${`translate3d(-100%, 0, 0)`};
+        transition: ${transition && '0.3s'};
+      `;
+    }
+  }};
 `;
 
 const StImageWrapper = styled.li`
   ${sizeStyles};
+  ${({ size, homeWidth, imageCount }) =>
+    size === 'responsive' &&
+    css`
+      min-width: 100%;
+      padding-bottom: -75%;
+    `}
 `;
 
 const StImage = styled.img`

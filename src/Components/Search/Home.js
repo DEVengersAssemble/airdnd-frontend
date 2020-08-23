@@ -19,6 +19,7 @@ export const HomePrice = ({ type, price, dateDiff }) => {
 
 const Home = ({ home, onClickBookmark, dateDiff }) => {
   const {
+    homeId,
     isSuperhost,
     isBookmarked,
     image,
@@ -60,7 +61,7 @@ const Home = ({ home, onClickBookmark, dateDiff }) => {
           ckType
           hover
           checked={isBookmarked}
-          onClick={() => onClickBookmark(isBookmarked)}
+          onClick={() => onClickBookmark(isBookmarked, homeId)}
         />
       </StHome>
     </StWrapper>

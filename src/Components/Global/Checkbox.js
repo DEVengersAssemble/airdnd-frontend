@@ -34,8 +34,8 @@ const StCheckBoxLabel = styled.label`
     value &&
     css`
       width: 100%;
-    `}
-  background: ${({ map, theme }) => map && theme.color.white}
+    `};
+  background: ${({ map, theme }) => map && theme.color.white};
 `;
 
 const StCheckBoxInput = styled.input`
