@@ -70,7 +70,7 @@ const MapMarkerButton = () => {
   );
 };
 
-const MapCloseButton = ({ onHideMap, closeMap }) => {
+const MapCloseButton = ({ onHideMap, closeMap, view }) => {
   return (
     <StButton
       boxShadow
@@ -78,7 +78,7 @@ const MapCloseButton = ({ onHideMap, closeMap }) => {
       top="10rem"
       margin="0 0 91px 0"
       onClick={() => {
-        onHideMap();
+        view === 'result' && onHideMap();
         closeMap();
       }}
     >

@@ -14,7 +14,7 @@ const SearchMap = ({ onHideMap, mapState, view, closeMap }) => {
   return (
     <StWrapper mapState={mapState} view={view}>
       <StStickyWrapper>
-        <MapCloseButton onHideMap={onHideMap} closeMap={closeMap} />
+        <MapCloseButton onHideMap={onHideMap} closeMap={closeMap} view={view} />
         <MapCheckbox />
         <StBtnSetWrapper>
           <MapZoomButton />
