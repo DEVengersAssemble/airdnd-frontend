@@ -1,14 +1,19 @@
 // action types
 const SET_RESERVATION = 'user/SET_RESERVATION';
-const SET_BOOKMARKLIST = 'user/SET_BOOKMARKLIST';
-const SET_BOOKMARK = 'user/SET_BOOKMARK';
-const UNSET_BOOKMARK = 'user/UNSET_BOOKMARK';
+const ADD_BOOKMARKLIST = 'user/ADD_BOOKMARKLIST';
+const ADD_BOOKMARK = 'user/ADD_BOOKMARK';
+const REMOVE_BOOKMARK = 'user/REMOVE_BOOKMARK';
 
 // action creators
 export const setReservation = payload => ({ type: SET_RESERVATION });
-export const setBookmarkList = payload => ({ type: SET_BOOKMARKLIST });
-export const setBookmark = payload => ({ type: SET_BOOKMARK, payload });
-export const unsetBookmark = homeId => ({ type: UNSET_BOOKMARK, homeId });
+export const addBookmarkList = title => ({ type: ADD_BOOKMARKLIST, title });
+export const addBookmark = (homeId, bookmarkListId) => ({
+  type: ADD_BOOKMARK,
+  homeId,
+  bookmarkListId,
+});
+export const removeBookmark = homeId => ({ type: REMOVE_BOOKMARK, homeId });
+
 // initialState
 const initialState = {
   id: 0,
@@ -97,6 +102,33 @@ const initialState = {
 
 const user = (state = initialState, action) => {
   switch (action.type) {
+    case ADD_BOOKMARKLIST:
+      return {
+        ...state,
+        bookmarkLists: state.bookmarkLists.concat({
+          bookmarkListId:
+            state.bookmarkLists[state.bookmarkLists.length - 1].bookmarkListId +
+            1,
+          bookmarkListTitle: action.title,
+          bookmarks: [],
+        }),
+      };
+    case ADD_BOOKMARK:
+      return {
+        ...state,
+        bookmarkLists: state.bookmarkLists.map(list =>
+          list.bookmarkListId === action.bookmarkListId
+            ? list.bookmarks.concat({ homeId: action.homeId })
+            : list,
+        ),
+      };
+    case REMOVE_BOOKMARK:
+      return {
+        ...state,
+        bookmarkLists: state.bookmarkLists.map(list =>
+          list.bookmarks.filter(({ homeId }) => homeId !== action.homeId),
+        ),
+      };
     default:
       return state;
   }
