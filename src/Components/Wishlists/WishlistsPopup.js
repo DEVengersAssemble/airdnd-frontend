@@ -25,7 +25,7 @@ const WishlistsPopup = ({ openPopup, onClickPopup }) => {
       </PopupHeader>
       <PopupMain>
         <NewInput
-          title="이름3"
+          title="이름"
           placeholder="예: 여름 휴가"
           // value={value}
           // onChange={onChangeInput}
