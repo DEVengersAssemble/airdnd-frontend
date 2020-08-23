@@ -50,7 +50,7 @@ const MapContainer = () => {
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     getCenter(location);
   }, []);
 

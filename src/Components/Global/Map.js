@@ -52,6 +52,7 @@ const Map = compose(
         lat: center.lat,
         lng: center.lng,
       }}
+      options={{ disableDefaultUI: true }}
     >
       <Marker position={{ lat: 37.550533, lng: 127.041504 }} />
     </GoogleMap>
