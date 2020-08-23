@@ -90,7 +90,10 @@ const PopupMain = styled.div`
 `;
 
 const StDropDown = styled(DropDownWithFocus)`
-  background: black;
+  border: 1px solid ${({ theme }) => theme.color.black};
+  & > select {
+    border: 1px solid ${({ theme }) => theme.color.black};
+  }
 `;
 
 const PopupFooter = styled.div`
