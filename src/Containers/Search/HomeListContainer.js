@@ -11,6 +11,7 @@ import HomeCardContainer from './HomeCardContainer';
 const HomeListContainer = ({ mapState }) => {
   const { homes } = useSelector(state => state.search);
   const { dateDiff } = useSelector(state => state.searchForm);
+  const [selectedId, setSelectedId] = useState(0);
   const [listModalState, setListModalState] = useState(false);
   const [newModalState, setNewModalState] = useState(false);
 
@@ -29,9 +30,12 @@ const HomeListContainer = ({ mapState }) => {
     <>
       <HomeList mapState={mapState}>
         {homes.map(home => {
-          const onClickBookmark = bookmark => {
+          const onClickBookmark = (bookmark, id) => {
             if (bookmark) console.log(bookmark);
-            if (!bookmark) openListModal();
+            if (!bookmark) {
+              openListModal();
+              setSelectedId(id);
+            }
           };
 
           return mapState ? (
@@ -55,10 +59,13 @@ const HomeListContainer = ({ mapState }) => {
         listModalState={listModalState}
         closeListModal={closeListModal}
         openNewModal={openNewModal}
+        homeId={selectedId}
       />
       <NewBookmarkModalContainer
         newModalState={newModalState}
         closeNewModal={closeNewModal}
+        closeListModal={closeListModal}
+        homeId={selectedId}
       />
     </>
   );

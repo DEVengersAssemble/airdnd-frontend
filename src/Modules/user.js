@@ -6,7 +6,11 @@ const REMOVE_BOOKMARK = 'user/REMOVE_BOOKMARK';
 
 // action creators
 export const setReservation = payload => ({ type: SET_RESERVATION });
-export const addBookmarkList = title => ({ type: ADD_BOOKMARKLIST, title });
+export const addBookmarkList = (title, nextId) => ({
+  type: ADD_BOOKMARKLIST,
+  title,
+  nextId,
+});
 export const addBookmark = (homeId, bookmarkListId) => ({
   type: ADD_BOOKMARK,
   homeId,
@@ -106,9 +110,7 @@ const user = (state = initialState, action) => {
       return {
         ...state,
         bookmarkLists: state.bookmarkLists.concat({
-          bookmarkListId:
-            state.bookmarkLists[state.bookmarkLists.length - 1].bookmarkListId +
-            1,
+          bookmarkListId: action.nextId,
           bookmarkListTitle: action.title,
           bookmarks: [],
         }),
@@ -118,7 +120,10 @@ const user = (state = initialState, action) => {
         ...state,
         bookmarkLists: state.bookmarkLists.map(list =>
           list.bookmarkListId === action.bookmarkListId
-            ? list.bookmarks.concat({ homeId: action.homeId })
+            ? {
+                ...list,
+                bookmarks: [...list.bookmarks, { homeId: action.homeId }],
+              }
             : list,
         ),
       };
