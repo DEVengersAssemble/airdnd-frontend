@@ -61,7 +61,7 @@ const Home = ({ home, onClickBookmark, dateDiff }) => {
           ckType
           hover
           checked={isBookmarked}
-          onClick={() => onClickBookmark(isBookmarked, homeId)}
+          onCheck={() => onClickBookmark(isBookmarked, homeId)}
         />
       </StHome>
     </StWrapper>

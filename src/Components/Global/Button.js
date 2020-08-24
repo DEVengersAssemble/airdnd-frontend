@@ -16,6 +16,7 @@ const Button = ({
   focus,
   transition,
   type,
+  disabled,
   ...rest
 }) => {
   return (
@@ -30,6 +31,7 @@ const Button = ({
       padding={padding} // '0'
       hover={hover} // 'background: gray'
       focus={focus} // true
+      disabled={disabled} // true
       transition={transition} // true
       type={type || 'button'} // 'submit'
       {...rest}
@@ -144,10 +146,10 @@ const transitionStyles = css`
 `;
 
 export const StBtn = styled.button`
+  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
   outline: none;
   border-radius: 8px;
   overflow: hidden;

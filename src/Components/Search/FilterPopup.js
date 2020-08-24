@@ -48,6 +48,7 @@ const RoomTypePopup = ({
       size={size}
       onReset={onReset}
       onSave={onSave}
+      check={check}
     >
       <StCheckboxList>
         <StCheckboxWrapper>
@@ -175,6 +176,7 @@ const FilterPopup = ({
   popupState,
   size,
   value,
+  check,
   onReset,
   onSave,
 }) => {
@@ -187,7 +189,10 @@ const FilterPopup = ({
           padding="1rem"
           fontSize="1.6rem"
           onClick={onReset}
-          disabled={!value}
+          disabled={
+            (value !== undefined && !value) ||
+            (check && !check.house && !check.private && !check.shared)
+          }
         >
           지우기
         </Button>

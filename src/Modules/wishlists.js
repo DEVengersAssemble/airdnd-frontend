@@ -131,12 +131,10 @@ const wishlists = (state = initialState, action) => {
     case ADD_BOOKMARK_NEW_LIST:
       return state.concat(action.bookmarkLists);
     case REMOVE_BOOKMARK:
-      return state.map(bmList => {
-        return {
-          ...bmList,
-          bookmarks: bmList.bookmarks.filter(bm => bm.homeId !== action.homeId),
-        };
-      });
+      return state.map(bmList => ({
+        ...bmList,
+        bookmarks: bmList.bookmarks.filter(bm => bm.homeId !== action.homeId),
+      }));
     default:
       return state;
   }

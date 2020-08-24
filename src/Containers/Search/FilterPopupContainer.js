@@ -62,14 +62,15 @@ const RoomTypePopupContainer = ({ popupState, size, onClose }) => {
 
   const [check, setCheck] = useState(roomType);
   const onChange = type => setCheck({ ...check, [type]: !check[type] });
-  const onReset = () =>
-    setCheck({ house: false, private: false, shared: false });
+  const onReset = state => {
+    setCheck(state || { house: false, private: false, shared: false });
+  };
 
   const popup = useRef();
   const closePopup = ({ target }) => {
     if (!popupState || popup.current.contains(target)) return;
     onClose();
-    onReset();
+    onReset(roomType);
   };
 
   const onSave = () => {

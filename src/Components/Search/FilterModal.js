@@ -110,7 +110,7 @@ const CheckboxFilter = ({ title, listName, list, filter, onCheck }) => {
             key={i}
             value
             checked={filter[name]}
-            onClick={() => onCheck(listName, name, !filter[name])}
+            onCheck={() => onCheck(listName, name, !filter[name])}
           >
             <StLargeSpan>{name}</StLargeSpan>
           </StCheckbox>
