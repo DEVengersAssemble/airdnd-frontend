@@ -1,12 +1,12 @@
 import React from 'react';
-import WishlistsHeaderContainer from '../Containers/Wishlists/WishlistsHeaderContainer';
+import WishlistsHeader from '../Components/Wishlists/WishlistsHeader';
 import WishlistsMainContainer from '../Containers/Wishlists/WishlistsMainContainer';
 import Footer from '../Components/Main/Footer';
 
 const WishlistsPage = () => {
   return (
     <>
-      <WishlistsHeaderContainer />
+      <WishlistsHeader />
       <WishlistsMainContainer />
       <Footer />
     </>
