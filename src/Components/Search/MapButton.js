@@ -48,14 +48,14 @@ const MapCheckbox = () => {
   );
 };
 
-const MapZoomButton = () => {
+const MapZoomButton = ({ onZoomIn, onZoomOut }) => {
   return (
     <StBtnWrapper>
-      <StButton className="plusBtn" position="relative">
+      <StButton className="plusBtn" position="relative" onClick={onZoomIn}>
         <FiPlus fontSize="2.4rem" />
       </StButton>
       <StLine />
-      <StButton className="minusBtn" position="relative">
+      <StButton className="minusBtn" position="relative" onClick={onZoomOut}>
         <FiMinus fontSize="2.4rem" />
       </StButton>
     </StBtnWrapper>

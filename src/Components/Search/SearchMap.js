@@ -8,14 +8,21 @@ import {
 } from './MapButton';
 import MapContainer from '../../Containers/Global/MapContainer';
 
-const SearchMap = ({ onHideMap, mapState, view, closeMap }) => {
+const SearchMap = ({
+  onHideMap,
+  mapState,
+  onZoomIn,
+  onZoomOut,
+  view,
+  closeMap,
+}) => {
   return (
     <StWrapper mapState={mapState} view={view}>
       <StStickyWrapper>
         <MapCloseButton onHideMap={onHideMap} closeMap={closeMap} view={view} />
         <MapCheckbox />
         <StBtnSetWrapper>
-          <MapZoomButton />
+          <MapZoomButton onZoomIn={onZoomIn} onZoomOut={onZoomOut} />
           <MapMarkerButton />
         </StBtnSetWrapper>
       </StStickyWrapper>

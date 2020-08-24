@@ -1,6 +1,6 @@
 import React, { useReducer, useEffect } from 'react';
 import Map from '../../Components/Global/Map';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 
 const centerInit = {
@@ -36,17 +36,19 @@ const centerReducer = (state, action) => {
 
 const MapContainer = () => {
   const { location } = useSelector(state => state.searchForm);
-  const [centerState, dispatch] = useReducer(centerReducer, centerInit);
+  const { mapZoom } = useSelector(state => state.search);
+  const [centerState, centerDispatch] = useReducer(centerReducer, centerInit);
+  const dispatch = useDispatch();
 
   const getCenter = async location => {
-    dispatch({ type: 'LOADING' });
+    centerDispatch({ type: 'LOADING' });
     try {
       const response = await axios.get(
         `https://maps.googleapis.com/maps/api/geocode/json?address=${location}&key=AIzaSyCqryK5lMUxY0i_-Zu1cUrgW3_Geg4BrWA`,
       );
-      dispatch({ type: 'SUCCESS', response });
+      centerDispatch({ type: 'SUCCESS', response });
     } catch (e) {
-      dispatch({ type: 'ERROR', error: e });
+      centerDispatch({ type: 'ERROR', error: e });
     }
   };
 
@@ -55,7 +57,9 @@ const MapContainer = () => {
   }, []);
 
   if (!centerState.center) return null;
-  return <Map location={location} center={centerState.center} />;
+  return (
+    <Map location={location} center={centerState.center} mapZoom={mapZoom} />
+  );
 };
 
 export default MapContainer;
