@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import TripsCanceledItem from '../../Components/Trips/TripsCanceledItem';
+import TripsCanceled from '../../Components/Trips/TripsCanceled';
 // import { showReservation } from '../../Modules/trips';
 
 const TripsCanceledContainer = () => {
@@ -10,7 +10,7 @@ const TripsCanceledContainer = () => {
   const canceledTrips = trips.filter(trip => trip.isCanceled);
   console.log(canceledTrips);
 
-  return <TripsCanceledItem canceledTrips={canceledTrips} />;
+  return <TripsCanceled canceledTrips={canceledTrips} />;
 };
 
 export default TripsCanceledContainer;

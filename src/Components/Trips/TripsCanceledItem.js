@@ -5,25 +5,32 @@ import { lighten } from 'polished';
 import Button from '../Global/Button';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 
-const TripsCanceledItem = ({
-  reservationId,
-  image,
-  title,
-  location,
-  ci,
-  co,
-}) => {
+const TripsCanceledItem = ({ trip }) => {
+  console.log(trip);
+  // const { reservationId, image, title, location, checkin, checkout } = trip;
+
+  // console.log(checkin.split('/'), checkout);
+
+  // const ciDate = new Date(checkin.split('/'));
+  // const coDate = new Date(checkout.split('/'));
+  // const options = {
+  //   month: 'long',
+  //   day: 'numeric',
+  // };
+  // const ci = ciDate.toLocaleDateString('ko-KR', options);
+  // const co = coDate.toLocaleDateString('ko-KR', options);
+
   return (
     <TripsCanceledItemWrapper>
-      <Link to={`/schedule/${reservationId}`}>
+      <Link to={`/schedule/1`}>
         <StButton>
           <TripsCanceledButtonWrapper>
             <TripsCanceledButtonInnerWrapper>
-              <TripsCanceledButtonImg src={`${image}`} alt="#" />
+              <TripsCanceledButtonImg src={'#'} alt="#" />
               <TripsCanceledTextWrapper>
-                <TripsCanceledTitle>{title}</TripsCanceledTitle>
+                <TripsCanceledTitle>타이틀</TripsCanceledTitle>
                 <TripsCanceledCkLc>
-                  {location} · {ci} - {co}
+                  location · 체크인 - 체크아웃
                 </TripsCanceledCkLc>
               </TripsCanceledTextWrapper>
             </TripsCanceledButtonInnerWrapper>

@@ -1,18 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
 import { lighten } from 'polished';
-import TripsCanceledItemContainer from '../../Containers/Trips/TripsCanceledItemContainer';
+import TripsCanceledItem from './TripsCanceledItem';
 import TripsSubFooter from './TripsSubFooter';
 import Button from '../Global/Button';
 
 const TripsCanceled = ({ canceledTrips }) => {
-  console.log(canceledTrips);
+  console.log('tripsCancled', canceledTrips);
+
   return (
     <>
       <TripsCanceledWrapper>
         <TripsCanceledLists>
           {canceledTrips.map(trip => (
-            <TripsCanceledItemContainer key={trip.reservationId} trip={trip} />
+            <TripsCanceledItem key={trip.reservationId} trip={trip} />
           ))}
         </TripsCanceledLists>
       </TripsCanceledWrapper>
