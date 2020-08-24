@@ -37,6 +37,11 @@ const centerReducer = (state, action) => {
 const MapContainer = () => {
   const { location } = useSelector(state => state.searchForm);
   const { mapZoom } = useSelector(state => state.search);
+  const { homes } = useSelector(state => state.search);
+  const markers = homes.map(home => ({
+    id: home.id,
+    location: home.location,
+  }));
   const [centerState, centerDispatch] = useReducer(centerReducer, centerInit);
   const dispatch = useDispatch();
 
@@ -58,7 +63,12 @@ const MapContainer = () => {
 
   if (!centerState.center) return null;
   return (
-    <Map location={location} center={centerState.center} mapZoom={mapZoom} />
+    <Map
+      location={location}
+      center={centerState.center}
+      mapZoom={mapZoom}
+      markers={markers}
+    />
   );
 };
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import styled, { css } from 'styled-components';
 import { compose, withProps } from 'recompose';
 import {
   withScriptjs,
@@ -45,22 +46,48 @@ const Map = compose(
   withScriptjs,
   withGoogleMap,
 )(({ center, mapZoom }) => {
-  React.useEffect(() => {
-    console.log(mapZoom);
-  }, [mapZoom]);
+  const goldStar = {
+    fillColor: 'white',
+    fillOpacity: 0.8,
+    borderRadius: '50%',
+    scale: 0.3,
+    strokeColor: 'gold',
+    strokeWeight: 1,
+  };
   return (
     <GoogleMap
       zoom={mapZoom}
-      defaultZoom={15}
+      defaultZoom={13}
       defaultCenter={{
         lat: center.lat,
         lng: center.lng,
       }}
       options={{ disableDefaultUI: true }}
     >
-      <Marker position={{ lat: 37.550533, lng: 127.041504 }} />
+      <StMarker
+        className="노원역"
+        position={{ lat: 37.651791, lng: 127.060944 }}
+        icon={goldStar}
+      />
+      <StMarker
+        className="을지초"
+        position={{ lat: 37.650333, lng: 127.072783 }}
+        icon={goldStar}
+      />
+      <StMarker
+        className="당현천"
+        position={{ lat: 37.648824, lng: 127.065379 }}
+        label={{ text: 'hello', color: 'white' }}
+        icon={goldStar}
+      />
     </GoogleMap>
   );
 });
+
+const StMarker = styled(Marker)`
+  background: blue;
+  width: 20px;
+  height: 20px;
+`;
 
 export default Map;

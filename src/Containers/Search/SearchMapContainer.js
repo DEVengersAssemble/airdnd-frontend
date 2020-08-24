@@ -6,7 +6,6 @@ import { zoomIn, zoomOut } from '../../Modules/search';
 
 const SearchMapContainer = ({ view, closeMap }) => {
   const { mapState } = useSelector(state => state.search);
-  const { mapZoom } = useSelector(state => state.search);
   const dispatch = useDispatch();
   const onHideMap = () => dispatch(hideMap());
   const onZoomIn = () => dispatch(zoomIn());
