@@ -4,7 +4,13 @@ import Button from '../Global/Button';
 import Wishlist from './Wishlist';
 import WishlistsPopup from './WishlistsPopup';
 
-const WishlistsMain = ({ openPopup, onClickPopup }) => {
+const WishlistsMain = ({
+  bmLists,
+  onChangeTitleInput,
+  onCreateBookMarkList,
+  openPopup,
+  onClickPopup,
+}) => {
   return (
     <WishlistsMainWrapper>
       <WishlistsMainInner>
@@ -23,8 +29,9 @@ const WishlistsMain = ({ openPopup, onClickPopup }) => {
           </PopupWrapper>
         </WishlistsTitleWrapper>
         <WishlistsItems>
-          <Wishlist />
-          <Wishlist />
+          {bmLists.map(bmList => (
+            <Wishlist key={bmList.bookmarkListId} bmList={bmList} />
+          ))}
         </WishlistsItems>
       </WishlistsMainInner>
     </WishlistsMainWrapper>

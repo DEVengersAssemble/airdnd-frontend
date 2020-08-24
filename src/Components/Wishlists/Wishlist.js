@@ -3,16 +3,15 @@ import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import { ellipsis } from 'polished';
 
-const Wishlist = () => {
-  // 기능구현하면서 넘겨주는 props가 바뀔 수 있음
-  // const homeCount = 1;
-  const homeCount = 2;
-  // const homeCount = 3;
+const Wishlist = ({ bmList }) => {
+  console.log('wishlist', bmList);
+  const { bookmarkListId, bookmarkListTitle, bookmarks } = bmList;
+  const homeCount = bookmarks.length;
 
   // Link id변경 필요
   return (
     <WishlistCardWrapper>
-      <Link to={homeCount === 1 ? '/detail' : '/wishlist/1'}>
+      <Link to={homeCount === 1 ? '/detail' : `/wishlist/${bookmarkListId}`}>
         <WishlistImgWrapper>
           <WishlistImg homeCount={homeCount} />
           {homeCount === 1 ? null : (
@@ -23,8 +22,8 @@ const Wishlist = () => {
           )}
         </WishlistImgWrapper>
         <WishlistContent>
-          <WishlistTitle>흐앙 놀러가자ㅠㅠ 코로나님 꺼져주세여</WishlistTitle>
-          <WishlistHomeCount>숙소 2개</WishlistHomeCount>
+          <WishlistTitle>{bookmarkListTitle}</WishlistTitle>
+          <WishlistHomeCount>숙소 {homeCount}개</WishlistHomeCount>
         </WishlistContent>
       </Link>
     </WishlistCardWrapper>
@@ -32,7 +31,7 @@ const Wishlist = () => {
 };
 
 const WishlistCardWrapper = styled.li`
-  width: 40rem;
+  width: 38rem;
   height: 31rem;
   &:nth-child(3n + 2),
   &:nth-child(3n + 1) {
@@ -58,7 +57,7 @@ const WishlistImg = styled.div`
   height: 20rem;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  background: no-repeat center / 40rem
+  background: no-repeat center / 38rem
     url('https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large');
   ${({ homeCount }) =>
     homeCount >= 2 &&
