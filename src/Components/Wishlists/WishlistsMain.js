@@ -4,12 +4,7 @@ import Button from '../Global/Button';
 import Wishlist from './Wishlist';
 import WishlistsPopup from './WishlistsPopup';
 
-const WishlistsMain = () => {
-  const [openPopup, setOpenPopup] = React.useState(false);
-  const onClickPopup = () => {
-    setOpenPopup(!openPopup);
-  };
-
+const WishlistsMain = ({ openPopup, onClickPopup }) => {
   return (
     <WishlistsMainWrapper>
       <WishlistsMainInner>
