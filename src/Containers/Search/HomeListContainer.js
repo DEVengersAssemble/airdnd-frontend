@@ -7,7 +7,7 @@ import {
 } from './BookmarkModalContainer';
 import HomeContainer from './HomeContainer';
 import HomeCardContainer from './HomeCardContainer';
-import { removeBookmark } from '../../Modules/user';
+import { removeBookmark } from '../../Modules/wishlists';
 
 const HomeListContainer = ({ mapState }) => {
   const { homes } = useSelector(state => state.search);

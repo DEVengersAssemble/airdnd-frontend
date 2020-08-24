@@ -1,6 +1,8 @@
 // action type
 const SHOW_MAP = 'search/SHOW_MAP';
 const HIDE_MAP = 'search/HIDE_MAP';
+const ZOOM_IN = 'search/ZOOM_IN';
+const ZOOM_OUT = 'search/ZOOM_OUT';
 const SAVE_FILTER = 'search/SAVE_FILTER';
 const APPLY_TOGGLE_FILTER = 'search/APPLY_TOGGLE_FILTER';
 const APPLY_COUNTER_FILTER = 'search/APPLY_COUNTER_FILTER';
@@ -10,6 +12,8 @@ const RESET_MODAL_FILTER = 'search/RESET_MODAL/FILTER';
 // action creator
 export const showMap = () => ({ type: SHOW_MAP });
 export const hideMap = () => ({ type: HIDE_MAP });
+export const zoomIn = () => ({ type: ZOOM_IN });
+export const zoomOut = () => ({ type: ZOOM_OUT });
 export const saveFilter = (name, value) => ({ type: SAVE_FILTER, name, value });
 export const applyToggleFilter = (name, value) => ({
   type: APPLY_TOGGLE_FILTER,
@@ -334,6 +338,7 @@ const initialState = {
   // 1박 평균 가격
   averagePrice: 82094,
   mapState: true,
+  mapZoom: 15,
   // map 범위 보낼때
   // mapSend: {
   //   from: { lat: 0, lng: 0 },
@@ -353,6 +358,16 @@ const search = (state = initialState, action) => {
       return {
         ...state,
         mapState: false,
+      };
+    case ZOOM_IN:
+      return {
+        ...state,
+        mapZoom: state.mapZoom + 1,
+      };
+    case ZOOM_OUT:
+      return {
+        ...state,
+        mapZoom: state.mapZoom - 1,
       };
     case SAVE_FILTER:
       return {

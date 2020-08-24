@@ -4,7 +4,10 @@ import {
   NewBookmarkModal,
 } from '../../Components/Global/BookmarkModal.js';
 import { useSelector, useDispatch } from 'react-redux';
-import { addBookmarkList, addBookmark } from '../../Modules/user';
+import {
+  addBookmarkNewList,
+  addBookmarkOldList,
+} from '../../Modules/wishlists';
 
 const BookmarkListModalContainer = ({
   listModalState,
@@ -12,10 +15,10 @@ const BookmarkListModalContainer = ({
   openNewModal,
   homeId,
 }) => {
-  const { bookmarkLists } = useSelector(state => state.user);
+  const bookmarkLists = useSelector(state => state.wishlists);
   const dispatch = useDispatch();
   const onClickBookmark = (homeId, bookmarkListId) =>
-    dispatch(addBookmark(homeId, bookmarkListId));
+    dispatch(addBookmarkOldList(homeId, bookmarkListId));
 
   return (
     <BookmarkListModal
@@ -36,12 +39,9 @@ const NewBookmarkModalContainer = ({
   homeId,
 }) => {
   const { location } = useSelector(state => state.searchForm);
-  const { bookmarkLists } = useSelector(state => state.user);
-  const nextId = bookmarkLists[bookmarkLists.length - 1].bookmarkListId + 1;
   const dispatch = useDispatch();
   const onClickNewList = (title, homeId) => {
-    dispatch(addBookmarkList(title, nextId));
-    dispatch(addBookmark(homeId, nextId));
+    dispatch(addBookmarkNewList(title, homeId));
   };
 
   const [value, setValue] = useState(location);

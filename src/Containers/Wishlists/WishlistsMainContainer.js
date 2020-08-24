@@ -7,7 +7,7 @@ const WishlistsMainContainer = () => {
   const [openPopup, setOpenPopup] = useState(false);
   const [title, setTitle] = useState('');
   const bmLists = useSelector(state => {
-    return state.wishlists.bookmarkLists;
+    return state.wishlists;
   });
   const dispatch = useDispatch();
 
