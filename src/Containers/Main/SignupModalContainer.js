@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef } from 'react';
 import SignupModal from '../../Components/Main/SignupModal';
 
 const SignupModalContainer = ({
@@ -39,14 +39,9 @@ const SignupModalContainer = ({
     } = form;
 
     const isEmailInvalid = !email;
-    console.log('isEmailInvalid: ', !email);
     const isFirstNameInvalid = !firstName;
-    console.log('isFirstNameInvalid: ', !firstName);
     const isLastNameInvalid = !lastName;
-    console.log('isLastNameInvalid: ', !lastName);
     const isPwInvalid = !pw;
-    console.log('isPwInvalid: ', !pw);
-
     // const isBirthMonthInvalid = !birthMonth;
     // const isBirthDayInvalid = !birthDay;
     // const isBirthYearInvalid = !birthYear;
@@ -94,26 +89,23 @@ const SignupModalContainer = ({
     console.log('유저정보: ', form);
   };
 
-  const onSignup = useCallback(
-    e => {
-      e.preventDefault();
-      checkFormValidation();
-      console.log('[onSignup..formValiation]', formValidation);
-      console.log(Object.values(formValidation));
-      console.log(Object.values(formValidation).filter(v => v));
-      console.log(Object.values(formValidation).filter(v => v).length);
-      if (Object.values(form).map(v => v).length) {
-        Object.entries(form)
-          .reverse()
-          .forEach(v => {
-            !v[1] && refObj[`${v[0]}Ref`].current.focus();
-          });
-        return;
-      }
-      onSuccess();
-    },
-    [formValidation, form],
-  );
+  const changeFocus = () => {
+    if (Object.values(formValidation).filter(v => v).length) {
+      Object.entries(form)
+        .reverse()
+        .forEach(v => {
+          !v[1] && refObj[`${v[0]}Ref`].current.focus();
+        });
+      return;
+    }
+    onSuccess();
+  };
+
+  const onSignup = e => {
+    e.preventDefault();
+    checkFormValidation();
+    changeFocus();
+  };
 
   return (
     <SignupModal
