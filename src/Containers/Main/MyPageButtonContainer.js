@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import MyPageButton from '../../Components/Main/MyPageButton';
 import MyPagePopup from '../../Components/Main/MyPagePopup';
-import SignupModal from '../../Components/Main/SignupModal';
-import LoginModal from '../../Components/Main/LoginModal';
+import SignupModalContainer from './SignupModalContainer';
+import LoginModalContainer from './LoginModalContainer';
 
 // 1. 로그인 전 <GoPerson />
 // 2. 로그인 후 프로필사진 존재할 시 그 이미지 url
@@ -21,13 +21,26 @@ const MyPageButtonContainer = ({ isScrollTop }) => {
     setPopupVisible(prevState => !prevState);
   };
 
-  const openSignupModal = () => {
-    setSignupModalVisible(() => true);
+  const openModal = type => {
+    console.log('[openModal], ', type);
+    if (type === 'signup') {
+      setLoginModalVisible(false);
+      setSignupModalVisible(true);
+    } else if (type === 'login') {
+      setSignupModalVisible(false);
+      setLoginModalVisible(true);
+    }
   };
 
-  const closeSignupModal = () => {
-    setSignupModalVisible(() => false);
+  const closeModal = type => {
+    console.log('[closeModal], ', type);
+    if (type === 'signup') {
+      setSignupModalVisible(false);
+    } else if (type === 'login') {
+      setLoginModalVisible(false);
+    }
   };
+
   return (
     <>
       <MyPageButton
@@ -38,12 +51,18 @@ const MyPageButtonContainer = ({ isScrollTop }) => {
         popupVisible={popupVisible}
         closePopup={closePopup}
         isLoggedIn={isLoggedIn}
-        openSignupModal={openSignupModal}
+        openModal={openModal}
       ></MyPagePopup>
-      <SignupModal
+      <LoginModalContainer
+        loginModalVisible={loginModalVisible}
+        openModal={openModal}
+        closeModal={closeModal}
+      ></LoginModalContainer>
+      <SignupModalContainer
         signupModalVisible={signupModalVisible}
-        closeSignupModal={closeSignupModal}
-      ></SignupModal>
+        openModal={openModal}
+        closeModal={closeModal}
+      ></SignupModalContainer>
     </>
   );
 };
