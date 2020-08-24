@@ -5,6 +5,7 @@ import Wishlist from './Wishlist';
 import WishlistsPopup from './WishlistsPopup';
 
 const WishlistsMain = ({
+  title,
   bmLists,
   onChangeTitleInput,
   onCreateBookMarkList,
@@ -25,7 +26,13 @@ const WishlistsMain = ({
             >
               목록 만들기
             </Button>
-            <WishlistsPopup openPopup={openPopup} onClickPopup={onClickPopup} />
+            <WishlistsPopup
+              title={title}
+              onChangeTitleInput={onChangeTitleInput}
+              onCreateBookMarkList={onCreateBookMarkList}
+              openPopup={openPopup}
+              onClickPopup={onClickPopup}
+            />
           </PopupWrapper>
         </WishlistsTitleWrapper>
         <WishlistsItems>

@@ -11,10 +11,10 @@ const Wishlist = ({ bmList }) => {
   // Link id변경 필요
   return (
     <WishlistCardWrapper>
-      <Link to={homeCount === 1 ? '/detail' : `/wishlist/${bookmarkListId}`}>
+      <Link to={`/wishlist/${bookmarkListId}`}>
         <WishlistImgWrapper>
           <WishlistImg homeCount={homeCount} />
-          {homeCount === 1 ? null : (
+          {homeCount !== 0 && (
             <WishlistSubImgWrapper homeCount={homeCount}>
               <WishlistSubImg homeCount={homeCount} />
               {homeCount >= 3 ? <WishlistSubMoreImg /> : <AltImg />}
@@ -51,14 +51,23 @@ const WishlistImgWrapper = styled.div`
 `;
 
 const WishlistImg = styled.div`
+  /* homeCount === 0 이면 alt image */
   /* 이미지가 하나면 꽉차게  */
   /* 이미지가 2개이상이면 모자이크 */
   width: 100%;
   height: 20rem;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  background: no-repeat center / 38rem
-    url('https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large');
+  ${({ homeCount }) =>
+    homeCount
+      ? css`
+          background: no-repeat center / 38rem
+            url('https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large');
+        `
+      : css`
+          background: no-repeat center / 38rem
+            url('https://media.glassdoor.com/sql/391850/airbnb-squarelogo-1459271200583.png');
+        `}
   ${({ homeCount }) =>
     homeCount >= 2 &&
     css`

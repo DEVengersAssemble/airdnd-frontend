@@ -6,7 +6,13 @@ import { NewInput } from '../Global/Input';
 import DropDownWithFocus from '../Global/DropDownWithFocus';
 import { GrClose } from 'react-icons/gr';
 
-const WishlistsPopup = ({ openPopup, onClickPopup }) => {
+const WishlistsPopup = ({
+  title,
+  onChangeTitleInput,
+  onCreateBookMarkList,
+  openPopup,
+  onClickPopup,
+}) => {
   return (
     <StPopup
       popupState={openPopup}
@@ -27,8 +33,8 @@ const WishlistsPopup = ({ openPopup, onClickPopup }) => {
         <NewInput
           title="이름"
           placeholder="예: 여름 휴가"
-          // value={value}
-          // onChange={onChangeInput}
+          value={title}
+          onChange={onChangeTitleInput}
         />
         <StDropDown
           name="개인정보 설정"
@@ -45,7 +51,11 @@ const WishlistsPopup = ({ openPopup, onClickPopup }) => {
         <Button btnType="underlined" padding="1rem" onClick={onClickPopup}>
           취소
         </Button>
-        <Button color="black" hover="background: black">
+        <Button
+          color="black"
+          hover="background: black"
+          onClick={onCreateBookMarkList}
+        >
           저장
         </Button>
       </PopupFooter>

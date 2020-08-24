@@ -1,20 +1,17 @@
 // action type
-const CHANGE_TITLE_INPUT = 'wishlists/CHANGE_TITLE_INPUT';
 const CREATE_BOOKMARKLIST = 'wishlists/CREATE_BOOKMARKLIST';
 
 // action creator
-export const changeTitleInput = value => ({ type: CHANGE_TITLE_INPUT, value });
 let id = 5;
 export const createBookmarkList = value => ({
   type: CREATE_BOOKMARKLIST,
   bookmarkLists: [
-    { bookmarkListId: id++, bookmarkListTitle: value, bookmarks: [{}] },
+    { bookmarkListId: id++, bookmarkListTitle: value, bookmarks: [] },
   ],
 });
 
 // initial state
 const initialState = {
-  listTitle: '',
   bookmarkLists: [
     {
       bookmarkListId: 1,
@@ -106,11 +103,6 @@ const initialState = {
 // reducer
 const wishlists = (state = initialState, action) => {
   switch (action.type) {
-    case CHANGE_TITLE_INPUT:
-      return {
-        ...state,
-        listTitle: action.title,
-      };
     case CREATE_BOOKMARKLIST:
       return {
         ...state,
