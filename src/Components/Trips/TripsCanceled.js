@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { lighten } from 'polished';
-import TripsCanceledItem from './TripsCanceledItem';
 import TripsSubFooter from './TripsSubFooter';
 import Button from '../Global/Button';
+import TripsCanceledItemContainer from '../../Containers/Trips/TripsCanceledItemContainer';
 
 const TripsCanceled = ({ canceledTrips }) => {
   console.log('tripsCancled', canceledTrips);
@@ -13,7 +13,7 @@ const TripsCanceled = ({ canceledTrips }) => {
       <TripsCanceledWrapper>
         <TripsCanceledLists>
           {canceledTrips.map(trip => (
-            <TripsCanceledItem key={trip.reservationId} trip={trip} />
+            <TripsCanceledItemContainer key={trip.reservationId} trip={trip} />
           ))}
         </TripsCanceledLists>
       </TripsCanceledWrapper>
