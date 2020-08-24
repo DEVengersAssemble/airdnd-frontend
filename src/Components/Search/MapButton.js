@@ -48,14 +48,14 @@ const MapCheckbox = () => {
   );
 };
 
-const MapZoomButton = () => {
+const MapZoomButton = ({ onZoomIn, onZoomOut }) => {
   return (
     <StBtnWrapper>
-      <StButton className="plusBtn" position="relative">
+      <StButton className="plusBtn" position="relative" onClick={onZoomIn}>
         <FiPlus fontSize="2.4rem" />
       </StButton>
       <StLine />
-      <StButton className="minusBtn" position="relative">
+      <StButton className="minusBtn" position="relative" onClick={onZoomOut}>
         <FiMinus fontSize="2.4rem" />
       </StButton>
     </StBtnWrapper>
@@ -70,7 +70,7 @@ const MapMarkerButton = () => {
   );
 };
 
-const MapCloseButton = ({ onHideMap, closeMap }) => {
+const MapCloseButton = ({ onHideMap, closeMap, view }) => {
   return (
     <StButton
       boxShadow
@@ -78,7 +78,7 @@ const MapCloseButton = ({ onHideMap, closeMap }) => {
       top="10rem"
       margin="0 0 91px 0"
       onClick={() => {
-        onHideMap();
+        view === 'result' && onHideMap();
         closeMap();
       }}
     >

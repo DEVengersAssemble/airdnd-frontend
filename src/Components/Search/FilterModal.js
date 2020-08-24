@@ -8,7 +8,7 @@ import { MinusButton, PlusButton } from '../Global/CounterButton';
 import Checkbox from '../Global/Checkbox';
 import { GrFormDown } from 'react-icons/gr';
 
-const ToggleFilter = () => {
+const ToggleFilter = ({ onToggle, filter }) => {
   return (
     <StFilterWrapper direction="row">
       <StContentWrapper direction="column">
@@ -17,12 +17,15 @@ const ToggleFilter = () => {
           호스트 승인을 기다릴 필요 없이 예약할 수 있는 숙소
         </StSmallSpan>
       </StContentWrapper>
-      <Toggle />
+      <Toggle
+        handleClick={() => onToggle('instantBooking', !filter.instantBooking)}
+        checked={filter.instantBooking}
+      />
     </StFilterWrapper>
   );
 };
 
-const MoreFilters = () => {
+const MoreFilters = ({ onToggle, filter }) => {
   return (
     <StFilterWrapper>
       <StTitle>편의시설 더 보기</StTitle>
@@ -32,7 +35,10 @@ const MoreFilters = () => {
           <StSmallSpan>슈퍼호스트의 숙소에 머물러보세요</StSmallSpan>
           <StLink>더 알아보기</StLink>
         </StContentWrapper>
-        <Toggle />
+        <Toggle
+          checked={filter.convenience}
+          handleClick={() => onToggle('convenience', !filter.convenience)}
+        />
       </StContentWrapper>
       <StLargeSpan>장애인 편의시설</StLargeSpan>
       <StSmallSpan>
@@ -43,56 +49,72 @@ const MoreFilters = () => {
   );
 };
 
-const Counter = () => {
+const Counter = ({ onIncrease, onDecrease, filter, name }) => {
   return (
     <StContentWrapper align="center" width="10rem">
-      <MinusButton disabled />
-      <StLargeSpan>0</StLargeSpan>
-      <PlusButton />
+      <MinusButton
+        onClick={() => onDecrease(name, filter - 1)}
+        disabled={filter <= 0}
+      />
+      <StLargeSpan>{filter}</StLargeSpan>
+      <PlusButton
+        onClick={() => onIncrease(name, filter + 1)}
+        disabled={filter >= 15}
+      />
     </StContentWrapper>
   );
 };
 
-const CounterFilter = () => {
+const CounterFilter = ({ onIncrease, onDecrease, filter }) => {
   return (
     <StFilterWrapper>
       <StTitle>침실과 침대</StTitle>
       <StContentWrapper align="center" margin="0 0 2rem">
         <StLargeSpan>침대 수</StLargeSpan>
-        <Counter />
+        <Counter
+          onIncrease={onIncrease}
+          onDecrease={onDecrease}
+          filter={filter.bed}
+          name="bed"
+        />
       </StContentWrapper>
       <StContentWrapper align="center" margin="0 0 2rem">
         <StLargeSpan>침실 수</StLargeSpan>
-        <Counter />
+        <Counter
+          onIncrease={onIncrease}
+          onDecrease={onDecrease}
+          filter={filter.room}
+          name="room"
+        />
       </StContentWrapper>
       <StContentWrapper align="center">
         <StLargeSpan>욕실 수</StLargeSpan>
-        <Counter />
+        <Counter
+          onIncrease={onIncrease}
+          onDecrease={onDecrease}
+          filter={filter.bathroom}
+          name="bathroom"
+        />
       </StContentWrapper>
     </StFilterWrapper>
   );
 };
 
-const CheckboxFilter = () => {
+const CheckboxFilter = ({ title, listName, list, filter, onCheck }) => {
   return (
     <StFilterWrapper>
-      <StTitle>편의 시설</StTitle>
+      <StTitle>{title}</StTitle>
       <StCheckboxList>
-        <StCheckbox value>
-          <StLargeSpan>주방</StLargeSpan>
-        </StCheckbox>
-        <StCheckbox value>
-          <StLargeSpan>주방</StLargeSpan>
-        </StCheckbox>
-        <StCheckbox value>
-          <StLargeSpan>주방</StLargeSpan>
-        </StCheckbox>
-        <StCheckbox value>
-          <StLargeSpan>주방</StLargeSpan>
-        </StCheckbox>
-        <StCheckbox value>
-          <StLargeSpan>주방</StLargeSpan>
-        </StCheckbox>
+        {list.map((name, i) => (
+          <StCheckbox
+            key={i}
+            value
+            checked={filter[name]}
+            onClick={() => onCheck(listName, name, !filter[name])}
+          >
+            <StLargeSpan>{name}</StLargeSpan>
+          </StCheckbox>
+        ))}
       </StCheckboxList>
       <Button
         btnType="underlined"
@@ -107,7 +129,27 @@ const CheckboxFilter = () => {
   );
 };
 
-const FilterModal = ({ popupState, onClose }) => {
+const FilterModal = ({
+  popupState,
+  filterCondition,
+  filter,
+  onClose,
+  onSave,
+  onCheck,
+  onReset,
+  onToggle,
+  onIncrease,
+  onDecrease,
+}) => {
+  const {
+    instantBooking,
+    bedroom,
+    convenience,
+    convenienceList,
+    facilityList,
+    hostLangList,
+  } = filterCondition;
+
   return (
     <StModal
       modalState={popupState}
@@ -116,13 +158,45 @@ const FilterModal = ({ popupState, onClose }) => {
       title="필터 추가하기"
     >
       <StFilterList>
-        <ToggleFilter />
-        <CounterFilter />
-        <MoreFilters />
-        <CheckboxFilter />
+        {instantBooking && <ToggleFilter filter={filter} onToggle={onToggle} />}
+        {bedroom && (
+          <CounterFilter
+            filter={filter.bedroom}
+            onIncrease={onIncrease}
+            onDecrease={onDecrease}
+          />
+        )}
+        {convenience && <MoreFilters filter={filter} onToggle={onToggle} />}
+        {convenienceList && (
+          <CheckboxFilter
+            title="편의 시설"
+            listName="convenienceList"
+            list={convenienceList}
+            filter={filter.convenienceList}
+            onCheck={onCheck}
+          />
+        )}
+        {facilityList && (
+          <CheckboxFilter
+            title="시설"
+            listName="facilityList"
+            list={facilityList}
+            filter={filter.facilityList}
+            onCheck={onCheck}
+          />
+        )}
+        {hostLangList && (
+          <CheckboxFilter
+            title="호스트 언어"
+            listName="hostLangList"
+            list={hostLangList}
+            filter={filter.hostLangList}
+            onCheck={onCheck}
+          />
+        )}
       </StFilterList>
       <StFooter align="space-between">
-        <Button btnType="underlined" hover="background: none">
+        <Button btnType="underlined" hover="background: none" onClick={onReset}>
           전체 삭제
         </Button>
         <Button
@@ -131,6 +205,7 @@ const FilterModal = ({ popupState, onClose }) => {
           hover="background: #000"
           padding="1.5rem 2rem"
           transition
+          onClick={onSave}
         >
           <span>300개 이상</span>의 숙소 보기
         </Button>

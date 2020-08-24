@@ -26,7 +26,6 @@ const StDropDownSelect = styled.select`
   border: 1px solid ${({ theme }) => theme.color.gray};
   border-radius: ${({ radius }) => radius || '4px'};
   text-indent: 5px;
-
   ${({ outline }) =>
     outline
       ? css`
@@ -97,5 +96,4 @@ const DropDownWithFocus = ({
     </StDropDownWrapper>
   );
 };
-
 export default DropDownWithFocus;

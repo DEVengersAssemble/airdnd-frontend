@@ -189,7 +189,7 @@ const NewInput = ({
   onChange,
   ...rest
 }) => {
-  console.log(rest);
+  // console.log(rest);
   return (
     <>
       <StNewLabel short={short} pay={pay} animation={animation} value={value}>

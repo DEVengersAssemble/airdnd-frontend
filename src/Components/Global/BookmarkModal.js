@@ -6,11 +6,14 @@ import { NewInput } from './Input';
 import styled from 'styled-components';
 
 const BookmarkListModal = ({
+  homeId,
   modalState,
   setModalState,
   openNewModal,
   bookmarkLists,
+  onClickBookmark,
 }) => {
+  console.log('is it rendering?');
   return (
     <Modal
       modalState={modalState}
@@ -22,15 +25,22 @@ const BookmarkListModal = ({
     >
       <StList>
         {bookmarkLists.map(
-          ({ bookmarkListId, bookmarkListTitle, bookmarks }) => (
-            <StBookmark key={bookmarkListId}>
-              <StImage src={bookmarks[0].images} />
-              <StContentWrapper>
-                <StTitle>{bookmarkListTitle}</StTitle>
-                <StCount>숙소 {bookmarks.length}개</StCount>
-              </StContentWrapper>
-            </StBookmark>
-          ),
+          ({ bookmarkListId, bookmarkListTitle, bookmarks }) =>
+            bookmarks && (
+              <StBookmark
+                key={bookmarkListId}
+                onClick={() => {
+                  setModalState();
+                  onClickBookmark(homeId, bookmarkListId);
+                }}
+              >
+                <StImage src={bookmarks[0].images} />
+                <StContentWrapper>
+                  <StTitle>{bookmarkListTitle}</StTitle>
+                  <StCount>숙소 {bookmarks.length}개</StCount>
+                </StContentWrapper>
+              </StBookmark>
+            ),
         )}
       </StList>
       <ModalFooter>
@@ -47,7 +57,15 @@ const BookmarkListModal = ({
   );
 };
 
-const NewBookmarkModal = ({ value, onChange, modalState, setModalState }) => {
+const NewBookmarkModal = ({
+  homeId,
+  value,
+  onChange,
+  onClickNewList,
+  modalState,
+  setModalState,
+  closeListModal,
+}) => {
   return (
     <Modal
       modalState={modalState}
@@ -67,6 +85,11 @@ const NewBookmarkModal = ({ value, onChange, modalState, setModalState }) => {
           color="black"
           hover="background: #000"
           width="100%"
+          onClick={() => {
+            onClickNewList(value, homeId);
+            setModalState();
+            closeListModal();
+          }}
         >
           새로 만들기
         </Button>
