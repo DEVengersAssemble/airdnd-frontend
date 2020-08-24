@@ -2,18 +2,43 @@ import React from 'react';
 import styled from 'styled-components';
 import Button from '../Global/Button';
 import Wishlist from './Wishlist';
+import WishlistsPopup from './WishlistsPopup';
 
-const WishlistsMain = () => {
+const WishlistsMain = ({
+  title,
+  bmLists,
+  onChangeTitleInput,
+  onCreateBookMarkList,
+  openPopup,
+  onClickPopup,
+}) => {
   return (
     <WishlistsMainWrapper>
       <WishlistsMainInner>
         <WishlistsTitleWrapper>
           <WishlistsTitle>저장 목록</WishlistsTitle>
-          <Button padding="1.2rem 2rem">목록 만들기</Button>
+          <PopupWrapper>
+            <Button
+              padding="1.2rem 2rem"
+              transition="1rem"
+              onClick={onClickPopup}
+              openPopup={openPopup}
+            >
+              목록 만들기
+            </Button>
+            <WishlistsPopup
+              title={title}
+              onChangeTitleInput={onChangeTitleInput}
+              onCreateBookMarkList={onCreateBookMarkList}
+              openPopup={openPopup}
+              onClickPopup={onClickPopup}
+            />
+          </PopupWrapper>
         </WishlistsTitleWrapper>
         <WishlistsItems>
-          <Wishlist />
-          <Wishlist />
+          {bmLists.map(bmList => (
+            <Wishlist key={bmList.bookmarkListId} bmList={bmList} />
+          ))}
         </WishlistsItems>
       </WishlistsMainInner>
     </WishlistsMainWrapper>
@@ -41,6 +66,10 @@ const WishlistsTitleWrapper = styled.div`
 const WishlistsTitle = styled.h2`
   font-size: 3.4rem;
   font-weight: bold;
+`;
+
+const PopupWrapper = styled.div`
+  position: relative;
 `;
 
 const WishlistsItems = styled.ul`

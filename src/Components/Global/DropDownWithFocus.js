@@ -1,20 +1,20 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 
 const StDropDownWrapper = styled.div`
   position: relative;
   box-sizing: border-box;
-  width: ${props => props.width || '200px'};
-  background: rgb(255, 255, 255);
+  width: ${({ width }) => width || '200px'};
+  background: ${({ theme }) => theme.color.white};
   z-index: 0;
 `;
 
 const StDropDownSelect = styled.select`
   box-sizing: border-box;
   width: 100%;
-  height: 48px;
-  padding: 10px;
+  height: ${({ height }) => height || '48px'};
+  padding: ${({ padding }) => padding || '10px'};
   -o-appearance: none;
   -ms-appearance: none;
   -webkit-appearance: none;
@@ -23,13 +23,23 @@ const StDropDownSelect = styled.select`
   background: transparent;
   border: none;
   outline: none;
-  border: 1px solid #ced4da;
-  border-radius: 4px;
+  border: 1px solid ${({ theme }) => theme.color.gray};
+  border-radius: ${({ radius }) => radius || '4px'};
   text-indent: 5px;
-  &:focus {
-    border: 1px solid #0ca678;
-    border-radius: 4px;
-  }
+  ${({ outline }) =>
+    outline
+      ? css`
+          &:focus {
+            border: 1px solid ${({ theme }) => theme.color.dropDownGreen};
+            border-radius: ${({ radius }) => radius || '4px'};
+          }
+        `
+      : css`
+          &:focus {
+            border: 1px solid ${({ theme }) => theme.color.black};
+            border-radius: ${({ radius }) => radius || '4px'};
+          }
+        `}
 `;
 
 const StDropDownOption = styled.option`
@@ -54,10 +64,25 @@ const StDropDownIconWrapper = styled.span`
   z-index: -1;
 `;
 
-const DropDownWithFocus = ({ width, name, title, options }) => {
+const DropDownWithFocus = ({
+  name,
+  title,
+  options,
+  width,
+  height,
+  padding,
+  radius,
+  outline,
+}) => {
   return (
     <StDropDownWrapper width={width}>
-      <StDropDownSelect name={name}>
+      <StDropDownSelect
+        name={name}
+        height={height}
+        padding={padding}
+        radius={radius}
+        outline={outline}
+      >
         <StDropDownOption disabled>{title}</StDropDownOption>
         {options.map((option, i) => (
           <StDropDownOption key={i} value={option}>
@@ -71,5 +96,4 @@ const DropDownWithFocus = ({ width, name, title, options }) => {
     </StDropDownWrapper>
   );
 };
-
 export default DropDownWithFocus;
