@@ -66,7 +66,7 @@ const getWidth = (size, type, mapState) => {
       return '148px';
     case size === 'large' && type:
       console.log('33%');
-      return '33%';
+      return '50%';
     case size === 'medium' || type:
       console.log('50%');
       return '50%';
@@ -78,13 +78,16 @@ const getWidth = (size, type, mapState) => {
 const StWrapper = styled.li`
   position: relative;
   padding: 1rem 1rem 3rem;
-  width: ${({ type, mapState }) => getWidth(null, type, mapState)};
+  width: 20%;
+  width: ${({ type, mapState }) => type && mapState && '148px'};
 
   @media ${({ theme }) => theme.size.large} {
-    width: ${({ type, mapState }) => getWidth('large', type, mapState)};
+    width: 25%;
+    width: ${({ type, mapState }) => (type && mapState ? '50%' : '33%')};
   }
   @media ${({ theme }) => theme.size.medium} {
-    width: ${({ type, mapState }) => getWidth('medium', type, mapState)};
+    width: 50%;
+    /* width: ${({ type, mapState }) => (type && mapState ? '50%' : '33%')}; */
   }
 `;
 

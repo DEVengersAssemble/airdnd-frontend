@@ -24,6 +24,8 @@ const RecentHomeList = ({ recentHomes }) => {
 const StWrapper = styled.div`
   margin: 4rem 0;
   position: relative;
+  overflow: hidden;
+  width: 100%;
 `;
 
 const StHomeWrapper = styled.ul`

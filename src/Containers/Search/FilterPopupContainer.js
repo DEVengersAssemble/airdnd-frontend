@@ -8,6 +8,8 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import { saveFilter, setFilter, resetFilter } from '../../Modules/search';
 
+let prevFilter = {};
+
 const RefundPopupContainer = ({ popupState, onClose }) => {
   const { refund } = useSelector(state => state.search.filterApplied);
   const dispatch = useDispatch();
@@ -20,10 +22,12 @@ const RefundPopupContainer = ({ popupState, onClose }) => {
   const popup = useRef();
   const closePopup = ({ target }) => {
     if (!popupState || popup.current.contains(target)) return;
+    // dispatch(saveFilter('refund'), prevFilter);
     onClose();
   };
 
   useEffect(() => {
+    prevFilter = refund;
     document.addEventListener('click', closePopup);
     return () => {
       document.removeEventListener('click', closePopup);
@@ -37,7 +41,7 @@ const RefundPopupContainer = ({ popupState, onClose }) => {
         popupState={popupState}
         isDisabled={isDisabled}
         onSave={onSave}
-        onClose={onClose}
+        // onClose={onClose}
         onReset={onReset}
         handleClick={onToggle}
       />
@@ -59,10 +63,12 @@ const RoomTypePopupContainer = ({ popupState, onClose }) => {
   const popup = useRef();
   const closePopup = ({ target }) => {
     if (!popupState || popup.current.contains(target)) return;
+    // dispatch(saveFilter('roomType'), prevFilter);
     onClose();
   };
 
   useEffect(() => {
+    prevFilter = { ...roomType };
     document.addEventListener('click', closePopup);
     return () => {
       document.removeEventListener('click', closePopup);
@@ -101,10 +107,12 @@ const PricePopupContainer = ({ popupState, onClose }) => {
   const popup = useRef();
   const closePopup = ({ target }) => {
     if (!popupState || popup.current.contains(target)) return;
+    // dispatch(saveFilter('price'), prevFilter);
     onClose();
   };
 
   useEffect(() => {
+    prevFilter = { priceFrom, priceTo };
     document.addEventListener('click', closePopup);
     return () => {
       document.removeEventListener('click', closePopup);
