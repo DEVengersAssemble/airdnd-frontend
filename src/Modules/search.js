@@ -13,6 +13,7 @@ const SAVE_FILTER = 'search/SAVE_FILTER';
 const APPLY_TOGGLE_FILTER = 'search/APPLY_TOGGLE_FILTER';
 const APPLY_COUNTER_FILTER = 'search/APPLY_COUNTER_FILTER';
 const APPLY_CHECK_FILTER = 'search/APPLY_CHECK_FILTER';
+const SET_MODAL_FILTER = 'search/SET_MODAL_FILTER';
 const RESET_MODAL_FILTER = 'search/RESET_MODAL/FILTER';
 
 // action creator
@@ -43,11 +44,15 @@ export const applyCheckFilter = (list, name, value) => ({
   name,
   value,
 });
+export const setModalFilter = modalFilter => ({
+  type: SET_MODAL_FILTER,
+  modalFilter,
+});
 export const resetModalFilter = filterCondition => ({
   type: RESET_MODAL_FILTER,
   filterCondition,
 });
-export const setModalFilter = filterCondition => {
+export const modalFilterInit = filterCondition => {
   const filter = {};
   const {
     instantBooking,
@@ -371,12 +376,21 @@ const search = (state = initialState, action) => {
           },
         },
       };
+    case SET_MODAL_FILTER:
+      return {
+        ...state,
+        filterApplied: {
+          ...state.filterApplied,
+          ...action.modalFilter,
+        },
+        popup: popupInit,
+      };
     case RESET_MODAL_FILTER:
       return {
         ...state,
         filterApplied: {
           ...state.filterApplied,
-          ...setModalFilter(state.filterCondition),
+          ...modalFilterInit(state.filterCondition),
         },
       };
     default:

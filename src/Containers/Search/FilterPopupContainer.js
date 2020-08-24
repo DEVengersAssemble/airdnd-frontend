@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
   RefundPopup,
   RoomTypePopup,
@@ -15,32 +15,33 @@ const RefundPopupContainer = ({ popupState, onClose }) => {
   const onToggle = () => dispatch(setFilter('refund', !refund));
   const onReset = () => dispatch(resetFilter('refund'));
   const onSave = () => dispatch(saveFilter('refund', refund));
+  const isDisabled = !refund;
 
-  // const popup = useRef();
-  // const closePopup = ({ target }) => {
-  //   if (!popupState || popup.current.contains(target)) return;
-  //   onClose();
-  //   onReset(refund);
-  // };
+  const popup = useRef();
+  const closePopup = ({ target }) => {
+    if (!popupState || popup.current.contains(target)) return;
+    onClose();
+  };
 
-  // useEffect(() => {
-  //   document.addEventListener('click', closePopup);
-  //   return () => {
-  //     document.removeEventListener('click', closePopup);
-  //   };
-  // }, [closePopup]);
+  useEffect(() => {
+    document.addEventListener('click', closePopup);
+    return () => {
+      document.removeEventListener('click', closePopup);
+    };
+  }, [closePopup]);
 
   return (
-    // <div ref={popup}>
-    <RefundPopup
-      toggle={refund}
-      popupState={popupState}
-      onSave={onSave}
-      onClose={onClose}
-      onReset={onReset}
-      handleClick={onToggle}
-    />
-    // </div>
+    <div ref={popup}>
+      <RefundPopup
+        toggle={refund}
+        popupState={popupState}
+        isDisabled={isDisabled}
+        onSave={onSave}
+        onClose={onClose}
+        onReset={onReset}
+        handleClick={onToggle}
+      />
+    </div>
   );
 };
 
@@ -52,31 +53,33 @@ const RoomTypePopupContainer = ({ popupState, onClose }) => {
     dispatch(setFilter('roomType', { ...roomType, [type]: !roomType[type] }));
   const onReset = () => dispatch(resetFilter('roomType'));
   const onSave = () => dispatch(saveFilter('roomType', roomType));
+  const isDisabled =
+    roomType && !roomType.house && !roomType.private && !roomType.shared;
 
-  // const popup = useRef();
-  // const closePopup = ({ target }) => {
-  //   if (!popupState || popup.current.contains(target)) return;
-  //   onClose();
-  //   onReset(roomType);
-  // };
+  const popup = useRef();
+  const closePopup = ({ target }) => {
+    if (!popupState || popup.current.contains(target)) return;
+    onClose();
+  };
 
-  // useEffect(() => {
-  //   document.addEventListener('click', closePopup);
-  //   return () => {
-  //     document.removeEventListener('click', closePopup);
-  //   };
-  // }, [closePopup]);
+  useEffect(() => {
+    document.addEventListener('click', closePopup);
+    return () => {
+      document.removeEventListener('click', closePopup);
+    };
+  }, [closePopup]);
 
   return (
-    // <div ref={popup}>
-    <RoomTypePopup
-      check={roomType}
-      popupState={popupState}
-      onSave={onSave}
-      onChange={onChange}
-      onReset={onReset}
-    />
-    // </div>
+    <div ref={popup}>
+      <RoomTypePopup
+        check={roomType}
+        popupState={popupState}
+        isDisabled={isDisabled}
+        onSave={onSave}
+        onChange={onChange}
+        onReset={onReset}
+      />
+    </div>
   );
 };
 
@@ -93,56 +96,57 @@ const PricePopupContainer = ({ popupState, onClose }) => {
     dispatch(setFilter('price', { priceFrom, priceTo: target.value }));
   const onReset = () => dispatch(resetFilter('price'));
   const onSave = () => dispatch(saveFilter('price', { priceFrom, priceTo }));
+  const isDisabled = priceFrom === 12000 && priceTo === 1000000;
 
-  //   const popup = useRef();
-  // const closePopup = ({ target }) => {
-  //   if (!popupState || popup.current.contains(target)) return;
-  //   onClose();
-  //   onReset();
-  // };
+  const popup = useRef();
+  const closePopup = ({ target }) => {
+    if (!popupState || popup.current.contains(target)) return;
+    onClose();
+  };
 
-  // useEffect(() => {
-  //   document.addEventListener('click', closePopup);
-  //   return () => {
-  //     document.removeEventListener('click', closePopup);
-  //   };
-  // }, [closePopup]);
+  useEffect(() => {
+    document.addEventListener('click', closePopup);
+    return () => {
+      document.removeEventListener('click', closePopup);
+    };
+  }, [closePopup]);
 
   return (
-    // <div ref={popup}>
-    <PricePopup
-      popupState={popupState}
-      priceArray={priceArray}
-      averagePrice={averagePrice}
-      priceFrom={priceFrom}
-      priceTo={priceTo}
-      onChangePriceFrom={onChangePriceFrom}
-      onChangePriceTo={onChangePriceTo}
-      onSave={onSave}
-      onReset={onReset}
-    />
-    // </div>
+    <div ref={popup}>
+      <PricePopup
+        popupState={popupState}
+        isDisabled={isDisabled}
+        priceArray={priceArray}
+        averagePrice={averagePrice}
+        priceFrom={priceFrom}
+        priceTo={priceTo}
+        onChangePriceFrom={onChangePriceFrom}
+        onChangePriceTo={onChangePriceTo}
+        onSave={onSave}
+        onReset={onReset}
+      />
+    </div>
   );
 };
 
 const SetDatePopupContainer = ({ popupState, onClose }) => {
-  // const popup = useRef();
-  // const closePopup = ({ target }) => {
-  //   if (!popupState || popup.current.contains(target)) return;
-  //   onClose();
-  // };
+  const popup = useRef();
+  const closePopup = ({ target }) => {
+    if (!popupState || popup.current.contains(target)) return;
+    onClose();
+  };
 
-  // useEffect(() => {
-  //   document.addEventListener('click', closePopup);
-  //   return () => {
-  //     document.removeEventListener('click', closePopup);
-  //   };
-  // }, [closePopup]);
+  useEffect(() => {
+    document.addEventListener('click', closePopup);
+    return () => {
+      document.removeEventListener('click', closePopup);
+    };
+  }, [closePopup]);
 
   return (
-    // <div ref={popup}>
-    <SetDatePopup popupState={popupState} />
-    // </div>
+    <div ref={popup}>
+      <SetDatePopup popupState={popupState} />
+    </div>
   );
 };
 

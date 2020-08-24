@@ -8,10 +8,18 @@ import Checkbox from '../Global/Checkbox';
 import { NewInput } from '../Global/Input';
 import { GiHamburgerMenu } from 'react-icons/gi';
 
-const RefundPopup = ({ popupState, toggle, handleClick, onReset, onSave }) => {
+const RefundPopup = ({
+  popupState,
+  isDisabled,
+  toggle,
+  handleClick,
+  onReset,
+  onSave,
+}) => {
   return (
     <FilterPopup
       popupState={popupState}
+      isDisabled={isDisabled}
       size="350px"
       value={toggle}
       onSave={onSave}
@@ -27,11 +35,19 @@ const RefundPopup = ({ popupState, toggle, handleClick, onReset, onSave }) => {
   );
 };
 
-const RoomTypePopup = ({ popupState, check, onChange, onReset, onSave }) => {
+const RoomTypePopup = ({
+  popupState,
+  isDisabled,
+  check,
+  onChange,
+  onReset,
+  onSave,
+}) => {
   return (
     check && (
       <FilterPopup
         popupState={popupState}
+        isDisabled={isDisabled}
         size="365px"
         onReset={onReset}
         onSave={onSave}
@@ -90,6 +106,7 @@ const PricePopup = ({
   priceArray,
   averagePrice,
   popupState,
+  isDisabled,
   priceFrom,
   priceTo,
   onChangePriceFrom,
@@ -100,6 +117,7 @@ const PricePopup = ({
   return (
     <FilterPopup
       popupState={popupState}
+      isDisabled={isDisabled}
       size="430px"
       onReset={onReset}
       onSave={onSave}
@@ -161,9 +179,8 @@ const SetDatePopup = ({ popupState }) => {
 const FilterPopup = ({
   children,
   popupState,
+  isDisabled,
   size,
-  value,
-  check,
   onReset,
   onSave,
 }) => {
@@ -176,10 +193,7 @@ const FilterPopup = ({
           padding="1rem"
           fontSize="1.6rem"
           onClick={onReset}
-          disabled={
-            (value !== undefined && !value) ||
-            (check && !check.house && !check.private && !check.shared)
-          }
+          disabled={isDisabled}
         >
           지우기
         </Button>
