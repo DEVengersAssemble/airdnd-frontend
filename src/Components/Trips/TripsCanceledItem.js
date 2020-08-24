@@ -5,24 +5,25 @@ import { lighten } from 'polished';
 import Button from '../Global/Button';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 
-const TripsCanceledItem = () => {
+const TripsCanceledItem = ({
+  reservationId,
+  image,
+  title,
+  location,
+  ci,
+  co,
+}) => {
   return (
     <TripsCanceledItemWrapper>
-      <Link to="/schedule/1">
+      <Link to={`/schedule/${reservationId}`}>
         <StButton>
           <TripsCanceledButtonWrapper>
             <TripsCanceledButtonInnerWrapper>
-              <TripsCanceledButtonImg
-                src="https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large"
-                alt="#"
-              />
+              <TripsCanceledButtonImg src={`${image}`} alt="#" />
               <TripsCanceledTextWrapper>
-                <TripsCanceledTitle>
-                  Round#1, 서울숲 차로 10분 성수역 2호선 보도 8분
-                </TripsCanceledTitle>
+                <TripsCanceledTitle>{title}</TripsCanceledTitle>
                 <TripsCanceledCkLc>
-                  Seongsudong 3(il)-ga, SeongDong-gu, Seoul · 10월 25일 - 10월
-                  26일
+                  {location} · {ci} - {co}
                 </TripsCanceledCkLc>
               </TripsCanceledTextWrapper>
             </TripsCanceledButtonInnerWrapper>
