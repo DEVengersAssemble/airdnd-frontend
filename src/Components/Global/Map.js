@@ -1,4 +1,5 @@
 import React from 'react';
+import styled, { css } from 'styled-components';
 import { compose, withProps } from 'recompose';
 import {
   withScriptjs,
@@ -8,15 +9,85 @@ import {
 } from 'react-google-maps';
 
 const Map = compose(
+  withProps({
+    googleMapURL:
+      'https://maps.googleapis.com/maps/api/js?key=AIzaSyCqryK5lMUxY0i_-Zu1cUrgW3_Geg4BrWA&v=3.exp&libraries=geometry,drawing,places',
+    loadingElement: (
+      <div
+        style={{
+          width: '100%',
+          height: `100vh`,
+          position: 'sticky',
+          top: '0',
+        }}
+      />
+    ),
+    containerElement: (
+      <div
+        style={{
+          width: '100%',
+          height: `100vh`,
+          position: 'sticky',
+          top: '0',
+        }}
+      />
+    ),
+    mapElement: (
+      <div
+        style={{
+          width: '100%',
+          height: `100vh`,
+          position: 'sticky',
+          top: '0',
+        }}
+      />
+    ),
+  }),
   withScriptjs,
   withGoogleMap,
-)(props => (
-  <GoogleMap
-    defaultZoom={13}
-    defaultCenter={{ lat: 37.550533, lng: 127.041504 }}
-  >
-    <Marker position={{ lat: 37.550533, lng: 127.041504 }} />
-  </GoogleMap>
-));
+)(({ center, mapZoom }) => {
+  const goldStar = {
+    fillColor: 'white',
+    fillOpacity: 0.8,
+    borderRadius: '50%',
+    scale: 0.3,
+    strokeColor: 'gold',
+    strokeWeight: 1,
+  };
+  return (
+    <GoogleMap
+      zoom={mapZoom}
+      defaultZoom={13}
+      defaultCenter={{
+        lat: center.lat,
+        lng: center.lng,
+      }}
+      options={{ disableDefaultUI: true }}
+    >
+      <StMarker
+        className="노원역"
+        position={{ lat: 37.651791, lng: 127.060944 }}
+        icon={goldStar}
+      />
+      <StMarker
+        className="을지초"
+        position={{ lat: 37.650333, lng: 127.072783 }}
+        icon={goldStar}
+      />
+      <StMarker
+        className="당현천"
+        position={{ lat: 37.648824, lng: 127.065379 }}
+        label={{ text: 'hello', color: 'white' }}
+        icon={goldStar}
+      />
+    </GoogleMap>
+  );
+});
+
+const StMarker = styled(Marker)`
+  background: blue;
+  width: 20px;
+  height: 20px;
+`;
 
 export default Map;

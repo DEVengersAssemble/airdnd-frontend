@@ -13,6 +13,7 @@ const StToggleButton = styled.button`
   background: ${({ theme }) => theme.color.gray};
   cursor: pointer;
   outline: none;
+  min-width: 48px;
   ${({ checked }) =>
     checked &&
     css`

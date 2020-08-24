@@ -1,64 +1,32 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import {
   MapZoomButton,
   MapMarkerButton,
   MapCloseButton,
   MapCheckbox,
-  MapFilterButton,
-  MapButton,
 } from './MapButton';
-import Map from '../Global/Map';
+import MapContainer from '../../Containers/Global/MapContainer';
 
-const SearchMap = ({ onHideMap, mapState, view, closeMap }) => {
+const SearchMap = ({
+  onHideMap,
+  mapState,
+  onZoomIn,
+  onZoomOut,
+  view,
+  closeMap,
+}) => {
   return (
     <StWrapper mapState={mapState} view={view}>
       <StStickyWrapper>
-        <MapCloseButton onHideMap={onHideMap} closeMap={closeMap} />
+        <MapCloseButton onHideMap={onHideMap} closeMap={closeMap} view={view} />
         <MapCheckbox />
         <StBtnSetWrapper>
-          <MapZoomButton />
+          <MapZoomButton onZoomIn={onZoomIn} onZoomOut={onZoomOut} />
           <MapMarkerButton />
         </StBtnSetWrapper>
       </StStickyWrapper>
-      {/* <Map /> */}
-      <Map
-        googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqryK5lMUxY0i_-Zu1cUrgW3_Geg4BrWA&v=3.exp&libraries=geometry,drawing,places"
-        loadingElement={
-          <div
-            style={{
-              width: '100%',
-              height: `100vh`,
-              position: 'sticky',
-              top: '0',
-            }}
-          />
-        }
-        containerElement={
-          <div
-            style={{
-              width: '100%',
-              height: `100vh`,
-              position: 'sticky',
-              top: '0',
-            }}
-          />
-        }
-        mapElement={
-          <div
-            style={{
-              width: '100%',
-              height: `100vh`,
-              position: 'sticky',
-              top: '0',
-            }}
-          />
-        }
-
-        // loadingElement={<div style={{ height: `100%` }} />}
-        // containerElement={<div style={{ height: `400px` }} />}
-        // mapElement={<div style={{ height: `100%` }} />}
-      />
+      <MapContainer />
     </StWrapper>
   );
 };
