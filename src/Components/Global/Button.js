@@ -17,6 +17,7 @@ const Button = ({
   transition,
   type,
   disabled,
+  onClick,
   ...rest
 }) => {
   return (
@@ -34,6 +35,7 @@ const Button = ({
       disabled={disabled} // true
       transition={transition} // true
       type={type || 'button'} // 'submit'
+      onClick={onClick} // () => {}
       {...rest}
     >
       {children}

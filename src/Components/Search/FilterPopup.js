@@ -8,18 +8,11 @@ import Checkbox from '../Global/Checkbox';
 import { NewInput } from '../Global/Input';
 import { GiHamburgerMenu } from 'react-icons/gi';
 
-const RefundPopup = ({
-  popupState,
-  size,
-  toggle,
-  handleClick,
-  onReset,
-  onSave,
-}) => {
+const RefundPopup = ({ popupState, toggle, handleClick, onReset, onSave }) => {
   return (
     <FilterPopup
       popupState={popupState}
-      size={size}
+      size="350px"
       value={toggle}
       onSave={onSave}
       onReset={() => onReset(false)}
@@ -34,67 +27,62 @@ const RefundPopup = ({
   );
 };
 
-const RoomTypePopup = ({
-  popupState,
-  size,
-  check,
-  onChange,
-  onReset,
-  onSave,
-}) => {
+const RoomTypePopup = ({ popupState, check, onChange, onReset, onSave }) => {
   return (
-    <FilterPopup
-      popupState={popupState}
-      size={size}
-      onReset={onReset}
-      onSave={onSave}
-      check={check}
-    >
-      <StCheckboxList>
-        <StCheckboxWrapper>
-          <Checkbox
-            value
-            checked={check.house}
-            onChange={() => onChange('house')}
-          >
-            <StContentWrapper content="roomType">
-              <StLargeSpan>집 전체</StLargeSpan>
-              <StSmallSpan>집 전체를 단독으로 사용합니다</StSmallSpan>
-            </StContentWrapper>
-          </Checkbox>
-        </StCheckboxWrapper>
-        <StCheckboxWrapper>
-          <Checkbox
-            value
-            checked={check.private}
-            onChange={() => onChange('private')}
-          >
-            <StContentWrapper content="roomType">
-              <StLargeSpan>개인실</StLargeSpan>
-              <StSmallSpan>
-                침실은 단독으로 쓰고, 이외의 공간은 호스트나 다른 게스트와 함께
-                이용할 수도 있습니다
-              </StSmallSpan>
-            </StContentWrapper>
-          </Checkbox>
-        </StCheckboxWrapper>
-        <StCheckboxWrapper>
-          <Checkbox
-            value
-            checked={check.shared}
-            onChange={() => onChange('shared')}
-          >
-            <StContentWrapper content="roomType">
-              <StLargeSpan>다인실</StLargeSpan>
-              <StSmallSpan>
-                사적 공간 없이, 침실이나 욕실 등을 호스트나 다른 게스트와 함께
-                이용합니다
-              </StSmallSpan>
-            </StContentWrapper>
-          </Checkbox>
-        </StCheckboxWrapper>
-      </StCheckboxList>
-    </FilterPopup>
+    check && (
+      <FilterPopup
+        popupState={popupState}
+        size="365px"
+        onReset={onReset}
+        onSave={onSave}
+        check={check}
+      >
+        <StCheckboxList>
+          <StCheckboxWrapper>
+            <Checkbox
+              value
+              checked={check.house}
+              onChange={() => onChange('house')}
+            >
+              <StContentWrapper content="roomType">
+                <StLargeSpan>집 전체</StLargeSpan>
+                <StSmallSpan>집 전체를 단독으로 사용합니다</StSmallSpan>
+              </StContentWrapper>
+            </Checkbox>
+          </StCheckboxWrapper>
+          <StCheckboxWrapper>
+            <Checkbox
+              value
+              checked={check.private}
+              onChange={() => onChange('private')}
+            >
+              <StContentWrapper content="roomType">
+                <StLargeSpan>개인실</StLargeSpan>
+                <StSmallSpan>
+                  침실은 단독으로 쓰고, 이외의 공간은 호스트나 다른 게스트와
+                  함께 이용할 수도 있습니다
+                </StSmallSpan>
+              </StContentWrapper>
+            </Checkbox>
+          </StCheckboxWrapper>
+          <StCheckboxWrapper>
+            <Checkbox
+              value
+              checked={check.shared}
+              onChange={() => onChange('shared')}
+            >
+              <StContentWrapper content="roomType">
+                <StLargeSpan>다인실</StLargeSpan>
+                <StSmallSpan>
+                  사적 공간 없이, 침실이나 욕실 등을 호스트나 다른 게스트와 함께
+                  이용합니다
+                </StSmallSpan>
+              </StContentWrapper>
+            </Checkbox>
+          </StCheckboxWrapper>
+        </StCheckboxList>
+      </FilterPopup>
+    )
   );
 };
 
@@ -102,7 +90,6 @@ const PricePopup = ({
   priceArray,
   averagePrice,
   popupState,
-  size,
   priceFrom,
   priceTo,
   onChangePriceFrom,
@@ -113,7 +100,7 @@ const PricePopup = ({
   return (
     <FilterPopup
       popupState={popupState}
-      size={size}
+      size="430px"
       onReset={onReset}
       onSave={onSave}
     >
@@ -158,9 +145,9 @@ const PricePopup = ({
   );
 };
 
-const SetDatePopup = ({ popupState, size }) => {
+const SetDatePopup = ({ popupState }) => {
   return (
-    <StPopup popupState={popupState} size={size}>
+    <StPopup popupState={popupState} size="35px">
       <StContentWrapper content="setDate">
         <StLargeSpan>요금을 확인하려면 여행 날짜를 입력하세요</StLargeSpan>
         <Button btnType="color" color="black" fontSize="1.4rem">

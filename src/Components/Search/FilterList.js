@@ -38,7 +38,7 @@ export const FilterList = ({
         popupState={popupState}
         dispatch={dispatch}
       >
-        <RefundPopupContainer size="350px" />
+        <RefundPopupContainer />
       </FilterButtonContainer>
       <FilterButtonContainer
         name="roomType"
@@ -46,7 +46,7 @@ export const FilterList = ({
         popupState={popupState}
         dispatch={dispatch}
       >
-        <RoomTypePopupContainer size="365px" />
+        <RoomTypePopupContainer />
       </FilterButtonContainer>
       <FilterButtonContainer
         name="price"
@@ -54,11 +54,7 @@ export const FilterList = ({
         popupState={popupState}
         dispatch={dispatch}
       >
-        {dateDiff ? (
-          <PricePopupContainer size="430px" />
-        ) : (
-          <SetDatePopupContainer size="350px" />
-        )}
+        {dateDiff ? <PricePopupContainer /> : <SetDatePopupContainer />}
       </FilterButtonContainer>
       <FilterButtonContainer
         name="modal"

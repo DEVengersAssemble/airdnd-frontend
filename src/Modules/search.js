@@ -7,6 +7,7 @@ const ZOOM_OUT = 'search/ZOOM_OUT';
 const OPEN_POPUP = 'search/OPEN_POPUP';
 const CLOSE_POPUP = 'search/CLOSE_POPUP';
 const SET_FILTER = 'search/SET_FILTER';
+const RESET_FILTER = 'search/RESET_FILTER';
 const SAVE_FILTER = 'search/SAVE_FILTER';
 
 const APPLY_TOGGLE_FILTER = 'search/APPLY_TOGGLE_FILTER';
@@ -23,6 +24,7 @@ export const zoomOut = () => ({ type: ZOOM_OUT });
 export const openPopup = name => ({ type: OPEN_POPUP, name });
 export const closePopup = () => ({ type: CLOSE_POPUP });
 export const setFilter = (name, value) => ({ type: SET_FILTER, name, value });
+export const resetFilter = name => ({ type: RESET_FILTER, name });
 export const saveFilter = (name, value) => ({ type: SAVE_FILTER, name, value });
 
 export const applyToggleFilter = (name, value) => ({
@@ -45,7 +47,6 @@ export const resetModalFilter = filterCondition => ({
   type: RESET_MODAL_FILTER,
   filterCondition,
 });
-
 export const setModalFilter = filterCondition => {
   const filter = {};
   const {
@@ -75,6 +76,27 @@ export const setModalFilter = filterCondition => {
 };
 
 // initial state
+const filterInit = {
+  refund: false,
+  roomType: {
+    house: false,
+    private: false,
+    shared: false,
+  },
+  price: {
+    priceFrom: 12000,
+    priceTo: 1000000,
+  },
+};
+
+const popupInit = {
+  refund: false,
+  roomType: false,
+  price: false,
+  setDate: false,
+  modal: false,
+};
+
 const initialState = {
   homes: [
     {
@@ -139,7 +161,7 @@ const initialState = {
     },
   ],
   filterApplied: {
-    refund: true,
+    refund: false,
     roomType: {
       house: false,
       private: false,
@@ -159,14 +181,14 @@ const initialState = {
     convenienceList: {
       주방: false,
       샴푸: false,
-      난방: true,
+      난방: false,
       에어컨: false,
-      다리미: true,
+      다리미: false,
       // ...
     },
 
     facilityList: {
-      헬스장: true,
+      헬스장: false,
       수영장: false,
       // ...
     },
@@ -292,13 +314,7 @@ const search = (state = initialState, action) => {
     case CLOSE_POPUP:
       return {
         ...state,
-        popup: {
-          refund: false,
-          roomType: false,
-          price: false,
-          setDate: false,
-          modal: false,
-        },
+        popup: popupInit,
       };
     case SET_FILTER:
       return {
@@ -308,6 +324,14 @@ const search = (state = initialState, action) => {
           [action.name]: action.value,
         },
       };
+    case RESET_FILTER:
+      return {
+        ...state,
+        filterApplied: {
+          ...state.filterApplied,
+          [action.name]: filterInit[action.name],
+        },
+      };
     case SAVE_FILTER:
       return {
         ...state,
@@ -315,6 +339,7 @@ const search = (state = initialState, action) => {
           ...state.filterApplied,
           [action.name]: action.value,
         },
+        popup: popupInit,
       };
     case APPLY_TOGGLE_FILTER:
       return {
