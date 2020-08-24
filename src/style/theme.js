@@ -9,6 +9,7 @@ const theme = {
     main: '#FF385C',
     warning: '#D93900',
     darkRed: '#C03515',
+    dropDownGreen: '#0ca678',
     lightGreen: '#018A04',
     green: '#008489',
     deepGreen: '#01797E',

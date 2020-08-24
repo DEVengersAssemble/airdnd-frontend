@@ -74,15 +74,15 @@ const StNavSearchWrapper = styled.div`
     isScrollTop || isSearchBtnClicked ? slideUp : slideDown};
 
   @media (max-width: 950px) {
-    width: 80%;
+    width: 90%;
     top: 70px;
-    left: calc(50vw - 40%);
+    left: calc(50vw - 45%);
   }
 
   @media ${({ theme }) => theme.size.iPad} {
-    width: 80%;
+    width: 90%;
     top: 70px;
-    left: calc(50vw - 40%);
+    left: calc(50vw - 45%);
   }
 `;
 

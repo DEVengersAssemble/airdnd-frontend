@@ -7,13 +7,15 @@ import Footer from '../Components/Main/Footer';
 
 const MainPage = () => {
   return (
-    <main>
+    <>
       <MainHeaderContainer></MainHeaderContainer>
-      <Background></Background>
-      <Category></Category>
-      <OnlineExp></OnlineExp>
-      <Footer></Footer>
-    </main>
+      <main>
+        <Background></Background>
+        <Category></Category>
+        <OnlineExp></OnlineExp>
+        <Footer></Footer>
+      </main>
+    </>
   );
 };
 

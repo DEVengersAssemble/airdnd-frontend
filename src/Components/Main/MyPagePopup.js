@@ -61,7 +61,7 @@ const StMyPageOptionButton = styled.button`
   }
 `;
 
-const MyPagePopup = ({ popupVisible, closePopup, isLoggedIn }) => {
+const MyPagePopup = ({ popupVisible, closePopup, isLoggedIn, openModal }) => {
   const popupRef = useRef();
   const handlePopup = ({ target }) => {
     if (popupVisible && !popupRef.current.contains(target)) {
@@ -81,10 +81,14 @@ const MyPagePopup = ({ popupVisible, closePopup, isLoggedIn }) => {
           {!isLoggedIn && (
             <>
               <StMyPageOptionItem>
-                <StMyPageOptionButton>로그인</StMyPageOptionButton>
+                <StMyPageOptionButton onClick={() => openModal('login')}>
+                  로그인
+                </StMyPageOptionButton>
               </StMyPageOptionItem>
               <StMyPageOptionItem>
-                <StMyPageOptionButton>회원가입</StMyPageOptionButton>
+                <StMyPageOptionButton onClick={() => openModal('signup')}>
+                  회원가입
+                </StMyPageOptionButton>
               </StMyPageOptionItem>
             </>
           )}
