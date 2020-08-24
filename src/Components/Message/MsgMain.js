@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import theme from '../../style/theme';
-import { Input } from '../Global/Input';
 import Button from '../Global/Button';
+import { Input } from '../Global/Input';
 import { AiOutlinePicture } from 'react-icons/ai';
 import MsgItem from '../Message/MsgItem';
 

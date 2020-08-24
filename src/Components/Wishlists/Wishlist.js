@@ -1,20 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
+import { ellipsis } from 'polished';
 
-const Wishlist = () => {
-  // 기능구현하면서 넘겨주는 props가 바뀔 수 있음
-  const homeCount = 1;
-  // const homeCount = 2;
-  // const homeCount = 3;
+const Wishlist = ({ bmList }) => {
+  console.log('wishlist', bmList);
+  const { bookmarkListId, bookmarkListTitle, bookmarks } = bmList;
+  const homeCount = bookmarks.length;
 
   // Link id변경 필요
   return (
     <WishlistCardWrapper>
-      <Link to={homeCount === 1 ? '/detail' : '/wishlist/1'}>
+      <Link to={`/wishlist/${bookmarkListId}`}>
         <WishlistImgWrapper>
           <WishlistImg homeCount={homeCount} />
-          {homeCount === 1 ? null : (
+          {homeCount !== 0 && (
             <WishlistSubImgWrapper homeCount={homeCount}>
               <WishlistSubImg homeCount={homeCount} />
               {homeCount >= 3 ? <WishlistSubMoreImg /> : <AltImg />}
@@ -22,9 +22,8 @@ const Wishlist = () => {
           )}
         </WishlistImgWrapper>
         <WishlistContent>
-          <WishlistCheckInOut>날짜 상관없음</WishlistCheckInOut>
-          <WishlistTitle>서울특별시</WishlistTitle>
-          <WishlistHomeCount>숙소 2개</WishlistHomeCount>
+          <WishlistTitle>{bookmarkListTitle}</WishlistTitle>
+          <WishlistHomeCount>숙소 {homeCount}개</WishlistHomeCount>
         </WishlistContent>
       </Link>
     </WishlistCardWrapper>
@@ -32,7 +31,7 @@ const Wishlist = () => {
 };
 
 const WishlistCardWrapper = styled.li`
-  width: 40rem;
+  width: 38rem;
   height: 31rem;
   &:nth-child(3n + 2),
   &:nth-child(3n + 1) {
@@ -52,14 +51,23 @@ const WishlistImgWrapper = styled.div`
 `;
 
 const WishlistImg = styled.div`
+  /* homeCount === 0 이면 alt image */
   /* 이미지가 하나면 꽉차게  */
   /* 이미지가 2개이상이면 모자이크 */
   width: 100%;
   height: 20rem;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  background: no-repeat center / 40rem
-    url('https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large');
+  ${({ homeCount }) =>
+    homeCount
+      ? css`
+          background: no-repeat center / 38rem
+            url('https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large');
+        `
+      : css`
+          background: no-repeat center / 38rem
+            url('https://media.glassdoor.com/sql/391850/airbnb-squarelogo-1459271200583.png');
+        `}
   ${({ homeCount }) =>
     homeCount >= 2 &&
     css`
@@ -103,23 +111,20 @@ const AltImg = styled.div`
 `;
 
 const WishlistContent = styled.div`
-  padding: 2rem;
-`;
-
-const WishlistCheckInOut = styled.div`
-  color: ${({ theme }) => theme.color.darkGray};
-  font-size: 1.2rem;
-  font-weight: 400;
+  padding: 0rem 2rem;
 `;
 
 const WishlistTitle = styled.div`
-  padding: 0.5rem 0rem;
-  font-size: 2rem;
+  padding: 2.5rem 0rem 0rem;
+  font-size: 2.5rem;
   font-weight: 500;
+  line-height: 2.5rem;
+  ${ellipsis('36rem')};
 `;
 
 const WishlistHomeCount = styled.div`
-  font-size: 1.4rem;
+  font-size: 1.8rem;
+  padding: 1rem 0rem;
 `;
 
 export default Wishlist;
