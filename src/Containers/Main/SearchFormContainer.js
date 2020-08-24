@@ -12,13 +12,12 @@ const SearchFormContainer = ({ isSearchBtnClicked }) => {
   const [locationResult, setLocationResult] = useState([]);
   const [type, setType] = useState(null);
 
-  console.log('[type]', type);
+  // console.log('[type]', type);
   const closePopup = () => {
     setType(() => null);
   };
 
   const changeType = type => {
-    console.log('changeType', type);
     setType(() => type);
   };
 
