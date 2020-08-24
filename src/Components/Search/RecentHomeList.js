@@ -1,9 +1,10 @@
 import React from 'react';
 import RecentHome from './RecentHome';
+import HomeCard from './HomeCard';
 import styled from 'styled-components';
 import RecentPagenation from './RecentPagenation';
 
-const RecentHomeList = () => {
+const RecentHomeList = ({ recentHomes }) => {
   return (
     <StWrapper>
       <StHeader>최근 숙소</StHeader>
@@ -11,7 +12,11 @@ const RecentHomeList = () => {
         현재 검색 결과와 일치하도록 날짜와 가격이 업데이트되었습니다.
       </StSpan>
       <RecentPagenation />
-      <StHomeWrapper>{}</StHomeWrapper>
+      <StHomeWrapper>
+        {recentHomes.map(home => (
+          <HomeCard key={home.homeId} home={home} type="recent" />
+        ))}
+      </StHomeWrapper>
     </StWrapper>
   );
 };

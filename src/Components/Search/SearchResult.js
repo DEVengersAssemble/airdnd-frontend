@@ -5,6 +5,7 @@ import RecentHomeList from './RecentHomeList';
 import SearchPagenation from './SearchPagenation';
 import { FloatingMapButton } from './MapButton';
 import HomeListContainer from '../../Containers/Search/HomeListContainer';
+import RecentHomeListContainer from '../../Containers/Search/RecentHomeListContainer';
 
 const SearchResult = ({
   mapState,
@@ -23,7 +24,7 @@ const SearchResult = ({
       <StHeader>{location}의 숙소</StHeader>
       <FilterListContainer mapState={mapState} onShowMap={onShowMap} />
       <HomeListContainer mapState={mapState} />
-      <RecentHomeList />
+      <RecentHomeListContainer />
       <SearchPagenation />
       <FloatingMapButton openMap={openMap} />
     </StWrapper>

@@ -5,7 +5,7 @@ import Rating from '../Global/Rating';
 import { CkHeart } from '../Global/Heart';
 import { HomePrice } from './Home';
 
-const HomeCard = ({ home, onClickBookmark, dateDiff }) => {
+const HomeCard = ({ home, type, mapState, onClickBookmark, dateDiff }) => {
   const homeRef = useRef();
   const getHomeWidth = () => homeRef.current && homeRef.current.offsetWidth;
   const {
@@ -21,7 +21,7 @@ const HomeCard = ({ home, onClickBookmark, dateDiff }) => {
   } = home;
 
   return (
-    <StWrapper ref={homeRef}>
+    <StWrapper ref={homeRef} type={type}>
       <CarouselContainer
         size="responsive"
         getHomeWidth={getHomeWidth}
@@ -50,16 +50,41 @@ const HomeCard = ({ home, onClickBookmark, dateDiff }) => {
 
 export default HomeCard;
 
+const getWidth = (size, type, mapState) => {
+  switch (true) {
+    case !size && type && mapState:
+      console.log('148px');
+      return '148px';
+    case !size && type && !mapState:
+      console.log('25%');
+      return '25%';
+    case size === 'large' && !type:
+      console.log('25%');
+      return '25%';
+    case size === 'large' && type && mapState:
+      console.log('148px');
+      return '148px';
+    case size === 'large' && type:
+      console.log('33%');
+      return '33%';
+    case size === 'medium' || type:
+      console.log('50%');
+      return '50%';
+    default:
+      return '20%';
+  }
+};
+
 const StWrapper = styled.li`
   position: relative;
   padding: 1rem 1rem 3rem;
-  width: 20%;
+  width: ${({ type, mapState }) => getWidth(null, type, mapState)};
 
   @media ${({ theme }) => theme.size.large} {
-    width: 25%;
+    width: ${({ type, mapState }) => getWidth('large', type, mapState)};
   }
   @media ${({ theme }) => theme.size.medium} {
-    width: 50%;
+    width: ${({ type, mapState }) => getWidth('medium', type, mapState)};
   }
 `;
 

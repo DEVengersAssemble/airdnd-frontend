@@ -163,6 +163,78 @@ const initialState = {
       title: 'Pia Resort Hotel Corner Studio Room 기기',
       rating: 3.33,
       reviewCount: 312,
+      price: 98839,
+      location: { lat: 0, lng: 0 },
+    },
+    {
+      homeId: 6,
+      isSuperhost: true,
+      isBookmarked: true,
+      image:
+        'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large', // 첫번째 이미지만
+      imageCount: 4, // 이미지 개수
+      subTitle: 'MongMong-Toto의 호텔 객실이답',
+      title: 'Pia Resort Hotel Corner Studio Room 기기',
+      rating: 3.33,
+      reviewCount: 312,
+      price: 98839,
+      location: { lat: 0, lng: 0 },
+    },
+    {
+      homeId: 7,
+      isSuperhost: true,
+      isBookmarked: true,
+      image:
+        'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large', // 첫번째 이미지만
+      imageCount: 4, // 이미지 개수
+      subTitle: 'MongMong-Toto의 호텔 객실이답',
+      title: 'Pia Resort Hotel Corner Studio Room 기기',
+      rating: 3.33,
+      reviewCount: 312,
+      price: 98839,
+      location: { lat: 0, lng: 0 },
+    },
+    {
+      homeId: 8,
+      isSuperhost: true,
+      isBookmarked: true,
+      image:
+        'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large', // 첫번째 이미지만
+      imageCount: 4, // 이미지 개수
+      subTitle: 'MongMong-Toto의 호텔 객실이답',
+      title: 'Pia Resort Hotel Corner Studio Room 기기',
+      rating: 3.33,
+      reviewCount: 312,
+      price: 98839,
+      location: { lat: 0, lng: 0 },
+    },
+    {
+      homeId: 9,
+      isSuperhost: true,
+      isBookmarked: true,
+      image:
+        'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large', // 첫번째 이미지만
+      imageCount: 4, // 이미지 개수
+      subTitle: 'MongMong-Toto의 호텔 객실이답',
+      title: 'Pia Resort Hotel Corner Studio Room 기기',
+      rating: 3.33,
+      reviewCount: 312,
+      price: 98839,
+      location: { lat: 0, lng: 0 },
+    },
+    {
+      homeId: 10,
+      isSuperhost: true,
+      isBookmarked: true,
+      image:
+        'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large', // 첫번째 이미지만
+      imageCount: 4, // 이미지 개수
+      subTitle: 'MongMong-Toto의 호텔 객실이답',
+      title: 'Pia Resort Hotel Corner Studio Room 기기',
+      rating: 3.33,
+      reviewCount: 312,
+      price: 98839,
+      location: { lat: 0, lng: 0 },
     },
   ],
   filterApplied: {
