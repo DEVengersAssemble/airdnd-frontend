@@ -18,11 +18,10 @@ const TripsPastContainer = () => {
       (checkinDate - nowDate < 0 && checkoutDate - nowDate > 0) ||
       checkinDate - nowDate > 0;
 
-    // return !trip.isCanceled && tripState; // 예정된 예약
     return !trip.isCanceled && !tripState; // 지난 예약
   });
-
-  return <TripsPast pastTrips={pastTrips} />;
+  const tripsCount = pastTrips.length;
+  return <TripsPast pastTrips={pastTrips} tripsCount={tripsCount} />;
 };
 
 export default TripsPastContainer;

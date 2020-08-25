@@ -1,21 +1,28 @@
 import React from 'react';
 import styled from 'styled-components';
 import { lighten } from 'polished';
-// import TripsNone from './TripsNone';
+import TripsNone from './TripsNone';
 import TripsSubFooter from './TripsSubFooter';
 import Button from '../Global/Button';
 import TripsPastCardItemContainer from '../../Containers/Trips/TripsPastCardItemContainer';
 
-const TripsPast = ({ pastTrips }) => {
+const TripsPast = ({ pastTrips, tripsCount }) => {
   return (
     <>
-      <TripsPastCardWrapper>
-        <TripsPastCardLists>
-          {pastTrips.map(trip => (
-            <TripsPastCardItemContainer key={trip.reservationId} trip={trip} />
-          ))}
-        </TripsPastCardLists>
-      </TripsPastCardWrapper>
+      {tripsCount ? (
+        <TripsPastCardWrapper>
+          <TripsPastCardLists>
+            {pastTrips.map(trip => (
+              <TripsPastCardItemContainer
+                key={trip.reservationId}
+                trip={trip}
+              />
+            ))}
+          </TripsPastCardLists>
+        </TripsPastCardWrapper>
+      ) : (
+        <TripsNone />
+      )}
       <TripsSubFooter>
         예약 내역을 찾으실 수 없나요?{' '}
         <Button btnType="underlined" hover="none" padding="0" fontSize="1.5rem">

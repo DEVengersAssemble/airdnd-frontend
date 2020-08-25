@@ -3,10 +3,10 @@ import TripsNone from './TripsNone';
 import TripsSubFooter from './TripsSubFooter';
 import Button from '../Global/Button';
 
-const TripsUpcoming = () => {
+const TripsUpcoming = ({ upcomingTrips, tripsCount }) => {
   return (
     <>
-      <TripsNone />
+      {tripsCount ? null : <TripsNone />}
       <TripsSubFooter>
         예약 내역을 찾으실 수 없나요?{' '}
         <Button btnType="underlined" hover="none" padding="0" fontSize="1.5rem">
