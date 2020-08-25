@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import TripsPast from '../../Components/Trips/TripsPast';
 
 const TripsPastContainer = () => {
-  const trips = useSelector(state => state.trips.user.reservations);
+  const trips = useSelector(state => state.trips.reservations);
   const pastTrips = trips.filter(trip => {
     const { checkin, checkout } = trip;
     const nowDate = new Date();

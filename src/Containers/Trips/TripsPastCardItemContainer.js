@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import TripsPastCardItem from '../../Components/Trips/TripsPastCardItem';
 
 const TripsPastCardItemContainer = ({ trip }) => {
-  const myInfo = useSelector(state => state.trips.user);
+  const myInfo = useSelector(state => state.trips);
   const { checkin, checkout } = trip;
   const ciDate = new Date(checkin);
   const coDate = new Date(checkout);
