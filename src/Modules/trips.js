@@ -12,7 +12,7 @@ const initialState = {
     id: 0,
     email: 'keemgreat@gmail.com',
     pw: '1234',
-    fistName: '태진',
+    firstName: '태진',
     lastName: '김',
     profileImg:
       'https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cg_face%2Cq_auto:good%2Cw_300/MTY2MzU3Nzk2OTM2MjMwNTkx/elon_musk_royal_society.jpg',
@@ -30,6 +30,8 @@ const initialState = {
         location: 'Seoul',
         isCanceled: false,
         title: 'Pia Resort Hotel Corner Studio Room~~~',
+        withGuest: false,
+        guest: {},
       },
       {
         reservationId: 2,
@@ -44,6 +46,14 @@ const initialState = {
         isCanceled: false,
         title:
           '애월고내리 해안절경2~ *신규오픈* 멀리바다뷰,그림같은 풍경, 새소리, 힐링 공간♡',
+        withGuest: true,
+        guest: {
+          id: 1,
+          firstName: '지미',
+          lastName: '주',
+          profileImg:
+            'https://media.short-biography.com/wp-content/uploads/mark-zuckerberg/Mark-Zuckerberg.jpg',
+        },
       },
       {
         reservationId: 3,
@@ -57,6 +67,8 @@ const initialState = {
         location: 'Jeju',
         isCanceled: true,
         title: '포근한 정원이 있는 엄마의 정원 "낭안트레" 2인실',
+        withGuest: false,
+        guest: {},
       },
       {
         reservationId: 4,
@@ -70,6 +82,8 @@ const initialState = {
         location: 'Jeju',
         isCanceled: true,
         title: '[플레이스캠프제주] Standard',
+        withGuest: false,
+        guest: {},
       },
       {
         reservationId: 5,
@@ -84,9 +98,17 @@ const initialState = {
         isCanceled: false,
         title:
           '#튤립# "영원한 사랑의 고백"의꽃말을 가진 포근한숙소~바다와 함께 아침에 눈뜨는 오션뷰~',
+        withGuest: true,
+        guest: {
+          id: 1,
+          firstName: '지미',
+          lastName: '주',
+          profileImg:
+            'https://media.short-biography.com/wp-content/uploads/mark-zuckerberg/Mark-Zuckerberg.jpg',
+        },
       },
       {
-        reservationId: 5,
+        reservationId: 6,
         homeId: 4,
         image: [
           'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large',
@@ -98,9 +120,11 @@ const initialState = {
         isCanceled: false,
         title:
           '#튤립# "영원한 사랑의 고백"의꽃말을 가진 포근한숙소~바다와 함께 아침에 눈뜨는 오션뷰~',
+        withGuest: false,
+        guest: {},
       },
       {
-        reservationId: 5,
+        reservationId: 7,
         homeId: 4,
         image: [
           'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large',
@@ -111,6 +135,8 @@ const initialState = {
         location: 'Jeju',
         isCanceled: false,
         title: '포근한 정원이 있는 엄마의 정원 "낭안트레" 2인실',
+        withGuest: false,
+        guest: {},
       },
     ],
   },

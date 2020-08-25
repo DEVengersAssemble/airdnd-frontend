@@ -4,16 +4,18 @@ import { lighten } from 'polished';
 // import TripsNone from './TripsNone';
 import TripsSubFooter from './TripsSubFooter';
 import Button from '../Global/Button';
-import TripsPastCardItem from './TripsPastCardItem';
+import TripsPastCardItemContainer from '../../Containers/Trips/TripsPastCardItemContainer';
 
-const TripsPast = () => {
+const TripsPast = ({ pastTrips }) => {
+  console.log('tripsPast', pastTrips);
+
   return (
     <>
       <TripsPastCardWrapper>
         <TripsPastCardLists>
-          <TripsPastCardItem />
-          <TripsPastCardItem />
-          <TripsPastCardItem />
+          {pastTrips.map(trip => (
+            <TripsPastCardItemContainer key={trip.reservationId} trip={trip} />
+          ))}
         </TripsPastCardLists>
       </TripsPastCardWrapper>
       <TripsSubFooter>

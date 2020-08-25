@@ -5,10 +5,7 @@ import TripsCanceled from '../../Components/Trips/TripsCanceled';
 
 const TripsCanceledContainer = () => {
   const trips = useSelector(state => state.trips.user.reservations);
-  console.log(trips);
-
   const canceledTrips = trips.filter(trip => trip.isCanceled);
-  console.log(canceledTrips);
 
   return <TripsCanceled canceledTrips={canceledTrips} />;
 };

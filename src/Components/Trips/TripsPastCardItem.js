@@ -6,16 +6,34 @@ import Button from '../Global/Button';
 import Profile from '../Global/Profile';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 
-const TripsPastCardItem = () => {
+const TripsPastCardItem = ({ trip }) => {
+  console.log('tripsPastcardItem', trip);
+  const {
+    checkin,
+    checkout,
+    guest,
+    homeId,
+    hostId,
+    image,
+    isCanceled,
+    location,
+    reservationId,
+    title,
+    withGuest,
+  } = trip;
+  const { firstName, lastName, id, profileImg } = guest;
+
   return (
     <TripsPastCardItemWrapper>
       <Link to="/schedule">
         <TripsPastImgWrapper>
           <TripsPastImg />
-          <TripsProfileWrapper>
-            <Profile lastName="김" size="4.3rem" />
-            <Profile lastName="김" size="4.3rem" />
-          </TripsProfileWrapper>
+          {withGuest && (
+            <TripsProfileWrapper>
+              <Profile lastName={`${lastName}`} size="4.3rem" />
+              <Profile lastName={`${lastName}`} size="4.3rem" />
+            </TripsProfileWrapper>
+          )}
         </TripsPastImgWrapper>
         <TripsPastCkLcWrapper>
           <TripsPastCheckInOut>8월 18일 - 8월 19일</TripsPastCheckInOut>
