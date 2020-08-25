@@ -1,10 +1,11 @@
 import React from 'react';
+import { lighten } from 'polished';
 import styled, { css } from 'styled-components';
 import Modal from '../Global/Modal';
 import Button from '../Global/Button';
 import { Input } from '../Global/Input';
 import { RiEyeCloseLine, RiMailLine, RiUserLine } from 'react-icons/ri';
-
+import { MdCheck, MdClose } from 'react-icons/md';
 const StSignupModal = styled(Modal)`
   overflow-y: scroll;
 `;
@@ -16,12 +17,11 @@ const StSignupForm = styled.form`
 
 const StInputWrapper = styled.div`
   position: relative;
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 
-  & svg {
+  & > svg {
     position: absolute;
+    top: 17px;
     right: 10px;
     font-size: 18px;
     color: ${({ theme }) => theme.color.darkGray};
@@ -32,13 +32,14 @@ const StInput = styled(Input)`
   &::placeholder {
     color: ${({ theme }) => theme.color.darkGray};
   }
-  ${({ isValid }) =>
-    !isValid &&
+  ${({ isInvalid }) =>
+    isInvalid &&
     css`
+      background: #fff8f6;
       &:focus {
-        outline: ${({ theme }) => theme.color.warning};
+        border: 1px solid ${({ theme }) => theme.color.warning};
       }
-    `}
+    `};
 `;
 
 const StBirthDayTitle = styled.p`
@@ -58,8 +59,31 @@ const StBirthDayText = styled.p`
 
 const StValidationText = styled.p`
   color: ${({ theme }) => theme.color.warning};
-  padding: 5px;
-  background: lightblue;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 5px 0 0 5px;
+`;
+
+const StPwValidationList = styled.div`
+  margin-top: 5px;
+  padding-left: 5px;
+`;
+
+const StPwValidationItem = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 22px;
+  color: ${({ isPwValid, theme, pwInvalid }) =>
+    pwInvalid === null
+      ? theme.color.gray
+      : isPwValid
+      ? theme.color.green
+      : theme.color.warning};
+`;
+
+const StPwValidationText = styled.span`
+  font-size: 14px;
+  padding-left: 5px;
 `;
 
 const StSubmitButton = styled(Button)``;
@@ -70,40 +94,17 @@ const SignupModal = ({
   signupModalVisible,
   openLoginModal,
   closeModal,
-  form,
+  signup,
   onChangeForm,
   onSignup,
-  formValidation,
   refObj,
+  onPwFocus,
+  pwFocus,
 }) => {
-  const {
-    email,
-    firstName,
-    lastName,
-    pw,
-    // birthMonth,
-    // birthDay,
-    // birthYear,
-  } = form;
-
-  const {
-    isEmailInvalid,
-    isFirstNameInvalid,
-    isLastNameInvalid,
-    isPwInvalid,
-    // isBirthMonthInvalid,
-    // isBirthDayInvalid,
-    // isBirthYearInvalid,
-  } = formValidation;
-  const {
-    emailRef,
-    firstNameRef,
-    lastNameRef,
-    pwRef,
-    // birthMonthRef,
-    // birthDayRef,
-    // birthYearRef,
-  } = refObj;
+  const { email, firstName, lastName, pw, pwValidation } = signup;
+  const { pwLevel, pwLength, pwContain, pwCase } = pwValidation;
+  const { emailRef, firstNameRef, lastNameRef, pwRef } = refObj;
+  console.log('pw.invalid: ', pw.invalid);
   return (
     <StSignupModal
       modalState={signupModalVisible}
@@ -116,65 +117,101 @@ const SignupModal = ({
       <StSignupForm onSubmit={onSignup}>
         <StInputWrapper>
           <StInput
-            value={email}
+            value={email.value}
             onChange={e => onChangeForm(e, 'email')}
             focusBorderColor
             placeholder="이메일 주소"
             ref={emailRef}
+            isInvalid={email.invalid}
           ></StInput>
           <RiMailLine />
+          {email.invalid && (
+            <StValidationText isInvalid={email.invalid}>
+              이메일이 필요합니다.
+            </StValidationText>
+          )}
         </StInputWrapper>
-        {isEmailInvalid && (
-          <StValidationText isInvalid={isEmailInvalid}>
-            이메일이 필요합니다.
-          </StValidationText>
-        )}
+
         <StInputWrapper>
           <StInput
-            value={firstName}
+            value={firstName.value}
             onChange={e => onChangeForm(e, 'firstName')}
             focusBorderColor
             placeholder="이름 (예: 길동)"
             ref={firstNameRef}
+            isInvalid={firstName.invalid}
           ></StInput>
           <RiUserLine />
+          {firstName.invalid && (
+            <StValidationText isInvalid={firstName.invalid}>
+              이름을 입력하세요.
+            </StValidationText>
+          )}
         </StInputWrapper>
-        {isFirstNameInvalid && (
-          <StValidationText isInvalid={isFirstNameInvalid}>
-            이름을 입력하세요.
-          </StValidationText>
-        )}
+
         <StInputWrapper>
           <StInput
-            value={lastName}
+            value={lastName.value}
             onChange={e => onChangeForm(e, 'lastName')}
             focusBorderColor
             placeholder="성 (예: 홍)"
             ref={lastNameRef}
+            isInvalid={lastName.invalid}
           ></StInput>
           <RiUserLine />
+          {lastName.invalid && (
+            <StValidationText isInvalid={lastName.invalid}>
+              성을 입력하세요.
+            </StValidationText>
+          )}
         </StInputWrapper>
-        {isLastNameInvalid && (
-          <StValidationText isInvalid={isLastNameInvalid}>
-            성을 입력하세요.
-          </StValidationText>
-        )}
-        <StInputWrapper>
+
+        <StInputWrapper name="password">
           <StInput
             type="password"
-            value={pw}
+            value={pw.value}
             onChange={e => onChangeForm(e, 'pw')}
+            onFocus={onPwFocus}
             focusBorderColor
             placeholder="비밀번호 설정하기"
             ref={pwRef}
+            isInvalid={pw.invalid}
           ></StInput>
           <RiEyeCloseLine />
+          {pw.invalid && (
+            <StValidationText isInvalid={pw.invalid}>
+              비밀번호를 입력하세요.
+            </StValidationText>
+          )}
+          {pwFocus && (
+            <StPwValidationList>
+              <StPwValidationItem pwLevel={pwLevel} pwInvalid={pw.invalid}>
+                {pwLevel >= 1 ? <MdCheck /> : <MdClose />}
+                <StPwValidationText>
+                  비밀번호 보안 수준:
+                  {pwLevel ? (pwLevel === 2 ? ' 강함' : ' 보통') : ' 약함'}
+                </StPwValidationText>
+              </StPwValidationItem>
+              <StPwValidationItem isPwValid={pwContain} pwInvalid={pw.invalid}>
+                {pwCase ? <MdCheck /> : <MdClose />}
+                <StPwValidationText>
+                  비밀번호에 본인 이름이나 이메일 주소를 포함할 수 없습니다.
+                </StPwValidationText>
+              </StPwValidationItem>
+              <StPwValidationItem isPwValid={pwLength} pwInvalid={pw.invalid}>
+                {pwLength ? <MdCheck /> : <MdClose />}
+                <StPwValidationText>최소 8자</StPwValidationText>
+              </StPwValidationItem>
+              <StPwValidationItem isPwValid={pwCase} pwInvalid={pw.invalid}>
+                {pwCase ? <MdCheck /> : <MdClose />}
+                <StPwValidationText>
+                  숫자나 기호를 포함하세요
+                </StPwValidationText>
+              </StPwValidationItem>
+            </StPwValidationList>
+          )}
         </StInputWrapper>
-        {isPwInvalid && (
-          <StValidationText isInvalid={isLastNameInvalid}>
-            비밀번호를 입력하세요.
-          </StValidationText>
-        )}
+
         <StBirthDayTitle>생일</StBirthDayTitle>
         <StBirthDayText>
           만 18세 이상의 성인만 회원으로 가입할 수 있습니다. 생일은 다른

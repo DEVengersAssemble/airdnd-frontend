@@ -245,10 +245,7 @@ const SearchForm = ({
   };
 
   const handlePopup = ({ target }) => {
-    console.log('===handlePopup');
-    console.log(target);
     if (locationListRef.current && locationListRef.current.contains(target)) {
-      console.log('111');
       changeType('checkIn');
       return;
     } else if (
@@ -265,10 +262,8 @@ const SearchForm = ({
         !guestsPopupRef.current.contains(target) &&
         !guestsResetBtnRef.current.contains(target))
     ) {
-      console.log('222');
       closePopup();
     }
-    console.log('333');
   };
 
   useEffect(() => {

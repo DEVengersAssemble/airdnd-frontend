@@ -1,82 +1,114 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useReducer } from 'react';
 import SignupModal from '../../Components/Main/SignupModal';
+
+const initialState = {
+  email: {
+    value: '',
+    invalid: null,
+  },
+  firstName: {
+    value: '',
+    invalid: null,
+  },
+  lastName: {
+    value: '',
+    invalid: null,
+  },
+  pw: {
+    value: '',
+    invalid: null,
+  },
+  pwValidation: {
+    pwLevel: 0,
+    pwContain: false,
+    pwLength: false,
+    pwCase: false,
+  },
+};
+
+const signupReducer = (state, action) => {
+  switch (action.type) {
+    case 'CHECK_ALL_VALIDATION':
+      return action.payload;
+    case 'UPDATE_VALUE':
+      return {
+        ...state,
+        [action.key]: {
+          value: action.payload,
+          invalid: state[action.key].invalid && false,
+        },
+      };
+    default:
+      return state;
+  }
+};
 
 const SignupModalContainer = ({
   signupModalVisible,
   openModal,
   closeModal,
 }) => {
-  const [form, setForm] = useState({
-    email: '',
-    firstName: '',
-    lastName: '',
-    pw: '',
-    // birthMonth: null,
-    // birthDay: null,
-    // birthYear: null,
-  });
-  const [formValidation, setFormValidation] = useState({
-    isEmailInvalid: null,
-    isFirstNameInvalid: null,
-    isLastNameInvalid: null,
-    isPwInvalid: null,
-    // isBirthMonthInvalid: null,
-    // isBirthDayInvalid: null,
-    // isBirthYearInvalid: null,
-  });
-  console.log('[formValidation]: ', formValidation);
-  console.log('[form]', form);
-
-  const checkFormValidation = () => {
-    const {
-      email,
-      firstName,
-      lastName,
-      pw,
-      // birthMonth,
-      // birthDay,
-      // birthYear,
-    } = form;
-
-    const isEmailInvalid = !email;
-    const isFirstNameInvalid = !firstName;
-    const isLastNameInvalid = !lastName;
-    const isPwInvalid = !pw;
-    // const isBirthMonthInvalid = !birthMonth;
-    // const isBirthDayInvalid = !birthDay;
-    // const isBirthYearInvalid = !birthYear;
-    const result = {
-      isEmailInvalid,
-      isFirstNameInvalid,
-      isLastNameInvalid,
-      isPwInvalid,
-      // isBirthMonthInvalid,
-      // isBirthDayInvalid,
-      // isBirthYearInvalid,
-    };
-    console.log('[result]: ', result);
-    setFormValidation(result);
-  };
-
   const emailRef = useRef();
   const firstNameRef = useRef();
   const lastNameRef = useRef();
   const pwRef = useRef();
-  // const birthMonthRef = useRef();
-  // const birthDayRef = useRef();
-  // const birthYearRef = useRef();
-
   const refObj = {
     emailRef,
     firstNameRef,
     lastNameRef,
     pwRef,
-    // birthMonthRef,
-    // birthDayRef,
-    // birthYearRef,
   };
-  const onChangeForm = ({ target }, type) => {
-    setForm({ ...form, [type]: target.value });
+
+  const [signup, dispatch] = useReducer(signupReducer, initialState);
+  const [isChecking, setIsChecking] = useState(false);
+  const [pwFocus, setPwFocus] = useState(false);
+
+  const { email, firstName, lastName, pw, pwValidation } = signup;
+  const { pwLevel, pwContain, pwLength, pwCase } = pwValidation;
+
+  const onPwFocus = () => {
+    setPwFocus(true);
+  };
+
+  const checkFormValidation = () => {
+    const emailRegExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+    const emailObj = {
+      value: email.value,
+      invalid: !emailRegExp.test(email.value),
+    };
+    const firstNameObj = {
+      value: firstName.value,
+      invalid: !firstName.value,
+    };
+    const lastNameObj = {
+      value: lastName.value,
+      invalid: !lastName.value,
+    };
+    const pwObj = {
+      value: pw.value,
+      invalid: !pwLevel,
+    };
+    console.log('[pwObj]', pwObj);
+    const pwValidationObj = {
+      pwLevel: 0,
+      pwContain: false,
+      pwLength: false,
+      pwCase: false,
+    };
+    const payload = {
+      email: emailObj,
+      firstName: firstNameObj,
+      lastName: lastNameObj,
+      pw: pwObj,
+      pwValidation: pwValidationObj,
+    };
+    dispatch({ type: 'CHECK_ALL_VALIDATION', payload });
+    setIsChecking(true);
+  };
+
+  const onChangeForm = ({ target }, key) => {
+    const payload = target.value;
+    dispatch({ type: 'UPDATE_VALUE', key, payload });
   };
 
   const openLoginModal = () => {
@@ -86,16 +118,24 @@ const SignupModalContainer = ({
 
   const onSuccess = () => {
     console.log('===유저를 등록합니다====');
-    console.log('유저정보: ', form);
   };
 
   const changeFocus = () => {
-    if (Object.values(formValidation).filter(v => v).length) {
-      Object.entries(form)
-        .reverse()
-        .forEach(v => {
-          !v[1] && refObj[`${v[0]}Ref`].current.focus();
-        });
+    const invalidCount = Object.values(signup)
+      .slice(0, 4)
+      .reduce((acc, cur) => {
+        return acc + +cur.invalid;
+      }, 0);
+    console.log(Object.entries(signup).find(v => v[1].invalid)[0]);
+    if (invalidCount) {
+      // Object.entries(signup)
+      //   .reverse()
+      //   .forEach((v, i) => {
+      //     v[1].invalid && refObj[`${v[0]}Ref`].current.focus();
+      //   });
+      refObj[
+        `${Object.entries(signup).find(v => v[1].invalid)[0]}Ref`
+      ].current.focus();
       return;
     }
     onSuccess();
@@ -104,21 +144,25 @@ const SignupModalContainer = ({
   const onSignup = e => {
     e.preventDefault();
     checkFormValidation();
-    changeFocus();
   };
+
+  React.useEffect(() => {
+    isChecking && changeFocus();
+    setIsChecking(false);
+  }, [isChecking]);
 
   return (
     <SignupModal
       signupModalVisible={signupModalVisible}
       openLoginModal={openLoginModal}
       closeModal={closeModal}
-      form={form}
-      formValidation={formValidation}
+      signup={signup}
       onChangeForm={onChangeForm}
       onSignup={onSignup}
       refObj={refObj}
+      onPwFocus={onPwFocus}
+      pwFocus={pwFocus}
     ></SignupModal>
   );
 };
-
 export default SignupModalContainer;
