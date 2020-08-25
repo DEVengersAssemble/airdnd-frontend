@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { lighten } from 'polished';
 import TripsNone from './TripsNone';
+import TripsPastCardItemContainer from '../../Containers/Trips/TripsPastCardItemContainer';
 import TripsSubFooter from './TripsSubFooter';
 import Button from '../Global/Button';
-import TripsPastCardItemContainer from '../../Containers/Trips/TripsPastCardItemContainer';
 
 const TripsPast = ({ pastTrips, tripsCount }) => {
   return (

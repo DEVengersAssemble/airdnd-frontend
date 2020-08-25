@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import TripsPastCardItem from '../../Components/Trips/TripsPastCardItem';
+import TripsUpcomingCardItem from '../../Components/Trips/TripsUpcomingCardItem';
 
-const TripsPastCardItemContainer = ({ trip }) => {
+const TripsUpcomingCardItemContainer = ({ trip }) => {
   const myInfo = useSelector(state => state.trips.user);
   const { checkin, checkout } = trip;
   const ciDate = new Date(checkin);
@@ -11,7 +11,7 @@ const TripsPastCardItemContainer = ({ trip }) => {
   const ci = ciDate.toLocaleDateString('ko-KR', options);
   const co = coDate.toLocaleDateString('ko-KR', options);
 
-  return <TripsPastCardItem trip={trip} myInfo={myInfo} ci={ci} co={co} />;
+  return <TripsUpcomingCardItem trip={trip} myInfo={myInfo} ci={ci} co={co} />;
 };
 
-export default TripsPastCardItemContainer;
+export default TripsUpcomingCardItemContainer;
