@@ -10,8 +10,6 @@ export const showReservation = () => ({
 const initialState = {
   user: {
     id: 0,
-    email: 'keemgreat@gmail.com',
-    pw: '1234',
     firstName: '태진',
     lastName: '김',
     profileImg:
@@ -21,7 +19,7 @@ const initialState = {
       {
         reservationId: 1,
         homeId: 1,
-        image: [
+        homeImage: [
           'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large',
         ],
         hostId: 1,
@@ -36,7 +34,7 @@ const initialState = {
       {
         reservationId: 2,
         homeId: 2,
-        image: [
+        homeImage: [
           'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large',
         ],
         hostId: 2,
@@ -58,7 +56,7 @@ const initialState = {
       {
         reservationId: 3,
         homeId: 3,
-        image: [
+        homeImage: [
           'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large',
         ],
         hostId: 3,
@@ -73,7 +71,7 @@ const initialState = {
       {
         reservationId: 4,
         homeId: 4,
-        image: [
+        homeImage: [
           'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large',
         ],
         hostId: 4,
@@ -88,7 +86,7 @@ const initialState = {
       {
         reservationId: 5,
         homeId: 4,
-        image: [
+        homeImage: [
           'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large',
         ],
         hostId: 5,
@@ -110,7 +108,7 @@ const initialState = {
       {
         reservationId: 6,
         homeId: 4,
-        image: [
+        homeImage: [
           'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large',
         ],
         hostId: 5,
@@ -126,7 +124,7 @@ const initialState = {
       {
         reservationId: 7,
         homeId: 4,
-        image: [
+        homeImage: [
           'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large',
         ],
         hostId: 3,

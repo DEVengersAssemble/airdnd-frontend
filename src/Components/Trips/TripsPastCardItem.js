@@ -6,32 +6,43 @@ import Button from '../Global/Button';
 import Profile from '../Global/Profile';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 
-const TripsPastCardItem = () => {
+const TripsPastCardItem = ({ trip, myInfo, ci, co }) => {
+  const { title, homeImage, location, withGuest, guest } = trip;
+  const { lastName: myLastName, profileImg: myProfileImg } = myInfo;
+  const { lastName: gstLastName, profileImg: gstProfileImg } = guest;
+
   return (
     <TripsPastCardItemWrapper>
       <Link to="/schedule">
         <TripsPastImgWrapper>
           <TripsPastImg />
-          <TripsProfileWrapper>
-            <Profile lastName="김" size="4.3rem" />
-            <Profile lastName="박" size="4.3rem" />
-          </TripsProfileWrapper>
+          {withGuest && (
+            <TripsProfileWrapper>
+              <Profile
+                lastName={`${myLastName}`}
+                size="4.3rem"
+                profileImg={myProfileImg}
+              />
+              <Profile
+                lastName={`${gstLastName}`}
+                size="4.3rem"
+                profileImg={gstProfileImg}
+              />
+            </TripsProfileWrapper>
+          )}
         </TripsPastImgWrapper>
         <TripsPastCkLcWrapper>
-          <TripsPastCheckInOut>8월 18일 - 8월 19일</TripsPastCheckInOut>
-          <TripsPastLocation>Seoul 및 Seoul-si</TripsPastLocation>
+          <TripsPastCheckInOut>
+            {ci} - {co}
+          </TripsPastCheckInOut>
+          <TripsPastLocation>{location}</TripsPastLocation>
         </TripsPastCkLcWrapper>
         <Link to="/schedule/1">
           <StButton>
             <TripsPastButtonWrapper>
               <TripsPastButtonInnerWrapper>
-                <TripsPastImgInButton
-                  src="https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large"
-                  alt="#"
-                />
-                <TripsPastButtonText>
-                  [헤드오피스] 502호 4인실, 성수역 인근 내 도보 5분거리
-                </TripsPastButtonText>
+                <TripsPastImgInButton src={`${homeImage[0]}`} alt="#" />
+                <TripsPastButtonText>{title}</TripsPastButtonText>
               </TripsPastButtonInnerWrapper>
               <MdKeyboardArrowRight />
             </TripsPastButtonWrapper>
@@ -41,13 +52,8 @@ const TripsPastCardItem = () => {
           <StButton>
             <TripsPastButtonWrapper>
               <TripsPastButtonInnerWrapper>
-                <TripsPastImgInButton
-                  src="https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large"
-                  alt="#"
-                />
-                <TripsPastButtonText>
-                  [헤드오피스] 502호 4인실, 성수역 인근 내 도보 5분거리
-                </TripsPastButtonText>
+                <TripsPastImgInButton src={`${homeImage[0]}`} alt="#" />
+                <TripsPastButtonText>{title}</TripsPastButtonText>
               </TripsPastButtonInnerWrapper>
               <MdKeyboardArrowRight />
             </TripsPastButtonWrapper>
