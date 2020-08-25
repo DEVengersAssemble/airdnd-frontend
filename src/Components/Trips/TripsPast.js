@@ -7,8 +7,6 @@ import Button from '../Global/Button';
 import TripsPastCardItemContainer from '../../Containers/Trips/TripsPastCardItemContainer';
 
 const TripsPast = ({ pastTrips }) => {
-  console.log('tripsPast', pastTrips);
-
   return (
     <>
       <TripsPastCardWrapper>
