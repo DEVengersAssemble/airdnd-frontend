@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import LuckyChance from '../Global/LuckyChance';
+import Aside from './Aside';
 
 const StMain = styled.main`
   display: flex;
@@ -26,13 +27,6 @@ const StTitle = styled.h2`
   line-height: 1.125em;
 `;
 
-const StRightWrapper = styled.div`
-  width: 37%;
-  margin-left: 5%;
-  border: 1px solid ${({ theme }) => theme.color.line};
-  padding: 24px;
-`;
-
 const CommonLayout = ({ children, title }) => {
   const almostFull = true;
 
@@ -43,7 +37,7 @@ const CommonLayout = ({ children, title }) => {
         {almostFull && <LuckyChance lastName="haeun" margin="16px 0 36px" />}
         {children}
       </StLeftWrapper>
-      <StRightWrapper></StRightWrapper>
+      <Aside />
     </StMain>
   );
 };
