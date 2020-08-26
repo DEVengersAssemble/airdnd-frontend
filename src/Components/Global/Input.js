@@ -187,6 +187,7 @@ const NewInput = ({
   placeholder,
   value,
   onChange,
+  onBlur,
   ...rest
 }) => {
   // console.log(rest);
@@ -204,6 +205,7 @@ const NewInput = ({
               placeholder={placeholder}
               value={value}
               onChange={onChange}
+              onBlur={onBlur}
             />
           </>
         ) : (
@@ -211,6 +213,7 @@ const NewInput = ({
             placeholder={placeholder}
             value={value}
             onChange={onChange}
+            onBlur={onBlur}
           />
         )}
       </StNewLabel>

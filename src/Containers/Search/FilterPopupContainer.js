@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   RefundPopup,
   RoomTypePopup,
@@ -92,12 +92,18 @@ const RoomTypePopupContainer = ({ popupState, onClose }) => {
 const PricePopupContainer = ({ popupState, onClose }) => {
   const { min, max } = useSelector(state => state.search.filterApplied.price);
   const { priceArray, averagePrice } = useSelector(state => state.search);
+  const [range, setRange] = useState({ value: [min, max] });
   const dispatch = useDispatch();
 
+  const onHandler = e => {
+    setRange({ value: e });
+    dispatch(setFilter('price', { min: e[0], max: e[1] }));
+  };
+  const onSetRange = () => setRange({ value: [min, max] });
   const onChangeMinPrice = ({ target }) =>
-    dispatch(setFilter('price', { min: target.value, max }));
+    dispatch(setFilter('price', { min: +target.value, max }));
   const onChangeMaxPrice = ({ target }) =>
-    dispatch(setFilter('price', { min, max: target.value }));
+    dispatch(setFilter('price', { min, max: +target.value }));
   const onReset = () => dispatch(resetFilter('price'));
   const onSave = () => dispatch(saveFilter('price', { min, max }));
   const isDisabled = min === 12000 && max === 1000000;
@@ -126,6 +132,9 @@ const PricePopupContainer = ({ popupState, onClose }) => {
         averagePrice={averagePrice}
         min={min}
         max={max}
+        range={range}
+        onHandler={onHandler}
+        onSetRange={onSetRange}
         onChangeMinPrice={onChangeMinPrice}
         onChangeMaxPrice={onChangeMaxPrice}
         onSave={onSave}

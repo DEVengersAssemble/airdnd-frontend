@@ -112,12 +112,13 @@ const PricePopup = ({
   isDisabled,
   min,
   max,
+  range,
+  onHandler,
+  onSetRange,
   onChangeMinPrice,
   onChangeMaxPrice,
   onReset,
   onSave,
-  onDrag,
-  onDrop,
 }) => {
   return (
     <FilterPopup
@@ -136,9 +137,9 @@ const PricePopup = ({
             min={12000}
             max={1000000}
             allowCross={false}
-            // value={state.value}
+            value={range.value}
             defaultValue={[12000, 1000000]}
-            // onChange={onChange}
+            onChange={onHandler}
             tipProps={{ visible: false }}
             handle={
               <StHandler>
@@ -154,19 +155,23 @@ const PricePopup = ({
         </StRangeWrapper>
         <StInputWrapper>
           <NewInput
+            type="number"
             title="최저 요금"
             value={min}
             short
             pay="₩"
             onChange={onChangeMinPrice}
+            onBlur={onSetRange}
           />
           <span>―</span>
           <NewInput
+            type="number"
             title="최고 요금"
             value={max}
             short
             pay="₩"
             onChange={onChangeMaxPrice}
+            onBlur={onSetRange}
           />
         </StInputWrapper>
       </StContentWrapper>
@@ -309,11 +314,52 @@ const StRangeWrapper = styled.div`
   display: flex;
   flex-direction: column;
   flex-flow: column-reverse;
+
+  .rc-slider {
+    position: relative;
+    height: 14px;
+    width: 95%;
+    margin: 0 auto;
+    border-radius: 3px;
+  }
+  .rc-slider-rail {
+    position: absolute;
+    width: 100%;
+    background-color: ${({ theme }) => theme.color.shadow};
+    height: 2px;
+    border-radius: 3px;
+  }
+  .rc-slider-track {
+    position: absolute;
+    height: 2px;
+    background-color: ${({ theme }) => theme.color.gray};
+  }
+  .rc-slider-handle {
+    position: absolute;
+    width: 27px;
+    height: 27px;
+    cursor: pointer;
+    cursor: -webkit-grab;
+    margin-top: -13.5px;
+    cursor: grab;
+    border-radius: 50%;
+    border: solid 1px ${({ theme }) => theme.color.gray};
+    background-color: #fff;
+    touch-action: pan-x;
+    &:focus {
+      outline: none;
+    }
+  }
+  .rc-slider-tooltip {
+    display: none;
+  }
 `;
 
 const StGraph = styled.ul`
   display: flex;
   align-items: flex-end;
+  width: 95%;
+  margin: 0 auto;
 `;
 
 const StStick = styled.li`
@@ -333,18 +379,9 @@ const StRangeBar = styled.div`
   align-items: center;
 `;
 
-const StFillRange = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  background: ${({ theme }) => theme.color.gray};
-`;
-
 const StHandler = styled(Button)`
   position: absolute;
   z-index: 15;
-  right: ${({ right }) => right};
-  left: ${({ left }) => left};
 `;
 
 const StIcon = styled(GiHamburgerMenu)`
