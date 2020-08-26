@@ -7,6 +7,7 @@ const Wishlist = ({ bmList }) => {
   console.log('wishlist', bmList);
   const { bookmarkListId, bookmarkListTitle, bookmarks } = bmList;
   const homeCount = bookmarks.length;
+  // styled-component에 background image props로 넘기기
 
   return (
     <WishlistCardWrapper>
