@@ -165,7 +165,7 @@ const TripsPastButtonWrapper = styled.div`
 const TripsPastButtonInnerWrapper = styled.div`
   display: flex;
   align-items: center;
-  width: 80%;
+  width: 90%;
 `;
 
 const TripsPastImgInButton = styled.img`

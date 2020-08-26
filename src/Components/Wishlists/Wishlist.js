@@ -181,7 +181,7 @@ const WishlistContent = styled.div`
 
 const WishlistTitle = styled.div`
   padding: 2.5rem 0rem 0rem;
-  width: 80%;
+  width: 95%;
   font-size: 2.5rem;
   font-weight: 500;
   line-height: 2.5rem;
