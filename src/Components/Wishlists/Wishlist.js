@@ -25,7 +25,9 @@ const Wishlist = ({ bmList }) => {
         </WishlistImgWrapper>
         <WishlistContent>
           <WishlistTitle>{bookmarkListTitle}</WishlistTitle>
-          <WishlistHomeCount>숙소 {homeCount}개</WishlistHomeCount>
+          <WishlistHomeCount>
+            {homeCount ? `숙소 ${homeCount}` : '저장된 항목 없음'}
+          </WishlistHomeCount>
         </WishlistContent>
       </Link>
     </WishlistCardWrapper>
@@ -75,6 +77,7 @@ const WishlistFirstImg = styled.div`
   ${({ homeCount }) =>
     homeCount === 0 &&
     css`
+      width: 100%;
       background-color: ${({ theme }) => theme.color.gray};
     `}
   ${({ homeCount }) =>
@@ -112,11 +115,31 @@ const WishlistFirstImg = styled.div`
 `;
 
 const WishlistSubImgWrapper = styled.div`
-  display: ${({ homeCount }) => (homeCount === 1 ? 'none' : 'flex')};
-  flex-flow: column wrap;
-  margin-left: 0.5rem;
-  height: 20rem;
-  width: ${({ homeCount }) => (homeCount === 2 ? '98%' : '50%')};
+  ${({ homeCount }) =>
+    (homeCount === 0 || homeCount === 1) &&
+    css`
+      dispaly: none;
+      margin-left: 0rem;
+    `}
+      
+  ${({ homeCount }) =>
+    homeCount === 2 &&
+    css`
+      dispaly: flex;
+      flex-flow: column wrap;
+      width: 98%;
+      height: 20rem;
+      margin-left: 0.5rem;
+    `}
+  ${({ homeCount }) =>
+    homeCount >= 3 &&
+    css`
+      dispaly: flex;
+      flex-flow: column wrap;
+      width: 50%;
+      height: 20rem;
+      margin-left: 0.5rem;
+    `}
 `;
 
 const WishlistSecondImg = styled.div`
@@ -158,6 +181,7 @@ const WishlistContent = styled.div`
 
 const WishlistTitle = styled.div`
   padding: 2.5rem 0rem 0rem;
+  width: 80%;
   font-size: 2.5rem;
   font-weight: 500;
   line-height: 2.5rem;
