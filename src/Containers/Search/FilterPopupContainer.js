@@ -111,8 +111,10 @@ const PricePopupContainer = ({ popupState, onClose }) => {
   let minPos = 0;
   let maxPos = 0;
 
+  const fillRange = () => ({ width: 'maxPos - minPos' });
   const onDrag = e => {
-    const { left, right, width } = rangeBarRef.current.getBoundingClientRect();
+    e.preventDefault();
+    // offset = e.clientX - initial
   };
   const allowDrop = e => e.preventDefault();
   const onDrop = e => {

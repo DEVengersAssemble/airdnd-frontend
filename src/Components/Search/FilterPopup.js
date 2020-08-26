@@ -1,4 +1,5 @@
 import React from 'react';
+import Slider from 'rc-slider';
 import Popup from '../Global/Popup';
 import styled, { css } from 'styled-components';
 import Button from '../Global/Button';
@@ -7,6 +8,7 @@ import ModalFooter from '../Global/ModalFooter';
 import Checkbox from '../Global/Checkbox';
 import { NewInput } from '../Global/Input';
 import { GiHamburgerMenu } from 'react-icons/gi';
+import RangeSlider from './RangeSlider';
 
 const RefundPopup = ({
   popupState,
@@ -130,7 +132,7 @@ const PricePopup = ({
           평균 1박 요금은 ₩{averagePrice.toLocaleString()}입니다
         </StLargeSpan>
         <StRangeWrapper ref={refs.rangeBarRef}>
-          {/* <StRangeBar onDrop={onDrop}>
+          <StRangeBar onDrop={onDrop}>
             <StHandler
               id="minPriceHandler"
               ref={refs.minHandlerRef}
@@ -140,6 +142,7 @@ const PricePopup = ({
             >
               <StIcon />
             </StHandler>
+            <StFillRange />
             <StHandler
               id="maxPriceHandler"
               ref={refs.maxHandlerRef}
@@ -154,7 +157,7 @@ const PricePopup = ({
             {priceArray.map((price, i) => (
               <StStick key={i} height={price} />
             ))}
-          </StGraph> */}
+          </StGraph>
         </StRangeWrapper>
         <StInputWrapper>
           <NewInput
@@ -331,10 +334,16 @@ const StStick = styled.li`
 const StRangeBar = styled.div`
   width: 100%;
   height: 2px;
-  background: ${({ theme }) => theme.color.gray};
+  background: ${({ theme }) => theme.color.shadow};
   position: relative;
   display: flex;
   align-items: center;
+`;
+
+const StFillRange = styled.div`
+  /* width: 100%; */
+  height: 2px;
+  background: ${({ theme }) => theme.color.gray};
 `;
 
 const StHandler = styled(Button)`

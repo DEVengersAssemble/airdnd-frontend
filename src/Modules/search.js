@@ -6,6 +6,7 @@ const ZOOM_OUT = 'search/ZOOM_OUT';
 
 const OPEN_POPUP = 'search/OPEN_POPUP';
 const CLOSE_POPUP = 'search/CLOSE_POPUP';
+const HANDLE_RANGE = 'search/HANDLE_RANGE';
 const SET_FILTER = 'search/SET_FILTER';
 const RESET_FILTER = 'search/RESET_FILTER';
 const SAVE_FILTER = 'search/SAVE_FILTER';
@@ -24,6 +25,7 @@ export const zoomOut = () => ({ type: ZOOM_OUT });
 
 export const openPopup = name => ({ type: OPEN_POPUP, name });
 export const closePopup = () => ({ type: CLOSE_POPUP });
+export const handleRange = handler => ({ type: HANDLE_RANGE, handler });
 export const setFilter = (name, value) => ({ type: SET_FILTER, name, value });
 export const resetFilter = name => ({ type: RESET_FILTER, name });
 export const saveFilter = (name, value) => ({ type: SAVE_FILTER, name, value });
