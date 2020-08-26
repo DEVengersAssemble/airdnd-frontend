@@ -32,10 +32,12 @@ const StInput = styled(Input)`
   &::placeholder {
     color: ${({ theme }) => theme.color.darkGray};
   }
+
   ${({ isInvalid }) =>
     isInvalid &&
     css`
       background: #fff8f6;
+      border: 1px solid ${({ theme }) => theme.color.warning};
       &:focus {
         border: 1px solid ${({ theme }) => theme.color.warning};
       }
@@ -74,7 +76,7 @@ const StPwValidationItem = styled.div`
   align-items: center;
   font-size: 22px;
   color: ${({ theme, isPwValid }) =>
-    isPwValid ? theme.color.green : theme.color.warning};
+    isPwValid ? '#2f9e44' : theme.color.warning};
 `;
 
 const StPwValidationText = styled.span`
@@ -83,8 +85,7 @@ const StPwValidationText = styled.span`
 `;
 
 const StPwValidationLevelText = styled.span`
-  color: ${({ pwLevel, theme }) =>
-    pwLevel ? theme.color.green : theme.color.warning};
+  color: ${({ pwLevel, theme }) => (pwLevel ? '#2f9e44' : theme.color.warning)};
 `;
 
 const StSubmitButton = styled(Button)``;
@@ -196,22 +197,26 @@ const SignupModal = ({
                   </StPwValidationLevelText>
                 </StPwValidationText>
               </StPwValidationItem>
-              <StPwValidationItem isPwValid={pwContain}>
-                {pwContain ? <MdCheck /> : <MdClose />}
-                <StPwValidationText>
-                  비밀번호에 본인 이름이나 이메일 주소를 포함할 수 없습니다.
-                </StPwValidationText>
-              </StPwValidationItem>
-              <StPwValidationItem isPwValid={pwLength}>
-                {pwLength ? <MdCheck /> : <MdClose />}
-                <StPwValidationText>최소 8자</StPwValidationText>
-              </StPwValidationItem>
-              <StPwValidationItem isPwValid={pwCase}>
-                {pwCase ? <MdCheck /> : <MdClose />}
-                <StPwValidationText>
-                  숫자나 기호를 포함하세요
-                </StPwValidationText>
-              </StPwValidationItem>
+              {pwLevel === 0 && (
+                <>
+                  <StPwValidationItem isPwValid={pwContain}>
+                    {pwContain ? <MdCheck /> : <MdClose />}
+                    <StPwValidationText>
+                      비밀번호에 본인 이름이나 이메일 주소를 포함할 수 없습니다.
+                    </StPwValidationText>
+                  </StPwValidationItem>
+                  <StPwValidationItem isPwValid={pwLength}>
+                    {pwLength ? <MdCheck /> : <MdClose />}
+                    <StPwValidationText>최소 8자</StPwValidationText>
+                  </StPwValidationItem>
+                  <StPwValidationItem isPwValid={pwCase}>
+                    {pwCase ? <MdCheck /> : <MdClose />}
+                    <StPwValidationText>
+                      숫자나 기호를 포함하세요
+                    </StPwValidationText>
+                  </StPwValidationItem>
+                </>
+              )}
             </StPwValidationList>
           )}
         </StInputWrapper>

@@ -43,6 +43,8 @@ const signupReducer = (state, action) => {
         ...state,
         pwValidation: action.payload,
       };
+    case 'RESET':
+      return initialState;
     default:
       return state;
   }
@@ -68,7 +70,7 @@ const SignupModalContainer = ({
   const [isChecking, setIsChecking] = useState(false);
   const [isPwChanged, setIsPwChanged] = useState(false);
   const [pwFocus, setPwFocus] = useState(false);
-  console.log('[isPwChanged]:', isPwChanged);
+  console.log('[pwFocus]:', pwFocus);
   const { email, firstName, lastName, pw, pwValidation } = signup;
   const { pwLevel, pwContain, pwLength, pwCase } = pwValidation;
 
@@ -76,6 +78,41 @@ const SignupModalContainer = ({
     setPwFocus(true);
   };
 
+  const checkPwValidation = () => {
+    const pwLength = pw.value && pw.value.length >= 8;
+    const emailResult =
+      !email.value.split('@')[0] ||
+      !pw.value.includes(email.value.split('@')[0]);
+    const firstNameResult =
+      !firstName.value || !pw.value.includes(firstName.value);
+    const lastNameResult =
+      !lastName.value || !pw.value.includes(lastName.value);
+
+    const pwContain =
+      pw.value && emailResult && firstNameResult && lastNameResult;
+
+    const numberPattern = /[0-9]/;
+    const specialCasePattern = /[~!@#$%^&*()_+|<>?:{}]/;
+    const pwCase =
+      numberPattern.test(pw.value) || specialCasePattern.test(pw.value);
+    const pwCaseBoth =
+      numberPattern.test(pw.value) && specialCasePattern.test(pw.value);
+    const pwLevel =
+      pwContain && pwLength && pwCaseBoth
+        ? 2
+        : pwContain && pwLength && pwCase
+        ? 1
+        : 0;
+
+    const pwValidation = {
+      pwLevel,
+      pwContain,
+      pwLength,
+      pwCase,
+    };
+
+    return pwValidation;
+  };
   const checkFormValidation = () => {
     const emailRegExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
     const emailObj = {
@@ -94,12 +131,7 @@ const SignupModalContainer = ({
       value: pw.value,
       invalid: !pwLevel,
     };
-    const pwValidationObj = {
-      pwLevel: 0,
-      pwContain: false,
-      pwLength: false,
-      pwCase: false,
-    };
+    const pwValidationObj = checkPwValidation();
     const payload = {
       email: emailObj,
       firstName: firstNameObj,
@@ -112,33 +144,7 @@ const SignupModalContainer = ({
   };
 
   const updatePwValidation = () => {
-    console.log('-----onChangeForm');
-    console.log('[pw.value]:', pw.value);
-    const pwLength = pw.value && pw.value.length > 8;
-    const pwContain =
-      !pw.value.includes(firstName.value) &&
-      !pw.value.includes(lastName.value) &&
-      !pw.value.includes(email.value.split('@')[0]);
-    const numberPattern = /[0-9]/;
-    const specialCasePattern = /[~!@#$%^&*()_+|<>?:{}]/;
-    const pwCase =
-      numberPattern.test(pw.value) || specialCasePattern.test(pw.value);
-    const pwCaseBoth =
-      numberPattern.test(pw.value) && specialCasePattern.test(pw.value);
-    const pwLevel =
-      pwContain && pwLength && pwCaseBoth
-        ? 2
-        : pwContain && pwLength && pwCase
-        ? 1
-        : 0;
-
-    console.log('---', pwLevel, pwLength, pwContain, pwCase);
-    const payload = {
-      pwLevel,
-      pwContain,
-      pwLength,
-      pwCase,
-    };
+    const payload = checkPwValidation();
     dispatch({ type: 'VALIDATE_PW', payload });
   };
 
@@ -155,6 +161,8 @@ const SignupModalContainer = ({
 
   const onSuccess = () => {
     console.log('===유저를 등록합니다====');
+    setPwFocus(false);
+    dispatch({ type: 'RESET' });
   };
 
   const changeFocus = () => {
@@ -163,8 +171,14 @@ const SignupModalContainer = ({
       .reduce((acc, cur) => {
         return acc + +cur.invalid;
       }, 0);
-    console.log(Object.entries(signup).find(v => v[1].invalid)[0]);
     if (invalidCount) {
+      // Object.entries(signup)
+      //   .slice(0, 4)
+      //   .reverse()
+      //   .forEach(v => {
+      //     console.log('v: ', v);
+      //     v[1].invalid && refObj[`${v[0]}Ref`].current.focus();
+      //   });
       refObj[
         `${Object.entries(signup).find(v => v[1].invalid)[0]}Ref`
       ].current.focus();
@@ -180,6 +194,7 @@ const SignupModalContainer = ({
 
   React.useEffect(() => {
     console.log('[USEEFFECT]=======');
+    // if (pwLevel >= 1) setPwFocus(false);
     isChecking && changeFocus();
     isPwChanged && updatePwValidation();
     setIsChecking(false);
