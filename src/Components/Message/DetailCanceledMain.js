@@ -1,10 +1,10 @@
-import React from 'react';
-import styled from 'styled-components';
-import { darken } from 'polished';
-import DetailTitleBox from '../Message/DetailTitleBox';
-import DetailReservedHomeBox from '../Message/DetailReservedHomeBox';
-import DetailSubInfoBox from '../Message/DetailSubInfoBox';
-import DetailAirbnbSupportTeamBox from '../Message/DetailAirbnbSupportTeamBox';
+import React from "react";
+import styled from "styled-components";
+import { darken } from "polished";
+import DetailTitleBox from "./DetailTitleBox";
+import DetailReservedHomeBox from "./DetailReservedHomeBox";
+import DetailSubInfoBox from "./DetailSubInfoBox";
+import DetailAirbnbSupportTeamBox from "./DetailAirbnbSupportTeamBox";
 
 const DetailCanceledMain = () => {
   return (

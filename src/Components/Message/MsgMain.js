@@ -1,10 +1,10 @@
-import React from 'react';
-import styled from 'styled-components';
-import theme from '../../style/theme';
-import Button from '../Global/Button';
-import { Input } from '../Global/Input';
-import { AiOutlinePicture } from 'react-icons/ai';
-import MsgItem from '../Message/MsgItem';
+import React from "react";
+import styled from "styled-components";
+import theme from "../../style/theme";
+import Button from "../Global/Button";
+import { Input } from "../Global/Input";
+import { AiOutlinePicture } from "react-icons/ai";
+import MsgItem from "./MsgItem";
 
 const MsgMain = () => {
   const host = true;
@@ -25,7 +25,7 @@ const MsgMain = () => {
             hover={{
               backgroundColor: theme.color.lightGray,
             }}
-            style={{ width: '4rem', height: '4rem' }}
+            style={{ width: "4rem", height: "4rem" }}
           >
             <MsgImageUploadIcon />
           </Button>

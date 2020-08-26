@@ -1,14 +1,14 @@
-import React from 'react';
-import styled from 'styled-components';
-import { darken } from 'polished';
-import DetailTitleBox from '../Message/DetailTitleBox';
-import DetailReservedHomeBox from '../Message/DetailReservedHomeBox';
-import DetailSubInfoBox from '../Message/DetailSubInfoBox';
-import DetailAddressBox from '../Message/DetailAddressBox';
-import DetailReservedHomeLinkBox from '../Message/DetailReservedHomeLinkBox';
-import DetailHostInfoPageLinkBox from '../Message/DetailHostInfoPageLinkBox';
-import DetailSettlementBox from '../Message/DetailSettlementBox';
-import DetailAirbnbSupportTeamBox from '../Message/DetailAirbnbSupportTeamBox';
+import React from "react";
+import styled from "styled-components";
+import { darken } from "polished";
+import DetailTitleBox from "./DetailTitleBox";
+import DetailReservedHomeBox from "./DetailReservedHomeBox";
+import DetailSubInfoBox from "./DetailSubInfoBox";
+import DetailAddressBox from "./DetailAddressBox";
+import DetailReservedHomeLinkBox from "./DetailReservedHomeLinkBox";
+import DetailHostInfoPageLinkBox from "./DetailHostInfoPageLinkBox";
+import DetailSettlementBox from "./DetailSettlementBox";
+import DetailAirbnbSupportTeamBox from "./DetailAirbnbSupportTeamBox";
 
 const DetailMain = () => {
   return (

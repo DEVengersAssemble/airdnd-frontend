@@ -1,9 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
-import ChatMain from '../../Components/Message/ChatMain';
-import MsgMain from '../../Components/Message/MsgMain';
-import DetailCanceledMain from '../../Components/Message/DetailCanceledMain';
-import DetailMain from './DetailMain';
+import React from "react";
+import styled from "styled-components";
+import ChatMain from "./ChatMain";
+import MsgMain from "./MsgMain";
+import DetailCanceledMain from "./DetailCanceledMain";
+import DetailMain from "./DetailMain";
 
 const MessageMainWrapper = () => {
   const [canceled, setCanceled] = React.useState(false);
