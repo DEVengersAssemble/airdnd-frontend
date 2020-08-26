@@ -114,7 +114,8 @@ const PricePopup = ({
   max,
   left,
   right,
-  width,
+  start,
+  end,
   range,
   onHandler,
   onSetRange,
@@ -146,13 +147,13 @@ const PricePopup = ({
           />
           <StGraph>
             {priceArray.map((price, i) => {
-              const isSmaller = right > (width / 20) * (i + 1);
-              const isBigger = left < (width / 20) * i;
+              const isSmaller = right > end - (priceArray.length - i) * 7;
+              const isBigger = left < start + i * 7;
               return (
                 <StStick
                   key={i}
                   height={price}
-                  inRange={isSmaller && isBigger}
+                  inRange={isDisabled || (isSmaller && isBigger)}
                 />
               );
             })}
@@ -343,8 +344,6 @@ const StRangeWrapper = styled.div`
     position: absolute;
     width: 27px;
     height: 27px;
-    cursor: pointer;
-    cursor: -webkit-grab;
     margin-top: -13.5px;
     cursor: grab;
     border-radius: 50%;
@@ -361,8 +360,6 @@ const StRangeWrapper = styled.div`
       font-size: 1.3rem;
       padding: 2.5px 6px;
       color: ${({ theme }) => theme.color.gray};
-      /* background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR4tuEhLkej_9yySmSYJbuwaSzzQnK7czK1Bw&usqp=CAU'); */
-      /* transform: rotate(90deg); */
     }
   }
   .rc-slider-tooltip {

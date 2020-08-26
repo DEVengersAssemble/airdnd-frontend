@@ -153,7 +153,7 @@ const FilterModal = ({
   return (
     <StModal
       modalState={popupState}
-      setModalState={onClose}
+      setModalState={() => onClose('modal')}
       header
       title="필터 추가하기"
     >

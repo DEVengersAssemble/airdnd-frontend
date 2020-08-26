@@ -6,8 +6,9 @@ import { closePopup, openPopup } from '../../Modules/search';
 const FilterButtonContainer = ({ name, text, children }) => {
   const { popup } = useSelector(state => state.search);
   const dispatch = useDispatch();
-  const onClose = () => dispatch(closePopup());
-  const onClick = () => dispatch(popup[name] ? closePopup() : openPopup(name));
+  const onClose = name => dispatch(closePopup(name));
+  const onClick = () =>
+    dispatch(popup[name] ? closePopup(name) : openPopup(name));
 
   return (
     <FilterButton text={text} onClick={onClick}>

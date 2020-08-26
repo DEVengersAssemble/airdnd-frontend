@@ -24,7 +24,7 @@ export const zoomIn = () => ({ type: ZOOM_IN });
 export const zoomOut = () => ({ type: ZOOM_OUT });
 
 export const openPopup = name => ({ type: OPEN_POPUP, name });
-export const closePopup = () => ({ type: CLOSE_POPUP });
+export const closePopup = name => ({ type: CLOSE_POPUP, name });
 export const handleRange = handler => ({ type: HANDLE_RANGE, handler });
 export const setFilter = (name, value) => ({ type: SET_FILTER, name, value });
 export const resetFilter = name => ({ type: RESET_FILTER, name });
@@ -393,7 +393,10 @@ const search = (state = initialState, action) => {
     case CLOSE_POPUP:
       return {
         ...state,
-        popup: popupInit,
+        popup: {
+          ...state.popup,
+          [action.name]: false,
+        },
       };
     case SET_FILTER:
       return {

@@ -23,7 +23,7 @@ const RefundPopupContainer = ({ popupState, onClose }) => {
   const closePopup = ({ target }) => {
     if (!popupState || popup.current.contains(target)) return;
     // dispatch(saveFilter('refund'), prevFilter);
-    onClose();
+    onClose('refund');
   };
 
   useEffect(() => {
@@ -64,7 +64,7 @@ const RoomTypePopupContainer = ({ popupState, onClose }) => {
   const closePopup = ({ target }) => {
     if (!popupState || popup.current.contains(target)) return;
     // dispatch(saveFilter('roomType'), prevFilter);
-    onClose();
+    onClose('roomType');
   };
 
   useEffect(() => {
@@ -112,15 +112,15 @@ const PricePopupContainer = ({ popupState, onClose }) => {
 
   const track = document.querySelector('.rc-slider-track');
   const rangeBar = document.querySelector('.rc-slider');
-  const pos = track && track.getBoundingClientRect();
-  const rangeWidth = rangeBar && rangeBar.getBoundingClientRect();
+  const trackPos = track && track.getBoundingClientRect();
+  const rangePos = rangeBar && rangeBar.getBoundingClientRect();
   const isDisabled = min === 12000 && max === 1000000;
 
   const popup = useRef();
   const closePopup = ({ target }) => {
     if (!popupState || popup.current.contains(target)) return;
     // dispatch(saveFilter('price'), prevFilter);
-    onClose();
+    onClose('price');
   };
 
   useEffect(() => {
@@ -140,9 +140,10 @@ const PricePopupContainer = ({ popupState, onClose }) => {
         averagePrice={averagePrice}
         min={min}
         max={max}
-        left={pos && pos.left}
-        right={pos && pos.right}
-        width={pos && rangeWidth.width}
+        left={trackPos && trackPos.left}
+        right={trackPos && trackPos.right}
+        start={rangePos && rangePos.left}
+        end={rangePos && rangePos.right}
         range={range}
         onHandler={onHandler}
         onSetRange={onSetRange}
@@ -159,7 +160,7 @@ const SetDatePopupContainer = ({ popupState, onClose }) => {
   const popup = useRef();
   const closePopup = ({ target }) => {
     if (!popupState || popup.current.contains(target)) return;
-    onClose();
+    onClose('setDate');
   };
 
   useEffect(() => {
