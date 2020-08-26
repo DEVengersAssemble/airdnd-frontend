@@ -89,8 +89,8 @@ const filterInit = {
     shared: false,
   },
   price: {
-    priceFrom: 12000,
-    priceTo: 1000000,
+    min: 12000,
+    max: 1000000,
   },
 };
 
@@ -245,8 +245,8 @@ const initialState = {
       shared: false,
     },
     price: {
-      priceFrom: 12000,
-      priceTo: 1000000,
+      min: 12000,
+      max: 1000000,
     },
     instantBooking: false,
     bedroom: {

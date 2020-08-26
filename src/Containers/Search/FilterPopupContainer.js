@@ -90,19 +90,36 @@ const RoomTypePopupContainer = ({ popupState, onClose }) => {
 };
 
 const PricePopupContainer = ({ popupState, onClose }) => {
-  const { priceFrom, priceTo } = useSelector(
-    state => state.search.filterApplied.price,
-  );
+  const { min, max } = useSelector(state => state.search.filterApplied.price);
   const { priceArray, averagePrice } = useSelector(state => state.search);
   const dispatch = useDispatch();
 
-  const onChangePriceFrom = ({ target }) =>
-    dispatch(setFilter('price', { priceFrom: target.value, priceTo }));
-  const onChangePriceTo = ({ target }) =>
-    dispatch(setFilter('price', { priceFrom, priceTo: target.value }));
+  const onChangeMinPrice = ({ target }) =>
+    dispatch(setFilter('price', { min: target.value, max }));
+  const onChangeMaxPrice = ({ target }) =>
+    dispatch(setFilter('price', { min, max: target.value }));
   const onReset = () => dispatch(resetFilter('price'));
-  const onSave = () => dispatch(saveFilter('price', { priceFrom, priceTo }));
-  const isDisabled = priceFrom === 12000 && priceTo === 1000000;
+  const onSave = () => dispatch(saveFilter('price', { min, max }));
+  const isDisabled = min === 12000 && max === 1000000;
+
+  const rangeBarRef = useRef();
+  const minHandlerRef = useRef();
+  const maxHandlerRef = useRef();
+  let initialMin = 289.90625;
+  let initialMax = 677.90625;
+  let width = 388;
+  let minPos = 0;
+  let maxPos = 0;
+
+  const onDrag = e => {
+    const { left, right, width } = rangeBarRef.current.getBoundingClientRect();
+  };
+  const allowDrop = e => e.preventDefault();
+  const onDrop = e => {
+    console.log('isDropped');
+    e.preventDefault();
+    const data = e.dataTransfer.getData('button');
+  };
 
   const popup = useRef();
   const closePopup = ({ target }) => {
@@ -112,7 +129,7 @@ const PricePopupContainer = ({ popupState, onClose }) => {
   };
 
   useEffect(() => {
-    prevFilter = { priceFrom, priceTo };
+    prevFilter = { min, max };
     document.addEventListener('click', closePopup);
     return () => {
       document.removeEventListener('click', closePopup);
@@ -126,12 +143,15 @@ const PricePopupContainer = ({ popupState, onClose }) => {
         isDisabled={isDisabled}
         priceArray={priceArray}
         averagePrice={averagePrice}
-        priceFrom={priceFrom}
-        priceTo={priceTo}
-        onChangePriceFrom={onChangePriceFrom}
-        onChangePriceTo={onChangePriceTo}
+        min={min}
+        max={max}
+        refs={{ rangeBarRef, minHandlerRef, maxHandlerRef }}
+        onChangeMinPrice={onChangeMinPrice}
+        onChangeMaxPrice={onChangeMaxPrice}
         onSave={onSave}
         onReset={onReset}
+        onDrag={onDrag}
+        onDrop={onDrop}
       />
     </div>
   );

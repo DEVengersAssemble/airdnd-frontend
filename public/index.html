@@ -25,6 +25,10 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+    <link
+      rel="stylesheet"
+      href="../../assets/vendor/chartist/dist/chartist.min.css"
+    />
 
     <title>Airdnd</title>
   </head>
@@ -50,5 +54,24 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <!-- JS Implementing Plugins -->
+    <script src="../../assets/vendor/chartist/dist/chartist.min.js"></script>
+
+    <!-- JS Front -->
+    <script src="../../assets/js/components/hs.chartist-bar-chart.js"></script>
+
+    <!-- JS Plugins Init. -->
+    <script>
+      $(document).on('ready', function () {
+        // initialization of chartist bar chart
+        $.HSCore.components.HSChartistBarChart.init('.js-bar-chart');
+      });
+
+      $(window).on('resize', function () {
+        setTimeout(function () {
+          $.HSCore.components.HSChartistBarChart.init('.js-bar-chart');
+        }, 800);
+      });
+    </script>
   </body>
 </html>

@@ -107,12 +107,15 @@ const PricePopup = ({
   averagePrice,
   popupState,
   isDisabled,
-  priceFrom,
-  priceTo,
-  onChangePriceFrom,
-  onChangePriceTo,
+  min,
+  max,
+  refs,
+  onChangeMinPrice,
+  onChangeMaxPrice,
   onReset,
   onSave,
+  onDrag,
+  onDrop,
 }) => {
   return (
     <FilterPopup
@@ -126,36 +129,48 @@ const PricePopup = ({
         <StLargeSpan>
           평균 1박 요금은 ₩{averagePrice.toLocaleString()}입니다
         </StLargeSpan>
-        <StRangeWrapper>
-          <StRangeBar>
-            <StButton btnType="circle" left="0">
+        <StRangeWrapper ref={refs.rangeBarRef}>
+          {/* <StRangeBar onDrop={onDrop}>
+            <StHandler
+              id="minPriceHandler"
+              ref={refs.minHandlerRef}
+              btnType="circle"
+              left="0"
+              onMouseDown={onDrag}
+            >
               <StIcon />
-            </StButton>
-            <StButton btnType="circle" right="0">
+            </StHandler>
+            <StHandler
+              id="maxPriceHandler"
+              ref={refs.maxHandlerRef}
+              btnType="circle"
+              right="0"
+              onMouseDown={onDrag}
+            >
               <StIcon />
-            </StButton>
+            </StHandler>
           </StRangeBar>
           <StGraph>
             {priceArray.map((price, i) => (
               <StStick key={i} height={price} />
             ))}
-          </StGraph>
+          </StGraph> */}
         </StRangeWrapper>
         <StInputWrapper>
           <NewInput
             title="최저 요금"
-            value={priceFrom}
+            value={min}
             short
             pay="₩"
-            onChange={onChangePriceFrom}
+            onChange={onChangeMinPrice}
           />
           <span>―</span>
           <NewInput
             title="최고 요금"
-            value={priceTo}
+            value={max}
             short
             pay="₩"
-            onChange={onChangePriceTo}
+            onChange={onChangeMaxPrice}
           />
         </StInputWrapper>
       </StContentWrapper>
@@ -322,7 +337,7 @@ const StRangeBar = styled.div`
   align-items: center;
 `;
 
-const StButton = styled(Button)`
+const StHandler = styled(Button)`
   position: absolute;
   right: ${({ right }) => right};
   left: ${({ left }) => left};
