@@ -9,7 +9,6 @@ const WishlistsHeader = () => {
       <Header>
         <Airbnb size="4.5rem" />
       </Header>
-      {/* <RwdText>테스트</RwdText> */}
     </TripsHeaderWrapper>
   );
 };
@@ -39,15 +38,4 @@ const Header = styled.div`
   }
 `;
 
-// const RwdText = styled.div`
-//   border: 1px solid red;
-//   width: 5rem;
-//   height: 3rem;
-//   @media ${({ theme }) => theme.size.medium} {
-//     border: 1px solid blue;
-//   }
-//   @media ${({ theme }) => theme.size.iPad} {
-//     border: 1px solid green;
-//   }
-// `;
 export default WishlistsHeader;
