@@ -73,17 +73,18 @@ const StPwValidationItem = styled.div`
   display: flex;
   align-items: center;
   font-size: 22px;
-  color: ${({ isPwValid, theme, pwInvalid }) =>
-    pwInvalid === null
-      ? theme.color.gray
-      : isPwValid
-      ? theme.color.green
-      : theme.color.warning};
+  color: ${({ theme, isPwValid }) =>
+    isPwValid ? theme.color.green : theme.color.warning};
 `;
 
 const StPwValidationText = styled.span`
   font-size: 14px;
   padding-left: 5px;
+`;
+
+const StPwValidationLevelText = styled.span`
+  color: ${({ pwLevel, theme }) =>
+    pwLevel ? theme.color.green : theme.color.warning};
 `;
 
 const StSubmitButton = styled(Button)``;
@@ -104,7 +105,8 @@ const SignupModal = ({
   const { email, firstName, lastName, pw, pwValidation } = signup;
   const { pwLevel, pwLength, pwContain, pwCase } = pwValidation;
   const { emailRef, firstNameRef, lastNameRef, pwRef } = refObj;
-  console.log('pw.invalid: ', pw.invalid);
+  console.log('-----[Signup Modal]-----');
+  console.log(pwLevel, pwLength, pwContain, pwCase);
   return (
     <StSignupModal
       modalState={signupModalVisible}
@@ -185,24 +187,26 @@ const SignupModal = ({
           )}
           {pwFocus && (
             <StPwValidationList>
-              <StPwValidationItem pwLevel={pwLevel} pwInvalid={pw.invalid}>
+              <StPwValidationItem isPwValid={pwLevel}>
                 {pwLevel >= 1 ? <MdCheck /> : <MdClose />}
                 <StPwValidationText>
                   비밀번호 보안 수준:
-                  {pwLevel ? (pwLevel === 2 ? ' 강함' : ' 보통') : ' 약함'}
+                  <StPwValidationLevelText pwLevel={pwLevel}>
+                    {pwLevel ? (pwLevel === 2 ? ' 강함' : ' 보통') : ' 약함'}
+                  </StPwValidationLevelText>
                 </StPwValidationText>
               </StPwValidationItem>
-              <StPwValidationItem isPwValid={pwContain} pwInvalid={pw.invalid}>
-                {pwCase ? <MdCheck /> : <MdClose />}
+              <StPwValidationItem isPwValid={pwContain}>
+                {pwContain ? <MdCheck /> : <MdClose />}
                 <StPwValidationText>
                   비밀번호에 본인 이름이나 이메일 주소를 포함할 수 없습니다.
                 </StPwValidationText>
               </StPwValidationItem>
-              <StPwValidationItem isPwValid={pwLength} pwInvalid={pw.invalid}>
+              <StPwValidationItem isPwValid={pwLength}>
                 {pwLength ? <MdCheck /> : <MdClose />}
                 <StPwValidationText>최소 8자</StPwValidationText>
               </StPwValidationItem>
-              <StPwValidationItem isPwValid={pwCase} pwInvalid={pw.invalid}>
+              <StPwValidationItem isPwValid={pwCase}>
                 {pwCase ? <MdCheck /> : <MdClose />}
                 <StPwValidationText>
                   숫자나 기호를 포함하세요

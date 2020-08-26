@@ -38,6 +38,11 @@ const signupReducer = (state, action) => {
           invalid: state[action.key].invalid && false,
         },
       };
+    case 'VALIDATE_PW':
+      return {
+        ...state,
+        pwValidation: action.payload,
+      };
     default:
       return state;
   }
@@ -61,8 +66,9 @@ const SignupModalContainer = ({
 
   const [signup, dispatch] = useReducer(signupReducer, initialState);
   const [isChecking, setIsChecking] = useState(false);
+  const [isPwChanged, setIsPwChanged] = useState(false);
   const [pwFocus, setPwFocus] = useState(false);
-
+  console.log('[isPwChanged]:', isPwChanged);
   const { email, firstName, lastName, pw, pwValidation } = signup;
   const { pwLevel, pwContain, pwLength, pwCase } = pwValidation;
 
@@ -88,7 +94,6 @@ const SignupModalContainer = ({
       value: pw.value,
       invalid: !pwLevel,
     };
-    console.log('[pwObj]', pwObj);
     const pwValidationObj = {
       pwLevel: 0,
       pwContain: false,
@@ -106,9 +111,41 @@ const SignupModalContainer = ({
     setIsChecking(true);
   };
 
+  const updatePwValidation = () => {
+    console.log('-----onChangeForm');
+    console.log('[pw.value]:', pw.value);
+    const pwLength = pw.value && pw.value.length > 8;
+    const pwContain =
+      !pw.value.includes(firstName.value) &&
+      !pw.value.includes(lastName.value) &&
+      !pw.value.includes(email.value.split('@')[0]);
+    const numberPattern = /[0-9]/;
+    const specialCasePattern = /[~!@#$%^&*()_+|<>?:{}]/;
+    const pwCase =
+      numberPattern.test(pw.value) || specialCasePattern.test(pw.value);
+    const pwCaseBoth =
+      numberPattern.test(pw.value) && specialCasePattern.test(pw.value);
+    const pwLevel =
+      pwContain && pwLength && pwCaseBoth
+        ? 2
+        : pwContain && pwLength && pwCase
+        ? 1
+        : 0;
+
+    console.log('---', pwLevel, pwLength, pwContain, pwCase);
+    const payload = {
+      pwLevel,
+      pwContain,
+      pwLength,
+      pwCase,
+    };
+    dispatch({ type: 'VALIDATE_PW', payload });
+  };
+
   const onChangeForm = ({ target }, key) => {
-    const payload = target.value;
-    dispatch({ type: 'UPDATE_VALUE', key, payload });
+    const value = target.value;
+    dispatch({ type: 'UPDATE_VALUE', key, payload: value });
+    setIsPwChanged(true);
   };
 
   const openLoginModal = () => {
@@ -128,11 +165,6 @@ const SignupModalContainer = ({
       }, 0);
     console.log(Object.entries(signup).find(v => v[1].invalid)[0]);
     if (invalidCount) {
-      // Object.entries(signup)
-      //   .reverse()
-      //   .forEach((v, i) => {
-      //     v[1].invalid && refObj[`${v[0]}Ref`].current.focus();
-      //   });
       refObj[
         `${Object.entries(signup).find(v => v[1].invalid)[0]}Ref`
       ].current.focus();
@@ -147,9 +179,12 @@ const SignupModalContainer = ({
   };
 
   React.useEffect(() => {
+    console.log('[USEEFFECT]=======');
     isChecking && changeFocus();
+    isPwChanged && updatePwValidation();
     setIsChecking(false);
-  }, [isChecking]);
+    setIsPwChanged(false);
+  }, [isChecking, isPwChanged, signup]);
 
   return (
     <SignupModal
@@ -157,6 +192,7 @@ const SignupModalContainer = ({
       openLoginModal={openLoginModal}
       closeModal={closeModal}
       signup={signup}
+      pwValidation={pwValidation}
       onChangeForm={onChangeForm}
       onSignup={onSignup}
       refObj={refObj}
