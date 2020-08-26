@@ -71,11 +71,25 @@ const TripsUpcomingCardItemWrapper = styled.li`
   /* media query 적용필요: 기기별 카드의 width값 변경 */
   &:nth-child(3n + 2),
   &:nth-child(3n + 1) {
-    margin-right: 3.3rem;
+    margin-right: 2%;
   }
   margin-bottom: 4rem;
   border-radius: 10px;
-  width: 38rem;
+  width: 32%;
+  @media ${({ theme }) => theme.size.medium} {
+    &:nth-child(2n) {
+      margin-right: 0rem;
+    }
+    &:nth-child(2n + 1) {
+      margin-right: 4%;
+    }
+    width: 48%;
+  }
+
+  @media ${({ theme }) => theme.size.iPad} {
+    margin-right: 0rem;
+  }
+
   height: 45rem;
   box-shadow: 0rem 0rem 1rem ${({ theme }) => theme.color.gray};
   &:hover {
@@ -91,7 +105,7 @@ const TripsUpcomingImgWrapper = styled.div`
 const TripsUpcomingImg = styled.div`
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  background: no-repeat center/38rem
+  background: no-repeat center/100%
     url('https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large');
   height: 20rem;
 `;
@@ -152,6 +166,7 @@ const TripsUpcomingButtonWrapper = styled.div`
 const TripsUpcomingButtonInnerWrapper = styled.div`
   display: flex;
   align-items: center;
+  width: 80%;
 `;
 
 const TripsUpcomingImgInButton = styled.img`
