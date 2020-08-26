@@ -104,8 +104,16 @@ const PricePopupContainer = ({ popupState, onClose }) => {
     dispatch(setFilter('price', { min: +target.value, max }));
   const onChangeMaxPrice = ({ target }) =>
     dispatch(setFilter('price', { min, max: +target.value }));
-  const onReset = () => dispatch(resetFilter('price'));
+  const onReset = () => {
+    setRange({ value: [12000, 1000000] });
+    dispatch(resetFilter('price'));
+  };
   const onSave = () => dispatch(saveFilter('price', { min, max }));
+
+  const track = document.querySelector('.rc-slider-track');
+  const rangeBar = document.querySelector('.rc-slider');
+  const pos = track && track.getBoundingClientRect();
+  const rangeWidth = rangeBar && rangeBar.getBoundingClientRect();
   const isDisabled = min === 12000 && max === 1000000;
 
   const popup = useRef();
@@ -132,6 +140,9 @@ const PricePopupContainer = ({ popupState, onClose }) => {
         averagePrice={averagePrice}
         min={min}
         max={max}
+        left={pos && pos.left}
+        right={pos && pos.right}
+        width={pos && rangeWidth.width}
         range={range}
         onHandler={onHandler}
         onSetRange={onSetRange}

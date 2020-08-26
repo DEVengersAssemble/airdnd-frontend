@@ -112,6 +112,9 @@ const PricePopup = ({
   isDisabled,
   min,
   max,
+  left,
+  right,
+  width,
   range,
   onHandler,
   onSetRange,
@@ -140,17 +143,19 @@ const PricePopup = ({
             value={range.value}
             defaultValue={[12000, 1000000]}
             onChange={onHandler}
-            tipProps={{ visible: false }}
-            handle={
-              <StHandler>
-                <StIcon />
-              </StHandler>
-            }
-          ></Range>
+          />
           <StGraph>
-            {priceArray.map((price, i) => (
-              <StStick key={i} height={price} />
-            ))}
+            {priceArray.map((price, i) => {
+              const isSmaller = right > (width / 20) * (i + 1);
+              const isBigger = left < (width / 20) * i;
+              return (
+                <StStick
+                  key={i}
+                  height={price}
+                  inRange={isSmaller && isBigger}
+                />
+              );
+            })}
           </StGraph>
         </StRangeWrapper>
         <StInputWrapper>
@@ -310,14 +315,14 @@ const StInputWrapper = styled.div`
 
 const StRangeWrapper = styled.div`
   height: 10rem;
-  margin: 2rem 0;
+  margin: 3rem 0 1rem;
   display: flex;
   flex-direction: column;
   flex-flow: column-reverse;
 
   .rc-slider {
     position: relative;
-    height: 14px;
+    height: 10px;
     width: 95%;
     margin: 0 auto;
     border-radius: 3px;
@@ -346,8 +351,18 @@ const StRangeWrapper = styled.div`
     border: solid 1px ${({ theme }) => theme.color.gray};
     background-color: #fff;
     touch-action: pan-x;
+    z-index: 15;
     &:focus {
       outline: none;
+    }
+    &:after {
+      content: '|||';
+      position: absolute;
+      font-size: 1.3rem;
+      padding: 2.5px 6px;
+      color: ${({ theme }) => theme.color.gray};
+      /* background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR4tuEhLkej_9yySmSYJbuwaSzzQnK7czK1Bw&usqp=CAU'); */
+      /* transform: rotate(90deg); */
     }
   }
   .rc-slider-tooltip {
@@ -360,33 +375,17 @@ const StGraph = styled.ul`
   align-items: flex-end;
   width: 95%;
   margin: 0 auto;
+  position: relative;
 `;
 
 const StStick = styled.li`
   width: 5%;
+  z-index: -1;
   height: ${({ height }) => `${height * 0.8}px`};
   margin: 0 1px -1px;
   border-radius: 1px;
-  background: ${({ theme }) => theme.color.gray};
-`;
-
-const StRangeBar = styled.div`
-  width: 100%;
-  height: 2px;
-  background: ${({ theme }) => theme.color.shadow};
-  position: relative;
-  display: flex;
-  align-items: center;
-`;
-
-const StHandler = styled(Button)`
-  position: absolute;
-  z-index: 15;
-`;
-
-const StIcon = styled(GiHamburgerMenu)`
-  color: ${({ theme }) => theme.color.gray};
-  transform: rotate(90deg);
+  background: ${({ theme, inRange }) =>
+    inRange ? `${theme.color.gray}` : `${theme.color.shadow}`};
 `;
 
 const StFooter = styled(ModalFooter)`
