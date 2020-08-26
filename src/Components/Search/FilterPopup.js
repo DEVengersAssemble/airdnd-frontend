@@ -1,4 +1,5 @@
 import React from 'react';
+import { Slider, Rail, Handles, Tracks, Ticks } from 'react-compound-slider';
 import Popup from '../Global/Popup';
 import styled, { css } from 'styled-components';
 import Button from '../Global/Button';
@@ -130,6 +131,12 @@ const PricePopup = ({
           평균 1박 요금은 ₩{averagePrice.toLocaleString()}입니다
         </StLargeSpan>
         <StRangeWrapper ref={refs.rangeBarRef}>
+          <Slider>
+            <Rail></Rail>
+            <Handles></Handles>
+            <Tracks></Tracks>
+            <Ticks></Ticks>
+          </Slider>
           {/* <StRangeBar onDrop={onDrop}>
             <StHandler
               id="minPriceHandler"
