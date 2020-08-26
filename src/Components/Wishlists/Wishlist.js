@@ -8,18 +8,19 @@ const Wishlist = ({ bmList }) => {
   const { bookmarkListId, bookmarkListTitle, bookmarks } = bmList;
   const homeCount = bookmarks.length;
 
-  // Link id변경 필요
   return (
     <WishlistCardWrapper>
       <Link to={`/wishlist/${bookmarkListId}`}>
         <WishlistImgWrapper>
-          <WishlistImg homeCount={homeCount} />
-          {homeCount !== 0 && (
-            <WishlistSubImgWrapper homeCount={homeCount}>
-              <WishlistSubImg homeCount={homeCount} />
-              {homeCount >= 3 ? <WishlistSubMoreImg /> : <AltImg />}
-            </WishlistSubImgWrapper>
-          )}
+          <WishlistFirstImg homeCount={homeCount} />
+          <WishlistSubImgWrapper homeCount={homeCount}>
+            {homeCount >= 2 && (
+              <>
+                <WishlistSecondImg homeCount={homeCount} />
+                {homeCount >= 3 && <WishlistThirdImg />}
+              </>
+            )}
+          </WishlistSubImgWrapper>
         </WishlistImgWrapper>
         <WishlistContent>
           <WishlistTitle>{bookmarkListTitle}</WishlistTitle>
@@ -31,14 +32,26 @@ const Wishlist = ({ bmList }) => {
 };
 
 const WishlistCardWrapper = styled.li`
-  width: 38rem;
-  height: 31rem;
   &:nth-child(3n + 2),
   &:nth-child(3n + 1) {
-    margin-right: 3.3rem;
+    margin-right: 2%;
   }
   margin-bottom: 4rem;
   border-radius: 10px;
+  width: 32%;
+  @media ${({ theme }) => theme.size.medium} {
+    &:nth-child(2n) {
+      margin-right: 0rem;
+    }
+    &:nth-child(2n + 1) {
+      margin-right: 4%;
+    }
+    width: 48%;
+  }
+  @media ${({ theme }) => theme.size.iPad} {
+    margin-right: 0rem;
+  }
+  height: 31rem;
   box-shadow: 0rem 0rem 1rem ${({ theme }) => theme.color.gray};
   &:hover {
     /* hover시 자연스러운 shadow증가를 위해 transition효과 필요 */
@@ -50,64 +63,92 @@ const WishlistImgWrapper = styled.div`
   display: flex;
 `;
 
-const WishlistImg = styled.div`
-  /* homeCount === 0 이면 alt image */
+const WishlistFirstImg = styled.div`
   /* 이미지가 하나면 꽉차게  */
   /* 이미지가 2개이상이면 모자이크 */
+  /* 0, 1, 2, 3개이상 */
   width: 100%;
   height: 20rem;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   ${({ homeCount }) =>
-    homeCount
-      ? css`
-          background: no-repeat center / 38rem
-            url('https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large');
-        `
-      : css`
-          background: no-repeat center / 38rem
-            url('https://media.glassdoor.com/sql/391850/airbnb-squarelogo-1459271200583.png');
-        `}
+    homeCount === 0 &&
+    css`
+      background-color: ${({ theme }) => theme.color.gray};
+    `}
   ${({ homeCount }) =>
-    homeCount >= 2 &&
+    homeCount === 1 &&
+    css`
+      background: url('https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+    `}
+  ${({ homeCount }) =>
+    homeCount === 2 &&
     css`
       width: 100%;
       height: 20rem;
       border-top-left-radius: 10px;
       border-top-right-radius: 0rem;
-      background: no-repeat cover / 100%
-        url('https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large');
-      background-position: left;
-    `};
+      background: url('https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+    `}
+  ${({ homeCount }) =>
+    homeCount >= 3 &&
+    css`
+      width: 100%;
+      height: 20rem;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 0rem;
+      background: url('https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+    `}   
 `;
 
 const WishlistSubImgWrapper = styled.div`
   display: ${({ homeCount }) => (homeCount === 1 ? 'none' : 'flex')};
   flex-flow: column wrap;
   margin-left: 0.5rem;
+  height: 20rem;
+  width: ${({ homeCount }) => (homeCount === 2 ? '98%' : '50%')};
 `;
 
-const WishlistSubImg = styled.div`
-  width: 14rem;
-  height: 9.75rem;
-  margin-bottom: 0.5rem;
-  border-top-right-radius: 10px;
-  background: no-repeat center / 100%
-    url('https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large');
+const WishlistSecondImg = styled.div`
+  ${({ homeCount }) =>
+    homeCount === 2
+      ? css`
+          width: 100%;
+          height: 20rem;
+          border-top-right-radius: 10px;
+          background: url('https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large');
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-position: center;
+        `
+      : css`
+          width: 100%;
+          height: 9.75rem;
+          margin-bottom: 0.5rem;
+          border-top-right-radius: 10px;
+          background: url('https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large');
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-position: center;
+        `}
 `;
 
-const WishlistSubMoreImg = styled.div`
-  width: 14rem;
+const WishlistThirdImg = styled.div`
+  width: 100%;
   height: 9.75rem;
-  background: no-repeat center / 100%
-    url('https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large');
-`;
-
-const AltImg = styled.div`
-  width: 14rem;
-  height: 9.75rem;
-  background: no-repeat center / 100%
-    url('https://media.glassdoor.com/sql/391850/airbnb-squarelogo-1459271200583.png');
+  background: url('https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 `;
 
 const WishlistContent = styled.div`

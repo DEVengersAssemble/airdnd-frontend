@@ -89,7 +89,6 @@ const TripsPastCardItemWrapper = styled.li`
   @media ${({ theme }) => theme.size.iPad} {
     margin-right: 0rem;
   }
-
   height: 45rem;
   box-shadow: 0rem 0rem 1rem ${({ theme }) => theme.color.gray};
   &:hover {
