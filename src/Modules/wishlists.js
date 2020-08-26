@@ -12,11 +12,13 @@ export const createBookmarkList = value => ({
     { bookmarkListId: id++, bookmarkListTitle: value, bookmarks: [] },
   ],
 });
+
 export const addBookmarkOldList = (homeId, bookmarkListId) => ({
   type: ADD_BOOKMARK_OLD_LIST,
   bookmark: { homeId, images: [] },
   bookmarkListId,
 });
+
 export const addBookmarkNewList = (title, homeId) => ({
   type: ADD_BOOKMARK_NEW_LIST,
   bookmarkLists: [
@@ -27,6 +29,7 @@ export const addBookmarkNewList = (title, homeId) => ({
     },
   ],
 });
+
 export const removeBookmark = homeId => ({ type: REMOVE_BOOKMARK, homeId });
 
 // initial state

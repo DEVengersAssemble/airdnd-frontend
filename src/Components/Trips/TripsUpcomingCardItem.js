@@ -6,16 +6,16 @@ import Button from '../Global/Button';
 import Profile from '../Global/Profile';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 
-const TripsPastCardItem = ({ trip, myInfo, ci, co }) => {
+const TripsUpcomingCardItem = ({ trip, myInfo, ci, co }) => {
   const { title, homeImage, location, withGuest, guest } = trip;
   const { lastName: myLastName, profileImg: myProfileImg } = myInfo;
   const { lastName: gstLastName, profileImg: gstProfileImg } = guest;
 
   return (
-    <TripsPastCardItemWrapper>
+    <TripsUpcomingCardItemWrapper>
       <Link to="/schedule">
-        <TripsPastImgWrapper>
-          <TripsPastImg />
+        <TripsUpcomingImgWrapper>
+          <TripsUpcomingImg />
           {withGuest && (
             <TripsProfileWrapper>
               <Profile
@@ -30,44 +30,44 @@ const TripsPastCardItem = ({ trip, myInfo, ci, co }) => {
               />
             </TripsProfileWrapper>
           )}
-        </TripsPastImgWrapper>
-        <TripsPastCkLcWrapper>
-          <TripsPastCheckInOut>
+        </TripsUpcomingImgWrapper>
+        <TripsUpcomingCkLcWrapper>
+          <TripsUpcomingCheckInOut>
             {ci} - {co}
-          </TripsPastCheckInOut>
-          <TripsPastLocation>{location}</TripsPastLocation>
-        </TripsPastCkLcWrapper>
+          </TripsUpcomingCheckInOut>
+          <TripsUpcomingLocation>{location}</TripsUpcomingLocation>
+        </TripsUpcomingCkLcWrapper>
         <Link to="/schedule/1">
           <StButton>
-            <TripsPastButtonWrapper>
-              <TripsPastButtonInnerWrapper>
-                <TripsPastImgInButton src={`${homeImage[0]}`} alt="#" />
-                <TripsPastButtonText>{title}</TripsPastButtonText>
-              </TripsPastButtonInnerWrapper>
+            <TripsUpcomingButtonWrapper>
+              <TripsUpcomingButtonInnerWrapper>
+                <TripsUpcomingImgInButton src={`${homeImage[0]}`} alt="#" />
+                <TripsUpcomingButtonText>{title}</TripsUpcomingButtonText>
+              </TripsUpcomingButtonInnerWrapper>
               <MdKeyboardArrowRight />
-            </TripsPastButtonWrapper>
+            </TripsUpcomingButtonWrapper>
           </StButton>
         </Link>
         <Link to="/schedues/2">
           <StButton>
-            <TripsPastButtonWrapper>
-              <TripsPastButtonInnerWrapper>
-                <TripsPastImgInButton src={`${homeImage[0]}`} alt="#" />
-                <TripsPastButtonText>{title}</TripsPastButtonText>
-              </TripsPastButtonInnerWrapper>
+            <TripsUpcomingButtonWrapper>
+              <TripsUpcomingButtonInnerWrapper>
+                <TripsUpcomingImgInButton src={`${homeImage[0]}`} alt="#" />
+                <TripsUpcomingButtonText>{title}</TripsUpcomingButtonText>
+              </TripsUpcomingButtonInnerWrapper>
               <MdKeyboardArrowRight />
-            </TripsPastButtonWrapper>
+            </TripsUpcomingButtonWrapper>
           </StButton>
         </Link>
       </Link>
       <Link to="/schedule">
         <StMoreButton border="none">여행 계획 더보기</StMoreButton>
       </Link>
-    </TripsPastCardItemWrapper>
+    </TripsUpcomingCardItemWrapper>
   );
 };
 
-const TripsPastCardItemWrapper = styled.li`
+const TripsUpcomingCardItemWrapper = styled.li`
   /* media query 적용필요: 기기별 카드의 width값 변경 */
   &:nth-child(3n + 2),
   &:nth-child(3n + 1) {
@@ -84,11 +84,11 @@ const TripsPastCardItemWrapper = styled.li`
   }
 `;
 
-const TripsPastImgWrapper = styled.div`
+const TripsUpcomingImgWrapper = styled.div`
   position: relative;
 `;
 
-const TripsPastImg = styled.div`
+const TripsUpcomingImg = styled.div`
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   background: no-repeat center/38rem
@@ -113,19 +113,19 @@ const TripsProfileWrapper = styled.div`
   }
 `;
 
-const TripsPastCkLcWrapper = styled.div`
+const TripsUpcomingCkLcWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 2rem 2rem 1rem;
 `;
 
-const TripsPastCheckInOut = styled.div`
+const TripsUpcomingCheckInOut = styled.div`
   color: ${({ theme }) => lighten(0.1, theme.color.darkGray)};
   font-size: 1.25rem;
   font-weight: 400;
 `;
 
-const TripsPastLocation = styled.div`
+const TripsUpcomingLocation = styled.div`
   padding: 0.5rem 0rem 0rem;
   font-size: 2.2rem;
   font-weight: 600;
@@ -139,7 +139,7 @@ const StButton = styled(Button)`
   padding: 0rem;
 `;
 
-const TripsPastButtonWrapper = styled.div`
+const TripsUpcomingButtonWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -149,18 +149,18 @@ const TripsPastButtonWrapper = styled.div`
   font-weight: bold;
 `;
 
-const TripsPastButtonInnerWrapper = styled.div`
+const TripsUpcomingButtonInnerWrapper = styled.div`
   display: flex;
   align-items: center;
 `;
 
-const TripsPastImgInButton = styled.img`
+const TripsUpcomingImgInButton = styled.img`
   border-radius: 5px;
   width: 4rem;
   height: 4rem;
 `;
 
-const TripsPastButtonText = styled.div`
+const TripsUpcomingButtonText = styled.div`
   padding-left: 1rem;
   font-size: 1.4rem;
   font-weight: 400;
@@ -177,4 +177,4 @@ const StMoreButton = styled(Button)`
   font-size: 1.5rem;
 `;
 
-export default TripsPastCardItem;
+export default TripsUpcomingCardItem;
