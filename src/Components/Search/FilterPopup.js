@@ -8,7 +8,8 @@ import ModalFooter from '../Global/ModalFooter';
 import Checkbox from '../Global/Checkbox';
 import { NewInput } from '../Global/Input';
 import { GiHamburgerMenu } from 'react-icons/gi';
-import RangeSlider from './RangeSlider';
+
+const Range = Slider.createSliderWithTooltip(Slider.Range);
 
 const RefundPopup = ({
   popupState,
@@ -111,7 +112,6 @@ const PricePopup = ({
   isDisabled,
   min,
   max,
-  refs,
   onChangeMinPrice,
   onChangeMaxPrice,
   onReset,
@@ -131,28 +131,21 @@ const PricePopup = ({
         <StLargeSpan>
           평균 1박 요금은 ₩{averagePrice.toLocaleString()}입니다
         </StLargeSpan>
-        <StRangeWrapper ref={refs.rangeBarRef}>
-          <StRangeBar onDrop={onDrop}>
-            <StHandler
-              id="minPriceHandler"
-              ref={refs.minHandlerRef}
-              btnType="circle"
-              left="0"
-              onMouseDown={onDrag}
-            >
-              <StIcon />
-            </StHandler>
-            <StFillRange />
-            <StHandler
-              id="maxPriceHandler"
-              ref={refs.maxHandlerRef}
-              btnType="circle"
-              right="0"
-              onMouseDown={onDrag}
-            >
-              <StIcon />
-            </StHandler>
-          </StRangeBar>
+        <StRangeWrapper>
+          <Range
+            min={12000}
+            max={1000000}
+            allowCross={false}
+            // value={state.value}
+            defaultValue={[12000, 1000000]}
+            // onChange={onChange}
+            tipProps={{ visible: false }}
+            handle={
+              <StHandler>
+                <StIcon />
+              </StHandler>
+            }
+          ></Range>
           <StGraph>
             {priceArray.map((price, i) => (
               <StStick key={i} height={price} />
@@ -341,13 +334,15 @@ const StRangeBar = styled.div`
 `;
 
 const StFillRange = styled.div`
-  /* width: 100%; */
+  position: absolute;
+  width: 100%;
   height: 2px;
   background: ${({ theme }) => theme.color.gray};
 `;
 
 const StHandler = styled(Button)`
   position: absolute;
+  z-index: 15;
   right: ${({ right }) => right};
   left: ${({ left }) => left};
 `;

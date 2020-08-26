@@ -102,27 +102,6 @@ const PricePopupContainer = ({ popupState, onClose }) => {
   const onSave = () => dispatch(saveFilter('price', { min, max }));
   const isDisabled = min === 12000 && max === 1000000;
 
-  const rangeBarRef = useRef();
-  const minHandlerRef = useRef();
-  const maxHandlerRef = useRef();
-  let initialMin = 289.90625;
-  let initialMax = 677.90625;
-  let width = 388;
-  let minPos = 0;
-  let maxPos = 0;
-
-  const fillRange = () => ({ width: 'maxPos - minPos' });
-  const onDrag = e => {
-    e.preventDefault();
-    // offset = e.clientX - initial
-  };
-  const allowDrop = e => e.preventDefault();
-  const onDrop = e => {
-    console.log('isDropped');
-    e.preventDefault();
-    const data = e.dataTransfer.getData('button');
-  };
-
   const popup = useRef();
   const closePopup = ({ target }) => {
     if (!popupState || popup.current.contains(target)) return;
@@ -147,13 +126,10 @@ const PricePopupContainer = ({ popupState, onClose }) => {
         averagePrice={averagePrice}
         min={min}
         max={max}
-        refs={{ rangeBarRef, minHandlerRef, maxHandlerRef }}
         onChangeMinPrice={onChangeMinPrice}
         onChangeMaxPrice={onChangeMaxPrice}
         onSave={onSave}
         onReset={onReset}
-        onDrag={onDrag}
-        onDrop={onDrop}
       />
     </div>
   );
