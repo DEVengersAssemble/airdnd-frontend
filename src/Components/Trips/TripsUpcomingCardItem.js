@@ -166,7 +166,7 @@ const TripsUpcomingButtonWrapper = styled.div`
 const TripsUpcomingButtonInnerWrapper = styled.div`
   display: flex;
   align-items: center;
-  width: 80%;
+  width: 90%;
 `;
 
 const TripsUpcomingImgInButton = styled.img`
