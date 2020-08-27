@@ -17,7 +17,8 @@ const MsgSectionHeaderContainer = ({ msgSectionStates }) => {
 
   return (
     <MsgSectionHeader
-      msgSectionStates={msgSectionStates}
+      msgListSectionState={msgListSectionState}
+      msgDetailSectionState={msgDetailSectionState}
       onToggleDetail={onToggleDetail}
     />
   );

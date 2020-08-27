@@ -10,6 +10,7 @@ const MsgSectionHeader = ({
   msgDetailSectionState,
   onToggleDetail,
 }) => {
+  console.log(msgDetailSectionState);
   return (
     <MsgSectionHeaderWrapper>
       <MsgSectionHeaderTitle>호스트닉네임</MsgSectionHeaderTitle>
