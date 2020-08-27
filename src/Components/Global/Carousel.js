@@ -83,7 +83,7 @@ const slideNext = (homeWidth, size) => keyframes`
   transform: translate3d(0,0,0);
 }
 100% {
-  transform: ${`translate3d(-${size ? sizes[size].width : homeWidth}px,0,0)`};
+  transform: ${`translate3d(-${size ? sizes[size].width : homeWidth}px, 0, 0)`};
 }
 `;
 
@@ -92,7 +92,7 @@ const slidePrev = (homeWidth, size) => keyframes`
   transform: translate3d(0,0,0);
 }
 100% {
-  transform: ${`translate3d(${size ? sizes[size].width : homeWidth}px,0,0)`};
+  transform: ${`translate3d(${size ? sizes[size].width : homeWidth}px, 0, 0)`};
 }
 `;
 
