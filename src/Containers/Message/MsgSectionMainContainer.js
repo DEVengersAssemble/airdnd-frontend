@@ -1,15 +1,8 @@
 import React from 'react';
 import MsgSectionMain from '../../Components/Message/MsgSectionMain';
 
-const MsgSectionMainContainer = ({ msgSectionStates }) => {
-  const { msgListSectionState, msgDetailSectionState } = msgSectionStates;
-
-  return (
-    <MsgSectionMain
-      msgListSectionState={msgListSectionState}
-      msgDetailSectionState={msgDetailSectionState}
-    />
-  );
+const MsgSectionMainContainer = () => {
+  return <MsgSectionMain />;
 };
 
 export default MsgSectionMainContainer;

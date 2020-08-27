@@ -5,7 +5,7 @@ import Button from '../Global/Button';
 import { Input } from '../Global/Input';
 import { AiOutlinePicture } from 'react-icons/ai';
 
-const MsgSectionFooter = ({ msgListSectionState, msgDetailSectionState }) => {
+const MsgSectionFooter = () => {
   return (
     <MsgSectionFooterWrapper>
       <MsgSectionFooterInner>

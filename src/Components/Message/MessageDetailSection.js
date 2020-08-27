@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css, keyframes } from 'styled-components';
+import styled, { css } from 'styled-components';
 import MsgDetailSectionHeaderContainer from '../../Containers/Message/MsgDetailSectionHeaderContainer';
 import MsgDetailSectionMain from './MsgDetailSectionMain';
 
@@ -21,7 +21,7 @@ const MessageDetailSectionWrapper = styled.section`
   min-width: 37.5rem;
 
   transition-property: all;
-  transition-duration: 0.3s;
+  transition-duration: 0.4s;
   transition-timing-function: linear;
 
   ${({ msgDetailSectionState }) =>
