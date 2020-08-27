@@ -21,7 +21,13 @@ const RefundPopupContainer = ({ popupState, onClose }) => {
 
   const popup = useRef();
   const closePopup = ({ target }) => {
-    if (!popupState || popup.current.contains(target)) return;
+    if (
+      !popupState ||
+      popup.current.contains(target) ||
+      target.nodeName === 'svg' ||
+      target.nodeName === 'path'
+    )
+      return;
     // dispatch(saveFilter('refund'), prevFilter);
     onClose('refund');
   };

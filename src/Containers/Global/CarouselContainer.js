@@ -2,29 +2,31 @@ import React, { useState } from 'react';
 import Carousel from '../../Components/Global/Carousel';
 
 const CarouselContainer = ({
-  getHomeWidth,
+  size,
   image,
   imageCount,
-  size,
   isSuperhost,
+  getHomeWidth,
 }) => {
   const [img, setImg] = useState(1);
   const [transition, setTransition] = useState(true);
   const [isClicked, setIsClicked] = useState(false);
   const [homeWidth, setHomeWidth] = useState(0);
 
+  window.addEventListener('resize', () => {
+    size === 'responsive' && setHomeWidth(getHomeWidth());
+  });
+
   const slideNext = () => {
     setImg(img + 1);
     setTransition(true);
     setIsClicked(true);
-    // if (size === 'responsive') setHomeWidth(getHomeWidth());
   };
 
   const slidePrev = () => {
     setImg(img - 1);
     setTransition(true);
     setIsClicked(true);
-    // if (size === 'responsive') setHomeWidth(getHomeWidth());
   };
 
   const resetCarousel = () => {

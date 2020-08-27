@@ -7,8 +7,6 @@ const Carousel = ({
   img,
   imageCount,
   imagePath,
-  setHomeWidth,
-  getHomeWidth,
   homeWidth,
   isSuperhost,
   isClicked,
@@ -20,8 +18,6 @@ const Carousel = ({
   ...rest
 }) => {
   React.useEffect(() => {
-    console.log(imageCount);
-    if (size === 'responsive') setHomeWidth(getHomeWidth());
     if (!isClicked) return;
     resetCarousel();
     console.log(homeWidth);
@@ -41,6 +37,7 @@ const Carousel = ({
           img={img}
           imageCount={imageCount}
           size={size}
+          homeWidth={homeWidth}
           transition={transition}
         >
           <StImageWrapper size={size} imageCount={imageCount}>
@@ -164,8 +161,17 @@ const StImageList = styled.ul`
       `;
     } else {
       return css`
-        transform: ${`translate3d(-100%, 0, 0)`};
         transition: ${transition && '0.3s'};
+        /* transform: ${`translate3d(-calc(${+img} * (20vw - 5rem)), 0, 0)`};
+      @media ${({ theme }) => theme.size.large} {
+        transform: ${`translate3d(-calc(${+img} * (25vw - 5rem)), 0, 0)`};
+        }
+      @media ${({ theme }) => theme.size.medium} {
+        transform: ${`translate3d(-calc(${+img} * (50vw - 5rem)), 0, 0)`};
+        } */
+        transform: ${
+          homeWidth && `translate3d(-${img * (homeWidth - 20)}px, 0, 0)`
+        };
       `;
     }
   }};
@@ -173,18 +179,16 @@ const StImageList = styled.ul`
 
 const StImageWrapper = styled.li`
   ${sizeStyles};
-  ${({ size, homeWidth, imageCount }) =>
+  ${({ size }) =>
     size === 'responsive' &&
     css`
       min-width: 100%;
-      padding-bottom: -75%;
     `}
 `;
 
 const StImage = styled.img`
+  width: 100%;
   object-fit: cover;
-  width: inherit;
-  height: inherit;
 `;
 
 const StPrevBtn = styled(PrevButton)`

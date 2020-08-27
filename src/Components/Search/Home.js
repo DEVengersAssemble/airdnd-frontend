@@ -36,9 +36,9 @@ const Home = ({ home, onClickBookmark, dateDiff }) => {
     <StWrapper>
       <CarouselContainer
         size="large"
-        isSuperhost={isSuperhost}
         image={image}
         imageCount={imageCount}
+        isSuperhost={isSuperhost}
       />
       <StHome
         target="_blank"
