@@ -19,7 +19,7 @@ const MsgSectionFooter = ({ msgListSectionState, msgDetailSectionState }) => {
         >
           <MsgSectionFooterImageUploadIcon />
         </Button>
-        <MsgSectionFooterInput message placeholder="메시지를 입력하세요." />
+        <Input message placeholder="메시지를 입력하세요." />
       </MsgSectionFooterInner>
     </MsgSectionFooterWrapper>
   );
@@ -45,10 +45,6 @@ const MsgSectionFooterInner = styled.div`
 
 const MsgSectionFooterImageUploadIcon = styled(AiOutlinePicture)`
   font-size: 2rem;
-`;
-
-const MsgSectionFooterInput = styled(Input)`
-  margin-left: 4rem;
 `;
 
 export default MsgSectionFooter;

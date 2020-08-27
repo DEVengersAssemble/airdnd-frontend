@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import MsgDetailSectionHeaderContainer from '../../Containers/Message/MsgDetailSectionHeaderContainer';
 import MsgDetailSectionMain from './MsgDetailSectionMain';
 
@@ -21,18 +21,14 @@ const MessageDetailSectionWrapper = styled.section`
   min-width: 37.5rem;
 
   transition-property: all;
-  transition-duration: 1s;
-  transition-timing-function: esae-out;
+  transition-duration: 0.3s;
+  transition-timing-function: linear;
 
   ${({ msgDetailSectionState }) =>
     !msgDetailSectionState &&
     css`
-      transform: translateX(37.5rem);
+      opacity: 0;
     `}
-
-  /* visibility 이거는 무시해도 돼 */
-  /* visibility: ${({ msgDetailSectionState }) =>
-    msgDetailSectionState ? 'visible' : 'hidden'}; */
 `;
 
 export default MessageDetailSection;
