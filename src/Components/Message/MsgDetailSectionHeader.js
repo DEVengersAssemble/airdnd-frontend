@@ -5,7 +5,7 @@ import theme from '../../style/theme';
 import Button from '../Global/Button';
 import { MdClear } from 'react-icons/md';
 
-const MsgDetailSectionHeader = () => {
+const MsgDetailSectionHeader = ({ msgDetailSectionState, onCloseSection }) => {
   return (
     <MsgDetailSectionHeaderWrapper>
       <MsgDetailSectionHeaderTitle>세부 내용</MsgDetailSectionHeaderTitle>
@@ -14,6 +14,7 @@ const MsgDetailSectionHeader = () => {
         border="none"
         hover={{ backgroundColor: theme.color.lightGray }}
         style={{ width: '3.5rem', height: '3.5rem' }}
+        onClick={onCloseSection}
       >
         <StMsgDetailHeaderClearIcon />
       </Button>
@@ -27,8 +28,6 @@ const MsgDetailSectionHeaderWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   border-left: 1px solid ${({ theme }) => darken(0.1, theme.color.lightGray)};
-  width: 37.5rem;
-  min-width: 37.5rem;
   height: 7.5rem;
   padding-left: 2.5rem;
   padding-right: 2.5rem;
