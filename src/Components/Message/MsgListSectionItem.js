@@ -4,22 +4,22 @@ import { ellipsis } from 'polished';
 import theme from '../../style/theme';
 import Profile from '../Global/Profile';
 
-const ChatListItem = () => {
+const MsgListItem = () => {
   const complete = true;
 
   return (
-    <ChatListItemLi>
+    <MsgListItemWrapper>
       <Profile size="4.2rem" lastName="Kim" />
-      <LastChatOuter>
+      <LastMsgItemOuter>
         <HostName>호스트 이름</HostName>
-        <LastChatInner>
-          <LastChat>
+        <LastMsgItemInner>
+          <LastMsgItemText>
             마지막 메시지 내용입니다. 마지막 메시지 내용입니다.
-          </LastChat>
-          <LastChatDate>2020년 8월 16일</LastChatDate>
-        </LastChatInner>
-        <ReservationWrapper>
-          <ReservedState
+          </LastMsgItemText>
+          <LastMsgItemDate>2020년 8월 16일</LastMsgItemDate>
+        </LastMsgItemInner>
+        <MsgItemReservationWrapper>
+          <MsgItemReservedState
             style={{
               color: `${
                 complete ? theme.color.lightGreen : theme.color.darkGray
@@ -27,16 +27,18 @@ const ChatListItem = () => {
             }}
           >
             완료
-          </ReservedState>
+          </MsgItemReservedState>
           {' • '}
-          <ReservedDate>2020년 8월 15일 - 2020년 8월 16일</ReservedDate>
-        </ReservationWrapper>
-      </LastChatOuter>
-    </ChatListItemLi>
+          <MsgItemReservedDate>
+            2020년 8월 15일 - 2020년 8월 16일
+          </MsgItemReservedDate>
+        </MsgItemReservationWrapper>
+      </LastMsgItemOuter>
+    </MsgListItemWrapper>
   );
 };
 
-const ChatListItemLi = styled.li`
+const MsgListItemWrapper = styled.li`
   display: flex;
   align-items: flex-start;
   border: none;
@@ -45,7 +47,7 @@ const ChatListItemLi = styled.li`
   padding: 1rem;
 `;
 
-const LastChatOuter = styled.div`
+const LastMsgItemOuter = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -60,37 +62,37 @@ const HostName = styled.div`
   font-weight: 400;
 `;
 
-const LastChatInner = styled.div`
+const LastMsgItemInner = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
 `;
 
-const LastChat = styled.span`
+const LastMsgItemText = styled.span`
   font-size: 1.4rem;
   ${ellipsis('17.8rem')};
 `;
 
-const LastChatDate = styled.span`
+const LastMsgItemDate = styled.span`
   color: ${({ theme }) => theme.color.darkGray};
   font-size: 1.3rem;
   font-weight: light;
 `;
 
-const ReservationWrapper = styled.div`
+const MsgItemReservationWrapper = styled.div`
   font-size: 1rem;
   font-weight: light;
 `;
 
-const ReservedState = styled.span`
+const MsgItemReservedState = styled.span`
   font-size: 1.4rem;
   font-weight: 400;
 `;
 
-const ReservedDate = styled.span`
+const MsgItemReservedDate = styled.span`
   color: ${({ theme }) => theme.color.darkGray};
   font-size: 1.3rem;
   font-weight: 400;
 `;
 
-export default ChatListItem;
+export default MsgListItem;

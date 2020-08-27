@@ -45,7 +45,16 @@ const TripsMainWrapper = styled.div`
 
 const TripsMainInner = styled.div`
   margin-top: 4rem;
-  padding: 0rem 8rem;
+  padding: 0rem 12rem;
+
+  @media ${({ theme }) => theme.size.medium} {
+    padding: 0rem 7.5rem;
+  }
+
+  @media ${({ theme }) => theme.size.iPad} {
+    padding: 0rem 3rem;
+  }
+
   height: fit-content;
   min-height: calc(100vh - 12rem);
   border-bottom: 1px solid ${({ theme }) => theme.color.gray};
