@@ -30,6 +30,7 @@ const MsgListSectionHeader = () => {
 };
 
 const MsgListSectionHeaderWrapper = styled.div`
+  border-bottom: 1px solid ${({ theme }) => darken(0.1, theme.color.lightGray)};
   display: flex;
   flex-direction: row;
   justify-content: space-between;

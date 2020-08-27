@@ -22,6 +22,7 @@ const MsgDetailSectionHeader = () => {
 };
 
 const MsgDetailSectionHeaderWrapper = styled.div`
+  border-bottom: 1px solid ${({ theme }) => darken(0.1, theme.color.lightGray)};
   display: flex;
   justify-content: space-between;
   align-items: center;
