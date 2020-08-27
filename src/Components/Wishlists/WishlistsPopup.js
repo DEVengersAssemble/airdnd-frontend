@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Popup from '../Global/Popup';
 import Button from '../Global/Button';
 import { NewInput } from '../Global/Input';
-import DropDownWithFocus from '../Global/DropDownWithFocus';
+import DropDown from '../Global/DropDown';
 import { GrClose } from 'react-icons/gr';
 
 const WishlistsPopup = ({
@@ -103,7 +103,7 @@ const PopupMain = styled.div`
   }
 `;
 
-const StDropDown = styled(DropDownWithFocus)`
+const StDropDown = styled(DropDown)`
   border: 1px solid ${({ theme }) => theme.color.black};
   & > select {
     border: 1px solid ${({ theme }) => theme.color.black};

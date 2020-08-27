@@ -20,9 +20,9 @@ const initialState = {
   },
   pwValidation: {
     pwLevel: 0,
-    pwContain: false,
-    pwLength: false,
-    pwCase: false,
+    pwContain: null,
+    pwLength: null,
+    pwCase: null,
   },
 };
 
@@ -172,13 +172,6 @@ const SignupModalContainer = ({
         return acc + +cur.invalid;
       }, 0);
     if (invalidCount) {
-      // Object.entries(signup)
-      //   .slice(0, 4)
-      //   .reverse()
-      //   .forEach(v => {
-      //     console.log('v: ', v);
-      //     v[1].invalid && refObj[`${v[0]}Ref`].current.focus();
-      //   });
       refObj[
         `${Object.entries(signup).find(v => v[1].invalid)[0]}Ref`
       ].current.focus();
@@ -194,7 +187,6 @@ const SignupModalContainer = ({
 
   React.useEffect(() => {
     console.log('[USEEFFECT]=======');
-    // if (pwLevel >= 1) setPwFocus(false);
     isChecking && changeFocus();
     isPwChanged && updatePwValidation();
     setIsChecking(false);
