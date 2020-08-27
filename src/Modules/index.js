@@ -4,7 +4,6 @@ import user from './user';
 import searchForm from './searchForm';
 import wishlists from './wishlists';
 import trips from './trips';
-import carousel from './carousel';
 
 const rootReducer = combineReducers({
   user,
@@ -12,7 +11,6 @@ const rootReducer = combineReducers({
   searchForm,
   wishlists,
   trips,
-  carousel,
 });
 
 export default rootReducer;

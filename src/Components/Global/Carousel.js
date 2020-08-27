@@ -6,62 +6,57 @@ import { PrevButton, NextButton } from './SlideButton';
 const Carousel = ({
   img,
   imageCount,
-  imagePath,
+  imageArray,
+  renderArray,
   homeWidth,
   isSuperhost,
   isClicked,
   transition,
-  slideNext,
-  slidePrev,
-  resetCarousel,
+  onSlideNext,
+  onSlidePrev,
+  onSetCarousel,
   size,
   ...rest
 }) => {
   React.useEffect(() => {
+    // onSetCarousel({ imageCount, imageArray });
     if (!isClicked) return;
-    resetCarousel();
     console.log(homeWidth);
   }, [isClicked]);
 
   return (
     <StWrapper size={size} homeWidth={homeWidth} {...rest}>
-      <StPrevBtn styleType="transparent" onClick={slidePrev} />
-      <StNextBtn styleType="transparent" onClick={slideNext} />
+      <StPrevBtn styleType="transparent" onClick={onSlidePrev} />
+      <StNextBtn styleType="transparent" onClick={onSlideNext} />
       <StLink
         rel="noopener noreferrer"
         target="_blank"
         href="https://www.airbnb.co.kr/rooms/36094960?adults=1&location=%EB%A7%88%EB%93%9C%EB%A6%AC%EB%93%9C&source_impression_id=p3_1597324281_lNy0Q31ggfi0f1St&check_in=2020-09-26&guests=1&check_out=2020-09-30"
       >
         {isSuperhost && <StBadge>슈퍼호스트</StBadge>}
-        <StImageList
-          img={img}
-          imageCount={imageCount}
-          size={size}
-          homeWidth={homeWidth}
-          transition={transition}
-        >
+        {imageCount < 2 ? (
           <StImageWrapper size={size} imageCount={imageCount}>
-            <StImage src="https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large" />
+            <StImage src={imageArray[1]} />
           </StImageWrapper>
-          <StImageWrapper size={size} imageCount={imageCount}>
-            <StImage src="https://a0.muscache.com/im/pictures/3276d8ad-d455-4c59-923c-3f6926301a93.jpg?aki_policy=large" />
-          </StImageWrapper>
-          <StImageWrapper size={size} imageCount={imageCount}>
-            <StImage src="https://a0.muscache.com/im/pictures/2013c2de-4727-4cd9-b9cd-77d85238d440.jpg?aki_policy=large" />
-          </StImageWrapper>
-          <StImageWrapper size={size} imageCount={imageCount}>
-            <StImage src="https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large" />
-          </StImageWrapper>
-          <StImageWrapper size={size} imageCount={imageCount}>
-            <StImage src="https://a0.muscache.com/im/pictures/3276d8ad-d455-4c59-923c-3f6926301a93.jpg?aki_policy=large" />
-          </StImageWrapper>
-        </StImageList>
+        ) : (
+          <StImageList
+            img={img}
+            imageCount={imageCount}
+            size={size}
+            homeWidth={homeWidth}
+            transition={transition}
+          >
+            {renderArray.map((image, i) => (
+              <StImageWrapper key={i} size={size} imageCount={imageCount}>
+                <StImage src={image} />
+              </StImageWrapper>
+            ))}
+          </StImageList>
+        )}
         <StCircleWrapper>
-          <StCircle color="lightGray" />
-          <StCircle color="gray" />
-          <StCircle color="gray" />
-          <StCircle color="gray" />
-          <StCircle color="gray" />
+          {imageArray.map((_, i) => {
+            return i < 5 ? <StCircle key={i} color="lightGray" /> : null;
+          })}
         </StCircleWrapper>
       </StLink>
     </StWrapper>

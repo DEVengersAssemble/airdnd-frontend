@@ -11,7 +11,7 @@ const HomeCard = ({ home, type, mapState, onClickBookmark, dateDiff }) => {
   const {
     isSuperhost,
     isBookmarked,
-    image,
+    imageArray,
     imageCount,
     subTitle,
     title,
@@ -26,7 +26,7 @@ const HomeCard = ({ home, type, mapState, onClickBookmark, dateDiff }) => {
         size="responsive"
         getHomeWidth={getHomeWidth}
         isSuperhost={isSuperhost}
-        image={image}
+        imageArray={imageArray}
         imageCount={imageCount}
       />
       <a

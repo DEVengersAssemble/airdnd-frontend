@@ -110,9 +110,15 @@ const initialState = {
       homeId: 1,
       isSuperhost: true,
       isBookmarked: true,
-      image:
-        'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small', // 첫번째 이미지만
-      imageCount: 3, // 이미지 개수
+      imageArray: [
+        'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small',
+        'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large',
+        'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large',
+        'https://a0.muscache.com/im/pictures/3276d8ad-d455-4c59-923c-3f6926301a93.jpg?aki_policy=large',
+        'https://a0.muscache.com/im/pictures/2013c2de-4727-4cd9-b9cd-77d85238d440.jpg?aki_policy=large',
+        'https://a0.muscache.com/im/pictures/3276d8ad-d455-4c59-923c-3f6926301a93.jpg?aki_policy=large',
+      ],
+      imageCount: 4, // 이미지 개수
       subTitle: 'MongMong-Toto의 호텔 객실',
       title: 'Pia Resort Hotel Corner Studio Room',
       feature: '최대 인원 2명 ﹒ 침실 1개 ﹒ 침대 2개 ﹒ 단독 사용 욕실 1개',
@@ -125,8 +131,9 @@ const initialState = {
       homeId: 2,
       isSuperhost: false,
       isBookmarked: false,
-      image:
+      imageArray: [
         'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large',
+      ],
       imageCount: 3, // 이미지 개수
       subTitle: 'MongMong-Toto의 호텔 객실이지롱',
       title: 'Pia Resort Hotel Corner Studio Room~~~',
@@ -140,8 +147,12 @@ const initialState = {
       homeId: 3,
       isSuperhost: false,
       isBookmarked: false,
-      image:
+      imageArray: [
+        'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small',
         'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large',
+        'https://a0.muscache.com/im/pictures/3276d8ad-d455-4c59-923c-3f6926301a93.jpg?aki_policy=large',
+        'https://a0.muscache.com/im/pictures/2013c2de-4727-4cd9-b9cd-77d85238d440.jpg?aki_policy=large',
+      ],
       imageCount: 3, // 이미지 개수
       subTitle: 'MongMong-Toto의 호텔 객실이지롱',
       title: 'Pia Resort Hotel Corner Studio Room~~~',
@@ -158,8 +169,12 @@ const initialState = {
       homeId: 5,
       isSuperhost: true,
       isBookmarked: true,
-      image:
-        'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large', // 첫번째 이미지만
+      imageArray: [
+        'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small',
+        'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large',
+        'https://a0.muscache.com/im/pictures/3276d8ad-d455-4c59-923c-3f6926301a93.jpg?aki_policy=large',
+        'https://a0.muscache.com/im/pictures/2013c2de-4727-4cd9-b9cd-77d85238d440.jpg?aki_policy=large',
+      ],
       imageCount: 4, // 이미지 개수
       subTitle: 'MongMong-Toto의 호텔 객실이답',
       title: 'Pia Resort Hotel Corner Studio Room 기기',
@@ -172,8 +187,12 @@ const initialState = {
       homeId: 6,
       isSuperhost: true,
       isBookmarked: true,
-      image:
-        'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large', // 첫번째 이미지만
+      imageArray: [
+        'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small',
+        'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large',
+        'https://a0.muscache.com/im/pictures/3276d8ad-d455-4c59-923c-3f6926301a93.jpg?aki_policy=large',
+        'https://a0.muscache.com/im/pictures/2013c2de-4727-4cd9-b9cd-77d85238d440.jpg?aki_policy=large',
+      ],
       imageCount: 4, // 이미지 개수
       subTitle: 'MongMong-Toto의 호텔 객실이답',
       title: 'Pia Resort Hotel Corner Studio Room 기기',
@@ -186,8 +205,12 @@ const initialState = {
       homeId: 7,
       isSuperhost: true,
       isBookmarked: true,
-      image:
-        'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large', // 첫번째 이미지만
+      imageArray: [
+        'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small',
+        'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large',
+        'https://a0.muscache.com/im/pictures/3276d8ad-d455-4c59-923c-3f6926301a93.jpg?aki_policy=large',
+        'https://a0.muscache.com/im/pictures/2013c2de-4727-4cd9-b9cd-77d85238d440.jpg?aki_policy=large',
+      ],
       imageCount: 4, // 이미지 개수
       subTitle: 'MongMong-Toto의 호텔 객실이답',
       title: 'Pia Resort Hotel Corner Studio Room 기기',
@@ -200,8 +223,12 @@ const initialState = {
       homeId: 8,
       isSuperhost: true,
       isBookmarked: true,
-      image:
-        'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large', // 첫번째 이미지만
+      imageArray: [
+        'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small',
+        'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large',
+        'https://a0.muscache.com/im/pictures/3276d8ad-d455-4c59-923c-3f6926301a93.jpg?aki_policy=large',
+        'https://a0.muscache.com/im/pictures/2013c2de-4727-4cd9-b9cd-77d85238d440.jpg?aki_policy=large',
+      ],
       imageCount: 4, // 이미지 개수
       subTitle: 'MongMong-Toto의 호텔 객실이답',
       title: 'Pia Resort Hotel Corner Studio Room 기기',
@@ -214,8 +241,12 @@ const initialState = {
       homeId: 9,
       isSuperhost: true,
       isBookmarked: true,
-      image:
-        'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large', // 첫번째 이미지만
+      imageArray: [
+        'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small',
+        'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large',
+        'https://a0.muscache.com/im/pictures/3276d8ad-d455-4c59-923c-3f6926301a93.jpg?aki_policy=large',
+        'https://a0.muscache.com/im/pictures/2013c2de-4727-4cd9-b9cd-77d85238d440.jpg?aki_policy=large',
+      ],
       imageCount: 4, // 이미지 개수
       subTitle: 'MongMong-Toto의 호텔 객실이답',
       title: 'Pia Resort Hotel Corner Studio Room 기기',
@@ -228,8 +259,12 @@ const initialState = {
       homeId: 10,
       isSuperhost: true,
       isBookmarked: true,
-      image:
-        'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large', // 첫번째 이미지만
+      imageArray: [
+        'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small',
+        'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large',
+        'https://a0.muscache.com/im/pictures/3276d8ad-d455-4c59-923c-3f6926301a93.jpg?aki_policy=large',
+        'https://a0.muscache.com/im/pictures/2013c2de-4727-4cd9-b9cd-77d85238d440.jpg?aki_policy=large',
+      ],
       imageCount: 4, // 이미지 개수
       subTitle: 'MongMong-Toto의 호텔 객실이답',
       title: 'Pia Resort Hotel Corner Studio Room 기기',
@@ -345,13 +380,7 @@ const initialState = {
   averagePrice: 82094,
   mapState: true,
   mapZoom: 15,
-  popup: {
-    refund: false,
-    roomType: false,
-    price: false,
-    setDate: false,
-    modal: false,
-  },
+  popup: popupInit,
   // map 범위 보낼때
   // mapSend: {
   //   from: { lat: 0, lng: 0 },

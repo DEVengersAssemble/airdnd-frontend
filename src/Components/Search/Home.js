@@ -22,7 +22,7 @@ const Home = ({ home, onClickBookmark, dateDiff }) => {
     homeId,
     isSuperhost,
     isBookmarked,
-    image,
+    imageArray,
     imageCount,
     subTitle,
     title,
@@ -36,7 +36,7 @@ const Home = ({ home, onClickBookmark, dateDiff }) => {
     <StWrapper>
       <CarouselContainer
         size="large"
-        image={image}
+        imageArray={imageArray}
         imageCount={imageCount}
         isSuperhost={isSuperhost}
       />
