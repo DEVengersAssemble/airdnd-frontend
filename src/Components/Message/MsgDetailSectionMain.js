@@ -43,8 +43,6 @@ const MsgDetailSectionMain = () => {
 const MsgDetailSectionMainWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 37.5rem;
-  min-width: 37.5rem;
   height: 100vh;
   max-height: calc(100vh - 15.5rem);
   border-left: 1px solid ${({ theme }) => darken(0.1, theme.color.lightGray)};

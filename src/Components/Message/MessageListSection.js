@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import MsgListSectionHeader from './MsgListSectionHeader';
 import MsgListSectionMain from './MsgListSectionMain';
 
-const MessageListSection = () => {
+const MessageListSection = ({ msgListSectionState }) => {
   return (
-    <MessageListSectionWrapper>
+    <MessageListSectionWrapper msgListSectionState={msgListSectionState}>
       <MsgListSectionHeader />
       <MsgListSectionMain />
     </MessageListSectionWrapper>

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import MsgSectionChatItem from '../Message/MsgSectionChatItem';
 
-const MsgSectionMain = () => {
+const MsgSectionMain = ({ msgListSectionState, msgDetailSectionState }) => {
   const isHost = true;
 
   return (
@@ -22,8 +22,6 @@ const MsgSectionMain = () => {
 const MsgSectionMainWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: calc(100vw - 75rem);
-  min-width: 37.5rem;
 `;
 
 const MsgSectionMainChattingWrapper = styled.div`

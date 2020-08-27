@@ -5,7 +5,7 @@ import Button from '../Global/Button';
 import { Input } from '../Global/Input';
 import { AiOutlinePicture } from 'react-icons/ai';
 
-const MsgSectionFooter = () => {
+const MsgSectionFooter = ({ msgListSectionState, msgDetailSectionState }) => {
   return (
     <MsgSectionFooterWrapper>
       <MsgSectionFooterInner>
@@ -37,7 +37,6 @@ const MsgSectionFooterInner = styled.div`
   align-items: center;
   width: 100%;
   max-width: 57.5rem;
-  min-width: 37.5rem;
   padding: 0rem 2.5rem;
   & > label {
     margin-left: 1rem;
