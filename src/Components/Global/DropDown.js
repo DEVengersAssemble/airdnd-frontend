@@ -61,7 +61,8 @@ const StDropDownIconWrapper = styled.span`
   justify-content: center;
   align-items: center;
   font-size: 24px;
-  z-index: -1;
+  z-index: 0;
+  pointer-events: none;
 `;
 
 const DropDown = ({
@@ -73,28 +74,32 @@ const DropDown = ({
   padding,
   radius,
   outline,
+  value,
   ...rest
 }) => {
   return (
     <StDropDownWrapper width={width}>
-      <StDropDownIconWrapper>
-        <MdKeyboardArrowDown></MdKeyboardArrowDown>
-      </StDropDownIconWrapper>
       <StDropDownSelect
         name={name}
         height={height}
         padding={padding}
         radius={radius}
         outline={outline}
+        value={value}
         {...rest}
       >
-        <StDropDownOption disabled>{title}</StDropDownOption>
+        <StDropDownOption key={0} disabled>
+          {title}
+        </StDropDownOption>
         {options.map((option, i) => (
-          <StDropDownOption key={i} value={option}>
+          <StDropDownOption key={i + 1} value={option}>
             {option}
           </StDropDownOption>
         ))}
       </StDropDownSelect>
+      <StDropDownIconWrapper>
+        <MdKeyboardArrowDown></MdKeyboardArrowDown>
+      </StDropDownIconWrapper>
     </StDropDownWrapper>
   );
 };

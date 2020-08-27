@@ -6,20 +6,14 @@ import DropDown from '../Global/DropDown';
 import { Input } from '../Global/Input';
 import { RiEyeCloseLine, RiMailLine, RiUserLine } from 'react-icons/ri';
 import { MdCheck, MdClose } from 'react-icons/md';
+
 const StSignupModal = styled(Modal)`
   overflow-y: scroll;
 `;
 
-const StSignupFormWrapper = styled.div`
-  padding: 20px;
-`;
-
-const StSocialLoginWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  padding: 0 0 20px 0;
+const StDividerLine = styled.hr`
+  border: none;
+  border-top: 1px solid ${({ theme }) => theme.color.line};
 `;
 
 const StDividerText = styled.span`
@@ -32,6 +26,19 @@ const StDividerText = styled.span`
   align-items: center;
   background: white;
   padding: 0 20px;
+  color: ${({ theme }) => theme.color.darkGray};
+`;
+
+const StSignupFormWrapper = styled.div`
+  padding: 20px;
+`;
+
+const StSocialLoginWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  padding: 0 0 20px 0;
 `;
 
 const StSignupForm = styled.form`
@@ -116,14 +123,57 @@ const StBirthDayWrapper = styled.div`
   display: flex;
   background: transparent;
   justify-content: space-between;
-  padding: 20px 0px;
+  padding-top: 20px;
 `;
 
-const StBirthDayDropDown = styled(DropDown)``;
+const StBirthDayDropDown = styled(DropDown)`
+  ${({ isSelectInvalid }) =>
+    isSelectInvalid &&
+    css`
+      &:not(:focus) {
+        border: 1px solid ${({ theme }) => theme.color.warning};
+        background: #fff8f6;
+        & + span {
+          color: ${({ theme }) => theme.color.warning};
+        }
+      }
+    `};
+`;
 
-const StSubmitButton = styled(Button)``;
+const StSubmitButton = styled(Button)`
+  margin: 30px 0 20px 0;
+  width: 100%;
+  padding: 20px 0;
+  color: ${({ theme }) => theme.color.white};
+  background: ${({ theme }) => theme.color.main};
+  &:hover {
+    color: ${({ theme }) => theme.color.white};
+    background: ${({ theme }) => theme.color.main};
+  }
+`;
 
-const StLoginButton = styled(Button)``;
+const StLoginButtonWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const StLoginText = styled.span`
+  font-size: 14px;
+  line-height: 19px;
+`;
+
+const StLoginButton = styled(Button)`
+  margin-top: 5px;
+  margin-left: 10px;
+  padding: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: ${({ theme }) => theme.color.green};
+  border-radius: 0;
+  &:hover {
+    text-decoration: underline;
+  }
+`;
 
 const SignupModal = ({
   signupModalVisible,
@@ -131,12 +181,22 @@ const SignupModal = ({
   closeModal,
   signup,
   onChangeForm,
+  onChangeSelect,
   onSignup,
   refObj,
   onPwFocus,
   pwFocus,
 }) => {
-  const { email, firstName, lastName, pw, pwValidation } = signup;
+  const {
+    email,
+    firstName,
+    lastName,
+    pw,
+    pwValidation,
+    birthMonth,
+    birthDay,
+    birthYear,
+  } = signup;
   const { pwLevel, pwLength, pwContain, pwCase } = pwValidation;
   const { emailRef, firstNameRef, lastNameRef, pwRef } = refObj;
   console.log('-----[Signup Modal]-----');
@@ -154,7 +214,7 @@ const SignupModal = ({
         <StSocialLoginWrapper>
           페이스북 또는 구글로 회원 가입하세요.
         </StSocialLoginWrapper>
-        <hr style={{ borderTop: '1px solid lightgray' }} />
+        <StDividerLine />
         <StDividerText>또는</StDividerText>
         <StSignupForm onSubmit={onSignup}>
           <StInputWrapper>
@@ -269,28 +329,48 @@ const SignupModal = ({
             <StBirthDayDropDown
               name="birthMonth"
               width="40%"
+              title="월"
               options={[1, 2, 3]}
               outline
+              value={birthMonth.value}
+              isSelectInvalid={birthMonth.invalid}
+              onChange={e => onChangeSelect(e, 'birthMonth')}
             ></StBirthDayDropDown>
             <StBirthDayDropDown
               name="birthDay"
               width="22%"
+              title="일"
               options={[1, 2, 3]}
               outline
+              value={birthDay.value}
+              isSelectInvalid={birthDay.invalid}
+              onChange={e => onChangeSelect(e, 'birthDay')}
             ></StBirthDayDropDown>
             <StBirthDayDropDown
               name="birthYear"
               width="33%"
+              title="년"
               options={[1, 2, 3]}
               outline
+              value={birthYear.value}
+              isSelectInvalid={birthYear.invalid}
+              onChange={e => onChangeSelect(e, 'birthYear')}
             ></StBirthDayDropDown>
           </StBirthDayWrapper>
-          <StSubmitButton type="submit">가입하기</StSubmitButton>
+          {(birthMonth.invalid || birthDay.invalid || birthYear.invalid) && (
+            <StValidationText>계속하시려면 생일을 선택하세요.</StValidationText>
+          )}
+          <StSubmitButton border="none" type="submit">
+            가입하기
+          </StSubmitButton>
         </StSignupForm>
-        <hr />
-        <StLoginButton btnType="color" onClick={openLoginModal}>
-          로그인하기
-        </StLoginButton>
+        <StDividerLine />
+        <StLoginButtonWrapper>
+          <StLoginText>이미 에어비앤비 계정이 있나요?</StLoginText>
+          <StLoginButton btnType="color" onClick={openLoginModal}>
+            로그인
+          </StLoginButton>
+        </StLoginButtonWrapper>
       </StSignupFormWrapper>
     </StSignupModal>
   );

@@ -24,6 +24,18 @@ const initialState = {
     pwLength: null,
     pwCase: null,
   },
+  birthMonth: {
+    value: '월',
+    invalid: null,
+  },
+  birthDay: {
+    value: '일',
+    invalid: null,
+  },
+  birthYear: {
+    value: '년',
+    invalid: null,
+  },
 };
 
 const signupReducer = (state, action) => {
@@ -35,7 +47,7 @@ const signupReducer = (state, action) => {
         ...state,
         [action.key]: {
           value: action.payload,
-          invalid: state[action.key].invalid && false,
+          invalid: false,
         },
       };
     case 'VALIDATE_PW':
@@ -45,6 +57,11 @@ const signupReducer = (state, action) => {
       };
     case 'RESET':
       return initialState;
+    case 'UPDATE_SELECT':
+      return {
+        ...state,
+        [action.key]: action.payload,
+      };
     default:
       return state;
   }
@@ -59,21 +76,35 @@ const SignupModalContainer = ({
   const firstNameRef = useRef();
   const lastNameRef = useRef();
   const pwRef = useRef();
+  const birthMonthRef = useRef();
+  const birthDayRef = useRef();
+  const birthYearRef = useRef();
   const refObj = {
     emailRef,
     firstNameRef,
     lastNameRef,
     pwRef,
+    birthMonthRef,
+    birthDayRef,
+    birthYearRef,
   };
 
   const [signup, dispatch] = useReducer(signupReducer, initialState);
   const [isChecking, setIsChecking] = useState(false);
   const [isPwChanged, setIsPwChanged] = useState(false);
   const [pwFocus, setPwFocus] = useState(false);
-  console.log('[pwFocus]:', pwFocus);
-  const { email, firstName, lastName, pw, pwValidation } = signup;
+  const {
+    email,
+    firstName,
+    lastName,
+    pw,
+    pwValidation,
+    birthMonth,
+    birthDay,
+    birthYear,
+  } = signup;
   const { pwLevel, pwContain, pwLength, pwCase } = pwValidation;
-
+  console.log('=======, ', birthMonth, birthDay, birthYear);
   const onPwFocus = () => {
     setPwFocus(true);
   };
@@ -132,12 +163,27 @@ const SignupModalContainer = ({
       invalid: !pwLevel,
     };
     const pwValidationObj = checkPwValidation();
+    const birthMonthObj = {
+      value: birthMonth.value,
+      invalid: isNaN(birthMonth.value),
+    };
+    const birthDayObj = {
+      value: birthDay.value,
+      invalid: isNaN(birthDay.value),
+    };
+    const birthYearObj = {
+      value: birthYear.value,
+      invalid: isNaN(birthYear.value),
+    };
     const payload = {
       email: emailObj,
       firstName: firstNameObj,
       lastName: lastNameObj,
       pw: pwObj,
       pwValidation: pwValidationObj,
+      birthMonth: birthMonthObj,
+      birthDay: birthDayObj,
+      birthYear: birthYearObj,
     };
     dispatch({ type: 'CHECK_ALL_VALIDATION', payload });
     setIsChecking(true);
@@ -154,6 +200,17 @@ const SignupModalContainer = ({
     setIsPwChanged(true);
   };
 
+  const onChangeSelect = ({ target }, key) => {
+    const value = Number(target.value);
+    console.log('select..value: ', value, typeof value);
+    console.log('select..key: ', key, typeof key);
+    const payload = {
+      value,
+      invalid: isNaN(value),
+    };
+    console.log('select...payload:', payload);
+    dispatch({ type: 'UPDATE_SELECT', key, payload });
+  };
   const openLoginModal = () => {
     closeModal('signup');
     openModal('login');
@@ -201,6 +258,7 @@ const SignupModalContainer = ({
       signup={signup}
       pwValidation={pwValidation}
       onChangeForm={onChangeForm}
+      onChangeSelect={onChangeSelect}
       onSignup={onSignup}
       refObj={refObj}
       onPwFocus={onPwFocus}
