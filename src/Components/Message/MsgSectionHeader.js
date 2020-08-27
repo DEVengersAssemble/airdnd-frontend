@@ -4,31 +4,23 @@ import theme from '../../style/theme';
 import Button from '../Global/Button';
 import { FaBox } from 'react-icons/fa';
 
-/**
- * title: 호스트닉네임
- * Button props: children,btnType,color,border,width,height,fontSize,hover,padding,
- * focus,transition,type,...rest
- * Button type: 세부사항 숨기기, 자세히 알아보기
- * Tooltip 만들기
- */
-
-const MsgSection = () => {
+const MsgSectionHeader = () => {
   const [clicked, setClicked] = useState(false);
   const onClick = () => {
     setClicked(!clicked);
   };
 
   return (
-    <MsgSectionWrapper>
-      <MsgSectionTitle>호스트닉네임</MsgSectionTitle>
-      <MsgButtonWrapper>
+    <MsgSectionHeaderWrapper>
+      <MsgSectionHeaderTitle>호스트닉네임</MsgSectionHeaderTitle>
+      <MsgSectionHeaderButtonWrapper>
         <Button
           btnType="circle"
           border="none"
           hover={{ backgroundColor: theme.color.lightGray }}
           style={{ width: '4rem', height: '4rem' }}
         >
-          <MsgStorageIcon />
+          <StMsgSectionHeaderStorageIcon />
         </Button>
         {clicked ? (
           <Button
@@ -56,12 +48,12 @@ const MsgSection = () => {
             세부사항 숨기기
           </Button>
         )}
-      </MsgButtonWrapper>
-    </MsgSectionWrapper>
+      </MsgSectionHeaderButtonWrapper>
+    </MsgSectionHeaderWrapper>
   );
 };
 
-const MsgSectionWrapper = styled.div`
+const MsgSectionHeaderWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -72,13 +64,13 @@ const MsgSectionWrapper = styled.div`
   padding-right: 2.5rem;
 `;
 
-const MsgSectionTitle = styled.h2`
+const MsgSectionHeaderTitle = styled.h2`
   color: ${({ theme }) => theme.color.black};
   font-size: 1.8rem;
   font-weight: bold;
 `;
 
-const MsgButtonWrapper = styled.div`
+const MsgSectionHeaderButtonWrapper = styled.div`
   display: flex;
   align-items: center;
   & > Button + Button {
@@ -86,8 +78,8 @@ const MsgButtonWrapper = styled.div`
   }
 `;
 
-const MsgStorageIcon = styled(FaBox)`
+const StMsgSectionHeaderStorageIcon = styled(FaBox)`
   font-size: 1.45rem;
 `;
 
-export default MsgSection;
+export default MsgSectionHeader;
