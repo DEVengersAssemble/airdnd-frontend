@@ -30,12 +30,12 @@ const message = (state = initialState, action) => {
     case SHOW_MESSAGE_DETAIL_SECTION:
       return {
         ...state,
-        msgDetailSectionState: false,
+        msgDetailSectionState: true,
       };
     case HIDE_MESSAGE_DETAIL_SECTION:
       return {
         ...state,
-        msgDetailSectionState: true,
+        msgDetailSectionState: false,
       };
     case SHOW_MESSAGE_LIST_SECTION:
       return {

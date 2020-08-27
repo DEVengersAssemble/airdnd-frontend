@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import MsgSectionHeader from './MsgSectionHeader';
+import MsgSectionHeaderContainer from '../../Containers/Message/MsgSectionHeaderContainer';
 import MsgSectionMain from './MsgSectionMain';
 import MsgSectionFooter from './MsgSectionFooter';
 
-const MessageSection = () => {
+const MessageSection = ({ msgSectionStates }) => {
   return (
     <MessageSectionWrapper>
-      <MsgSectionHeader />
+      <MsgSectionHeaderContainer msgSectionStates={msgSectionStates} />
       <MsgSectionMain />
       <MsgSectionFooter />
     </MessageSectionWrapper>

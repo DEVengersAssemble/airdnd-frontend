@@ -1,15 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
-import MessageListSection from './MessageListSection';
-import MessageSection from './MessageSection';
-import MessageDetailSection from './MessageDetailSection';
+import MessageListSectionContainer from '../../Containers/Message/MessageListSectionContainer';
+import MessageDetailSectionContainer from '../../Containers/Message/MessageDetailSectionContainer';
+import MessageSectionContainer from '../../Containers/Message/MessageSectionContainer';
 
 const MessageMain = () => {
   return (
     <MessageMainWrapper>
-      <MessageListSection />
-      <MessageSection />
-      <MessageDetailSection />
+      <MessageListSectionContainer />
+      <MessageSectionContainer />
+      <MessageDetailSectionContainer />
     </MessageMainWrapper>
   );
 };

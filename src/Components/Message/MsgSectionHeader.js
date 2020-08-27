@@ -5,12 +5,11 @@ import theme from '../../style/theme';
 import Button from '../Global/Button';
 import { FaBox } from 'react-icons/fa';
 
-const MsgSectionHeader = () => {
-  const [clicked, setClicked] = useState(false);
-  const onClick = () => {
-    setClicked(!clicked);
-  };
-
+const MsgSectionHeader = ({
+  msgListSectionState,
+  msgDetailSectionState,
+  onToggleDetail,
+}) => {
   return (
     <MsgSectionHeaderWrapper>
       <MsgSectionHeaderTitle>호스트닉네임</MsgSectionHeaderTitle>
@@ -23,18 +22,7 @@ const MsgSectionHeader = () => {
         >
           <StMsgSectionHeaderStorageIcon />
         </Button>
-        {clicked ? (
-          <Button
-            btnType="oval"
-            border={`1px solid ${theme.color.gray}`}
-            hover={{ border: `1px solid ${theme.color.black}` }}
-            fontSize="1.2rem"
-            style={{ fontWeight: '400' }}
-            onClick={onClick}
-          >
-            자세히 알아보기
-          </Button>
-        ) : (
+        {msgDetailSectionState ? (
           <Button
             btnType="oval"
             border={`2px solid ${theme.color.black}`}
@@ -44,9 +32,20 @@ const MsgSectionHeader = () => {
               backgroundColor: `${theme.color.lightGray}`,
               fontWeight: '600',
             }}
-            onClick={onClick}
+            onClick={onToggleDetail}
           >
             세부사항 숨기기
+          </Button>
+        ) : (
+          <Button
+            btnType="oval"
+            border={`1px solid ${theme.color.gray}`}
+            hover={{ border: `1px solid ${theme.color.black}` }}
+            fontSize="1.2rem"
+            style={{ fontWeight: '400' }}
+            onClick={onToggleDetail}
+          >
+            자세히 알아보기
           </Button>
         )}
       </MsgSectionHeaderButtonWrapper>
