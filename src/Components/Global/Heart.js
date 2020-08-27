@@ -140,10 +140,11 @@ const Heart = ({ size, bgColor, stroke, ckType, hover, checked, ...rest }) => {
   );
 };
 
-const CkHeart = ({ ckType, hover, checked, ...event }) => {
+// onClick 이벤트는 onCheck 이름으로 내려주세요
+const CkHeart = ({ ckType, hover, checked, onCheck, ...event }) => {
   return (
     <StHeartLabel hover={hover} {...event}>
-      <StHeartInput type="checkbox" />
+      <StHeartInput type="checkbox" onClick={onCheck} />
       {hover ? (
         // hover=true
         <Heart size="large" ckType={ckType} hover={hover} checked={checked} />

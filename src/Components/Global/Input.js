@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable react/display-name */
+import React, { forwardRef } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import { darken, lighten } from 'polished';
 
@@ -141,33 +142,41 @@ const StPay = styled.div`
   vertical-align: sub;
 `;
 
-const Input = ({
-  children,
-  message,
-  short,
-  borderNone,
-  focusBorderColor,
-  type,
-  placeholder,
-  value,
-  onChange,
-}) => {
-  return (
-    <StLabel New={short}>
-      {children && <StLabelName>{children}</StLabelName>}
-      <StInput
-        short={short}
-        message={message}
-        borderNone={borderNone}
-        focusBorderColor={focusBorderColor}
-        type={type}
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-      />
-    </StLabel>
-  );
-};
+const Input = forwardRef(
+  (
+    {
+      children,
+      message,
+      short,
+      borderNone,
+      focusBorderColor,
+      type,
+      placeholder,
+      value,
+      onChange,
+      ...rest
+    },
+    ref,
+  ) => {
+    return (
+      <StLabel New={short}>
+        {children && <StLabelName>{children}</StLabelName>}
+        <StInput
+          short={short}
+          message={message}
+          borderNone={borderNone}
+          focusBorderColor={focusBorderColor}
+          type={type}
+          placeholder={placeholder}
+          value={value}
+          onChange={onChange}
+          ref={ref}
+          {...rest}
+        />
+      </StLabel>
+    );
+  },
+);
 
 const NewInput = ({
   short,
@@ -178,6 +187,7 @@ const NewInput = ({
   placeholder,
   value,
   onChange,
+  onBlur,
   ...rest
 }) => {
   // console.log(rest);
@@ -195,6 +205,7 @@ const NewInput = ({
               placeholder={placeholder}
               value={value}
               onChange={onChange}
+              onBlur={onBlur}
             />
           </>
         ) : (
@@ -202,6 +213,7 @@ const NewInput = ({
             placeholder={placeholder}
             value={value}
             onChange={onChange}
+            onBlur={onBlur}
           />
         )}
       </StNewLabel>
