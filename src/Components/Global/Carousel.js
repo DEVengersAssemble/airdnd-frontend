@@ -1,27 +1,21 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { PrevButton, NextButton } from './SlideButton';
 
 // size 필수: superLarge, large, medium, small
 const Carousel = ({
-  img,
+  direction,
+  isSliding,
   imageCount,
   imageArray,
   renderArray,
   homeWidth,
   isSuperhost,
-  isClicked,
-  transition,
   onSlideNext,
   onSlidePrev,
   size,
   ...rest
 }) => {
-  React.useEffect(() => {
-    if (!isClicked) return;
-    console.log(homeWidth);
-  }, [isClicked]);
-
   return (
     <StWrapper size={size} homeWidth={homeWidth} {...rest}>
       <StPrevBtn styleType="transparent" onClick={onSlidePrev} />
@@ -33,15 +27,14 @@ const Carousel = ({
       >
         {isSuperhost && <StBadge>슈퍼호스트</StBadge>}
         <StImageList
-          img={img}
-          imageCount={imageCount}
           size={size}
+          direction={direction}
+          isSliding={isSliding}
           homeWidth={homeWidth}
-          transition={transition}
         >
-          {renderArray.map((image, i) => (
+          {renderArray.map((index, i) => (
             <StImageWrapper key={i} size={size} imageCount={imageCount}>
-              <StImage src={image} />
+              <StImage src={imageArray[index]} />
             </StImageWrapper>
           ))}
         </StImageList>
@@ -73,6 +66,24 @@ const sizes = {
     height: '105',
   },
 };
+
+const slideNext = keyframes`
+0% {
+  transform: translate3d(0,0,0);
+}
+100% {
+  transform: translate3d(-300px,0,0);
+}
+`;
+
+const slidePrev = keyframes`
+0% {
+  transform: translate3d(0,0,0);
+}
+100% {
+  transform: translate3d(300px,0,0);
+}
+`;
 
 const sizeStyles = css`
   ${({ size }) => {
@@ -140,28 +151,25 @@ const StCircle = styled.div`
 
 const StImageList = styled.ul`
   display: flex;
-  ${({ img, imageCount, size, transition, homeWidth }) => {
-    if (size !== 'responsive') {
+  position: absolute;
+  right: ${({ direction }) => direction === 'left' && 0};
+  left: ${({ direction }) => direction === 'right' && 0};
+
+  ${({ size, direction, isSliding }) => {
+    if (size !== 'responsive' && direction === 'right' && isSliding) {
       return css`
-        transform: ${`translate3d(-${img * sizes[size].width}px, 0, 0)`};
-        transition: ${transition && '0.3s'};
+        animation-name: ${slideNext};
+        animation-duration: 0.3s;
+        animation-fill-mode: forwards;
       `;
-    } else {
+    } else if (size !== 'responsive' && direction === 'left' && isSliding) {
       return css`
-        transition: ${transition && '0.3s'};
-        /* transform: ${`translate3d(-calc(${+img} * (20vw - 5rem)), 0, 0)`};
-      @media ${({ theme }) => theme.size.large} {
-        transform: ${`translate3d(-calc(${+img} * (25vw - 5rem)), 0, 0)`};
-        }
-      @media ${({ theme }) => theme.size.medium} {
-        transform: ${`translate3d(-calc(${+img} * (50vw - 5rem)), 0, 0)`};
-        } */
-        transform: ${
-          homeWidth && `translate3d(-${img * (homeWidth - 20)}px, 0, 0)`
-        };
+        animation-name: ${slidePrev};
+        animation-duration: 0.3s;
+        animation-fill-mode: forwards;
       `;
     }
-  }};
+  }}
 `;
 
 const StImageWrapper = styled.li`
