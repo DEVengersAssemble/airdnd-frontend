@@ -14,12 +14,10 @@ const Carousel = ({
   transition,
   onSlideNext,
   onSlidePrev,
-  onSetCarousel,
   size,
   ...rest
 }) => {
   React.useEffect(() => {
-    // onSetCarousel({ imageCount, imageArray });
     if (!isClicked) return;
     console.log(homeWidth);
   }, [isClicked]);
@@ -34,25 +32,19 @@ const Carousel = ({
         href="https://www.airbnb.co.kr/rooms/36094960?adults=1&location=%EB%A7%88%EB%93%9C%EB%A6%AC%EB%93%9C&source_impression_id=p3_1597324281_lNy0Q31ggfi0f1St&check_in=2020-09-26&guests=1&check_out=2020-09-30"
       >
         {isSuperhost && <StBadge>슈퍼호스트</StBadge>}
-        {imageCount < 2 ? (
-          <StImageWrapper size={size} imageCount={imageCount}>
-            <StImage src={imageArray[1]} />
-          </StImageWrapper>
-        ) : (
-          <StImageList
-            img={img}
-            imageCount={imageCount}
-            size={size}
-            homeWidth={homeWidth}
-            transition={transition}
-          >
-            {renderArray.map((image, i) => (
-              <StImageWrapper key={i} size={size} imageCount={imageCount}>
-                <StImage src={image} />
-              </StImageWrapper>
-            ))}
-          </StImageList>
-        )}
+        <StImageList
+          img={img}
+          imageCount={imageCount}
+          size={size}
+          homeWidth={homeWidth}
+          transition={transition}
+        >
+          {renderArray.map((image, i) => (
+            <StImageWrapper key={i} size={size} imageCount={imageCount}>
+              <StImage src={image} />
+            </StImageWrapper>
+          ))}
+        </StImageList>
         <StCircleWrapper>
           {imageArray.map((_, i) => {
             return i < 5 ? <StCircle key={i} color="lightGray" /> : null;
