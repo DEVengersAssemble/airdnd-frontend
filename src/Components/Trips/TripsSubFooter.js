@@ -6,7 +6,7 @@ const TripsSubFooter = ({ children }) => {
 };
 
 const TripsSubFooterWrapper = styled.div`
-  padding-top: 2rem;
+  padding: 2rem 0rem;
   color: ${({ theme }) => theme.color.darkGray};
   font-size: 1.5rem;
 `;

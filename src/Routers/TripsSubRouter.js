@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import TripsUpcoming from '../Components/Trips/TripsUpcoming';
-import TripsPast from '../Components/Trips/TripsPast';
-import TripsCanceled from '../Components/Trips/TripsCanceled';
+import TripsUpcomingContainer from '../Containers/Trips/TripsUpcomingContainer';
+import TripsPastContainer from '../Containers/Trips/TripsPastContainer';
+import TripsCanceledContainer from '../Containers/Trips/TripsCanceledContainer';
 
 const SubRouter = () => {
   return (
@@ -10,10 +10,10 @@ const SubRouter = () => {
       <Route
         exact
         path={['/trips', '/trips/upcoming']}
-        component={TripsUpcoming}
+        component={TripsUpcomingContainer}
       />
-      <Route path="/trips/past" component={TripsPast} />
-      <Route path="/trips/canceled" component={TripsCanceled} />
+      <Route path="/trips/past" component={TripsPastContainer} />
+      <Route path="/trips/canceled" component={TripsCanceledContainer} />
       <Route
         render={({ location }) => (
           <div>
