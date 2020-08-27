@@ -78,43 +78,21 @@ const sizes = {
   },
 };
 
-// const slideNext = keyframes`
-// 0% {
-//   transform: translate3d(0,0,0);
-// }
-// 100% {
-//   transform: scale(2)
-//   transform: ${({ homeWidth, size }) =>
-//     `translate3d(-${size ? sizes[size].width : homeWidth}px,0,0)`};
-// }
-// `;
-
-// const slidePrev = keyframes`
-// 0% {
-//   transform: translate3d(0,0,0);
-// }
-// 100% {
-//   transform: scale(2)
-//   transform: ${({ homeWidth, size }) =>
-//     `translate3d(${size ? sizes[size].width : homeWidth}px,0,0)`};
-// }
-// `;
-
-const slideNext = keyframes`
+const slideNext = (homeWidth, size) => keyframes`
 0% {
   transform: translate3d(0,0,0);
 }
 100% {
-  transform: translate3d(-300px, 0, 0);
+  transform: ${`translate3d(-${size ? sizes[size].width : homeWidth}px,0,0)`};
 }
 `;
 
-const slidePrev = keyframes`
+const slidePrev = (homeWidth, size) => keyframes`
 0% {
   transform: translate3d(0,0,0);
 }
 100% {
-  transform: translate3d(300px, 0, 0);
+  transform: ${`translate3d(${size ? sizes[size].width : homeWidth}px,0,0)`};
 }
 `;
 
@@ -181,17 +159,14 @@ const StImageList = styled.ul`
   position: absolute;
   right: ${({ direction }) => direction === 'left' && 0};
   left: ${({ direction }) => direction === 'right' && 0};
-
   ${({ direction, isSliding, homeWidth, size }) => {
-    if (direction === 'right' && isSliding && !size)
-      css`
-        animation: ${slideNext} 0.3s forwards;
-        animation-name: ${slideNext};
+    if (direction === 'right' && isSliding)
+      return css`
+        animation: ${slideNext(homeWidth, size)} 0.3s forwards;
       `;
-    if (direction === 'left' && isSliding && !size)
-      css`
-        animation: ${slidePrev} 0.3s forwards;
-        animation-name: ${slidePrev};
+    if (direction === 'left' && isSliding)
+      return css`
+        animation: ${slidePrev(homeWidth, size)} 0.3s forwards;
       `;
   }}
 `;
