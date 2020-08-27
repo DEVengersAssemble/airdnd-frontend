@@ -15,20 +15,25 @@ const MessageDetailSection = ({ msgDetailSectionState }) => {
 };
 
 const MessageDetailSectionWrapper = styled.section`
-  display: flex;
-  flex-direction: column;
-  width: 37.5rem;
-  min-width: 37.5rem;
+  @media ${({ theme }) => theme.size.large} {
+    display: flex;
+    flex-direction: column;
+    width: 37.5rem;
+    min-width: 37.5rem;
 
-  transition-property: all;
-  transition-duration: 0.4s;
-  transition-timing-function: linear;
+    transition-property: all;
+    transition-duration: 0.4s;
+    transition-timing-function: linear;
 
-  ${({ msgDetailSectionState }) =>
-    !msgDetailSectionState &&
-    css`
-      opacity: 0;
-    `}
+    ${({ msgDetailSectionState }) =>
+      !msgDetailSectionState &&
+      css`
+        opacity: 0;
+      `}
+  }
+
+  @media ${({ theme }) => theme.size.medium} {
+  }
 `;
 
 export default MessageDetailSection;
