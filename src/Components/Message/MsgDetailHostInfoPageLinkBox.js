@@ -6,57 +6,59 @@ import Profile from '../Global/Profile';
 import Button from '../Global/Button';
 import { MdKeyboardArrowRight, MdPhoneIphone } from 'react-icons/md';
 
-const DetailHostInfoPageLinkBox = () => {
+const MsgDetailHostInfoPageLinkBox = () => {
   return (
-    <DtHpLinkWrapper>
-      <DtHpLinkOuterWrapper>
-        <DtHpLinkInnerWrapper>
-          <DtHpLinkTitleWrapper>
-            <DtHpLinkTitle>호스트 호스트이름님</DtHpLinkTitle>
+    <MsgDetailHpLinkWrapper>
+      <MsgDetailHpLinkOuterWrapper>
+        <MsgDetailHpLinkInnerWrapper>
+          <MsgDetailHpLinkTitleWrapper>
+            <MsgDetailHpLinkTitle>호스트 호스트이름님</MsgDetailHpLinkTitle>
             <StLink to="/users/show/hostId" target="_blank">
               프로필 보기
             </StLink>
-          </DtHpLinkTitleWrapper>
-          <DtHpLinkProfileWrapper>
+          </MsgDetailHpLinkTitleWrapper>
+          <MsgDetailHpLinkProfileWrapper>
             <Profile />
-          </DtHpLinkProfileWrapper>
-        </DtHpLinkInnerWrapper>
+          </MsgDetailHpLinkProfileWrapper>
+        </MsgDetailHpLinkInnerWrapper>
         <a href="tel:+8210-6415-4738">
           <StButton>
-            <DtHpLinkButtonWrapper>
-              <DtHpLinkButtonInnerWrapper>
+            <MsgDetailHpLinkButtonWrapper>
+              <MsgDetailHpLinkButtonInnerWrapper>
                 <MdPhoneIphone />
-                <DtHpLinkButtonText>호스트에게 전화하기</DtHpLinkButtonText>
-              </DtHpLinkButtonInnerWrapper>
+                <MsgDetailHpLinkButtonText>
+                  호스트에게 전화하기
+                </MsgDetailHpLinkButtonText>
+              </MsgDetailHpLinkButtonInnerWrapper>
               <MdKeyboardArrowRight />
-            </DtHpLinkButtonWrapper>
+            </MsgDetailHpLinkButtonWrapper>
           </StButton>
         </a>
-      </DtHpLinkOuterWrapper>
-    </DtHpLinkWrapper>
+      </MsgDetailHpLinkOuterWrapper>
+    </MsgDetailHpLinkWrapper>
   );
 };
 
-const DtHpLinkWrapper = styled.div`
+const MsgDetailHpLinkWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-const DtHpLinkOuterWrapper = styled.div`
+const MsgDetailHpLinkOuterWrapper = styled.div`
   padding-bottom: 2rem;
 `;
 
-const DtHpLinkInnerWrapper = styled.div`
+const MsgDetailHpLinkInnerWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 4.5rem 2.5rem 2.5rem;
 `;
 
-const DtHpLinkTitleWrapper = styled.div`
+const MsgDetailHpLinkTitleWrapper = styled.div`
   font-weight: bold;
 `;
 
-const DtHpLinkTitle = styled.h3`
+const MsgDetailHpLinkTitle = styled.h3`
   padding-bottom: 1.2rem;
   font-size: 2.2rem;
 `;
@@ -70,7 +72,7 @@ const StLink = styled(Link)`
   }
 `;
 
-const DtHpLinkProfileWrapper = styled.div``;
+const MsgDetailHpLinkProfileWrapper = styled.div``;
 
 const StButton = styled(Button)`
   width: 100%;
@@ -79,7 +81,7 @@ const StButton = styled(Button)`
   padding: 0rem;
 `;
 
-const DtHpLinkButtonWrapper = styled.div`
+const MsgDetailHpLinkButtonWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 1.8rem 0rem;
@@ -87,13 +89,13 @@ const DtHpLinkButtonWrapper = styled.div`
   border-top: 1px solid ${({ theme }) => lighten(0.1, theme.color.gray)};
 `;
 
-const DtHpLinkButtonInnerWrapper = styled.div`
+const MsgDetailHpLinkButtonInnerWrapper = styled.div`
   display: flex;
 `;
 
-const DtHpLinkButtonText = styled.div`
+const MsgDetailHpLinkButtonText = styled.div`
   padding-left: 1rem;
   font-size: 1.4rem;
 `;
 
-export default DetailHostInfoPageLinkBox;
+export default MsgDetailHostInfoPageLinkBox;

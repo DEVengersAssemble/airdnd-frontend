@@ -6,30 +6,30 @@ import Button from '../Global/Button';
 import { IoIosCopy } from 'react-icons/io';
 import { MdKeyboardArrowRight, MdLocationOn } from 'react-icons/md';
 
-const DetailAddressBox = () => {
+const MsgDetailAddressBox = () => {
   const address = '한국, 서울특별시, 성동구, 성수2가3동, 연무장13길, 9';
 
   return (
-    <DtAdrsWrapper>
-      <DtAdrsOuterWrapper>
-        <DtAdrsInnerWrapper>
-          <DtAdrsTitle>찾아가는 방법</DtAdrsTitle>
-          <DtAdrsAddrestWrapper>
-            <DtAdrsAddressTitle>주소</DtAdrsAddressTitle>
-            <DtAdrsAddress>
+    <MsgDetailAdrsWrapper>
+      <MsgDetailAdrsOuterWrapper>
+        <MsgDetailAdrsInnerWrapper>
+          <MsgDetailAdrsTitle>찾아가는 방법</MsgDetailAdrsTitle>
+          <MsgDetailAdrsAddrestWrapper>
+            <MsgDetailAdrsAddressTitle>주소</MsgDetailAdrsAddressTitle>
+            <MsgDetailAdrsAddress>
               한국, 서울특별시, 성동구, 성수2가3동, 연무장13길, 9
-            </DtAdrsAddress>
-          </DtAdrsAddrestWrapper>
-        </DtAdrsInnerWrapper>
+            </MsgDetailAdrsAddress>
+          </MsgDetailAdrsAddrestWrapper>
+        </MsgDetailAdrsInnerWrapper>
         <CopyToClipboard text={address}>
           <StButton>
-            <DtAdrsButtonWrapper>
-              <DtAdrsButtonInnerWrapper>
+            <MsgDetailAdrsButtonWrapper>
+              <MsgDetailAdrsButtonInnerWrapper>
                 <IoIosCopy />
-                <DtAdrsButtonText>주소 복사하기</DtAdrsButtonText>
-              </DtAdrsButtonInnerWrapper>
+                <MsgDetailAdrsButtonText>주소 복사하기</MsgDetailAdrsButtonText>
+              </MsgDetailAdrsButtonInnerWrapper>
               <MdKeyboardArrowRight />
-            </DtAdrsButtonWrapper>
+            </MsgDetailAdrsButtonWrapper>
           </StButton>
         </CopyToClipboard>
         <a
@@ -38,50 +38,52 @@ const DetailAddressBox = () => {
           rel="noopener noreferrer"
         >
           <StButton>
-            <DtAdrsButtonWrapper>
-              <DtAdrsButtonInnerWrapper>
+            <MsgDetailAdrsButtonWrapper>
+              <MsgDetailAdrsButtonInnerWrapper>
                 <MdLocationOn />
-                <DtAdrsButtonText>찾아가는 방법 보기</DtAdrsButtonText>
-              </DtAdrsButtonInnerWrapper>
+                <MsgDetailAdrsButtonText>
+                  찾아가는 방법 보기
+                </MsgDetailAdrsButtonText>
+              </MsgDetailAdrsButtonInnerWrapper>
               <MdKeyboardArrowRight />
-            </DtAdrsButtonWrapper>
+            </MsgDetailAdrsButtonWrapper>
           </StButton>
         </a>
-      </DtAdrsOuterWrapper>
-    </DtAdrsWrapper>
+      </MsgDetailAdrsOuterWrapper>
+    </MsgDetailAdrsWrapper>
   );
 };
 
-const DtAdrsWrapper = styled.div`
+const MsgDetailAdrsWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-const DtAdrsOuterWrapper = styled.div`
+const MsgDetailAdrsOuterWrapper = styled.div`
   padding-bottom: 2rem;
 `;
 
-const DtAdrsInnerWrapper = styled.div`
+const MsgDetailAdrsInnerWrapper = styled.div`
   padding: 4.5rem 2.5rem 0rem;
 `;
 
-const DtAdrsTitle = styled.h3`
+const MsgDetailAdrsTitle = styled.h3`
   font-size: 2.2rem;
   font-weight: 500;
 `;
 
-const DtAdrsAddrestWrapper = styled.div`
+const MsgDetailAdrsAddrestWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 3rem 0rem;
   word-break: keep-all;
 `;
 
-const DtAdrsAddressTitle = styled.div`
+const MsgDetailAdrsAddressTitle = styled.div`
   font-weight: bold;
 `;
 
-const DtAdrsAddress = styled.div`
+const MsgDetailAdrsAddress = styled.div`
   padding-top: 1rem;
 `;
 
@@ -92,7 +94,7 @@ const StButton = styled(Button)`
   padding: 0rem;
 `;
 
-const DtAdrsButtonWrapper = styled.div`
+const MsgDetailAdrsButtonWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 1.8rem 0rem;
@@ -100,13 +102,13 @@ const DtAdrsButtonWrapper = styled.div`
   border-top: 1px solid ${({ theme }) => lighten(0.1, theme.color.gray)};
 `;
 
-const DtAdrsButtonInnerWrapper = styled.div`
+const MsgDetailAdrsButtonInnerWrapper = styled.div`
   display: flex;
 `;
 
-const DtAdrsButtonText = styled.div`
+const MsgDetailAdrsButtonText = styled.div`
   padding-left: 1rem;
   font-size: 1.4rem;
 `;
 
-export default DetailAddressBox;
+export default MsgDetailAddressBox;

@@ -6,7 +6,7 @@ import { MdKeyboardArrowLeft } from 'react-icons/md';
 import Modal from '../Global/Modal';
 import Button from '../Global/Button';
 
-const ChatFlagModal = () => {
+const MsgFlagModal = () => {
   // Radio값 상태로 유지해서 다시 작업(현재 간단한 기능은 기타 선택시 모습)
   const [modal, setModal] = React.useState(false);
   const [next, setNext] = React.useState(false);
@@ -162,4 +162,4 @@ const StBackButton = styled(Button)`
   color: ${({ theme }) => theme.color.green};
 `;
 
-export default ChatFlagModal;
+export default MsgFlagModal;

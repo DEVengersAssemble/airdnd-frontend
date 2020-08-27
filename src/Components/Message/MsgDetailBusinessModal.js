@@ -4,7 +4,7 @@ import Modal from '../Global/Modal';
 import ModalFooter from '../Global/ModalFooter';
 import Button from '../Global/Button';
 
-const DetailBusinessModal = () => {
+const MsgDetailBusinessModal = () => {
   const [modal, setModal] = React.useState(false);
   const onClickDelete = () => {
     setModal(!modal);
@@ -78,4 +78,4 @@ const StBusinessModalFooter = styled(ModalFooter)`
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
 `;
-export default DetailBusinessModal;
+export default MsgDetailBusinessModal;

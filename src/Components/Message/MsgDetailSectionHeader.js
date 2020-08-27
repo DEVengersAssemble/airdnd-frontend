@@ -5,29 +5,23 @@ import theme from '../../style/theme';
 import Button from '../Global/Button';
 import { MdClear } from 'react-icons/md';
 
-/**
- * title: 호스트닉네임
- * Button props: children,btnType,color,border,width,height,fontSize,hover,padding,
- * focus,transition,type,...rest
- */
-
-const DetailSection = () => {
+const MsgDetailSectionHeader = () => {
   return (
-    <DetailHeaderDiv>
-      <DetailHeaderTitle>세부 내용</DetailHeaderTitle>
+    <MsgDetailSectionHeaderWrapper>
+      <MsgDetailSectionHeaderTitle>세부 내용</MsgDetailSectionHeaderTitle>
       <Button
         btnType="circle"
         border="none"
         hover={{ backgroundColor: theme.color.lightGray }}
         style={{ width: '3.5rem', height: '3.5rem' }}
       >
-        <DetailClearIcon />
+        <StMsgDetailHeaderClearIcon />
       </Button>
-    </DetailHeaderDiv>
+    </MsgDetailSectionHeaderWrapper>
   );
 };
 
-const DetailHeaderDiv = styled.div`
+const MsgDetailSectionHeaderWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -39,14 +33,14 @@ const DetailHeaderDiv = styled.div`
   padding-right: 2.5rem;
 `;
 
-const DetailHeaderTitle = styled.h2`
+const MsgDetailSectionHeaderTitle = styled.h2`
   color: ${({ theme }) => theme.color.black};
   font-size: 1.8rem;
   font-weight: bold;
 `;
 
-const DetailClearIcon = styled(MdClear)`
+const StMsgDetailHeaderClearIcon = styled(MdClear)`
   font-size: 2.5rem;
 `;
 
-export default DetailSection;
+export default MsgDetailSectionHeader;

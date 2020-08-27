@@ -6,7 +6,7 @@ import Modal from '../Global/Modal';
 import ModalFooter from '../Global/ModalFooter';
 import Button from '../Global/Button';
 
-const DetailPdfModal = () => {
+const MsgDetailPdfModal = () => {
   const [modal, setModal] = React.useState(false);
   const [next, setNext] = React.useState(false);
   const [save, setSave] = React.useState(false);
@@ -169,6 +169,7 @@ const StPdfModalLabel = styled.label`
 const StPdfModalInput = styled.input`
   width: 2rem;
   height: 2rem;
+  margin-right: 2rem;
   cursor: pointer;
 `;
 
@@ -183,4 +184,4 @@ const StModalFooter = styled(ModalFooter)`
   padding-bottom: 1.5rem;
 `;
 
-export default DetailPdfModal;
+export default MsgDetailPdfModal;
