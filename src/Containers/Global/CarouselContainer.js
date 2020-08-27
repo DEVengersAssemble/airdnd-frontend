@@ -1,13 +1,6 @@
 import React, { useState, useReducer, useEffect } from 'react';
 import Carousel from '../../Components/Global/Carousel';
 
-const getMarkerIndex = (imageCount, currentIndex) => {
-  if (imageCount <= 5) return currentIndex;
-  if (currentIndex >= 2 && currentIndex < imageCount - 2) return 2;
-  if (currentIndex >= imageCount - 2) return 5 - (imageCount - currentIndex);
-  return currentIndex;
-};
-
 const carouselReducer = (state, action) => {
   switch (action.type) {
     case 'SLIDE_NEXT':
@@ -45,8 +38,16 @@ const carouselReducer = (state, action) => {
   }
 };
 
+const getMarkerIndex = (imageCount, currentIndex) => {
+  if (imageCount <= 5) return currentIndex;
+  if (currentIndex >= 2 && currentIndex < imageCount - 2) return 2;
+  if (currentIndex >= imageCount - 2) return 5 - (imageCount - currentIndex);
+  return currentIndex;
+};
+
 const CarouselContainer = ({
   size,
+  homeRef,
   imageArray,
   imageCount,
   isSuperhost,
@@ -77,7 +78,7 @@ const CarouselContainer = ({
   const [homeWidth, setHomeWidth] = useState(0);
 
   window.addEventListener('resize', () => {
-    size === 'responsive' && setHomeWidth(getHomeWidth());
+    !size && setHomeWidth(getHomeWidth());
   });
 
   useEffect(() => {
@@ -86,7 +87,8 @@ const CarouselContainer = ({
       marker: getMarkerIndex(imageCount, currentIndex),
     });
     setTimeout(() => isSliding && dispatch({ type: 'END_SLIDE' }), 300);
-  }, [isSliding, currentIndex]);
+    console.log(homeWidth);
+  }, [isSliding, currentIndex, homeWidth]);
 
   return (
     <Carousel
@@ -95,8 +97,6 @@ const CarouselContainer = ({
       direction={direction}
       isSliding={isSliding}
       renderArray={renderArray}
-      setHomeWidth={setHomeWidth}
-      getHomeWidth={getHomeWidth}
       homeWidth={homeWidth}
       imageArray={imageArray}
       imageCount={imageCount}

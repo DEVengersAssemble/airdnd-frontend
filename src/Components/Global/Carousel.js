@@ -17,10 +17,15 @@ const Carousel = ({
   size,
   ...rest
 }) => {
+  console.log(homeWidth);
   return (
     <StWrapper size={size} homeWidth={homeWidth} {...rest}>
-      <StPrevBtn styleType="transparent" onClick={onSlidePrev} />
-      <StNextBtn styleType="transparent" onClick={onSlideNext} />
+      {imageCount > 1 ? (
+        <>
+          <StPrevBtn styleType="transparent" onClick={onSlidePrev} />
+          <StNextBtn styleType="transparent" onClick={onSlideNext} />
+        </>
+      ) : null}
       <StLink
         rel="noopener noreferrer"
         target="_blank"
@@ -73,12 +78,34 @@ const sizes = {
   },
 };
 
+// const slideNext = keyframes`
+// 0% {
+//   transform: translate3d(0,0,0);
+// }
+// 100% {
+//   transform: scale(2)
+//   transform: ${({ homeWidth, size }) =>
+//     `translate3d(-${size ? sizes[size].width : homeWidth}px,0,0)`};
+// }
+// `;
+
+// const slidePrev = keyframes`
+// 0% {
+//   transform: translate3d(0,0,0);
+// }
+// 100% {
+//   transform: scale(2)
+//   transform: ${({ homeWidth, size }) =>
+//     `translate3d(${size ? sizes[size].width : homeWidth}px,0,0)`};
+// }
+// `;
+
 const slideNext = keyframes`
 0% {
   transform: translate3d(0,0,0);
 }
 100% {
-  transform: translate3d(-300px,0,0);
+  transform: translate3d(-300px, 0, 0);
 }
 `;
 
@@ -87,35 +114,29 @@ const slidePrev = keyframes`
   transform: translate3d(0,0,0);
 }
 100% {
-  transform: translate3d(300px,0,0);
+  transform: translate3d(300px, 0, 0);
 }
 `;
 
-const sizeStyles = css`
-  ${({ size }) => {
-    if (size !== 'responsive') {
-      return css`
-        min-width: ${`${sizes[size].width}px`};
-        width: ${`${sizes[size].width}px`};
-        height: ${`${sizes[size].height}px`};
-      `;
-    } else {
-      return css`
-        width: 100%;
-        height: 0;
-        padding-bottom: 75%;
-      `;
-    }
-  }}
+const fixedSizes = size => css`
+  min-width: ${`${sizes[size].width}px`};
+  width: ${`${sizes[size].width}px`};
+  height: ${`${sizes[size].height}px`};
+`;
+
+const responsiveSize = css`
+  width: 100%;
+  height: 0;
+  padding-bottom: 75%;
 `;
 
 const StWrapper = styled.div`
   position: relative;
-  border: 1px solid ${({ theme }) => theme.color.lightGray};
-  border-radius: 8px;
-  background: ${({ theme }) => theme.color.gray};
   overflow: hidden;
-  ${sizeStyles};
+  border-radius: 8px;
+  border: 1px solid ${({ theme }) => theme.color.lightGray};
+  background: ${({ theme }) => theme.color.gray};
+  ${({ size }) => (size ? fixedSizes(size) : responsiveSize)};
 `;
 
 const StLink = styled.a`
@@ -123,11 +144,11 @@ const StLink = styled.a`
 `;
 
 const StBadge = styled.div`
+  background: ${({ theme }) => theme.color.lightGray};
   position: absolute;
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  background: ${({ theme }) => theme.color.lightGray};
   border-radius: 3px;
   padding: 0.2rem 0.8rem;
   font-size: 1.3rem;
@@ -138,21 +159,21 @@ const StBadge = styled.div`
 `;
 
 const StCircleWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
 
 const StCircle = styled.div`
+  background: ${({ color, theme }) => theme.color[color]};
   margin: 1rem 0.3rem;
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: ${({ color, theme }) => theme.color[color]};
 `;
 
 const StImageList = styled.ul`
@@ -161,34 +182,28 @@ const StImageList = styled.ul`
   right: ${({ direction }) => direction === 'left' && 0};
   left: ${({ direction }) => direction === 'right' && 0};
 
-  ${({ size, direction, isSliding }) => {
-    if (size !== 'responsive' && direction === 'right' && isSliding) {
-      return css`
+  ${({ direction, isSliding, homeWidth, size }) => {
+    if (direction === 'right' && isSliding && !size)
+      css`
+        animation: ${slideNext} 0.3s forwards;
         animation-name: ${slideNext};
-        animation-duration: 0.3s;
-        animation-fill-mode: forwards;
       `;
-    } else if (size !== 'responsive' && direction === 'left' && isSliding) {
-      return css`
+    if (direction === 'left' && isSliding && !size)
+      css`
+        animation: ${slidePrev} 0.3s forwards;
         animation-name: ${slidePrev};
-        animation-duration: 0.3s;
-        animation-fill-mode: forwards;
       `;
-    }
   }}
 `;
 
 const StImageWrapper = styled.li`
-  ${sizeStyles};
-  ${({ size }) =>
-    size === 'responsive' &&
-    css`
-      min-width: 100%;
-    `}
+  min-width: 100%;
+  ${({ size }) => size && fixedSizes(size)};
 `;
 
 const StImage = styled.img`
   width: 100%;
+  height: 100%;
   object-fit: cover;
 `;
 

@@ -5,7 +5,7 @@ import Rating from '../Global/Rating';
 import { CkHeart } from '../Global/Heart';
 import { HomePrice } from './Home';
 
-const HomeCard = ({ home, type, mapState, onClickBookmark, dateDiff }) => {
+const HomeCard = ({ home, type, onClickBookmark, dateDiff }) => {
   const homeRef = useRef();
   const getHomeWidth = () => homeRef.current && homeRef.current.offsetWidth;
   const {
@@ -23,7 +23,8 @@ const HomeCard = ({ home, type, mapState, onClickBookmark, dateDiff }) => {
   return (
     <StWrapper ref={homeRef} type={type}>
       <CarouselContainer
-        size="responsive"
+        responsive
+        homeRef={homeRef}
         getHomeWidth={getHomeWidth}
         isSuperhost={isSuperhost}
         imageArray={imageArray}
