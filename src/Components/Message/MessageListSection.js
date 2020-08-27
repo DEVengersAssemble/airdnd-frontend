@@ -13,11 +13,6 @@ const MessageListSection = ({ msgListSectionState }) => {
 };
 
 const MessageListSectionWrapper = styled.section`
-  ${({ msgListSectionState }) =>
-    console.log(
-      'false가 되면 List section slide로 사라지기!! 지금은:',
-      msgListSectionState,
-    )}
   display: flex;
   flex-direction: column;
 `;

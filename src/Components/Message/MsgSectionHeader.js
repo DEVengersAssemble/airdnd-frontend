@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { darken } from 'polished';
 import theme from '../../style/theme';
@@ -10,9 +10,8 @@ const MsgSectionHeader = ({
   msgDetailSectionState,
   onToggleDetail,
 }) => {
-  console.log(msgDetailSectionState);
   return (
-    <MsgSectionHeaderWrapper>
+    <MsgSectionHeaderWrapper msgDetailSectionState={msgDetailSectionState}>
       <MsgSectionHeaderTitle>호스트닉네임</MsgSectionHeaderTitle>
       <MsgSectionHeaderButtonWrapper>
         <Button
@@ -59,8 +58,6 @@ const MsgSectionHeaderWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
-  min-width: 37.5rem;
   height: 7.5rem;
   padding-left: 2.5rem;
   padding-right: 2.5rem;

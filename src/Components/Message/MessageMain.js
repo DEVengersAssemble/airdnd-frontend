@@ -17,6 +17,7 @@ const MessageMain = () => {
 const MessageMainWrapper = styled.div`
   display: flex;
   padding-top: 8rem;
+  overflow-x: hidden;
 `;
 
 export default MessageMain;
