@@ -22,14 +22,13 @@ const MessageDetailSectionWrapper = styled.section`
 
   transition-property: all;
   transition-duration: 1s;
-  transition-timing-function: esae-out;
+  transition-timing-function: ease-in;
 
   ${({ msgDetailSectionState }) =>
     !msgDetailSectionState &&
     css`
       transform: translateX(37.5rem);
     `}
-
   /* visibility 이거는 무시해도 돼 */
   /* visibility: ${({ msgDetailSectionState }) =>
     msgDetailSectionState ? 'visible' : 'hidden'}; */

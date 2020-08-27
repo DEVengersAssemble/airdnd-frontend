@@ -13,6 +13,7 @@ const Carousel = ({
   isSuperhost,
   onSlideNext,
   onSlidePrev,
+  responsive,
   marker,
   size,
   ...rest
@@ -39,7 +40,12 @@ const Carousel = ({
           homeWidth={homeWidth}
         >
           {renderArray.map((index, i) => (
-            <StImageWrapper key={i} size={size} imageCount={imageCount}>
+            <StImageWrapper
+              key={i}
+              size={size}
+              imageCount={imageCount}
+              responsive={responsive}
+            >
               <StImage src={imageArray[index]} />
             </StImageWrapper>
           ))}
@@ -157,7 +163,8 @@ const StCircle = styled.div`
 const StImageList = styled.ul`
   display: flex;
   position: absolute;
-  right: ${({ direction }) => direction === 'left' && 0};
+  right: ${({ direction, responsive, homeWidth }) =>
+    direction === 'left' && (responsive ? `-${homeWidth}px` : 0)};
   left: ${({ direction }) => direction === 'right' && 0};
   ${({ direction, isSliding, homeWidth, size }) => {
     if (direction === 'right' && isSliding)

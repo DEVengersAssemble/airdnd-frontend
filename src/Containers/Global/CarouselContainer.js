@@ -48,6 +48,7 @@ const getMarkerIndex = (imageCount, currentIndex) => {
 const CarouselContainer = ({
   size,
   homeRef,
+  responsive,
   imageArray,
   imageCount,
   isSuperhost,
@@ -94,6 +95,7 @@ const CarouselContainer = ({
     <Carousel
       size={size}
       marker={marker}
+      responsive={responsive}
       direction={direction}
       isSliding={isSliding}
       renderArray={renderArray}

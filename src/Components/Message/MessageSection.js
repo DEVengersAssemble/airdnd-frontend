@@ -8,7 +8,7 @@ const MessageSection = ({ msgSectionStates }) => {
   const { msgDetailSectionState } = msgSectionStates;
   console.log(msgDetailSectionState);
   return (
-    <MessageSectionWrapper>
+    <MessageSectionWrapper msgDetailSectionState={msgDetailSectionState}>
       <MsgSectionHeaderContainer msgSectionStates={msgSectionStates} />
       <MsgSectionMainContainer msgSectionStates={msgSectionStates} />
       <MsgSectionFooterContainer msgSectionStates={msgSectionStates} />
@@ -25,12 +25,13 @@ const MessageSectionWrapper = styled.section`
 
   transition-property: all;
   transition-duration: 1s;
-  transition-timing-function: esae-out;
+  transition-timing-function: ease-in;
 
   ${({ msgDetailSectionState }) =>
-    msgDetailSectionState &&
+    !msgDetailSectionState &&
     css`
-      align-items: stretch;
+      min-width: calc(100% - 37.5rem);
+      /* align-items: stretch; */
     `}
 `;
 
