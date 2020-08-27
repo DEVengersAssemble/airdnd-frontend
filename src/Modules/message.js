@@ -20,8 +20,8 @@ export const hideMsgListSection = () => ({
 
 // initial state
 const initialState = {
-  msgDetailState: true,
-  msgListState: true,
+  msgDetailSectionState: true, // default
+  msgListSectionState: true, // default
 };
 
 // reducer
@@ -30,22 +30,22 @@ const message = (state = initialState, action) => {
     case SHOW_MESSAGE_DETAIL_SECTION:
       return {
         ...state,
-        msgDetailState: false,
+        msgDetailSectionState: false,
       };
     case HIDE_MESSAGE_DETAIL_SECTION:
       return {
         ...state,
-        msgDetailState: true,
+        msgDetailSectionState: true,
       };
     case SHOW_MESSAGE_LIST_SECTION:
       return {
         ...state,
-        msgListState: true,
+        msgListSectionState: true,
       };
     case HIDE_MESSAGE_LIST_SECTION:
       return {
         ...state,
-        msgListState: false,
+        msgListSectionState: false,
       };
     default:
       return state;
