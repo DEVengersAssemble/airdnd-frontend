@@ -1,5 +1,12 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState, useReducer, useEffect } from 'react';
 import Carousel from '../../Components/Global/Carousel';
+
+const getMarkerIndex = (imageCount, currentIndex) => {
+  if (imageCount <= 5) return currentIndex;
+  if (currentIndex >= 2 && currentIndex < imageCount - 2) return 2;
+  if (currentIndex >= imageCount - 2) return 5 - (imageCount - currentIndex);
+  return currentIndex;
+};
 
 const carouselReducer = (state, action) => {
   switch (action.type) {
@@ -31,6 +38,8 @@ const carouselReducer = (state, action) => {
         renderArray: [state.currentIndex],
         isSliding: false,
       };
+    case 'GET_MARKER':
+      return { ...state, marker: action.marker };
     default:
       return state;
   }
@@ -47,15 +56,21 @@ const CarouselContainer = ({
     imageCount,
     isSliding: false,
     nextIndex: imageCount > 1 ? 1 : null,
-    prevIndex: imageCount - 1,
+    prevIndex: imageCount > 1 ? imageCount - 1 : null,
     currentIndex: 0,
     renderArray: [0],
     direction: '',
     width: 0,
-    color: '',
+    marker: 0,
   };
   const [carouselState, dispatch] = useReducer(carouselReducer, carouselInit);
-  const { isSliding, direction, renderArray } = carouselState;
+  const {
+    isSliding,
+    direction,
+    renderArray,
+    marker,
+    currentIndex,
+  } = carouselState;
   const onSlideNext = () => dispatch({ type: 'SLIDE_NEXT' });
   const onSlidePrev = () => dispatch({ type: 'SLIDE_PREV' });
 
@@ -65,13 +80,18 @@ const CarouselContainer = ({
     size === 'responsive' && setHomeWidth(getHomeWidth());
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
+    dispatch({
+      type: 'GET_MARKER',
+      marker: getMarkerIndex(imageCount, currentIndex),
+    });
     setTimeout(() => isSliding && dispatch({ type: 'END_SLIDE' }), 300);
-  }, [isSliding]);
+  }, [isSliding, currentIndex]);
 
   return (
     <Carousel
       size={size}
+      marker={marker}
       direction={direction}
       isSliding={isSliding}
       renderArray={renderArray}

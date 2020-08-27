@@ -151,9 +151,10 @@ const initialState = {
         'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small',
         'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large',
         'https://a0.muscache.com/im/pictures/3276d8ad-d455-4c59-923c-3f6926301a93.jpg?aki_policy=large',
+        'https://a0.muscache.com/im/pictures/3276d8ad-d455-4c59-923c-3f6926301a93.jpg?aki_policy=large',
         'https://a0.muscache.com/im/pictures/2013c2de-4727-4cd9-b9cd-77d85238d440.jpg?aki_policy=large',
       ],
-      imageCount: 4, // 이미지 개수
+      imageCount: 5, // 이미지 개수
       subTitle: 'MongMong-Toto의 호텔 객실이지롱',
       title: 'Pia Resort Hotel Corner Studio Room~~~',
       feature: '최대 인원 2명 ﹒ 침실 1개 ﹒ 침대 2개 ﹒ 단독 사용 욕실 1개!!!',

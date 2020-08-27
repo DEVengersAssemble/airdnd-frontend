@@ -13,6 +13,7 @@ const Carousel = ({
   isSuperhost,
   onSlideNext,
   onSlidePrev,
+  marker,
   size,
   ...rest
 }) => {
@@ -39,8 +40,13 @@ const Carousel = ({
           ))}
         </StImageList>
         <StCircleWrapper>
-          {imageArray.map((_, i) => {
-            return i < 5 ? <StCircle key={i} color="lightGray" /> : null;
+          {imageArray.map((_, index) => {
+            return index < 5 ? (
+              <StCircle
+                key={index}
+                color={index === marker ? 'white' : 'shadow'}
+              />
+            ) : null;
           })}
         </StCircleWrapper>
       </StLink>
@@ -113,7 +119,7 @@ const StWrapper = styled.div`
 `;
 
 const StLink = styled.a`
-  /* text-decoration: none; */
+  text-decoration: none;
 `;
 
 const StBadge = styled.div`
@@ -143,8 +149,8 @@ const StCircleWrapper = styled.div`
 
 const StCircle = styled.div`
   margin: 1rem 0.3rem;
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background: ${({ color, theme }) => theme.color[color]};
 `;
