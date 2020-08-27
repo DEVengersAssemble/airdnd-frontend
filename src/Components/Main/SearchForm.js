@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled, { css } from 'styled-components';
+import Button from '../Global/Button';
 import SearchButton from './SearchButton';
-import SearchPlacePopup from './SearchPlacePopup';
+import SearchLocationPopup from './SearchLocationPopup';
+import SearchGuestsPopup from './SearchGuestsPopup';
+import { MdClose } from 'react-icons/md';
 
 const StSearchForm = styled.form`
   position: relative;
@@ -31,15 +34,17 @@ const StTextWrapper = styled.div`
 `;
 
 const StFormItemWrapper = styled.div`
+  position: relative;
   width: ${({ width }) => width};
   height: 68px;
   margin-top: -2px;
   outline: none;
+
   &:not(:first-child) ${StTextWrapper}::before {
     content: '';
     position: absolute;
     top: 0;
-    left: -14px;
+    left: -20px;
     display: block;
     height: 100%;
     width: 1px;
@@ -65,11 +70,14 @@ const StFormItemWrapper = styled.div`
   &:focus-within {
     background: white;
     border-radius: 34px;
-    height: 68px;
-    margin-top: -2px;
+    height: 66px;
+    margin-top: -1px;
     box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.3);
     ${StTextWrapper}::before {
       display: none;
+    }
+    button {
+      display: inline-flex;
     }
   }
 
@@ -83,7 +91,7 @@ const StFormItemWrapper = styled.div`
     css`
       display: flex;
       align-items: center;
-      padding-left: 14px;
+      padding-left: 20px;
       cursor: pointer;
     `}
 `;
@@ -111,13 +119,20 @@ const StPlaceLabel = styled.label`
 `;
 
 const StPlaceInput = styled.input`
+  position: relative;
+  top: -2px;
   background: transparent;
-  width: 100%;
+  width: 80%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   font-size: 14px;
   line-height: 18px;
+  margin-top: -10px;
   padding: 0;
   outline: none;
   border: none;
+  font-weight: ${({ value }) => value && 500};
   &::-webkit-input-placeholder {
     color: ${({ theme }) => theme.color.darkGray};
   }
@@ -141,7 +156,53 @@ const StTypeText = styled.p`
 const StContentText = styled.p`
   font-size: 14px;
   line-height: 18px;
-  color: ${({ theme }) => theme.color.darkGray};
+  color: ${({ theme, value }) =>
+    theme && value
+      ? css`
+          ${({ theme }) => theme.color.black}
+        `
+      : css`
+          ${({ theme }) => theme.color.darkGray}
+        `};
+  font-weight: ${({ value }) => value && 500};
+  @media ${({ theme }) => theme.size.iPad} {
+    ${({ name }) =>
+      name === 'guests' &&
+      css`
+        width: 80px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      `}
+  }
+`;
+
+const StResetBtn = styled(Button)`
+  position: absolute;
+  display: inline-flex;
+  width: 26px;
+  height: 26px;
+  font-size: 16px;
+  top: calc(50% - 13px);
+  right: ${({ name }) => (name === 'guests' ? '65px' : '15px')};
+  border: none;
+  background: ${({ theme }) => theme.color.shadow};
+  ${({ pointer }) =>
+    pointer
+      ? css`
+          pointer-events: auto;
+          visibility: auto;
+        `
+      : css`
+          pointer-events: none;
+          visibility: hidden;
+        `};
+  &:hover {
+    background: ${({ theme }) => theme.color.line};
+  }
+  @media ${({ theme }) => theme.size.iPad} {
+    right: ${({ name }) => (name === 'guests' ? '60px' : '10px')};
+  }
 `;
 
 const SearchForm = ({
@@ -151,15 +212,83 @@ const SearchForm = ({
   closePopup,
   searchData,
   changeSearchData,
+  changeAutoComplete,
+  locationResult,
+  handleSubmit,
+  increaseGuestCount,
+  decreaseGuestCount,
 }) => {
+  console.log('[SEARCHFORM]', type);
   const { location, checkIn, checkOut, flexibleDate, guests } = searchData;
+  const { adult, child, infant } = guests;
+  const guestCount = adult + child + infant;
+  const locationResetBtnRef = useRef();
+  const locationListRef = useRef();
+  const checkInResetBtnRef = useRef();
+  const checkInPopupRef = useRef();
+  const checkOutResetBtnRef = useRef();
+  const checkOutPopupRef = useRef();
+  const guestsResetBtnRef = useRef();
+  const guestsPopupRef = useRef();
+
+  const locationWrapperRef = useRef();
+  const checkInWrapperRef = useRef();
+  const checkOutWrapperRef = useRef();
+  const guestsWrapperRef = useRef();
+
+  const changeFocus = nextRef => {
+    if (nextRef === 'location') {
+      locationWrapperRef.current.focus();
+    } else if (nextRef === 'checkIn') checkInWrapperRef.current.focus();
+    else if (nextRef === 'checkOut') checkOutWrapperRef.current.focus();
+    else if (nextRef === 'guests') guestsWrapperRef.current.focus();
+  };
+
+  const handlePopup = ({ target }) => {
+    console.log('===handlePopup');
+    console.log(target);
+    if (locationListRef.current && locationListRef.current.contains(target)) {
+      console.log('111');
+      changeType('checkIn');
+      return;
+    } else if (
+      (type === 'location' &&
+        !locationResetBtnRef.current.contains(target) &&
+        !locationWrapperRef.current.contains(target)) ||
+      // (type === 'checkIn' &&
+      //   !checkInPopupRef.current.contains(target) &&
+      //   !checkInResetBtnRef.current.contains(target)) ||
+      // (type === 'checkOut' &&
+      //   !checkOutPopupRef.current.contains(target) &&
+      //   !checkOutResetBtnRef.current.contains(target)) ||
+      (type === 'guests' &&
+        !guestsPopupRef.current.contains(target) &&
+        !guestsResetBtnRef.current.contains(target))
+    ) {
+      console.log('222');
+      closePopup();
+    }
+    console.log('333');
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', handlePopup);
+    return () => {
+      document.removeEventListener('click', handlePopup);
+    };
+  }, [handlePopup]);
+
   return (
-    <StSearchForm isSearchBtnClicked={isSearchBtnClicked}>
+    <StSearchForm
+      onSubmit={handleSubmit}
+      isSearchBtnClicked={isSearchBtnClicked}
+    >
       <StFormItemWrapper
         name="location"
         width="30%"
         tabIndex="0"
-        onClick={e => changeType(e)}
+        ref={locationWrapperRef}
+        onClick={() => changeType('location')}
       >
         <StPlaceLabel>
           <StTextWrapper>
@@ -168,50 +297,126 @@ const SearchForm = ({
               value={location}
               name="location"
               placeholder="어디로 여행가세요?"
-              onChange={e => {
-                changeSearchData(e.target.name, e.target.value);
+              onFocus={e => {
+                changeAutoComplete(e.target.value);
               }}
+              onChange={e => {
+                changeAutoComplete(e.target.value);
+              }}
+              autoComplete="off"
+              required
             ></StPlaceInput>
           </StTextWrapper>
         </StPlaceLabel>
-        <SearchPlacePopup
+        <SearchLocationPopup
           type={type}
-          closePopup={closePopup}
-        ></SearchPlacePopup>
+          changeType={changeType}
+          searchData={searchData}
+          locationResult={locationResult}
+          changeSearchData={changeSearchData}
+          ref={locationListRef}
+          changeFocus={changeFocus}
+        ></SearchLocationPopup>
+        <StResetBtn
+          btnType="circle"
+          name="location"
+          ref={locationResetBtnRef}
+          pointer={type === 'location' && location}
+          onClick={() => {
+            changeSearchData('location', '');
+            changeFocus('location');
+          }}
+        >
+          <MdClose />
+        </StResetBtn>
       </StFormItemWrapper>
       <StFormItemWrapper
         name="checkIn"
         width="20%"
         tabIndex="0"
-        onClick={e => changeType(e)}
+        ref={checkInWrapperRef}
+        onClick={() => changeType('checkIn')}
       >
         <StTextWrapper>
           <StTypeText>체크인</StTypeText>
-          <StContentText>날짜 추가</StContentText>
+          <StContentText value={checkIn}>
+            {checkIn || '날짜 추가'}
+          </StContentText>
         </StTextWrapper>
+        <StResetBtn
+          btnType="circle"
+          name="checkIn"
+          pointer={type === 'checkIn' && checkIn}
+          ref={checkInResetBtnRef}
+          onClick={() => {
+            changeSearchData('checkIn', '');
+            changeFocus('checkIn');
+          }}
+        >
+          <MdClose />
+        </StResetBtn>
       </StFormItemWrapper>
       <StFormItemWrapper
         name="checkOut"
         width="20%"
         tabIndex="0"
-        onClick={e => changeType(e)}
+        ref={checkOutWrapperRef}
+        onClick={() => changeType('checkOut')}
       >
-        <SearchPlacePopup></SearchPlacePopup>
         <StTextWrapper>
           <StTypeText>체크아웃</StTypeText>
-          <StContentText>날짜 추가</StContentText>
+          <StContentText value={checkOut}>
+            {checkOut || '날짜 추가'}
+          </StContentText>
         </StTextWrapper>
+        <StResetBtn
+          btnType="circle"
+          name="checkOut"
+          pointer={type === 'checkOut' && checkOut}
+          ref={checkOutResetBtnRef}
+          onClick={() => {
+            changeSearchData('checkOut', '');
+            changeFocus('checkOut');
+          }}
+        >
+          <MdClose />
+        </StResetBtn>
       </StFormItemWrapper>
       <StFormItemWrapper
         name="guests"
         width="30%"
         tabIndex="0"
-        onClick={e => changeType(e)}
+        ref={guestsWrapperRef}
+        onClick={() => changeType('guests')}
       >
         <StTextWrapper>
           <StTypeText>인원</StTypeText>
-          <StContentText>게스트 추가</StContentText>
+          <StContentText value={guestCount} name="guests">
+            {guestCount
+              ? `게스트 ${adult + child}명, 유아 ${infant}명`
+              : '게스트 추가'}
+          </StContentText>
         </StTextWrapper>
+        <StResetBtn
+          btnType="circle"
+          name="guests"
+          pointer={type === 'guests' && guestCount > 0}
+          ref={guestsResetBtnRef}
+          onClick={() => {
+            changeSearchData('guests', { adult: 0, child: 0, infant: 0 });
+            changeFocus('guests');
+          }}
+        >
+          <MdClose />
+        </StResetBtn>
+        <SearchGuestsPopup
+          type={type}
+          closePopup={closePopup}
+          searchData={searchData}
+          increaseGuestCount={increaseGuestCount}
+          decreaseGuestCount={decreaseGuestCount}
+          ref={guestsPopupRef}
+        ></SearchGuestsPopup>
       </StFormItemWrapper>
       <SearchButton></SearchButton>
     </StSearchForm>

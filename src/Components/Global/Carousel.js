@@ -1,36 +1,31 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { PrevButton, NextButton } from './SlideButton';
 
 // size 필수: superLarge, large, medium, small
 const Carousel = ({
-  img,
+  direction,
+  isSliding,
   imageCount,
-  imagePath,
-  setHomeWidth,
-  getHomeWidth,
+  imageArray,
+  renderArray,
   homeWidth,
   isSuperhost,
-  isClicked,
-  transition,
-  slideNext,
-  slidePrev,
-  resetCarousel,
+  onSlideNext,
+  onSlidePrev,
+  marker,
   size,
   ...rest
 }) => {
-  React.useEffect(() => {
-    console.log(imageCount);
-    if (size === 'responsive') setHomeWidth(getHomeWidth());
-    if (!isClicked) return;
-    resetCarousel();
-    console.log(homeWidth);
-  }, [isClicked]);
-
+  console.log(homeWidth);
   return (
     <StWrapper size={size} homeWidth={homeWidth} {...rest}>
-      <StPrevBtn styleType="transparent" onClick={slidePrev} />
-      <StNextBtn styleType="transparent" onClick={slideNext} />
+      {imageCount > 1 ? (
+        <>
+          <StPrevBtn styleType="transparent" onClick={onSlidePrev} />
+          <StNextBtn styleType="transparent" onClick={onSlideNext} />
+        </>
+      ) : null}
       <StLink
         rel="noopener noreferrer"
         target="_blank"
@@ -38,33 +33,26 @@ const Carousel = ({
       >
         {isSuperhost && <StBadge>슈퍼호스트</StBadge>}
         <StImageList
-          img={img}
-          imageCount={imageCount}
           size={size}
-          transition={transition}
+          direction={direction}
+          isSliding={isSliding}
+          homeWidth={homeWidth}
         >
-          <StImageWrapper size={size} imageCount={imageCount}>
-            <StImage src="https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large" />
-          </StImageWrapper>
-          <StImageWrapper size={size} imageCount={imageCount}>
-            <StImage src="https://a0.muscache.com/im/pictures/3276d8ad-d455-4c59-923c-3f6926301a93.jpg?aki_policy=large" />
-          </StImageWrapper>
-          <StImageWrapper size={size} imageCount={imageCount}>
-            <StImage src="https://a0.muscache.com/im/pictures/2013c2de-4727-4cd9-b9cd-77d85238d440.jpg?aki_policy=large" />
-          </StImageWrapper>
-          <StImageWrapper size={size} imageCount={imageCount}>
-            <StImage src="https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large" />
-          </StImageWrapper>
-          <StImageWrapper size={size} imageCount={imageCount}>
-            <StImage src="https://a0.muscache.com/im/pictures/3276d8ad-d455-4c59-923c-3f6926301a93.jpg?aki_policy=large" />
-          </StImageWrapper>
+          {renderArray.map((index, i) => (
+            <StImageWrapper key={i} size={size} imageCount={imageCount}>
+              <StImage src={imageArray[index]} />
+            </StImageWrapper>
+          ))}
         </StImageList>
         <StCircleWrapper>
-          <StCircle color="lightGray" />
-          <StCircle color="gray" />
-          <StCircle color="gray" />
-          <StCircle color="gray" />
-          <StCircle color="gray" />
+          {imageArray.map((_, index) => {
+            return index < 5 ? (
+              <StCircle
+                key={index}
+                color={index === marker ? 'white' : 'shadow'}
+              />
+            ) : null;
+          })}
         </StCircleWrapper>
       </StLink>
     </StWrapper>
@@ -90,43 +78,55 @@ const sizes = {
   },
 };
 
-const sizeStyles = css`
-  ${({ size }) => {
-    if (size !== 'responsive') {
-      return css`
-        min-width: ${`${sizes[size].width}px`};
-        width: ${`${sizes[size].width}px`};
-        height: ${`${sizes[size].height}px`};
-      `;
-    } else {
-      return css`
-        width: 100%;
-        height: 0;
-        padding-bottom: 75%;
-      `;
-    }
-  }}
+const slideNext = (homeWidth, size) => keyframes`
+0% {
+  transform: translate3d(0,0,0);
+}
+100% {
+  transform: ${`translate3d(-${size ? sizes[size].width : homeWidth}px, 0, 0)`};
+}
+`;
+
+const slidePrev = (homeWidth, size) => keyframes`
+0% {
+  transform: translate3d(0,0,0);
+}
+100% {
+  transform: ${`translate3d(${size ? sizes[size].width : homeWidth}px, 0, 0)`};
+}
+`;
+
+const fixedSizes = size => css`
+  min-width: ${`${sizes[size].width}px`};
+  width: ${`${sizes[size].width}px`};
+  height: ${`${sizes[size].height}px`};
+`;
+
+const responsiveSize = css`
+  width: 100%;
+  height: 0;
+  padding-bottom: 75%;
 `;
 
 const StWrapper = styled.div`
   position: relative;
-  border: 1px solid ${({ theme }) => theme.color.lightGray};
-  border-radius: 8px;
-  background: ${({ theme }) => theme.color.gray};
   overflow: hidden;
-  ${sizeStyles};
+  border-radius: 8px;
+  border: 1px solid ${({ theme }) => theme.color.lightGray};
+  background: ${({ theme }) => theme.color.gray};
+  ${({ size }) => (size ? fixedSizes(size) : responsiveSize)};
 `;
 
 const StLink = styled.a`
-  /* text-decoration: none; */
+  text-decoration: none;
 `;
 
 const StBadge = styled.div`
+  background: ${({ theme }) => theme.color.lightGray};
   position: absolute;
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  background: ${({ theme }) => theme.color.lightGray};
   border-radius: 3px;
   padding: 0.2rem 0.8rem;
   font-size: 1.3rem;
@@ -137,54 +137,49 @@ const StBadge = styled.div`
 `;
 
 const StCircleWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
 
 const StCircle = styled.div`
-  margin: 1rem 0.3rem;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
   background: ${({ color, theme }) => theme.color[color]};
+  margin: 1rem 0.3rem;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
 `;
 
 const StImageList = styled.ul`
   display: flex;
-  ${({ img, imageCount, size, transition, homeWidth }) => {
-    if (size !== 'responsive') {
+  position: absolute;
+  right: ${({ direction }) => direction === 'left' && 0};
+  left: ${({ direction }) => direction === 'right' && 0};
+  ${({ direction, isSliding, homeWidth, size }) => {
+    if (direction === 'right' && isSliding)
       return css`
-        transform: ${`translate3d(-${img * sizes[size].width}px, 0, 0)`};
-        transition: ${transition && '0.3s'};
+        animation: ${slideNext(homeWidth, size)} 0.3s forwards;
       `;
-    } else {
+    if (direction === 'left' && isSliding)
       return css`
-        transform: ${`translate3d(-100%, 0, 0)`};
-        transition: ${transition && '0.3s'};
+        animation: ${slidePrev(homeWidth, size)} 0.3s forwards;
       `;
-    }
-  }};
+  }}
 `;
 
 const StImageWrapper = styled.li`
-  ${sizeStyles};
-  ${({ size, homeWidth, imageCount }) =>
-    size === 'responsive' &&
-    css`
-      min-width: 100%;
-      padding-bottom: -75%;
-    `}
+  min-width: 100%;
+  ${({ size }) => size && fixedSizes(size)};
 `;
 
 const StImage = styled.img`
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  width: inherit;
-  height: inherit;
 `;
 
 const StPrevBtn = styled(PrevButton)`

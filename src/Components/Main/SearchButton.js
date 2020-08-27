@@ -5,23 +5,22 @@ import Button from '../Global/Button';
 
 const StSearchButton = styled(Button)`
   position: absolute;
-  top: calc(50% - 26px);
-  right: 10px;
+  top: calc(50% - 21px);
+  right: 12px;
   font-size: 20px;
   font-weight: 500;
-  padding: 14px 18px;
+  padding: 0;
+  width: 40px;
+  height: 40px;
   border: none;
   z-index: 10;
   &:hover {
     border: none;
     outline: none;
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.7);
   }
   color: white;
   background: ${({ theme }) => theme.color.main};
-
-  @media ${({ theme }) => theme.size.iPad} {
-    padding: 16px;
-  }
 `;
 
 const StSearchButtonText = styled.span`
@@ -34,9 +33,9 @@ const StSearchButtonText = styled.span`
 
 const SearchButton = () => {
   return (
-    <StSearchButton btnType="oval">
+    <StSearchButton type="submit" btnType="circle">
       <FiSearch></FiSearch>
-      <StSearchButtonText>검색</StSearchButtonText>
+      {/* <StSearchButtonText></StSearchButtonText> */}
     </StSearchButton>
   );
 };
