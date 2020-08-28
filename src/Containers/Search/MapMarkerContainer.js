@@ -5,17 +5,12 @@ import MapMarker from '../../Components/Search/MapMarker';
 const MapMarkerContainer = ({ marker, theme }) => {
   const { dateDiff } = useSelector(state => state.searchForm);
   const [infoState, setInfoState] = useState(false);
-  // const markerRef = useRef();
-
-  // console.log(markerRef);
-  // useEffect(() => {
-  //   console.log(markerRef, infoState);
-  // }, [infoState]);
+  const markerRef = useRef();
 
   return (
     <MapMarker
       theme={theme}
-      // markerRef={markerRef}
+      markerRef={markerRef}
       marker={marker}
       dateDiff={dateDiff}
       infoState={infoState}

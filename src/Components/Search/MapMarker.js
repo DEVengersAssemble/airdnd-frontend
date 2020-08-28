@@ -15,21 +15,15 @@ const getPixelPositionOffset = (width, height) => ({
 const MapMarker = ({
   theme,
   marker,
-  // markerRef,
+  markerRef,
   dateDiff,
   infoState,
   setInfoState,
 }) => {
   const { location, price, isBookmarked } = marker;
-  const markerRef = React.useRef();
-
-  useEffect(() => {
-    console.log(markerRef, infoState);
-  }, [infoState]);
-
-  console.log(markerRef);
   return (
     <Marker
+      ref={markerRef}
       position={location}
       icon={{
         scale: 0,
@@ -43,7 +37,6 @@ const MapMarker = ({
       >
         {dateDiff ? (
           <PriceMarker
-            ref={markerRef}
             onClick={() => {
               setInfoState(true);
               console.log(markerRef);
@@ -58,12 +51,11 @@ const MapMarker = ({
           </PriceMarker>
         ) : (
           <HomeMarker
-            ref={markerRef}
             theme={theme}
             btnType="circle"
             onClick={() => {
               setInfoState(!infoState);
-              console.log(markerRef);
+              console.log(markerRef.current);
             }}
           >
             <AiFillHome />
@@ -95,6 +87,7 @@ const buttonStyle = css`
     border: none;
     transform: scale(1.1);
     transition: 0.3s;
+    z-index: 20;
   }
   &:focus {
     background: black;
