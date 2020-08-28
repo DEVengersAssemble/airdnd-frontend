@@ -9,7 +9,7 @@ const getPixelPositionOffset = (width, height) => ({
   y: -(height / 2),
 });
 
-const MapMarker = ({ marker, dateDiff, infoState, setInfoState }) => {
+const MapMarker = ({ theme, marker, dateDiff, infoState, setInfoState }) => {
   const { id, location, price } = marker;
   return (
     <Marker
@@ -25,11 +25,15 @@ const MapMarker = ({ marker, dateDiff, infoState, setInfoState }) => {
         getPixelPositionOffset={getPixelPositionOffset}
       >
         {dateDiff ? (
-          <PriceMarker onClick={() => setInfoState(true)}>
+          <PriceMarker
+            onClick={() => setInfoState(true)}
+            theme={theme}
+            btnType="oval"
+          >
             ₩ <strong>{price.toLocaleString()}</strong>
           </PriceMarker>
         ) : (
-          <HomeMarker>
+          <HomeMarker theme={theme} btnType="circle">
             <AiFillHome />
           </HomeMarker>
         )}
@@ -44,12 +48,11 @@ const MapMarker = ({ marker, dateDiff, infoState, setInfoState }) => {
 };
 
 const buttonStyle = css`
-  cursor: pointer;
-  justify-content: center;
-  align-items: center;
-  outline: none;
+  box-shadow: 0 0 2px ${({ theme }) => theme.color.gray};
+  border: none;
   transition: 0.3s;
   &:hover {
+    border: none;
     transform: scale(1.1);
     transition: 0.3s;
   }
@@ -59,20 +62,12 @@ const buttonStyle = css`
   }
 `;
 
-const HomeMarker = styled.button`
+const HomeMarker = styled(Button)`
   ${buttonStyle};
-  border: 1px solid lightgray;
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  font-size: 1.6rem;
-  padding: 2px 0 0;
 `;
 
-const PriceMarker = styled.button`
+const PriceMarker = styled(Button)`
   ${buttonStyle};
-  border: 1px solid lightgray;
-  border-radius: 30px;
   font-size: 1.4rem;
   padding: 0.6rem 0.8rem;
 `;

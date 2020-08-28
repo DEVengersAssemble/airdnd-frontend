@@ -5,12 +5,12 @@ import {
   withScriptjs,
   withGoogleMap,
   GoogleMap,
-  Marker,
   OverlayView,
-  InfoWindow,
 } from 'react-google-maps';
 import { AiFillHome } from 'react-icons/ai';
+import theme from '../../style/theme';
 import MapMarkerContainer from '../../Containers/Search/MapMarkerContainer';
+import Button from './Button';
 
 const Map = compose(
   withProps({
@@ -62,13 +62,13 @@ const Map = compose(
     >
       {markers &&
         markers.map((marker, i) => (
-          <MapMarkerContainer key={i} marker={marker} />
+          <MapMarkerContainer key={i} marker={marker} theme={theme} />
         ))}
       <OverlayView
         position={{ lat: 37.64993, lng: 127.077999 }}
         mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
       >
-        <HomeMarker>
+        <HomeMarker theme={theme} btnType="circle">
           <AiFillHome />
         </HomeMarker>
       </OverlayView>
@@ -77,12 +77,11 @@ const Map = compose(
 });
 
 const buttonStyle = css`
-  cursor: pointer;
-  justify-content: center;
-  align-items: center;
-  outline: none;
+  border: none;
+  box-shadow: 0 0 2px ${theme.color.gray};
   transition: 0.3s;
   &:hover {
+    border: none;
     transform: scale(1.1);
     transition: 0.3s;
   }
@@ -92,20 +91,12 @@ const buttonStyle = css`
   }
 `;
 
-const HomeMarker = styled.button`
+const HomeMarker = styled(Button)`
   ${buttonStyle};
-  border: 1px solid lightgray;
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  font-size: 1.6rem;
-  padding: 2px 0 0;
 `;
 
-const PriceMarker = styled.button`
+const PriceMarker = styled(Button)`
   ${buttonStyle};
-  border: 1px solid lightgray;
-  border-radius: 30px;
   font-size: 1.4rem;
   padding: 0.6rem 0.8rem;
 `;
