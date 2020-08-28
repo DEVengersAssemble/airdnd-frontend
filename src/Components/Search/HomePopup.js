@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import HomeCaption from './HomeCard';
+import { HomeCaption } from './HomeCard';
 import { CkHeart } from '../Global/Heart';
 import CarouselContainer from '../../Containers/Global/CarouselContainer';
 
-const HomePopup = ({ home, dateDiff }) => {
+const HomePopup = ({ home, dateDiff, theme }) => {
   const {
     isSuperhost,
     isBookmarked,
@@ -20,11 +20,13 @@ const HomePopup = ({ home, dateDiff }) => {
     <StWrapper>
       <CarouselContainer
         size="large"
+        theme={theme}
         isSuperhost={isSuperhost}
         imageArray={imageArray}
         imageCount={imageCount}
       />
       <HomeCaption
+        theme={theme}
         subTitle={subTitle}
         title={title}
         rating={rating}
@@ -32,7 +34,7 @@ const HomePopup = ({ home, dateDiff }) => {
         price={price}
         dateDiff={dateDiff}
       />
-      <Heart ckType checked={isBookmarked} />
+      <Heart ckType theme={theme} checked={isBookmarked} />
     </StWrapper>
   );
 };

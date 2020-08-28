@@ -5,6 +5,7 @@ import { PrevButton, NextButton } from './SlideButton';
 // size(str) or responsive(bool) 필수: superLarge, large, medium, small
 const Carousel = ({
   size,
+  theme,
   responsive,
   homeWidth,
   marker,
@@ -21,11 +22,19 @@ const Carousel = ({
 }) => {
   useEffect(() => setWidth(), []);
   return (
-    <StWrapper size={size} homeWidth={homeWidth} {...rest}>
+    <StWrapper size={size} homeWidth={homeWidth} theme={theme} {...rest}>
       {imageCount > 1 ? (
         <>
-          <StPrevBtn styleType="transparent" onClick={onSlidePrev} />
-          <StNextBtn styleType="transparent" onClick={onSlideNext} />
+          <StPrevBtn
+            styleType="transparent"
+            onClick={onSlidePrev}
+            theme={theme}
+          />
+          <StNextBtn
+            styleType="transparent"
+            onClick={onSlideNext}
+            theme={theme}
+          />
         </>
       ) : null}
       <StLink
@@ -33,7 +42,7 @@ const Carousel = ({
         target="_blank"
         href="https://www.airbnb.co.kr/rooms/36094960?adults=1&location=%EB%A7%88%EB%93%9C%EB%A6%AC%EB%93%9C&source_impression_id=p3_1597324281_lNy0Q31ggfi0f1St&check_in=2020-09-26&guests=1&check_out=2020-09-30"
       >
-        {isSuperhost && <StBadge>슈퍼호스트</StBadge>}
+        {isSuperhost && <StBadge theme={theme}>슈퍼호스트</StBadge>}
         <StImageList
           size={size}
           direction={direction}
@@ -43,6 +52,7 @@ const Carousel = ({
           {renderArray.map((index, i) => (
             <StImageWrapper
               key={i}
+              theme={theme}
               size={size}
               imageCount={imageCount}
               responsive={responsive}
@@ -56,6 +66,7 @@ const Carousel = ({
             return index < 5 ? (
               <StCircle
                 key={index}
+                theme={theme}
                 color={index === marker ? 'white' : 'shadow'}
               />
             ) : null;

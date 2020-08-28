@@ -4,13 +4,13 @@ import Rating from '../Global/Rating';
 import { CkHeart } from '../Global/Heart';
 import CarouselContainer from '../../Containers/Global/CarouselContainer';
 
-export const HomePrice = ({ type, price, dateDiff }) => {
+export const HomePrice = ({ type, price, dateDiff, theme }) => {
   return (
     <StPriceWrapper type={type}>
       <StLargePrice>
         <strong>₩{price.toLocaleString()}</strong> / 1박
       </StLargePrice>
-      <StSmallPrice>
+      <StSmallPrice theme={theme}>
         총 요금: ₩{(dateDiff * price).toLocaleString()}
       </StSmallPrice>
     </StPriceWrapper>

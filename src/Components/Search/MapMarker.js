@@ -5,7 +5,6 @@ import { InfoBox } from 'react-google-maps/lib/components/addons/InfoBox';
 import { AiFillHome } from 'react-icons/ai';
 import Button from '../Global/Button';
 import HomePopup from './HomePopup';
-import HomePopupContainer from '../../Containers/Search/HomePopupContainer';
 
 const getPixelPositionOffset = (width, height) => ({
   x: -(width / 2),
@@ -13,7 +12,7 @@ const getPixelPositionOffset = (width, height) => ({
 });
 
 const MapMarker = ({ theme, marker, dateDiff, infoState, setInfoState }) => {
-  const { id, location, price } = marker;
+  const { location, price } = marker;
   return (
     <Marker
       position={location}
@@ -43,7 +42,7 @@ const MapMarker = ({ theme, marker, dateDiff, infoState, setInfoState }) => {
       </OverlayView>
       {infoState && (
         <InfoBox>
-          <HomePopupContainer homeId={id} dateDiff={dateDiff} />
+          <HomePopup home={marker} dateDiff={dateDiff} theme={theme} />
         </InfoBox>
       )}
     </Marker>
