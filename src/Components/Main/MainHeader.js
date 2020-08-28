@@ -37,7 +37,7 @@ const StMainHeader = styled.header`
   }
 `;
 
-const slideUp = keyframes`
+const slideDown = keyframes`
   from {
     transform: scale(0.3, 0.75) translateY(-80px);
   }
@@ -46,7 +46,7 @@ const slideUp = keyframes`
   }
 `;
 
-const slideDown = keyframes`
+const slideUp = keyframes`
   from {
     transform: scale(1, 1) translateY(0px);
     opacity: 0.5;
@@ -71,7 +71,7 @@ const StNavSearchWrapper = styled.div`
   animation-timing-function: ease-out;
   animation-fill-mode: forwards;
   animation-name: ${({ isScrollTop, isSearchBtnClicked }) =>
-    isScrollTop || isSearchBtnClicked ? slideUp : slideDown};
+    isScrollTop || isSearchBtnClicked ? slideDown : slideUp};
 
   @media (max-width: 950px) {
     width: 90%;
@@ -98,8 +98,9 @@ const StOnScrollSearchButton = styled(Button)`
       display: none;
     `}
   position: absolute;
-  top: 14px;
-  left: calc(50% - 150px);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   padding: 10px 10px 10px 20px;
   color: ${({ theme }) => theme.color.black};
   border: 1px solid ${({ theme }) => theme.color.line};

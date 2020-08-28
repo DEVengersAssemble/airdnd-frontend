@@ -22,13 +22,13 @@ const StSearchHeader = styled.header`
   border-bottom: 1px solid ${({ theme }) => theme.color.line};
   padding: 20px 25px 15px 10px;
   @media ${({ theme }) => theme.size.iPad} {
-    padding: 20px 25px 15px 25px;
+    padding: 20px 25px 15px 10px;
     height: ${({ isSearchBtnClicked }) =>
       isSearchBtnClicked ? '250px' : '80px'};
   }
 `;
 
-const slideUp = keyframes`
+const slideDown = keyframes`
   from {
     transform: scale(0.3, 0.75) translateY(-80px);
   }
@@ -37,7 +37,7 @@ const slideUp = keyframes`
   }
 `;
 
-const slideDown = keyframes`
+const slideUp = keyframes`
   from {
     transform: scale(1, 1) translateY(0px);
     opacity: 0.5;
@@ -61,8 +61,8 @@ const StNavSearchWrapper = styled.div`
   animation-duration: 0.2s;
   animation-timing-function: ease-out;
   animation-fill-mode: forwards;
-  animation-name: ${({ isScrollTop, isSearchBtnClicked }) =>
-    isScrollTop || isSearchBtnClicked ? slideUp : slideDown};
+  animation-name: ${({ isSearchBtnClicked }) =>
+    isSearchBtnClicked ? slideDown : slideUp};
 
   @media (max-width: 950px) {
     width: 90%;
@@ -89,8 +89,9 @@ const StOnScrollSearchButton = styled(Button)`
       display: none;
     `}
   position: absolute;
-  top: 14px;
-  left: calc(50% - 150px);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   padding: 10px 10px 10px 20px;
   color: ${({ theme }) => theme.color.black};
   border: 1px solid ${({ theme }) => theme.color.line};
