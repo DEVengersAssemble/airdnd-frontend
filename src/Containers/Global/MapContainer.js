@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useState, useReducer, useEffect } from 'react';
 import Map from '../../Components/Global/Map';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
@@ -30,18 +30,23 @@ const centerReducer = (state, action) => {
         error: action.error,
       };
     default:
-      throw new Error('Unhandled Action', action.type);
+      return state;
   }
 };
 
 const MapContainer = () => {
-  const { location } = useSelector(state => state.searchForm);
+  const { location, dateDiff } = useSelector(state => state.searchForm);
   const { mapZoom } = useSelector(state => state.search);
   const { homes } = useSelector(state => state.search);
-  const markers = homes.map(home => ({
-    id: home.id,
-    location: home.location,
-  }));
+  const markers = homes.map(home => {
+    return {
+      id: home.id,
+      location: home.location,
+      price: home.price,
+    };
+  });
+
+  const [infoState, setInfoState] = useState(false);
   const [centerState, centerDispatch] = useReducer(centerReducer, centerInit);
   const dispatch = useDispatch();
 
@@ -57,7 +62,7 @@ const MapContainer = () => {
     }
   };
 
-  const showInfo = () => console.log('clicked');
+  const showInfo = () => setInfoState(true);
 
   useEffect(() => {
     getCenter(location);
@@ -66,10 +71,11 @@ const MapContainer = () => {
   if (!centerState.center) return null;
   return (
     <Map
-      location={location}
       center={centerState.center}
       mapZoom={mapZoom}
+      dateDiff={dateDiff}
       markers={markers}
+      infoState={infoState}
       showInfo={showInfo}
     />
   );

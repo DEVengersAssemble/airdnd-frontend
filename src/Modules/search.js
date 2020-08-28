@@ -125,7 +125,7 @@ const initialState = {
       rating: 4.25,
       reviewCount: 89,
       price: 54324,
-      location: { lat: 0, lng: 0 },
+      location: { lat: 37.650333, lng: 127.072783 },
     },
     {
       homeId: 2,
@@ -141,7 +141,7 @@ const initialState = {
       rating: 3.95,
       reviewCount: 111,
       price: 98839,
-      location: { lat: 0, lng: 0 },
+      location: { lat: 37.651791, lng: 127.060944 },
     },
     {
       homeId: 3,
@@ -159,10 +159,9 @@ const initialState = {
       rating: 3.95,
       reviewCount: 111,
       price: 98839,
-      location: { lat: 0, lng: 0 },
+      location: { lat: 37.64993, lng: 127.065379 },
     },
   ],
-  homeImage: '', // 캐러셀 버튼 클릭할 때 받아올 이미지
   recentHomes: [
     {
       homeId: 5,
@@ -198,7 +197,7 @@ const initialState = {
       rating: 3.33,
       reviewCount: 312,
       price: 98839,
-      location: { lat: 0, lng: 0 },
+      location: { lat: 37.651791, lng: 127.060944 },
     },
     {
       homeId: 7,
