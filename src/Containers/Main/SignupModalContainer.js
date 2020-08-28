@@ -104,7 +104,6 @@ const SignupModalContainer = ({
     birthYear,
   } = signup;
   const { pwLevel, pwContain, pwLength, pwCase } = pwValidation;
-  console.log('=======, ', birthMonth, birthDay, birthYear);
   const onPwFocus = () => {
     setPwFocus(true);
   };
@@ -118,10 +117,8 @@ const SignupModalContainer = ({
       !firstName.value || !pw.value.includes(firstName.value);
     const lastNameResult =
       !lastName.value || !pw.value.includes(lastName.value);
-
     const pwContain =
       pw.value && emailResult && firstNameResult && lastNameResult;
-
     const numberPattern = /[0-9]/;
     const specialCasePattern = /[~!@#$%^&*()_+|<>?:{}]/;
     const pwCase =
@@ -202,13 +199,10 @@ const SignupModalContainer = ({
 
   const onChangeSelect = ({ target }, key) => {
     const value = Number(target.value);
-    console.log('select..value: ', value, typeof value);
-    console.log('select..key: ', key, typeof key);
     const payload = {
       value,
       invalid: isNaN(value),
     };
-    console.log('select...payload:', payload);
     dispatch({ type: 'UPDATE_SELECT', key, payload });
   };
   const openLoginModal = () => {
