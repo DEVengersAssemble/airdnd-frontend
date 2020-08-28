@@ -1,6 +1,6 @@
-import React, { useState, useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import Map from '../../Components/Global/Map';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import axios from 'axios';
 
 const centerInit = {
@@ -34,16 +34,10 @@ const centerReducer = (state, action) => {
   }
 };
 
-const MapContainer = () => {
+const MapContainer = ({ markers }) => {
   const { location } = useSelector(state => state.searchForm);
   const { mapZoom } = useSelector(state => state.search);
   const [centerState, centerDispatch] = useReducer(centerReducer, centerInit);
-  const { homes } = useSelector(state => state.search);
-  const markers = homes.map(home => ({
-    id: home.id,
-    location: home.location,
-    price: home.price,
-  }));
 
   const getCenter = async location => {
     centerDispatch({ type: 'LOADING' });

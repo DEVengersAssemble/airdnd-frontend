@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { Marker, OverlayView, InfoWindow } from 'react-google-maps';
 import { AiFillHome } from 'react-icons/ai';
+import Button from '../Global/Button';
 
 const getPixelPositionOffset = (width, height) => ({
   x: -(width / 2),

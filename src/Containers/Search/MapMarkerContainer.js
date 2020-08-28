@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import MapMarker from '../../Components/Search/MapMarker';
 
 const MapMarkerContainer = ({ marker }) => {
