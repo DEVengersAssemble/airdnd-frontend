@@ -3,10 +3,14 @@ import styled, { css } from 'styled-components';
 import MsgListSectionHeader from './MsgListSectionHeader';
 import MsgListSectionMain from './MsgListSectionMain';
 
-const MessageListSection = ({ msgSectionStates }) => {
+const MessageListSection = ({ myRef, msgSectionStates }) => {
   const { msgListSectionState, msgDetailSectionState } = msgSectionStates;
+  console.log('msgListSectionState', msgListSectionState);
+  console.log('msgDetailSectionState', msgDetailSectionState);
+
   return (
     <MessageListSectionWrapper
+      ref={myRef}
       msgListSectionState={msgListSectionState}
       msgDetailSectionState={msgDetailSectionState}
     >
@@ -24,7 +28,6 @@ const MessageListSectionWrapper = styled.section`
   ${({ msgListSectionState }) =>
     msgListSectionState &&
     css`
-      opacity: 1;
       min-width: 37.5rem;
     `}
 
