@@ -58,6 +58,7 @@ const CarouselContainer = ({
   imageCount,
   isSuperhost,
   getWidth,
+  ...rest
 }) => {
   const carouselInit = {
     imageCount,
@@ -111,6 +112,7 @@ const CarouselContainer = ({
       onSlideNext={onSlideNext}
       onSlidePrev={onSlidePrev}
       setWidth={setWidth}
+      {...rest}
     />
   );
 };

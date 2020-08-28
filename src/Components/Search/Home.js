@@ -145,6 +145,7 @@ const StPriceWrapper = styled.div`
 
 const StLargePrice = styled.span`
   margin-bottom: 0.3rem;
+  font-size: 1.6rem;
 `;
 
 const StSmallPrice = styled.span`
