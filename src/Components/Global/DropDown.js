@@ -1,103 +1,106 @@
 import React from 'react';
-import styled from 'styled-components';
-import { MdKeyboardArrowUp, MdKeyboardArrowDown } from 'react-icons/md';
+import styled, { css } from 'styled-components';
+import { MdKeyboardArrowDown } from 'react-icons/md';
 
 const StDropDownWrapper = styled.div`
-  display: inline-block;
-  width: 200px;
+  position: relative;
   box-sizing: border-box;
+  width: ${({ width }) => width || '200px'};
+  background: transparent;
+  z-index: 0;
 `;
 
-const StHeaderWrapper = styled.div`
+const StDropDownSelect = styled.select`
   box-sizing: border-box;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
   width: 100%;
-  padding: 2px;
-  border: 1px solid ${({ theme }) => theme.color.lightGray};
-  border-radius: 8px;
-  padding: 2px 5px;
-`;
-
-const StHeader = styled.span`
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  width: 90%;
-  height: 30px;
-  text-indent: 5px;
-  box-sizing: border-box;
-`;
-
-const StIconWrapper = styled.span`
-  font-size: 30px;
-  height: 30px;
-`;
-
-const StOptions = styled.ul`
-  box-sizing: border-box;
-  list-style: none;
-  margin: 5px 0 0 0;
-  padding: 5px 5px 3px 5px;
-  width: 100%;
-  height: 150px;
-  overflow-y: scroll;
-  border: 1px solid ${({ theme }) => theme.color.lightGray};
-  border-radius: 8px;
-`;
-
-const StOptionItem = styled.li`
-  cursor: pointer;
-  width: 100%;
-  height: 30px;
-  background: ${({ theme }) => theme.color.lightGray};
-  box-sizing: border-box;
+  height: ${({ height }) => height || '48px'};
+  padding: ${({ padding }) => padding || '10px'};
+  -o-appearance: none;
+  -ms-appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: transparent;
   border: none;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
+  outline: none;
+  border: 1px solid ${({ theme }) => theme.color.gray};
+  border-radius: ${({ radius }) => radius || '4px'};
   text-indent: 5px;
-  &:hover {
-    background: ${({ theme }) => theme.color.gray};
-  }
-  margin-bottom: 3px;
+  ${({ outline }) =>
+    outline
+      ? css`
+          &:focus {
+            border: 1px solid ${({ theme }) => theme.color.green};
+            border-radius: ${({ radius }) => radius || '4px'};
+          }
+        `
+      : css`
+          &:focus {
+            border: 1px solid ${({ theme }) => theme.color.black};
+            border-radius: ${({ radius }) => radius || '4px'};
+          }
+        `}
+`;
+
+const StDropDownOption = styled.option`
+  box-sizing: border-box;
+  display: block;
+  white-space: pre;
+  min-height: 12px;
+  padding: 0px 2px 1px;
+`;
+
+const StDropDownIconWrapper = styled.span`
+  box-sizing: border-box;
+  position: absolute;
+  top: calc(50% - 10px);
+  right: 10px;
+  width: 20px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  z-index: 0;
+  pointer-events: none;
 `;
 
 const DropDown = ({
+  name,
   title,
   options,
-  isOpen,
-  toggleOpen,
-  optionSelected,
-  clickOption,
+  width,
+  height,
+  padding,
+  radius,
+  outline,
+  value,
   ...rest
 }) => {
   return (
-    <StDropDownWrapper {...rest}>
-      <StHeaderWrapper onClick={toggleOpen}>
-        <StHeader>{optionSelected || title}</StHeader>
-        <StIconWrapper>
-          {isOpen ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}
-        </StIconWrapper>
-      </StHeaderWrapper>
-      {isOpen && (
-        <StOptions>
-          {options.map((option, i) => (
-            <StOptionItem
-              key={i}
-              onClick={() => {
-                clickOption(option);
-                toggleOpen();
-              }}
-            >
-              {option}
-            </StOptionItem>
-          ))}
-        </StOptions>
-      )}
+    <StDropDownWrapper width={width}>
+      <StDropDownSelect
+        name={name}
+        height={height}
+        padding={padding}
+        radius={radius}
+        outline={outline}
+        value={value}
+        {...rest}
+      >
+        <StDropDownOption key={0} disabled>
+          {title}
+        </StDropDownOption>
+        {options.map((option, i) => (
+          <StDropDownOption key={i + 1} value={option}>
+            {option}
+          </StDropDownOption>
+        ))}
+      </StDropDownSelect>
+      <StDropDownIconWrapper>
+        <MdKeyboardArrowDown></MdKeyboardArrowDown>
+      </StDropDownIconWrapper>
     </StDropDownWrapper>
   );
 };
-
 export default DropDown;
