@@ -111,11 +111,11 @@ const initialState = {
       isSuperhost: true,
       isBookmarked: true,
       imageArray: [
-        'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small',
+        'https://a0.muscache.com/im/pictures/86dc65fd-88a4-454f-800a-a10ffd4c0c23.jpg?aki_policy=large',
         'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large',
+        'https://a0.muscache.com/im/pictures/f30f7f4c-8900-44ff-bf05-30eb49447961.jpg?aki_policy=large',
         'https://a0.muscache.com/im/pictures/3276d8ad-d455-4c59-923c-3f6926301a93.jpg?aki_policy=large',
-        'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large',
-        'https://a0.muscache.com/im/pictures/2013c2de-4727-4cd9-b9cd-77d85238d440.jpg?aki_policy=large',
+        'https://a0.muscache.com/im/pictures/d0a5e471-b1a5-43c1-8ec3-8570440857a6.jpg?aki_policy=large',
         'https://a0.muscache.com/im/pictures/3276d8ad-d455-4c59-923c-3f6926301a93.jpg?aki_policy=large',
       ],
       imageCount: 6, // 이미지 개수
@@ -148,13 +148,11 @@ const initialState = {
       isSuperhost: false,
       isBookmarked: false,
       imageArray: [
-        'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small',
-        'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large',
+        'https://a0.muscache.com/im/pictures/f30f7f4c-8900-44ff-bf05-30eb49447961.jpg?aki_policy=large',
         'https://a0.muscache.com/im/pictures/3276d8ad-d455-4c59-923c-3f6926301a93.jpg?aki_policy=large',
-        'https://a0.muscache.com/im/pictures/3276d8ad-d455-4c59-923c-3f6926301a93.jpg?aki_policy=large',
-        'https://a0.muscache.com/im/pictures/2013c2de-4727-4cd9-b9cd-77d85238d440.jpg?aki_policy=large',
+        'https://a0.muscache.com/im/pictures/d0a5e471-b1a5-43c1-8ec3-8570440857a6.jpg?aki_policy=large',
       ],
-      imageCount: 5, // 이미지 개수
+      imageCount: 3, // 이미지 개수
       subTitle: 'MongMong-Toto의 호텔 객실이지롱',
       title: 'Pia Resort Hotel Corner Studio Room~~~',
       feature: '최대 인원 2명 ﹒ 침실 1개 ﹒ 침대 2개 ﹒ 단독 사용 욕실 1개!!!',

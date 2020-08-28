@@ -7,7 +7,7 @@ import { HomePrice } from './Home';
 
 const HomeCard = ({ home, type, onClickBookmark, dateDiff }) => {
   const homeRef = useRef();
-  const getHomeWidth = () => homeRef.current && homeRef.current.offsetWidth;
+  const getWidth = () => homeRef && homeRef.current.offsetWidth;
   const {
     isSuperhost,
     isBookmarked,
@@ -24,8 +24,7 @@ const HomeCard = ({ home, type, onClickBookmark, dateDiff }) => {
     <StWrapper ref={homeRef} type={type}>
       <CarouselContainer
         responsive
-        homeRef={homeRef}
-        getHomeWidth={getHomeWidth}
+        getWidth={getWidth}
         isSuperhost={isSuperhost}
         imageArray={imageArray}
         imageCount={imageCount}

@@ -2,7 +2,7 @@ import React from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import { PrevButton, NextButton } from './SlideButton';
 
-// size 필수: superLarge, large, medium, small
+// size(str) or responsive(bool) 필수: superLarge, large, medium, small
 const Carousel = ({
   direction,
   isSliding,
@@ -18,7 +18,6 @@ const Carousel = ({
   size,
   ...rest
 }) => {
-  console.log(homeWidth);
   return (
     <StWrapper size={size} homeWidth={homeWidth} {...rest}>
       {imageCount > 1 ? (
@@ -95,10 +94,12 @@ const slideNext = (homeWidth, size) => keyframes`
 
 const slidePrev = (homeWidth, size) => keyframes`
 0% {
-  transform: translate3d(0,0,0);
+  transform: ${`translate3d(${
+    size ? sizes[size].width : homeWidth * -1
+  }px, 0, 0)`};
 }
 100% {
-  transform: ${`translate3d(${size ? sizes[size].width : homeWidth}px, 0, 0)`};
+  transform: translate3d(0,0,0);
 }
 `;
 
@@ -163,8 +164,7 @@ const StCircle = styled.div`
 const StImageList = styled.ul`
   display: flex;
   position: absolute;
-  right: ${({ direction, responsive, homeWidth }) =>
-    direction === 'left' && (responsive ? `-${homeWidth}px` : 0)};
+  right: ${({ direction }) => direction === 'left' && 0};
   left: ${({ direction }) => direction === 'right' && 0};
   ${({ direction, isSliding, homeWidth, size }) => {
     if (direction === 'right' && isSliding)
@@ -174,6 +174,7 @@ const StImageList = styled.ul`
     if (direction === 'left' && isSliding)
       return css`
         animation: ${slidePrev(homeWidth, size)} 0.3s forwards;
+        animation-direction: ${size && 'reverse'};
       `;
   }}
 `;

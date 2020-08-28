@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import Carousel from '../../Components/Global/Carousel';
 
 const carouselReducer = (state, action) => {
@@ -31,6 +31,11 @@ const carouselReducer = (state, action) => {
         renderArray: [state.currentIndex],
         isSliding: false,
       };
+    case 'SET_WIDTH':
+      return {
+        ...state,
+        width: action.width,
+      };
     case 'GET_MARKER':
       return { ...state, marker: action.marker };
     default:
@@ -47,12 +52,11 @@ const getMarkerIndex = (imageCount, currentIndex) => {
 
 const CarouselContainer = ({
   size,
-  homeRef,
   responsive,
   imageArray,
   imageCount,
   isSuperhost,
-  getHomeWidth,
+  getWidth,
 }) => {
   const carouselInit = {
     imageCount,
@@ -70,17 +74,15 @@ const CarouselContainer = ({
     isSliding,
     direction,
     renderArray,
+    width,
     marker,
     currentIndex,
   } = carouselState;
   const onSlideNext = () => dispatch({ type: 'SLIDE_NEXT' });
   const onSlidePrev = () => dispatch({ type: 'SLIDE_PREV' });
-
-  const [homeWidth, setHomeWidth] = useState(0);
-
-  window.addEventListener('resize', () => {
-    !size && setHomeWidth(getHomeWidth());
-  });
+  const setWidth = () =>
+    dispatch({ type: 'SET_WIDTH', width: !size && getWidth() });
+  window.addEventListener('resize', setWidth);
 
   useEffect(() => {
     dispatch({
@@ -88,8 +90,9 @@ const CarouselContainer = ({
       marker: getMarkerIndex(imageCount, currentIndex),
     });
     setTimeout(() => isSliding && dispatch({ type: 'END_SLIDE' }), 300);
-    console.log(homeWidth);
-  }, [isSliding, currentIndex, homeWidth]);
+    console.log(width);
+    return window.removeEventListener('resize', setWidth);
+  }, [isSliding, currentIndex, width]);
 
   return (
     <Carousel
@@ -99,7 +102,7 @@ const CarouselContainer = ({
       direction={direction}
       isSliding={isSliding}
       renderArray={renderArray}
-      homeWidth={homeWidth - 20}
+      homeWidth={width - 20}
       imageArray={imageArray}
       imageCount={imageCount}
       isSuperhost={isSuperhost}
