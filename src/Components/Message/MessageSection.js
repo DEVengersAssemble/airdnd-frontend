@@ -5,10 +5,13 @@ import MsgSectionMainContainer from '../../Containers/Message/MsgSectionMainCont
 import MsgSectionFooterContainer from '../../Containers/Message/MsgSectionFooterContainer';
 
 const MessageSection = ({ msgSectionStates }) => {
-  const { msgDetailSectionState } = msgSectionStates;
+  const { msgDetailSectionState, msgListSectionState } = msgSectionStates;
 
   return (
-    <MessageSectionWrapper msgDetailSectionState={msgDetailSectionState}>
+    <MessageSectionWrapper
+      msgListSectionState={msgListSectionState}
+      msgDetailSectionState={msgDetailSectionState}
+    >
       <MsgSectionHeaderContainer msgSectionStates={msgSectionStates} />
       <MsgSectionMainContainer />
       <MsgSectionFooterContainer />
@@ -17,6 +20,7 @@ const MessageSection = ({ msgSectionStates }) => {
 };
 
 const MessageSectionWrapper = styled.section`
+  background-color: ${({ theme }) => theme.color.white};
   @media ${({ theme }) => theme.size.large} {
     display: flex;
     flex-direction: column;
@@ -36,13 +40,6 @@ const MessageSectionWrapper = styled.section`
   }
 
   @media ${({ theme }) => theme.size.medium} {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    flex-grow: 1;
-    min-width: 37.5rem;
-
-    border: 1px solid red;
     min-width: calc(100% - 37.5rem);
   }
 `;

@@ -1,6 +1,6 @@
 import React from 'react';
 import MessageSection from '../../Components/Message/MessageSection';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 const MessageSectionContainer = () => {
   const msgSectionStates = useSelector(state => state.message);

@@ -15,19 +15,18 @@ const MessageDetailSection = ({ msgDetailSectionState }) => {
 };
 
 const MessageDetailSectionWrapper = styled.section`
+  display: flex;
+  flex-direction: column;
+  width: 37.5rem;
+  min-width: 37.5rem;
+
   @media ${({ theme }) => theme.size.large} {
-    display: flex;
-    flex-direction: column;
-    width: 37.5rem;
-    min-width: 37.5rem;
-
-    transition-property: all;
-    transition-duration: 0.4s;
-    transition-timing-function: linear;
-
     ${({ msgDetailSectionState }) =>
       !msgDetailSectionState &&
       css`
+        transition-property: all;
+        transition-duration: 0.4s;
+        transition-timing-function: linear;
         opacity: 0;
       `}
   }
