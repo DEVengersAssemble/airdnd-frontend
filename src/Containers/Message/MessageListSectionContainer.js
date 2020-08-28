@@ -13,8 +13,12 @@ const MessageListSectionContainer = () => {
     myRef.current.style.display === '' && dispatch(hideMsgListSection());
   });
 
+  window.addEventListener('resize', () => {
+    console.log(myRef.current && myRef);
+  });
+
   return (
-    <MessageListSection myRef={myRef} msgSectionStates={msgSectionStates} />
+    <MessageListSection msgSectionStates={msgSectionStates} myRef={myRef} />
   );
 };
 

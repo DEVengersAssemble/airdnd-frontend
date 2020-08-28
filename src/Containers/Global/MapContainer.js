@@ -1,6 +1,6 @@
 import React, { useReducer, useEffect } from 'react';
 import Map from '../../Components/Global/Map';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import axios from 'axios';
 
 const centerInit = {
@@ -30,20 +30,14 @@ const centerReducer = (state, action) => {
         error: action.error,
       };
     default:
-      throw new Error('Unhandled Action', action.type);
+      return state;
   }
 };
 
-const MapContainer = () => {
+const MapContainer = ({ markers }) => {
   const { location } = useSelector(state => state.searchForm);
   const { mapZoom } = useSelector(state => state.search);
-  const { homes } = useSelector(state => state.search);
-  const markers = homes.map(home => ({
-    id: home.id,
-    location: home.location,
-  }));
   const [centerState, centerDispatch] = useReducer(centerReducer, centerInit);
-  const dispatch = useDispatch();
 
   const getCenter = async location => {
     centerDispatch({ type: 'LOADING' });
@@ -57,18 +51,11 @@ const MapContainer = () => {
     }
   };
 
-  useEffect(() => {
-    getCenter(location);
-  }, []);
+  useEffect(() => getCenter(location), []);
 
   if (!centerState.center) return null;
   return (
-    <Map
-      location={location}
-      center={centerState.center}
-      mapZoom={mapZoom}
-      markers={markers}
-    />
+    <Map center={centerState.center} mapZoom={mapZoom} markers={markers} />
   );
 };
 

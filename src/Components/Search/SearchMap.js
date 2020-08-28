@@ -9,11 +9,12 @@ import {
 import MapContainer from '../../Containers/Global/MapContainer';
 
 const SearchMap = ({
-  onHideMap,
+  view,
+  markers,
   mapState,
   onZoomIn,
   onZoomOut,
-  view,
+  onHideMap,
   closeMap,
 }) => {
   return (
@@ -26,7 +27,7 @@ const SearchMap = ({
           <MapMarkerButton />
         </StBtnSetWrapper>
       </StStickyWrapper>
-      <MapContainer />
+      <MapContainer markers={markers} />
     </StWrapper>
   );
 };
