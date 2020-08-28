@@ -1,8 +1,11 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { Marker, OverlayView, InfoWindow } from 'react-google-maps';
+import { Marker, OverlayView } from 'react-google-maps';
+import { InfoBox } from 'react-google-maps/lib/components/addons/InfoBox';
 import { AiFillHome } from 'react-icons/ai';
 import Button from '../Global/Button';
+import HomePopup from './HomePopup';
+import HomePopupContainer from '../../Containers/Search/HomePopupContainer';
 
 const getPixelPositionOffset = (width, height) => ({
   x: -(width / 2),
@@ -39,9 +42,9 @@ const MapMarker = ({ theme, marker, dateDiff, infoState, setInfoState }) => {
         )}
       </OverlayView>
       {infoState && (
-        <InfoWindow>
-          <AiFillHome />
-        </InfoWindow>
+        <InfoBox>
+          <HomePopupContainer homeId={id} dateDiff={dateDiff} />
+        </InfoBox>
       )}
     </Marker>
   );
