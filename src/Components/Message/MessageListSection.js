@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css, keyframes } from 'styled-components';
+import styled, { css } from 'styled-components';
 import MsgListSectionHeader from './MsgListSectionHeader';
 import MsgListSectionMain from './MsgListSectionMain';
 
@@ -17,38 +17,24 @@ const MessageListSection = ({ msgSectionStates }) => {
 };
 
 const MessageListSectionWrapper = styled.section`
-  @media ${({ theme }) => theme.size.large} {
-    display: flex;
-    flex-direction: column;
-    min-width: 37.5rem;
+  display: flex;
+  flex-direction: column;
+  min-width: 37.5rem;
 
-    ${({ msgListSectionState }) =>
-      msgListSectionState &&
-      css`
-        transition-property: all;
-        transition-duration: 0.4s;
-        transition-timing-function: linear;
-        opacity: 1;
-        min-width: 37.5rem;
-      `}
-  }
+  ${({ msgListSectionState }) =>
+    msgListSectionState &&
+    css`
+      opacity: 1;
+      min-width: 37.5rem;
+    `}
 
   @media ${({ theme }) => theme.size.medium} {
-    position: absolute;
-    z-index: -1;
-    opacity: 0;
-    visibility: hidden;
-    /* transition-property: all;
-        transition-duration: 0.4s;
-        transition-timing-function: linear; */
+    display: none;
 
     ${({ msgDetailSectionState }) =>
       !msgDetailSectionState &&
       css`
-        position: static;
-        z-index: 0;
-        opacity: 1;
-        visibility: visible;
+        display: flex;
       `}
   }
 `;
