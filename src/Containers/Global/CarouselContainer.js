@@ -93,7 +93,7 @@ const CarouselContainer = ({
     });
     setTimeout(() => isSliding && dispatch({ type: 'END_SLIDE' }), 300);
     console.log(width);
-    return window.removeEventListener('resize', setWidth);
+    return () => window.removeEventListener('resize', setWidth);
   }, [isSliding, currentIndex, width]);
 
   return (
