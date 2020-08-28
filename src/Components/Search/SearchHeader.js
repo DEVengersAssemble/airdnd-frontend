@@ -161,7 +161,7 @@ const SearchHeader = ({
             : '날짜 추가'}
         </StSearchFormResultWrapper>
         <StSearchFormResultWrapper guestCount dataExists={guestCount}>
-          {guestCount ? `${guestCount}명` : '게스트 추가'}
+          {guestCount ? `게스트 ${guestCount}명` : '게스트 추가'}
         </StSearchFormResultWrapper>
         <StOnScrollSearchButtonIconWrapper>
           <FiSearch />
