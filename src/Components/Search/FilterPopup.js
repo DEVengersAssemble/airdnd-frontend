@@ -7,7 +7,6 @@ import Toggle from '../Global/Toggle';
 import ModalFooter from '../Global/ModalFooter';
 import Checkbox from '../Global/Checkbox';
 import { NewInput } from '../Global/Input';
-import { GiHamburgerMenu } from 'react-icons/gi';
 
 const Range = Slider.createSliderWithTooltip(Slider.Range);
 

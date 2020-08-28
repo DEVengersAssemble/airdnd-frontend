@@ -57,6 +57,8 @@ const MapContainer = () => {
     }
   };
 
+  const showInfo = () => console.log('clicked');
+
   useEffect(() => {
     getCenter(location);
   }, []);
@@ -68,6 +70,7 @@ const MapContainer = () => {
       center={centerState.center}
       mapZoom={mapZoom}
       markers={markers}
+      showInfo={showInfo}
     />
   );
 };

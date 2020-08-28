@@ -6,7 +6,16 @@ import {
   withGoogleMap,
   GoogleMap,
   Marker,
+  OverlayView,
+  InfoWindow,
 } from 'react-google-maps';
+import { AiFillHome } from 'react-icons/ai';
+// import Button from './Button';
+
+const getPixelPositionOffset = (width, height) => ({
+  x: -(width / 2),
+  y: -(height / 2),
+});
 
 const Map = compose(
   withProps({
@@ -45,15 +54,7 @@ const Map = compose(
   }),
   withScriptjs,
   withGoogleMap,
-)(({ center, mapZoom }) => {
-  // const goldStar = {
-  //   fillColor: 'white',
-  //   fillOpacity: 0.8,
-  //   borderRadius: '50%',
-  //   scale: 0.3,
-  //   strokeColor: 'gold',
-  //   strokeWeight: 1,
-  // };
+)(({ center, mapZoom, showInfo }) => {
   return (
     <GoogleMap
       zoom={mapZoom}
@@ -64,24 +65,79 @@ const Map = compose(
       }}
       options={{ disableDefaultUI: true }}
     >
-      <Marker
-        className="노원역"
+      <OverlayView
         position={{ lat: 37.651791, lng: 127.060944 }}
-        // icon={goldStar}
-      />
-      <Marker
-        className="을지초"
+        mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+        getPixelPositionOffset={getPixelPositionOffset}
+      >
+        <PriceMarker onClick={showInfo}>
+          ₩ <strong>42,409</strong>
+        </PriceMarker>
+      </OverlayView>
+      <OverlayView
         position={{ lat: 37.650333, lng: 127.072783 }}
-        // icon={goldStar}
-      />
-      <Marker
-        className="당현천"
+        mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+        getPixelPositionOffset={getPixelPositionOffset}
+      >
+        <PriceMarker onClick={showInfo}>
+          ₩ <strong>42,409</strong>
+        </PriceMarker>
+      </OverlayView>
+      <OverlayView
         position={{ lat: 37.648824, lng: 127.065379 }}
-        label={{ text: 'hello', color: 'white' }}
-        // icon={goldStar}
-      />
+        mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+        getPixelPositionOffset={getPixelPositionOffset}
+      >
+        <PriceMarker onClick={showInfo}>
+          ₩ <strong>42,409</strong>
+        </PriceMarker>
+      </OverlayView>
+      <OverlayView
+        position={{ lat: 37.64993, lng: 127.065379 }}
+        mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+        getPixelPositionOffset={getPixelPositionOffset}
+      >
+        <HomeMarker onClick={showInfo}>
+          <AiFillHome />
+        </HomeMarker>
+      </OverlayView>
     </GoogleMap>
   );
 });
+
+const buttonStyle = css`
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  transition: 0.3s;
+`;
+
+const hoverStyle = css`
+  &:hover {
+    transform: scale(1.1);
+    transition: 0.3s;
+  }
+`;
+
+const HomeMarker = styled.button`
+  ${buttonStyle};
+  ${hoverStyle}
+  border: 1px solid lightgray;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 1.6rem;
+  padding: 2px 0 0;
+`;
+
+const PriceMarker = styled.button`
+  ${buttonStyle};
+  ${hoverStyle};
+  border: 1px solid lightgray;
+  border-radius: 30px;
+  font-size: 1.4rem;
+  padding: 0.6rem 0.8rem;
+`;
 
 export default Map;
