@@ -18,7 +18,7 @@ const MapMarker = ({
   markerRef,
   dateDiff,
   infoState,
-  setInfoState,
+  clickMarker,
 }) => {
   const { location, price, isBookmarked } = marker;
   return (
@@ -37,35 +37,36 @@ const MapMarker = ({
       >
         {dateDiff ? (
           <PriceMarker
-            onClick={() => {
-              setInfoState(true);
-              console.log(markerRef);
-            }}
+            infoState={infoState}
+            onClick={clickMarker}
             theme={theme}
             btnType="oval"
           >
-            ₩ <Strong> {price.toLocaleString()} </Strong>
+            <span>
+              ₩<Strong> {price.toLocaleString()} </Strong>
+            </span>
             {isBookmarked && (
-              <Heart size="smaller" bgColor="main" theme={theme} />
+              <Heart
+                size="smaller"
+                bgColor={infoState ? 'white' : 'main'}
+                stroke={infoState ? 'black' : 'white'}
+                theme={theme}
+              />
             )}
           </PriceMarker>
         ) : (
           <HomeMarker
             theme={theme}
+            infoState={infoState}
             btnType="circle"
-            onClick={() => {
-              setInfoState(!infoState);
-              // markerRef.focus();
-              console.log(markerRef.current.props.children[0]);
-              console.log(markerRef.current);
-            }}
+            onClick={clickMarker}
           >
             <AiFillHome />
             {isBookmarked && (
               <MiniHeart
-                size="small"
-                bgColor="main"
-                stroke="white"
+                size="smaller"
+                bgColor={infoState ? 'white' : 'main'}
+                stroke={infoState ? 'black' : 'white'}
                 theme={theme}
               />
             )}
@@ -91,20 +92,35 @@ const buttonStyle = css`
     transition: 0.3s;
     z-index: 20;
   }
-  &:focus {
-    background: black;
-    color: white;
-  }
+  /* &:focus {
+    background: ${({ theme }) => theme.color.black};
+    color: ${({ theme }) => theme.color.white};
+  } */
+`;
+
+const focusStyle = css`
+  ${({ infoState, theme }) =>
+    infoState
+      ? css`
+          background: ${theme.color.black};
+          color: ${theme.color.white};
+        `
+      : css`
+          background: ${theme.color.white};
+          color: ${theme.color.black};
+        `}
 `;
 
 const HomeMarker = styled(Button)`
   ${buttonStyle};
+  ${focusStyle};
   overflow: visible;
   position: relative;
 `;
 
 const PriceMarker = styled(Button)`
   ${buttonStyle};
+  ${focusStyle};
   font-size: 1.4rem;
   padding: 0.6rem 0.8rem;
 `;
@@ -115,8 +131,8 @@ const Strong = styled.strong`
 
 const MiniHeart = styled(Heart)`
   position: absolute;
-  top: -0.5rem;
-  right: -0.5rem;
+  top: -0.3rem;
+  right: -0.3rem;
 `;
 
 export default MapMarker;

@@ -7,6 +7,8 @@ const MapMarkerContainer = ({ marker, theme }) => {
   const [infoState, setInfoState] = useState(false);
   const markerRef = useRef();
 
+  const clickMarker = () => setInfoState(!infoState);
+
   return (
     <MapMarker
       theme={theme}
@@ -14,7 +16,7 @@ const MapMarkerContainer = ({ marker, theme }) => {
       marker={marker}
       dateDiff={dateDiff}
       infoState={infoState}
-      setInfoState={setInfoState}
+      clickMarker={clickMarker}
     />
   );
 };
