@@ -237,7 +237,6 @@ const SignupModalContainer = ({
   };
 
   React.useEffect(() => {
-    console.log('[USEEFFECT]=======');
     isChecking && changeFocus();
     isPwChanged && updatePwValidation();
     setIsChecking(false);

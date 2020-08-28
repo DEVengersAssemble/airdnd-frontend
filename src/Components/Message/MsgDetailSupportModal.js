@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Modal from '../Global/Modal';
 import Button from '../Global/Button';
 
-const DetailSupportModal = () => {
+const MsgDetailSupportModal = () => {
   const [modal, setModal] = React.useState(false);
   const onClickDelete = () => {
     setModal(!modal);
@@ -48,4 +48,4 @@ const StSuppertModalWrapper = styled.div`
   }
 `;
 
-export default DetailSupportModal;
+export default MsgDetailSupportModal;

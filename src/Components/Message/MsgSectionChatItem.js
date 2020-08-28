@@ -5,7 +5,7 @@ import Profile from '../Global/Profile';
 import Button from '../Global/Button';
 import { AiFillFlag } from 'react-icons/ai';
 
-const MsgItem = ({ host }) => {
+const MsgSectionChatItem = ({ host }) => {
   return (
     <MsgItemWrapper>
       <MsgProfileWrapper>
@@ -83,4 +83,4 @@ const MsgText = styled.div`
   line-height: 2.5rem;
 `;
 
-export default MsgItem;
+export default MsgSectionChatItem;

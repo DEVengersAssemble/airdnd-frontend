@@ -22,7 +22,7 @@ const Home = ({ home, onClickBookmark, dateDiff }) => {
     homeId,
     isSuperhost,
     isBookmarked,
-    image,
+    imageArray,
     imageCount,
     subTitle,
     title,
@@ -36,9 +36,9 @@ const Home = ({ home, onClickBookmark, dateDiff }) => {
     <StWrapper>
       <CarouselContainer
         size="large"
-        isSuperhost={isSuperhost}
-        image={image}
+        imageArray={imageArray}
         imageCount={imageCount}
+        isSuperhost={isSuperhost}
       />
       <StHome
         target="_blank"
@@ -61,7 +61,7 @@ const Home = ({ home, onClickBookmark, dateDiff }) => {
           ckType
           hover
           checked={isBookmarked}
-          onClick={() => onClickBookmark(isBookmarked, homeId)}
+          onCheck={() => onClickBookmark(isBookmarked, homeId)}
         />
       </StHome>
     </StWrapper>

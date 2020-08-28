@@ -46,14 +46,14 @@ const Map = compose(
   withScriptjs,
   withGoogleMap,
 )(({ center, mapZoom }) => {
-  const goldStar = {
-    fillColor: 'white',
-    fillOpacity: 0.8,
-    borderRadius: '50%',
-    scale: 0.3,
-    strokeColor: 'gold',
-    strokeWeight: 1,
-  };
+  // const goldStar = {
+  //   fillColor: 'white',
+  //   fillOpacity: 0.8,
+  //   borderRadius: '50%',
+  //   scale: 0.3,
+  //   strokeColor: 'gold',
+  //   strokeWeight: 1,
+  // };
   return (
     <GoogleMap
       zoom={mapZoom}
@@ -64,30 +64,24 @@ const Map = compose(
       }}
       options={{ disableDefaultUI: true }}
     >
-      <StMarker
+      <Marker
         className="노원역"
         position={{ lat: 37.651791, lng: 127.060944 }}
-        icon={goldStar}
+        // icon={goldStar}
       />
-      <StMarker
+      <Marker
         className="을지초"
         position={{ lat: 37.650333, lng: 127.072783 }}
-        icon={goldStar}
+        // icon={goldStar}
       />
-      <StMarker
+      <Marker
         className="당현천"
         position={{ lat: 37.648824, lng: 127.065379 }}
         label={{ text: 'hello', color: 'white' }}
-        icon={goldStar}
+        // icon={goldStar}
       />
     </GoogleMap>
   );
 });
-
-const StMarker = styled(Marker)`
-  background: blue;
-  width: 20px;
-  height: 20px;
-`;
 
 export default Map;
