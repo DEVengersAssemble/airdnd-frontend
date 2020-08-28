@@ -19,16 +19,13 @@ const MessageDetailSectionWrapper = styled.section`
   flex-direction: column;
   width: 37.5rem;
   min-width: 37.5rem;
-  @media ${({ theme }) => theme.size.large} {
-    ${({ msgDetailSectionState }) =>
-      !msgDetailSectionState &&
-      css`
-        transition-property: all;
-        transition-duration: 0.4s;
-        transition-timing-function: linear;
-        opacity: 0;
-      `}
-  }
+
+  ${({ msgDetailSectionState }) =>
+    !msgDetailSectionState &&
+    css`
+      opacity: 0;
+    `}
+
   @media ${({ theme }) => theme.size.medium} {
   }
 `;
