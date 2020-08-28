@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import { Marker, OverlayView } from 'react-google-maps';
 import { InfoBox } from 'react-google-maps/lib/components/addons/InfoBox';
@@ -12,8 +12,22 @@ const getPixelPositionOffset = (width, height) => ({
   y: -(height / 2),
 });
 
-const MapMarker = ({ theme, marker, dateDiff, infoState, setInfoState }) => {
+const MapMarker = ({
+  theme,
+  marker,
+  // markerRef,
+  dateDiff,
+  infoState,
+  setInfoState,
+}) => {
   const { location, price, isBookmarked } = marker;
+  const markerRef = React.useRef();
+
+  useEffect(() => {
+    console.log(markerRef, infoState);
+  }, [infoState]);
+
+  console.log(markerRef);
   return (
     <Marker
       position={location}
@@ -29,7 +43,11 @@ const MapMarker = ({ theme, marker, dateDiff, infoState, setInfoState }) => {
       >
         {dateDiff ? (
           <PriceMarker
-            onClick={() => setInfoState(true)}
+            ref={markerRef}
+            onClick={() => {
+              setInfoState(true);
+              console.log(markerRef);
+            }}
             theme={theme}
             btnType="oval"
           >
@@ -40,9 +58,13 @@ const MapMarker = ({ theme, marker, dateDiff, infoState, setInfoState }) => {
           </PriceMarker>
         ) : (
           <HomeMarker
+            ref={markerRef}
             theme={theme}
             btnType="circle"
-            onClick={() => setInfoState(true)}
+            onClick={() => {
+              setInfoState(!infoState);
+              console.log(markerRef);
+            }}
           >
             <AiFillHome />
             {isBookmarked && (
