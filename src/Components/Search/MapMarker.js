@@ -17,14 +17,12 @@ const MapMarker = ({
   isOpen,
   marker,
   markerState,
-  markerRef,
   dateDiff,
   clickMarker,
 }) => {
   const { homeId, location, price, isBookmarked } = marker;
   return (
     <Marker
-      ref={markerRef}
       position={location}
       icon={{
         scale: 0,
@@ -93,10 +91,6 @@ const buttonStyle = css`
     transition: 0.3s;
     z-index: 20;
   }
-  /* &:focus {
-    background: ${({ theme }) => theme.color.black};
-    color: ${({ theme }) => theme.color.white};
-  } */
 `;
 
 const focusStyle = css`

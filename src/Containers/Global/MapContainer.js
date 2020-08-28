@@ -1,7 +1,8 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect, useRef } from 'react';
 import Map from '../../Components/Global/Map';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
+import { closeMarker } from '../../Modules/search';
 
 const centerInit = {
   loading: false,
@@ -38,6 +39,10 @@ const MapContainer = ({ markers }) => {
   const { location } = useSelector(state => state.searchForm);
   const { mapZoom } = useSelector(state => state.search);
   const [centerState, centerDispatch] = useReducer(centerReducer, centerInit);
+  const dispatch = useDispatch();
+  const onCloseMarker = e => {
+    e.target.nodeName === 'DIV' && dispatch(closeMarker());
+  };
 
   useEffect(() => {
     const getCenter = async location => {
@@ -56,7 +61,14 @@ const MapContainer = ({ markers }) => {
 
   if (!centerState.center) return null;
   return (
-    <Map center={centerState.center} mapZoom={mapZoom} markers={markers} />
+    <div onClick={onCloseMarker}>
+      <Map
+        center={centerState.center}
+        mapZoom={mapZoom}
+        markers={markers}
+        onCloseMarker={onCloseMarker}
+      />
+    </div>
   );
 };
 

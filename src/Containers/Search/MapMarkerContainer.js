@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import MapMarker from '../../Components/Search/MapMarker';
 import { closeMarker, openMarker } from '../../Modules/search';
@@ -6,9 +6,8 @@ import { closeMarker, openMarker } from '../../Modules/search';
 const MapMarkerContainer = ({ marker, theme }) => {
   const { dateDiff } = useSelector(state => state.searchForm);
   const { markerState } = useSelector(state => state.search);
-  const dispatch = useDispatch();
-  const markerRef = useRef();
   const isOpen = markerState === marker.homeId;
+  const dispatch = useDispatch();
   const clickMarker = () => {
     isOpen ? dispatch(closeMarker()) : dispatch(openMarker(marker.homeId));
   };
@@ -17,7 +16,6 @@ const MapMarkerContainer = ({ marker, theme }) => {
     <MapMarker
       theme={theme}
       isOpen={isOpen}
-      markerRef={markerRef}
       marker={marker}
       markerState={markerState}
       dateDiff={dateDiff}
