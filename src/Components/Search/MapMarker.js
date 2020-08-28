@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled, { css } from 'styled-components';
 import { Marker, OverlayView } from 'react-google-maps';
 import { InfoBox } from 'react-google-maps/lib/components/addons/InfoBox';
@@ -39,7 +39,11 @@ const MapMarker = ({ theme, marker, dateDiff, infoState, setInfoState }) => {
             )}
           </PriceMarker>
         ) : (
-          <HomeMarker theme={theme} btnType="circle">
+          <HomeMarker
+            theme={theme}
+            btnType="circle"
+            onClick={() => setInfoState(true)}
+          >
             <AiFillHome />
             {isBookmarked && (
               <MiniHeart
@@ -78,8 +82,8 @@ const buttonStyle = css`
 
 const HomeMarker = styled(Button)`
   ${buttonStyle};
+  overflow: visible;
   position: relative;
-  margin: 2rem;
 `;
 
 const PriceMarker = styled(Button)`
@@ -94,8 +98,8 @@ const Strong = styled.strong`
 
 const MiniHeart = styled(Heart)`
   position: absolute;
-  top: -1rem;
-  right: 0rem;
+  top: -0.5rem;
+  right: -0.5rem;
 `;
 
 export default MapMarker;

@@ -19,7 +19,6 @@ const MessageDetailSectionWrapper = styled.section`
   flex-direction: column;
   width: 37.5rem;
   min-width: 37.5rem;
-
   @media ${({ theme }) => theme.size.large} {
     ${({ msgDetailSectionState }) =>
       !msgDetailSectionState &&
@@ -30,7 +29,6 @@ const MessageDetailSectionWrapper = styled.section`
         opacity: 0;
       `}
   }
-
   @media ${({ theme }) => theme.size.medium} {
   }
 `;
