@@ -379,7 +379,7 @@ const initialState = {
   averagePrice: 82094,
   mapState: true,
   mapZoom: 15,
-  markerState: false,
+  markerState: null,
   popup: popupInit,
   // map 범위 보낼때
   // mapSend: {
