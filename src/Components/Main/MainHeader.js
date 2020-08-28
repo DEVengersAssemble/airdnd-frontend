@@ -5,7 +5,6 @@ import Navigation from './Navigation';
 import SearchFormContainer from '../../Containers/Main/SearchFormContainer';
 import SettingButtonContainer from '../../Containers/Main/SettingButtonContainer';
 import MyPageButtonContainer from '../../Containers/Main/MyPageButtonContainer';
-import SearchForm from './SearchForm';
 import Button from '../Global/Button';
 import { FiSearch } from 'react-icons/fi';
 
