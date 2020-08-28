@@ -13,12 +13,12 @@ const SearchMapContainer = ({ view, closeMap }) => {
 
   return (
     <SearchMap
+      view={view}
       mapState={mapState}
+      closeMap={closeMap}
       onZoomIn={onZoomIn}
       onZoomOut={onZoomOut}
       onHideMap={onHideMap}
-      closeMap={closeMap}
-      view={view}
     />
   );
 };
