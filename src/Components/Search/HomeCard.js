@@ -1,13 +1,39 @@
 import React, { useRef } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import CarouselContainer from '../../Containers/Global/CarouselContainer';
 import Rating from '../Global/Rating';
 import { CkHeart } from '../Global/Heart';
 import { HomePrice } from './Home';
 
+export const HomeCaption = ({
+  theme,
+  subTitle,
+  title,
+  rating,
+  reviewCount,
+  price,
+  dateDiff,
+  ...rest
+}) => {
+  return (
+    <a
+      rel="noopener noreferrer"
+      target="_blank"
+      href="https://www.airbnb.co.kr/rooms/36094960?adults=1&location=%EB%A7%88%EB%93%9C%EB%A6%AC%EB%93%9C&source_impression_id=p3_1597324281_lNy0Q31ggfi0f1St&check_in=2020-09-26&guests=1&check_out=2020-09-30"
+      {...rest}
+    >
+      <StRating scale="1.4" rate={rating} count={reviewCount} theme={theme} />
+      <StSpan>{subTitle}</StSpan>
+      <StSpan>{title}</StSpan>
+      <HomePrice price={price} dateDiff={dateDiff} type="card" theme={theme} />
+    </a>
+  );
+};
+
 const HomeCard = ({ home, type, onClickBookmark, dateDiff }) => {
   const homeRef = useRef();
-  const getHomeWidth = () => homeRef.current && homeRef.current.offsetWidth;
+  const getWidth = () => homeRef.current && homeRef.current.offsetWidth;
+
   const {
     isSuperhost,
     isBookmarked,
@@ -24,22 +50,19 @@ const HomeCard = ({ home, type, onClickBookmark, dateDiff }) => {
     <StWrapper ref={homeRef} type={type}>
       <CarouselContainer
         responsive
-        homeRef={homeRef}
-        getHomeWidth={getHomeWidth}
+        getWidth={getWidth}
         isSuperhost={isSuperhost}
         imageArray={imageArray}
         imageCount={imageCount}
       />
-      <a
-        rel="noopener noreferrer"
-        target="_blank"
-        href="https://www.airbnb.co.kr/rooms/36094960?adults=1&location=%EB%A7%88%EB%93%9C%EB%A6%AC%EB%93%9C&source_impression_id=p3_1597324281_lNy0Q31ggfi0f1St&check_in=2020-09-26&guests=1&check_out=2020-09-30"
-      >
-        <StRating scale="1.4" rate={rating} count={reviewCount} />
-        <StSpan>{subTitle}</StSpan>
-        <StSpan>{title}</StSpan>
-        <HomePrice price={price} dateDiff={dateDiff} type="card" />
-      </a>
+      <HomeCaption
+        subTitle={subTitle}
+        title={title}
+        rating={rating}
+        reviewCount={reviewCount}
+        price={price}
+        dateDiff={dateDiff}
+      />
       <Heart
         ckType
         checked={isBookmarked}
@@ -98,20 +121,11 @@ const StRating = styled(Rating)`
 
 const StSpan = styled.span`
   display: block;
-  color: ${({ theme }) => theme.color.black};
   font-size: 1.6rem;
   margin-bottom: 0.3rem;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-/* 
-  ${({ noRate }) =>
-    noRate &&
-    css`
-      color: ${({ theme }) => theme.color.darkGray};
-      margin: 1rem 0 0.3rem;
-      font-size: 1.4rem;
-    `} */
 `;
 
 const Heart = styled(CkHeart)`
