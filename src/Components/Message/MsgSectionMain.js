@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import MsgSectionChatItem from '../Message/MsgSectionChatItem';
 
-const MsgSectionMain = ({ msgListSectionState, msgDetailSectionState }) => {
+const MsgSectionMain = () => {
   const isHost = true;
 
   return (

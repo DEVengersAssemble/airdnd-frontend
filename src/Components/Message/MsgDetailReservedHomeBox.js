@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { lighten, darken } from 'polished';
-import CarouselContainer from '../../Containers/Global/CarouselContainer';
+// import CarouselContainer from '../../Containers/Global/CarouselContainer';
 import Button from '../Global/Button';
 import Profile from '../Global/Profile';
 

@@ -20,18 +20,19 @@ const MessageDetailSectionWrapper = styled.section`
   width: 37.5rem;
   min-width: 37.5rem;
 
-  transition-property: all;
-  transition-duration: 1s;
-  transition-timing-function: ease-in;
+  @media ${({ theme }) => theme.size.large} {
+    ${({ msgDetailSectionState }) =>
+      !msgDetailSectionState &&
+      css`
+        transition-property: all;
+        transition-duration: 0.4s;
+        transition-timing-function: linear;
+        opacity: 0;
+      `}
+  }
 
-  ${({ msgDetailSectionState }) =>
-    !msgDetailSectionState &&
-    css`
-      transform: translateX(37.5rem);
-    `}
-  /* visibility 이거는 무시해도 돼 */
-  /* visibility: ${({ msgDetailSectionState }) =>
-    msgDetailSectionState ? 'visible' : 'hidden'}; */
+  @media ${({ theme }) => theme.size.medium} {
+  }
 `;
 
 export default MessageDetailSection;

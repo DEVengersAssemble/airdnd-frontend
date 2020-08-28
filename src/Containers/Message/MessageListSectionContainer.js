@@ -1,13 +1,14 @@
 import React from 'react';
 import MessageListSection from '../../Components/Message/MessageListSection';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { hideMsgListSection } from '../../Modules/message';
 
 const MessageListSectionContainer = () => {
-  const msgListSectionState = useSelector(
-    state => state.message.msgListSectionState,
-  );
+  const dispatch = useDispatch();
 
-  return <MessageListSection msgListSectionState={msgListSectionState} />;
+  const msgSectionStates = useSelector(state => state.message);
+
+  return <MessageListSection msgSectionStates={msgSectionStates} />;
 };
 
 export default MessageListSectionContainer;
