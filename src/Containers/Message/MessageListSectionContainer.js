@@ -10,7 +10,7 @@ const MessageListSectionContainer = () => {
   const msgSectionStates = useSelector(state => state.message);
 
   window.addEventListener('resize', () => {
-    console.log(myRef.current && myRef.current.style.display);
+    console.log(myRef.current && myRef);
   });
 
   return (
