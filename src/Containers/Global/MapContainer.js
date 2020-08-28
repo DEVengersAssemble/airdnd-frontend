@@ -35,20 +35,15 @@ const centerReducer = (state, action) => {
 };
 
 const MapContainer = () => {
-  const { location, dateDiff } = useSelector(state => state.searchForm);
+  const { location } = useSelector(state => state.searchForm);
   const { mapZoom } = useSelector(state => state.search);
-  const { homes } = useSelector(state => state.search);
-  const markers = homes.map(home => {
-    return {
-      id: home.id,
-      location: home.location,
-      price: home.price,
-    };
-  });
-
-  const [infoState, setInfoState] = useState(false);
   const [centerState, centerDispatch] = useReducer(centerReducer, centerInit);
-  const dispatch = useDispatch();
+  const { homes } = useSelector(state => state.search);
+  const markers = homes.map(home => ({
+    id: home.id,
+    location: home.location,
+    price: home.price,
+  }));
 
   const getCenter = async location => {
     centerDispatch({ type: 'LOADING' });
@@ -62,22 +57,11 @@ const MapContainer = () => {
     }
   };
 
-  const showInfo = () => setInfoState(true);
-
-  useEffect(() => {
-    getCenter(location);
-  }, []);
+  useEffect(() => getCenter(location), []);
 
   if (!centerState.center) return null;
   return (
-    <Map
-      center={centerState.center}
-      mapZoom={mapZoom}
-      dateDiff={dateDiff}
-      markers={markers}
-      infoState={infoState}
-      showInfo={showInfo}
-    />
+    <Map center={centerState.center} mapZoom={mapZoom} markers={markers} />
   );
 };
 

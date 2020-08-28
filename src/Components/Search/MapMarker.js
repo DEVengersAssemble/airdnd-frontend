@@ -1,4 +1,5 @@
 import React from 'react';
+import styled, { css } from 'styled-components';
 import { Marker, OverlayView, InfoWindow } from 'react-google-maps';
 import { AiFillHome } from 'react-icons/ai';
 
@@ -7,7 +8,8 @@ const getPixelPositionOffset = (width, height) => ({
   y: -(height / 2),
 });
 
-const MapMarker = ({ id, dateDiff, location, price, infoState, showInfo }) => {
+const MapMarker = ({ marker, dateDiff, infoState, setInfoState }) => {
+  const { id, location, price } = marker;
   return (
     <Marker
       position={location}
@@ -22,7 +24,7 @@ const MapMarker = ({ id, dateDiff, location, price, infoState, showInfo }) => {
         getPixelPositionOffset={getPixelPositionOffset}
       >
         {dateDiff ? (
-          <PriceMarker onClick={showInfo}>
+          <PriceMarker onClick={() => setInfoState(true)}>
             ₩ <strong>{price.toLocaleString()}</strong>
           </PriceMarker>
         ) : (

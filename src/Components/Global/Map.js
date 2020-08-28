@@ -10,11 +10,7 @@ import {
   InfoWindow,
 } from 'react-google-maps';
 import { AiFillHome } from 'react-icons/ai';
-
-const getPixelPositionOffset = (width, height) => ({
-  x: -(width / 2),
-  y: -(height / 2),
-});
+import MapMarkerContainer from '../../Containers/Search/MapMarkerContainer';
 
 const Map = compose(
   withProps({
@@ -53,7 +49,7 @@ const Map = compose(
   }),
   withScriptjs,
   withGoogleMap,
-)(({ center, mapZoom, markers, dateDiff, showInfo }) => {
+)(({ center, mapZoom, markers }) => {
   return (
     <GoogleMap
       zoom={mapZoom}
@@ -64,43 +60,15 @@ const Map = compose(
       }}
       options={{ disableDefaultUI: true }}
     >
-      {markers.map(({ id, location, price, infoState }, i) => (
-        <Marker
-          key={i}
-          position={location}
-          icon={{
-            scale: 0,
-            path: '',
-          }}
-        >
-          <OverlayView
-            position={location}
-            mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
-            getPixelPositionOffset={getPixelPositionOffset}
-          >
-            {dateDiff ? (
-              <PriceMarker onClick={showInfo}>
-                ₩ <strong>{price.toLocaleString()}</strong>
-              </PriceMarker>
-            ) : (
-              <HomeMarker>
-                <AiFillHome />
-              </HomeMarker>
-            )}
-          </OverlayView>
-          {infoState && (
-            <InfoWindow>
-              <AiFillHome />
-            </InfoWindow>
-          )}
-        </Marker>
-      ))}
+      {markers &&
+        markers.map((marker, i) => (
+          <MapMarkerContainer key={i} marker={marker} />
+        ))}
       <OverlayView
         position={{ lat: 37.64993, lng: 127.077999 }}
         mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
-        getPixelPositionOffset={getPixelPositionOffset}
       >
-        <HomeMarker onClick={showInfo}>
+        <HomeMarker>
           <AiFillHome />
         </HomeMarker>
       </OverlayView>
