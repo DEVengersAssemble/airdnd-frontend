@@ -4,11 +4,11 @@ import SearchResult from '../Components/Search/SearchResult';
 import SearchMap from '../Components/Search/SearchMap';
 import Footer from '../Components/Main/Footer';
 import SearchContentContainer from '../Containers/Search/SearchContentContainer';
-
+import SearchHeaderContainer from '../Containers/Search/SearchHeaderContainer';
 const SearchPage = () => {
   return (
     <StWrapper>
-      <StNav></StNav>
+      <SearchHeaderContainer></SearchHeaderContainer>
       <SearchContentContainer />
       <Footer />
     </StWrapper>
