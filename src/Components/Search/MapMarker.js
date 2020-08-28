@@ -55,6 +55,8 @@ const MapMarker = ({
             btnType="circle"
             onClick={() => {
               setInfoState(!infoState);
+              // markerRef.focus();
+              console.log(markerRef.current.props.children[0]);
               console.log(markerRef.current);
             }}
           >
