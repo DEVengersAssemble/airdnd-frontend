@@ -36,8 +36,8 @@ const MsgListSectionHeaderWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   border-right: 1px solid ${({ theme }) => darken(0.1, theme.color.lightGray)};
-  width: 37.5rem;
-  min-width: 37.5rem;
+  /* width: 37.5rem; */
+  /* min-width: 37.5rem; */
   height: 7.5rem;
   padding-left: 2.5rem;
   padding-right: 2.5rem;

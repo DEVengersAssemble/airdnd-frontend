@@ -4,6 +4,7 @@ import { darken } from 'polished';
 import theme from '../../style/theme';
 import Button from '../Global/Button';
 import { FaBox } from 'react-icons/fa';
+import { MdKeyboardArrowLeft } from 'react-icons/md';
 
 const MsgSectionHeader = ({
   msgListSectionState,
@@ -12,7 +13,20 @@ const MsgSectionHeader = ({
 }) => {
   return (
     <MsgSectionHeaderWrapper msgDetailSectionState={msgDetailSectionState}>
-      <MsgSectionHeaderTitle>호스트닉네임</MsgSectionHeaderTitle>
+      <MsgSectionHeaderTitle>
+        {!msgListSectionState && (
+          <Button
+            btnType="circle"
+            border="none"
+            hover={{ backgroundColor: theme.color.lightGray }}
+            fontSize="3rem"
+            style={{ width: '4rem', height: '4rem', marginRight: '3rem' }}
+          >
+            <MdKeyboardArrowLeft />
+          </Button>
+        )}
+        호스트닉네임
+      </MsgSectionHeaderTitle>
       <MsgSectionHeaderButtonWrapper>
         <Button
           btnType="circle"
@@ -64,6 +78,8 @@ const MsgSectionHeaderWrapper = styled.div`
 `;
 
 const MsgSectionHeaderTitle = styled.h2`
+  display: flex;
+  align-items: center;
   color: ${({ theme }) => theme.color.black};
   font-size: 1.8rem;
   font-weight: bold;
