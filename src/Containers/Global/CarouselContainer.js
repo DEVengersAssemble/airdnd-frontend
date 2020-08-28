@@ -108,6 +108,7 @@ const CarouselContainer = ({
       isSuperhost={isSuperhost}
       onSlideNext={onSlideNext}
       onSlidePrev={onSlidePrev}
+      setWidth={setWidth}
     />
   );
 };

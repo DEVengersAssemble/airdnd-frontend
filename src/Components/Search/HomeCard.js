@@ -7,7 +7,7 @@ import { HomePrice } from './Home';
 
 const HomeCard = ({ home, type, onClickBookmark, dateDiff }) => {
   const homeRef = useRef();
-  const getWidth = () => homeRef && homeRef.current.offsetWidth;
+  const getWidth = () => homeRef.current && homeRef.current.offsetWidth;
   const {
     isSuperhost,
     isBookmarked,

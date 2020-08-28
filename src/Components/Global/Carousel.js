@@ -1,23 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import { PrevButton, NextButton } from './SlideButton';
 
 // size(str) or responsive(bool) 필수: superLarge, large, medium, small
 const Carousel = ({
+  size,
+  responsive,
+  homeWidth,
+  marker,
   direction,
   isSliding,
   imageCount,
   imageArray,
   renderArray,
-  homeWidth,
   isSuperhost,
   onSlideNext,
   onSlidePrev,
-  responsive,
-  marker,
-  size,
+  setWidth,
   ...rest
 }) => {
+  useEffect(() => setWidth(), []);
   return (
     <StWrapper size={size} homeWidth={homeWidth} {...rest}>
       {imageCount > 1 ? (
