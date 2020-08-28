@@ -42,7 +42,6 @@ const HomePopup = ({ home, dateDiff, theme }) => {
 const StWrapper = styled.div`
   background: white;
   position: relative;
-  top: -18px;
   width: 300px;
   height: fit-content;
   border-radius: 8px;
@@ -59,7 +58,7 @@ const Caption = styled(HomeCaption)`
 
 const Heart = styled(CkHeart)`
   position: absolute;
-  top: 2.2em;
+  top: 0.7rem;
   right: 1.1em;
 `;
 

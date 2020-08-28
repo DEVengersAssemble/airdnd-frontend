@@ -5,6 +5,7 @@ import { InfoBox } from 'react-google-maps/lib/components/addons/InfoBox';
 import { AiFillHome } from 'react-icons/ai';
 import Button from '../Global/Button';
 import HomePopup from './HomePopup';
+import { Heart } from '../Global/Heart';
 
 const getPixelPositionOffset = (width, height) => ({
   x: -(width / 2),
@@ -12,7 +13,7 @@ const getPixelPositionOffset = (width, height) => ({
 });
 
 const MapMarker = ({ theme, marker, dateDiff, infoState, setInfoState }) => {
-  const { location, price } = marker;
+  const { location, price, isBookmarked } = marker;
   return (
     <Marker
       position={location}
@@ -32,16 +33,27 @@ const MapMarker = ({ theme, marker, dateDiff, infoState, setInfoState }) => {
             theme={theme}
             btnType="oval"
           >
-            ₩ <strong>{price.toLocaleString()}</strong>
+            ₩ <Strong> {price.toLocaleString()} </Strong>
+            {isBookmarked && (
+              <Heart size="smaller" bgColor="main" theme={theme} />
+            )}
           </PriceMarker>
         ) : (
           <HomeMarker theme={theme} btnType="circle">
             <AiFillHome />
+            {isBookmarked && (
+              <MiniHeart
+                size="small"
+                bgColor="main"
+                stroke="white"
+                theme={theme}
+              />
+            )}
           </HomeMarker>
         )}
       </OverlayView>
       {infoState && (
-        <InfoBox>
+        <InfoBox options={{ closeBoxURL: '', enableEventPropagatioin: true }}>
           <HomePopup home={marker} dateDiff={dateDiff} theme={theme} />
         </InfoBox>
       )}
@@ -66,12 +78,24 @@ const buttonStyle = css`
 
 const HomeMarker = styled(Button)`
   ${buttonStyle};
+  position: relative;
+  margin: 2rem;
 `;
 
 const PriceMarker = styled(Button)`
   ${buttonStyle};
   font-size: 1.4rem;
   padding: 0.6rem 0.8rem;
+`;
+
+const Strong = styled.strong`
+  padding: 0 3px;
+`;
+
+const MiniHeart = styled(Heart)`
+  position: absolute;
+  top: -1rem;
+  right: 0rem;
 `;
 
 export default MapMarker;

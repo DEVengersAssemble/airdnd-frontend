@@ -92,6 +92,9 @@ const hoverStyles = css`
 
 // default heart
 const StDiv = styled.div`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   ${defaultColorStyles}
   ${sizeStyles}
   ${hoverStyles}
