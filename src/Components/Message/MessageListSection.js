@@ -3,10 +3,11 @@ import styled, { css } from 'styled-components';
 import MsgListSectionHeader from './MsgListSectionHeader';
 import MsgListSectionMain from './MsgListSectionMain';
 
-const MessageListSection = ({ msgSectionStates }) => {
+const MessageListSection = ({ msgSectionStates, myRef }) => {
   const { msgListSectionState, msgDetailSectionState } = msgSectionStates;
   return (
     <MessageListSectionWrapper
+      ref={myRef}
       msgListSectionState={msgListSectionState}
       msgDetailSectionState={msgDetailSectionState}
     >
