@@ -111,11 +111,11 @@ const initialState = {
       isSuperhost: true,
       isBookmarked: true,
       imageArray: [
-        'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small',
+        'https://a0.muscache.com/im/pictures/86dc65fd-88a4-454f-800a-a10ffd4c0c23.jpg?aki_policy=large',
         'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large',
+        'https://a0.muscache.com/im/pictures/f30f7f4c-8900-44ff-bf05-30eb49447961.jpg?aki_policy=large',
         'https://a0.muscache.com/im/pictures/3276d8ad-d455-4c59-923c-3f6926301a93.jpg?aki_policy=large',
-        'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large',
-        'https://a0.muscache.com/im/pictures/2013c2de-4727-4cd9-b9cd-77d85238d440.jpg?aki_policy=large',
+        'https://a0.muscache.com/im/pictures/d0a5e471-b1a5-43c1-8ec3-8570440857a6.jpg?aki_policy=large',
         'https://a0.muscache.com/im/pictures/3276d8ad-d455-4c59-923c-3f6926301a93.jpg?aki_policy=large',
       ],
       imageCount: 6, // 이미지 개수
@@ -125,7 +125,7 @@ const initialState = {
       rating: 4.25,
       reviewCount: 89,
       price: 54324,
-      location: { lat: 0, lng: 0 },
+      location: { lat: 37.650333, lng: 127.072783 },
     },
     {
       homeId: 2,
@@ -141,30 +141,27 @@ const initialState = {
       rating: 3.95,
       reviewCount: 111,
       price: 98839,
-      location: { lat: 0, lng: 0 },
+      location: { lat: 37.651791, lng: 127.060944 },
     },
     {
       homeId: 3,
       isSuperhost: false,
       isBookmarked: false,
       imageArray: [
-        'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small',
-        'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large',
+        'https://a0.muscache.com/im/pictures/f30f7f4c-8900-44ff-bf05-30eb49447961.jpg?aki_policy=large',
         'https://a0.muscache.com/im/pictures/3276d8ad-d455-4c59-923c-3f6926301a93.jpg?aki_policy=large',
-        'https://a0.muscache.com/im/pictures/3276d8ad-d455-4c59-923c-3f6926301a93.jpg?aki_policy=large',
-        'https://a0.muscache.com/im/pictures/2013c2de-4727-4cd9-b9cd-77d85238d440.jpg?aki_policy=large',
+        'https://a0.muscache.com/im/pictures/d0a5e471-b1a5-43c1-8ec3-8570440857a6.jpg?aki_policy=large',
       ],
-      imageCount: 5, // 이미지 개수
+      imageCount: 3, // 이미지 개수
       subTitle: 'MongMong-Toto의 호텔 객실이지롱',
       title: 'Pia Resort Hotel Corner Studio Room~~~',
       feature: '최대 인원 2명 ﹒ 침실 1개 ﹒ 침대 2개 ﹒ 단독 사용 욕실 1개!!!',
       rating: 3.95,
       reviewCount: 111,
       price: 98839,
-      location: { lat: 0, lng: 0 },
+      location: { lat: 37.64993, lng: 127.065379 },
     },
   ],
-  homeImage: '', // 캐러셀 버튼 클릭할 때 받아올 이미지
   recentHomes: [
     {
       homeId: 5,
@@ -200,7 +197,7 @@ const initialState = {
       rating: 3.33,
       reviewCount: 312,
       price: 98839,
-      location: { lat: 0, lng: 0 },
+      location: { lat: 37.651791, lng: 127.060944 },
     },
     {
       homeId: 7,
