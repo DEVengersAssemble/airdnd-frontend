@@ -21,23 +21,17 @@ const MessageSection = ({ msgSectionStates }) => {
 
 const MessageSectionWrapper = styled.section`
   background-color: ${({ theme }) => theme.color.white};
-  @media ${({ theme }) => theme.size.large} {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    flex-grow: 1;
-    min-width: 37.5rem;
-
-    transition-property: all;
-    transition-duration: 0.4s;
-    transition-timing-function: linear;
-
-    ${({ msgDetailSectionState }) =>
-      !msgDetailSectionState &&
-      css`
-        min-width: calc(100% - 37.5rem);
-      `}
-  }
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex-grow: 1;
+  min-width: 37.5rem;
+  
+  ${({ msgDetailSectionState }) =>
+    !msgDetailSectionState &&
+    css`
+      min-width: calc(100% - 37.5rem);
+    `}
 
   @media ${({ theme }) => theme.size.medium} {
     min-width: calc(100% - 37.5rem);
