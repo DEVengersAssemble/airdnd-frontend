@@ -8,6 +8,7 @@ const Carousel = ({
   theme,
   responsive,
   homeWidth,
+  isHovered,
   marker,
   direction,
   isSliding,
@@ -28,11 +29,13 @@ const Carousel = ({
           <StPrevBtn
             styleType="transparent"
             onClick={onSlidePrev}
+            isHovered={isHovered}
             theme={theme}
           />
           <StNextBtn
             styleType="transparent"
             onClick={onSlideNext}
+            isHovered={isHovered}
             theme={theme}
           />
         </>
@@ -208,6 +211,8 @@ const StPrevBtn = styled(PrevButton)`
   top: calc(50% - 16px);
   left: 1rem;
   z-index: 5;
+  opacity: ${({ isHovered }) => (isHovered ? 1 : 0)};
+  transition: 0.3s;
 `;
 
 const StNextBtn = styled(NextButton)`
@@ -215,6 +220,8 @@ const StNextBtn = styled(NextButton)`
   top: calc(50% - 16px);
   right: 1rem;
   z-index: 5;
+  opacity: ${({ isHovered }) => (isHovered ? 1 : 0)};
+  transition: 0.3s;
 `;
 
 export default Carousel;

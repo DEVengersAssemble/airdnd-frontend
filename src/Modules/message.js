@@ -189,7 +189,7 @@ const message = (state = initialState, action) => {
     case ALL_MESSAGE_LIST:
       return {
         ...state,
-        filteredMsg: state.message.filter(msg => msg.state === 'all'),
+        filteredMsg: state.messages.filter(msg => msg.state === 'all'),
       };
     case HIDE_MESSAGE_LIST:
       return {

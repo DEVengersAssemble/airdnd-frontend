@@ -30,10 +30,16 @@ export const HomeCaption = ({
   );
 };
 
-const HomeCard = ({ home, type, onClickBookmark, onHoverHome, dateDiff }) => {
+const HomeCard = ({
+  home,
+  type,
+  onClickBookmark,
+  onHoverHome,
+  onBlurHome,
+  dateDiff,
+}) => {
   const homeRef = useRef();
   const getWidth = () => homeRef.current && homeRef.current.offsetWidth;
-
   const {
     homeId,
     isSuperhost,
@@ -52,10 +58,12 @@ const HomeCard = ({ home, type, onClickBookmark, onHoverHome, dateDiff }) => {
       ref={homeRef}
       type={type}
       onMouseOver={() => onHoverHome(homeId)}
+      onMouseLeave={onBlurHome}
     >
       <CarouselContainer
         responsive
         getWidth={getWidth}
+        homeId={homeId}
         isSuperhost={isSuperhost}
         imageArray={imageArray}
         imageCount={imageCount}
