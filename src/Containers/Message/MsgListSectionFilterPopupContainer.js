@@ -24,18 +24,18 @@ const MsgListSectionFilterPopupContainer = ({
   // event
   // !Error: dispatch가 안됨............ㅅㅂ
   // !개잘됌^^
-  const onClickAll = () => {
+  const onClickAll = useCallback(() => {
     dispatch(allMsgList());
     setOpenPopup(false);
-  };
-  const onClickHide = () => {
+  }, [dispatch, setOpenPopup]);
+  const onClickHide = useCallback(() => {
     dispatch(hideMsgList());
     setOpenPopup(false);
-  };
-  const onClickUnread = () => {
+  }, [dispatch, setOpenPopup]);
+  const onClickUnread = useCallback(() => {
     dispatch(unreadMsgList());
     setOpenPopup(false);
-  };
+  }, [dispatch, setOpenPopup]);
 
   return (
     <MsgListSectionFilterPopup
