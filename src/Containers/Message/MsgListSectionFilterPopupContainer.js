@@ -25,16 +25,18 @@ const MsgListSectionFilterPopupContainer = ({
   // ! popup을 끈다
   const onClickFilterList = useCallback(
     ({ target }) => {
-      console.dir(target.childNodes[0]);
-      if (target.childNodes[0]) {
+      // console.dir(target.childNodes[0]);
+      console.dir(target);
+      console.dir(popupRef.current.children[0].children);
+      if (target === popupRef.current.children[0].children[0]) {
         dispatch(allMsgList());
         setOpenPopup(false);
       }
-      if (target.childNodes[1]) {
+      if (target === popupRef.current.children[0].children[1]) {
         dispatch(hideMsgList());
         setOpenPopup(false);
       }
-      if (target.childNodes[2]) {
+      if (target === popupRef.current.children[0].children[3]) {
         dispatch(unreadMsgList());
         setOpenPopup(false);
       }
