@@ -1,14 +1,14 @@
 import React from 'react';
 import styled, { css, keyframes } from 'styled-components';
-import Logo from './Logo';
-import Navigation from './Navigation';
+import Logo from '../Main/Logo';
+import Navigation from '../Main/Navigation';
 import SearchFormContainer from '../../Containers/Main/SearchFormContainer';
 import SettingButtonContainer from '../../Containers/Main/SettingButtonContainer';
 import MyPageButtonContainer from '../../Containers/Main/MyPageButtonContainer';
 import Button from '../Global/Button';
 import { FiSearch } from 'react-icons/fi';
 
-const StMainHeader = styled.header`
+const StSearchHeader = styled.header`
   box-sizing: border-box;
   z-index: 100;
   position: fixed;
@@ -18,19 +18,11 @@ const StMainHeader = styled.header`
   margin: 0;
   height: ${({ isSearchBtnClicked }) =>
     isSearchBtnClicked ? '180px' : '80px'};
-  background: ${({ isScrollTop }) =>
-    isScrollTop
-      ? 'transparent'
-      : css`
-          ${({ theme }) => theme.color.white}
-        `};
-  border: ${({ isScrollTop }) =>
-    !isScrollTop && css`1px solid ${({ theme }) => theme.color.line}`};
-  box-shadow: ${({ isScrollTop }) =>
-    !isScrollTop && css`0px 2px 4px rgba(0,0,0,0.3)`};
-  padding: 20px 80px 15px 80px;
+  background: ${({ theme }) => theme.color.white};
+  border-bottom: 1px solid ${({ theme }) => theme.color.line};
+  padding: 20px 25px 15px 10px;
   @media ${({ theme }) => theme.size.iPad} {
-    padding: 20px 40px 15px 40px;
+    padding: 20px 25px 15px 10px;
     height: ${({ isSearchBtnClicked }) =>
       isSearchBtnClicked ? '250px' : '80px'};
   }
@@ -69,8 +61,8 @@ const StNavSearchWrapper = styled.div`
   animation-duration: 0.2s;
   animation-timing-function: ease-out;
   animation-fill-mode: forwards;
-  animation-name: ${({ isScrollTop, isSearchBtnClicked }) =>
-    isScrollTop || isSearchBtnClicked ? slideDown : slideUp};
+  animation-name: ${({ isSearchBtnClicked }) =>
+    isSearchBtnClicked ? slideDown : slideUp};
 
   @media (max-width: 950px) {
     width: 90%;
@@ -91,8 +83,8 @@ const StButtonGroupWrapper = styled.div`
 `;
 
 const StOnScrollSearchButton = styled(Button)`
-  ${({ isScrollTop, isSearchBtnClicked }) =>
-    (isScrollTop || isSearchBtnClicked) &&
+  ${({ isSearchBtnClicked }) =>
+    isSearchBtnClicked &&
     css`
       display: none;
     `}
@@ -119,51 +111,69 @@ const StOnScrollSearchButtonIconWrapper = styled.div`
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  margin-left: 160px;
+  margin-left: 20px;
 `;
 
-const MainHeader = ({
-  isScrollTop,
-  handleLogoClick,
+const StSearchFormResultWrapper = styled.div`
+  display: flex;
+  font-size: 13px;
+  padding: 5px 20px;
+  border-right: ${({ guestCount, theme }) =>
+    !guestCount && `1px solid ${theme.color.line}`};
+  font-weight: ${({ dataExists }) => (dataExists ? 600 : 400)};
+  color: ${({ dataExists, theme }) =>
+    dataExists ? theme.color.black : theme.color.darkGray};
+`;
+
+const SearchHeader = ({
   isSearchBtnClicked,
+  handleLogoClick,
   handleSearchBtnClick,
+  searchForm,
 }) => {
+  const { location, checkIn, checkOut, guests } = searchForm;
+  const [, checkInMonth, checkInDay] = checkIn.replace(/\b0/g, '').split('/');
+  const [, checkOutMonth, checkOutDay] = checkOut
+    .replace(/\b0/g, '')
+    .split('/');
+  const { adult, child } = guests;
+  const guestCount = adult + child;
   return (
-    <StMainHeader
-      isScrollTop={isScrollTop}
-      isSearchBtnClicked={isSearchBtnClicked}
-    >
-      <Logo isScrollTop={isScrollTop} handleLogoClick={handleLogoClick}></Logo>
-      <StNavSearchWrapper
-        isScrollTop={isScrollTop}
-        isSearchBtnClicked={isSearchBtnClicked}
-      >
-        <Navigation
-          isScrollTop={isScrollTop}
-          isSearchBtnClicked={isSearchBtnClicked}
-        ></Navigation>
+    <StSearchHeader isSearchBtnClicked={isSearchBtnClicked}>
+      <Logo handleLogoClick={handleLogoClick}></Logo>
+      <StNavSearchWrapper isSearchBtnClicked={isSearchBtnClicked}>
+        <Navigation isSearchBtnClicked={isSearchBtnClicked}></Navigation>
         <SearchFormContainer isSearchBtnClicked={isSearchBtnClicked} />
       </StNavSearchWrapper>
 
       <StOnScrollSearchButton
         btnType="oval"
         fontSize="14px"
-        isScrollTop={isScrollTop}
         isSearchBtnClicked={isSearchBtnClicked}
         onClick={handleSearchBtnClick}
       >
-        검색 시작하기
+        <StSearchFormResultWrapper dataExists={location}>
+          {location || '장소 추가'}
+        </StSearchFormResultWrapper>
+        <StSearchFormResultWrapper dataExists={checkIn}>
+          {checkInMonth
+            ? `${checkInMonth}월 ${checkInDay}일 - ${checkOutMonth}월 ${checkOutDay}일`
+            : '날짜 추가'}
+        </StSearchFormResultWrapper>
+        <StSearchFormResultWrapper guestCount dataExists={guestCount}>
+          {guestCount ? `${guestCount}명` : '게스트 추가'}
+        </StSearchFormResultWrapper>
         <StOnScrollSearchButtonIconWrapper>
           <FiSearch />
         </StOnScrollSearchButtonIconWrapper>
       </StOnScrollSearchButton>
 
       <StButtonGroupWrapper>
-        <SettingButtonContainer isScrollTop={isScrollTop} />
-        <MyPageButtonContainer isScrollTop={isScrollTop} />
+        <SettingButtonContainer />
+        <MyPageButtonContainer />
       </StButtonGroupWrapper>
-    </StMainHeader>
+    </StSearchHeader>
   );
 };
 
-export default MainHeader;
+export default SearchHeader;

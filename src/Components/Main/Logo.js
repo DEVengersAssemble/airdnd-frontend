@@ -28,6 +28,9 @@ const StLogoLink = styled.a`
 `;
 
 const StLogoTitle = styled.h1`
+  @media ${({ theme }) => theme.size.iPad} {
+    display: none;
+  }
   ${({ isScrollTop }) =>
     isScrollTop
       ? css`
@@ -48,7 +51,7 @@ const Logo = ({ isScrollTop, handleLogoClick }) => {
       onClick={e => handleLogoClick(e)}
     >
       <FaAirbnb />
-      <StLogoTitle isScrollTop={isScrollTop}>Airdnd</StLogoTitle>
+      <StLogoTitle isScrollTop={isScrollTop}>airdnd</StLogoTitle>
     </StLogoLink>
   );
 };
