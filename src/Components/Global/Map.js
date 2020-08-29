@@ -1,16 +1,8 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
-import { compose, withProps } from 'recompose';
-import {
-  withScriptjs,
-  withGoogleMap,
-  GoogleMap,
-  OverlayView,
-} from 'react-google-maps';
-import { AiFillHome } from 'react-icons/ai';
+import { compose, withProps, withState, withHandlers } from 'recompose';
+import { withScriptjs, withGoogleMap, GoogleMap } from 'react-google-maps';
 import theme from '../../style/theme';
 import MapMarkerContainer from '../../Containers/Search/MapMarkerContainer';
-import Button from './Button';
 
 const Map = compose(
   withProps({
@@ -47,58 +39,58 @@ const Map = compose(
       />
     ),
   }),
+  withState('zoom', 'onZoomChange', 13),
+  withHandlers(() => {
+    const refs = {
+      map: undefined,
+    };
+
+    return {
+      setRef: () => ref => {
+        refs.map = ref;
+      },
+      setZoom: ({ onZoomChange }) => () => {
+        onZoomChange(refs.map.getZoom());
+      },
+      getRef: () => e => console.log(e),
+    };
+  }),
   withScriptjs,
   withGoogleMap,
-)(({ center, mapZoom, markers }) => {
-  return (
-    <GoogleMap
-      zoom={mapZoom}
-      defaultZoom={13}
-      defaultCenter={{
-        lat: center.lat,
-        lng: center.lng,
-      }}
-      options={{ disableDefaultUI: true }}
-    >
-      {markers &&
-        markers.map((marker, i) => (
-          <MapMarkerContainer key={i} marker={marker} theme={theme} />
-        ))}
-      <OverlayView
-        position={{ lat: 37.64993, lng: 127.077999 }}
-        mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+)(
+  ({
+    center,
+    markers,
+    mapZoom,
+    setZoom,
+    updateZoom,
+    getRef,
+    setRef,
+    onCloseMarker,
+  }) => {
+    console.log(setRef());
+    return (
+      <GoogleMap
+        ref={setRef}
+        zoom={mapZoom}
+        defaultZoom={13}
+        defaultCenter={{
+          lat: center.lat,
+          lng: center.lng,
+        }}
+        options={{ disableDefaultUI: true }}
+        onZoomChanged={() => {
+          setZoom();
+          // updateZoom();
+        }}
       >
-        <HomeMarker theme={theme} btnType="circle">
-          <AiFillHome />
-        </HomeMarker>
-      </OverlayView>
-    </GoogleMap>
-  );
-});
-
-const buttonStyle = css`
-  border: none;
-  box-shadow: 0 0 2px ${theme.color.gray};
-  transition: 0.3s;
-  &:hover {
-    border: none;
-    transform: scale(1.1);
-    transition: 0.3s;
-  }
-  &:focus {
-    background: black;
-    color: white;
-  }
-`;
-
-const HomeMarker = styled(Button)`
-  ${buttonStyle};
-`;
-
-const PriceMarker = styled(Button)`
-  ${buttonStyle};
-  font-size: 1.4rem;
-  padding: 0.6rem 0.8rem;
-`;
+        {markers &&
+          markers.map((marker, i) => (
+            <MapMarkerContainer key={i} marker={marker} theme={theme} />
+          ))}
+      </GoogleMap>
+    );
+  },
+);
 
 export default Map;

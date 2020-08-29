@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 import { Marker, OverlayView } from 'react-google-maps';
 import { InfoBox } from 'react-google-maps/lib/components/addons/InfoBox';
@@ -8,22 +8,21 @@ import HomePopup from './HomePopup';
 import { Heart } from '../Global/Heart';
 
 const getPixelPositionOffset = (width, height) => ({
-  x: -(width / 2),
-  y: -(height / 2),
+  x: width + width / 2,
+  y: -(height * 2),
 });
 
 const MapMarker = ({
   theme,
+  isOpen,
   marker,
-  markerRef,
+  markerState,
   dateDiff,
-  infoState,
-  setInfoState,
+  clickMarker,
 }) => {
-  const { location, price, isBookmarked } = marker;
+  const { homeId, location, price, isBookmarked } = marker;
   return (
     <Marker
-      ref={markerRef}
       position={location}
       icon={{
         scale: 0,
@@ -37,40 +36,43 @@ const MapMarker = ({
       >
         {dateDiff ? (
           <PriceMarker
-            onClick={() => {
-              setInfoState(true);
-              console.log(markerRef);
-            }}
-            theme={theme}
             btnType="oval"
+            isOpen={isOpen}
+            theme={theme}
+            onClick={clickMarker}
           >
-            ₩ <Strong> {price.toLocaleString()} </Strong>
+            <span>
+              ₩<Strong> {price.toLocaleString()} </Strong>
+            </span>
             {isBookmarked && (
-              <Heart size="smaller" bgColor="main" theme={theme} />
+              <Heart
+                size="smaller"
+                bgColor={markerState === homeId ? 'white' : 'main'}
+                stroke={markerState === homeId ? 'black' : 'white'}
+                theme={theme}
+              />
             )}
           </PriceMarker>
         ) : (
           <HomeMarker
-            theme={theme}
             btnType="circle"
-            onClick={() => {
-              setInfoState(!infoState);
-              console.log(markerRef.current);
-            }}
+            isOpen={isOpen}
+            theme={theme}
+            onClick={clickMarker}
           >
             <AiFillHome />
             {isBookmarked && (
               <MiniHeart
-                size="small"
-                bgColor="main"
-                stroke="white"
+                size="smaller"
+                bgColor={markerState === homeId ? 'white' : 'main'}
+                stroke={markerState === homeId ? 'black' : 'white'}
                 theme={theme}
               />
             )}
           </HomeMarker>
         )}
       </OverlayView>
-      {infoState && (
+      {isOpen && (
         <InfoBox options={{ closeBoxURL: '', enableEventPropagatioin: true }}>
           <HomePopup home={marker} dateDiff={dateDiff} theme={theme} />
         </InfoBox>
@@ -89,20 +91,31 @@ const buttonStyle = css`
     transition: 0.3s;
     z-index: 20;
   }
-  &:focus {
-    background: black;
-    color: white;
-  }
+`;
+
+const focusStyle = css`
+  ${({ isOpen, theme }) =>
+    isOpen
+      ? css`
+          background: ${theme.color.black};
+          color: ${theme.color.white};
+        `
+      : css`
+          background: ${theme.color.white};
+          color: ${theme.color.black};
+        `}
 `;
 
 const HomeMarker = styled(Button)`
   ${buttonStyle};
+  ${focusStyle};
   overflow: visible;
   position: relative;
 `;
 
 const PriceMarker = styled(Button)`
   ${buttonStyle};
+  ${focusStyle};
   font-size: 1.4rem;
   padding: 0.6rem 0.8rem;
 `;
@@ -113,8 +126,8 @@ const Strong = styled.strong`
 
 const MiniHeart = styled(Heart)`
   position: absolute;
-  top: -0.5rem;
-  right: -0.5rem;
+  top: -0.3rem;
+  right: -0.3rem;
 `;
 
 export default MapMarker;
