@@ -17,6 +17,7 @@ const HomeListContainer = ({ mapState }) => {
 
   const onHoverHome = homeId => {
     if (hoveredHome === homeId) return;
+    console.log(hoveredHome, homeId);
     dispatch(hoverHome(homeId));
   };
 
