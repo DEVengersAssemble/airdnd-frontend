@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { darken } from 'polished';
 import theme from '../../style/theme';
 import Button from '../Global/Button';
+import Tooltip from '../Global/Tooltip';
 import { FaBox } from 'react-icons/fa';
 import { MdKeyboardArrowLeft } from 'react-icons/md';
 
@@ -41,14 +42,14 @@ const MsgSectionHeader = ({
         호스트닉네임
       </MsgSectionHeaderTitle>
       <MsgSectionHeaderButtonWrapper>
-        <Button
+        <StStroageButton
           btnType="circle"
           border="none"
           hover={{ backgroundColor: theme.color.lightGray }}
-          style={{ width: '4rem', height: '4rem' }}
         >
           <StMsgSectionHeaderStorageIcon />
-        </Button>
+          <Tooltip />
+        </StStroageButton>
         {msgDetailSectionState ? (
           <Button
             btnType="oval"
@@ -103,6 +104,14 @@ const MsgSectionHeaderButtonWrapper = styled.div`
   align-items: center;
   & > Button + Button {
     margin-left: 1rem;
+  }
+`;
+
+const StStroageButton = styled(Button)`
+  width: 4rem;
+  height: 4rem;
+  &:hover > div {
+    display: flex;
   }
 `;
 
