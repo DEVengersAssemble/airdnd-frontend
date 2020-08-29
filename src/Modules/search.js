@@ -1,7 +1,10 @@
+const HOVER_HOME = 'search/HOVER_HOME';
+
 const SHOW_MAP = 'search/SHOW_MAP';
 const HIDE_MAP = 'search/HIDE_MAP';
 const ZOOM_IN = 'search/ZOOM_IN';
 const ZOOM_OUT = 'search/ZOOM_OUT';
+const ZOOM_SET = 'search/ZOOM_SET';
 const OPEN_MARKER = 'search/OPEN_MARKER';
 const CLOSE_MARKER = 'search/CLOSE_MARKER';
 
@@ -18,10 +21,13 @@ const APPLY_CHECK_FILTER = 'search/APPLY_CHECK_FILTER';
 const SET_MODAL_FILTER = 'search/SET_MODAL_FILTER';
 const RESET_MODAL_FILTER = 'search/RESET_MODAL/FILTER';
 
+export const hoverHome = homeId => ({ type: HOVER_HOME, homeId });
+
 export const showMap = () => ({ type: SHOW_MAP });
 export const hideMap = () => ({ type: HIDE_MAP });
 export const zoomIn = () => ({ type: ZOOM_IN });
 export const zoomOut = () => ({ type: ZOOM_OUT });
+export const zoomSet = zoom => ({ type: ZOOM_SET, zoom });
 export const openMarker = id => ({ type: OPEN_MARKER, id });
 export const closeMarker = () => ({ type: CLOSE_MARKER });
 
@@ -380,6 +386,7 @@ const initialState = {
   mapState: true,
   mapZoom: 15,
   markerState: null,
+  hoveredHome: null,
   popup: popupInit,
   // map 범위 보낼때
   // mapSend: {
@@ -410,6 +417,11 @@ const search = (state = initialState, action) => {
       return {
         ...state,
         mapZoom: state.mapZoom - 1,
+      };
+    case ZOOM_SET:
+      return {
+        ...state,
+        mapZoom: action.zoom,
       };
     case OPEN_MARKER:
       return {
@@ -508,6 +520,11 @@ const search = (state = initialState, action) => {
           ...state.filterApplied,
           ...modalFilterInit(state.filterCondition),
         },
+      };
+    case HOVER_HOME:
+      return {
+        ...state,
+        hoveredHome: action.homeId,
       };
     default:
       return state;
