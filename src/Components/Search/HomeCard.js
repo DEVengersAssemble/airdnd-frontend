@@ -30,11 +30,12 @@ export const HomeCaption = ({
   );
 };
 
-const HomeCard = ({ home, type, onClickBookmark, dateDiff }) => {
+const HomeCard = ({ home, type, onClickBookmark, onHoverHome, dateDiff }) => {
   const homeRef = useRef();
   const getWidth = () => homeRef.current && homeRef.current.offsetWidth;
 
   const {
+    homeId,
     isSuperhost,
     isBookmarked,
     imageArray,
@@ -47,7 +48,11 @@ const HomeCard = ({ home, type, onClickBookmark, dateDiff }) => {
   } = home;
 
   return (
-    <StWrapper ref={homeRef} type={type}>
+    <StWrapper
+      ref={homeRef}
+      type={type}
+      onMouseOver={() => onHoverHome(homeId)}
+    >
       <CarouselContainer
         responsive
         getWidth={getWidth}
@@ -66,7 +71,7 @@ const HomeCard = ({ home, type, onClickBookmark, dateDiff }) => {
       <Heart
         ckType
         checked={isBookmarked}
-        onClick={() => onClickBookmark(isBookmarked)}
+        onClick={() => onClickBookmark(isBookmarked, homeId)}
       />
     </StWrapper>
   );
