@@ -1,22 +1,36 @@
-import React, { useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import MessageListSection from '../../Components/Message/MessageListSection';
 import { useSelector, useDispatch } from 'react-redux';
-import { hideMsgListSection } from '../../Modules/message';
+import { hideMsgListSection, showMsgListSection } from '../../Modules/message';
 
 const MessageListSectionContainer = () => {
   const msgSectionStates = useSelector(state => state.message);
   const dispatch = useDispatch();
   const myRef = useRef();
 
-  window.addEventListener('resize', () => {
-    console.log(myRef.current.style);
-    myRef.current.style.display === '' && dispatch(hideMsgListSection());
-  });
+  const [hide, setHide] = useState(false); // 디스패치를 보낼지 말지 결정하는 상태
+  const [show, setShow] = useState(false);
 
-  window.addEventListener('resize', () => {
-    console.log(myRef.current && myRef);
-  });
+  const onHide = () => {
+    return myRef.current.offsetWidth === 0 && setHide(true);
+  };
 
+  const onShow = () => {
+    myRef.current.offsetWidth === 375 && setShow(false);
+  };
+
+  window.addEventListener('resize', onShow);
+  window.addEventListener('resize', onHide);
+
+  useEffect(() => {
+    hide && dispatch(hideMsgListSection());
+  }, [hide]);
+
+  useEffect(() => {
+    show && dispatch(showMsgListSection());
+  }, [show]);
+
+  // return show && dispatch(showMsgListSection());
   return (
     <MessageListSection msgSectionStates={msgSectionStates} myRef={myRef} />
   );

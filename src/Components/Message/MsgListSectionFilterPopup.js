@@ -22,7 +22,7 @@ const MsgListFilterPopup = ({ openPopup }) => {
         <StMsgListFilterPopupButton>
           <MsgListFilterPopupButtonInner>
             <MsgListFilterPopupButtonText>
-              보관된 메시지 (1)
+              숨긴 메시지 (1)
             </MsgListFilterPopupButtonText>
           </MsgListFilterPopupButtonInner>
         </StMsgListFilterPopupButton>

@@ -7,24 +7,37 @@ import { FaBox } from 'react-icons/fa';
 import { MdKeyboardArrowLeft } from 'react-icons/md';
 
 const MsgSectionHeader = ({
+  media,
   msgListSectionState,
   msgDetailSectionState,
-  onToggleDetail,
+  onClickShowList,
+  onClickDetail,
 }) => {
   return (
-    <MsgSectionHeaderWrapper msgDetailSectionState={msgDetailSectionState}>
+    <MsgSectionHeaderWrapper>
       <MsgSectionHeaderTitle>
-        {!msgListSectionState && (
+        {media === 'medium' && !msgListSectionState && (
           <Button
             btnType="circle"
             border="none"
             hover={{ backgroundColor: theme.color.lightGray }}
             fontSize="3rem"
             style={{ width: '4rem', height: '4rem', marginRight: '3rem' }}
+            onClick={onClickShowList}
           >
             <MdKeyboardArrowLeft />
           </Button>
         )}
+        {/* <Button
+          btnType="circle"
+          border="none"
+          hover={{ backgroundColor: theme.color.lightGray }}
+          fontSize="3rem"
+          style={{ width: '4rem', height: '4rem', marginRight: '3rem' }}
+          onClick={onClickShowList}
+        >
+          <MdKeyboardArrowLeft />
+        </Button> */}
         호스트닉네임
       </MsgSectionHeaderTitle>
       <MsgSectionHeaderButtonWrapper>
@@ -46,9 +59,9 @@ const MsgSectionHeader = ({
               backgroundColor: `${theme.color.lightGray}`,
               fontWeight: '600',
             }}
-            onClick={onToggleDetail}
+            onClick={onClickDetail}
           >
-            세부사항 숨기기
+            세부 정보 숨기기
           </Button>
         ) : (
           <Button
@@ -57,9 +70,9 @@ const MsgSectionHeader = ({
             hover={{ border: `1px solid ${theme.color.black}` }}
             fontSize="1.2rem"
             style={{ fontWeight: '400' }}
-            onClick={onToggleDetail}
+            onClick={onClickDetail}
           >
-            자세히 알아보기
+            세부 정보 보기
           </Button>
         )}
       </MsgSectionHeaderButtonWrapper>

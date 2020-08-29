@@ -5,8 +5,6 @@ import MsgListSectionMain from './MsgListSectionMain';
 
 const MessageListSection = ({ myRef, msgSectionStates }) => {
   const { msgListSectionState, msgDetailSectionState } = msgSectionStates;
-  console.log('msgListSectionState', msgListSectionState);
-  console.log('msgDetailSectionState', msgDetailSectionState);
 
   return (
     <MessageListSectionWrapper
@@ -25,13 +23,13 @@ const MessageListSectionWrapper = styled.section`
   flex-direction: column;
   min-width: 37.5rem;
 
-  ${({ msgListSectionState }) =>
+  /* ${({ msgListSectionState }) =>
     msgListSectionState &&
     css`
       min-width: 37.5rem;
-    `}
+    `} */
 
-  @media ${({ theme }) => theme.size.medium} {
+  /* @media ${({ theme }) => theme.size.medium} {
     display: none;
 
     ${({ msgDetailSectionState }) =>
@@ -39,7 +37,7 @@ const MessageListSectionWrapper = styled.section`
       css`
         display: flex;
       `}
-  }
+  } */
 `;
 
 export default MessageListSection;
