@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import MsgListSectionHeader from './MsgListSectionHeader';
+import MsgListSectionHeaderContainer from '../../Containers/Message/MsgListSectionHeaderContainer';
 import MsgListSectionMain from './MsgListSectionMain';
 
 const MessageListSection = ({ myRef, msgSectionStates }) => {
@@ -12,7 +12,7 @@ const MessageListSection = ({ myRef, msgSectionStates }) => {
       msgListSectionState={msgListSectionState}
       msgDetailSectionState={msgDetailSectionState}
     >
-      <MsgListSectionHeader />
+      <MsgListSectionHeaderContainer />
       <MsgListSectionMain />
     </MessageListSectionWrapper>
   );

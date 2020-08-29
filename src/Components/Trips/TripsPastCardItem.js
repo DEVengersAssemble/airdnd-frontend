@@ -15,7 +15,7 @@ const TripsPastCardItem = ({ trip, myInfo, ci, co }) => {
     <TripsPastCardItemWrapper>
       <Link to="/schedule">
         <TripsPastImgWrapper>
-          <TripsPastImg />
+          <TripsPastImg homeImage={homeImage} />
           {withGuest && (
             <TripsProfileWrapper>
               <Profile
@@ -104,8 +104,7 @@ const TripsPastImgWrapper = styled.div`
 const TripsPastImg = styled.div`
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  background: no-repeat center/100%
-    url('https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large');
+  background: no-repeat center/100% url(${({ homeImage }) => homeImage[0]});
   height: 20rem;
 `;
 

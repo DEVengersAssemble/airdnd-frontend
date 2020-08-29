@@ -3,35 +3,36 @@ import styled from 'styled-components';
 import Popup from '../Global/Popup';
 import Button from '../Global/Button';
 
-const MsgListFilterPopup = ({ openPopup }) => {
+const MsgListFilterPopup = ({
+  openPopup,
+  popupRef,
+  onClickFilterList,
+  allMsg,
+  hideMsg,
+  unreadMsg,
+}) => {
   return (
-    <MsgListFilterPopupWrapper>
+    <MsgListFilterPopupWrapper ref={popupRef}>
       <StMsgListFilterPopup
         popupState={openPopup}
         top="3.5rem"
         left="12rem"
         padding="1rem 0rem"
       >
-        <StMsgListFilterPopupButton>
-          <MsgListFilterPopupButtonInner>
-            <MsgListFilterPopupButtonText>
-              모든 메시지 (1)
-            </MsgListFilterPopupButtonText>
-          </MsgListFilterPopupButtonInner>
+        <StMsgListFilterPopupButton onClick={onClickFilterList}>
+          <MsgListFilterPopupButtonText>
+            모든 메시지 ({allMsg})
+          </MsgListFilterPopupButtonText>
         </StMsgListFilterPopupButton>
-        <StMsgListFilterPopupButton>
-          <MsgListFilterPopupButtonInner>
-            <MsgListFilterPopupButtonText>
-              숨긴 메시지 (1)
-            </MsgListFilterPopupButtonText>
-          </MsgListFilterPopupButtonInner>
+        <StMsgListFilterPopupButton onClick={onClickFilterList}>
+          <MsgListFilterPopupButtonText>
+            숨긴 메시지 ({hideMsg})
+          </MsgListFilterPopupButtonText>
         </StMsgListFilterPopupButton>
-        <StMsgListFilterPopupButton>
-          <MsgListFilterPopupButtonInner>
-            <MsgListFilterPopupButtonText>
-              읽지 않은 메시지 (1)
-            </MsgListFilterPopupButtonText>
-          </MsgListFilterPopupButtonInner>
+        <StMsgListFilterPopupButton onClick={onClickFilterList}>
+          <MsgListFilterPopupButtonText>
+            읽지 않은 메시지 ({unreadMsg})
+          </MsgListFilterPopupButtonText>
         </StMsgListFilterPopupButton>
       </StMsgListFilterPopup>
     </MsgListFilterPopupWrapper>
@@ -55,14 +56,11 @@ const StMsgListFilterPopupButton = styled(Button)`
   padding: 0rem;
 `;
 
-const MsgListFilterPopupButtonInner = styled.div`
+const MsgListFilterPopupButtonText = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 1.3rem 0rem;
   width: calc(100% - 4rem);
-`;
-
-const MsgListFilterPopupButtonText = styled.div`
   font-size: 1.5rem;
   font-weight: light;
 `;

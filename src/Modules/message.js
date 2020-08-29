@@ -5,10 +5,14 @@ const HIDE_MESSAGE_DETAIL_SECTION = 'message/HIDE_MESSAGE_DETAIL_SECTION';
 const SHOW_MESSAGE_LIST_SECTION = 'message/SHOW_MESSAGE_LIST_SECTION';
 const HIDE_MESSAGE_LIST_SECTION = 'message/HIDE_MESSAGE_LIST_SECTION';
 const CHANGE_MEDIA_SIZE = 'message/CHANGE_MEDIA_SIZE';
-// message filter
+// message archive
 const ARCHAIVE_MESSAGE = 'message/ARCHAIVE_MESSAGE';
 const UNARCHAIVE_MESSAGE = 'message/UNARCHAIVE_MESSAGE';
 const UNDO = 'message/UNDO';
+// message list
+const ALL_MESSAGE_LIST = 'message/ALL_MESSAGE_LIST';
+const HIDE_MESSAGE_LIST = 'message/HIDE_MESSAGE_LIST';
+const UNREAD_MESSAGE_LIST = 'message/UNREAD_MESSAGE_LIST';
 // message
 const MESSAGE_HOST_FLAG = 'message/MESSAGE_HOST_FLAG';
 
@@ -30,11 +34,14 @@ export const changeMediaSize = media => ({
   type: CHANGE_MEDIA_SIZE,
   media,
 });
-// message filter
+// message archive
 export const archiveMsg = () => ({ type: ARCHAIVE_MESSAGE });
 export const unarchiveMsg = () => ({ type: UNARCHAIVE_MESSAGE });
 export const undo = () => ({ type: UNDO });
-
+// message list
+export const allMsgList = () => ({ type: ALL_MESSAGE_LIST });
+export const hideMsgList = () => ({ type: HIDE_MESSAGE_LIST });
+export const unreadMsgList = () => ({ type: UNREAD_MESSAGE_LIST });
 // message
 export const isHost = isHost => ({
   type: MESSAGE_HOST_FLAG,
@@ -47,7 +54,7 @@ const initialState = {
   msgListSectionState: true, // default
   media: 'large', // large, medium, ipad
 
-  message: [
+  messages: [
     // messageState.length = total message(10)
     // unread이면 hide일 수 없음
     {
@@ -131,6 +138,11 @@ const initialState = {
       hostname: 'John',
     },
   ],
+  // popup filter를 통해 걸러진 message들
+  filteredMsg: [],
+  // allMsgCount: 0,
+  // hideMsgCount: 0,
+  // unreadMsgCount: 0,
   isHost: false,
 };
 
@@ -162,16 +174,31 @@ const message = (state = initialState, action) => {
         ...state,
         media: action.media,
       };
-    // case HIDE_MESSAGE:
-    //   return {
-    //     ...state,
-    //     // message: state.message.filter(msg => msg.id === action.id ? )
-    //   };
-    // case UNREAD_MESSAGE:
-    //   return {
-    //     ...state,
-    //     // message:
-    //   };
+    case ARCHAIVE_MESSAGE:
+      return {
+        ...state,
+      };
+    case UNARCHAIVE_MESSAGE:
+      return {
+        ...state,
+      };
+    case UNDO:
+      return {
+        ...state,
+      };
+    case ALL_MESSAGE_LIST:
+      return {
+        ...state,
+        filteredMsg: state.message.filter(msg => msg.state === 'all'),
+      };
+    case HIDE_MESSAGE_LIST:
+      return {
+        ...state,
+      };
+    case UNREAD_MESSAGE_LIST:
+      return {
+        ...state,
+      };
     case MESSAGE_HOST_FLAG:
       return {
         ...state,
