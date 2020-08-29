@@ -13,6 +13,7 @@ const MsgSectionHeader = ({
   msgDetailSectionState,
   onClickShowList,
   onClickDetail,
+  onClickArchive,
 }) => {
   return (
     <MsgSectionHeaderWrapper>
@@ -46,6 +47,7 @@ const MsgSectionHeader = ({
           btnType="circle"
           border="none"
           hover={{ backgroundColor: theme.color.lightGray }}
+          onClick={onClickArchive}
         >
           <StMsgSectionHeaderStorageIcon />
           <Tooltip />

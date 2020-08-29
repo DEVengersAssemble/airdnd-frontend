@@ -12,6 +12,7 @@ const MsgSectionHeaderContainer = ({ msgSectionStates }) => {
   // redux
   const media = useSelector(state => state.message.media);
   const { msgListSectionState, msgDetailSectionState } = msgSectionStates;
+  const messages = useSelector(state => state.message.message);
   const dispatch = useDispatch();
 
   // event
@@ -41,6 +42,13 @@ const MsgSectionHeaderContainer = ({ msgSectionStates }) => {
       return dispatch(hideMsgListSection());
   }, [dispatch, msgDetailSectionState]);
 
+  // message:id의 state: all -> hide
+  // message:id의 state: hide -> all
+  const onClickArchive = useCallback(() => {
+    console.log('메시지 숨기기! 또는 메시지 취소!');
+    console.log(messages);
+  }, [dispatch]);
+
   return (
     <MsgSectionHeader
       media={media}
@@ -48,6 +56,7 @@ const MsgSectionHeaderContainer = ({ msgSectionStates }) => {
       msgDetailSectionState={msgDetailSectionState}
       onClickDetail={onClickDetail}
       onClickShowList={onClickShowList}
+      onClickArchive={onClickArchive}
     />
   );
 };
