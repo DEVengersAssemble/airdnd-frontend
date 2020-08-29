@@ -6,7 +6,9 @@ import Button from '../Global/Button';
 const MsgListFilterPopup = ({
   openPopup,
   popupRef,
-  onClickFilterList,
+  onClickAll,
+  onClickHide,
+  onClickUnread,
   allMsg,
   hideMsg,
   unreadMsg,
@@ -19,17 +21,17 @@ const MsgListFilterPopup = ({
         left="12rem"
         padding="1rem 0rem"
       >
-        <StMsgListFilterPopupButton onClick={onClickFilterList}>
+        <StMsgListFilterPopupButton onClick={onClickAll}>
           <MsgListFilterPopupButtonText>
             모든 메시지 ({allMsg})
           </MsgListFilterPopupButtonText>
         </StMsgListFilterPopupButton>
-        <StMsgListFilterPopupButton onClick={onClickFilterList}>
+        <StMsgListFilterPopupButton onClick={onClickHide}>
           <MsgListFilterPopupButtonText>
             숨긴 메시지 ({hideMsg})
           </MsgListFilterPopupButtonText>
         </StMsgListFilterPopupButton>
-        <StMsgListFilterPopupButton onClick={onClickFilterList}>
+        <StMsgListFilterPopupButton onClick={onClickUnread}>
           <MsgListFilterPopupButtonText>
             읽지 않은 메시지 ({unreadMsg})
           </MsgListFilterPopupButtonText>

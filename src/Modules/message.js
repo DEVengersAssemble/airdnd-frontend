@@ -1,23 +1,21 @@
 // ACTION TYPE
-// view
 const SHOW_MESSAGE_DETAIL_SECTION = 'message/SHOW_MESSAGE_DETAIL_SECTION';
 const HIDE_MESSAGE_DETAIL_SECTION = 'message/HIDE_MESSAGE_DETAIL_SECTION';
 const SHOW_MESSAGE_LIST_SECTION = 'message/SHOW_MESSAGE_LIST_SECTION';
 const HIDE_MESSAGE_LIST_SECTION = 'message/HIDE_MESSAGE_LIST_SECTION';
 const CHANGE_MEDIA_SIZE = 'message/CHANGE_MEDIA_SIZE';
-// message archive
+
 const ARCHAIVE_MESSAGE = 'message/ARCHAIVE_MESSAGE';
 const UNARCHAIVE_MESSAGE = 'message/UNARCHAIVE_MESSAGE';
 const UNDO = 'message/UNDO';
-// message list
+
 const ALL_MESSAGE_LIST = 'message/ALL_MESSAGE_LIST';
 const HIDE_MESSAGE_LIST = 'message/HIDE_MESSAGE_LIST';
 const UNREAD_MESSAGE_LIST = 'message/UNREAD_MESSAGE_LIST';
-// message
+
 const MESSAGE_HOST_FLAG = 'message/MESSAGE_HOST_FLAG';
 
 // ACTION CREATOR
-// view
 export const showMsgDetailSection = () => ({
   type: SHOW_MESSAGE_DETAIL_SECTION,
 });
@@ -34,15 +32,15 @@ export const changeMediaSize = media => ({
   type: CHANGE_MEDIA_SIZE,
   media,
 });
-// message archive
+
 export const archiveMsg = () => ({ type: ARCHAIVE_MESSAGE });
 export const unarchiveMsg = () => ({ type: UNARCHAIVE_MESSAGE });
 export const undo = () => ({ type: UNDO });
-// message list
+
 export const allMsgList = () => ({ type: ALL_MESSAGE_LIST });
 export const hideMsgList = () => ({ type: HIDE_MESSAGE_LIST });
 export const unreadMsgList = () => ({ type: UNREAD_MESSAGE_LIST });
-// message
+
 export const isHost = isHost => ({
   type: MESSAGE_HOST_FLAG,
   isHost,
@@ -189,15 +187,17 @@ const message = (state = initialState, action) => {
     case ALL_MESSAGE_LIST:
       return {
         ...state,
-        filteredMsg: state.message.filter(msg => msg.state === 'all'),
+        filteredMsg: state.messages.filter(msg => msg.state === 'all'),
       };
     case HIDE_MESSAGE_LIST:
       return {
         ...state,
+        filteredMsg: state.messages.filter(msg => msg.state === 'hide'),
       };
     case UNREAD_MESSAGE_LIST:
       return {
         ...state,
+        filteredMsg: state.messages.filter(msg => !msg.readMsg),
       };
     case MESSAGE_HOST_FLAG:
       return {
