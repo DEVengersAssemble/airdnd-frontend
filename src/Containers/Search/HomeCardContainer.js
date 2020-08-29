@@ -7,6 +7,7 @@ const HomeCardContainer = ({
   dateDiff,
   onHoverHome,
 }) => {
+  console.log(onHoverHome);
   return (
     <HomeCard
       home={home}

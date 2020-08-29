@@ -36,6 +36,7 @@ const Home = ({ home, onClickBookmark, onHoverHome, dateDiff }) => {
     <StWrapper onMouseOver={() => onHoverHome(homeId)}>
       <CarouselContainer
         size="large"
+        homeId={homeId}
         imageArray={imageArray}
         imageCount={imageCount}
         isSuperhost={isSuperhost}
