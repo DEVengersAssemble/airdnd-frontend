@@ -6,6 +6,7 @@ const HomeCardContainer = ({
   onClickBookmark,
   dateDiff,
   onHoverHome,
+  onBlurHome,
 }) => {
   console.log(onHoverHome);
   return (
@@ -14,6 +15,7 @@ const HomeCardContainer = ({
       onClickBookmark={onClickBookmark}
       dateDiff={dateDiff}
       onHoverHome={onHoverHome}
+      onBlurHome={onBlurHome}
     />
   );
 };

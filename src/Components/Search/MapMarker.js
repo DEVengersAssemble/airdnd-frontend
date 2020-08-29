@@ -15,6 +15,7 @@ const getPixelPositionOffset = (width, height) => ({
 const MapMarker = ({
   theme,
   isOpen,
+  isHovered,
   marker,
   markerState,
   dateDiff,
@@ -38,6 +39,7 @@ const MapMarker = ({
           <PriceMarker
             btnType="oval"
             isOpen={isOpen}
+            isHovered={isHovered}
             theme={theme}
             onClick={clickMarker}
           >
@@ -47,8 +49,8 @@ const MapMarker = ({
             {isBookmarked && (
               <Heart
                 size="smaller"
-                bgColor={markerState === homeId ? 'white' : 'main'}
-                stroke={markerState === homeId ? 'black' : 'white'}
+                bgColor={isOpen || isHovered ? 'white' : 'main'}
+                stroke={isOpen || isHovered ? 'black' : 'white'}
                 theme={theme}
               />
             )}
@@ -57,6 +59,7 @@ const MapMarker = ({
           <HomeMarker
             btnType="circle"
             isOpen={isOpen}
+            isHovered={isHovered}
             theme={theme}
             onClick={clickMarker}
           >
@@ -64,8 +67,8 @@ const MapMarker = ({
             {isBookmarked && (
               <MiniHeart
                 size="smaller"
-                bgColor={markerState === homeId ? 'white' : 'main'}
-                stroke={markerState === homeId ? 'black' : 'white'}
+                bgColor={isOpen || isHovered ? 'white' : 'main'}
+                stroke={isOpen || isHovered ? 'black' : 'white'}
                 theme={theme}
               />
             )}
@@ -87,18 +90,22 @@ const buttonStyle = css`
   transition: 0.3s;
   &:hover {
     border: none;
-    transform: scale(1.1);
     transition: 0.3s;
+    transform: scale(1.1);
     z-index: 20;
   }
 `;
 
 const focusStyle = css`
-  ${({ isOpen, theme }) =>
-    isOpen
+  ${({ isOpen, isHovered, theme }) =>
+    isOpen || isHovered
       ? css`
           background: ${theme.color.black};
           color: ${theme.color.white};
+          transition: 0.3s;
+          transition-delay: 0.3s;
+          transform: scale(1.1);
+          z-index: 20;
         `
       : css`
           background: ${theme.color.white};

@@ -8,18 +8,16 @@ import {
 import HomeContainer from './HomeContainer';
 import HomeCardContainer from './HomeCardContainer';
 import { removeBookmark } from '../../Modules/wishlists';
-import { hoverHome } from '../../Modules/search';
+import { hoverHome, blurHome } from '../../Modules/search';
 
 const HomeListContainer = ({ mapState }) => {
   const { homes, hoveredHome } = useSelector(state => state.search);
   const { dateDiff } = useSelector(state => state.searchForm);
   const dispatch = useDispatch();
 
-  const onHoverHome = homeId => {
-    if (hoveredHome === homeId) return;
-    console.log(hoveredHome, homeId);
-    dispatch(hoverHome(homeId));
-  };
+  const onHoverHome = homeId =>
+    hoveredHome !== homeId && dispatch(hoverHome(homeId));
+  const onBlurHome = () => dispatch(blurHome());
 
   const onRemoveBookmark = homeId => dispatch(removeBookmark(homeId));
 
@@ -58,6 +56,7 @@ const HomeListContainer = ({ mapState }) => {
               dateDiff={dateDiff}
               onClickBookmark={onClickBookmark}
               onHoverHome={onHoverHome}
+              onBlurHome={onBlurHome}
             />
           ) : (
             <HomeCardContainer
@@ -66,6 +65,7 @@ const HomeListContainer = ({ mapState }) => {
               dateDiff={dateDiff}
               onClickBookmark={onClickBookmark}
               onHoverHome={onHoverHome}
+              onBlurHome={onBlurHome}
             />
           );
         })}
