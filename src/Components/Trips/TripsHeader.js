@@ -3,8 +3,6 @@ import styled from 'styled-components';
 import Logo from '../Main/Logo';
 import SettingButtonContainer from '../../Containers/Main/SettingButtonContainer';
 import MyPageButtonContainer from '../../Containers/Main/MyPageButtonContainer';
-import { darken } from 'polished';
-import { Airbnb } from '@styled-icons/boxicons-logos/Airbnb';
 
 const StTripsHeader = styled.header`
   box-sizing: border-box;
@@ -14,8 +12,7 @@ const StTripsHeader = styled.header`
   width: 100%;
   justify-content: space-between;
   margin: 0;
-  height: ${({ isSearchBtnClicked }) =>
-    isSearchBtnClicked ? '180px' : '80px'};
+  height: 80px;
   background: ${({ theme }) => theme.color.white};
   border-bottom: 1px solid ${({ theme }) => theme.color.line};
   padding: 20px 120px 15px 110px;

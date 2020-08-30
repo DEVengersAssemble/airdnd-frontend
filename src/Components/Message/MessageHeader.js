@@ -1,33 +1,38 @@
 import React from 'react';
 import styled from 'styled-components';
-import { darken } from 'polished';
-import { Airbnb } from '@styled-icons/boxicons-logos/Airbnb';
+import Logo from '../Main/Logo';
+import SettingButtonContainer from '../../Containers/Main/SettingButtonContainer';
+import MyPageButtonContainer from '../../Containers/Main/MyPageButtonContainer';
 
-const MessageHeader = () => {
+const StMessageHeader = styled.header`
+  box-sizing: border-box;
+  z-index: 100;
+  position: fixed;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin: 0;
+  height: 80px;
+  background: ${({ theme }) => theme.color.white};
+  border-bottom: 1px solid ${({ theme }) => theme.color.line};
+  padding: 20px 20px 15px 10px;
+`;
+
+const StButtonGroupWrapper = styled.div`
+  height: 40px;
+  display: flex;
+`;
+
+const MessageHeader = ({ handleLogoClick }) => {
   return (
-    <MessageHeaderWrapper>
-      <Header>
-        <Airbnb size="4.5rem" />
-      </Header>
-    </MessageHeaderWrapper>
+    <StMessageHeader>
+      <Logo handleLogoClick={handleLogoClick}></Logo>
+      <StButtonGroupWrapper>
+        <SettingButtonContainer />
+        <MyPageButtonContainer />
+      </StButtonGroupWrapper>
+    </StMessageHeader>
   );
 };
-
-const MessageHeaderWrapper = styled.div`
-  position: fixed;
-  z-index: 1;
-  background: ${({ theme }) => theme.color.white};
-  width: 100%;
-`;
-
-const Header = styled.div`
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid ${({ theme }) => darken(0.1, theme.color.lightGray)};
-  box-shadow: 1px 0 0.4rem ${({ theme }) => theme.color.shadow};
-  padding-left: 2rem;
-  color: ${({ theme }) => theme.color.main};
-  height: 8rem;
-`;
 
 export default MessageHeader;
