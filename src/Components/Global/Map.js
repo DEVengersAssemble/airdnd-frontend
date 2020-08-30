@@ -47,7 +47,7 @@ const Map = compose(
       />
     ),
   }),
-  withState('zoom', 'onZoomChange', 13),
+  withState('zoom', 'onZoomChange', 15),
   withHandlers(() => {
     const refs = {
       map: undefined,
@@ -60,7 +60,6 @@ const Map = compose(
       setZoom: ({ onZoomChange }) => () => {
         onZoomChange(refs.map.getZoom());
       },
-      getRef: () => e => console.log(e),
     };
   }),
   withScriptjs,
@@ -70,10 +69,12 @@ const Map = compose(
     view,
     center,
     markers,
+    zoom,
     mapZoom,
     setZoom,
     onZoomIn,
     onZoomOut,
+    onZoomChange,
     onHideMap,
     onCloseMap,
     updateZoom,
@@ -81,7 +82,6 @@ const Map = compose(
     setRef,
     onCloseMarker,
   }) => {
-    console.log(setRef());
     return (
       <GoogleMap
         ref={setRef}
@@ -94,7 +94,7 @@ const Map = compose(
         options={{ disableDefaultUI: true }}
         onZoomChanged={() => {
           setZoom();
-          // updateZoom();
+          updateZoom(zoom);
         }}
       >
         <StStickyWrapper>
@@ -106,7 +106,16 @@ const Map = compose(
           <MapCheckbox />
           <StBtnSetWrapper>
             {view === 'map' && <MapFilterButton />}
-            <MapZoomButton onZoomIn={onZoomIn} onZoomOut={onZoomOut} />
+            <MapZoomButton
+              onZoomIn={() => {
+                onZoomIn();
+                onZoomChange(mapZoom + 1);
+              }}
+              onZoomOut={() => {
+                onZoomOut();
+                onZoomChange(mapZoom - 1);
+              }}
+            />
             <MapMarkerButton />
           </StBtnSetWrapper>
         </StStickyWrapper>

@@ -6,6 +6,7 @@ import { AiFillHome } from 'react-icons/ai';
 import Button from '../Global/Button';
 import HomePopup from './HomePopup';
 import { Heart } from '../Global/Heart';
+import HomePopupContainer from '../../Containers/Search/HomePopupContainer';
 
 const getPixelPositionOffset = (width, height) => ({
   x: width + width / 2,
@@ -76,8 +77,11 @@ const MapMarker = ({
         )}
       </OverlayView>
       {isOpen && (
-        <InfoBox options={{ closeBoxURL: '', enableEventPropagatioin: true }}>
-          <HomePopup home={marker} dateDiff={dateDiff} theme={theme} />
+        <InfoBox
+          options={{ closeBoxURL: '', enableEventPropagation: true }}
+          onClick={() => console.log('infoBox')}
+        >
+          <HomePopupContainer home={marker} dateDiff={dateDiff} theme={theme} />
         </InfoBox>
       )}
     </Marker>
