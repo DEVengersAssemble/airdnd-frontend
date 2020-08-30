@@ -19,15 +19,15 @@ const SearchMap = ({
 }) => {
   return (
     <StWrapper mapState={mapState} view={view}>
-      <StStickyWrapper>
+      {/* <StStickyWrapper>
         <MapCloseButton onHideMap={onHideMap} closeMap={closeMap} view={view} />
         <MapCheckbox />
         <StBtnSetWrapper>
           <MapZoomButton onZoomIn={onZoomIn} onZoomOut={onZoomOut} />
           <MapMarkerButton />
         </StBtnSetWrapper>
-      </StStickyWrapper>
-      <MapContainer markers={markers} />
+      </StStickyWrapper> */}
+      <MapContainer markers={markers} closeMap={closeMap} />
     </StWrapper>
   );
 };

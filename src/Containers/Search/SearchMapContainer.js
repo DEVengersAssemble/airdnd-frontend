@@ -8,20 +8,12 @@ const SearchMapContainer = ({ view, closeMap }) => {
   const { mapState } = useSelector(state => state.search);
   const { homes } = useSelector(state => state.search);
 
-  const dispatch = useDispatch();
-  const onHideMap = () => dispatch(hideMap());
-  const onZoomIn = () => dispatch(zoomIn());
-  const onZoomOut = () => dispatch(zoomOut());
-
   return (
     <SearchMap
       view={view}
       markers={homes}
       mapState={mapState}
       closeMap={closeMap}
-      onZoomIn={onZoomIn}
-      onZoomOut={onZoomOut}
-      onHideMap={onHideMap}
     />
   );
 };

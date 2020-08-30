@@ -1,4 +1,11 @@
 import React from 'react';
+import styled from 'styled-components';
+import {
+  MapZoomButton,
+  MapMarkerButton,
+  MapCloseButton,
+  MapCheckbox,
+} from '../Search/MapButton';
 import { compose, withProps, withState, withHandlers } from 'recompose';
 import { withScriptjs, withGoogleMap, GoogleMap } from 'react-google-maps';
 import theme from '../../style/theme';
@@ -63,6 +70,10 @@ const Map = compose(
     markers,
     mapZoom,
     setZoom,
+    onZoomIn,
+    onZoomOut,
+    onHideMap,
+    closeMap,
     updateZoom,
     getRef,
     setRef,
@@ -84,6 +95,14 @@ const Map = compose(
           // updateZoom();
         }}
       >
+        <StStickyWrapper>
+          <MapCloseButton onHideMap={onHideMap} closeMap={closeMap} />
+          <MapCheckbox />
+          <StBtnSetWrapper>
+            <MapZoomButton onZoomIn={onZoomIn} onZoomOut={onZoomOut} />
+            <MapMarkerButton />
+          </StBtnSetWrapper>
+        </StStickyWrapper>
         {markers &&
           markers.map((marker, i) => (
             <MapMarkerContainer key={i} marker={marker} theme={theme} />
@@ -92,5 +111,28 @@ const Map = compose(
     );
   },
 );
+
+const StStickyWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 10rem;
+  padding: 0 0 0 2rem;
+`;
+
+const StBtnSetWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  top: 10rem;
+  right: 2rem;
+  height: fit-content;
+  position: sticky;
+  z-index: 10;
+  & > *:nth-child(1) {
+    margin-bottom: 1rem;
+  }
+`;
 
 export default Map;

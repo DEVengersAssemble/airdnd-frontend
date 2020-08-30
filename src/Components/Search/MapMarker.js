@@ -87,6 +87,7 @@ const MapMarker = ({
 const buttonStyle = css`
   box-shadow: 0 0 2px ${({ theme }) => theme.color.gray};
   border: none;
+  transform: scale(1);
   transition: 0.3s;
   &:hover {
     border: none;
@@ -103,7 +104,6 @@ const focusStyle = css`
           background: ${theme.color.black};
           color: ${theme.color.white};
           transition: 0.3s;
-          transition-delay: 0.3s;
           transform: scale(1.1);
           z-index: 20;
         `

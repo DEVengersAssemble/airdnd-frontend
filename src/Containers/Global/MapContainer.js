@@ -2,7 +2,13 @@ import React, { useReducer, useEffect, useRef } from 'react';
 import Map from '../../Components/Global/Map';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
-import { closeMarker, zoomSet } from '../../Modules/search';
+import {
+  closeMarker,
+  zoomSet,
+  hideMap,
+  zoomIn,
+  zoomOut,
+} from '../../Modules/search';
 
 const centerInit = {
   loading: false,
@@ -35,12 +41,15 @@ const centerReducer = (state, action) => {
   }
 };
 
-const MapContainer = ({ markers }) => {
+const MapContainer = ({ markers, closeMap }) => {
   const { location } = useSelector(state => state.searchForm);
   const { mapZoom } = useSelector(state => state.search);
   const [centerState, centerDispatch] = useReducer(centerReducer, centerInit);
   const dispatch = useDispatch();
   const updateZoom = zoom => dispatch(zoomSet());
+  const onHideMap = () => dispatch(hideMap());
+  const onZoomIn = () => dispatch(zoomIn());
+  const onZoomOut = () => dispatch(zoomOut());
   const onCloseMarker = e => {
     e.target.nodeName === 'DIV' && dispatch(closeMarker());
   };
@@ -67,6 +76,10 @@ const MapContainer = ({ markers }) => {
       center={centerState.center}
       mapZoom={mapZoom}
       markers={markers}
+      closeMap={closeMap}
+      onHideMap={onHideMap}
+      onZoomIn={onZoomIn}
+      onZoomOut={onZoomOut}
       updateZoom={updateZoom}
       onCloseMarker={onCloseMarker}
     />
