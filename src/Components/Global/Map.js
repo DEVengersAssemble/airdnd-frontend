@@ -5,6 +5,7 @@ import {
   MapMarkerButton,
   MapCloseButton,
   MapCheckbox,
+  MapFilterButton,
 } from '../Search/MapButton';
 import { compose, withProps, withState, withHandlers } from 'recompose';
 import { withScriptjs, withGoogleMap, GoogleMap } from 'react-google-maps';
@@ -66,6 +67,7 @@ const Map = compose(
   withGoogleMap,
 )(
   ({
+    view,
     center,
     markers,
     mapZoom,
@@ -73,7 +75,7 @@ const Map = compose(
     onZoomIn,
     onZoomOut,
     onHideMap,
-    closeMap,
+    onCloseMap,
     updateZoom,
     getRef,
     setRef,
@@ -96,9 +98,14 @@ const Map = compose(
         }}
       >
         <StStickyWrapper>
-          <MapCloseButton onHideMap={onHideMap} closeMap={closeMap} />
+          <MapCloseButton
+            onHideMap={onHideMap}
+            onCloseMap={onCloseMap}
+            view={view}
+          />
           <MapCheckbox />
           <StBtnSetWrapper>
+            {view === 'map' && <MapFilterButton />}
             <MapZoomButton onZoomIn={onZoomIn} onZoomOut={onZoomOut} />
             <MapMarkerButton />
           </StBtnSetWrapper>
@@ -116,7 +123,6 @@ const StStickyWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  height: 100vh;
   position: absolute;
   top: 10rem;
   padding: 0 0 0 2rem;
@@ -130,9 +136,6 @@ const StBtnSetWrapper = styled.div`
   height: fit-content;
   position: sticky;
   z-index: 10;
-  & > *:nth-child(1) {
-    margin-bottom: 1rem;
-  }
 `;
 
 export default Map;
