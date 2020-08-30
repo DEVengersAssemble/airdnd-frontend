@@ -3,39 +3,55 @@ import styled from 'styled-components';
 import { darken } from 'polished';
 import theme from '../../style/theme';
 import Button from '../Global/Button';
+import Tooltip from '../Global/Tooltip';
 import { FaBox } from 'react-icons/fa';
 import { MdKeyboardArrowLeft } from 'react-icons/md';
 
 const MsgSectionHeader = ({
+  media,
   msgListSectionState,
   msgDetailSectionState,
-  onToggleDetail,
+  onClickShowList,
+  onClickDetail,
+  onClickArchive,
 }) => {
   return (
-    <MsgSectionHeaderWrapper msgDetailSectionState={msgDetailSectionState}>
+    <MsgSectionHeaderWrapper>
       <MsgSectionHeaderTitle>
-        {!msgListSectionState && (
+        {media === 'medium' && !msgListSectionState && (
           <Button
             btnType="circle"
             border="none"
             hover={{ backgroundColor: theme.color.lightGray }}
             fontSize="3rem"
             style={{ width: '4rem', height: '4rem', marginRight: '3rem' }}
+            onClick={onClickShowList}
           >
             <MdKeyboardArrowLeft />
           </Button>
         )}
-        호스트닉네임
-      </MsgSectionHeaderTitle>
-      <MsgSectionHeaderButtonWrapper>
-        <Button
+        {/* <Button
           btnType="circle"
           border="none"
           hover={{ backgroundColor: theme.color.lightGray }}
-          style={{ width: '4rem', height: '4rem' }}
+          fontSize="3rem"
+          style={{ width: '4rem', height: '4rem', marginRight: '3rem' }}
+          onClick={onClickShowList}
+        >
+          <MdKeyboardArrowLeft />
+        </Button> */}
+        호스트닉네임
+      </MsgSectionHeaderTitle>
+      <MsgSectionHeaderButtonWrapper>
+        <StStroageButton
+          btnType="circle"
+          border="none"
+          hover={{ backgroundColor: theme.color.lightGray }}
+          onClick={onClickArchive}
         >
           <StMsgSectionHeaderStorageIcon />
-        </Button>
+          <Tooltip />
+        </StStroageButton>
         {msgDetailSectionState ? (
           <Button
             btnType="oval"
@@ -46,9 +62,9 @@ const MsgSectionHeader = ({
               backgroundColor: `${theme.color.lightGray}`,
               fontWeight: '600',
             }}
-            onClick={onToggleDetail}
+            onClick={onClickDetail}
           >
-            세부사항 숨기기
+            세부 정보 숨기기
           </Button>
         ) : (
           <Button
@@ -57,9 +73,9 @@ const MsgSectionHeader = ({
             hover={{ border: `1px solid ${theme.color.black}` }}
             fontSize="1.2rem"
             style={{ fontWeight: '400' }}
-            onClick={onToggleDetail}
+            onClick={onClickDetail}
           >
-            자세히 알아보기
+            세부 정보 보기
           </Button>
         )}
       </MsgSectionHeaderButtonWrapper>
@@ -90,6 +106,14 @@ const MsgSectionHeaderButtonWrapper = styled.div`
   align-items: center;
   & > Button + Button {
     margin-left: 1rem;
+  }
+`;
+
+const StStroageButton = styled(Button)`
+  width: 4rem;
+  height: 4rem;
+  &:hover > div {
+    display: flex;
   }
 `;
 

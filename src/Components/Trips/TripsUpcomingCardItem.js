@@ -11,11 +11,13 @@ const TripsUpcomingCardItem = ({ trip, myInfo, ci, co }) => {
   const { lastName: myLastName, profileImg: myProfileImg } = myInfo;
   const { lastName: gstLastName, profileImg: gstProfileImg } = guest;
 
+  // TODO: co - ci 만큼 mapping 필요
+
   return (
     <TripsUpcomingCardItemWrapper>
       <Link to="/schedule">
         <TripsUpcomingImgWrapper>
-          <TripsUpcomingImg />
+          <TripsUpcomingImg homeImage={homeImage} />
           {withGuest && (
             <TripsProfileWrapper>
               <Profile
@@ -105,8 +107,7 @@ const TripsUpcomingImgWrapper = styled.div`
 const TripsUpcomingImg = styled.div`
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  background: no-repeat center/100%
-    url('https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large');
+  background: no-repeat center/100% url(${({ homeImage }) => homeImage[0]});
   height: 20rem;
 `;
 

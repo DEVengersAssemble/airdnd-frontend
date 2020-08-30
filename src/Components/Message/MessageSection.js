@@ -27,7 +27,7 @@ const MessageSectionWrapper = styled.section`
   flex-grow: 1;
   min-width: 37.5rem;
   
-  ${({ msgDetailSectionState }) =>
+  /* ${({ msgDetailSectionState }) =>
     !msgDetailSectionState &&
     css`
       min-width: calc(100% - 37.5rem);
@@ -35,7 +35,7 @@ const MessageSectionWrapper = styled.section`
 
   @media ${({ theme }) => theme.size.medium} {
     min-width: calc(100% - 37.5rem);
-  }
+  } */
 `;
 
 export default MessageSection;
