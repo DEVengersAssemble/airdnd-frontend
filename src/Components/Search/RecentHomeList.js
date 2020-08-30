@@ -1,10 +1,10 @@
 import React from 'react';
-import RecentHome from './RecentHome';
 import HomeCard from './HomeCard';
 import styled from 'styled-components';
 import RecentPagenation from './RecentPagenation';
 
 const RecentHomeList = ({
+  mapState,
   recentHomes,
   onHoverHome,
   onBlurHome,
@@ -23,6 +23,7 @@ const RecentHomeList = ({
             key={home.homeId}
             home={home}
             type="recent"
+            mapState={mapState}
             isHovered={hoveredHome === home.homeId}
             onHoverHome={onHoverHome}
             onBlurHome={onBlurHome}
@@ -43,7 +44,12 @@ const StWrapper = styled.div`
 const StHomeWrapper = styled.ul`
   display: flex;
   justify-content: space-between;
-  margin: 2rem 0;
+  margin: 2rem -1rem;
+
+  &:after {
+    content: '';
+    flex: auto;
+  }
 `;
 
 const StHeader = styled.h3`
