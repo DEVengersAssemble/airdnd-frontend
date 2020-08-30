@@ -8,19 +8,23 @@ import MyPageButtonContainer from '../../Containers/Main/MyPageButtonContainer';
 import Button from '../Global/Button';
 import { FiSearch } from 'react-icons/fi';
 
-const StSearchHeader = styled.header`
-  box-sizing: border-box;
+const StDetailHeaderWrapper = styled.div`
+  width: 100vw;
   z-index: 100;
   position: fixed;
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  margin: 0;
-  height: ${({ isSearchBtnClicked }) =>
-    isSearchBtnClicked ? '180px' : '80px'};
   background: ${({ theme }) => theme.color.white};
   border-bottom: 1px solid ${({ theme }) => theme.color.line};
-  padding: 20px 20px 15px 20px;
+`;
+
+const StDetailHeader = styled.header`
+  display: flex;
+  max-width: 1200px;
+  padding: 20px 40px 15px 40px;
+  margin: 0 auto;
+  justify-content: space-between;
+  height: ${({ isSearchBtnClicked }) =>
+    isSearchBtnClicked ? '180px' : '80px'};
+
   @media ${({ theme }) => theme.size.iPad} {
     height: ${({ isSearchBtnClicked }) =>
       isSearchBtnClicked ? '230px' : '80px'};
@@ -124,7 +128,7 @@ const StSearchFormResultWrapper = styled.div`
     dataExists ? theme.color.black : theme.color.darkGray};
 `;
 
-const SearchHeader = ({
+const DetailHeader = ({
   isSearchBtnClicked,
   handleLogoClick,
   handleSearchBtnClick,
@@ -138,41 +142,43 @@ const SearchHeader = ({
   const { adult, child } = guests;
   const guestCount = adult + child;
   return (
-    <StSearchHeader isSearchBtnClicked={isSearchBtnClicked}>
-      <Logo handleLogoClick={handleLogoClick}></Logo>
-      <StNavSearchWrapper isSearchBtnClicked={isSearchBtnClicked}>
-        <Navigation isSearchBtnClicked={isSearchBtnClicked}></Navigation>
-        <SearchFormContainer isSearchBtnClicked={isSearchBtnClicked} />
-      </StNavSearchWrapper>
+    <StDetailHeaderWrapper>
+      <StDetailHeader isSearchBtnClicked={isSearchBtnClicked}>
+        <Logo handleLogoClick={handleLogoClick}></Logo>
+        <StNavSearchWrapper isSearchBtnClicked={isSearchBtnClicked}>
+          <Navigation isSearchBtnClicked={isSearchBtnClicked}></Navigation>
+          <SearchFormContainer isSearchBtnClicked={isSearchBtnClicked} />
+        </StNavSearchWrapper>
 
-      <StOnScrollSearchButton
-        btnType="oval"
-        fontSize="14px"
-        isSearchBtnClicked={isSearchBtnClicked}
-        onClick={handleSearchBtnClick}
-      >
-        <StSearchFormResultWrapper dataExists={location}>
-          {location || '장소 추가'}
-        </StSearchFormResultWrapper>
-        <StSearchFormResultWrapper dataExists={checkIn}>
-          {checkInMonth
-            ? `${checkInMonth}월 ${checkInDay}일 - ${checkOutMonth}월 ${checkOutDay}일`
-            : '날짜 추가'}
-        </StSearchFormResultWrapper>
-        <StSearchFormResultWrapper guestCount dataExists={guestCount}>
-          {guestCount ? `게스트 ${guestCount}명` : '게스트 추가'}
-        </StSearchFormResultWrapper>
-        <StOnScrollSearchButtonIconWrapper>
-          <FiSearch />
-        </StOnScrollSearchButtonIconWrapper>
-      </StOnScrollSearchButton>
+        <StOnScrollSearchButton
+          btnType="oval"
+          fontSize="14px"
+          isSearchBtnClicked={isSearchBtnClicked}
+          onClick={handleSearchBtnClick}
+        >
+          <StSearchFormResultWrapper dataExists={location}>
+            {location || '장소 추가'}
+          </StSearchFormResultWrapper>
+          <StSearchFormResultWrapper dataExists={checkIn}>
+            {checkInMonth
+              ? `${checkInMonth}월 ${checkInDay}일 - ${checkOutMonth}월 ${checkOutDay}일`
+              : '날짜 추가'}
+          </StSearchFormResultWrapper>
+          <StSearchFormResultWrapper guestCount dataExists={guestCount}>
+            {guestCount ? `게스트 ${guestCount}명` : '게스트 추가'}
+          </StSearchFormResultWrapper>
+          <StOnScrollSearchButtonIconWrapper>
+            <FiSearch />
+          </StOnScrollSearchButtonIconWrapper>
+        </StOnScrollSearchButton>
 
-      <StButtonGroupWrapper>
-        <SettingButtonContainer />
-        <MyPageButtonContainer />
-      </StButtonGroupWrapper>
-    </StSearchHeader>
+        <StButtonGroupWrapper>
+          <SettingButtonContainer />
+          <MyPageButtonContainer />
+        </StButtonGroupWrapper>
+      </StDetailHeader>
+    </StDetailHeaderWrapper>
   );
 };
 
-export default SearchHeader;
+export default DetailHeader;

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Reviews from './Reviews';
-import HomeMap from './HomeMap';
+// import HomeMap from './HomeMap';
 import HostInfo from './HostInfo';
 import HomeNotice from './HomeNotice';
 
@@ -9,7 +9,7 @@ const FullsizeWrapper = () => {
   return (
     <StWrapper>
       <Reviews />
-      <HomeMap />
+      {/* <HomeMap /> */}
       <HostInfo />
       <HomeNotice />
     </StWrapper>

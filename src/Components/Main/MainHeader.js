@@ -32,7 +32,7 @@ const StMainHeader = styled.header`
   @media ${({ theme }) => theme.size.iPad} {
     padding: 20px 40px 15px 40px;
     height: ${({ isSearchBtnClicked }) =>
-      isSearchBtnClicked ? '250px' : '80px'};
+      isSearchBtnClicked ? '230px' : '80px'};
   }
 `;
 
@@ -72,15 +72,15 @@ const StNavSearchWrapper = styled.div`
   animation-name: ${({ isScrollTop, isSearchBtnClicked }) =>
     isScrollTop || isSearchBtnClicked ? slideDown : slideUp};
 
-  @media (max-width: 950px) {
-    width: 90%;
-    top: 70px;
-    left: calc(50vw - 45%);
+  @media ${({ theme }) => theme.size.medium} {
+    width: 76%;
+    top: 0;
+    left: calc(50vw - 38%);
   }
 
   @media ${({ theme }) => theme.size.iPad} {
     width: 90%;
-    top: 70px;
+    top: 50px;
     left: calc(50vw - 45%);
   }
 `;

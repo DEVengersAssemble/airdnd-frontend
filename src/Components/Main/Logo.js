@@ -9,7 +9,6 @@ const StLogoLink = styled.a`
   justify-content: center;
   align-items: center;
   height: 40px;
-  padding: 10px;
   text-decoration: none;
   ${({ isScrollTop }) =>
     isScrollTop
