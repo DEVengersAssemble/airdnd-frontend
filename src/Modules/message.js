@@ -67,11 +67,11 @@ const initialState = {
       state: 'all',
       readMsg: true,
       hostname: 'Paul',
-      isActive: true,
+      isActive: false,
       contents: {
         hostProfileImg:
-          'https://t1.daumcdn.net/cfile/tistory/146C13354E56E5420D',
-        lastMsg: '마지막 메시지 내용입니다.',
+          'https://lh3.googleusercontent.com/proxy/HwULzhe0mrv1SXgAN_v_3xwpuiNBPMfBNs891dO_cnfBnGFuV6zxOmKexXwbbnbRrKpjFOrIGLwtPmsNQ7V5ySkWwhQCYlO0azLnePvoYsLV2boJhA',
+        lastMsg: '끼야야야야야옹~~~~~끼야야야야야옹~~~~~',
         lastMsgDate: '2020/08/20',
         isCanceled: false,
         checkin: '2020/09/25',
@@ -87,8 +87,8 @@ const initialState = {
       isActive: false,
       contents: {
         hostProfileImg:
-          'https://t1.daumcdn.net/cfile/tistory/146C13354E56E5420D',
-        lastMsg: '마지막 메시지 내용입니다.',
+          'https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F192F1C464DD57EB614',
+        lastMsg: '유후유후',
         lastMsgDate: '2020/08/20',
         isCanceled: false,
         checkin: '2020/09/10',
@@ -104,8 +104,8 @@ const initialState = {
       isActive: false,
       contents: {
         hostProfileImg:
-          'https://t1.daumcdn.net/cfile/tistory/146C13354E56E5420D',
-        lastMsg: '마지막 메시지 내용입니다.',
+          'https://lh3.googleusercontent.com/proxy/oiw7i5NnxIJr3dRM9IUKn50ggw9Sd0x4JplCQ65C0sNpJ4nA1EXkwpvyTn7i06bBn7jZNMe5tNkt2HcDWrv2i_-dclwqeJROVt2LDz1wrf3ODAV5d_mLA-x69GOvnWRMlli2zxOrvBdDTKSPL9KgNyLYl7lEaBwnqOcj6Vb8K-Rw0LhotQtI',
+        lastMsg: '코로나인데 올수있음?',
         lastMsgDate: '2020/08/20',
         isCanceled: true,
         checkin: '2020/08/15',
@@ -121,8 +121,8 @@ const initialState = {
       isActive: false,
       contents: {
         hostProfileImg:
-          'https://t1.daumcdn.net/cfile/tistory/146C13354E56E5420D',
-        lastMsg: '마지막 메시지 내용입니다.',
+          'https://www.1xbetkrs.com/wp-content/uploads/2020/03/0-e1583216806476.jpg',
+        lastMsg: '끼야호! 여행 개꿀~',
         lastMsgDate: '2020/08/20',
         isCanceled: true,
         checkin: '2020/06/01',
@@ -138,8 +138,8 @@ const initialState = {
       isActive: false,
       contents: {
         hostProfileImg:
-          'https://t1.daumcdn.net/cfile/tistory/146C13354E56E5420D',
-        lastMsg: '마지막 메시지 내용입니다.',
+          'https://mblogthumb-phinf.pstatic.net/MjAxNzEwMjNfMzIg/MDAxNTA4NzQxMzIwMDY0.iuNB_sdkpC4PIscgbOArKNr5qFu9KFUUwQuvcVGtrWUg.6nqdqSlCQblZpSID9LH3vLaNrdkHo-9OiWrC39ebIdwg.JPEG.soko1274/009_20171023.jpg?type=w800',
+        lastMsg: '여행 개꿀이었슴다',
         lastMsgDate: '2020/08/20',
         isCanceled: false,
         checkin: '2020/07/30',
@@ -155,8 +155,8 @@ const initialState = {
       isActive: false,
       contents: {
         hostProfileImg:
-          'https://t1.daumcdn.net/cfile/tistory/146C13354E56E5420D',
-        lastMsg: '마지막 메시지 내용입니다.',
+          'https://i.pinimg.com/originals/05/5f/2b/055f2bf2e34e410fffc5b7dc83c5ed61.jpg',
+        lastMsg: '췍췍 메시지 췍!',
         lastMsgDate: '2020/08/20',
         isCanceled: false,
         checkin: '2020/08/08',
@@ -172,7 +172,7 @@ const initialState = {
       isActive: false,
       contents: {
         hostProfileImg:
-          'https://t1.daumcdn.net/cfile/tistory/146C13354E56E5420D',
+          'https://www.catcare.or.kr/files/attach/images/260/358/867/002/d4d55e3427874b6aa9a467499b913975.jpg',
         lastMsg: '마지막 메시지 내용입니다.',
         lastMsgDate: '2020/08/20',
         isCanceled: false,
@@ -189,8 +189,8 @@ const initialState = {
       isActive: false,
       contents: {
         hostProfileImg:
-          'https://t1.daumcdn.net/cfile/tistory/146C13354E56E5420D',
-        lastMsg: '마지막 메시지 내용입니다.',
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQFpHJt-TLd1nvnt17LKYGqAt_q-jtw_dvheQ&usqp=CAU',
+        lastMsg: '로나를ㄹㄹㄹ도!!',
         lastMsgDate: '2020/08/20',
         isCanceled: true,
         checkin: '2020/11/20',
@@ -206,8 +206,8 @@ const initialState = {
       isActive: false,
       contents: {
         hostProfileImg:
-          'https://t1.daumcdn.net/cfile/tistory/146C13354E56E5420D',
-        lastMsg: '마지막 메시지 내용입니다.',
+          'https://cdn.crowdpic.net/list-thumb/thumb_l_3E51F47F947E3C9D46DF66C41496ED70.jpg',
+        lastMsg: 'Hey, krystyn! im jay!',
         lastMsgDate: '2020/08/20',
         isCanceled: false,
         checkin: '2020/12/15',
@@ -224,7 +224,7 @@ const initialState = {
       contents: {
         hostProfileImg:
           'https://t1.daumcdn.net/cfile/tistory/146C13354E56E5420D',
-        lastMsg: '마지막 메시지 내용입니다.',
+        lastMsg: 'what the holy s...',
         lastMsgDate: '2020/08/20',
         isCanceled: false,
         checkin: '2020/10/15',
