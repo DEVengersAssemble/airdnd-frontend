@@ -20,8 +20,8 @@ const theme = {
   },
   size: {
     iPad: 'screen and (max-width: 768px)',
-    large: 'screen and (max-width: 1440px)',
     medium: 'screen and (max-width: 1127px)',
+    large: 'screen and (max-width: 1440px)',
   },
 };
 
