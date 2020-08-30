@@ -110,7 +110,7 @@ const StAmenity = styled.li`
   margin-right: 2rem;
   padding-bottom: 16px;
 
-  @media ${({ theme }) => theme.color.medium} {
+  @media ${({ theme }) => theme.size.medium} {
     width: 100%;
     margin-right: 0;
   }
