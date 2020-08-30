@@ -60,7 +60,6 @@ const initialState = {
       reservationId: 1,
       state: 'all',
       readMsg: true,
-      homeId: 1,
       hostname: 'Paul',
     },
     {
@@ -68,7 +67,6 @@ const initialState = {
       reservationId: 2,
       state: 'all',
       readMsg: true,
-      homeId: 2,
       hostname: 'Bhel',
     },
     {
@@ -76,7 +74,6 @@ const initialState = {
       reservationId: 3,
       state: 'all',
       readMsg: false,
-      homeId: 3,
       hostname: 'James',
     },
     {
@@ -84,7 +81,6 @@ const initialState = {
       reservationId: 4,
       state: 'all',
       readMsg: false,
-      homeId: 4,
       hostname: 'Maple',
     },
     {
@@ -92,7 +88,6 @@ const initialState = {
       reservationId: 5,
       state: 'all',
       readMsg: false,
-      homeId: 5,
       hostname: 'Linda',
     },
     {
@@ -100,7 +95,6 @@ const initialState = {
       reservationId: 6,
       state: 'hide',
       readMsg: true,
-      homeId: 6,
       hostname: 'June',
     },
     {
@@ -108,7 +102,6 @@ const initialState = {
       reservationId: 7,
       state: 'hide',
       readMsg: true,
-      homeId: 7,
       hostname: 'Jason',
     },
     {
@@ -116,7 +109,6 @@ const initialState = {
       reservationId: 8,
       state: 'hide',
       readMsg: true,
-      homeId: 7,
       hostname: 'Ronald',
     },
     {
@@ -124,7 +116,6 @@ const initialState = {
       reservationId: 9,
       state: 'hide',
       readMsg: true,
-      homeId: 8,
       hostname: 'Krystyn',
     },
     {
@@ -132,7 +123,6 @@ const initialState = {
       reservationId: 10,
       state: 'hide',
       readMsg: true,
-      homeId: 9,
       hostname: 'John',
     },
   ],
