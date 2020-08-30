@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import SearchHeader from '../../Components/Search/SearchHeader';
+import DetailHeader from '../../Components/Detail/DetailHeader';
 
-const SearchHeaderContainer = () => {
+const DetailHeaderContainer = () => {
   const history = useHistory();
   const [isSearchBtnClicked, setIsSearchBtnClicked] = useState(false);
   const searchForm = useSelector(state => state.searchForm);
@@ -29,13 +29,13 @@ const SearchHeaderContainer = () => {
   };
 
   return (
-    <SearchHeader
+    <DetailHeader
       isSearchBtnClicked={isSearchBtnClicked}
       handleLogoClick={handleLogoClick}
       handleSearchBtnClick={handleSearchBtnClick}
       searchForm={searchForm}
-    ></SearchHeader>
+    ></DetailHeader>
   );
 };
 
-export default SearchHeaderContainer;
+export default DetailHeaderContainer;

@@ -1,5 +1,5 @@
 import React from 'react';
-import MessageHeader from '../Components/Message/MessageHeader';
+import MessageHeaderContainer from '../Containers/Message/MessageHeaderContainer';
 import MsgFlagModal from '../Components/Message/MsgFlagModal';
 import MsgDetailPdfModal from '../Components/Message/MsgDetailPdfModal';
 import MsgDetailBusinessModal from '../Components/Message/MsgDetailBusinessModal';
@@ -9,7 +9,7 @@ import MessageMain from '../Components/Message/MessageMain';
 const MessagePage = () => {
   return (
     <>
-      <MessageHeader />
+      <MessageHeaderContainer />
       <MessageMain />
       <MsgFlagModal />
       <MsgDetailPdfModal />

@@ -1,12 +1,12 @@
 import React from 'react';
-import TripsHeader from '../Components/Trips/TripsHeader';
+import TripsHeaderContainer from '../Containers/Trips/TripsHeaderContainer';
 import TripsMain from '../Components/Trips/TripsMain';
 import Footer from '../Components/Main/Footer';
 
 const TripsPage = () => {
   return (
     <>
-      <TripsHeader />
+      <TripsHeaderContainer />
       <TripsMain />
       <Footer />
     </>

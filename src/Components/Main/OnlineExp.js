@@ -3,9 +3,11 @@ import styled from 'styled-components';
 import Button from '../Global/Button';
 const StOnlineExpWrapper = styled.div`
   background: ${({ theme }) => theme.color.realBlack};
-  height: 800px;
   padding: 65px 80px;
   color: ${({ theme }) => theme.color.white};
+  @media ${({ theme }) => theme.size.iPad} {
+    padding: 65px 40px;
+  }
 `;
 
 const StUpperWrapper = styled.div`
@@ -36,13 +38,16 @@ const StGridWrapper = styled.div`
   display: grid;
   width: 100%;
   height: 520px;
+  @media ${({ theme }) => theme.size.iPad} {
+    height: 470px;
+  }
   margin-top: 25px;
 
   grid-template-rows: repeat(2, 1fr);
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
 
-  @media ${({ theme }) => theme.size.iPad} {
+  @media ${({ theme }) => theme.size.medium} {
     grid-template-rows: repeat(2, 1fr);
     grid-template-columns: 2fr 1fr;
   }
@@ -81,7 +86,7 @@ const StGridItem = styled.div`
     grid-column-end: 5;
   }
 
-  @media ${({ theme }) => theme.size.iPad} {
+  @media ${({ theme }) => theme.size.medium} {
     &:nth-child(1) {
       grid-row-start: 1;
       grid-row-end: 3;
