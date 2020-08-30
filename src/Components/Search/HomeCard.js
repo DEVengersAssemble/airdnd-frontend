@@ -33,6 +33,7 @@ export const HomeCaption = ({
 const HomeCard = ({
   home,
   type,
+  isHovered,
   onClickBookmark,
   onHoverHome,
   onBlurHome,
@@ -63,7 +64,7 @@ const HomeCard = ({
       <CarouselContainer
         responsive
         getWidth={getWidth}
-        homeId={homeId}
+        isHovered={isHovered}
         isSuperhost={isSuperhost}
         imageArray={imageArray}
         imageCount={imageCount}

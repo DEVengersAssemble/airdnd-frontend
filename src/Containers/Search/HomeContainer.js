@@ -1,5 +1,6 @@
 import React from 'react';
 import Home from '../../Components/Search/Home';
+import { useSelector } from 'react-redux';
 
 const HomeContainer = ({
   home,
@@ -8,9 +9,13 @@ const HomeContainer = ({
   onHoverHome,
   onBlurHome,
 }) => {
+  const { hoveredHome } = useSelector(state => state.search);
+  const isHovered = hoveredHome === home.homeId;
+
   return (
     <Home
       home={home}
+      isHovered={isHovered}
       onClickBookmark={onClickBookmark}
       onHoverHome={onHoverHome}
       onBlurHome={onBlurHome}
