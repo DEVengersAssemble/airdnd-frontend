@@ -4,6 +4,7 @@ import Subject from '../Components/Detail/Subject';
 import HomeInfos from '../Components/Detail/HomeInfos';
 import FullsizeWrapper from '../Components/Detail/FullsizeWrapper';
 import HomeFooter from '../Components/Detail/HomeFooter';
+import DetailHeaderContainer from '../Containers/Search/SearchHeaderContainer';
 
 const DetailPage = () => {
   const [modalState, setModalState] = useState(false);
@@ -14,7 +15,7 @@ const DetailPage = () => {
 
   return (
     <>
-      <TestHeader />
+      <DetailHeaderContainer />
       <main>
         <Subject />
         <HomeInfos />
