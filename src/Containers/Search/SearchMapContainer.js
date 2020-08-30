@@ -1,21 +1,12 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { hideMap } from '../../Modules/search';
+import { useSelector } from 'react-redux';
 import SearchMap from '../../Components/Search/SearchMap';
-import { zoomIn, zoomOut } from '../../Modules/search';
 
-const SearchMapContainer = ({ view, closeMap }) => {
-  const { mapState } = useSelector(state => state.search);
+const SearchMapContainer = () => {
+  const { mapState, viewState } = useSelector(state => state.search);
   const { homes } = useSelector(state => state.search);
 
-  return (
-    <SearchMap
-      view={view}
-      markers={homes}
-      mapState={mapState}
-      closeMap={closeMap}
-    />
-  );
+  return <SearchMap view={viewState} markers={homes} mapState={mapState} />;
 };
 
 export default SearchMapContainer;

@@ -1,10 +1,11 @@
-import React, { useReducer, useEffect, useRef } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import Map from '../../Components/Global/Map';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import {
   closeMarker,
   zoomSet,
+  closeMap,
   hideMap,
   zoomIn,
   zoomOut,
@@ -41,13 +42,14 @@ const centerReducer = (state, action) => {
   }
 };
 
-const MapContainer = ({ markers, closeMap }) => {
+const MapContainer = ({ markers }) => {
   const { location } = useSelector(state => state.searchForm);
-  const { mapZoom } = useSelector(state => state.search);
+  const { mapZoom, viewState } = useSelector(state => state.search);
   const [centerState, centerDispatch] = useReducer(centerReducer, centerInit);
   const dispatch = useDispatch();
   const updateZoom = zoom => dispatch(zoomSet());
   const onHideMap = () => dispatch(hideMap());
+  const onCloseMap = () => dispatch(closeMap());
   const onZoomIn = () => dispatch(zoomIn());
   const onZoomOut = () => dispatch(zoomOut());
   const onCloseMarker = e => {
@@ -73,10 +75,11 @@ const MapContainer = ({ markers, closeMap }) => {
   return (
     // <div onClick={onCloseMarker}>
     <Map
+      view={viewState}
       center={centerState.center}
       mapZoom={mapZoom}
       markers={markers}
-      closeMap={closeMap}
+      onCloseMap={onCloseMap}
       onHideMap={onHideMap}
       onZoomIn={onZoomIn}
       onZoomOut={onZoomOut}

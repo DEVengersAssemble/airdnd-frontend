@@ -1,6 +1,8 @@
 const HOVER_HOME = 'search/HOVER_HOME';
 const BLUR_HOME = 'search/BLUR_HOME';
 
+const OPEN_MAP = 'search/OPEN_MAP';
+const CLOSE_MAP = 'search/CLOSE_MAP';
 const SHOW_MAP = 'search/SHOW_MAP';
 const HIDE_MAP = 'search/HIDE_MAP';
 const ZOOM_IN = 'search/ZOOM_IN';
@@ -25,6 +27,8 @@ const RESET_MODAL_FILTER = 'search/RESET_MODAL/FILTER';
 export const hoverHome = homeId => ({ type: HOVER_HOME, homeId });
 export const blurHome = () => ({ type: BLUR_HOME });
 
+export const openMap = () => ({ type: OPEN_MAP });
+export const closeMap = () => ({ type: CLOSE_MAP });
 export const showMap = () => ({ type: SHOW_MAP });
 export const hideMap = () => ({ type: HIDE_MAP });
 export const zoomIn = () => ({ type: ZOOM_IN });
@@ -385,6 +389,7 @@ const initialState = {
   ],
   // 1박 평균 가격
   averagePrice: 82094,
+  viewState: 'result',
   mapState: true,
   mapZoom: 15,
   markerState: null,
@@ -409,6 +414,16 @@ const search = (state = initialState, action) => {
       return {
         ...state,
         mapState: false,
+      };
+    case OPEN_MAP:
+      return {
+        ...state,
+        viewState: 'map',
+      };
+    case CLOSE_MAP:
+      return {
+        ...state,
+        viewState: 'result',
       };
     case ZOOM_IN:
       return {
