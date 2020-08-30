@@ -12,7 +12,7 @@ const UNDO = 'message/UNDO';
 const ALL_MESSAGE_LIST = 'message/ALL_MESSAGE_LIST';
 const HIDE_MESSAGE_LIST = 'message/HIDE_MESSAGE_LIST';
 const UNREAD_MESSAGE_LIST = 'message/UNREAD_MESSAGE_LIST';
-
+const ACTIVE_MESSAGE_LIST_ITEM = 'message/ACTIVE_MESSAGE_LIST_ITEM';
 const MESSAGE_HOST_FLAG = 'message/MESSAGE_HOST_FLAG';
 
 // ACTION CREATOR
@@ -43,9 +43,14 @@ export const unarchiveMsg = (id, isActive) => ({
 });
 export const undo = () => ({ type: UNDO });
 
-export const allMsgList = () => ({ type: ALL_MESSAGE_LIST });
+export const allMsgList = (id, isActive) => ({
+  type: ALL_MESSAGE_LIST,
+  id,
+  isActive,
+});
 export const hideMsgList = () => ({ type: HIDE_MESSAGE_LIST });
 export const unreadMsgList = () => ({ type: UNREAD_MESSAGE_LIST });
+export const activeMsgListItem = () => ({ type: ACTIVE_MESSAGE_LIST_ITEM });
 
 export const isHost = isHost => ({
   type: MESSAGE_HOST_FLAG,
@@ -70,7 +75,7 @@ const initialState = {
       isActive: false,
       contents: {
         hostProfileImg:
-          'https://lh3.googleusercontent.com/proxy/HwULzhe0mrv1SXgAN_v_3xwpuiNBPMfBNs891dO_cnfBnGFuV6zxOmKexXwbbnbRrKpjFOrIGLwtPmsNQ7V5ySkWwhQCYlO0azLnePvoYsLV2boJhA',
+          'https://i.pinimg.com/originals/05/5f/2b/055f2bf2e34e410fffc5b7dc83c5ed61.jpg',
         lastMsg: '끼야야야야야옹~~~~~끼야야야야야옹~~~~~',
         lastMsgDate: '2020/08/20',
         isCanceled: false,
@@ -268,24 +273,24 @@ const message = (state = initialState, action) => {
         ...state,
         media: action.media,
       };
-    case ARCHAIVE_MESSAGE:
-      return {
-        ...state,
-        messages: state.messages.map(msg =>
-          msg.id === action.id
-            ? { ...msg, isActive: !action.isActive, state: 'hide' }
-            : msg,
-        ),
-      };
-    case UNARCHAIVE_MESSAGE:
-      return {
-        ...state,
-        messages: state.messages.map(msg =>
-          msg.id === action.id
-            ? { ...msg, isActive: !action.isActive, state: 'all' }
-            : msg,
-        ),
-      };
+    // case ARCHAIVE_MESSAGE:
+    //   return {
+    //     ...state,
+    //     messages: state.messages.map(msg =>
+    //       msg.id === action.id
+    //         ? { ...msg, isActive: !action.isActive, state: 'hide' }
+    //         : msg,
+    //     ),
+    //   };
+    // case UNARCHAIVE_MESSAGE:
+    //   return {
+    //     ...state,
+    //     messages: state.messages.map(msg =>
+    //       msg.id === action.id
+    //         ? { ...msg, isActive: !action.isActive, state: 'all' }
+    //         : msg,
+    //     ),
+    //   };
     case UNDO:
       return {
         ...state,
@@ -305,6 +310,13 @@ const message = (state = initialState, action) => {
         ...state,
         filteredMsgs: state.messages.filter(msg => !msg.readMsg),
       };
+    // case ACTIVE_MESSAGE_LIST_ITEM:
+    //   return {
+    //     ...state,
+    //     filteredMsgs: state.filteredMsgs.map(msg =>
+    //       msg.isActive ? { ...msg, isActive: !msg.isActive } : msg,
+    //     ),
+    //   };
     case MESSAGE_HOST_FLAG:
       return {
         ...state,

@@ -7,14 +7,14 @@ const MsgListSectionMainContainer = () => {
   // ! 작업중
   // redux
   const filteredMsgs = useSelector(state => state.message.filteredMsgs);
+  const { id, isActive } = filteredMsgs;
   const dispatch = useDispatch();
   console.log(filteredMsgs);
 
   // variable
   const hasMsgs = filteredMsgs.length;
-
   useEffect(() => {
-    dispatch(allMsgList());
+    dispatch(allMsgList(id, isActive));
   }, [dispatch]);
 
   return <MsgListSectionMain hasMsgs={hasMsgs} filteredMsgs={filteredMsgs} />;
