@@ -16,13 +16,13 @@ const MsgSectionHeaderContainer = ({ msgSectionStates }) => {
   const { msgListSectionState, msgDetailSectionState } = msgSectionStates;
   const messages = useSelector(state => state.message.messages);
   const nextActiveAllMsg = messages.find(
-    msg => msg.state === 'all' && msg.readMsg && !msg.isActive,
+    msg => msg.state === 'all' && msg.isRead && !msg.isActive,
   );
   const nextActiveHideMsg = messages.find(
-    msg => msg.state === 'hide' && msg.readMsg && !msg.isActive,
+    msg => msg.state === 'hide' && msg.isRead && !msg.isActive,
   );
   const nextActiveUnreadMsg = messages.find(
-    msg => msg.state === 'all' && !msg.readMsg && !msg.isActive,
+    msg => msg.state === 'all' && !msg.isRead && !msg.isActive,
   );
   console.log(nextActiveAllMsg.id);
   console.log(nextActiveHideMsg.id);
