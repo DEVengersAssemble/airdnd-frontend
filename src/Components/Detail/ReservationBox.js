@@ -6,19 +6,16 @@ import DropDown from '../Global/DropDown';
 
 const StDropDown = styled(DropDown)`
   width: 100%;
-  margin-bottom: 16px;
   margin-top: -1px;
-
-  & > div {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-  }
+  border-radius: 8px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 `;
 
 const StCheckIn = styled.div`
   width: 50%;
   padding: 10px;
-  border: 1px solid lightgray;
+  border: 1px solid ${({ theme }) => theme.color.gray};
   border-right: none;
   border-top-left-radius: 8px;
 `;
@@ -26,8 +23,12 @@ const StCheckIn = styled.div`
 const StCheckOut = styled.div`
   width: 50%;
   padding: 10px;
-  border: 1px solid lightgray;
+  border: 1px solid ${({ theme }) => theme.color.gray};
   border-top-right-radius: 8px;
+`;
+
+const StReserveBtn = styled(Button)`
+  margin-top: 16px;
 `;
 
 const ReservationBox = () => {
@@ -39,10 +40,16 @@ const ReservationBox = () => {
           <Rating rate="4.55" count="687" />
           <StCheckIn>체크인</StCheckIn>
           <StCheckOut>체크아웃</StCheckOut>
-          <StDropDown title="게스트 1명" />
-          <Button color="main" border="none" width="100%" padding="14px" hover>
+          <StDropDown title="게스트 1명" width="100%" options={[]} />
+          <StReserveBtn
+            color="main"
+            border="none"
+            width="100%"
+            padding="14px"
+            hover
+          >
             예약 가능 여부 보기 or 예약 하기
-          </Button>
+          </StReserveBtn>
           <StChargeMsg>예약 확정 전에는 요금이 청구되지 않습니다.</StChargeMsg>
           <StChargeList>
             <li>
@@ -154,6 +161,7 @@ const StTotalCharge = styled.div`
   justify-content: space-between;
   margin-top: 16px;
   padding-top: 24px;
+  font-weight: 700;
   border-top: 1px solid ${({ theme }) => theme.color.line};
 `;
 
