@@ -33,8 +33,14 @@ export const changeMediaSize = media => ({
   media,
 });
 
-export const archiveMsg = () => ({ type: ARCHAIVE_MESSAGE });
-export const unarchiveMsg = () => ({ type: UNARCHAIVE_MESSAGE });
+export const archiveMsg = (id, isActive) => ({
+  type: ARCHAIVE_MESSAGE,
+  isActive,
+});
+export const unarchiveMsg = (id, isActive) => ({
+  type: UNARCHAIVE_MESSAGE,
+  isActive,
+});
 export const undo = () => ({ type: UNDO });
 
 export const allMsgList = () => ({ type: ALL_MESSAGE_LIST });
@@ -61,6 +67,7 @@ const initialState = {
       state: 'all',
       readMsg: true,
       hostname: 'Paul',
+      isActive: true,
     },
     {
       id: 2,
@@ -68,6 +75,7 @@ const initialState = {
       state: 'all',
       readMsg: true,
       hostname: 'Bhel',
+      isActive: false,
     },
     {
       id: 3,
@@ -75,6 +83,7 @@ const initialState = {
       state: 'all',
       readMsg: false,
       hostname: 'James',
+      isActive: false,
     },
     {
       id: 4,
@@ -82,6 +91,7 @@ const initialState = {
       state: 'all',
       readMsg: false,
       hostname: 'Maple',
+      isActive: false,
     },
     {
       id: 5,
@@ -89,6 +99,7 @@ const initialState = {
       state: 'all',
       readMsg: false,
       hostname: 'Linda',
+      isActive: false,
     },
     {
       id: 6,
@@ -96,6 +107,7 @@ const initialState = {
       state: 'hide',
       readMsg: true,
       hostname: 'June',
+      isActive: false,
     },
     {
       id: 7,
@@ -103,6 +115,7 @@ const initialState = {
       state: 'hide',
       readMsg: true,
       hostname: 'Jason',
+      isActive: false,
     },
     {
       id: 8,
@@ -110,6 +123,7 @@ const initialState = {
       state: 'hide',
       readMsg: true,
       hostname: 'Ronald',
+      isActive: false,
     },
     {
       id: 9,
@@ -117,6 +131,7 @@ const initialState = {
       state: 'hide',
       readMsg: true,
       hostname: 'Krystyn',
+      isActive: false,
     },
     {
       id: 10,
@@ -124,10 +139,11 @@ const initialState = {
       state: 'hide',
       readMsg: true,
       hostname: 'John',
+      isActive: false,
     },
   ],
-  // popup filter를 통해 걸러진 message들
-  filteredMsg: [],
+  // popup filter를 통해 걸러진 messages
+  filteredMsgs: [],
   // allMsgCount: 0,
   // hideMsgCount: 0,
   // unreadMsgCount: 0,
@@ -165,10 +181,20 @@ const message = (state = initialState, action) => {
     case ARCHAIVE_MESSAGE:
       return {
         ...state,
+        messages: state.messages.map(msg =>
+          msg.id === action.id
+            ? { ...msg, isActive: !action.isActive, state: 'hide' }
+            : msg,
+        ),
       };
     case UNARCHAIVE_MESSAGE:
       return {
         ...state,
+        messages: state.messages.map(msg =>
+          msg.id === action.id
+            ? { ...msg, isActive: !action.isActive, state: 'all' }
+            : msg,
+        ),
       };
     case UNDO:
       return {
