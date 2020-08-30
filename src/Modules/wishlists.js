@@ -4,6 +4,11 @@ const ADD_BOOKMARK_OLD_LIST = 'wishlists/ADD_BOOKMARK_OLD_LIST';
 const ADD_BOOKMARK_NEW_LIST = 'wishlists/ADD_BOOKMARK_NEW_LIST';
 const REMOVE_BOOKMARK = 'wishlists/REMOVE_BOOKMARK';
 
+const OPEN_LIST_MODAL = 'wishlists/OPEN_LIST_MODAL';
+const CLOSE_LIST_MODAL = 'wishlists/CLOSE_LIST_MODAL';
+const OPEN_NEW_MODAL = 'wishlists/OPEN_NEW_MODAL';
+const CLOSE_NEW_MODAL = 'wishlists/CLOSE_NEW_MODAL';
+
 // action creator
 let id = 5;
 export const createBookmarkList = value => ({
