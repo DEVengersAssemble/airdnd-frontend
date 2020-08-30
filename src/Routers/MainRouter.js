@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import MainPage from '../Pages/MainPage';
-import SearchPage from '../Pages/SearchPage';
+// import SearchPage from '../Pages/SearchPage';
 import DetailPage from '../Pages/DetailPage';
 import ReservationPage from '../Pages/ReservationPage';
 import TripsPage from '../Pages/TripsPage';
@@ -13,7 +13,7 @@ const MainRouter = () => {
   return (
     <Switch>
       <Route path="/" component={MainPage} exact />
-      <Route path="/Search" component={SearchPage} />
+      {/* <Route path="/Search" component={SearchPage} /> */}
       <Route path="/Detail" component={DetailPage} exact />
       <Route path="/Reservation" component={ReservationPage} />
       <Route path="/message" component={MessagePage} />

@@ -12,15 +12,24 @@ const StWrapper = styled.div`
 `;
 
 const StSubjectWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;
+
+const StTextWrapper = styled.div`
   display: inline-block;
   width: calc(100% - 108px);
   margin-right: 8px;
+
+  @media ${({ theme }) => theme.size.medium} {
+    width: 100%;
+  }
 `;
 
 const StTitle = styled.strong`
   display: block;
   font-weight: 700;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 `;
 
 const StSubTitle = styled.span`
@@ -31,7 +40,7 @@ const StSubTitle = styled.span`
 const StReview = styled.div`
   display: flex;
   align-items: center;
-  margin-top: 6px;
+  margin-top: 2px;
   font-size: 14px;
 `;
 
@@ -45,7 +54,13 @@ const StHomeImage = styled.img`
   height: 80px;
   min-height: 1px;
   object-fit: cover;
-  /* vertical-align: top; */
+  vertical-align: top;
+
+  @media ${({ theme }) => theme.size.medium} {
+    order: -1;
+    margin-right: calc(100% - 100px);
+    margin-bottom: 16px;
+  }
 `;
 
 const StInfoWrapper = styled.div`
@@ -66,6 +81,7 @@ const StInfoWrapper = styled.div`
       margin-right: 8px;
       height: 2rem;
       width: 2rem;
+      min-width: 2rem;
       display: block;
       fill: currentcolor;
     }
@@ -74,6 +90,7 @@ const StInfoWrapper = styled.div`
 
 const StArrowIcon = styled(BsArrowRight)`
   margin: 0 12px;
+  min-width: 16px;
 `;
 
 const StChargeList = styled.ul`
@@ -103,17 +120,19 @@ const Aside = () => {
   return (
     <StWrapper>
       <StSubjectWrapper>
-        <StTitle>제주에서 제일 싼 개인실/ 개별욕실/ 가성비갑 G</StTitle>
-        <StSubTitle>Bonggaedaedong 10-gil, Cheju의 주택의 개인실</StSubTitle>
-        <StReview>
-          <StStarIcon />
-          후기 123개
-        </StReview>
+        <StTextWrapper>
+          <StTitle>제주에서 제일 싼 개인실/ 개별욕실/ 가성비갑 G</StTitle>
+          <StSubTitle>Bonggaedaedong 10-gil, Cheju의 주택의 개인실</StSubTitle>
+          <StReview>
+            <StStarIcon />
+            후기 123개
+          </StReview>
+        </StTextWrapper>
+        <StHomeImage
+          src="https://a0.muscache.com/im/pictures/fa8abf26-acbf-4463-bb2c-015cb1373c6e.jpg?aki_policy=large"
+          alt="숙소 사진"
+        />
       </StSubjectWrapper>
-      <StHomeImage
-        src="https://a0.muscache.com/im/pictures/fa8abf26-acbf-4463-bb2c-015cb1373c6e.jpg?aki_policy=large"
-        alt="숙소 사진"
-      />
       <StInfoWrapper>
         <div>
           <svg

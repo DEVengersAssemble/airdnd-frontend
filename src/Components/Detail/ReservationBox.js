@@ -6,6 +6,7 @@ import DropDown from '../Global/DropDown';
 
 const StDropDown = styled(DropDown)`
   width: 100%;
+  height: 56px;
   margin-top: -1px;
   border-radius: 8px;
   border-top-left-radius: 0;
@@ -14,6 +15,7 @@ const StDropDown = styled(DropDown)`
 
 const StCheckIn = styled.div`
   width: 50%;
+  height: 56px;
   padding: 10px;
   border: 1px solid ${({ theme }) => theme.color.gray};
   border-right: none;
@@ -22,6 +24,7 @@ const StCheckIn = styled.div`
 
 const StCheckOut = styled.div`
   width: 50%;
+  height: 56px;
   padding: 10px;
   border: 1px solid ${({ theme }) => theme.color.gray};
   border-top-right-radius: 8px;

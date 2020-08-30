@@ -71,7 +71,7 @@ const ReservationHeader = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/Reservation/Pay" activeClassName="active">
+            <NavLink to="/Reservation/Payment" activeClassName="active">
               <GrNext />
               3. 확인 및 결제
             </NavLink>

@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import HouseRules from '../Components/Reservation/HouseRules';
 import GuestInfo from '../Components/Reservation/GuestInfo';
+import Payment from '../Components/Reservation/Payment';
 
 const ReservationSubRouter = () => {
   return (
@@ -9,6 +10,7 @@ const ReservationSubRouter = () => {
       <Route exact path="/Reservation" component={HouseRules} />
       <Route path="/Reservation/HouseRules" component={HouseRules} />
       <Route path="/Reservation/GuestInfo" component={GuestInfo} />
+      <Route path="/Reservation/Payment" component={Payment} />
       <Route
         render={({ location }) => (
           <div>
