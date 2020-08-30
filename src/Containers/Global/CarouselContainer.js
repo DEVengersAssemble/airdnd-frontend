@@ -1,5 +1,55 @@
 import React, { useReducer, useEffect } from 'react';
 import Carousel from '../../Components/Global/Carousel';
+import { useSelector } from 'react-redux';
+
+const carouselReducer = (state, action) => {
+  switch (action.type) {
+    case 'SLIDE_NEXT':
+      return {
+        ...state,
+        nextIndex:
+          state.nextIndex + 1 < state.imageCount ? state.nextIndex + 1 : 0,
+        prevIndex: state.currentIndex,
+        currentIndex: state.nextIndex,
+        renderArray: [state.currentIndex, state.nextIndex],
+        direction: 'right',
+        isSliding: true,
+      };
+    case 'SLIDE_PREV':
+      return {
+        ...state,
+        nextIndex: state.currentIndex,
+        prevIndex:
+          state.prevIndex - 1 >= 0 ? state.prevIndex - 1 : state.imageCount - 1,
+        currentIndex: state.prevIndex,
+        renderArray: [state.prevIndex, state.currentIndex],
+        direction: 'left',
+        isSliding: true,
+      };
+    case 'END_SLIDE':
+      return {
+        ...state,
+        renderArray: [state.currentIndex],
+        isSliding: false,
+      };
+    case 'SET_WIDTH':
+      return {
+        ...state,
+        width: action.width,
+      };
+    case 'GET_MARKER':
+      return { ...state, marker: action.marker };
+    default:
+      return state;
+  }
+};
+
+const getMarkerIndex = (imageCount, currentIndex) => {
+  if (imageCount <= 5) return currentIndex;
+  if (currentIndex >= 2 && currentIndex < imageCount - 2) return 2;
+  if (currentIndex >= imageCount - 2) return 5 - (imageCount - currentIndex);
+  return currentIndex;
+};
 
 const carouselReducer = (state, action) => {
   switch (action.type) {
@@ -51,6 +101,10 @@ const getMarkerIndex = (imageCount, currentIndex) => {
 };
 
 const CarouselContainer = ({
+<<<<<<< HEAD
+=======
+  homeId,
+>>>>>>> a0b74daac04906641223ff4d6978c2f32087f291
   size,
   theme,
   responsive,
@@ -60,6 +114,11 @@ const CarouselContainer = ({
   getWidth,
   ...rest
 }) => {
+<<<<<<< HEAD
+=======
+  const { hoveredHome } = useSelector(state => state.search);
+  const isHovered = hoveredHome === homeId;
+>>>>>>> a0b74daac04906641223ff4d6978c2f32087f291
   const carouselInit = {
     imageCount,
     isSliding: false,
@@ -109,6 +168,10 @@ const CarouselContainer = ({
       imageArray={imageArray}
       imageCount={imageCount}
       isSuperhost={isSuperhost}
+<<<<<<< HEAD
+=======
+      isHovered={isHovered}
+>>>>>>> a0b74daac04906641223ff4d6978c2f32087f291
       onSlideNext={onSlideNext}
       onSlidePrev={onSlidePrev}
       setWidth={setWidth}

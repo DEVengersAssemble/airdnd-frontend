@@ -1,17 +1,18 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import MsgListSectionHeader from './MsgListSectionHeader';
+import MsgListSectionHeaderContainer from '../../Containers/Message/MsgListSectionHeaderContainer';
 import MsgListSectionMain from './MsgListSectionMain';
 
-const MessageListSection = ({ msgSectionStates, myRef }) => {
+const MessageListSection = ({ myRef, msgSectionStates }) => {
   const { msgListSectionState, msgDetailSectionState } = msgSectionStates;
+
   return (
     <MessageListSectionWrapper
       ref={myRef}
       msgListSectionState={msgListSectionState}
       msgDetailSectionState={msgDetailSectionState}
     >
-      <MsgListSectionHeader />
+      <MsgListSectionHeaderContainer />
       <MsgListSectionMain />
     </MessageListSectionWrapper>
   );
@@ -22,14 +23,13 @@ const MessageListSectionWrapper = styled.section`
   flex-direction: column;
   min-width: 37.5rem;
 
-  ${({ msgListSectionState }) =>
+  /* ${({ msgListSectionState }) =>
     msgListSectionState &&
     css`
-      opacity: 1;
       min-width: 37.5rem;
-    `}
+    `} */
 
-  @media ${({ theme }) => theme.size.medium} {
+  /* @media ${({ theme }) => theme.size.medium} {
     display: none;
 
     ${({ msgDetailSectionState }) =>
@@ -37,7 +37,7 @@ const MessageListSectionWrapper = styled.section`
       css`
         display: flex;
       `}
-  }
+  } */
 `;
 
 export default MessageListSection;

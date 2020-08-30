@@ -17,7 +17,7 @@ export const HomePrice = ({ type, price, dateDiff, theme }) => {
   );
 };
 
-const Home = ({ home, onClickBookmark, dateDiff }) => {
+const Home = ({ home, onClickBookmark, onHoverHome, onBlurHome, dateDiff }) => {
   const {
     homeId,
     isSuperhost,
@@ -33,9 +33,13 @@ const Home = ({ home, onClickBookmark, dateDiff }) => {
   } = home;
 
   return (
-    <StWrapper>
+    <StWrapper
+      onMouseOver={() => onHoverHome(homeId)}
+      onMouseLeave={onBlurHome}
+    >
       <CarouselContainer
         size="large"
+        homeId={homeId}
         imageArray={imageArray}
         imageCount={imageCount}
         isSuperhost={isSuperhost}

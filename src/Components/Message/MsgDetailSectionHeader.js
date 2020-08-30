@@ -5,7 +5,7 @@ import theme from '../../style/theme';
 import Button from '../Global/Button';
 import { MdClear } from 'react-icons/md';
 
-const MsgDetailSectionHeader = ({ msgDetailSectionState, onCloseSection }) => {
+const MsgDetailSectionHeader = ({ onCloseSection }) => {
   return (
     <MsgDetailSectionHeaderWrapper>
       <MsgDetailSectionHeaderTitle>세부 내용</MsgDetailSectionHeaderTitle>
