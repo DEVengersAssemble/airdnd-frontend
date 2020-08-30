@@ -15,7 +15,7 @@ const StTripsHeader = styled.header`
   height: 80px;
   background: ${({ theme }) => theme.color.white};
   border-bottom: 1px solid ${({ theme }) => theme.color.line};
-  padding: 20px 120px 15px 110px;
+  padding: 20px 120px 15px 120px;
 
   @media ${({ theme }) => theme.size.medium} {
     padding: 20px 75px 20px 65px;

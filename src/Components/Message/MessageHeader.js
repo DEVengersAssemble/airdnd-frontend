@@ -15,7 +15,7 @@ const StMessageHeader = styled.header`
   height: 80px;
   background: ${({ theme }) => theme.color.white};
   border-bottom: 1px solid ${({ theme }) => theme.color.line};
-  padding: 20px 20px 15px 10px;
+  padding: 20px 20px 15px 20px;
 `;
 
 const StButtonGroupWrapper = styled.div`
