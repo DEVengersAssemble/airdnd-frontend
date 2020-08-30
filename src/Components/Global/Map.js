@@ -22,6 +22,7 @@ const Map = compose(
           width: '100%',
           height: `100vh`,
           position: 'sticky',
+          // position: 'absolute',
           top: '0',
         }}
       />
@@ -32,6 +33,7 @@ const Map = compose(
           width: '100%',
           height: `100vh`,
           position: 'sticky',
+          // position: 'absolute',
           top: '0',
         }}
       />
@@ -42,6 +44,7 @@ const Map = compose(
           width: '100%',
           height: `100vh`,
           position: 'sticky',
+          // position: 'absolute',
           top: '0',
         }}
       />
