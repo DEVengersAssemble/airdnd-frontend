@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   RefundPopup,
   RoomTypePopup,
@@ -6,33 +6,34 @@ import {
   SetDatePopup,
 } from '../../Components/Search/FilterPopup';
 import { useSelector, useDispatch } from 'react-redux';
-import { saveFilter } from '../../Modules/search';
+import { saveFilter, setFilter, resetFilter } from '../../Modules/search';
 
-const RefundPopupContainer = ({ popupState, size, onClose }) => {
+let prevFilter = {};
+
+const RefundPopupContainer = ({ popupState, onClose }) => {
   const { refund } = useSelector(state => state.search.filterApplied);
   const dispatch = useDispatch();
 
-  const [toggle, setToggle] = useState(refund);
-  const handleClick = () => setToggle(!toggle);
-  const onReset = state => setToggle(state);
+  const onToggle = () => dispatch(setFilter('refund', !refund));
+  const onReset = () => dispatch(resetFilter('refund'));
+  const onSave = () => dispatch(saveFilter('refund', refund));
+  const isDisabled = !refund;
 
   const popup = useRef();
   const closePopup = ({ target }) => {
-    if (!popupState || popup.current.contains(target)) return;
-    onClose();
-    onReset(refund);
-  };
-
-  console.log('refund', refund);
-  console.log('toggle', toggle);
-
-  const onSave = () => {
-    dispatch(saveFilter('refund', toggle));
-    onClose();
-    console.log('===========saved');
+    if (
+      !popupState ||
+      popup.current.contains(target) ||
+      target.nodeName === 'svg' ||
+      target.nodeName === 'path'
+    )
+      return;
+    // dispatch(saveFilter('refund'), prevFilter);
+    onClose('refund');
   };
 
   useEffect(() => {
+    prevFilter = refund;
     document.addEventListener('click', closePopup);
     return () => {
       document.removeEventListener('click', closePopup);
@@ -42,42 +43,38 @@ const RefundPopupContainer = ({ popupState, size, onClose }) => {
   return (
     <div ref={popup}>
       <RefundPopup
-        size={size}
-        toggle={toggle}
+        toggle={refund}
         popupState={popupState}
+        isDisabled={isDisabled}
         onSave={onSave}
-        onClose={onClose}
+        // onClose={onClose}
         onReset={onReset}
-        handleClick={handleClick}
+        handleClick={onToggle}
       />
     </div>
   );
 };
 
-const RoomTypePopupContainer = ({ popupState, size, onClose }) => {
+const RoomTypePopupContainer = ({ popupState, onClose }) => {
   const { roomType } = useSelector(state => state.search.filterApplied);
   const dispatch = useDispatch();
 
-  console.log(roomType);
-
-  const [check, setCheck] = useState(roomType);
-  const onChange = type => setCheck({ ...check, [type]: !check[type] });
-  const onReset = () =>
-    setCheck({ house: false, private: false, shared: false });
+  const onChange = type =>
+    dispatch(setFilter('roomType', { ...roomType, [type]: !roomType[type] }));
+  const onReset = () => dispatch(resetFilter('roomType'));
+  const onSave = () => dispatch(saveFilter('roomType', roomType));
+  const isDisabled =
+    roomType && !roomType.house && !roomType.private && !roomType.shared;
 
   const popup = useRef();
   const closePopup = ({ target }) => {
     if (!popupState || popup.current.contains(target)) return;
-    onClose();
-    onReset();
-  };
-
-  const onSave = () => {
-    dispatch(saveFilter('roomType', check));
-    onClose();
+    // dispatch(saveFilter('roomType'), prevFilter);
+    onClose('roomType');
   };
 
   useEffect(() => {
+    prevFilter = { ...roomType };
     document.addEventListener('click', closePopup);
     return () => {
       document.removeEventListener('click', closePopup);
@@ -87,10 +84,9 @@ const RoomTypePopupContainer = ({ popupState, size, onClose }) => {
   return (
     <div ref={popup}>
       <RoomTypePopup
-        size={size}
-        check={check}
+        check={roomType}
         popupState={popupState}
-        onClose={onClose}
+        isDisabled={isDisabled}
         onSave={onSave}
         onChange={onChange}
         onReset={onReset}
@@ -99,33 +95,42 @@ const RoomTypePopupContainer = ({ popupState, size, onClose }) => {
   );
 };
 
-const PricePopupContainer = ({ popupState, size, onClose }) => {
-  const { price } = useSelector(state => state.search.filterApplied);
+const PricePopupContainer = ({ popupState, onClose }) => {
+  const { min, max } = useSelector(state => state.search.filterApplied.price);
+  const { priceArray, averagePrice } = useSelector(state => state.search);
+  const [range, setRange] = useState({ value: [min, max] });
   const dispatch = useDispatch();
 
-  const [priceFrom, setPriceFrom] = useState(price.priceFrom);
-  const [priceTo, setPriceTo] = useState(price.priceTo);
-  const onChangePriceFrom = ({ target }) => setPriceFrom(target.value);
-  const onChangePriceTo = ({ target }) => setPriceTo(target.value);
-  const onReset = () => {
-    setPriceFrom(12000);
-    setPriceTo(1000000);
+  const onHandler = e => {
+    setRange({ value: e });
+    dispatch(setFilter('price', { min: e[0], max: e[1] }));
   };
+  const onSetRange = () => setRange({ value: [min, max] });
+  const onChangeMinPrice = ({ target }) =>
+    dispatch(setFilter('price', { min: +target.value, max }));
+  const onChangeMaxPrice = ({ target }) =>
+    dispatch(setFilter('price', { min, max: +target.value }));
+  const onReset = () => {
+    setRange({ value: [12000, 1000000] });
+    dispatch(resetFilter('price'));
+  };
+  const onSave = () => dispatch(saveFilter('price', { min, max }));
 
-  const { priceArray, averagePrice } = useSelector(state => state.search);
+  const track = document.querySelector('.rc-slider-track');
+  const rangeBar = document.querySelector('.rc-slider');
+  const trackPos = track && track.getBoundingClientRect();
+  const rangePos = rangeBar && rangeBar.getBoundingClientRect();
+  const isDisabled = min === 12000 && max === 1000000;
+
   const popup = useRef();
   const closePopup = ({ target }) => {
     if (!popupState || popup.current.contains(target)) return;
-    onClose();
-    onReset();
-  };
-
-  const onSave = () => {
-    dispatch(saveFilter('price', { priceFrom, priceTo }));
-    onClose();
+    // dispatch(saveFilter('price'), prevFilter);
+    onClose('price');
   };
 
   useEffect(() => {
+    prevFilter = { min, max };
     document.addEventListener('click', closePopup);
     return () => {
       document.removeEventListener('click', closePopup);
@@ -135,27 +140,33 @@ const PricePopupContainer = ({ popupState, size, onClose }) => {
   return (
     <div ref={popup}>
       <PricePopup
-        size={size}
         popupState={popupState}
+        isDisabled={isDisabled}
         priceArray={priceArray}
         averagePrice={averagePrice}
-        priceFrom={priceFrom}
-        onChangePriceFrom={onChangePriceFrom}
-        onChangePriceTo={onChangePriceTo}
-        priceTo={priceTo}
+        min={min}
+        max={max}
+        left={trackPos && trackPos.left}
+        right={trackPos && trackPos.right}
+        start={rangePos && rangePos.left}
+        end={rangePos && rangePos.right}
+        range={range}
+        onHandler={onHandler}
+        onSetRange={onSetRange}
+        onChangeMinPrice={onChangeMinPrice}
+        onChangeMaxPrice={onChangeMaxPrice}
         onSave={onSave}
-        onClose={onClose}
         onReset={onReset}
       />
     </div>
   );
 };
 
-const SetDatePopupContainer = ({ popupState, size, onClose }) => {
+const SetDatePopupContainer = ({ popupState, onClose }) => {
   const popup = useRef();
   const closePopup = ({ target }) => {
     if (!popupState || popup.current.contains(target)) return;
-    onClose();
+    onClose('setDate');
   };
 
   useEffect(() => {
@@ -167,7 +178,7 @@ const SetDatePopupContainer = ({ popupState, size, onClose }) => {
 
   return (
     <div ref={popup}>
-      <SetDatePopup popupState={popupState} onClose={onClose} size={size} />
+      <SetDatePopup popupState={popupState} />
     </div>
   );
 };

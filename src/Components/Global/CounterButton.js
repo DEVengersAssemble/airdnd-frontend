@@ -31,7 +31,6 @@ const StCounterButton = styled(Button)`
   &:disabled {
     color: ${({ theme }) => theme.color.shadow};
     border: 1px solid ${({ theme }) => theme.color.shadow};
-    cursor: not-allowed;
   }
 `;
 

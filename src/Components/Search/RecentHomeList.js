@@ -1,9 +1,10 @@
 import React from 'react';
 import RecentHome from './RecentHome';
+import HomeCard from './HomeCard';
 import styled from 'styled-components';
 import RecentPagenation from './RecentPagenation';
 
-const RecentHomeList = () => {
+const RecentHomeList = ({ recentHomes }) => {
   return (
     <StWrapper>
       <StHeader>최근 숙소</StHeader>
@@ -12,11 +13,9 @@ const RecentHomeList = () => {
       </StSpan>
       <RecentPagenation />
       <StHomeWrapper>
-        <RecentHome />
-        <RecentHome />
-        <RecentHome />
-        <RecentHome />
-        <RecentHome />
+        {recentHomes.map(home => (
+          <HomeCard key={home.homeId} home={home} type="recent" />
+        ))}
       </StHomeWrapper>
     </StWrapper>
   );
@@ -25,6 +24,8 @@ const RecentHomeList = () => {
 const StWrapper = styled.div`
   margin: 4rem 0;
   position: relative;
+  overflow: hidden;
+  width: 100%;
 `;
 
 const StHomeWrapper = styled.ul`

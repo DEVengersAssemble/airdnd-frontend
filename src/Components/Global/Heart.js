@@ -92,6 +92,9 @@ const hoverStyles = css`
 
 // default heart
 const StDiv = styled.div`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   ${defaultColorStyles}
   ${sizeStyles}
   ${hoverStyles}
@@ -140,16 +143,23 @@ const Heart = ({ size, bgColor, stroke, ckType, hover, checked, ...rest }) => {
   );
 };
 
-const CkHeart = ({ ckType, hover, checked, ...event }) => {
+// onClick 이벤트는 onCheck 이름으로 내려주세요
+const CkHeart = ({ ckType, hover, checked, onCheck, theme, ...event }) => {
   return (
     <StHeartLabel hover={hover} {...event}>
-      <StHeartInput type="checkbox" />
+      <StHeartInput type="checkbox" onClick={onCheck} />
       {hover ? (
         // hover=true
-        <Heart size="large" ckType={ckType} hover={hover} checked={checked} />
+        <Heart
+          size="large"
+          ckType={ckType}
+          hover={hover}
+          checked={checked}
+          theme={theme}
+        />
       ) : (
         // hover=false
-        <Heart size="large" ckType={ckType} checked={checked} />
+        <Heart size="large" ckType={ckType} checked={checked} theme={theme} />
       )}
     </StHeartLabel>
   );

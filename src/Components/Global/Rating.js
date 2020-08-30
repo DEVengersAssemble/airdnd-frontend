@@ -4,7 +4,7 @@ import { AiFillStar } from 'react-icons/ai';
 
 // scale은 폰트크기로, rem 단위에서 '숫자만' 전달하세요
 
-const Rating = ({ scale, rate, count, starSize, ...rest }) => {
+const Rating = ({ scale, rate, count, starSize, theme, ...rest }) => {
   const regExp = /\d/g;
   const filteredNumber = (count + '').match(regExp).join('');
 
@@ -12,12 +12,12 @@ const Rating = ({ scale, rate, count, starSize, ...rest }) => {
 
   return (
     <StRatingWrapper scale={scale} {...rest}>
-      <StStarIcon scale={scale} starsize={starSize} />
+      <StStarIcon scale={scale} starsize={starSize} theme={theme} />
       <span className="a11yHidden">
         {`후기 ${filteredNumber}개로부터 5점 만점에 ${rate}점을 받은 숙소입니다.`}
       </span>
       <StRatingGrade>{rate}</StRatingGrade>
-      <StReviewCount>({count})</StReviewCount>
+      <StReviewCount theme={theme}>({count})</StReviewCount>
     </StRatingWrapper>
   );
 };

@@ -10,7 +10,6 @@ const SettingButtonContainer = ({ isScrollTop }) => {
   };
 
   const togglePopup = () => {
-    console.log('=====toggle');
     setPopupVisible(prevState => !prevState);
   };
 

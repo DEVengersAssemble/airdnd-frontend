@@ -1,4 +1,5 @@
 import React from 'react';
+import Slider from 'rc-slider';
 import Popup from '../Global/Popup';
 import styled, { css } from 'styled-components';
 import Button from '../Global/Button';
@@ -6,11 +7,12 @@ import Toggle from '../Global/Toggle';
 import ModalFooter from '../Global/ModalFooter';
 import Checkbox from '../Global/Checkbox';
 import { NewInput } from '../Global/Input';
-import { GiHamburgerMenu } from 'react-icons/gi';
+
+const Range = Slider.createSliderWithTooltip(Slider.Range);
 
 const RefundPopup = ({
   popupState,
-  size,
+  isDisabled,
   toggle,
   handleClick,
   onReset,
@@ -19,7 +21,8 @@ const RefundPopup = ({
   return (
     <FilterPopup
       popupState={popupState}
-      size={size}
+      isDisabled={isDisabled}
+      size="350px"
       value={toggle}
       onSave={onSave}
       onReset={() => onReset(false)}
@@ -36,64 +39,68 @@ const RefundPopup = ({
 
 const RoomTypePopup = ({
   popupState,
-  size,
+  isDisabled,
   check,
   onChange,
   onReset,
   onSave,
 }) => {
   return (
-    <FilterPopup
-      popupState={popupState}
-      size={size}
-      onReset={onReset}
-      onSave={onSave}
-    >
-      <StCheckboxList>
-        <StCheckboxWrapper>
-          <Checkbox
-            value
-            checked={check.house}
-            onChange={() => onChange('house')}
-          >
-            <StContentWrapper content="roomType">
-              <StLargeSpan>집 전체</StLargeSpan>
-              <StSmallSpan>집 전체를 단독으로 사용합니다</StSmallSpan>
-            </StContentWrapper>
-          </Checkbox>
-        </StCheckboxWrapper>
-        <StCheckboxWrapper>
-          <Checkbox
-            value
-            checked={check.private}
-            onChange={() => onChange('private')}
-          >
-            <StContentWrapper content="roomType">
-              <StLargeSpan>개인실</StLargeSpan>
-              <StSmallSpan>
-                침실은 단독으로 쓰고, 이외의 공간은 호스트나 다른 게스트와 함께
-                이용할 수도 있습니다
-              </StSmallSpan>
-            </StContentWrapper>
-          </Checkbox>
-        </StCheckboxWrapper>
-        <StCheckboxWrapper>
-          <Checkbox
-            value
-            checked={check.shared}
-            onChange={() => onChange('shared')}
-          >
-            <StContentWrapper content="roomType">
-              <StLargeSpan>다인실</StLargeSpan>
-              <StSmallSpan>
-                사적 공간 없이, 침실이나 욕실 등을 호스트나 다른 게스트와 함께
-                이용합니다
-              </StSmallSpan>
-            </StContentWrapper>
-          </Checkbox>
-        </StCheckboxWrapper>
-      </StCheckboxList>
-    </FilterPopup>
+    check && (
+      <FilterPopup
+        popupState={popupState}
+        isDisabled={isDisabled}
+        size="365px"
+        onReset={onReset}
+        onSave={onSave}
+        check={check}
+      >
+        <StCheckboxList>
+          <StCheckboxWrapper>
+            <Checkbox
+              value
+              checked={check.house}
+              onChange={() => onChange('house')}
+            >
+              <StContentWrapper content="roomType">
+                <StLargeSpan>집 전체</StLargeSpan>
+                <StSmallSpan>집 전체를 단독으로 사용합니다</StSmallSpan>
+              </StContentWrapper>
+            </Checkbox>
+          </StCheckboxWrapper>
+          <StCheckboxWrapper>
+            <Checkbox
+              value
+              checked={check.private}
+              onChange={() => onChange('private')}
+            >
+              <StContentWrapper content="roomType">
+                <StLargeSpan>개인실</StLargeSpan>
+                <StSmallSpan>
+                  침실은 단독으로 쓰고, 이외의 공간은 호스트나 다른 게스트와
+                  함께 이용할 수도 있습니다
+                </StSmallSpan>
+              </StContentWrapper>
+            </Checkbox>
+          </StCheckboxWrapper>
+          <StCheckboxWrapper>
+            <Checkbox
+              value
+              checked={check.shared}
+              onChange={() => onChange('shared')}
+            >
+              <StContentWrapper content="roomType">
+                <StLargeSpan>다인실</StLargeSpan>
+                <StSmallSpan>
+                  사적 공간 없이, 침실이나 욕실 등을 호스트나 다른 게스트와 함께
+                  이용합니다
+                </StSmallSpan>
+              </StContentWrapper>
+            </Checkbox>
+          </StCheckboxWrapper>
+        </StCheckboxList>
+      </FilterPopup>
+    )
   );
 };
 
@@ -101,18 +108,26 @@ const PricePopup = ({
   priceArray,
   averagePrice,
   popupState,
-  size,
-  priceFrom,
-  priceTo,
-  onChangePriceFrom,
-  onChangePriceTo,
+  isDisabled,
+  min,
+  max,
+  left,
+  right,
+  start,
+  end,
+  range,
+  onHandler,
+  onSetRange,
+  onChangeMinPrice,
+  onChangeMaxPrice,
   onReset,
   onSave,
 }) => {
   return (
     <FilterPopup
       popupState={popupState}
-      size={size}
+      isDisabled={isDisabled}
+      size="430px"
       onReset={onReset}
       onSave={onSave}
     >
@@ -121,35 +136,47 @@ const PricePopup = ({
           평균 1박 요금은 ₩{averagePrice.toLocaleString()}입니다
         </StLargeSpan>
         <StRangeWrapper>
-          <StRangeBar>
-            <StButton btnType="circle" left="0">
-              <StIcon />
-            </StButton>
-            <StButton btnType="circle" right="0">
-              <StIcon />
-            </StButton>
-          </StRangeBar>
+          <Range
+            min={12000}
+            max={1000000}
+            allowCross={false}
+            value={range.value}
+            defaultValue={[12000, 1000000]}
+            onChange={onHandler}
+          />
           <StGraph>
-            {priceArray.map((price, i) => (
-              <StStick key={i} height={price} />
-            ))}
+            {priceArray.map((price, i) => {
+              const isSmaller = right > end - (priceArray.length - i) * 7;
+              const isBigger = left < start + i * 7;
+              return (
+                <StStick
+                  key={i}
+                  height={price}
+                  inRange={isDisabled || (isSmaller && isBigger)}
+                />
+              );
+            })}
           </StGraph>
         </StRangeWrapper>
         <StInputWrapper>
           <NewInput
+            type="number"
             title="최저 요금"
-            value={priceFrom}
+            value={min}
             short
             pay="₩"
-            onChange={onChangePriceFrom}
+            onChange={onChangeMinPrice}
+            onBlur={onSetRange}
           />
           <span>―</span>
           <NewInput
+            type="number"
             title="최고 요금"
-            value={priceTo}
+            value={max}
             short
             pay="₩"
-            onChange={onChangePriceTo}
+            onChange={onChangeMaxPrice}
+            onBlur={onSetRange}
           />
         </StInputWrapper>
       </StContentWrapper>
@@ -157,9 +184,9 @@ const PricePopup = ({
   );
 };
 
-const SetDatePopup = ({ popupState, size }) => {
+const SetDatePopup = ({ popupState }) => {
   return (
-    <StPopup popupState={popupState} size={size}>
+    <StPopup popupState={popupState} size="35px">
       <StContentWrapper content="setDate">
         <StLargeSpan>요금을 확인하려면 여행 날짜를 입력하세요</StLargeSpan>
         <Button btnType="color" color="black" fontSize="1.4rem">
@@ -173,8 +200,8 @@ const SetDatePopup = ({ popupState, size }) => {
 const FilterPopup = ({
   children,
   popupState,
+  isDisabled,
   size,
-  value,
   onReset,
   onSave,
 }) => {
@@ -187,7 +214,7 @@ const FilterPopup = ({
           padding="1rem"
           fontSize="1.6rem"
           onClick={onReset}
-          disabled={!value}
+          disabled={isDisabled}
         >
           지우기
         </Button>
@@ -288,43 +315,73 @@ const StInputWrapper = styled.div`
 
 const StRangeWrapper = styled.div`
   height: 10rem;
-  margin: 2rem 0;
+  margin: 3rem 0 1rem;
   display: flex;
   flex-direction: column;
   flex-flow: column-reverse;
+
+  .rc-slider {
+    position: relative;
+    height: 10px;
+    width: 95%;
+    margin: 0 auto;
+    border-radius: 3px;
+  }
+  .rc-slider-rail {
+    position: absolute;
+    width: 100%;
+    background-color: ${({ theme }) => theme.color.shadow};
+    height: 2px;
+    border-radius: 3px;
+  }
+  .rc-slider-track {
+    position: absolute;
+    height: 2px;
+    background-color: ${({ theme }) => theme.color.gray};
+  }
+  .rc-slider-handle {
+    position: absolute;
+    width: 27px;
+    height: 27px;
+    margin-top: -13.5px;
+    cursor: grab;
+    border-radius: 50%;
+    border: solid 1px ${({ theme }) => theme.color.gray};
+    background-color: #fff;
+    touch-action: pan-x;
+    z-index: 15;
+    &:focus {
+      outline: none;
+    }
+    &:after {
+      content: '|||';
+      position: absolute;
+      font-size: 1.3rem;
+      padding: 2.5px 6px;
+      color: ${({ theme }) => theme.color.gray};
+    }
+  }
+  .rc-slider-tooltip {
+    display: none;
+  }
 `;
 
 const StGraph = styled.ul`
   display: flex;
   align-items: flex-end;
+  width: 95%;
+  margin: 0 auto;
+  position: relative;
 `;
 
 const StStick = styled.li`
   width: 5%;
+  z-index: -1;
   height: ${({ height }) => `${height * 0.8}px`};
   margin: 0 1px -1px;
   border-radius: 1px;
-  background: ${({ theme }) => theme.color.gray};
-`;
-
-const StRangeBar = styled.div`
-  width: 100%;
-  height: 2px;
-  background: ${({ theme }) => theme.color.gray};
-  position: relative;
-  display: flex;
-  align-items: center;
-`;
-
-const StButton = styled(Button)`
-  position: absolute;
-  right: ${({ right }) => right};
-  left: ${({ left }) => left};
-`;
-
-const StIcon = styled(GiHamburgerMenu)`
-  color: ${({ theme }) => theme.color.gray};
-  transform: rotate(90deg);
+  background: ${({ theme, inRange }) =>
+    inRange ? `${theme.color.gray}` : `${theme.color.shadow}`};
 `;
 
 const StFooter = styled(ModalFooter)`

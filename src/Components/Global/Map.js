@@ -5,8 +5,12 @@ import {
   withScriptjs,
   withGoogleMap,
   GoogleMap,
-  Marker,
+  OverlayView,
 } from 'react-google-maps';
+import { AiFillHome } from 'react-icons/ai';
+import theme from '../../style/theme';
+import MapMarkerContainer from '../../Containers/Search/MapMarkerContainer';
+import Button from './Button';
 
 const Map = compose(
   withProps({
@@ -45,15 +49,7 @@ const Map = compose(
   }),
   withScriptjs,
   withGoogleMap,
-)(({ center, mapZoom }) => {
-  const goldStar = {
-    fillColor: 'white',
-    fillOpacity: 0.8,
-    borderRadius: '50%',
-    scale: 0.3,
-    strokeColor: 'gold',
-    strokeWeight: 1,
-  };
+)(({ center, mapZoom, markers }) => {
   return (
     <GoogleMap
       zoom={mapZoom}
@@ -64,30 +60,45 @@ const Map = compose(
       }}
       options={{ disableDefaultUI: true }}
     >
-      <StMarker
-        className="노원역"
-        position={{ lat: 37.651791, lng: 127.060944 }}
-        icon={goldStar}
-      />
-      <StMarker
-        className="을지초"
-        position={{ lat: 37.650333, lng: 127.072783 }}
-        icon={goldStar}
-      />
-      <StMarker
-        className="당현천"
-        position={{ lat: 37.648824, lng: 127.065379 }}
-        label={{ text: 'hello', color: 'white' }}
-        icon={goldStar}
-      />
+      {markers &&
+        markers.map((marker, i) => (
+          <MapMarkerContainer key={i} marker={marker} theme={theme} />
+        ))}
+      <OverlayView
+        position={{ lat: 37.64993, lng: 127.077999 }}
+        mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+      >
+        <HomeMarker theme={theme} btnType="circle">
+          <AiFillHome />
+        </HomeMarker>
+      </OverlayView>
     </GoogleMap>
   );
 });
 
-const StMarker = styled(Marker)`
-  background: blue;
-  width: 20px;
-  height: 20px;
+const buttonStyle = css`
+  border: none;
+  box-shadow: 0 0 2px ${theme.color.gray};
+  transition: 0.3s;
+  &:hover {
+    border: none;
+    transform: scale(1.1);
+    transition: 0.3s;
+  }
+  &:focus {
+    background: black;
+    color: white;
+  }
+`;
+
+const HomeMarker = styled(Button)`
+  ${buttonStyle};
+`;
+
+const PriceMarker = styled(Button)`
+  ${buttonStyle};
+  font-size: 1.4rem;
+  padding: 0.6rem 0.8rem;
 `;
 
 export default Map;

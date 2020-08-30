@@ -92,10 +92,11 @@ const StCheckBoxText = styled.span`
   ${dragDisable}
 `;
 
-const Checkbox = ({ children, value, map, checked, ...event }) => {
+// onClick 이벤트는 onCheck 이름으로 내려주세요
+const Checkbox = ({ children, value, map, checked, onCheck, ...event }) => {
   return (
     <StCheckBoxLabel map={map} {...event}>
-      <StCheckBoxInput type="checkbox" />
+      <StCheckBoxInput type="checkbox" onClick={onCheck} />
       {checked ? <StCheckBox map={map} /> : <StCheckBoxOutLine map={map} />}
       {value && <StCheckBoxText map={map}>{children}</StCheckBoxText>}
     </StCheckBoxLabel>
