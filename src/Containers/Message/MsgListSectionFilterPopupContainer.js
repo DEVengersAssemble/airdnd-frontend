@@ -36,6 +36,26 @@ const MsgListSectionFilterPopupContainer = ({
     dispatch(unreadMsgList());
     setOpenPopup(false);
   }, [dispatch, setOpenPopup]);
+  // // ! onClick 이벤트가 발생하면 filter해서 메시지 리스트를 보여준다
+  // // ! popup을 끈다
+  // const onClickFilterList = ({ target }) => {
+  //   console.dir(target.childNodes[0]);
+  //   console.dir(target);
+  //   console.dir(popupRef.current.children[0].children[0]);
+  //   if (target === popupRef.current.children[0].children[0].children[0]) {
+  //     console.log('true');
+  //     dispatch(allMsgList());
+  //     setOpenPopup(false);
+  //   }
+  //   if (target === popupRef.current.children[0].children[1]) {
+  //     dispatch(hideMsgList());
+  //     setOpenPopup(false);
+  //   }
+  //   if (target === popupRef.current.children[0].children[3]) {
+  //     dispatch(unreadMsgList());
+  //     setOpenPopup(false);
+  //   }
+  // };
 
   return (
     <MsgListSectionFilterPopup

@@ -1,4 +1,5 @@
 const HOVER_HOME = 'search/HOVER_HOME';
+const BLUR_HOME = 'search/BLUR_HOME';
 
 const SHOW_MAP = 'search/SHOW_MAP';
 const HIDE_MAP = 'search/HIDE_MAP';
@@ -22,6 +23,7 @@ const SET_MODAL_FILTER = 'search/SET_MODAL_FILTER';
 const RESET_MODAL_FILTER = 'search/RESET_MODAL/FILTER';
 
 export const hoverHome = homeId => ({ type: HOVER_HOME, homeId });
+export const blurHome = () => ({ type: BLUR_HOME });
 
 export const showMap = () => ({ type: SHOW_MAP });
 export const hideMap = () => ({ type: HIDE_MAP });
@@ -525,6 +527,11 @@ const search = (state = initialState, action) => {
       return {
         ...state,
         hoveredHome: action.homeId,
+      };
+    case BLUR_HOME:
+      return {
+        ...state,
+        hoveredHome: null,
       };
     default:
       return state;

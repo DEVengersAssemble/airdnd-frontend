@@ -1,5 +1,6 @@
 import React, { useReducer, useEffect } from 'react';
 import Carousel from '../../Components/Global/Carousel';
+import { useSelector } from 'react-redux';
 
 const carouselReducer = (state, action) => {
   switch (action.type) {
@@ -51,6 +52,7 @@ const getMarkerIndex = (imageCount, currentIndex) => {
 };
 
 const CarouselContainer = ({
+  homeId,
   size,
   theme,
   responsive,
@@ -60,6 +62,8 @@ const CarouselContainer = ({
   getWidth,
   ...rest
 }) => {
+  const { hoveredHome } = useSelector(state => state.search);
+  const isHovered = hoveredHome === homeId;
   const carouselInit = {
     imageCount,
     isSliding: false,
@@ -109,6 +113,7 @@ const CarouselContainer = ({
       imageArray={imageArray}
       imageCount={imageCount}
       isSuperhost={isSuperhost}
+      isHovered={isHovered}
       onSlideNext={onSlideNext}
       onSlidePrev={onSlidePrev}
       setWidth={setWidth}

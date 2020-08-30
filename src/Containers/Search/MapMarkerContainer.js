@@ -5,7 +5,8 @@ import { closeMarker, openMarker } from '../../Modules/search';
 
 const MapMarkerContainer = ({ marker, theme }) => {
   const { dateDiff } = useSelector(state => state.searchForm);
-  const { markerState } = useSelector(state => state.search);
+  const { markerState, hoveredHome } = useSelector(state => state.search);
+  const isHovered = hoveredHome === marker.homeId;
   const isOpen = markerState === marker.homeId;
   const dispatch = useDispatch();
   const clickMarker = () => {
@@ -16,6 +17,7 @@ const MapMarkerContainer = ({ marker, theme }) => {
     <MapMarker
       theme={theme}
       isOpen={isOpen}
+      isHovered={isHovered}
       marker={marker}
       markerState={markerState}
       dateDiff={dateDiff}
