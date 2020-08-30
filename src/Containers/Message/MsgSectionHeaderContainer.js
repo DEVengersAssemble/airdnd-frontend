@@ -59,6 +59,7 @@ const MsgSectionHeaderContainer = ({ msgSectionStates }) => {
   }, [dispatch, msgDetailSectionState]);
 
   /**
+   * ! 작업중
    * isActive인 대화인지 먼저 알아야 함
    * isActive이면 isActive인 message.id가 필요
    * dispatch 보낼때 isActive인 message.id정보를 담아서

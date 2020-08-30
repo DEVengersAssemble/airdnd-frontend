@@ -5,7 +5,7 @@ import MsgListSectionHeader from '../../Components/Message/MsgListSectionHeader'
 const MsgListSectionHeaderContainer = () => {
   // redux
   // !현재 작업 진행중
-  const message = useSelector(state => state.message);
+  const messages = useSelector(state => state.message.messages);
   const dispatch = useDispatch();
   // hook
   const [openPopup, setOpenPopup] = useState(false);

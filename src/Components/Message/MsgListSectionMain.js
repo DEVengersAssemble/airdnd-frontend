@@ -4,15 +4,11 @@ import { darken } from 'polished';
 import MsgListSectionItem from './MsgListSectionItem';
 import MsgListSectionNone from './MsgListSectionNone';
 
-const MsgListSectionMain = () => {
-  const hasMsg = false;
-
+const MsgListSectionMain = ({ hasMsgs }) => {
   // MsgListNone과 MsgLists
   return (
     <MsgListSectionMainWrapper>
-      {hasMsg ? (
-        <MsgListSectionNone />
-      ) : (
+      {hasMsgs ? (
         <>
           <MsgLists>
             <MsgListSectionItem />
@@ -30,6 +26,8 @@ const MsgListSectionMain = () => {
             <MsgListSectionItem />
           </MsgLists>
         </>
+      ) : (
+        <MsgListSectionNone />
       )}
     </MsgListSectionMainWrapper>
   );

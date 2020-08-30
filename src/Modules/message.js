@@ -68,6 +68,15 @@ const initialState = {
       readMsg: true,
       hostname: 'Paul',
       isActive: true,
+      contents: {
+        hostProfileImg:
+          'https://t1.daumcdn.net/cfile/tistory/146C13354E56E5420D',
+        lastMsg: '마지막 메시지 내용입니다.',
+        lastMsgDate: '2020/08/20',
+        isCanceled: false,
+        checkin: '2020/09/25',
+        checkout: '2020/09/26',
+      },
     },
     {
       id: 2,
@@ -76,6 +85,15 @@ const initialState = {
       readMsg: true,
       hostname: 'Bhel',
       isActive: false,
+      contents: {
+        hostProfileImg:
+          'https://t1.daumcdn.net/cfile/tistory/146C13354E56E5420D',
+        lastMsg: '마지막 메시지 내용입니다.',
+        lastMsgDate: '2020/08/20',
+        isCanceled: false,
+        checkin: '2020/09/10',
+        checkout: '2020/09/12',
+      },
     },
     {
       id: 3,
@@ -84,6 +102,15 @@ const initialState = {
       readMsg: false,
       hostname: 'James',
       isActive: false,
+      contents: {
+        hostProfileImg:
+          'https://t1.daumcdn.net/cfile/tistory/146C13354E56E5420D',
+        lastMsg: '마지막 메시지 내용입니다.',
+        lastMsgDate: '2020/08/20',
+        isCanceled: true,
+        checkin: '2020/08/15',
+        checkout: '2020/08/16',
+      },
     },
     {
       id: 4,
@@ -92,6 +119,15 @@ const initialState = {
       readMsg: false,
       hostname: 'Maple',
       isActive: false,
+      contents: {
+        hostProfileImg:
+          'https://t1.daumcdn.net/cfile/tistory/146C13354E56E5420D',
+        lastMsg: '마지막 메시지 내용입니다.',
+        lastMsgDate: '2020/08/20',
+        isCanceled: true,
+        checkin: '2020/06/01',
+        checkout: '2020/06/03',
+      },
     },
     {
       id: 5,
@@ -100,6 +136,15 @@ const initialState = {
       readMsg: false,
       hostname: 'Linda',
       isActive: false,
+      contents: {
+        hostProfileImg:
+          'https://t1.daumcdn.net/cfile/tistory/146C13354E56E5420D',
+        lastMsg: '마지막 메시지 내용입니다.',
+        lastMsgDate: '2020/08/20',
+        isCanceled: false,
+        checkin: '2020/07/30',
+        checkout: '2020/08/01',
+      },
     },
     {
       id: 6,
@@ -108,6 +153,15 @@ const initialState = {
       readMsg: true,
       hostname: 'June',
       isActive: false,
+      contents: {
+        hostProfileImg:
+          'https://t1.daumcdn.net/cfile/tistory/146C13354E56E5420D',
+        lastMsg: '마지막 메시지 내용입니다.',
+        lastMsgDate: '2020/08/20',
+        isCanceled: false,
+        checkin: '2020/08/08',
+        checkout: '2020/08/09',
+      },
     },
     {
       id: 7,
@@ -116,6 +170,15 @@ const initialState = {
       readMsg: true,
       hostname: 'Jason',
       isActive: false,
+      contents: {
+        hostProfileImg:
+          'https://t1.daumcdn.net/cfile/tistory/146C13354E56E5420D',
+        lastMsg: '마지막 메시지 내용입니다.',
+        lastMsgDate: '2020/08/20',
+        isCanceled: false,
+        checkin: '2020/9/28',
+        checkout: '2020/9/30',
+      },
     },
     {
       id: 8,
@@ -124,6 +187,15 @@ const initialState = {
       readMsg: true,
       hostname: 'Ronald',
       isActive: false,
+      contents: {
+        hostProfileImg:
+          'https://t1.daumcdn.net/cfile/tistory/146C13354E56E5420D',
+        lastMsg: '마지막 메시지 내용입니다.',
+        lastMsgDate: '2020/08/20',
+        isCanceled: true,
+        checkin: '2020/11/20',
+        checkout: '2020/11/21',
+      },
     },
     {
       id: 9,
@@ -132,6 +204,15 @@ const initialState = {
       readMsg: true,
       hostname: 'Krystyn',
       isActive: false,
+      contents: {
+        hostProfileImg:
+          'https://t1.daumcdn.net/cfile/tistory/146C13354E56E5420D',
+        lastMsg: '마지막 메시지 내용입니다.',
+        lastMsgDate: '2020/08/20',
+        isCanceled: false,
+        checkin: '2020/12/15',
+        checkout: '2020/12/16',
+      },
     },
     {
       id: 10,
@@ -140,6 +221,15 @@ const initialState = {
       readMsg: true,
       hostname: 'John',
       isActive: false,
+      contents: {
+        hostProfileImg:
+          'https://t1.daumcdn.net/cfile/tistory/146C13354E56E5420D',
+        lastMsg: '마지막 메시지 내용입니다.',
+        lastMsgDate: '2020/08/20',
+        isCanceled: false,
+        checkin: '2020/10/15',
+        checkout: '2020/10/16',
+      },
     },
   ],
   // popup filter를 통해 걸러진 messages
@@ -203,17 +293,17 @@ const message = (state = initialState, action) => {
     case ALL_MESSAGE_LIST:
       return {
         ...state,
-        filteredMsg: state.messages.filter(msg => msg.state === 'all'),
+        filteredMsgs: state.messages.filter(msg => msg.state === 'all'),
       };
     case HIDE_MESSAGE_LIST:
       return {
         ...state,
-        filteredMsg: state.messages.filter(msg => msg.state === 'hide'),
+        filteredMsgs: state.messages.filter(msg => msg.state === 'hide'),
       };
     case UNREAD_MESSAGE_LIST:
       return {
         ...state,
-        filteredMsg: state.messages.filter(msg => !msg.readMsg),
+        filteredMsgs: state.messages.filter(msg => !msg.readMsg),
       };
     case MESSAGE_HOST_FLAG:
       return {
