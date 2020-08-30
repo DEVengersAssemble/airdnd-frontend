@@ -1,41 +1,46 @@
 import React from 'react';
 import styled from 'styled-components';
-import { darken } from 'polished';
-import { Airbnb } from '@styled-icons/boxicons-logos/Airbnb';
+import Logo from '../Main/Logo';
+import SettingButtonContainer from '../../Containers/Main/SettingButtonContainer';
+import MyPageButtonContainer from '../../Containers/Main/MyPageButtonContainer';
 
-const WishlistsHeader = () => {
-  return (
-    <TripsHeaderWrapper>
-      <Header>
-        <Airbnb size="4.5rem" />
-      </Header>
-    </TripsHeaderWrapper>
-  );
-};
-
-const TripsHeaderWrapper = styled.div`
+const StTripsHeader = styled.header`
+  box-sizing: border-box;
+  z-index: 100;
   position: fixed;
-  z-index: 1;
-  background: ${({ theme }) => theme.color.white};
-  width: 100%;
-`;
-
-const Header = styled.div`
   display: flex;
-  align-items: center;
-  border-bottom: 1px solid ${({ theme }) => darken(0.1, theme.color.lightGray)};
-  box-shadow: 1px 0 0.4rem ${({ theme }) => theme.color.shadow};
-  padding: 0rem 12rem;
-  color: ${({ theme }) => theme.color.main};
-  height: 8rem;
+  width: 100%;
+  justify-content: space-between;
+  margin: 0;
+  height: 80px;
+  background: ${({ theme }) => theme.color.white};
+  border-bottom: 1px solid ${({ theme }) => theme.color.line};
+  padding: 20px 120px 15px 120px;
 
   @media ${({ theme }) => theme.size.medium} {
-    padding: 0rem 7.5rem;
+    padding: 20px 75px 20px 65px;
   }
 
   @media ${({ theme }) => theme.size.iPad} {
-    padding: 0rem 3rem;
+    padding: 20px 25px 15px 10px;
   }
 `;
 
-export default WishlistsHeader;
+const StButtonGroupWrapper = styled.div`
+  height: 40px;
+  display: flex;
+`;
+
+const TripsHeader = ({ handleLogoClick }) => {
+  return (
+    <StTripsHeader>
+      <Logo handleLogoClick={handleLogoClick}></Logo>
+      <StButtonGroupWrapper>
+        <SettingButtonContainer />
+        <MyPageButtonContainer />
+      </StButtonGroupWrapper>
+    </StTripsHeader>
+  );
+};
+
+export default TripsHeader;

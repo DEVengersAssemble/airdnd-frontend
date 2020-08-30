@@ -39,7 +39,7 @@ const ReservationBox = () => {
           <Rating rate="4.55" count="687" />
           <StCheckIn>체크인</StCheckIn>
           <StCheckOut>체크아웃</StCheckOut>
-          <StDropDown title="게스트 1명" />
+          <StDropDown options={[]} title="게스트 1명" />
           <Button color="main" border="none" width="100%" padding="14px" hover>
             예약 가능 여부 보기 or 예약 하기
           </Button>
