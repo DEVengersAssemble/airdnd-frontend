@@ -13,7 +13,13 @@ const ALL_MESSAGE_LIST = 'message/ALL_MESSAGE_LIST';
 const HIDE_MESSAGE_LIST = 'message/HIDE_MESSAGE_LIST';
 const UNREAD_MESSAGE_LIST = 'message/UNREAD_MESSAGE_LIST';
 
+const SHOW_MESSAGE = 'message/SHOW_MESSAGE';
+const HIDE_MESSAGE = 'message/HIDE_MESSAGE';
+
 const MESSAGE_HOST_FLAG = 'message/MESSAGE_HOST_FLAG';
+
+const OPEN_MODAL = 'message/OPEN_MODAL';
+const CLOSE_MODAL = 'message/CLOSE_MODAL';
 
 // ACTION CREATOR
 export const showMsgDetailSection = () => ({
@@ -33,11 +39,13 @@ export const changeMediaSize = media => ({
   media,
 });
 
-export const archiveMsg = () => ({
+export const archiveMsg = index => ({
   type: ARCHAIVE_MESSAGE,
+  index,
 });
-export const unarchiveMsg = () => ({
+export const unarchiveMsg = index => ({
   type: UNARCHAIVE_MESSAGE,
+  index,
 });
 export const undo = () => ({ type: UNDO });
 
@@ -222,10 +230,8 @@ const initialState = {
   // popup filter를 통해 걸러진 messages
   activeIndex: 0,
   activeFilter: 'all',
+  pastFilteredMsgs: [], // 숨김 취소했을 시 pastFilteredMsgs를 불러옴
   filteredMsgs: [],
-  // allMsgCount: 0,
-  // hideMsgCount: 0,
-  // unreadMsgCount: 0,
   isHost: false,
 };
 

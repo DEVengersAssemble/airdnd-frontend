@@ -38,7 +38,8 @@ const MsgListSectionItemContainer = ({ msg, index }) => {
 
   // event
   const onClickActive = useCallback(() => {
-    console.log('click이벤트 발생시 filterMsgs', filteredMsgs);
+    // 아이템에 클릭 이벤트 발생시 dispatch(SHOW_MESSAGE action);
+    console.log('item에 click이벤트 발생시 filterMsgs', filteredMsgs[index]);
     if (activeIndex !== index) {
       activeFilter === 'all' && dispatch(allMsgList(index));
       activeFilter === 'hide' && dispatch(hideMsgList(index));
