@@ -3,13 +3,17 @@ import styled from 'styled-components';
 
 const StCategoryWrapper = styled.div`
   background: ${({ theme }) => theme.color.white};
-  height: 410px;
   padding: 30px 80px 70px 80px;
+  @media ${({ theme }) => theme.size.iPad} {
+    padding: 60px 40px;
+  }
 `;
 
 const StCategoryList = styled.ul`
   display: flex;
   justify-content: space-between;
+  @media ${({ theme }) => theme.size.iPad} {
+  }
 `;
 
 const StCategoryItem = styled.li`
@@ -19,11 +23,14 @@ const StCategoryItem = styled.li`
   border-radius: 16px;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
   cursor: pointer;
+
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 12px;
+  }
 `;
 
 const StCategoryImg = styled.img`
   width: 100%;
-  height: 220px;
 `;
 
 const StCategoryContentWrapper = styled.div`

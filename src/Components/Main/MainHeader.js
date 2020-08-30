@@ -28,9 +28,9 @@ const StMainHeader = styled.header`
     !isScrollTop && css`1px solid ${({ theme }) => theme.color.line}`};
   box-shadow: ${({ isScrollTop }) =>
     !isScrollTop && css`0px 2px 4px rgba(0,0,0,0.3)`};
-  padding: 20px 80px 15px 80px;
+  padding: 20px 80px 15px 70px;
   @media ${({ theme }) => theme.size.iPad} {
-    padding: 20px 40px 15px 40px;
+    padding: 20px 40px 15px 30px;
     height: ${({ isSearchBtnClicked }) =>
       isSearchBtnClicked ? '250px' : '80px'};
   }
