@@ -149,8 +149,8 @@ const initialState = {
     {
       id: 6,
       reservationId: 6,
-      state: 'hide',
-      readMsg: true,
+      state: 'all',
+      readMsg: false,
       hostname: 'June',
       isActive: false,
       contents: {

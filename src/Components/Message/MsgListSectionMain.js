@@ -4,26 +4,16 @@ import { darken } from 'polished';
 import MsgListSectionItem from './MsgListSectionItem';
 import MsgListSectionNone from './MsgListSectionNone';
 
-const MsgListSectionMain = ({ hasMsgs }) => {
+const MsgListSectionMain = ({ hasMsgs, filteredMsgs }) => {
   // MsgListNone과 MsgLists
   return (
     <MsgListSectionMainWrapper>
       {hasMsgs ? (
         <>
           <MsgLists>
-            <MsgListSectionItem />
-            <MsgListSectionItem />
-            <MsgListSectionItem />
-            <MsgListSectionItem />
-            <MsgListSectionItem />
-            <MsgListSectionItem />
-            <MsgListSectionItem />
-            <MsgListSectionItem />
-            <MsgListSectionItem />
-            <MsgListSectionItem />
-            <MsgListSectionItem />
-            <MsgListSectionItem />
-            <MsgListSectionItem />
+            {filteredMsgs.map(msg => (
+              <MsgListSectionItem key={msg.id} msg={msg} />
+            ))}
           </MsgLists>
         </>
       ) : (
