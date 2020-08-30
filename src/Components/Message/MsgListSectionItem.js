@@ -4,7 +4,8 @@ import { ellipsis } from 'polished';
 import Profile from '../Global/Profile';
 
 const MsgListSectionItem = ({
-  checked,
+  index,
+  activeIndex,
   hostname,
   hostProfileImg,
   lastMsg,
@@ -15,7 +16,11 @@ const MsgListSectionItem = ({
   onClickActive,
 }) => {
   return (
-    <MsgListItemWrapper checked={checked} onClick={onClickActive}>
+    <MsgListItemWrapper
+      index={index}
+      activeIndex={activeIndex}
+      onClick={onClickActive}
+    >
       <Profile size="4.2rem" lastName="Kim" profileImg={hostProfileImg} />
       <LastMsgItemOuter>
         <HostName>{hostname}</HostName>
@@ -42,8 +47,8 @@ const MsgListItemWrapper = styled.li`
   align-items: flex-start;
   border: none;
   border-radius: 12px;
-  background: ${({ checked, theme }) =>
-    checked ? theme.color.lightGray : 'none'};
+  background: ${({ activeIndex, index, theme }) =>
+    activeIndex === index ? theme.color.lightGray : 'none'};
   padding: 1rem;
   cursor: pointer;
 `;
