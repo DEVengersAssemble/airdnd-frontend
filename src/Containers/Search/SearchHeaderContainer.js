@@ -7,7 +7,6 @@ const SearchHeaderContainer = () => {
   const history = useHistory();
   const [isSearchBtnClicked, setIsSearchBtnClicked] = useState(false);
   const searchForm = useSelector(state => state.searchForm);
-  console.log('searchForm: ', searchForm);
   const onScroll = () => {
     setIsSearchBtnClicked(false);
   };
