@@ -4,10 +4,10 @@ import MsgListSectionMain from '../../Components/Message/MsgListSectionMain';
 import { allMsgList } from '../../Modules/message';
 
 const MsgListSectionMainContainer = () => {
+  // ! 작업중
   // redux
-  const { messages, filteredMsgs } = useSelector(state => state.message);
+  const filteredMsgs = useSelector(state => state.message.filteredMsgs);
   const dispatch = useDispatch();
-  console.log(messages);
   console.log(filteredMsgs);
 
   // variable

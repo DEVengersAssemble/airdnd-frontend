@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { darken } from 'polished';
-import MsgListSectionItem from './MsgListSectionItem';
+import MsgListSectionItemContainer from '../../Containers/Message/MsgListSectionItemContainer';
 import MsgListSectionNone from './MsgListSectionNone';
 
 const MsgListSectionMain = ({ hasMsgs, filteredMsgs }) => {
@@ -12,7 +12,7 @@ const MsgListSectionMain = ({ hasMsgs, filteredMsgs }) => {
         <>
           <MsgLists>
             {filteredMsgs.map(msg => (
-              <MsgListSectionItem key={msg.id} msg={msg} />
+              <MsgListSectionItemContainer key={msg.id} msg={msg} />
             ))}
           </MsgLists>
         </>
