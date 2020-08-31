@@ -7,55 +7,48 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   addBookmarkNewList,
   addBookmarkOldList,
+  openNewModal,
+  closeListModal,
+  closeNewModal,
 } from '../../Modules/wishlists';
 
-const BookmarkListModalContainer = ({
-  listModalState,
-  closeListModal,
-  openNewModal,
-  homeId,
-}) => {
-  const bookmarkLists = useSelector(state => state.wishlists);
+const BookmarkListModalContainer = () => {
+  const { bookmarkLists, listModal } = useSelector(state => state.wishlists);
   const dispatch = useDispatch();
+  const closeBmListModal = () => dispatch(closeListModal());
+  const openBmNewModal = () => dispatch(openNewModal());
   const onClickBookmark = (homeId, bookmarkListId) =>
     dispatch(addBookmarkOldList(homeId, bookmarkListId));
 
   return (
     <BookmarkListModal
-      homeId={homeId}
-      modalState={listModalState}
-      setModalState={closeListModal}
-      openNewModal={openNewModal}
+      modalState={listModal}
+      closeBmListModal={closeBmListModal}
+      openBmNewModal={openBmNewModal}
       bookmarkLists={bookmarkLists}
       onClickBookmark={onClickBookmark}
     />
   );
 };
 
-const NewBookmarkModalContainer = ({
-  newModalState,
-  closeNewModal,
-  closeListModal,
-  homeId,
-}) => {
+const NewBookmarkModalContainer = () => {
   const { location } = useSelector(state => state.searchForm);
+  const { newModal } = useSelector(state => state.wishlists);
+  const [value, setValue] = useState(location);
+  const onChange = ({ target }) => setValue(target.value);
   const dispatch = useDispatch();
+  const closeBmNewModal = () => dispatch(closeNewModal());
   const onClickNewList = (title, homeId) => {
     dispatch(addBookmarkNewList(title, homeId));
   };
 
-  const [value, setValue] = useState(location);
-  const onChange = ({ target }) => setValue(target.value);
-
   return (
     <NewBookmarkModal
-      homeId={homeId}
       value={value}
+      modalState={newModal}
       onChange={onChange}
       onClickNewList={onClickNewList}
-      modalState={newModalState}
-      setModalState={closeNewModal}
-      closeListModal={closeListModal}
+      closeBmNewModal={closeBmNewModal}
     />
   );
 };

@@ -20,7 +20,7 @@ export const HomePrice = ({ type, price, dateDiff, theme }) => {
 const Home = ({
   home,
   isHovered,
-  onClickBookmark,
+  onClickHeart,
   onHoverHome,
   onBlurHome,
   dateDiff,
@@ -68,12 +68,7 @@ const Home = ({
           />
           <HomePrice type="list" price={price} dateDiff={dateDiff} />
         </StDetailWrapper>
-        <Heart
-          ckType
-          hover
-          checked={isBookmarked}
-          onCheck={() => onClickBookmark(isBookmarked, homeId)}
-        />
+        <Heart ckType hover checked={isBookmarked} onCheck={onClickHeart} />
       </StHome>
     </StWrapper>
   );

@@ -15,11 +15,11 @@ const SearchResultContainer = () => {
     <SearchResult
       mapState={mapState}
       view={viewState}
-      onOpenMap={onOpenMap}
       dataTotal={dataTotal}
-      onShowMap={onShowMap}
       location={location}
       guestCount={guestCount}
+      onOpenMap={onOpenMap}
+      onShowMap={onShowMap}
     />
   );
 };

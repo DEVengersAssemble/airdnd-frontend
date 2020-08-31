@@ -13,34 +13,43 @@ const CLOSE_NEW_MODAL = 'wishlists/CLOSE_NEW_MODAL';
 let id = 5;
 export const createBookmarkList = value => ({
   type: CREATE_BOOKMARKLIST,
-  bookmarkLists: [
-    { bookmarkListId: id++, bookmarkListTitle: value, bookmarks: [] },
-  ],
+  bookmarkList: {
+    bookmarkListId: id++,
+    bookmarkListTitle: value,
+    bookmarks: [],
+  },
 });
 
-export const addBookmarkOldList = (homeId, bookmarkListId) => ({
+export const addBookmarkOldList = bookmarkListId => ({
   type: ADD_BOOKMARK_OLD_LIST,
-  bookmark: { homeId, images: [] },
   bookmarkListId,
 });
 
-export const addBookmarkNewList = (title, homeId) => ({
+export const addBookmarkNewList = title => ({
   type: ADD_BOOKMARK_NEW_LIST,
-  bookmarkLists: [
-    {
-      bookmarkListId: id++,
-      bookmarkListTitle: title,
-      bookmarks: [{ homeId, images: [] }],
-    },
-  ],
+  bookmarkList: {
+    bookmarkListId: id++,
+    bookmarkListTitle: title,
+  },
 });
 
 export const removeBookmark = homeId => ({ type: REMOVE_BOOKMARK, homeId });
+
+export const openListModal = (homeId, homeImg) => ({
+  type: OPEN_LIST_MODAL,
+  homeId,
+  homeImg,
+});
+export const closeListModal = () => ({ type: CLOSE_LIST_MODAL });
+export const openNewModal = () => ({ type: OPEN_NEW_MODAL });
+export const closeNewModal = () => ({ type: CLOSE_NEW_MODAL });
 
 // initial state
 const initialState = {
   listModal: false,
   newModal: false,
+  selectedId: null,
+  selectedImg: '',
   bookmarkLists: [
     {
       bookmarkListId: 1,
@@ -135,16 +144,24 @@ const wishlists = (state = initialState, action) => {
     case CREATE_BOOKMARKLIST:
       return {
         ...state,
-        bookmarkLists: state.bookmarkLists.concat(action.bookmarkLists),
+        bookmarkLists: state.bookmarkLists.concat(action.bookmarkList),
       };
 
     case ADD_BOOKMARK_OLD_LIST:
       return {
         ...state,
         listModal: false,
+        selectedId: null,
+        selectedImg: '',
         bookmarkLists: state.bookmarkLists.map(bmList =>
           bmList.bookmarkListId === action.bookmarkListId
-            ? { ...bmList, bookmarks: [...bmList.bookmarks, action.bookmark] }
+            ? {
+                ...bmList,
+                bookmarks: [
+                  ...bmList.bookmarks,
+                  { homeId: state.selectedId, images: state.selectedImg },
+                ],
+              }
             : bmList,
         ),
       };
@@ -152,7 +169,12 @@ const wishlists = (state = initialState, action) => {
       return {
         ...state,
         newModal: false,
-        bookmarkLists: state.bookmarkLists.concat(action.bookmarkLists),
+        selectedId: null,
+        selectedImg: '',
+        bookmarkLists: state.bookmarkLists.concat({
+          ...action.bookmarkList,
+          bookmarks: [{ homeId: state.selectedId, images: state.selectedImg }],
+        }),
       };
     case REMOVE_BOOKMARK:
       return {
@@ -162,6 +184,33 @@ const wishlists = (state = initialState, action) => {
           bookmarks: bmList.bookmarks.filter(bm => bm.homeId !== action.homeId),
         })),
       };
+    case OPEN_LIST_MODAL:
+      return {
+        ...state,
+        listModal: true,
+        selectedId: action.homeId,
+        selectedImg: action.homeImg,
+      };
+    case CLOSE_LIST_MODAL:
+      return {
+        ...state,
+        listModal: false,
+        selectedId: null,
+        selectedImg: '',
+      };
+    case OPEN_NEW_MODAL:
+      return {
+        ...state,
+        listModal: false,
+        newModal: true,
+      };
+    case CLOSE_NEW_MODAL:
+      return {
+        ...state,
+        listModal: true,
+        newModal: false,
+      };
+
     default:
       return state;
   }
