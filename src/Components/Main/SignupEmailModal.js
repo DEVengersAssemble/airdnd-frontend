@@ -6,7 +6,6 @@ import DropDown from '../Global/DropDown';
 import { Input } from '../Global/Input';
 import { RiEyeCloseLine, RiMailLine, RiUserLine } from 'react-icons/ri';
 import { MdCheck, MdClose } from 'react-icons/md';
-import { GoogleLogin } from 'react-google-login';
 
 const StSignupEmailModal = styled(Modal)`
   overflow-y: scroll;
@@ -224,7 +223,6 @@ const SignupEmailModal = ({
               </StValidationText>
             )}
           </StInputWrapper>
-
           <StInputWrapper>
             <StInput
               value={firstName.value}
@@ -258,7 +256,6 @@ const SignupEmailModal = ({
               </StValidationText>
             )}
           </StInputWrapper>
-
           <StInputWrapper name="password">
             <StInput
               type="password"
