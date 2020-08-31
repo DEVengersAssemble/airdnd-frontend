@@ -9,17 +9,22 @@ const PricePopupContainer = ({ popupState, onClose }) => {
   const { min, max } = useSelector(state => state.search.filterApplied.price);
   const { priceArray, averagePrice } = useSelector(state => state.search);
   const [range, setRange] = useState({ value: [min, max] });
-  const dispatch = useDispatch();
+  const regExp = /^\d{0,7}$/;
 
+  const dispatch = useDispatch();
   const onHandler = e => {
     setRange({ value: e });
     dispatch(setFilter('price', { min: e[0], max: e[1] }));
   };
   const onSetRange = () => setRange({ value: [min, max] });
-  const onChangeMinPrice = ({ target }) =>
+  const onChangeMinPrice = ({ target }) => {
+    if (!regExp.test(+target.value)) return;
     dispatch(setFilter('price', { min: +target.value, max }));
-  const onChangeMaxPrice = ({ target }) =>
+  };
+  const onChangeMaxPrice = ({ target }) => {
+    if (!regExp.test(+target.value)) return;
     dispatch(setFilter('price', { min, max: +target.value }));
+  };
   const onReset = () => {
     setRange({ value: [12000, 1000000] });
     dispatch(resetFilter('price'));
