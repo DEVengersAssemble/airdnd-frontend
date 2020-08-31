@@ -537,7 +537,7 @@ const search = (state = initialState, action) => {
         ...state,
         filterApplied: {
           ...state.filterApplied,
-          [action.name]: !action.value,
+          [action.name]: action.value,
         },
       };
     case APPLY_COUNTER_FILTER:
