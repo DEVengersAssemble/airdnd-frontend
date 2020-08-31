@@ -10,11 +10,14 @@ import {
   unarchiveMsg,
 } from '../../Modules/message';
 
-const MsgSectionHeaderContainer = ({ msgSectionStates }) => {
-  // redux
+const MsgSectionHeaderContainer = () => {
+  // ! redux
+  const { msgListSectionState, msgDetailSectionState } = useSelector(
+    state => state.message,
+  );
   const media = useSelector(state => state.message.media);
-  const { msgListSectionState, msgDetailSectionState } = msgSectionStates;
-  const messages = useSelector(state => state.message.messages);
+  const { activeIndex, filteredMsgs } = useSelector(state => state.message);
+  // variable
   // const nextActiveAllMsg = messages.find(
   //   msg => msg.state === 'all' && !msg.isActive,
   // );
@@ -29,7 +32,15 @@ const MsgSectionHeaderContainer = ({ msgSectionStates }) => {
   // console.log(nextActiveUnreadMsg.id);
   const dispatch = useDispatch();
 
-  /** event
+  // ! variable
+  const activeMsgs = filteredMsgs.find(
+    (_, index) => filteredMsgs[index] === filteredMsgs[activeIndex],
+  );
+  const { hostname } = activeMsgs;
+  console.log(hostname);
+
+  // ! event
+  /**
    * media = 'medium'
    * onClick 이벤트가 발생하면 msgListSectionState를 true로 바꿔준다
    * 버튼이 보이는 현재 상태는 msgListSectionState = false 상태
@@ -58,25 +69,13 @@ const MsgSectionHeaderContainer = ({ msgSectionStates }) => {
       return dispatch(hideMsgListSection());
   }, [dispatch, msgDetailSectionState]);
 
-  /**
-   * ! 작업중
-   * isActive인 대화인지 먼저 알아야 함
-   * isActive이면 isActive인 message.id가 필요
-   * dispatch 보낼때 isActive인 message.id정보를 담아서
-   * message:id의 state: all -> hide, isActive: false
-   * message:id의 state: hide -> all, isActive: false
-   * ! msg.isActive가 false가 되면서 다음 대화상대가 isActive로 바뀜
-   * ! 다음 대화상대 조건: state = 'all' && msg.isActive === true인 msg.id의 다음 id를 검색
-   * ! (find..?)
-   */
   const onClickArchive = useCallback(() => {
     console.log('메시지 숨기기! 또는 메시지 취소!');
-    const msg = messages.filter(msg => msg.isActive);
-    console.log('test', msg);
-    if (msg.isActive && msg.state === 'all')
-      return dispatch(archiveMsg(msg.id, msg.isActive));
-    if (msg.isActive && msg.state === 'hide')
-      return dispatch(unarchiveMsg(msg.id, msg.isActive));
+    // const msg = filteredMsgs.filter(msg => msg.isActive);
+    // if (msg.isActive && msg.state === 'all')
+    //   return dispatch(archiveMsg(msg.id, msg.isActive));
+    // if (msg.isActive && msg.state === 'hide')
+    //   return dispatch(unarchiveMsg(msg.id, msg.isActive));
   }, [dispatch]);
 
   return (
@@ -87,6 +86,7 @@ const MsgSectionHeaderContainer = ({ msgSectionStates }) => {
       onClickDetail={onClickDetail}
       onClickShowList={onClickShowList}
       onClickArchive={onClickArchive}
+      hostname={hostname}
     />
   );
 };

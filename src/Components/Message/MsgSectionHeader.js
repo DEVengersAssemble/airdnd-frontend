@@ -14,6 +14,7 @@ const MsgSectionHeader = ({
   onClickShowList,
   onClickDetail,
   onClickArchive,
+  hostname,
 }) => {
   return (
     <MsgSectionHeaderWrapper>
@@ -40,7 +41,7 @@ const MsgSectionHeader = ({
         >
           <MdKeyboardArrowLeft />
         </Button> */}
-        호스트닉네임
+        {hostname}
       </MsgSectionHeaderTitle>
       <MsgSectionHeaderButtonWrapper>
         <StStroageButton

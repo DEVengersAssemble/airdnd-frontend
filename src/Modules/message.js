@@ -220,7 +220,68 @@ const initialState = {
   // popup filter를 통해 걸러진 messages
   activeIndex: 0,
   pastFilteredMsgs: [], // 숨김 취소했을 시 pastFilteredMsgs를 불러옴
-  filteredMsgs: [],
+  filteredMsgs: [
+    {
+      id: 1,
+      reservationId: 1,
+      state: 'all',
+      hostname: 'Paul',
+      contents: {
+        hostProfileImg:
+          'https://i.pinimg.com/originals/05/5f/2b/055f2bf2e34e410fffc5b7dc83c5ed61.jpg',
+        lastMsg: '끼야야야야야옹~~~~~끼야야야야야옹~~~~~',
+        lastMsgDate: '2020/08/20',
+        isCanceled: false,
+        checkin: '2020/09/25',
+        checkout: '2020/09/26',
+      },
+    },
+    {
+      id: 2,
+      reservationId: 2,
+      state: 'all',
+      hostname: 'Bhel',
+      contents: {
+        hostProfileImg:
+          'https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F192F1C464DD57EB614',
+        lastMsg: '유후유후',
+        lastMsgDate: '2020/08/20',
+        isCanceled: false,
+        checkin: '2020/09/10',
+        checkout: '2020/09/12',
+      },
+    },
+    {
+      id: 3,
+      reservationId: 3,
+      state: 'all',
+      hostname: 'James',
+      contents: {
+        hostProfileImg:
+          'https://image.dongascience.com/Photo/2020/06/353a1307fc8cad69a8aaf6777b2862c1.jpg',
+        lastMsg: '코로나인데 올수있음?',
+        lastMsgDate: '2020/08/20',
+        isCanceled: true,
+        checkin: '2020/08/15',
+        checkout: '2020/08/16',
+      },
+    },
+    {
+      id: 4,
+      reservationId: 4,
+      state: 'all',
+      hostname: 'Maple',
+      contents: {
+        hostProfileImg:
+          'https://www.1xbetkrs.com/wp-content/uploads/2020/03/0-e1583216806476.jpg',
+        lastMsg: '끼야호! 여행 개꿀~',
+        lastMsgDate: '2020/08/20',
+        isCanceled: true,
+        checkin: '2020/06/01',
+        checkout: '2020/06/03',
+      },
+    },
+  ],
   isHost: false,
 };
 
