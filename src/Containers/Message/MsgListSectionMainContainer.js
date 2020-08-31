@@ -18,7 +18,7 @@ const MsgListSectionMainContainer = () => {
 
   // 마운트 되었을 때 allMsgList가 바로 렌더링
   useEffect(() => {
-    dispatch(allMsgList());
+    dispatch(allMsgList(0));
   }, [dispatch]);
 
   return <MsgListSectionMain hasMsgs={hasMsgs} filteredMsgs={filteredMsgs} />;

@@ -5,14 +5,11 @@ import { allMsgList, hideMsgList, unreadMsgList } from '../../Modules/message';
 
 const MsgListSectionItemContainer = ({ msg, index }) => {
   // redux
-  const { activeIndex, activeFilter, filteredMsgs } = useSelector(
-    state => state.message,
-  );
+  const { activeIndex, filteredMsgs } = useSelector(state => state.message);
   const dispatch = useDispatch();
-  console.log(msg);
-  console.log('아이템 컨테이너 activeIndex', activeIndex);
-  console.log('아이템 컨테이너 activeFilter', activeFilter);
-  console.log('아이템 컨테이너 filteredMsgs index', index);
+  // console.log(msg);
+  // console.log('아이템 컨테이너 activeIndex', activeIndex);
+  // console.log('아이템 컨테이너 filteredMsgs index', index);
 
   // variable
   const { hostname } = msg;
@@ -39,12 +36,18 @@ const MsgListSectionItemContainer = ({ msg, index }) => {
   // event
   const onClickActive = useCallback(() => {
     // 아이템에 클릭 이벤트 발생시 dispatch(SHOW_MESSAGE action);
-    console.log('item에 click이벤트 발생시 filterMsgs', filteredMsgs[index]);
-    if (activeIndex !== index) {
-      activeFilter === 'all' && dispatch(allMsgList(index));
-      activeFilter === 'hide' && dispatch(hideMsgList(index));
-      activeFilter === 'unread' && dispatch(unreadMsgList(index));
-    }
+    console.log('filteredMsgs.state', filteredMsgs[activeIndex].state);
+    filteredMsgs[activeIndex].state === 'all' &&
+      activeIndex !== index &&
+      dispatch(allMsgList(index));
+    filteredMsgs[activeIndex].state === 'hide' &&
+      activeIndex !== index &&
+      dispatch(allMsgList(index));
+    !filteredMsgs[activeIndex].isRead &&
+      activeIndex !== index &&
+      dispatch(allMsgList(index));
+    // dispatch(hideMsgList(index));
+    // dispatch(unreadMsgList(index));
   }, [dispatch]);
 
   return (

@@ -13,27 +13,27 @@ const MsgListSectionFilterPopupContainer = ({
   popupRef,
 }) => {
   // redux
-  const msgs = useSelector(state => state.message.messages);
+  const { messages } = useSelector(state => state.message);
   const dispatch = useDispatch();
   // variable
   // const totalMsg = messages.length;
-  const allMsg = msgs.filter(msg => msg.state === 'all').length;
-  const hideMsg = msgs.filter(msg => msg.state === 'hide').length;
-  const unreadMsg = msgs.filter(msg => !msg.readMsg).length;
+  const allMsg = messages.filter(msg => msg.state === 'all').length;
+  const hideMsg = messages.filter(msg => msg.state === 'hide').length;
+  const unreadMsg = messages.filter(msg => !msg.isRead).length;
 
   // event
   // !Error: dispatch가 안됨............ㅅㅂ
   // !개잘됌^^
   const onClickAll = useCallback(() => {
-    dispatch(allMsgList());
+    dispatch(allMsgList(0));
     setOpenPopup(false);
   }, [dispatch, setOpenPopup]);
   const onClickHide = useCallback(() => {
-    dispatch(hideMsgList());
+    dispatch(hideMsgList(0));
     setOpenPopup(false);
   }, [dispatch, setOpenPopup]);
   const onClickUnread = useCallback(() => {
-    dispatch(unreadMsgList());
+    dispatch(unreadMsgList(0));
     setOpenPopup(false);
   }, [dispatch, setOpenPopup]);
   // // ! onClick 이벤트가 발생하면 filter해서 메시지 리스트를 보여준다

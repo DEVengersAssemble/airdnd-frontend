@@ -229,7 +229,6 @@ const initialState = {
   ],
   // popup filter를 통해 걸러진 messages
   activeIndex: 0,
-  activeFilter: 'all',
   pastFilteredMsgs: [], // 숨김 취소했을 시 pastFilteredMsgs를 불러옴
   filteredMsgs: [],
   isHost: false,
@@ -288,31 +287,22 @@ const message = (state = initialState, action) => {
     case ALL_MESSAGE_LIST:
       return {
         ...state,
-        activeFilter: 'all',
         activeIndex:
-          state.activeIndex === action.index
-            ? state.activeIndex
-            : action.index || 0,
+          state.activeIndex === action.index ? state.activeIndex : action.index,
         filteredMsgs: state.messages.filter(msg => msg.state === 'all'),
       };
     case HIDE_MESSAGE_LIST:
       return {
         ...state,
-        activeFilter: 'hide',
         activeIndex:
-          state.activeIndex === action.index
-            ? state.activeIndex
-            : action.index || 0,
+          state.activeIndex === action.index ? state.activeIndex : action.index,
         filteredMsgs: state.messages.filter(msg => msg.state === 'hide'),
       };
     case UNREAD_MESSAGE_LIST:
       return {
         ...state,
-        activeFilter: 'unread',
         activeIndex:
-          state.activeIndex === action.index
-            ? state.activeIndex
-            : action.index || 0,
+          state.activeIndex === action.index ? state.activeIndex : action.index,
         filteredMsgs: state.messages.filter(msg => !msg.isRead),
       };
 
