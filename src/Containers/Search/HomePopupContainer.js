@@ -9,9 +9,6 @@ const HomePopupContainer = ({ home, dateDiff, theme, store }) => {
   const { id } = store.getState().user;
   const dispatch = store.dispatch;
 
-  // 주석 풀면 google map could not find react-redux context value 에러 발생
-  // const useDispatch = useDispatch();
-
   const onHoverHome = () =>
     hoveredHome !== home.homeId && dispatch(hoverHome(home.homeId));
   const onBlurHome = () => dispatch(blurHome());

@@ -21,7 +21,6 @@ const MapMarkerContainer = ({ marker, theme }) => {
       isOpen={isOpen}
       isHovered={isHovered}
       marker={marker}
-      markerState={markerState}
       dateDiff={dateDiff}
       clickMarker={clickMarker}
     />

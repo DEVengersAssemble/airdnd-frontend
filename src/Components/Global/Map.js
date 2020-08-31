@@ -11,7 +11,6 @@ import { compose, withProps, withState, withHandlers } from 'recompose';
 import { withScriptjs, withGoogleMap, GoogleMap } from 'react-google-maps';
 import theme from '../../style/theme';
 import MapMarkerContainer from '../../Containers/Search/MapMarkerContainer';
-import { Provider } from 'react-redux';
 
 const Map = compose(
   withProps({

@@ -18,7 +18,6 @@ const MapMarker = ({
   isOpen,
   isHovered,
   marker,
-  markerState,
   dateDiff,
   clickMarker,
 }) => {
