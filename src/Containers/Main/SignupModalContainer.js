@@ -216,6 +216,14 @@ const SignupModalContainer = ({
     dispatch({ type: 'RESET' });
   };
 
+  const onGoogleLoginSuccess = res => {
+    console.log('[googleLoginSucess]: ', res);
+  };
+
+  const onGoogleLoginFailure = res => {
+    console.log('[googleLoginFailure]: ', res);
+  };
+
   const changeFocus = () => {
     const invalidCount = Object.values(signup)
       .slice(0, 4)
@@ -256,6 +264,8 @@ const SignupModalContainer = ({
       refObj={refObj}
       onPwFocus={onPwFocus}
       pwFocus={pwFocus}
+      onGoogleLoginSuccess={onGoogleLoginSuccess}
+      onGoogleLoginFailure={onGoogleLoginFailure}
     ></SignupModal>
   );
 };

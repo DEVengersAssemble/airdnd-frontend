@@ -187,6 +187,8 @@ const SignupModal = ({
   refObj,
   onPwFocus,
   pwFocus,
+  onGoogleLoginSuccess,
+  onGoogleLoginFailure,
 }) => {
   const {
     email,
@@ -215,7 +217,13 @@ const SignupModal = ({
       <StSignupFormWrapper>
         <StSocialLoginWrapper>
           페이스북 또는{' '}
-          <GoogleLogin clientId={process.env.REACT_APP_GOOGLE_LOGIN_API_KEY} />
+          <GoogleLogin
+            clientId={process.env.REACT_APP_GOOGLE_LOGIN_API_KEY}
+            cookiePolicy={'single_host_origin'}
+            onSuccess={onGoogleLoginSuccess}
+            onFailure={onGoogleLoginFailure}
+            btnText=""
+          />
           로 회원 가입하세요.
         </StSocialLoginWrapper>
         <StDividerLine />
