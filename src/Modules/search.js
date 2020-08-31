@@ -178,8 +178,8 @@ const initialState = {
   recentHomes: [
     {
       homeId: 5,
-      isSuperhost: true,
-      isBookmarked: true,
+      isSuperhost: false,
+      isBookmarked: false,
       imageArray: [
         'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small',
         'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large',
@@ -197,7 +197,7 @@ const initialState = {
     {
       homeId: 6,
       isSuperhost: true,
-      isBookmarked: true,
+      isBookmarked: false,
       imageArray: [
         'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small',
         'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large',
@@ -232,8 +232,8 @@ const initialState = {
     },
     {
       homeId: 8,
-      isSuperhost: true,
-      isBookmarked: true,
+      isSuperhost: false,
+      isBookmarked: false,
       imageArray: [
         'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small',
         'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large',
