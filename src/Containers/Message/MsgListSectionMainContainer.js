@@ -6,13 +6,9 @@ import { allMsgList } from '../../Modules/message';
 const MsgListSectionMainContainer = () => {
   // ! 작업중
   // redux
-  const { activeIndex, activeFilter, filteredMsgs } = useSelector(
-    state => state.message,
-  );
+  const { filteredMsgs } = useSelector(state => state.message);
   const dispatch = useDispatch();
-  console.log(filteredMsgs);
-  console.log('메인컨테이너 activeIndex:', activeIndex);
-  console.log('메인컨테이너 activeFilter', activeFilter);
+
   // variable
   const hasMsgs = filteredMsgs.length;
 
