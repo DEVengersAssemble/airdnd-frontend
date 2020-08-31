@@ -10,6 +10,7 @@ const MsgListSectionMainContainer = () => {
   const { id, isActive } = filteredMsgs;
   const dispatch = useDispatch();
   console.log(filteredMsgs);
+  console.log(id, isActive);
 
   // variable
   const hasMsgs = filteredMsgs.length;
