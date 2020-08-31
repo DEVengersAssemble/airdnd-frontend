@@ -5,8 +5,14 @@ import MsgListSectionHeader from '../../Components/Message/MsgListSectionHeader'
 const MsgListSectionHeaderContainer = () => {
   // redux
   // !현재 작업 진행중
-  const messages = useSelector(state => state.message.messages);
+  const { messages, filteredMsgs } = useSelector(state => state.message);
   const dispatch = useDispatch();
+
+  // variable
+  const allState = filteredMsgs.map(msg => msg.state)[0];
+  const hideState = filteredMsgs.map(msg => msg.state)[0];
+  const unreadState = filteredMsgs.map(msg => msg.state)[0];
+
   // hook
   const [openPopup, setOpenPopup] = useState(false);
   const popupBtnRef = useRef();
@@ -37,6 +43,9 @@ const MsgListSectionHeaderContainer = () => {
 
   return (
     <MsgListSectionHeader
+      allState={allState}
+      hideState={hideState}
+      unreadState={unreadState}
       openPopup={openPopup}
       setOpenPopup={setOpenPopup}
       onClickPopup={onClickPopup}

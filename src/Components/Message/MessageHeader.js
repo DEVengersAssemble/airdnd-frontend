@@ -4,6 +4,18 @@ import Logo from '../Main/Logo';
 import SettingButtonContainer from '../../Containers/Main/SettingButtonContainer';
 import MyPageButtonContainer from '../../Containers/Main/MyPageButtonContainer';
 
+const MessageHeader = ({ handleLogoClick }) => {
+  return (
+    <StMessageHeader>
+      <Logo handleLogoClick={handleLogoClick}></Logo>
+      <StButtonGroupWrapper>
+        <SettingButtonContainer />
+        <MyPageButtonContainer />
+      </StButtonGroupWrapper>
+    </StMessageHeader>
+  );
+};
+
 const StMessageHeader = styled.header`
   box-sizing: border-box;
   z-index: 100;
@@ -22,17 +34,5 @@ const StButtonGroupWrapper = styled.div`
   height: 40px;
   display: flex;
 `;
-
-const MessageHeader = ({ handleLogoClick }) => {
-  return (
-    <StMessageHeader>
-      <Logo handleLogoClick={handleLogoClick}></Logo>
-      <StButtonGroupWrapper>
-        <SettingButtonContainer />
-        <MyPageButtonContainer />
-      </StButtonGroupWrapper>
-    </StMessageHeader>
-  );
-};
 
 export default MessageHeader;

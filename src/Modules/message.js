@@ -28,24 +28,21 @@ export const showMsgDetailSection = () => ({
 export const hideMsgDetailSection = () => ({
   type: HIDE_MESSAGE_DETAIL_SECTION,
 });
-export const showMsgListSection = () => ({
-  type: SHOW_MESSAGE_LIST_SECTION,
-});
-export const hideMsgListSection = () => ({
-  type: HIDE_MESSAGE_LIST_SECTION,
-});
-export const changeMediaSize = media => ({
-  type: CHANGE_MEDIA_SIZE,
-  media,
-});
+export const showMsgListSection = () => ({ type: SHOW_MESSAGE_LIST_SECTION });
+export const hideMsgListSection = () => ({ type: HIDE_MESSAGE_LIST_SECTION });
+export const changeMediaSize = media => ({ type: CHANGE_MEDIA_SIZE, media });
 
-export const archiveMsg = index => ({
+export const archiveMsg = (index, id, state) => ({
   type: ARCHAIVE_MESSAGE,
   index,
+  id,
+  state,
 });
-export const unarchiveMsg = index => ({
+export const unarchiveMsg = (index, id, state) => ({
   type: UNARCHAIVE_MESSAGE,
   index,
+  id,
+  state,
 });
 export const undo = () => ({ type: UNDO });
 
@@ -53,10 +50,7 @@ export const allMsgList = index => ({ type: ALL_MESSAGE_LIST, index });
 export const hideMsgList = index => ({ type: HIDE_MESSAGE_LIST, index });
 export const unreadMsgList = index => ({ type: UNREAD_MESSAGE_LIST, index });
 
-export const isHost = isHost => ({
-  type: MESSAGE_HOST_FLAG,
-  isHost,
-});
+export const isHost = isHost => ({ type: MESSAGE_HOST_FLAG, isHost });
 
 // INITIAL STATE
 const initialState = {
@@ -70,7 +64,6 @@ const initialState = {
       id: 1,
       reservationId: 1,
       state: 'all',
-      isRead: true,
       hostname: 'Paul',
       contents: {
         hostProfileImg:
@@ -86,7 +79,6 @@ const initialState = {
       id: 2,
       reservationId: 2,
       state: 'all',
-      isRead: true,
       hostname: 'Bhel',
       contents: {
         hostProfileImg:
@@ -102,7 +94,6 @@ const initialState = {
       id: 3,
       reservationId: 3,
       state: 'all',
-      isRead: false,
       hostname: 'James',
       contents: {
         hostProfileImg:
@@ -118,7 +109,6 @@ const initialState = {
       id: 4,
       reservationId: 4,
       state: 'all',
-      isRead: false,
       hostname: 'Maple',
       contents: {
         hostProfileImg:
@@ -133,8 +123,7 @@ const initialState = {
     {
       id: 5,
       reservationId: 5,
-      state: 'all',
-      isRead: false,
+      state: 'unread',
       hostname: 'Linda',
       contents: {
         hostProfileImg:
@@ -149,8 +138,7 @@ const initialState = {
     {
       id: 6,
       reservationId: 6,
-      state: 'all',
-      isRead: false,
+      state: 'unread',
       hostname: 'June',
       contents: {
         hostProfileImg:
@@ -166,7 +154,6 @@ const initialState = {
       id: 7,
       reservationId: 7,
       state: 'hide',
-      isRead: true,
       hostname: 'Jason',
       contents: {
         hostProfileImg:
@@ -182,7 +169,6 @@ const initialState = {
       id: 8,
       reservationId: 8,
       state: 'hide',
-      isRead: true,
       hostname: 'Ronald',
       contents: {
         hostProfileImg:
@@ -198,7 +184,6 @@ const initialState = {
       id: 9,
       reservationId: 9,
       state: 'hide',
-      isRead: true,
       hostname: 'Krystyn',
       contents: {
         hostProfileImg:
@@ -214,7 +199,6 @@ const initialState = {
       id: 10,
       reservationId: 10,
       state: 'hide',
-      isRead: true,
       hostname: 'John',
       contents: {
         hostProfileImg:
@@ -229,9 +213,69 @@ const initialState = {
   ],
   // popup filter를 통해 걸러진 messages
   activeIndex: 0,
-  activeFilter: 'all',
-  pastFilteredMsgs: [], // 숨김 취소했을 시 pastFilteredMsgs를 불러옴
-  filteredMsgs: [],
+  tempMsgs: [], // 숨김 취소했을 시 pastFilteredMsgs를 불러옴
+  filteredMsgs: [
+    {
+      id: 1,
+      reservationId: 1,
+      state: 'all',
+      hostname: 'Paul',
+      contents: {
+        hostProfileImg:
+          'https://i.pinimg.com/originals/05/5f/2b/055f2bf2e34e410fffc5b7dc83c5ed61.jpg',
+        lastMsg: '끼야야야야야옹~~~~~끼야야야야야옹~~~~~',
+        lastMsgDate: '2020/08/20',
+        isCanceled: false,
+        checkin: '2020/09/25',
+        checkout: '2020/09/26',
+      },
+    },
+    {
+      id: 2,
+      reservationId: 2,
+      state: 'all',
+      hostname: 'Bhel',
+      contents: {
+        hostProfileImg:
+          'https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F192F1C464DD57EB614',
+        lastMsg: '유후유후',
+        lastMsgDate: '2020/08/20',
+        isCanceled: false,
+        checkin: '2020/09/10',
+        checkout: '2020/09/12',
+      },
+    },
+    {
+      id: 3,
+      reservationId: 3,
+      state: 'all',
+      hostname: 'James',
+      contents: {
+        hostProfileImg:
+          'https://image.dongascience.com/Photo/2020/06/353a1307fc8cad69a8aaf6777b2862c1.jpg',
+        lastMsg: '코로나인데 올수있음?',
+        lastMsgDate: '2020/08/20',
+        isCanceled: true,
+        checkin: '2020/08/15',
+        checkout: '2020/08/16',
+      },
+    },
+    {
+      id: 4,
+      reservationId: 4,
+      state: 'all',
+      hostname: 'Maple',
+      contents: {
+        hostProfileImg:
+          'https://www.1xbetkrs.com/wp-content/uploads/2020/03/0-e1583216806476.jpg',
+        lastMsg: '끼야호! 여행 개꿀~',
+        lastMsgDate: '2020/08/20',
+        isCanceled: true,
+        checkin: '2020/06/01',
+        checkout: '2020/06/03',
+      },
+    },
+  ],
   isHost: false,
 };
 
@@ -263,57 +307,53 @@ const message = (state = initialState, action) => {
         ...state,
         media: action.media,
       };
-    // case ARCHAIVE_MESSAGE:
-    //   return {
-    //     ...state,
-    //     messages: state.messages.map(msg =>
-    //       msg.id === action.id
-    //         ? { ...msg, isActive: !action.isActive, state: 'hide' }
-    //         : msg,
-    //     ),
-    //   };
-    // case UNARCHAIVE_MESSAGE:
-    //   return {
-    //     ...state,
-    //     messages: state.messages.map(msg =>
-    //       msg.id === action.id
-    //         ? { ...msg, isActive: !action.isActive, state: 'all' }
-    //         : msg,
-    //     ),
-    //   };
+    case ARCHAIVE_MESSAGE:
+      return {
+        ...state,
+        messages: state.messages.map(msg =>
+          msg.id === action.id ? { ...msg, state: 'hide' } : msg,
+        ),
+        tempMsgs: state.filteredMsgs,
+        filteredMsgs: state.filteredMsgs.filter(
+          (_, index) => index !== action.index,
+        ),
+      };
+    case UNARCHAIVE_MESSAGE:
+      return {
+        ...state,
+        messages: state.messages.map(msg =>
+          msg.id === action.id ? { ...msg, state: 'all' } : msg,
+        ),
+        tempMsgs: state.filteredMsgs,
+        filteredMsgs: state.filteredMsgs.filter(
+          (_, index) => index !== action.index,
+        ),
+      };
     case UNDO:
       return {
         ...state,
+        filteredMsgs: state.tempMsgs,
       };
     case ALL_MESSAGE_LIST:
       return {
         ...state,
-        activeFilter: 'all',
         activeIndex:
-          state.activeIndex === action.index
-            ? state.activeIndex
-            : action.index || 0,
+          state.activeIndex === action.index ? state.activeIndex : action.index,
         filteredMsgs: state.messages.filter(msg => msg.state === 'all'),
       };
     case HIDE_MESSAGE_LIST:
       return {
         ...state,
-        activeFilter: 'hide',
         activeIndex:
-          state.activeIndex === action.index
-            ? state.activeIndex
-            : action.index || 0,
+          state.activeIndex === action.index ? state.activeIndex : action.index,
         filteredMsgs: state.messages.filter(msg => msg.state === 'hide'),
       };
     case UNREAD_MESSAGE_LIST:
       return {
         ...state,
-        activeFilter: 'unread',
         activeIndex:
-          state.activeIndex === action.index
-            ? state.activeIndex
-            : action.index || 0,
-        filteredMsgs: state.messages.filter(msg => !msg.isRead),
+          state.activeIndex === action.index ? state.activeIndex : action.index,
+        filteredMsgs: state.messages.filter(msg => msg.state === 'unread'),
       };
 
     case MESSAGE_HOST_FLAG:
