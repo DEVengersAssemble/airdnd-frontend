@@ -15,18 +15,18 @@ const MsgSectionHeaderContainer = ({ msgSectionStates }) => {
   const media = useSelector(state => state.message.media);
   const { msgListSectionState, msgDetailSectionState } = msgSectionStates;
   const messages = useSelector(state => state.message.messages);
-  const nextActiveAllMsg = messages.find(
-    msg => msg.state === 'all' && msg.isRead && !msg.isActive,
-  );
-  const nextActiveHideMsg = messages.find(
-    msg => msg.state === 'hide' && msg.isRead && !msg.isActive,
-  );
-  const nextActiveUnreadMsg = messages.find(
-    msg => msg.state === 'all' && !msg.isRead && !msg.isActive,
-  );
-  console.log(nextActiveAllMsg.id);
-  console.log(nextActiveHideMsg.id);
-  console.log(nextActiveUnreadMsg.id);
+  // const nextActiveAllMsg = messages.find(
+  //   msg => msg.state === 'all' && !msg.isActive,
+  // );
+  // const nextActiveHideMsg = messages.find(
+  //   msg => msg.state === 'hide' && !msg.isActive,
+  // );
+  // const nextActiveUnreadMsg = messages.find(
+  //   msg => msg.state === 'unread' && !msg.isActive,
+  // );
+  // console.log(nextActiveAllMsg.id);
+  // console.log(nextActiveHideMsg.id);
+  // console.log(nextActiveUnreadMsg.id);
   const dispatch = useDispatch();
 
   /** event

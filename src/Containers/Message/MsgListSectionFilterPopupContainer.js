@@ -13,49 +13,29 @@ const MsgListSectionFilterPopupContainer = ({
   popupRef,
 }) => {
   // redux
-  const { messages } = useSelector(state => state.message);
+  const { messages, activeIndex } = useSelector(state => state.message);
   const dispatch = useDispatch();
   // variable
   // const totalMsg = messages.length;
   const allMsg = messages.filter(msg => msg.state === 'all').length;
   const hideMsg = messages.filter(msg => msg.state === 'hide').length;
-  const unreadMsg = messages.filter(msg => !msg.isRead).length;
+  const unreadMsg = messages.filter(msg => msg.state === 'unread').length;
 
   // event
   // !Error: dispatch가 안됨............ㅅㅂ
   // !개잘됌^^
   const onClickAll = useCallback(() => {
-    dispatch(allMsgList(0));
+    dispatch(allMsgList(activeIndex));
     setOpenPopup(false);
   }, [dispatch, setOpenPopup]);
   const onClickHide = useCallback(() => {
-    dispatch(hideMsgList(0));
+    dispatch(hideMsgList(activeIndex));
     setOpenPopup(false);
   }, [dispatch, setOpenPopup]);
   const onClickUnread = useCallback(() => {
-    dispatch(unreadMsgList(0));
+    dispatch(unreadMsgList(activeIndex));
     setOpenPopup(false);
   }, [dispatch, setOpenPopup]);
-  // // ! onClick 이벤트가 발생하면 filter해서 메시지 리스트를 보여준다
-  // // ! popup을 끈다
-  // const onClickFilterList = ({ target }) => {
-  //   console.dir(target.childNodes[0]);
-  //   console.dir(target);
-  //   console.dir(popupRef.current.children[0].children[0]);
-  //   if (target === popupRef.current.children[0].children[0].children[0]) {
-  //     console.log('true');
-  //     dispatch(allMsgList());
-  //     setOpenPopup(false);
-  //   }
-  //   if (target === popupRef.current.children[0].children[1]) {
-  //     dispatch(hideMsgList());
-  //     setOpenPopup(false);
-  //   }
-  //   if (target === popupRef.current.children[0].children[3]) {
-  //     dispatch(unreadMsgList());
-  //     setOpenPopup(false);
-  //   }
-  // };
 
   return (
     <MsgListSectionFilterPopup

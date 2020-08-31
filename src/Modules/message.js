@@ -70,7 +70,6 @@ const initialState = {
       id: 1,
       reservationId: 1,
       state: 'all',
-      isRead: true,
       hostname: 'Paul',
       contents: {
         hostProfileImg:
@@ -86,7 +85,6 @@ const initialState = {
       id: 2,
       reservationId: 2,
       state: 'all',
-      isRead: true,
       hostname: 'Bhel',
       contents: {
         hostProfileImg:
@@ -102,7 +100,6 @@ const initialState = {
       id: 3,
       reservationId: 3,
       state: 'all',
-      isRead: false,
       hostname: 'James',
       contents: {
         hostProfileImg:
@@ -118,7 +115,6 @@ const initialState = {
       id: 4,
       reservationId: 4,
       state: 'all',
-      isRead: false,
       hostname: 'Maple',
       contents: {
         hostProfileImg:
@@ -133,8 +129,7 @@ const initialState = {
     {
       id: 5,
       reservationId: 5,
-      state: 'all',
-      isRead: false,
+      state: 'unread',
       hostname: 'Linda',
       contents: {
         hostProfileImg:
@@ -149,8 +144,7 @@ const initialState = {
     {
       id: 6,
       reservationId: 6,
-      state: 'all',
-      isRead: false,
+      state: 'unread',
       hostname: 'June',
       contents: {
         hostProfileImg:
@@ -166,7 +160,6 @@ const initialState = {
       id: 7,
       reservationId: 7,
       state: 'hide',
-      isRead: true,
       hostname: 'Jason',
       contents: {
         hostProfileImg:
@@ -182,7 +175,6 @@ const initialState = {
       id: 8,
       reservationId: 8,
       state: 'hide',
-      isRead: true,
       hostname: 'Ronald',
       contents: {
         hostProfileImg:
@@ -198,7 +190,6 @@ const initialState = {
       id: 9,
       reservationId: 9,
       state: 'hide',
-      isRead: true,
       hostname: 'Krystyn',
       contents: {
         hostProfileImg:
@@ -214,7 +205,6 @@ const initialState = {
       id: 10,
       reservationId: 10,
       state: 'hide',
-      isRead: true,
       hostname: 'John',
       contents: {
         hostProfileImg:
@@ -303,7 +293,7 @@ const message = (state = initialState, action) => {
         ...state,
         activeIndex:
           state.activeIndex === action.index ? state.activeIndex : action.index,
-        filteredMsgs: state.messages.filter(msg => !msg.isRead),
+        filteredMsgs: state.messages.filter(msg => msg.state === 'unread'),
       };
 
     case MESSAGE_HOST_FLAG:
