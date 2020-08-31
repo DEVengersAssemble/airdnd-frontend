@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Subject from '../Components/Detail/Subject';
-import HomeInfos from '../Components/Detail/HomeInfos';
-import FullsizeWrapper from '../Components/Detail/FullsizeWrapper';
+import DetailMainContainer from '../Containers/Detail/DetailMainContainer';
 import HomeFooter from '../Components/Detail/HomeFooter';
 
 const DetailPage = () => {
@@ -16,9 +14,7 @@ const DetailPage = () => {
     <>
       <TestHeader />
       <main>
-        <Subject />
-        <HomeInfos />
-        <FullsizeWrapper />
+        <DetailMainContainer />
         <HomeFooter />
       </main>
     </>

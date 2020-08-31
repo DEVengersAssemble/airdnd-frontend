@@ -1,45 +1,51 @@
 import React from 'react';
+import styled, { keyframes } from 'styled-components';
 import Button from '../Global/Button';
-import styled from 'styled-components';
 
-const HomePhotos = () => {
+const renderImgs = home => {
+  if (!home)
+    return (
+      <>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </>
+    );
+  return home.images.map((img, i) => (
+    <img key={i} src={img} alt={`숙소사진 ${i + 1}`} />
+  ));
+};
+
+const HomePhotos = ({ isLoading, home }) => {
   return (
-    <StImgsWrapper>
-      <img
-        src="https://a0.muscache.com/im/pictures/1fde1215-a81e-45d3-a36f-6018ca3f627e.jpg?im_w=960"
-        alt="숙소 사진 1"
-      />
-      <img
-        src="https://a0.muscache.com/im/pictures/1337d918-2bc5-4319-ad8d-b0ccd78b2dc2.jpg?im_w=720"
-        alt="숙소 사진 2"
-      />
-      <img
-        src="https://a0.muscache.com/im/pictures/0a5ea20c-9904-4153-b6be-a82c98249973.jpg?im_w=720"
-        alt="숙소 사진 3"
-      />
-      <img
-        src="https://a0.muscache.com/im/pictures/479306c6-ef56-409e-a2e5-79457fb43188.jpg?im_w=720"
-        alt="숙소 사진 4"
-      />
-      <img
-        src="https://a0.muscache.com/im/pictures/d4e1e39c-91c2-48cf-a00a-b64a150558c0.jpg?im_w=1200"
-        alt="숙소 사진 5"
-      />
-      <StViewerButton transition>사진 모두 보기</StViewerButton>
+    <StImgsWrapper isLoading={isLoading}>
+      {renderImgs(home)}
+      {home && <StViewerButton transition>사진 모두 보기</StViewerButton>}
     </StImgsWrapper>
   );
 };
 
+const skeleton = keyframes`
+  0% {
+    opacity: 0.1;
+  }
+  100% {
+    opacity: 0.3;
+  }
+`;
+
 const StImgsWrapper = styled.div`
   position: relative;
-  margin-top: 1.6rem;
   margin-bottom: 4.8rem;
   height: calc(60vh - 64px);
   max-height: 507px;
   border-radius: 1.2rem;
   overflow: hidden;
 
-  & img {
+  & img,
+  & div {
     float: left;
     width: calc(25% - 5px);
     height: calc(50% - 4px);
@@ -53,10 +59,22 @@ const StImgsWrapper = styled.div`
       }
     }
   }
-  & img:first-child {
+
+  & img:nth-of-type(1),
+  & div:nth-of-type(1) {
     width: calc(50% - 6px);
     height: 100%;
     margin: 0;
+  }
+
+  & div {
+    background-color: currentColor;
+    animation-name: ${skeleton};
+    animation-duration: 0.6s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
   }
 `;
 

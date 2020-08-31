@@ -5,6 +5,7 @@ import searchForm from './searchForm';
 import wishlists from './wishlists';
 import trips from './trips';
 import message from './message';
+import home from './home';
 
 const rootReducer = combineReducers({
   user,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   wishlists,
   trips,
   message,
+  home,
 });
 
 export default rootReducer;

@@ -1,4 +1,4 @@
-const { CheckBox } = require("styled-icons/material-rounded");
+const { CheckBox } = require('styled-icons/material-rounded');
 
 const initialState = {
   currentUser: {
@@ -55,9 +55,10 @@ const initialState = {
     guests: {
       adult: 0,
       child: 0,
-      infant: 0
-    }
-  }
+      infant: 0,
+    },
+  },
+
   homeDetailPage: {
     id: 0,
     host: {
