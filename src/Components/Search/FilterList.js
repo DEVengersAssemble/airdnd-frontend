@@ -7,7 +7,6 @@ import SetDatePopupContainer from '../../Containers/Search/SetDatePopupContainer
 import PricePopupContainer from '../../Containers/Search/PricePopupContainer';
 import RoomTypePopupContainer from '../../Containers/Search/RoomTypePopupContainer';
 import RefundPopupContainer from '../../Containers/Search/RefundPopupContainer';
-import FilterModalContainer from '../../Containers/Search/FilterModalContainer';
 
 export const FilterButton = ({ children, text, onClick, isApplied }) => {
   return (
@@ -44,9 +43,7 @@ export const FilterList = ({ popupState, mapState, onShowMap, dateDiff }) => {
         name="modal"
         text="필터 추가하기"
         popupState={popupState}
-      >
-        <FilterModalContainer />
-      </FilterButtonContainer>
+      ></FilterButtonContainer>
       <MapButton mapState={mapState} onShowMap={onShowMap} />
     </StWrapper>
   );

@@ -32,9 +32,14 @@ const FloatingMapButton = ({ onOpenMap }) => {
   );
 };
 
-const MapFilterButton = () => {
+const MapFilterButton = ({ openFilterModal }) => {
   return (
-    <StButton boxShadow position="sticky" margin="0 0 1rem">
+    <StButton
+      boxShadow
+      position="sticky"
+      margin="0 0 1rem"
+      onClick={openFilterModal}
+    >
       <StFilterIcon />
     </StButton>
   );

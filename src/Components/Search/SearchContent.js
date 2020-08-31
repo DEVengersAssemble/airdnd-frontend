@@ -6,6 +6,7 @@ import {
   BookmarkListModalContainer,
   NewBookmarkModalContainer,
 } from '../../Containers/Global/BookmarkModalContainer';
+import FilterModalContainer from '../../Containers/Search/FilterModalContainer';
 
 const SearchContent = ({ view, openMap, closeMap }) => {
   return (
@@ -14,6 +15,7 @@ const SearchContent = ({ view, openMap, closeMap }) => {
       <SearchMapContainer view={view} closeMap={closeMap} />
       <BookmarkListModalContainer />
       <NewBookmarkModalContainer />
+      <FilterModalContainer />
     </StContent>
   );
 };

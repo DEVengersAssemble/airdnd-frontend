@@ -80,6 +80,7 @@ const Map = compose(
     onZoomChange,
     onHideMap,
     onCloseMap,
+    openFilterModal,
     updateZoom,
     setRef,
   }) => {
@@ -106,7 +107,9 @@ const Map = compose(
           />
           <MapCheckbox />
           <StBtnSetWrapper>
-            {view === 'map' && <MapFilterButton />}
+            {view === 'map' && (
+              <MapFilterButton openFilterModal={openFilterModal} />
+            )}
             <MapZoomButton
               onZoomIn={() => {
                 onZoomIn();
