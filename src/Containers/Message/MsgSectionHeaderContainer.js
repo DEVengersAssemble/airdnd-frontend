@@ -43,11 +43,12 @@ const MsgSectionHeaderContainer = () => {
   const selectIndex = filteredMsgs.findIndex(
     (_, index) => filteredMsgs[index] === filteredMsgs[activeIndex],
   );
-  console.log('activeMsg', activeMsg);
-  console.log('selectIndex:', selectIndex, 'activeIndex:', activeIndex);
-  console.log('activeMsg.id', activeMsg.id);
-  console.log(activeMsg.hostname);
-  console.log(activeMsg.state);
+  const { id, state, hostname } = activeMsg;
+  // console.log('activeMsg', activeMsg);
+  // console.log('selectIndex:', selectIndex, 'activeIndex:', activeIndex);
+  // console.log('activeMsg.id', activeMsg.id);
+  // console.log(activeMsg.hostname);
+  // console.log(activeMsg.state);
 
   // ! event
   /**
@@ -79,14 +80,14 @@ const MsgSectionHeaderContainer = () => {
       return dispatch(hideMsgListSection());
   }, [dispatch, msgDetailSectionState]);
 
-  const onClickArchive = useCallback(() => {
+  const onClickArchive = () => {
     if (activeMsg.state === 'all') {
-      dispatch(archiveMsg(selectIndex, activeMsg.id, activeMsg.state));
+      dispatch(archiveMsg(selectIndex, id, state));
     }
     if (activeMsg.state === 'hide') {
-      dispatch(unarchiveMsg(selectIndex, activeMsg.id, activeMsg.state));
+      dispatch(unarchiveMsg(selectIndex, id, state));
     }
-  }, [dispatch, activeMsg.state, archiveMsg, unarchiveMsg]);
+  };
 
   return (
     <MsgSectionHeader
@@ -96,8 +97,8 @@ const MsgSectionHeaderContainer = () => {
       onClickDetail={onClickDetail}
       onClickShowList={onClickShowList}
       onClickArchive={onClickArchive}
-      hostname={activeMsg.hostname}
-      state={activeMsg.state}
+      hostname={activeMsg && hostname}
+      state={activeMsg && state}
     />
   );
 };
