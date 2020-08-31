@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import DetailMainContainer from '../Containers/Detail/DetailMainContainer';
+// import Subject from '../Components/Detail/Subject';
+// import HomeInfos from '../Components/Detail/HomeInfos';
+// import FullsizeWrapper from '../Components/Detail/FullsizeWrapper';
 import HomeFooter from '../Components/Detail/HomeFooter';
+import DetailHeaderContainer from '../Containers/Detail/DetailHeaderContainer';
 
 const DetailPage = () => {
   const [modalState, setModalState] = useState(false);
@@ -12,18 +15,16 @@ const DetailPage = () => {
 
   return (
     <>
-      <TestHeader />
-      <main>
+      <DetailHeaderContainer />
+      <main style={{ paddingTop: '80px' }}>
         <DetailMainContainer />
+        {/* <Subject />
+        <HomeInfos />
+        <FullsizeWrapper /> */}
         <HomeFooter />
       </main>
     </>
   );
 };
-
-const TestHeader = styled.header`
-  height: 8rem;
-  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.18);
-`;
 
 export default DetailPage;

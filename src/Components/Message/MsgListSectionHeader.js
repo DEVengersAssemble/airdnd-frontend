@@ -3,28 +3,41 @@ import styled from 'styled-components';
 import { darken } from 'polished';
 import theme from '../../style/theme';
 import Button from '../Global/Button';
-import MsgListSectionFilterPopup from './MsgListSectionFilterPopup';
 import { MdFilterList } from 'react-icons/md';
+import MsgListSectionFilterPopupContainer from '../../Containers/Message/MsgListSectionFilterPopupContainer';
 
-const MsgListSectionHeader = () => {
-  const [openPopup, setOpenPopup] = React.useState(false);
-  const onClickPopup = () => {
-    setOpenPopup(!openPopup);
-  };
-
+const MsgListSectionHeader = ({
+  allState,
+  hideState,
+  unreadState,
+  openPopup,
+  setOpenPopup,
+  onClickPopup,
+  popupBtnRef,
+  popupRef,
+}) => {
   return (
     <MsgListSectionHeaderWrapper>
-      <MsgListSectionHeaderTitle>메시지 주고받기</MsgListSectionHeaderTitle>
+      <MsgListSectionHeaderTitle>
+        {allState === 'all' && '메시지 주고받기'}
+        {hideState === 'hide' && '보관 처리됨'}
+        {unreadState === 'unread' && '읽지 않음'}
+      </MsgListSectionHeaderTitle>
       <StMsgListSectionHeaderFilterButton
         btnType="circle"
         border={openPopup ? '2px solid black' : 'none'}
         hover={{ backgroundColor: theme.color.lightGray }}
         onClick={onClickPopup}
         openPopup={openPopup}
+        ref={popupBtnRef}
       >
         <StMsgListSectionHeaderFilterButtonIcon />
       </StMsgListSectionHeaderFilterButton>
-      <MsgListSectionFilterPopup openPopup={openPopup} />
+      <MsgListSectionFilterPopupContainer
+        openPopup={openPopup}
+        setOpenPopup={setOpenPopup}
+        popupRef={popupRef}
+      />
     </MsgListSectionHeaderWrapper>
   );
 };

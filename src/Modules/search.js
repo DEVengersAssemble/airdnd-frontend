@@ -1,6 +1,9 @@
 const HOVER_HOME = 'search/HOVER_HOME';
 const BLUR_HOME = 'search/BLUR_HOME';
+const CHANGE_HEART = 'search/CHANGE_HEART';
 
+const OPEN_MAP = 'search/OPEN_MAP';
+const CLOSE_MAP = 'search/CLOSE_MAP';
 const SHOW_MAP = 'search/SHOW_MAP';
 const HIDE_MAP = 'search/HIDE_MAP';
 const ZOOM_IN = 'search/ZOOM_IN';
@@ -24,7 +27,10 @@ const RESET_MODAL_FILTER = 'search/RESET_MODAL/FILTER';
 
 export const hoverHome = homeId => ({ type: HOVER_HOME, homeId });
 export const blurHome = () => ({ type: BLUR_HOME });
+export const changeHeart = homeId => ({ type: CHANGE_HEART, homeId });
 
+export const openMap = () => ({ type: OPEN_MAP });
+export const closeMap = () => ({ type: CLOSE_MAP });
 export const showMap = () => ({ type: SHOW_MAP });
 export const hideMap = () => ({ type: HIDE_MAP });
 export const zoomIn = () => ({ type: ZOOM_IN });
@@ -38,7 +44,12 @@ export const closePopup = name => ({ type: CLOSE_POPUP, name });
 export const handleRange = handler => ({ type: HANDLE_RANGE, handler });
 export const setFilter = (name, value) => ({ type: SET_FILTER, name, value });
 export const resetFilter = name => ({ type: RESET_FILTER, name });
-export const saveFilter = (name, value) => ({ type: SAVE_FILTER, name, value });
+export const saveFilter = (name, value, state) => ({
+  type: SAVE_FILTER,
+  name,
+  value,
+  state,
+});
 
 export const applyToggleFilter = (name, value) => ({
   type: APPLY_TOGGLE_FILTER,
@@ -174,8 +185,8 @@ const initialState = {
   recentHomes: [
     {
       homeId: 5,
-      isSuperhost: true,
-      isBookmarked: true,
+      isSuperhost: false,
+      isBookmarked: false,
       imageArray: [
         'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small',
         'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large',
@@ -193,7 +204,7 @@ const initialState = {
     {
       homeId: 6,
       isSuperhost: true,
-      isBookmarked: true,
+      isBookmarked: false,
       imageArray: [
         'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small',
         'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large',
@@ -228,8 +239,8 @@ const initialState = {
     },
     {
       homeId: 8,
-      isSuperhost: true,
-      isBookmarked: true,
+      isSuperhost: false,
+      isBookmarked: false,
       imageArray: [
         'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small',
         'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large',
@@ -281,6 +292,12 @@ const initialState = {
       location: { lat: 0, lng: 0 },
     },
   ],
+  filterDisabled: {
+    refund: true,
+    roomType: true,
+    price: true,
+    modal: true,
+  },
   filterApplied: {
     refund: false,
     roomType: {
@@ -385,6 +402,7 @@ const initialState = {
   ],
   // 1박 평균 가격
   averagePrice: 82094,
+  viewState: 'result',
   mapState: true,
   mapZoom: 15,
   markerState: null,
@@ -400,6 +418,30 @@ const initialState = {
 // reducer
 const search = (state = initialState, action) => {
   switch (action.type) {
+    case HOVER_HOME:
+      return {
+        ...state,
+        hoveredHome: action.homeId,
+      };
+    case BLUR_HOME:
+      return {
+        ...state,
+        hoveredHome: null,
+      };
+    case CHANGE_HEART:
+      return {
+        ...state,
+        homes: state.homes.map(home =>
+          home.homeId === action.homeId
+            ? { ...home, isBookmarked: !home.isBookmarked }
+            : home,
+        ),
+        recentHomes: state.recentHomes.map(home =>
+          home.homeId === action.homeId
+            ? { ...home, isBookmarked: !home.isBookmarked }
+            : home,
+        ),
+      };
     case SHOW_MAP:
       return {
         ...state,
@@ -409,6 +451,16 @@ const search = (state = initialState, action) => {
       return {
         ...state,
         mapState: false,
+      };
+    case OPEN_MAP:
+      return {
+        ...state,
+        viewState: 'map',
+      };
+    case CLOSE_MAP:
+      return {
+        ...state,
+        viewState: 'result',
       };
     case ZOOM_IN:
       return {
@@ -474,6 +526,10 @@ const search = (state = initialState, action) => {
           ...state.filterApplied,
           [action.name]: action.value,
         },
+        filterDisabled: {
+          ...state.filterDisabled,
+          [action.name]: action.state,
+        },
         popup: popupInit,
       };
     case APPLY_TOGGLE_FILTER:
@@ -522,16 +578,6 @@ const search = (state = initialState, action) => {
           ...state.filterApplied,
           ...modalFilterInit(state.filterCondition),
         },
-      };
-    case HOVER_HOME:
-      return {
-        ...state,
-        hoveredHome: action.homeId,
-      };
-    case BLUR_HOME:
-      return {
-        ...state,
-        hoveredHome: null,
       };
     default:
       return state;

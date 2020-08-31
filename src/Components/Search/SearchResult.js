@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FilterListContainer } from '../../Containers/Search/FilterListContainer';
-import RecentHomeList from './RecentHomeList';
 import SearchPagenation from './SearchPagenation';
 import { FloatingMapButton } from './MapButton';
 import HomeListContainer from '../../Containers/Search/HomeListContainer';
@@ -10,8 +9,7 @@ import RecentHomeListContainer from '../../Containers/Search/RecentHomeListConta
 const SearchResult = ({
   mapState,
   view,
-  openMap,
-  onShowMap,
+  onOpenMap,
   dataTotal,
   location,
   guestCount,
@@ -22,11 +20,11 @@ const SearchResult = ({
         숙박 {dataTotal}건 · 게스트 {guestCount}명
       </StSpan>
       <StHeader>{location}의 숙소</StHeader>
-      <FilterListContainer mapState={mapState} onShowMap={onShowMap} />
-      <HomeListContainer mapState={mapState} />
+      <FilterListContainer mapState={mapState} />
+      <HomeListContainer />
       <RecentHomeListContainer />
       <SearchPagenation />
-      <FloatingMapButton openMap={openMap} />
+      <FloatingMapButton onOpenMap={onOpenMap} />
     </StWrapper>
   );
 };

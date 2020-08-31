@@ -6,18 +6,16 @@ import { NewInput } from './Input';
 import styled from 'styled-components';
 
 const BookmarkListModal = ({
-  homeId,
   modalState,
-  setModalState,
-  openNewModal,
+  closeBmListModal,
+  openBmNewModal,
   bookmarkLists,
   onClickBookmark,
 }) => {
-  console.log('is it rendering?');
   return (
     <Modal
       modalState={modalState}
-      setModalState={setModalState}
+      setModalState={closeBmListModal}
       width="520px"
       height="90vh"
       title="목록에 저장하기"
@@ -29,12 +27,9 @@ const BookmarkListModal = ({
             bookmarks && (
               <StBookmark
                 key={bookmarkListId}
-                onClick={() => {
-                  setModalState();
-                  onClickBookmark(homeId, bookmarkListId);
-                }}
+                onClick={() => onClickBookmark(bookmarkListId)}
               >
-                <StImage src={bookmarks[0].images} />
+                <StImage src={bookmarks[0] && bookmarks[0].images} />
                 <StContentWrapper>
                   <StTitle>{bookmarkListTitle}</StTitle>
                   <StCount>숙소 {bookmarks.length}개</StCount>
@@ -48,7 +43,7 @@ const BookmarkListModal = ({
           btnType="underlined"
           width="100%"
           fontWeight="500"
-          onClick={openNewModal}
+          onClick={openBmNewModal}
         >
           목록 만들기
         </Button>
@@ -58,18 +53,16 @@ const BookmarkListModal = ({
 };
 
 const NewBookmarkModal = ({
-  homeId,
   value,
   onChange,
   onClickNewList,
+  closeBmNewModal,
   modalState,
-  setModalState,
-  closeListModal,
 }) => {
   return (
     <Modal
       modalState={modalState}
-      setModalState={setModalState}
+      setModalState={closeBmNewModal}
       width="520px"
       height="305px"
       title="목록 이름 작성하기"
@@ -85,11 +78,7 @@ const NewBookmarkModal = ({
           color="black"
           hover="background: #000"
           width="100%"
-          onClick={() => {
-            onClickNewList(value, homeId);
-            setModalState();
-            closeListModal();
-          }}
+          onClick={() => onClickNewList(value)}
         >
           새로 만들기
         </Button>

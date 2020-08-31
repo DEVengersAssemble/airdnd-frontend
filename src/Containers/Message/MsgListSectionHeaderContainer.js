@@ -5,7 +5,13 @@ import MsgListSectionHeader from '../../Components/Message/MsgListSectionHeader'
 const MsgListSectionHeaderContainer = () => {
   // redux
   // !현재 작업 진행중
-  const message = useSelector(state => state.message);
+  const { messages, filteredMsgs } = useSelector(state => state.message);
+  const dispatch = useDispatch();
+
+  // variable
+  const allState = filteredMsgs.map(msg => msg.state)[0];
+  const hideState = filteredMsgs.map(msg => msg.state)[0];
+  const unreadState = filteredMsgs.map(msg => msg.state)[0];
 
   // hook
   const [openPopup, setOpenPopup] = useState(false);
@@ -17,7 +23,7 @@ const MsgListSectionHeaderContainer = () => {
     setOpenPopup(!openPopup);
   }, [openPopup, setOpenPopup]);
 
-  // ? onClickOutside: close popup when outside click
+  // onClickOutside: close popup when outside click
   const onClickOutSide = useCallback(
     ({ target }) => {
       if (!popupBtnRef.current || popupBtnRef.current.contains(target))
@@ -37,6 +43,9 @@ const MsgListSectionHeaderContainer = () => {
 
   return (
     <MsgListSectionHeader
+      allState={allState}
+      hideState={hideState}
+      unreadState={unreadState}
       openPopup={openPopup}
       setOpenPopup={setOpenPopup}
       onClickPopup={onClickPopup}

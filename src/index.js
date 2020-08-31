@@ -10,7 +10,7 @@ import rootReducer from './Modules';
 import theme from './style/theme';
 import App from './App';
 
-const store = createStore(
+export const store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(ReduxThunk)),
 );

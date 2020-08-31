@@ -4,8 +4,8 @@ import { Marker, OverlayView } from 'react-google-maps';
 import { InfoBox } from 'react-google-maps/lib/components/addons/InfoBox';
 import { AiFillHome } from 'react-icons/ai';
 import Button from '../Global/Button';
-import HomePopup from './HomePopup';
 import { Heart } from '../Global/Heart';
+import HomePopupContainer from '../../Containers/Search/HomePopupContainer';
 
 const getPixelPositionOffset = (width, height) => ({
   x: width + width / 2,
@@ -14,10 +14,10 @@ const getPixelPositionOffset = (width, height) => ({
 
 const MapMarker = ({
   theme,
+  store,
   isOpen,
   isHovered,
   marker,
-  markerState,
   dateDiff,
   clickMarker,
 }) => {
@@ -76,8 +76,16 @@ const MapMarker = ({
         )}
       </OverlayView>
       {isOpen && (
-        <InfoBox options={{ closeBoxURL: '', enableEventPropagatioin: true }}>
-          <HomePopup home={marker} dateDiff={dateDiff} theme={theme} />
+        <InfoBox
+          options={{ closeBoxURL: '', enableEventPropagation: true }}
+          onClick={() => console.log('infoBox')}
+        >
+          <HomePopupContainer
+            home={marker}
+            store={store}
+            dateDiff={dateDiff}
+            theme={theme}
+          />
         </InfoBox>
       )}
     </Marker>
@@ -87,6 +95,7 @@ const MapMarker = ({
 const buttonStyle = css`
   box-shadow: 0 0 2px ${({ theme }) => theme.color.gray};
   border: none;
+  transform: scale(1);
   transition: 0.3s;
   &:hover {
     border: none;
@@ -103,7 +112,6 @@ const focusStyle = css`
           background: ${theme.color.black};
           color: ${theme.color.white};
           transition: 0.3s;
-          transition-delay: 0.3s;
           transform: scale(1.1);
           z-index: 20;
         `

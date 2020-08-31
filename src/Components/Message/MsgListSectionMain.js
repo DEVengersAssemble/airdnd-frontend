@@ -1,35 +1,27 @@
 import React from 'react';
 import styled from 'styled-components';
 import { darken } from 'polished';
-import MsgListSectionItem from './MsgListSectionItem';
+import MsgListSectionItemContainer from '../../Containers/Message/MsgListSectionItemContainer';
 import MsgListSectionNone from './MsgListSectionNone';
 
-const MsgListSectionMain = () => {
-  const hasMsg = false;
-
+const MsgListSectionMain = ({ hasMsgs, filteredMsgs }) => {
   // MsgListNone과 MsgLists
   return (
     <MsgListSectionMainWrapper>
-      {hasMsg ? (
-        <MsgListSectionNone />
-      ) : (
+      {hasMsgs ? (
         <>
           <MsgLists>
-            <MsgListSectionItem />
-            <MsgListSectionItem />
-            <MsgListSectionItem />
-            <MsgListSectionItem />
-            <MsgListSectionItem />
-            <MsgListSectionItem />
-            <MsgListSectionItem />
-            <MsgListSectionItem />
-            <MsgListSectionItem />
-            <MsgListSectionItem />
-            <MsgListSectionItem />
-            <MsgListSectionItem />
-            <MsgListSectionItem />
+            {filteredMsgs.map((msg, index) => (
+              <MsgListSectionItemContainer
+                key={msg.id}
+                msg={msg}
+                index={index}
+              />
+            ))}
           </MsgLists>
         </>
+      ) : (
+        <MsgListSectionNone />
       )}
     </MsgListSectionMainWrapper>
   );

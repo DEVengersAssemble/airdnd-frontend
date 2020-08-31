@@ -4,8 +4,17 @@ import { HomeCaption } from './HomeCard';
 import { CkHeart } from '../Global/Heart';
 import CarouselContainer from '../../Containers/Global/CarouselContainer';
 
-const HomePopup = ({ home, dateDiff, theme }) => {
+const HomePopup = ({
+  home,
+  hover,
+  theme,
+  dateDiff,
+  onHoverHome,
+  onBlurHome,
+  onClickHeart,
+}) => {
   const {
+    homeId,
     isSuperhost,
     isBookmarked,
     imageArray,
@@ -17,10 +26,14 @@ const HomePopup = ({ home, dateDiff, theme }) => {
     price,
   } = home;
   return (
-    <StWrapper>
+    <StWrapper
+      onMouseOver={() => onHoverHome(homeId)}
+      onMouseLeave={onBlurHome}
+    >
       <Carousel
         size="large"
         theme={theme}
+        isHovered={hover}
         isSuperhost={isSuperhost}
         imageArray={imageArray}
         imageCount={imageCount}
@@ -34,7 +47,12 @@ const HomePopup = ({ home, dateDiff, theme }) => {
         price={price}
         dateDiff={dateDiff}
       />
-      <Heart ckType theme={theme} checked={isBookmarked} />
+      <Heart
+        ckType
+        theme={theme}
+        checked={isBookmarked}
+        onCheck={onClickHeart}
+      />
     </StWrapper>
   );
 };

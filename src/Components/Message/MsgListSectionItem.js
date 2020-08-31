@@ -1,36 +1,40 @@
 import React from 'react';
 import styled from 'styled-components';
 import { ellipsis } from 'polished';
-import theme from '../../style/theme';
 import Profile from '../Global/Profile';
 
-const MsgListItem = () => {
-  const complete = true;
-
+const MsgListSectionItem = ({
+  index,
+  activeIndex,
+  hostname,
+  hostProfileImg,
+  lastMsg,
+  lm,
+  ci,
+  co,
+  isCanceled,
+  onClickActive,
+}) => {
   return (
-    <MsgListItemWrapper>
-      <Profile size="4.2rem" lastName="Kim" />
+    <MsgListItemWrapper
+      index={index}
+      activeIndex={activeIndex}
+      onClick={onClickActive}
+    >
+      <Profile size="4.2rem" lastName="Kim" profileImg={hostProfileImg} />
       <LastMsgItemOuter>
-        <HostName>호스트 이름</HostName>
+        <HostName>{hostname}</HostName>
         <LastMsgItemInner>
-          <LastMsgItemText>
-            마지막 메시지 내용입니다. 마지막 메시지 내용입니다.
-          </LastMsgItemText>
-          <LastMsgItemDate>2020년 8월 16일</LastMsgItemDate>
+          <LastMsgItemText>{lastMsg}</LastMsgItemText>
+          <LastMsgItemDate>{lm}</LastMsgItemDate>
         </LastMsgItemInner>
         <MsgItemReservationWrapper>
-          <MsgItemReservedState
-            style={{
-              color: `${
-                complete ? theme.color.lightGreen : theme.color.darkGray
-              }`,
-            }}
-          >
-            완료
+          <MsgItemReservedState isCanceled={isCanceled}>
+            {isCanceled ? '예약취소' : '완료'}
           </MsgItemReservedState>
           {' • '}
           <MsgItemReservedDate>
-            2020년 8월 15일 - 2020년 8월 16일
+            {ci} - {co}
           </MsgItemReservedDate>
         </MsgItemReservationWrapper>
       </LastMsgItemOuter>
@@ -43,8 +47,10 @@ const MsgListItemWrapper = styled.li`
   align-items: flex-start;
   border: none;
   border-radius: 12px;
-  background: ${({ theme }) => theme.color.lightGray};
+  background: ${({ activeIndex, index, theme }) =>
+    activeIndex === index ? theme.color.lightGray : 'none'};
   padding: 1rem;
+  cursor: pointer;
 `;
 
 const LastMsgItemOuter = styled.div`
@@ -63,6 +69,7 @@ const HostName = styled.div`
 `;
 
 const LastMsgItemInner = styled.div`
+  width: 27rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -70,7 +77,7 @@ const LastMsgItemInner = styled.div`
 
 const LastMsgItemText = styled.span`
   font-size: 1.4rem;
-  ${ellipsis('17.8rem')};
+  ${ellipsis('17rem')};
 `;
 
 const LastMsgItemDate = styled.span`
@@ -85,6 +92,8 @@ const MsgItemReservationWrapper = styled.div`
 `;
 
 const MsgItemReservedState = styled.span`
+  color: ${({ isCanceled, theme }) =>
+    isCanceled ? theme.color.darkGray : theme.color.lightGreen};
   font-size: 1.4rem;
   font-weight: 400;
 `;
@@ -95,4 +104,4 @@ const MsgItemReservedDate = styled.span`
   font-weight: 400;
 `;
 
-export default MsgListItem;
+export default MsgListSectionItem;
