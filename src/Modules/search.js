@@ -1,5 +1,6 @@
 const HOVER_HOME = 'search/HOVER_HOME';
 const BLUR_HOME = 'search/BLUR_HOME';
+const CHANGE_HEART = 'search/CHANGE_HEART';
 
 const OPEN_MAP = 'search/OPEN_MAP';
 const CLOSE_MAP = 'search/CLOSE_MAP';
@@ -26,6 +27,7 @@ const RESET_MODAL_FILTER = 'search/RESET_MODAL/FILTER';
 
 export const hoverHome = homeId => ({ type: HOVER_HOME, homeId });
 export const blurHome = () => ({ type: BLUR_HOME });
+export const changeHeart = homeId => ({ type: CHANGE_HEART, homeId });
 
 export const openMap = () => ({ type: OPEN_MAP });
 export const closeMap = () => ({ type: CLOSE_MAP });
@@ -405,6 +407,30 @@ const initialState = {
 // reducer
 const search = (state = initialState, action) => {
   switch (action.type) {
+    case HOVER_HOME:
+      return {
+        ...state,
+        hoveredHome: action.homeId,
+      };
+    case BLUR_HOME:
+      return {
+        ...state,
+        hoveredHome: null,
+      };
+    case CHANGE_HEART:
+      return {
+        ...state,
+        homes: state.homes.map(home =>
+          home.homeId === action.homeId
+            ? { ...home, isBookmarked: !home.isBookmarked }
+            : home,
+        ),
+        recentHomes: state.recentHomes.map(home =>
+          home.homeId === action.homeId
+            ? { ...home, isBookmarked: !home.isBookmarked }
+            : home,
+        ),
+      };
     case SHOW_MAP:
       return {
         ...state,
@@ -537,16 +563,6 @@ const search = (state = initialState, action) => {
           ...state.filterApplied,
           ...modalFilterInit(state.filterCondition),
         },
-      };
-    case HOVER_HOME:
-      return {
-        ...state,
-        hoveredHome: action.homeId,
-      };
-    case BLUR_HOME:
-      return {
-        ...state,
-        hoveredHome: null,
       };
     default:
       return state;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import HomePopup from '../../Components/Search/HomePopup';
-import { hoverHome, blurHome } from '../../Modules/search';
+import { hoverHome, blurHome, changeHeart } from '../../Modules/search';
 import { removeBookmark, openListModal } from '../../Modules/wishlists';
 
 const HomePopupContainer = ({ home, dateDiff, theme, store }) => {
@@ -13,9 +13,12 @@ const HomePopupContainer = ({ home, dateDiff, theme, store }) => {
     hoveredHome !== home.homeId && dispatch(hoverHome(home.homeId));
   const onBlurHome = () => dispatch(blurHome());
   const onClickHeart = () => {
-    console.log('나 눌럿는데ㅠㅠㅠㅠ');
     if (!id) return console.log('로그인 해라~~~~~~~~~~~~~ 로그인 팝업 띄우기');
-    if (home.isBookmarked) return dispatch(removeBookmark(home.homeId));
+    if (home.isBookmarked) {
+      dispatch(removeBookmark(home.homeId));
+      dispatch(changeHeart(home.homeId));
+      return;
+    }
     dispatch(openListModal(home.homeId, home.imageArray[0]));
   };
 
