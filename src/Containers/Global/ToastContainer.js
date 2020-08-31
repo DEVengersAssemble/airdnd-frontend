@@ -1,8 +1,14 @@
 import React from 'react';
-import { Toast } from '../../Components/Global/Toast';
+import { useSelector } from 'react-redux';
+import { Toast, CanceledToast } from '../../Components/Global/Toast';
 
-const ToastContainer = () => {
-  return <Toast />;
+const ToastContainer = ({ state }) => {
+  const toast = useSelector(state => state.message.toast);
+  console.log('toast', toast);
+  return <Toast state={state} toast={toast} />;
 };
 
-export default ToastContainer;
+const CanceledToastContainer = ({ state }) => {
+  return <CanceledToast state={state} />;
+};
+export { ToastContainer, CanceledToastContainer };

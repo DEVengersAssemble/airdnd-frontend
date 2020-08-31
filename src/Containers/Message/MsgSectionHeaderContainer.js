@@ -1,5 +1,11 @@
 import React, { useCallback } from 'react';
+import styled from 'styled-components';
 import MsgSectionHeader from '../../Components/Message/MsgSectionHeader';
+import {
+  ToastContainer,
+  CanceledToastContainer,
+} from '../Global/ToastContainer';
+
 import { useSelector, useDispatch } from 'react-redux';
 import {
   hideMsgDetailSection,
@@ -8,6 +14,8 @@ import {
   showMsgListSection,
   archiveMsg,
   unarchiveMsg,
+  showToast,
+  hideToast,
 } from '../../Modules/message';
 
 const MsgSectionHeaderContainer = () => {
@@ -77,26 +85,40 @@ const MsgSectionHeaderContainer = () => {
       return dispatch(hideMsgListSection());
   }, [dispatch, msgDetailSectionState]);
 
+  const clearToast = () => dispatch(hideToast());
+
   const onClickArchive = () => {
     if (activeMsg.state === 'all') {
       dispatch(archiveMsg(selectIndex, activeMsg.id, activeMsg.state));
+      setTimeout(() => {
+        dispatch(showToast());
+        setTimeout(() => clearTimeout(clearToast()), 8000);
+      });
     }
     if (activeMsg.state === 'hide') {
       dispatch(unarchiveMsg(selectIndex, activeMsg.id, activeMsg.state));
+      setTimeout(() => {
+        dispatch(showToast());
+        setTimeout(() => clearTimeout(clearToast()), 8000);
+      });
     }
   };
 
   return (
-    <MsgSectionHeader
-      media={media}
-      msgListSectionState={msgListSectionState}
-      msgDetailSectionState={msgDetailSectionState}
-      onClickDetail={onClickDetail}
-      onClickShowList={onClickShowList}
-      onClickArchive={onClickArchive}
-      hostname={activeMsg && activeMsg.hostname}
-      state={activeMsg && activeMsg.state}
-    />
+    <>
+      <MsgSectionHeader
+        media={media}
+        msgListSectionState={msgListSectionState}
+        msgDetailSectionState={msgDetailSectionState}
+        onClickDetail={onClickDetail}
+        onClickShowList={onClickShowList}
+        onClickArchive={onClickArchive}
+        hostname={activeMsg && activeMsg.hostname}
+        state={activeMsg && activeMsg.state}
+      />
+      <ToastContainer state={activeMsg && activeMsg.state} />
+      <CanceledToastContainer state={activeMsg && activeMsg.state} />
+    </>
   );
 };
 

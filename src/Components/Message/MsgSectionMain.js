@@ -20,6 +20,8 @@ const MsgSectionMain = () => {
 };
 
 const MsgSectionMainWrapper = styled.div`
+  overflow-y: hidden;
+  max-height: calc(100% - 8rem);
   display: flex;
   flex-direction: column;
 `;
