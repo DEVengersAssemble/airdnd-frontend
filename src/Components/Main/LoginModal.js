@@ -7,15 +7,15 @@ const StLoginModal = styled(Modal)``;
 
 const StLoginButton = styled(Button)``;
 
-const LoginModal = ({ loginModalVisible, openSignupModal, closeModal }) => {
+const LoginModal = ({ modalVisible, openSignupMenuModal, closeModal }) => {
   return (
     <StLoginModal
-      modalState={loginModalVisible}
+      modalState={modalVisible}
       header
       title="로그인"
-      setModalState={() => closeModal('login')}
+      setModalState={closeModal}
     >
-      <StLoginButton btnType="color" onClick={openSignupModal}>
+      <StLoginButton btnType="color" onClick={openSignupMenuModal}>
         회원가입하기
       </StLoginButton>
     </StLoginModal>

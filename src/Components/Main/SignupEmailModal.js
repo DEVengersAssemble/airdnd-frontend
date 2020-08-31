@@ -169,7 +169,7 @@ const StLoginButton = styled(Button)`
 `;
 
 const SignupEmailModal = ({
-  signupModalVisible,
+  modalVisible,
   openLoginModal,
   closeModal,
   signup,
@@ -199,27 +199,14 @@ const SignupEmailModal = ({
 
   return (
     <StSignupEmailModal
-      modalState={signupModalVisible}
+      modalState={modalVisible}
       header
       title="회원가입"
       width="570px"
       height="680px"
-      setModalState={() => closeModal('signup')}
+      setModalState={closeModal}
     >
       <StSignupFormWrapper>
-        {/* <StSocialLoginWrapper>
-          페이스북 또는{' '}
-          <GoogleLogin
-            clientId={process.env.REACT_APP_GOOGLE_LOGIN_API_KEY}
-            cookiePolicy={'single_host_origin'}
-            onSuccess={onGoogleLoginSuccess}
-            onFailure={onGoogleLoginFailure}
-            btnText=""
-          />
-          로 회원 가입하세요.
-        </StSocialLoginWrapper>
-        <StDividerLine />
-        <StDividerText>또는</StDividerText> */}
         <StSignupForm onSubmit={onSignup}>
           <StInputWrapper>
             <StInput

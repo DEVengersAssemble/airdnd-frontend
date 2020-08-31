@@ -6,18 +6,18 @@ import LoginModal from '../../Components/Main/LoginModal';
 const LoginModalContainer = () => {
   const dispatch = useDispatch();
   const { name } = useSelector(state => state.modal);
-  const loginModalVisible = name === 'login';
+  const modalVisible = name === 'login';
   const [form, setForm] = useState({});
   // {email: '', firstName: '', lastName: '', pw:'', birthMonth: 0, birthDay: 0, birthYear: 0}
 
-  const openSignupModal = () => {
-    dispatch(openModal('signup'));
+  const openSignupMenuModal = () => {
+    dispatch(openModal('signup_menu'));
   };
 
   return (
     <LoginModal
-      loginModalVisible={loginModalVisible}
-      openSignupModal={openSignupModal}
+      modalVisible={modalVisible}
+      openSignupMenuModal={openSignupMenuModal}
       closeModal={() => {
         dispatch(closeModal());
       }}

@@ -92,7 +92,7 @@ const MyPagePopup = ({
               </StMyPageOptionItem>
               <StMyPageOptionItem>
                 <StMyPageOptionButton
-                  onClick={() => openModalByName('signup_email')}
+                  onClick={() => openModalByName('signup_menu')}
                 >
                   회원가입
                 </StMyPageOptionButton>

@@ -3,8 +3,9 @@ import { useDispatch } from 'react-redux';
 import { openModal } from '../../Modules/modal';
 import MyPageButton from '../../Components/Main/MyPageButton';
 import MyPagePopup from '../../Components/Main/MyPagePopup';
-import SignupEmailModalContainer from './SignupEmailModalContainer';
 import LoginModalContainer from './LoginModalContainer';
+import SignupMenuModalContainer from './SignupMenuModalContainer';
+import SignupEmailModalContainer from './SignupEmailModalContainer';
 
 // 1. 로그인 전 <GoPerson />
 // 2. 로그인 후 프로필사진 존재할 시 그 이미지 url
@@ -38,6 +39,7 @@ const MyPageButtonContainer = ({ isScrollTop }) => {
         openModalByName={openModalByName}
       ></MyPagePopup>
       <LoginModalContainer />
+      <SignupMenuModalContainer />
       <SignupEmailModalContainer />
     </>
   );

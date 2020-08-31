@@ -254,7 +254,7 @@ const SignupModalContainer = () => {
 
   return (
     <SignupEmailModal
-      signupModalVisible={modalVisible}
+      modalVisible={modalVisible}
       openLoginModal={openLoginModal}
       closeModal={() => {
         dispatch(closeModal());
@@ -272,4 +272,4 @@ const SignupModalContainer = () => {
     ></SignupEmailModal>
   );
 };
-export default SignupModalContainer;
+export default React.memo(SignupModalContainer);
