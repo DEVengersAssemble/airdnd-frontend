@@ -1,23 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import MsgListSectionItem from '../../Components/Message/MsgListSectionItem';
-import {
-  activeMsgListItem,
-  allMsgList,
-  hideMsgList,
-  unreadMsgList,
-} from '../../Modules/message';
+import { allMsgList, hideMsgList, unreadMsgList } from '../../Modules/message';
 
-const MsgListSectionItemContainer = ({ msg }) => {
+const MsgListSectionItemContainer = ({ msg, index }) => {
   // redux
-  const filteredMsgs = useSelector(state => state.message.filteredMsgs);
+  const { activeIndex, activeFilter, filteredMsgs } = useSelector(
+    state => state.message,
+  );
   const dispatch = useDispatch();
-
-  // hook
-  const [checked, setChecked] = useState(false);
+  console.log(msg);
+  console.log('아이템 컨테이너 activeIndex', activeIndex);
+  console.log('아이템 컨테이너 activeFilter', activeFilter);
+  console.log('아이템 컨테이너 filteredMsgs index', index);
 
   // variable
-  const { isActive, hostname } = msg;
+  const { hostname } = msg;
   const {
     hostProfileImg,
     lastMsg,
@@ -39,14 +37,20 @@ const MsgListSectionItemContainer = ({ msg }) => {
   const co = coDate.toLocaleDateString('ko-KR', options);
 
   // event
-  // target이 checked === true면 isActive false
-  // const onClickActive = ({ target }) => {
-
-  // };
+  const onClickActive = useCallback(() => {
+    // 아이템에 클릭 이벤트 발생시 dispatch(SHOW_MESSAGE action);
+    console.log('item에 click이벤트 발생시 filterMsgs', filteredMsgs[index]);
+    if (activeIndex !== index) {
+      activeFilter === 'all' && dispatch(allMsgList(index));
+      activeFilter === 'hide' && dispatch(hideMsgList(index));
+      activeFilter === 'unread' && dispatch(unreadMsgList(index));
+    }
+  }, [dispatch]);
 
   return (
     <MsgListSectionItem
-      checked={checked}
+      index={index}
+      activeIndex={activeIndex}
       hostname={hostname}
       hostProfileImg={hostProfileImg}
       lastMsg={lastMsg}
@@ -54,7 +58,7 @@ const MsgListSectionItemContainer = ({ msg }) => {
       ci={ci}
       co={co}
       isCanceled={isCanceled}
-      // onClickActive={onClickActive}
+      onClickActive={onClickActive}
     />
   );
 };

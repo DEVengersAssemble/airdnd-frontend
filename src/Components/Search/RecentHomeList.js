@@ -1,5 +1,4 @@
 import React from 'react';
-import HomeCard from './HomeCard';
 import styled from 'styled-components';
 import RecentPagenation from './RecentPagenation';
 import HomeCardContainer from '../../Containers/Search/HomeCardContainer';

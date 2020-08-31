@@ -11,8 +11,12 @@ const MsgListSectionMain = ({ hasMsgs, filteredMsgs }) => {
       {hasMsgs ? (
         <>
           <MsgLists>
-            {filteredMsgs.map(msg => (
-              <MsgListSectionItemContainer key={msg.id} msg={msg} />
+            {filteredMsgs.map((msg, index) => (
+              <MsgListSectionItemContainer
+                key={msg.id}
+                msg={msg}
+                index={index}
+              />
             ))}
           </MsgLists>
         </>
