@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from '../Global/Button';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { FilterButtonContainer } from '../../Containers/Search/FilterListContainer';
 import { MapButton } from './MapButton';
 import SetDatePopupContainer from '../../Containers/Search/SetDatePopupContainer';
@@ -9,10 +9,10 @@ import RoomTypePopupContainer from '../../Containers/Search/RoomTypePopupContain
 import RefundPopupContainer from '../../Containers/Search/RefundPopupContainer';
 import FilterModalContainer from '../../Containers/Search/FilterModalContainer';
 
-export const FilterButton = ({ children, text, onClick }) => {
+export const FilterButton = ({ children, text, onClick, isApplied }) => {
   return (
     <StFilterWrapper>
-      <FilterBtn btnType="oval" onClick={onClick}>
+      <FilterBtn btnType="oval" onClick={onClick} isApplied={isApplied}>
         {text}
       </FilterBtn>
       {children}
@@ -55,10 +55,20 @@ export const FilterList = ({ popupState, mapState, onShowMap, dateDiff }) => {
 const FilterBtn = styled(Button)`
   margin-right: 1rem;
   font-size: 14px;
+  ${({ isApplied, theme }) =>
+    isApplied &&
+    css`
+      border: 2px solid ${theme.color.black};
+      background: ${theme.color.lightGray};
+      &:hover {
+        border: 2px solid ${theme.color.black};
+      }
+    `}
 `;
 
 const StWrapper = styled.div`
   display: flex;
+  align-items: center;
   width: 100%;
   padding: 3rem 0 2rem;
 `;

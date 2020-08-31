@@ -4,14 +4,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import { closePopup, openPopup, showMap } from '../../Modules/search';
 
 const FilterButtonContainer = ({ name, text, children }) => {
-  const { popup } = useSelector(state => state.search);
+  const { popup, filterDisabled } = useSelector(state => state.search);
   const dispatch = useDispatch();
   const onClose = name => dispatch(closePopup(name));
   const onClick = () =>
     dispatch(popup[name] ? closePopup(name) : openPopup(name));
+  const isApplied = !filterDisabled[name];
 
   return (
-    <FilterButton text={text} onClick={onClick}>
+    <FilterButton text={text} isApplied={isApplied} onClick={onClick}>
       {Children.map(children, child => {
         return cloneElement(child, {
           popupState: popup[name],

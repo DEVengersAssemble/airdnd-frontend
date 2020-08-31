@@ -9,6 +9,7 @@ const PricePopupContainer = ({ popupState, onClose }) => {
   const { min, max } = useSelector(state => state.search.filterApplied.price);
   const { priceArray, averagePrice } = useSelector(state => state.search);
   const [range, setRange] = useState({ value: [min, max] });
+  const isDisabled = min === 12000 && max === 1000000;
   const regExp = /^\d{0,7}$/;
 
   const dispatch = useDispatch();
@@ -29,13 +30,12 @@ const PricePopupContainer = ({ popupState, onClose }) => {
     setRange({ value: [12000, 1000000] });
     dispatch(resetFilter('price'));
   };
-  const onSave = () => dispatch(saveFilter('price', { min, max }));
+  const onSave = () => dispatch(saveFilter('price', { min, max }, isDisabled));
 
   const track = document.querySelector('.rc-slider-track');
   const rangeBar = document.querySelector('.rc-slider');
   const trackPos = track && track.getBoundingClientRect();
   const rangePos = rangeBar && rangeBar.getBoundingClientRect();
-  const isDisabled = min === 12000 && max === 1000000;
 
   const popup = useRef();
   const closePopup = ({ target }) => {

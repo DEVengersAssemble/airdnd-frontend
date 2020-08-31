@@ -1,20 +1,25 @@
 import React, { useEffect, useRef } from 'react';
 import { RoomTypePopup } from '../../Components/Search/FilterPopup';
 import { useSelector, useDispatch } from 'react-redux';
-import { saveFilter, setFilter, resetFilter } from '../../Modules/search';
+import {
+  saveFilter,
+  setFilter,
+  resetFilter,
+  checkDisabled,
+} from '../../Modules/search';
 
 let prevFilter = {};
 
 const RoomTypePopupContainer = ({ popupState, onClose }) => {
   const { roomType } = useSelector(state => state.search.filterApplied);
   const dispatch = useDispatch();
+  const isDisabled =
+    roomType && !roomType.house && !roomType.private && !roomType.shared;
 
   const onChange = type =>
     dispatch(setFilter('roomType', { ...roomType, [type]: !roomType[type] }));
   const onReset = () => dispatch(resetFilter('roomType'));
-  const onSave = () => dispatch(saveFilter('roomType', roomType));
-  const isDisabled =
-    roomType && !roomType.house && !roomType.private && !roomType.shared;
+  const onSave = () => dispatch(saveFilter('roomType', roomType, isDisabled));
 
   const popup = useRef();
   const closePopup = ({ target }) => {

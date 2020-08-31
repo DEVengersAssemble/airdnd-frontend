@@ -7,12 +7,12 @@ let prevFilter = {};
 
 const RefundPopupContainer = ({ popupState, onClose }) => {
   const { refund } = useSelector(state => state.search.filterApplied);
+  const isDisabled = !refund;
   const dispatch = useDispatch();
 
   const onToggle = () => dispatch(setFilter('refund', !refund));
   const onReset = () => dispatch(resetFilter('refund'));
-  const onSave = () => dispatch(saveFilter('refund', refund));
-  const isDisabled = !refund;
+  const onSave = () => dispatch(saveFilter('refund', refund, isDisabled));
 
   const popup = useRef();
   const closePopup = ({ target }) => {

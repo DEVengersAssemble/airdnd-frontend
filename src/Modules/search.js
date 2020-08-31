@@ -44,7 +44,12 @@ export const closePopup = name => ({ type: CLOSE_POPUP, name });
 export const handleRange = handler => ({ type: HANDLE_RANGE, handler });
 export const setFilter = (name, value) => ({ type: SET_FILTER, name, value });
 export const resetFilter = name => ({ type: RESET_FILTER, name });
-export const saveFilter = (name, value) => ({ type: SAVE_FILTER, name, value });
+export const saveFilter = (name, value, state) => ({
+  type: SAVE_FILTER,
+  name,
+  value,
+  state,
+});
 
 export const applyToggleFilter = (name, value) => ({
   type: APPLY_TOGGLE_FILTER,
@@ -287,6 +292,12 @@ const initialState = {
       location: { lat: 0, lng: 0 },
     },
   ],
+  filterDisabled: {
+    refund: true,
+    roomType: true,
+    price: true,
+    modal: true,
+  },
   filterApplied: {
     refund: false,
     roomType: {
@@ -515,6 +526,10 @@ const search = (state = initialState, action) => {
           ...state.filterApplied,
           [action.name]: action.value,
         },
+        filterDisabled: {
+          ...state.filterDisabled,
+          [action.name]: action.state,
+        },
         popup: popupInit,
       };
     case APPLY_TOGGLE_FILTER:
@@ -522,7 +537,7 @@ const search = (state = initialState, action) => {
         ...state,
         filterApplied: {
           ...state.filterApplied,
-          [action.name]: action.value,
+          [action.name]: !action.value,
         },
       };
     case APPLY_COUNTER_FILTER:
