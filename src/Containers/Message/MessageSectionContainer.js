@@ -3,9 +3,18 @@ import MessageSection from '../../Components/Message/MessageSection';
 import { useSelector, useDispatch } from 'react-redux';
 
 const MessageSectionContainer = () => {
+  // redux
   const msgSectionStates = useSelector(state => state.message);
 
-  return <MessageSection msgSectionStates={msgSectionStates} />;
+  // variable
+  const { msgDetailSectionState, msgListSectionState } = msgSectionStates;
+
+  return (
+    <MessageSection
+      msgDetailSectionState={msgDetailSectionState}
+      msgListSectionState={msgListSectionState}
+    />
+  );
 };
 
 export default MessageSectionContainer;

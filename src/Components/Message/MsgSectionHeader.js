@@ -14,6 +14,8 @@ const MsgSectionHeader = ({
   onClickShowList,
   onClickDetail,
   onClickArchive,
+  hostname,
+  state,
 }) => {
   return (
     <MsgSectionHeaderWrapper>
@@ -40,18 +42,20 @@ const MsgSectionHeader = ({
         >
           <MdKeyboardArrowLeft />
         </Button> */}
-        호스트닉네임
+        {hostname}
       </MsgSectionHeaderTitle>
       <MsgSectionHeaderButtonWrapper>
-        <StStroageButton
-          btnType="circle"
-          border="none"
-          hover={{ backgroundColor: theme.color.lightGray }}
-          onClick={onClickArchive}
-        >
-          <StMsgSectionHeaderStorageIcon />
-          <Tooltip />
-        </StStroageButton>
+        {state !== 'unread' && (
+          <StStroageButton
+            btnType="circle"
+            border="none"
+            hover={{ backgroundColor: theme.color.lightGray }}
+            onClick={onClickArchive}
+          >
+            <StMsgSectionHeaderStorageIcon />
+            <Tooltip state={state} />
+          </StStroageButton>
+        )}
         {msgDetailSectionState ? (
           <Button
             btnType="oval"

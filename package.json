@@ -11,6 +11,7 @@
     "eslint-config-prettier": "^6.11.0",
     "http-proxy-middleware": "^1.0.5",
     "polished": "^3.6.5",
+    "proxy": "^1.0.2",
     "rc-slider": "^9.3.1",
     "react": "^16.13.1",
     "react-cookie": "^4.0.3",
@@ -59,5 +60,6 @@
   "devDependencies": {
     "eslint": "^6.6.0",
     "prettier": "2.0.5"
-  }
+  },
+  "proxy": "http://52.79.141.237:8080/"
 }

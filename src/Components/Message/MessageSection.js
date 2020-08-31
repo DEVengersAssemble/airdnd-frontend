@@ -4,15 +4,13 @@ import MsgSectionHeaderContainer from '../../Containers/Message/MsgSectionHeader
 import MsgSectionMainContainer from '../../Containers/Message/MsgSectionMainContainer';
 import MsgSectionFooterContainer from '../../Containers/Message/MsgSectionFooterContainer';
 
-const MessageSection = ({ msgSectionStates }) => {
-  const { msgDetailSectionState, msgListSectionState } = msgSectionStates;
-
+const MessageSection = ({ msgDetailSectionState, msgListSectionState }) => {
   return (
     <MessageSectionWrapper
       msgListSectionState={msgListSectionState}
       msgDetailSectionState={msgDetailSectionState}
     >
-      <MsgSectionHeaderContainer msgSectionStates={msgSectionStates} />
+      <MsgSectionHeaderContainer />
       <MsgSectionMainContainer />
       <MsgSectionFooterContainer />
     </MessageSectionWrapper>

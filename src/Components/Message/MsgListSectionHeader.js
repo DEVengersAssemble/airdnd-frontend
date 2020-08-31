@@ -7,6 +7,9 @@ import { MdFilterList } from 'react-icons/md';
 import MsgListSectionFilterPopupContainer from '../../Containers/Message/MsgListSectionFilterPopupContainer';
 
 const MsgListSectionHeader = ({
+  allState,
+  hideState,
+  unreadState,
   openPopup,
   setOpenPopup,
   onClickPopup,
@@ -15,7 +18,11 @@ const MsgListSectionHeader = ({
 }) => {
   return (
     <MsgListSectionHeaderWrapper>
-      <MsgListSectionHeaderTitle>메시지 주고받기</MsgListSectionHeaderTitle>
+      <MsgListSectionHeaderTitle>
+        {allState === 'all' && '메시지 주고받기'}
+        {hideState === 'hide' && '보관 처리됨'}
+        {unreadState === 'unread' && '읽지 않음'}
+      </MsgListSectionHeaderTitle>
       <StMsgListSectionHeaderFilterButton
         btnType="circle"
         border={openPopup ? '2px solid black' : 'none'}

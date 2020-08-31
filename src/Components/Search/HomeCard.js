@@ -33,7 +33,9 @@ export const HomeCaption = ({
 const HomeCard = ({
   home,
   type,
-  onClickBookmark,
+  isHovered,
+  mapState,
+  onClickHeart,
   onHoverHome,
   onBlurHome,
   dateDiff,
@@ -57,13 +59,14 @@ const HomeCard = ({
     <StWrapper
       ref={homeRef}
       type={type}
+      mapState={mapState}
       onMouseOver={() => onHoverHome(homeId)}
       onMouseLeave={onBlurHome}
     >
       <CarouselContainer
         responsive
         getWidth={getWidth}
-        homeId={homeId}
+        isHovered={isHovered}
         isSuperhost={isSuperhost}
         imageArray={imageArray}
         imageCount={imageCount}
@@ -76,55 +79,24 @@ const HomeCard = ({
         price={price}
         dateDiff={dateDiff}
       />
-      <Heart
-        ckType
-        checked={isBookmarked}
-        onClick={() => onClickBookmark(isBookmarked, homeId)}
-      />
+      <Heart ckType checked={isBookmarked} onClick={onClickHeart} />
     </StWrapper>
   );
 };
 
 export default HomeCard;
 
-const getWidth = (size, type, mapState) => {
-  switch (true) {
-    case !size && type && mapState:
-      console.log('148px');
-      return '148px';
-    case !size && type && !mapState:
-      console.log('25%');
-      return '25%';
-    case size === 'large' && !type:
-      console.log('25%');
-      return '25%';
-    case size === 'large' && type && mapState:
-      console.log('148px');
-      return '148px';
-    case size === 'large' && type:
-      console.log('33%');
-      return '50%';
-    case size === 'medium' || type:
-      console.log('50%');
-      return '50%';
-    default:
-      return '20%';
-  }
-};
-
 const StWrapper = styled.li`
   position: relative;
   padding: 1rem 1rem 3rem;
   width: 20%;
-  width: ${({ type, mapState }) => type && mapState && '148px'};
+  min-width: ${({ type, mapState }) => type && !mapState && '20%'};
 
   @media ${({ theme }) => theme.size.large} {
-    width: 25%;
-    width: ${({ type, mapState }) => (type && mapState ? '50%' : '33%')};
+    min-width: ${({ type, mapState }) => (type && mapState ? '20%' : '25%')};
   }
   @media ${({ theme }) => theme.size.medium} {
-    width: 50%;
-    /* width: ${({ type, mapState }) => (type && mapState ? '50%' : '33%')}; */
+    min-width: 50%;
   }
 `;
 
