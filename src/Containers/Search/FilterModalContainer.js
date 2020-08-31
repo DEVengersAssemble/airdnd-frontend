@@ -7,14 +7,17 @@ import {
   applyCheckFilter,
   resetModalFilter,
   setModalFilter,
+  closePopup,
 } from '../../Modules/search';
 
 let prevFilter = {};
 
-const FilterModalContainer = ({ popupState, onClose }) => {
-  const { filterCondition, filterApplied } = useSelector(state => state.search);
+const FilterModalContainer = () => {
+  const { popup, filterCondition, filterApplied } = useSelector(
+    state => state.search,
+  );
   const dispatch = useDispatch();
-
+  const onClose = () => dispatch(closePopup('modal'));
   const onToggle = (name, value) => dispatch(applyToggleFilter(name, value));
   const onIncrease = (name, value) => dispatch(applyCounterFilter(name, value));
   const onDecrease = (name, value) => dispatch(applyCounterFilter(name, value));
@@ -30,7 +33,7 @@ const FilterModalContainer = ({ popupState, onClose }) => {
 
   return (
     <FilterModal
-      popupState={popupState}
+      popupState={popup.modal}
       filterCondition={filterCondition}
       filter={filterApplied}
       // onClose={onUnsave}

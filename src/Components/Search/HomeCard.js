@@ -79,7 +79,7 @@ const HomeCard = ({
         price={price}
         dateDiff={dateDiff}
       />
-      <Heart ckType checked={isBookmarked} onClick={onClickHeart} />
+      <Heart ckType checked={isBookmarked} onCheck={onClickHeart} />
     </StWrapper>
   );
 };

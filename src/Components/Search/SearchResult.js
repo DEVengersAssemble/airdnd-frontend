@@ -10,7 +10,6 @@ const SearchResult = ({
   mapState,
   view,
   onOpenMap,
-  onShowMap,
   dataTotal,
   location,
   guestCount,
@@ -21,8 +20,8 @@ const SearchResult = ({
         숙박 {dataTotal}건 · 게스트 {guestCount}명
       </StSpan>
       <StHeader>{location}의 숙소</StHeader>
-      <FilterListContainer mapState={mapState} onShowMap={onShowMap} />
-      <HomeListContainer mapState={mapState} />
+      <FilterListContainer mapState={mapState} />
+      <HomeListContainer />
       <RecentHomeListContainer />
       <SearchPagenation />
       <FloatingMapButton onOpenMap={onOpenMap} />

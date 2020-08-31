@@ -1,7 +1,7 @@
 import React from 'react';
 import HomeCard from '../../Components/Search/HomeCard';
 import { useSelector, useDispatch } from 'react-redux';
-import { hoverHome, blurHome } from '../../Modules/search';
+import { hoverHome, blurHome, changeHeart } from '../../Modules/search';
 import { removeBookmark, openListModal } from '../../Modules/wishlists';
 
 const HomeCardContainer = ({ home, type }) => {
@@ -16,7 +16,11 @@ const HomeCardContainer = ({ home, type }) => {
   const onBlurHome = () => dispatch(blurHome());
   const onClickHeart = () => {
     if (!id) return console.log('로그인 해라~~~~~~~~~~~~~ 로그인 팝업 띄우기');
-    if (home.isBookmarked) return dispatch(removeBookmark(home.homeId));
+    if (home.isBookmarked) {
+      dispatch(removeBookmark(home.homeId));
+      dispatch(changeHeart(home.homeId));
+      return;
+    }
     dispatch(openListModal(home.homeId, home.imageArray[0]));
   };
 
