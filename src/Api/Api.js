@@ -116,7 +116,7 @@ const initialState = {
         {
           userDd: 0,
           userProfileImg: '',
-          userFirstname: '',
+          userFirstName: '',
           date: '',
           contents: '',
         },

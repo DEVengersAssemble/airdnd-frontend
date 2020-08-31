@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import { FaCrown } from 'react-icons/fa';
 import { FiShare } from 'react-icons/fi';
@@ -8,11 +8,15 @@ import HomePhotos from './HomePhotos';
 import { Heart } from '../Global/Heart';
 
 const Subject = ({ isLoading, home }) => {
+  const [bookmark, setBookmark] = useState(false);
+
+  const onClick = () => setBookmark(!bookmark);
+
   return (
     <StDetailTitle>
       <StH2 isLoading={isLoading}>{home && home.title}</StH2>
       <StLinkWrapper isLoading={isLoading}>
-        {home && (
+        {!isLoading && (
           <>
             <Rating
               scale="1.4"
@@ -34,9 +38,12 @@ const Subject = ({ isLoading, home }) => {
               <FiShare />
               공유하기
             </StButton>
-            <StButton transition>
-              <StHeart size="smaller" bgColor="white" stroke="black" />
-              <StHeart size="smaller" bgColor="main" stroke="main" />
+            <StButton transition onClick={onClick}>
+              <StHeart
+                size="smaller"
+                bgColor={bookmark ? 'main' : 'white'}
+                stroke={bookmark ? 'main' : 'black'}
+              />
               저장
             </StButton>
           </>

@@ -6,8 +6,10 @@ import Button from '../Global/Button';
 
 const Schedule = () => {
   return (
-    <Division title="Ara-dong, Jeju-si에서 38박" padding="8px">
-      <StTravelTerm>2020년 9월 10일 - 2020년 9월 12일</StTravelTerm>
+    <Division title="체크인 날짜를 선택해주세요." padding="8px">
+      <StTravelTerm>
+        여행 날짜를 입력하여 정확한 요금을 확인하세요.
+      </StTravelTerm>
       <Calendar />
       <StKeybordBtn transition transScale="0.88">
         <svg

@@ -4,43 +4,18 @@ import Rating from '../Global/Rating';
 import Button from '../Global/Button';
 import DropDown from '../Global/DropDown';
 
-const StDropDown = styled(DropDown)`
-  width: 100%;
-  height: 56px;
-  margin-top: -1px;
-  border-radius: 8px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-`;
+const ReservationBox = ({ home, getPercentage, getTotalPrice }) => {
+  const { rating, count } = home.reviews;
+  const { price } = home;
+  const percentage = getPercentage(price);
+  const totalPrice = getTotalPrice(price, percentage);
 
-const StCheckIn = styled.div`
-  width: 50%;
-  height: 56px;
-  padding: 10px;
-  border: 1px solid ${({ theme }) => theme.color.gray};
-  border-right: none;
-  border-top-left-radius: 8px;
-`;
-
-const StCheckOut = styled.div`
-  width: 50%;
-  height: 56px;
-  padding: 10px;
-  border: 1px solid ${({ theme }) => theme.color.gray};
-  border-top-right-radius: 8px;
-`;
-
-const StReserveBtn = styled(Button)`
-  margin-top: 16px;
-`;
-
-const ReservationBox = () => {
   return (
     <StWarpper>
       <StStickyWrapper>
         <StReserveBox>
           <h3>요금을 확인하려면 날짜를 입력하세요</h3>
-          <Rating rate="4.55" count="687" />
+          <Rating rate={rating} count={count} />
           <StCheckIn>체크인</StCheckIn>
           <StCheckOut>체크아웃</StCheckOut>
           <StDropDown title="게스트 1명" width="100%" options={[]} />
@@ -51,32 +26,26 @@ const ReservationBox = () => {
             padding="14px"
             hover
           >
-            예약 가능 여부 보기 or 예약 하기
+            예약 가능 여부 보기
           </StReserveBtn>
           <StChargeMsg>예약 확정 전에는 요금이 청구되지 않습니다.</StChargeMsg>
           <StChargeList>
             <li>
               <Button btnType="underlined" padding="0" hover>
-                ₩17,000 x 2박
+                ₩{price} x 2박
               </Button>
-              <span>₩34,000</span>
+              <span>₩{price}</span>
             </li>
             <li>
               <Button btnType="underlined" padding="0" hover>
-                ₩17,000 x 2박
+                서비스 수수료
               </Button>
-              <span>₩34,000</span>
-            </li>
-            <li>
-              <Button btnType="underlined" padding="0" hover>
-                ₩17,000 x 2박
-              </Button>
-              <span>₩34,000</span>
+              <span>₩{percentage}</span>
             </li>
           </StChargeList>
           <StTotalCharge>
             <span>총합계</span>
-            <span>₩27,727</span>
+            <span>₩{totalPrice}</span>
           </StTotalCharge>
         </StReserveBox>
         <StButton>숙소 신고하기</StButton>
@@ -122,13 +91,34 @@ const StReserveBox = styled.div`
   }
 `;
 
-const StButton = styled.button`
-  margin-top: 24px;
-  background-color: rgba(0, 0, 0, 0);
-  border: none;
-  font-size: 14px;
-  text-decoration: underline;
-  color: ${({ theme }) => theme.color.darkGray};
+const StDropDown = styled(DropDown)`
+  width: 100%;
+  height: 56px;
+  margin-top: -1px;
+  border-radius: 8px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+`;
+
+const StCheckIn = styled.div`
+  width: 50%;
+  height: 56px;
+  padding: 10px;
+  border: 1px solid ${({ theme }) => theme.color.gray};
+  border-right: none;
+  border-top-left-radius: 8px;
+`;
+
+const StCheckOut = styled.div`
+  width: 50%;
+  height: 56px;
+  padding: 10px;
+  border: 1px solid ${({ theme }) => theme.color.gray};
+  border-top-right-radius: 8px;
+`;
+
+const StReserveBtn = styled(Button)`
+  margin-top: 16px;
 `;
 
 const StChargeMsg = styled.div`
@@ -166,6 +156,15 @@ const StTotalCharge = styled.div`
   padding-top: 24px;
   font-weight: 700;
   border-top: 1px solid ${({ theme }) => theme.color.line};
+`;
+
+const StButton = styled.button`
+  margin-top: 24px;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  font-size: 14px;
+  text-decoration: underline;
+  color: ${({ theme }) => theme.color.darkGray};
 `;
 
 export default ReservationBox;

@@ -5,101 +5,99 @@ import Rating from '../Global/Rating';
 import Button from '../Global/Button';
 import Profile from '../Global/Profile';
 
-const Reviews = () => {
+const Reviews = ({ home }) => {
+  const {
+    cleanliness,
+    accuracy,
+    communication,
+    location,
+    checkin,
+    value,
+    count,
+    rating,
+    comments,
+  } = home.reviews;
+
+  const addDecimal = num => {
+    return (num + '').length === 1 ? num + '.0' : num;
+  };
+
+  console.log(window.screen.availWidth);
+
   return (
     <Division
       title={
-        <Rating scale="2.2" rate="4.92점" starSize="2.2rem" count="후기 12개" />
+        <Rating
+          scale="2.2"
+          starSize="2.2rem"
+          rate={`${rating}점`}
+          count={`후기 ${count}개`}
+        />
       }
     >
       <div style={{ marginBottom: '24px' }}>
-        <StEstimation percent="80">
+        <StEstimation percent={cleanliness * 20}>
           <span>청결도</span>
-          <div aria-label="5.0점 만점에 4.9점">
+          <div aria-label={`5점 만점에 ${cleanliness}점`}>
             <div />
           </div>
-          <span>4.9</span>
+          <span>{addDecimal(cleanliness)}</span>
         </StEstimation>
-        <StEstimation percent="80">
+        <StEstimation percent={accuracy * 20}>
           <span>정확성</span>
-          <div aria-label="5.0점 만점에 4.9점">
+          <div aria-label={`5점 만점에 ${accuracy}점`}>
             <div />
           </div>
-          <span>4.9</span>
+          <span>{addDecimal(accuracy)}</span>
         </StEstimation>
-        <StEstimation percent="80">
+        <StEstimation percent={communication * 20}>
           <span>의사소통</span>
-          <div aria-label="5.0점 만점에 4.9점">
+          <div aria-label={`5점 만점에 ${communication}점`}>
             <div />
           </div>
-          <span>4.9</span>
+          <span>{addDecimal(communication)}</span>
         </StEstimation>
-        <StEstimation percent="80">
+        <StEstimation percent={location * 20}>
           <span>위치</span>
-          <div aria-label="5.0점 만점에 4.9점">
+          <div aria-label={`5점 만점에 ${location}점`}>
             <div />
           </div>
-          <span>4.9</span>
+          <span>{addDecimal(location)}</span>
         </StEstimation>
-        <StEstimation percent="80">
+        <StEstimation percent={checkin * 20}>
           <span>체크인</span>
-          <div aria-label="5.0점 만점에 4.9점">
+          <div aria-label={`5점 만점에 ${checkin}점`}>
             <div />
           </div>
-          <span>4.9</span>
+          <span>{addDecimal(checkin)}</span>
         </StEstimation>
-        <StEstimation percent="80">
+        <StEstimation percent={value * 20}>
           <span>가격 대비 만족도</span>
-          <div aria-label="5.0점 만점에 4.9점">
+          <div aria-label={`5점 만점에 ${value}점`}>
             <div />
           </div>
-          <span>4.9</span>
+          <span>{addDecimal(value)}</span>
         </StEstimation>
       </div>
       <ul>
-        <StReview>
-          <StRiviewer>
-            <Profile lastName="Chan Young" />
-            <div>
-              Chan Young<div>2020년 8월</div>
-            </div>
-          </StRiviewer>
-          <p>
-            걸어서 15분만 나오면 제주 어디든 버스로 이동가능해요 15분 걷는게
-            운동도 되고 지루하지 않았어요 필요한 것들 넉넉히 준비되어요
-            일주일이상 머물기 좋아요 재방문 의사 있어요
-          </p>
-        </StReview>
-        <StReview>
-          <div>
-            <Profile lastName="Chan Young" />
-          </div>
-          <p>
-            걸어서 15분만 나오면 제주 어디든 버스로 이동가능해요 15분 걷는게
-            운동도 되고 지루하지 않았어요 필요한 것들 넉넉히 준비되어요
-            일주일이상 머물기 좋아요 재방문 의사 있어요
-          </p>
-        </StReview>
-        <StReview>
-          <div>
-            <Profile lastName="Chan Young" />
-          </div>
-          <p>
-            걸어서 15분만 나오면 제주 어디든 버스로 이동가능해요 15분 걷는게
-            운동도 되고 지루하지 않았어요 필요한 것들 넉넉히 준비되어요
-            일주일이상 머물기 좋아요 재방문 의사 있어요
-          </p>
-        </StReview>
-        <StReview>
-          <div>
-            <Profile lastName="Chan Young" />
-          </div>
-          <p>
-            걸어서 15분만 나오면 제주 어디든 버스로 이동가능해요 15분 걷는게
-            운동도 되고 지루하지 않았어요 필요한 것들 넉넉히 준비되어요
-            일주일이상 머물기 좋아요 재방문 의사 있어요
-          </p>
-        </StReview>
+        {comments.map((comment, i) => {
+          if (i > 5) return;
+          return (
+            <StReview key={i}>
+              <StRiviewer>
+                <Profile
+                  lastName={comment.userFirstName}
+                  profileImg={comment.userProfileImg}
+                />
+                <div>
+                  {comment.userFirstName}
+                  <div>{comment.date}</div>
+                </div>
+              </StRiviewer>
+              <p>{comment.contents}</p>
+            </StReview>
+          );
+        })}
       </ul>
       <Button padding="13px 23px" transition>
         후기 5개 모두 보기
@@ -170,6 +168,7 @@ const StReview = styled.li`
 `;
 
 const StRiviewer = styled.div`
+  width: 100%;
   display: flex;
   align-items: center;
   margin-bottom: 16px;
@@ -184,6 +183,10 @@ const StRiviewer = styled.div`
       font-weight: 400;
       font-size: 14px;
     }
+  }
+
+  & > a {
+    min-width: 5.6rem;
   }
 `;
 

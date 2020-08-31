@@ -4,20 +4,20 @@ import { AiOutlineRight } from 'react-icons/ai';
 import { MdCheckCircle } from 'react-icons/md';
 import Division from './Division';
 
-const HomeNotice = () => {
+const HomeNotice = ({ home }) => {
+  const { rules, safeties } = home.notice;
+
   return (
     <Division title="알아두어야 할 사항" border="none">
       <StWrapper>
         <strong>숙소 이용규칙</strong>
         <ul>
-          <li>
-            <MdCheckCircle />
-            체크인 시간: 오후 4:00 - 오전 2:00
-          </li>
-          <li>
-            <MdCheckCircle />
-            체크아웃 시간: 오전 10:00
-          </li>
+          {rules.map((rule, i) => (
+            <li key={i}>
+              <MdCheckCircle />
+              {rule.name}
+            </li>
+          ))}
         </ul>
         <StButton>
           모두 보기 <AiOutlineRight />
@@ -26,10 +26,12 @@ const HomeNotice = () => {
       <StWrapper>
         <strong>건강과 안전</strong>
         <ul>
-          <li>
-            <MdCheckCircle />
-            에어비앤비 청결 강화 기준을 준수합니다.
-          </li>
+          {safeties.map((safety, i) => (
+            <li key={i}>
+              <MdCheckCircle />
+              {safety.name}
+            </li>
+          ))}
         </ul>
         <StButton>
           모두 보기 <AiOutlineRight />
@@ -37,10 +39,7 @@ const HomeNotice = () => {
       </StWrapper>
       <StWrapper>
         <strong>환불 정책</strong>
-        <span>
-          8월 15일 4:00 PM 이전에 예약을 취소하면, 첫 30박 요금 및 서비스
-          수수료를 제외한 요금 전액이 환불됩니다.
-        </span>
+        <span>체크인 30일 전까지 취소하시면 전액이 환불됩니다.</span>
         <StButton>
           자세한 정보 <AiOutlineRight />
         </StButton>

@@ -1,27 +1,34 @@
 import React from 'react';
 import styled from 'styled-components';
-import ReservationBox from './ReservationBox';
+// import ReservationBox from './ReservationBox';
 import HomeExplain from './HomeExplain';
 import Bedrooms from './Bedrooms';
 import Amenities from './Amenities';
-import Schedule from './Schedule';
+import ScheduleContainer from '../../Containers/Detail/ScheduleContainer';
+import ReservationBoxContainer from '../../Containers/Detail/ReservationBoxContainer';
+// import Schedule from './Schedule';
 
-const HomeInfos = () => {
+const HomeInfos = ({ isLoading, home }) => {
   return (
     <StHomeInfos>
       <StInfosWrapper>
-        <HomeExplain />
-        <Bedrooms />
-        <Amenities />
-        <Schedule />
+        <HomeExplain isLoading={isLoading} home={home} />
+        {!isLoading && (
+          <>
+            <Bedrooms home={home} />
+            <Amenities home={home} />
+            {/* <Schedule home={home} /> */}
+            <ScheduleContainer home={home} />
+          </>
+        )}
       </StInfosWrapper>
-      <ReservationBox />
+      {/* {!isLoading && <ReservationBox home={home} />} */}
+      {!isLoading && <ReservationBoxContainer home={home} />}
     </StHomeInfos>
   );
 };
 
 const StHomeInfos = styled.div`
-  /* background-color: #e8f9f9; */
   display: flex;
   max-width: 1200px;
   padding: 0 40px;
@@ -29,7 +36,6 @@ const StHomeInfos = styled.div`
 `;
 
 const StInfosWrapper = styled.div`
-  background-color: ${({ theme }) => theme.color.white};
   width: 58%;
 `;
 

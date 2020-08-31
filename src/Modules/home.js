@@ -16,9 +16,8 @@ export const getHome = () => async dispatch => {
 };
 
 const initialState = {
-  isLoading: false,
-  home: null,
-  error: null,
+  homeState: { isLoading: false, home: null, error: null },
+  reservationState: {},
 };
 
 // 리듀서
@@ -27,23 +26,17 @@ const home = (state = initialState, action) => {
     case GET_HOME:
       return {
         ...state,
-        isLoading: true,
-        home: null,
-        error: null,
+        homeState: { isLoading: true, home: null, error: null },
       };
     case GET_HOME_SUCCESS:
       return {
         ...state,
-        isLoading: false,
-        home: action.home,
-        error: null,
+        homeState: { isLoading: false, home: action.home, error: null },
       };
     case GET_HOME_ERROR:
       return {
         ...state,
-        isLoading: false,
-        home: null,
-        error: action.error,
+        homeState: { isLoading: false, home: null, error: action.error },
       };
     default:
       return state;

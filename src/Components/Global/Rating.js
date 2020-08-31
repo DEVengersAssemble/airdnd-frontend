@@ -8,7 +8,7 @@ const Rating = ({ scale, rate, count, starSize, theme, ...rest }) => {
   const regExp = /\d/g;
   const filteredNumber = (count + '').match(regExp).join('');
 
-  if (!Number(count)) return <StNoReview>아직 후기 없음</StNoReview>;
+  if (!Number(filteredNumber)) return <StNoReview>아직 후기 없음</StNoReview>;
 
   return (
     <StRatingWrapper scale={scale} {...rest}>

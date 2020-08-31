@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import Button from '../Global/Button';
 
 const renderImgs = home => {
@@ -22,7 +22,7 @@ const HomePhotos = ({ isLoading, home }) => {
   return (
     <StImgsWrapper isLoading={isLoading}>
       {renderImgs(home)}
-      {home && <StViewerButton transition>사진 모두 보기</StViewerButton>}
+      {!isLoading && <StViewerButton transition>사진 모두 보기</StViewerButton>}
     </StImgsWrapper>
   );
 };
@@ -67,15 +67,19 @@ const StImgsWrapper = styled.div`
     margin: 0;
   }
 
-  & div {
-    background-color: currentColor;
-    animation-name: ${skeleton};
-    animation-duration: 0.6s;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-    animation-fill-mode: forwards;
-    animation-timing-function: ease-in-out;
-  }
+  ${({ isLoading }) =>
+    isLoading &&
+    css`
+      & div {
+        background-color: currentColor;
+        animation-name: ${skeleton};
+        animation-duration: 0.6s;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+        animation-fill-mode: forwards;
+        animation-timing-function: ease-in-out;
+      }
+    `}
 `;
 
 const StViewerButton = styled(Button)`
