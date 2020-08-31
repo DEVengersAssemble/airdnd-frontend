@@ -147,7 +147,7 @@ const Heart = ({ size, bgColor, stroke, ckType, hover, checked, ...rest }) => {
 const CkHeart = ({ ckType, hover, checked, onCheck, theme, ...event }) => {
   return (
     <StHeartLabel hover={hover} {...event}>
-      <StHeartInput type="checkbox" onClick={onCheck} />
+      <StHeartInput type="checkbox" />
       {hover ? (
         // hover=true
         <Heart
@@ -156,10 +156,17 @@ const CkHeart = ({ ckType, hover, checked, onCheck, theme, ...event }) => {
           hover={hover}
           checked={checked}
           theme={theme}
+          onClick={onCheck}
         />
       ) : (
         // hover=false
-        <Heart size="large" ckType={ckType} checked={checked} theme={theme} />
+        <Heart
+          size="large"
+          ckType={ckType}
+          checked={checked}
+          theme={theme}
+          onClick={onCheck}
+        />
       )}
     </StHeartLabel>
   );

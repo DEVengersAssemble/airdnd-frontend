@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   BookmarkListModal,
   NewBookmarkModal,
@@ -11,14 +11,19 @@ import {
   closeListModal,
   closeNewModal,
 } from '../../Modules/wishlists';
+import { changeHeart } from '../../Modules/search';
 
 const BookmarkListModalContainer = () => {
-  const { bookmarkLists, listModal } = useSelector(state => state.wishlists);
+  const { bookmarkLists, listModal, selectedId } = useSelector(
+    state => state.wishlists,
+  );
   const dispatch = useDispatch();
   const closeBmListModal = () => dispatch(closeListModal());
   const openBmNewModal = () => dispatch(openNewModal());
-  const onClickBookmark = (homeId, bookmarkListId) =>
-    dispatch(addBookmarkOldList(homeId, bookmarkListId));
+  const onClickBookmark = bookmarkListId => {
+    dispatch(addBookmarkOldList(bookmarkListId));
+    dispatch(changeHeart(selectedId));
+  };
 
   return (
     <BookmarkListModal
@@ -33,13 +38,14 @@ const BookmarkListModalContainer = () => {
 
 const NewBookmarkModalContainer = () => {
   const { location } = useSelector(state => state.searchForm);
-  const { newModal } = useSelector(state => state.wishlists);
+  const { newModal, selectedId } = useSelector(state => state.wishlists);
   const [value, setValue] = useState(location);
   const onChange = ({ target }) => setValue(target.value);
   const dispatch = useDispatch();
   const closeBmNewModal = () => dispatch(closeNewModal());
-  const onClickNewList = (title, homeId) => {
-    dispatch(addBookmarkNewList(title, homeId));
+  const onClickNewList = title => {
+    dispatch(addBookmarkNewList(title));
+    dispatch(changeHeart(selectedId));
   };
 
   return (

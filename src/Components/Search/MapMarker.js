@@ -4,7 +4,6 @@ import { Marker, OverlayView } from 'react-google-maps';
 import { InfoBox } from 'react-google-maps/lib/components/addons/InfoBox';
 import { AiFillHome } from 'react-icons/ai';
 import Button from '../Global/Button';
-import HomePopup from './HomePopup';
 import { Heart } from '../Global/Heart';
 import HomePopupContainer from '../../Containers/Search/HomePopupContainer';
 
@@ -15,10 +14,10 @@ const getPixelPositionOffset = (width, height) => ({
 
 const MapMarker = ({
   theme,
+  store,
   isOpen,
   isHovered,
   marker,
-  markerState,
   dateDiff,
   clickMarker,
 }) => {
@@ -81,7 +80,12 @@ const MapMarker = ({
           options={{ closeBoxURL: '', enableEventPropagation: true }}
           onClick={() => console.log('infoBox')}
         >
-          <HomePopupContainer home={marker} dateDiff={dateDiff} theme={theme} />
+          <HomePopupContainer
+            home={marker}
+            store={store}
+            dateDiff={dateDiff}
+            theme={theme}
+          />
         </InfoBox>
       )}
     </Marker>

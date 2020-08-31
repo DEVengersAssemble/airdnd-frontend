@@ -37,17 +37,27 @@ const MsgSectionHeaderContainer = () => {
   const dispatch = useDispatch();
 
   // ! variable
-  const activeMsg = filteredMsgs.find(
-    (_, index) => filteredMsgs[index] === filteredMsgs[activeIndex],
+  console.log(
+    '=====================================================================',
   );
+  const activeMsg =
+    filteredMsgs === []
+      ? 'blabllbal'
+      : filteredMsgs.find(
+          (_, index) => filteredMsgs[index] === filteredMsgs[activeIndex],
+        );
   const selectIndex = filteredMsgs.findIndex(
     (_, index) => filteredMsgs[index] === filteredMsgs[activeIndex],
   );
+
+  // if (!activeMsg) return <div>heljfdk</div>;
+  console.log('filtered', filteredMsgs);
   console.log('activeMsg', activeMsg);
-  console.log('selectIndex:', selectIndex, 'activeIndex:', activeIndex);
-  console.log('activeMsg.id', activeMsg.id);
-  console.log(activeMsg.hostname);
-  console.log(activeMsg.state);
+
+  // console.log('selectIndex:', selectIndex, 'activeIndex:', activeIndex);
+  // console.log('activeMsg.id', activeMsg.id);
+  // console.log(activeMsg.hostname);
+  // console.log(activeMsg.state);
 
   // ! event
   /**
@@ -79,14 +89,15 @@ const MsgSectionHeaderContainer = () => {
       return dispatch(hideMsgListSection());
   }, [dispatch, msgDetailSectionState]);
 
-  const onClickArchive = useCallback(() => {
+  const onClickArchive = () => {
+    console.log('아카이브햇다잉');
     if (activeMsg.state === 'all') {
       dispatch(archiveMsg(selectIndex, activeMsg.id, activeMsg.state));
     }
     if (activeMsg.state === 'hide') {
       dispatch(unarchiveMsg(selectIndex, activeMsg.id, activeMsg.state));
     }
-  }, [dispatch, activeMsg.state, archiveMsg, unarchiveMsg]);
+  };
 
   return (
     <MsgSectionHeader
@@ -96,8 +107,8 @@ const MsgSectionHeaderContainer = () => {
       onClickDetail={onClickDetail}
       onClickShowList={onClickShowList}
       onClickArchive={onClickArchive}
-      hostname={activeMsg.hostname}
-      state={activeMsg.state}
+      hostname={activeMsg && activeMsg.hostname}
+      state={activeMsg && activeMsg.state}
     />
   );
 };
