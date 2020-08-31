@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
 import HomePopup from '../../Components/Search/HomePopup';
 import { hoverHome, blurHome, changeHeart } from '../../Modules/search';
 import { removeBookmark, openListModal } from '../../Modules/wishlists';

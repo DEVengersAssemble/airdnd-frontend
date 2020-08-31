@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { showMap, openMap } from '../../Modules/search';
+import { openMap } from '../../Modules/search';
 import SearchResult from '../../Components/Search/SearchResult';
 
 const SearchResultContainer = () => {
@@ -8,7 +8,7 @@ const SearchResultContainer = () => {
   const { location, guests } = useSelector(state => state.searchForm);
   const guestCount = guests.adult + guests.child;
   const dispatch = useDispatch();
-  const onShowMap = () => dispatch(showMap());
+
   const onOpenMap = () => dispatch(openMap());
 
   return (
@@ -19,7 +19,6 @@ const SearchResultContainer = () => {
       location={location}
       guestCount={guestCount}
       onOpenMap={onOpenMap}
-      onShowMap={onShowMap}
     />
   );
 };

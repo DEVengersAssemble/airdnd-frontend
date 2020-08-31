@@ -1,7 +1,7 @@
 import React, { Children, cloneElement } from 'react';
 import { FilterList, FilterButton } from '../../Components/Search/FilterList';
 import { useSelector, useDispatch } from 'react-redux';
-import { closePopup, openPopup } from '../../Modules/search';
+import { closePopup, openPopup, showMap } from '../../Modules/search';
 
 const FilterButtonContainer = ({ name, text, children }) => {
   const { popup } = useSelector(state => state.search);
@@ -22,8 +22,10 @@ const FilterButtonContainer = ({ name, text, children }) => {
   );
 };
 
-const FilterListContainer = ({ mapState, onShowMap }) => {
+const FilterListContainer = ({ mapState }) => {
   const { dateDiff } = useSelector(state => state.searchForm);
+  const dispatch = useDispatch();
+  const onShowMap = () => dispatch(showMap());
 
   return (
     <FilterList mapState={mapState} onShowMap={onShowMap} dateDiff={dateDiff} />

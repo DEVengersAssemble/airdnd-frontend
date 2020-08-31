@@ -81,9 +81,7 @@ const Map = compose(
     onHideMap,
     onCloseMap,
     updateZoom,
-    getRef,
     setRef,
-    onCloseMarker,
   }) => {
     return (
       <GoogleMap
