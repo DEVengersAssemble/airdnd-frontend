@@ -6,6 +6,7 @@ import DropDown from '../Global/DropDown';
 import { Input } from '../Global/Input';
 import { RiEyeCloseLine, RiMailLine, RiUserLine } from 'react-icons/ri';
 import { MdCheck, MdClose } from 'react-icons/md';
+import { GoogleLogin } from 'react-google-login';
 
 const StSignupModal = styled(Modal)`
   overflow-y: scroll;
@@ -201,6 +202,7 @@ const SignupModal = ({
   const { emailRef, firstNameRef, lastNameRef, pwRef } = refObj;
   console.log('-----[Signup Modal]-----');
   console.log(pwLevel, pwLength, pwContain, pwCase);
+
   return (
     <StSignupModal
       modalState={signupModalVisible}
@@ -212,7 +214,9 @@ const SignupModal = ({
     >
       <StSignupFormWrapper>
         <StSocialLoginWrapper>
-          페이스북 또는 구글로 회원 가입하세요.
+          페이스북 또는{' '}
+          <GoogleLogin clientId={process.env.REACT_APP_GOOGLE_LOGIN_API_KEY} />
+          로 회원 가입하세요.
         </StSocialLoginWrapper>
         <StDividerLine />
         <StDividerText>또는</StDividerText>
