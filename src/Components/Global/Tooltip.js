@@ -3,11 +3,13 @@ import styled from 'styled-components';
 import { MdClear } from 'react-icons/md';
 
 const Tooltip = ({ state }) => {
+  console.log(state);
   // state: all, hide
   return (
     <>
       <StTooltip>
-        {state === 'all' ? '숨기기' : '숨김 취소'}
+        {state === 'all' && '숨기기'}
+        {state === 'hide' && '숨김 취소'}
         <StClearIcon />
       </StTooltip>
     </>

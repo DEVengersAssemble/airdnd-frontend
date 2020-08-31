@@ -8,6 +8,8 @@ import {
   showMsgListSection,
   archiveMsg,
   unarchiveMsg,
+  allMsgList,
+  hideMsgList,
 } from '../../Modules/message';
 
 const MsgSectionHeaderContainer = () => {
@@ -16,7 +18,9 @@ const MsgSectionHeaderContainer = () => {
     state => state.message,
   );
   const media = useSelector(state => state.message.media);
-  const { activeIndex, filteredMsgs } = useSelector(state => state.message);
+  const { messages, activeIndex, filteredMsgs } = useSelector(
+    state => state.message,
+  );
   // variable
   // const nextActiveAllMsg = messages.find(
   //   msg => msg.state === 'all' && !msg.isActive,
@@ -33,11 +37,16 @@ const MsgSectionHeaderContainer = () => {
   const dispatch = useDispatch();
 
   // ! variable
-  const activeMsgs = filteredMsgs.find(
+  const activeMsg = filteredMsgs.find(
     (_, index) => filteredMsgs[index] === filteredMsgs[activeIndex],
   );
-  const { hostname } = activeMsgs;
-  console.log(hostname);
+  const selectIndex = filteredMsgs.findIndex(
+    (_, index) => filteredMsgs[index] === filteredMsgs[activeIndex],
+  );
+  console.log(selectIndex);
+  console.log(activeMsg);
+  console.log(activeMsg.hostname);
+  console.log(activeMsg.state);
 
   // ! event
   /**
@@ -70,13 +79,13 @@ const MsgSectionHeaderContainer = () => {
   }, [dispatch, msgDetailSectionState]);
 
   const onClickArchive = useCallback(() => {
-    console.log('메시지 숨기기! 또는 메시지 취소!');
-    // const msg = filteredMsgs.filter(msg => msg.isActive);
-    // if (msg.isActive && msg.state === 'all')
-    //   return dispatch(archiveMsg(msg.id, msg.isActive));
-    // if (msg.isActive && msg.state === 'hide')
-    //   return dispatch(unarchiveMsg(msg.id, msg.isActive));
-  }, [dispatch]);
+    if (activeMsg.state === 'all') {
+      dispatch(archiveMsg(selectIndex, activeMsg.id));
+    }
+    if (activeMsg.state === 'hide') {
+      dispatch(unarchiveMsg(selectIndex, activeMsg.id));
+    }
+  }, [dispatch, activeMsg.state, archiveMsg, unarchiveMsg]);
 
   return (
     <MsgSectionHeader
@@ -86,7 +95,8 @@ const MsgSectionHeaderContainer = () => {
       onClickDetail={onClickDetail}
       onClickShowList={onClickShowList}
       onClickArchive={onClickArchive}
-      hostname={hostname}
+      hostname={activeMsg.hostname}
+      state={activeMsg.state}
     />
   );
 };

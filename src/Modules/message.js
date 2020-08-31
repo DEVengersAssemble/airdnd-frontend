@@ -28,24 +28,21 @@ export const showMsgDetailSection = () => ({
 export const hideMsgDetailSection = () => ({
   type: HIDE_MESSAGE_DETAIL_SECTION,
 });
-export const showMsgListSection = () => ({
-  type: SHOW_MESSAGE_LIST_SECTION,
-});
-export const hideMsgListSection = () => ({
-  type: HIDE_MESSAGE_LIST_SECTION,
-});
-export const changeMediaSize = media => ({
-  type: CHANGE_MEDIA_SIZE,
-  media,
-});
+export const showMsgListSection = () => ({ type: SHOW_MESSAGE_LIST_SECTION });
+export const hideMsgListSection = () => ({ type: HIDE_MESSAGE_LIST_SECTION });
+export const changeMediaSize = media => ({ type: CHANGE_MEDIA_SIZE, media });
 
-export const archiveMsg = index => ({
+export const archiveMsg = (index, id, state) => ({
   type: ARCHAIVE_MESSAGE,
   index,
+  id,
+  state,
 });
-export const unarchiveMsg = index => ({
+export const unarchiveMsg = (index, id, state) => ({
   type: UNARCHAIVE_MESSAGE,
   index,
+  id,
+  state,
 });
 export const undo = () => ({ type: UNDO });
 
@@ -53,10 +50,7 @@ export const allMsgList = index => ({ type: ALL_MESSAGE_LIST, index });
 export const hideMsgList = index => ({ type: HIDE_MESSAGE_LIST, index });
 export const unreadMsgList = index => ({ type: UNREAD_MESSAGE_LIST, index });
 
-export const isHost = isHost => ({
-  type: MESSAGE_HOST_FLAG,
-  isHost,
-});
+export const isHost = isHost => ({ type: MESSAGE_HOST_FLAG, isHost });
 
 // INITIAL STATE
 const initialState = {
@@ -219,7 +213,7 @@ const initialState = {
   ],
   // popup filter를 통해 걸러진 messages
   activeIndex: 0,
-  pastFilteredMsgs: [], // 숨김 취소했을 시 pastFilteredMsgs를 불러옴
+  tempMsgs: [], // 숨김 취소했을 시 pastFilteredMsgs를 불러옴
   filteredMsgs: [
     {
       id: 1,
@@ -313,27 +307,29 @@ const message = (state = initialState, action) => {
         ...state,
         media: action.media,
       };
-    // case ARCHAIVE_MESSAGE:
-    //   return {
-    //     ...state,
-    //     messages: state.messages.map(msg =>
-    //       msg.id === action.id
-    //         ? { ...msg, isActive: !action.isActive, state: 'hide' }
-    //         : msg,
-    //     ),
-    //   };
-    // case UNARCHAIVE_MESSAGE:
-    //   return {
-    //     ...state,
-    //     messages: state.messages.map(msg =>
-    //       msg.id === action.id
-    //         ? { ...msg, isActive: !action.isActive, state: 'all' }
-    //         : msg,
-    //     ),
-    //   };
+    case ARCHAIVE_MESSAGE:
+      return {
+        ...state,
+        messages: state.messages.map(msg =>
+          msg.id !== action.id ? { ...msg, state: action.state } : msg,
+        ),
+        tempMsgs: state.filteredMsgs,
+        filteredMsgs: state.filteredMsgs.filter(
+          (_, index) => index !== action.index,
+        ),
+      };
+    case UNARCHAIVE_MESSAGE:
+      return {
+        ...state,
+        tempMsgs: state.filteredMsgs,
+        filteredMsgs: state.filteredMsgs.filter(
+          (_, index) => index !== action.index,
+        ),
+      };
     case UNDO:
       return {
         ...state,
+        filteredMsgs: state.tempMsgs,
       };
     case ALL_MESSAGE_LIST:
       return {
