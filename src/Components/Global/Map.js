@@ -1,4 +1,12 @@
 import React from 'react';
+import styled from 'styled-components';
+import {
+  MapZoomButton,
+  MapMarkerButton,
+  MapCloseButton,
+  MapCheckbox,
+  MapFilterButton,
+} from '../Search/MapButton';
 import { compose, withProps, withState, withHandlers } from 'recompose';
 import { withScriptjs, withGoogleMap, GoogleMap } from 'react-google-maps';
 import theme from '../../style/theme';
@@ -14,6 +22,7 @@ const Map = compose(
           width: '100%',
           height: `100vh`,
           position: 'sticky',
+          // position: 'absolute',
           top: '0',
         }}
       />
@@ -24,6 +33,7 @@ const Map = compose(
           width: '100%',
           height: `100vh`,
           position: 'sticky',
+          // position: 'absolute',
           top: '0',
         }}
       />
@@ -34,12 +44,13 @@ const Map = compose(
           width: '100%',
           height: `100vh`,
           position: 'sticky',
+          // position: 'absolute',
           top: '0',
         }}
       />
     ),
   }),
-  withState('zoom', 'onZoomChange', 13),
+  withState('zoom', 'onZoomChange', 15),
   withHandlers(() => {
     const refs = {
       map: undefined,
@@ -52,23 +63,28 @@ const Map = compose(
       setZoom: ({ onZoomChange }) => () => {
         onZoomChange(refs.map.getZoom());
       },
-      getRef: () => e => console.log(e),
     };
   }),
   withScriptjs,
   withGoogleMap,
 )(
   ({
+    view,
     center,
     markers,
+    zoom,
     mapZoom,
     setZoom,
+    onZoomIn,
+    onZoomOut,
+    onZoomChange,
+    onHideMap,
+    onCloseMap,
     updateZoom,
     getRef,
     setRef,
     onCloseMarker,
   }) => {
-    console.log(setRef());
     return (
       <GoogleMap
         ref={setRef}
@@ -81,9 +97,31 @@ const Map = compose(
         options={{ disableDefaultUI: true }}
         onZoomChanged={() => {
           setZoom();
-          // updateZoom();
+          updateZoom(zoom);
         }}
       >
+        <StStickyWrapper>
+          <MapCloseButton
+            onHideMap={onHideMap}
+            onCloseMap={onCloseMap}
+            view={view}
+          />
+          <MapCheckbox />
+          <StBtnSetWrapper>
+            {view === 'map' && <MapFilterButton />}
+            <MapZoomButton
+              onZoomIn={() => {
+                onZoomIn();
+                onZoomChange(mapZoom + 1);
+              }}
+              onZoomOut={() => {
+                onZoomOut();
+                onZoomChange(mapZoom - 1);
+              }}
+            />
+            <MapMarkerButton />
+          </StBtnSetWrapper>
+        </StStickyWrapper>
         {markers &&
           markers.map((marker, i) => (
             <MapMarkerContainer key={i} marker={marker} theme={theme} />
@@ -92,5 +130,24 @@ const Map = compose(
     );
   },
 );
+
+const StStickyWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  position: absolute;
+  top: 10rem;
+  padding: 0 0 0 2rem;
+`;
+
+const StBtnSetWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  top: 10rem;
+  right: 2rem;
+  height: fit-content;
+  position: sticky;
+  z-index: 10;
+`;
 
 export default Map;

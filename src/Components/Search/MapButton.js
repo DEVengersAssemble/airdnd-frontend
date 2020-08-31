@@ -15,7 +15,7 @@ const MapButton = ({ mapState, onShowMap, ...rest }) => {
   );
 };
 
-const FloatingMapButton = ({ view, openMap }) => {
+const FloatingMapButton = ({ onOpenMap }) => {
   return (
     <StFloatingMapButton
       btnType="oval"
@@ -25,7 +25,7 @@ const FloatingMapButton = ({ view, openMap }) => {
         box-shadow: 0 3px 5px ${({ theme }) => theme.color.lightGray};
       `}
       transition
-      onClick={openMap}
+      onClick={onOpenMap}
     >
       <FiMap /> <span>지도</span>
     </StFloatingMapButton>
@@ -34,7 +34,7 @@ const FloatingMapButton = ({ view, openMap }) => {
 
 const MapFilterButton = () => {
   return (
-    <StButton boxShadow top="20rem" position="sticky">
+    <StButton boxShadow position="sticky" margin="0 0 1rem">
       <StFilterIcon />
     </StButton>
   );
@@ -64,13 +64,13 @@ const MapZoomButton = ({ onZoomIn, onZoomOut }) => {
 
 const MapMarkerButton = () => {
   return (
-    <StButton boxShadow>
+    <StButton boxShadow margin="1rem 0 0">
       <FaMapMarkerAlt />
     </StButton>
   );
 };
 
-const MapCloseButton = ({ onHideMap, closeMap, view }) => {
+const MapCloseButton = ({ onHideMap, onCloseMap, view }) => {
   return (
     <StButton
       boxShadow
@@ -79,7 +79,7 @@ const MapCloseButton = ({ onHideMap, closeMap, view }) => {
       margin="0 0 91px 0"
       onClick={() => {
         view === 'result' && onHideMap();
-        closeMap();
+        view === 'map' && onCloseMap();
       }}
     >
       <GrClose />

@@ -52,9 +52,9 @@ const getMarkerIndex = (imageCount, currentIndex) => {
 };
 
 const CarouselContainer = ({
-  homeId,
   size,
   theme,
+  isHovered,
   responsive,
   imageArray,
   imageCount,
@@ -62,8 +62,6 @@ const CarouselContainer = ({
   getWidth,
   ...rest
 }) => {
-  const { hoveredHome } = useSelector(state => state.search);
-  const isHovered = hoveredHome === homeId;
   const carouselInit = {
     imageCount,
     isSliding: false,

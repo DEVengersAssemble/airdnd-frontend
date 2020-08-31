@@ -17,7 +17,14 @@ export const HomePrice = ({ type, price, dateDiff, theme }) => {
   );
 };
 
-const Home = ({ home, onClickBookmark, onHoverHome, onBlurHome, dateDiff }) => {
+const Home = ({
+  home,
+  isHovered,
+  onClickHeart,
+  onHoverHome,
+  onBlurHome,
+  dateDiff,
+}) => {
   const {
     homeId,
     isSuperhost,
@@ -39,7 +46,7 @@ const Home = ({ home, onClickBookmark, onHoverHome, onBlurHome, dateDiff }) => {
     >
       <CarouselContainer
         size="large"
-        homeId={homeId}
+        isHovered={isHovered}
         imageArray={imageArray}
         imageCount={imageCount}
         isSuperhost={isSuperhost}
@@ -61,12 +68,7 @@ const Home = ({ home, onClickBookmark, onHoverHome, onBlurHome, dateDiff }) => {
           />
           <HomePrice type="list" price={price} dateDiff={dateDiff} />
         </StDetailWrapper>
-        <Heart
-          ckType
-          hover
-          checked={isBookmarked}
-          onCheck={() => onClickBookmark(isBookmarked, homeId)}
-        />
+        <Heart ckType hover checked={isBookmarked} onCheck={onClickHeart} />
       </StHome>
     </StWrapper>
   );
