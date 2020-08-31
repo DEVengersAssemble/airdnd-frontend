@@ -35,7 +35,7 @@ const HomeCard = ({
   type,
   isHovered,
   mapState,
-  onClickBookmark,
+  onClickHeart,
   onHoverHome,
   onBlurHome,
   dateDiff,
@@ -79,11 +79,7 @@ const HomeCard = ({
         price={price}
         dateDiff={dateDiff}
       />
-      <Heart
-        ckType
-        checked={isBookmarked}
-        onClick={() => onClickBookmark(isBookmarked, homeId)}
-      />
+      <Heart ckType checked={isBookmarked} onClick={onClickHeart} />
     </StWrapper>
   );
 };

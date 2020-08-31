@@ -12,7 +12,6 @@ const BookmarkListModal = ({
   bookmarkLists,
   onClickBookmark,
 }) => {
-  console.log('is it rendering?');
   return (
     <Modal
       modalState={modalState}

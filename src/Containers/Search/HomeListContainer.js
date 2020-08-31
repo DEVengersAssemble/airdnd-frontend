@@ -4,7 +4,7 @@ import HomeList from '../../Components/Search/HomeList';
 import {
   BookmarkListModalContainer,
   NewBookmarkModalContainer,
-} from './BookmarkModalContainer';
+} from '../Global/BookmarkModalContainer';
 import HomeContainer from './HomeContainer';
 import HomeCardContainer from './HomeCardContainer';
 

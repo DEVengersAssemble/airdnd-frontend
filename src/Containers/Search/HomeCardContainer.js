@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { hoverHome, blurHome } from '../../Modules/search';
 import { removeBookmark, openListModal } from '../../Modules/wishlists';
 
-const HomeCardContainer = ({ home }) => {
+const HomeCardContainer = ({ home, type }) => {
   const { id } = useSelector(state => state.user);
   const { dateDiff } = useSelector(state => state.searchForm);
   const { hoveredHome } = useSelector(state => state.search);
@@ -23,9 +23,10 @@ const HomeCardContainer = ({ home }) => {
   return (
     <HomeCard
       home={home}
+      type={type}
       isHovered={isHovered}
-      onClickHeart={onClickHeart}
       dateDiff={dateDiff}
+      onClickHeart={onClickHeart}
       onHoverHome={onHoverHome}
       onBlurHome={onBlurHome}
     />

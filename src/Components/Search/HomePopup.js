@@ -6,11 +6,11 @@ import CarouselContainer from '../../Containers/Global/CarouselContainer';
 
 const HomePopup = ({
   home,
-  dateDiff,
   hover,
+  theme,
+  dateDiff,
   onHoverHome,
   onBlurHome,
-  theme,
 }) => {
   const {
     homeId,

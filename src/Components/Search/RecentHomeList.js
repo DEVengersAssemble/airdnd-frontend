@@ -2,14 +2,9 @@ import React from 'react';
 import HomeCard from './HomeCard';
 import styled from 'styled-components';
 import RecentPagenation from './RecentPagenation';
+import HomeCardContainer from '../../Containers/Search/HomeCardContainer';
 
-const RecentHomeList = ({
-  mapState,
-  recentHomes,
-  onHoverHome,
-  onBlurHome,
-  hoveredHome,
-}) => {
+const RecentHomeList = ({ mapState, recentHomes }) => {
   return (
     <StWrapper>
       <StHeader>최근 숙소</StHeader>
@@ -19,14 +14,11 @@ const RecentHomeList = ({
       <RecentPagenation />
       <StHomeWrapper>
         {recentHomes.map(home => (
-          <HomeCard
+          <HomeCardContainer
             key={home.homeId}
             home={home}
             type="recent"
             mapState={mapState}
-            isHovered={hoveredHome === home.homeId}
-            onHoverHome={onHoverHome}
-            onBlurHome={onBlurHome}
           />
         ))}
       </StHomeWrapper>
