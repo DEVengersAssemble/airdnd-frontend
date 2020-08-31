@@ -213,7 +213,7 @@ const initialState = {
   ],
   // popup filter를 통해 걸러진 messages
   activeIndex: 0,
-  tempMsgs: [], // 숨김 취소했을 시 pastFilteredMsgs를 불러옴
+  tempMsgs: [], // 숨김 취소했을 시 tempMsgs 불러옴
   filteredMsgs: [
     {
       id: 1,
@@ -276,6 +276,7 @@ const initialState = {
       },
     },
   ],
+  schedulePdf: { text: '', language: '' },
   isHost: false,
 };
 

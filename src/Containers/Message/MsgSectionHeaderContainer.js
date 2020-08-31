@@ -8,8 +8,6 @@ import {
   showMsgListSection,
   archiveMsg,
   unarchiveMsg,
-  allMsgList,
-  hideMsgList,
 } from '../../Modules/message';
 
 const MsgSectionHeaderContainer = () => {
@@ -18,9 +16,7 @@ const MsgSectionHeaderContainer = () => {
     state => state.message,
   );
   const media = useSelector(state => state.message.media);
-  const { messages, activeIndex, filteredMsgs } = useSelector(
-    state => state.message,
-  );
+  const { activeIndex, filteredMsgs } = useSelector(state => state.message);
   // variable
   // const nextActiveAllMsg = messages.find(
   //   msg => msg.state === 'all' && !msg.isActive,
@@ -37,13 +33,14 @@ const MsgSectionHeaderContainer = () => {
   const dispatch = useDispatch();
 
   // ! variable
+  // ! activeMsg 구조할당 하면.. 망함... ㅠㅠ
   const activeMsg = filteredMsgs.find(
     (_, index) => filteredMsgs[index] === filteredMsgs[activeIndex],
   );
   const selectIndex = filteredMsgs.findIndex(
     (_, index) => filteredMsgs[index] === filteredMsgs[activeIndex],
   );
-  const { id, state, hostname } = activeMsg;
+
   // console.log('activeMsg', activeMsg);
   // console.log('selectIndex:', selectIndex, 'activeIndex:', activeIndex);
   // console.log('activeMsg.id', activeMsg.id);
@@ -82,10 +79,10 @@ const MsgSectionHeaderContainer = () => {
 
   const onClickArchive = () => {
     if (activeMsg.state === 'all') {
-      dispatch(archiveMsg(selectIndex, id, state));
+      dispatch(archiveMsg(selectIndex, activeMsg.id, activeMsg.state));
     }
     if (activeMsg.state === 'hide') {
-      dispatch(unarchiveMsg(selectIndex, id, state));
+      dispatch(unarchiveMsg(selectIndex, activeMsg.id, activeMsg.state));
     }
   };
 
@@ -97,8 +94,8 @@ const MsgSectionHeaderContainer = () => {
       onClickDetail={onClickDetail}
       onClickShowList={onClickShowList}
       onClickArchive={onClickArchive}
-      hostname={activeMsg && hostname}
-      state={activeMsg && state}
+      hostname={activeMsg && activeMsg.hostname}
+      state={activeMsg && activeMsg.state}
     />
   );
 };
