@@ -43,8 +43,9 @@ const MsgSectionHeaderContainer = () => {
   const selectIndex = filteredMsgs.findIndex(
     (_, index) => filteredMsgs[index] === filteredMsgs[activeIndex],
   );
-  console.log(selectIndex);
-  console.log(activeMsg);
+  console.log('activeMsg', activeMsg);
+  console.log('selectIndex:', selectIndex, 'activeIndex:', activeIndex);
+  console.log('activeMsg.id', activeMsg.id);
   console.log(activeMsg.hostname);
   console.log(activeMsg.state);
 
@@ -80,10 +81,10 @@ const MsgSectionHeaderContainer = () => {
 
   const onClickArchive = useCallback(() => {
     if (activeMsg.state === 'all') {
-      dispatch(archiveMsg(selectIndex, activeMsg.id));
+      dispatch(archiveMsg(selectIndex, activeMsg.id, activeMsg.state));
     }
     if (activeMsg.state === 'hide') {
-      dispatch(unarchiveMsg(selectIndex, activeMsg.id));
+      dispatch(unarchiveMsg(selectIndex, activeMsg.id, activeMsg.state));
     }
   }, [dispatch, activeMsg.state, archiveMsg, unarchiveMsg]);
 

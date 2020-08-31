@@ -311,7 +311,7 @@ const message = (state = initialState, action) => {
       return {
         ...state,
         messages: state.messages.map(msg =>
-          msg.id !== action.id ? { ...msg, state: action.state } : msg,
+          msg.id === action.id ? { ...msg, state: 'hide' } : msg,
         ),
         tempMsgs: state.filteredMsgs,
         filteredMsgs: state.filteredMsgs.filter(
@@ -321,6 +321,9 @@ const message = (state = initialState, action) => {
     case UNARCHAIVE_MESSAGE:
       return {
         ...state,
+        messages: state.messages.map(msg =>
+          msg.id === action.id ? { ...msg, state: 'all' } : msg,
+        ),
         tempMsgs: state.filteredMsgs,
         filteredMsgs: state.filteredMsgs.filter(
           (_, index) => index !== action.index,
