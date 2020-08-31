@@ -8,7 +8,7 @@ import { RiEyeCloseLine, RiMailLine, RiUserLine } from 'react-icons/ri';
 import { MdCheck, MdClose } from 'react-icons/md';
 import { GoogleLogin } from 'react-google-login';
 
-const StSignupModal = styled(Modal)`
+const StSignupEmailModal = styled(Modal)`
   overflow-y: scroll;
 `;
 
@@ -34,17 +34,9 @@ const StSignupFormWrapper = styled.div`
   padding: 20px;
 `;
 
-const StSocialLoginWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 15px;
-  padding: 0 0 20px 0;
-`;
-
 const StSignupForm = styled.form`
   width: 100%;
-  margin-top: 30px;
+  margin-top: 10px;
 `;
 
 const StInputWrapper = styled.div`
@@ -176,7 +168,7 @@ const StLoginButton = styled(Button)`
   }
 `;
 
-const SignupModal = ({
+const SignupEmailModal = ({
   signupModalVisible,
   openLoginModal,
   closeModal,
@@ -206,7 +198,7 @@ const SignupModal = ({
   console.log(pwLevel, pwLength, pwContain, pwCase);
 
   return (
-    <StSignupModal
+    <StSignupEmailModal
       modalState={signupModalVisible}
       header
       title="회원가입"
@@ -215,7 +207,7 @@ const SignupModal = ({
       setModalState={() => closeModal('signup')}
     >
       <StSignupFormWrapper>
-        <StSocialLoginWrapper>
+        {/* <StSocialLoginWrapper>
           페이스북 또는{' '}
           <GoogleLogin
             clientId={process.env.REACT_APP_GOOGLE_LOGIN_API_KEY}
@@ -227,7 +219,7 @@ const SignupModal = ({
           로 회원 가입하세요.
         </StSocialLoginWrapper>
         <StDividerLine />
-        <StDividerText>또는</StDividerText>
+        <StDividerText>또는</StDividerText> */}
         <StSignupForm onSubmit={onSignup}>
           <StInputWrapper>
             <StInput
@@ -384,8 +376,8 @@ const SignupModal = ({
           </StLoginButton>
         </StLoginButtonWrapper>
       </StSignupFormWrapper>
-    </StSignupModal>
+    </StSignupEmailModal>
   );
 };
 
-export default SignupModal;
+export default SignupEmailModal;

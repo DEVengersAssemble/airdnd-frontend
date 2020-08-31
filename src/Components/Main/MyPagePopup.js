@@ -61,7 +61,12 @@ const StMyPageOptionButton = styled.button`
   }
 `;
 
-const MyPagePopup = ({ popupVisible, closePopup, isLoggedIn, openModal }) => {
+const MyPagePopup = ({
+  popupVisible,
+  closePopup,
+  isLoggedIn,
+  openModalByName,
+}) => {
   const popupRef = useRef();
   const handlePopup = ({ target }) => {
     if (popupVisible && !popupRef.current.contains(target)) {
@@ -81,12 +86,14 @@ const MyPagePopup = ({ popupVisible, closePopup, isLoggedIn, openModal }) => {
           {!isLoggedIn && (
             <>
               <StMyPageOptionItem>
-                <StMyPageOptionButton onClick={() => openModal('login')}>
+                <StMyPageOptionButton onClick={() => openModalByName('login')}>
                   로그인
                 </StMyPageOptionButton>
               </StMyPageOptionItem>
               <StMyPageOptionItem>
-                <StMyPageOptionButton onClick={() => openModal('signup')}>
+                <StMyPageOptionButton
+                  onClick={() => openModalByName('signup_email')}
+                >
                   회원가입
                 </StMyPageOptionButton>
               </StMyPageOptionItem>

@@ -1,5 +1,7 @@
 import React, { useState, useRef, useReducer } from 'react';
-import SignupModal from '../../Components/Main/SignupModal';
+import SignupEmailModal from '../../Components/Main/SignupEmailModal';
+import { useSelector, useDispatch } from 'react-redux';
+import { openModal, closeModal } from '../../Modules/modal';
 
 const initialState = {
   email: {
@@ -67,11 +69,10 @@ const signupReducer = (state, action) => {
   }
 };
 
-const SignupModalContainer = ({
-  signupModalVisible,
-  openModal,
-  closeModal,
-}) => {
+const SignupModalContainer = () => {
+  const dispatch = useDispatch();
+  const { name } = useSelector(state => state.modal);
+  const modalVisible = name === 'signup_email';
   const emailRef = useRef();
   const firstNameRef = useRef();
   const lastNameRef = useRef();
@@ -89,7 +90,7 @@ const SignupModalContainer = ({
     birthYearRef,
   };
 
-  const [signup, dispatch] = useReducer(signupReducer, initialState);
+  const [signup, _dispatch] = useReducer(signupReducer, initialState);
   const [isChecking, setIsChecking] = useState(false);
   const [isPwChanged, setIsPwChanged] = useState(false);
   const [pwFocus, setPwFocus] = useState(false);
@@ -182,18 +183,18 @@ const SignupModalContainer = ({
       birthDay: birthDayObj,
       birthYear: birthYearObj,
     };
-    dispatch({ type: 'CHECK_ALL_VALIDATION', payload });
+    _dispatch({ type: 'CHECK_ALL_VALIDATION', payload });
     setIsChecking(true);
   };
 
   const updatePwValidation = () => {
     const payload = checkPwValidation();
-    dispatch({ type: 'VALIDATE_PW', payload });
+    _dispatch({ type: 'VALIDATE_PW', payload });
   };
 
   const onChangeForm = ({ target }, key) => {
     const value = target.value;
-    dispatch({ type: 'UPDATE_VALUE', key, payload: value });
+    _dispatch({ type: 'UPDATE_VALUE', key, payload: value });
     setIsPwChanged(true);
   };
 
@@ -203,17 +204,17 @@ const SignupModalContainer = ({
       value,
       invalid: isNaN(value),
     };
-    dispatch({ type: 'UPDATE_SELECT', key, payload });
+    _dispatch({ type: 'UPDATE_SELECT', key, payload });
   };
+
   const openLoginModal = () => {
-    closeModal('signup');
-    openModal('login');
+    dispatch(openModal('login'));
   };
 
   const onSuccess = () => {
     console.log('===유저를 등록합니다====');
     setPwFocus(false);
-    dispatch({ type: 'RESET' });
+    _dispatch({ type: 'RESET' });
   };
 
   const onGoogleLoginSuccess = res => {
@@ -252,10 +253,12 @@ const SignupModalContainer = ({
   }, [isChecking, isPwChanged, signup]);
 
   return (
-    <SignupModal
-      signupModalVisible={signupModalVisible}
+    <SignupEmailModal
+      signupModalVisible={modalVisible}
       openLoginModal={openLoginModal}
-      closeModal={closeModal}
+      closeModal={() => {
+        dispatch(closeModal());
+      }}
       signup={signup}
       pwValidation={pwValidation}
       onChangeForm={onChangeForm}
@@ -266,7 +269,7 @@ const SignupModalContainer = ({
       pwFocus={pwFocus}
       onGoogleLoginSuccess={onGoogleLoginSuccess}
       onGoogleLoginFailure={onGoogleLoginFailure}
-    ></SignupModal>
+    ></SignupEmailModal>
   );
 };
 export default SignupModalContainer;
