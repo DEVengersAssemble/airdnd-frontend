@@ -11,6 +11,7 @@ const HomePopup = ({
   dateDiff,
   onHoverHome,
   onBlurHome,
+  onClickHeart,
 }) => {
   const {
     homeId,
@@ -46,7 +47,12 @@ const HomePopup = ({
         price={price}
         dateDiff={dateDiff}
       />
-      <Heart ckType theme={theme} checked={isBookmarked} />
+      <Heart
+        ckType
+        theme={theme}
+        checked={isBookmarked}
+        onClick={onClickHeart}
+      />
     </StWrapper>
   );
 };
