@@ -1,8 +1,15 @@
-import React, { useReducer, useEffect, useRef } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import Map from '../../Components/Global/Map';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
-import { closeMarker, zoomSet } from '../../Modules/search';
+import {
+  closeMarker,
+  zoomSet,
+  closeMap,
+  hideMap,
+  zoomIn,
+  zoomOut,
+} from '../../Modules/search';
 
 const centerInit = {
   loading: false,
@@ -37,10 +44,14 @@ const centerReducer = (state, action) => {
 
 const MapContainer = ({ markers }) => {
   const { location } = useSelector(state => state.searchForm);
-  const { mapZoom } = useSelector(state => state.search);
+  const { mapZoom, viewState } = useSelector(state => state.search);
   const [centerState, centerDispatch] = useReducer(centerReducer, centerInit);
   const dispatch = useDispatch();
-  const updateZoom = zoom => dispatch(zoomSet());
+  const updateZoom = zoom => dispatch(zoomSet(zoom));
+  const onHideMap = () => dispatch(hideMap());
+  const onCloseMap = () => dispatch(closeMap());
+  const onZoomIn = () => dispatch(zoomIn());
+  const onZoomOut = () => dispatch(zoomOut());
   const onCloseMarker = e => {
     e.target.nodeName === 'DIV' && dispatch(closeMarker());
   };
@@ -62,15 +73,20 @@ const MapContainer = ({ markers }) => {
 
   if (!centerState.center) return null;
   return (
-    // <div onClick={onCloseMarker}>
-    <Map
-      center={centerState.center}
-      mapZoom={mapZoom}
-      markers={markers}
-      updateZoom={updateZoom}
-      onCloseMarker={onCloseMarker}
-    />
-    // </div>
+    <div onClick={onCloseMarker}>
+      <Map
+        view={viewState}
+        center={centerState.center}
+        mapZoom={mapZoom}
+        markers={markers}
+        onCloseMap={onCloseMap}
+        onHideMap={onHideMap}
+        onZoomIn={onZoomIn}
+        onZoomOut={onZoomOut}
+        updateZoom={updateZoom}
+        onCloseMarker={onCloseMarker}
+      />
+    </div>
   );
 };
 
