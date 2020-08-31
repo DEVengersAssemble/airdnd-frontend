@@ -3,10 +3,8 @@ import Button from '../Global/Button';
 import styled from 'styled-components';
 import { FilterButtonContainer } from '../../Containers/Search/FilterListContainer';
 import { MapButton } from './MapButton';
-import {
-  PricePopupContainer,
-  SetDatePopupContainer,
-} from '../../Containers/Search/FilterPopupContainer';
+import SetDatePopupContainer from '../../Containers/Search/SetDatePopupContainer';
+import PricePopupContainer from '../../Containers/Search/PricePopupContainer';
 import RoomTypePopupContainer from '../../Containers/Search/RoomTypePopupContainer';
 import RefundPopupContainer from '../../Containers/Search/RefundPopupContainer';
 import FilterModalContainer from '../../Containers/Search/FilterModalContainer';

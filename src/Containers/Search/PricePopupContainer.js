@@ -1,10 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import {
-  RefundPopup,
-  RoomTypePopup,
-  PricePopup,
-  SetDatePopup,
-} from '../../Components/Search/FilterPopup';
+import { PricePopup } from '../../Components/Search/FilterPopup';
 import { useSelector, useDispatch } from 'react-redux';
 import { saveFilter, setFilter, resetFilter } from '../../Modules/search';
 
@@ -77,25 +72,4 @@ const PricePopupContainer = ({ popupState, onClose }) => {
   );
 };
 
-const SetDatePopupContainer = ({ popupState, onClose }) => {
-  const popup = useRef();
-  const closePopup = ({ target }) => {
-    if (!popupState || popup.current.contains(target)) return;
-    onClose('setDate');
-  };
-
-  useEffect(() => {
-    document.addEventListener('click', closePopup);
-    return () => {
-      document.removeEventListener('click', closePopup);
-    };
-  }, [closePopup]);
-
-  return (
-    <div ref={popup}>
-      <SetDatePopup popupState={popupState} />
-    </div>
-  );
-};
-
-export { PricePopupContainer, SetDatePopupContainer };
+export default PricePopupContainer;
