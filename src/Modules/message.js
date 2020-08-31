@@ -356,7 +356,6 @@ const message = (state = initialState, action) => {
           state.activeIndex === action.index ? state.activeIndex : action.index,
         filteredMsgs: state.messages.filter(msg => msg.state === 'unread'),
       };
-
     case MESSAGE_HOST_FLAG:
       return {
         ...state,
