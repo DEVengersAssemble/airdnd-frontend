@@ -14,10 +14,12 @@ const HomePopupContainer = ({ home, dateDiff, theme, store }) => {
   const onClickHeart = () => {
     if (!id) return console.log('로그인 해라~~~~~~~~~~~~~ 로그인 팝업 띄우기');
     if (home.isBookmarked) {
+      console.log('북마크 없앤다니까 왜 모달 열어', home.isBookmarked);
       dispatch(removeBookmark(home.homeId));
       dispatch(changeHeart(home.homeId));
       return;
     }
+    console.log('북마크', home.isBookmarked);
     dispatch(openListModal(home.homeId, home.imageArray[0]));
   };
 

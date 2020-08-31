@@ -51,7 +51,7 @@ const HomePopup = ({
         ckType
         theme={theme}
         checked={isBookmarked}
-        onClick={onClickHeart}
+        onCheck={onClickHeart}
       />
     </StWrapper>
   );
