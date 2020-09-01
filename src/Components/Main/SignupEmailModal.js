@@ -13,20 +13,8 @@ const StSignupEmailModal = styled(Modal)`
 
 const StDividerLine = styled.hr`
   border: none;
+  margin: 20px 0;
   border-top: 1px solid ${({ theme }) => theme.color.line};
-`;
-
-const StDividerText = styled.span`
-  position: absolute;
-  font-size: 14px;
-  top: 120px;
-  left: calc(50% - 34px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: white;
-  padding: 0 20px;
-  color: ${({ theme }) => theme.color.darkGray};
 `;
 
 const StSignupFormWrapper = styled.div`
@@ -35,7 +23,6 @@ const StSignupFormWrapper = styled.div`
 
 const StSignupForm = styled.form`
   width: 100%;
-  margin-top: 10px;
 `;
 
 const StInputWrapper = styled.div`
@@ -133,14 +120,19 @@ const StBirthDayDropDown = styled(DropDown)`
 `;
 
 const StSubmitButton = styled(Button)`
-  margin: 30px 0 20px 0;
+  margin-top: 30px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 3px;
   width: 100%;
   padding: 20px 0;
   color: ${({ theme }) => theme.color.white};
   background: ${({ theme }) => theme.color.main};
+  transition: 0.125s all ease-in;
+  height: 52px;
   &:hover {
-    color: ${({ theme }) => theme.color.white};
     background: ${({ theme }) => theme.color.main};
+    box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.25);
   }
 `;
 
