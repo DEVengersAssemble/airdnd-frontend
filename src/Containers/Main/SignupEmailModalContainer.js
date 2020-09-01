@@ -1,4 +1,4 @@
-import React, { useState, useRef, useReducer } from 'react';
+import React, { useEffect, useState, useRef, useReducer } from 'react';
 import SignupEmailModal from '../../Components/Main/SignupEmailModal';
 import { useSelector, useDispatch } from 'react-redux';
 import { openModal, closeModal } from '../../Modules/modal';
@@ -143,18 +143,28 @@ const SignupModalContainer = () => {
     return pwValidation;
   };
   const checkFormValidation = () => {
-    const emailRegExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+    const emailRegExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+    const numberRegExp = /[\d]/;
+    const specialCharRegExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/gi;
     const emailObj = {
       value: email.value,
       invalid: !emailRegExp.test(email.value),
     };
     const firstNameObj = {
       value: firstName.value,
-      invalid: !firstName.value,
+      invalid:
+        firstName.value.length < 1 ||
+        firstName.value.length > 35 ||
+        numberRegExp.test(firstName.value) ||
+        specialCharRegExp.test(firstName.value),
     };
     const lastNameObj = {
       value: lastName.value,
-      invalid: !lastName.value,
+      invalid:
+        lastName.value.length < 1 ||
+        lastName.value.length > 35 ||
+        numberRegExp.test(lastName.value) ||
+        specialCharRegExp.test(lastName.value),
     };
     const pwObj = {
       value: pw.value,
@@ -245,7 +255,7 @@ const SignupModalContainer = () => {
     checkFormValidation();
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     isChecking && changeFocus();
     isPwChanged && updatePwValidation();
     setIsChecking(false);

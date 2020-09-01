@@ -187,7 +187,6 @@ const SignupEmailModal = ({
   } = signup;
   const { pwLevel, pwLength, pwContain, pwCase } = pwValidation;
   const { emailRef, firstNameRef, lastNameRef, pwRef } = refObj;
-
   return (
     <StSignupEmailModal
       modalState={modalVisible}
@@ -209,9 +208,14 @@ const SignupEmailModal = ({
               isInvalid={email.invalid}
             ></StInput>
             <RiMailLine />
-            {email.invalid && (
+            {email.value.length === 0 && email.invalid && (
               <StValidationText isInvalid={email.invalid}>
-                이메일이 필요합니다.
+                이메일을 입력하세요.
+              </StValidationText>
+            )}
+            {email.value.length > 0 && email.invalid && (
+              <StValidationText isInvalid={email.invalid}>
+                이메일 형식이 맞지 않습니다.
               </StValidationText>
             )}
           </StInputWrapper>
@@ -225,11 +229,24 @@ const SignupEmailModal = ({
               isInvalid={firstName.invalid}
             ></StInput>
             <RiUserLine />
-            {firstName.invalid && (
+            {firstName.value.length === 0 && firstName.invalid && (
               <StValidationText isInvalid={firstName.invalid}>
                 이름을 입력하세요.
               </StValidationText>
             )}
+            {firstName.value.length > 35 && firstName.invalid && (
+              <StValidationText isInvalid={firstName.invalid}>
+                이름을 입력할 수 있는 최대 글자 수는 35자입니다. 다시
+                시도하세요.
+              </StValidationText>
+            )}
+            {firstName.value.length !== 0 &&
+              firstName.value.length < 35 &&
+              firstName.invalid && (
+                <StValidationText isInvalid={firstName.invalid}>
+                  이름에 유효한 글자를 입력하세요.
+                </StValidationText>
+              )}
           </StInputWrapper>
 
           <StInputWrapper>
@@ -242,11 +259,23 @@ const SignupEmailModal = ({
               isInvalid={lastName.invalid}
             ></StInput>
             <RiUserLine />
-            {lastName.invalid && (
+            {lastName.value.length === 0 && lastName.invalid && (
               <StValidationText isInvalid={lastName.invalid}>
                 성을 입력하세요.
               </StValidationText>
             )}
+            {lastName.value.length > 35 && lastName.invalid && (
+              <StValidationText isInvalid={lastName.invalid}>
+                성을 입력할 수 있는 최대 글자 수는 35자입니다. 다시 시도하세요.
+              </StValidationText>
+            )}
+            {lastName.value.length !== 0 &&
+              lastName.value.length < 35 &&
+              lastName.invalid && (
+                <StValidationText isInvalid={lastName.invalid}>
+                  성에 유효한 글자를 입력하세요.
+                </StValidationText>
+              )}
           </StInputWrapper>
           <StInputWrapper name="password">
             <StInput
@@ -260,9 +289,14 @@ const SignupEmailModal = ({
               isInvalid={pw.invalid}
             ></StInput>
             <RiEyeCloseLine />
-            {pw.invalid && (
+            {pw.value.length === 0 && pw.invalid && (
               <StValidationText isInvalid={pw.invalid}>
                 비밀번호를 입력하세요.
+              </StValidationText>
+            )}
+            {pw.value.length > 0 && pw.invalid && (
+              <StValidationText isInvalid={pw.invalid}>
+                비밀번호 형식이 맞지 않습니다.
               </StValidationText>
             )}
             {pwFocus && (
