@@ -14,6 +14,7 @@ const MsgSectionHeader = ({
   onClickShowList,
   onClickDetail,
   onClickArchive,
+  activeMsg,
   hostname,
   state,
 }) => {
@@ -45,7 +46,7 @@ const MsgSectionHeader = ({
         {hostname}
       </MsgSectionHeaderTitle>
       <MsgSectionHeaderButtonWrapper>
-        {state !== 'unread' && (
+        {activeMsg && state !== 'unread' && (
           <StStroageButton
             btnType="circle"
             border="none"
@@ -57,19 +58,21 @@ const MsgSectionHeader = ({
           </StStroageButton>
         )}
         {msgDetailSectionState ? (
-          <Button
-            btnType="oval"
-            border={`2px solid ${theme.color.black}`}
-            hover="none"
-            fontSize="1.2rem"
-            style={{
-              backgroundColor: `${theme.color.lightGray}`,
-              fontWeight: '600',
-            }}
-            onClick={onClickDetail}
-          >
-            세부 정보 숨기기
-          </Button>
+          activeMsg && (
+            <Button
+              btnType="oval"
+              border={`2px solid ${theme.color.black}`}
+              hover="none"
+              fontSize="1.2rem"
+              style={{
+                backgroundColor: `${theme.color.lightGray}`,
+                fontWeight: '600',
+              }}
+              onClick={onClickDetail}
+            >
+              세부 정보 숨기기
+            </Button>
+          )
         ) : (
           <Button
             btnType="oval"

@@ -10,6 +10,8 @@ const UNARCHAIVE_MESSAGE = 'message/UNARCHAIVE_MESSAGE';
 const SHOW_TOAST = 'message/SHOW_TOAST';
 const HIDE_TOAST = 'message/HIDE_TOAST';
 const UNDO = 'message/UNDO';
+const SHOW_UNDO_TOAST = 'message/SHOW_UNDO_TOAST';
+const HIDE_UNDO_TOAST = 'message/HIDE_UNDO_TOAST';
 
 const ALL_MESSAGE_LIST = 'message/ALL_MESSAGE_LIST';
 const HIDE_MESSAGE_LIST = 'message/HIDE_MESSAGE_LIST';
@@ -49,6 +51,8 @@ export const unarchiveMsg = (index, id, state) => ({
 export const showToast = () => ({ type: SHOW_TOAST });
 export const hideToast = () => ({ type: HIDE_TOAST });
 export const undo = () => ({ type: UNDO });
+export const showUndoToast = () => ({ type: SHOW_UNDO_TOAST });
+export const hideUndoToast = () => ({ type: HIDE_UNDO_TOAST });
 
 export const allMsgList = index => ({ type: ALL_MESSAGE_LIST, index });
 export const hideMsgList = index => ({ type: HIDE_MESSAGE_LIST, index });
@@ -281,6 +285,7 @@ const initialState = {
     },
   ],
   toast: false,
+  undoToast: false,
   schedulePdf: { text: '', language: '' },
   isHost: false,
 };
@@ -349,6 +354,16 @@ const message = (state = initialState, action) => {
       return {
         ...state,
         filteredMsgs: state.tempMsgs,
+      };
+    case SHOW_UNDO_TOAST:
+      return {
+        ...state,
+        undoToast: true,
+      };
+    case HIDE_UNDO_TOAST:
+      return {
+        ...state,
+        undoToast: false,
       };
     case ALL_MESSAGE_LIST:
       return {

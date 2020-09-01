@@ -1,10 +1,6 @@
 import React, { useCallback } from 'react';
-import styled from 'styled-components';
 import MsgSectionHeader from '../../Components/Message/MsgSectionHeader';
-import {
-  ToastContainer,
-  CanceledToastContainer,
-} from '../Global/ToastContainer';
+import { ToastContainer, UndoToastContainer } from '../Global/ToastContainer';
 
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -16,6 +12,9 @@ import {
   unarchiveMsg,
   showToast,
   hideToast,
+  showUndoToast,
+  hideUndoToast,
+  undo,
 } from '../../Modules/message';
 
 const MsgSectionHeaderContainer = () => {
@@ -83,25 +82,47 @@ const MsgSectionHeaderContainer = () => {
     if (!msgDetailSectionState) return dispatch(showMsgDetailSection());
     if (media === 'medium' && msgDetailSectionState)
       return dispatch(hideMsgListSection());
-  }, [dispatch, msgDetailSectionState]);
+  }, [dispatch, media, msgDetailSectionState]);
 
   const clearToast = () => dispatch(hideToast());
+  const clearUndoToast = () => dispatch(hideUndoToast());
+
+  const emitToast = () =>
+    setTimeout(() => {
+      dispatch(showToast());
+      setTimeout(() => clearTimeout(clearToast()), 6000);
+    });
+
+  const emitUndoToast = () =>
+    setTimeout(() => {
+      dispatch(showUndoToast());
+      setTimeout(() => clearTimeout(clearUndoToast()), 6000);
+    });
 
   const onClickArchive = () => {
-    if (activeMsg.state === 'all') {
+    if (activeMsg && activeMsg.state === 'all') {
+      // ! 1번 온클릭이벤트 발생하면 archive or un archive
       dispatch(archiveMsg(selectIndex, activeMsg.id, activeMsg.state));
-      setTimeout(() => {
-        dispatch(showToast());
-        setTimeout(() => clearTimeout(clearToast()), 8000);
-      });
+      // ! 2번 Toast 발생
+      emitToast();
     }
-    if (activeMsg.state === 'hide') {
+    if (activeMsg && activeMsg.state === 'hide') {
+      // ! 1번 온클릭이벤트 발생하면 archive or un archive
       dispatch(unarchiveMsg(selectIndex, activeMsg.id, activeMsg.state));
-      setTimeout(() => {
-        dispatch(showToast());
-        setTimeout(() => clearTimeout(clearToast()), 8000);
-      });
+      // ! 2번 Toast 발생
+      emitToast();
     }
+  };
+
+  // ! 3번 실행취소버튼 클릭 이벤트 발생
+  // ! Toast.js로 연결
+  const onClickUndo = () => {
+    // ! 4번 기존 Toast clear
+    clearToast();
+    // ! 5번 이전 상태의 MsgList로 돌려놓음
+    dispatch(undo());
+    // ! 6번 UndoToast 발생
+    emitUndoToast();
   };
 
   return (
@@ -113,11 +134,15 @@ const MsgSectionHeaderContainer = () => {
         onClickDetail={onClickDetail}
         onClickShowList={onClickShowList}
         onClickArchive={onClickArchive}
+        activeMsg={activeMsg}
         hostname={activeMsg && activeMsg.hostname}
         state={activeMsg && activeMsg.state}
       />
-      <ToastContainer state={activeMsg && activeMsg.state} />
-      <CanceledToastContainer state={activeMsg && activeMsg.state} />
+      <ToastContainer
+        state={activeMsg && activeMsg.state}
+        onClickUndo={onClickUndo}
+      />
+      <UndoToastContainer />
     </>
   );
 };

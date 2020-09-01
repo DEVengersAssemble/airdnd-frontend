@@ -5,7 +5,7 @@ import Button from './Button';
 import { FaBox } from 'react-icons/fa';
 import { MdCheckCircle } from 'react-icons/md';
 
-const Toast = ({ state, toast, ...rest }) => {
+const Toast = ({ state, toast, onClickUndo, ...rest }) => {
   // Message에서 archive box클릭시 토스트 알람
   return (
     <ToastWrapper toast={toast}>
@@ -14,12 +14,15 @@ const Toast = ({ state, toast, ...rest }) => {
         {state === 'hide' ? '대화 보관 처리 취소됨' : '대화 보관 처리됨'}
         {' · '}
       </ToastText>
-
       <Button
         btnType="underlined"
         padding="0rem 0rem 0rem 0.2rem"
         fontSize="1.4rem"
         hover="background: none"
+        // ! 3번 실행취소버튼 클릭 이벤트 발생
+        // ! MsgSectionHeaderContainer.js로 이동
+        onClick={onClickUndo}
+        style={{ borderRadius: '0px' }}
         {...rest}
       >
         실행 취소
@@ -28,13 +31,12 @@ const Toast = ({ state, toast, ...rest }) => {
   );
 };
 
-const CanceledToast = () => {
-  // Message에서 archive box클릭 후 실행 취소 버튼 클릭 시 토스트 알람
+const UndoToast = ({ undoToast }) => {
   return (
-    <ToastWrapper>
+    <UndoToastWrapper undoToast={undoToast}>
       <StFaBox />
       <ToastText>실행 취소</ToastText>
-    </ToastWrapper>
+    </UndoToastWrapper>
   );
 };
 
@@ -78,6 +80,26 @@ const ToastWrapper = styled.div`
     `}
 `;
 
+const UndoToastWrapper = styled.div`
+  ${toastWrapperStyle}
+  position: absolute;
+  bottom: 0rem;
+  left: 18.75rem;
+  overflow: hidden;
+  transform: translate3d(-50%, 0, 0);
+  z-index: 1;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease-in;
+  ${({ undoToast }) =>
+    undoToast &&
+    css`
+      opacity: 1;
+      visibility: visible;
+      bottom: 5rem;
+    `}
+`;
+
 const ClipboardToastWrapper = styled.div`
   ${toastWrapperStyle}
 `;
@@ -91,4 +113,4 @@ const StFaBox = styled(FaBox)`
   font-size: 1.2rem;
 `;
 
-export { Toast, CopyToast, CanceledToast };
+export { Toast, CopyToast, UndoToast };
