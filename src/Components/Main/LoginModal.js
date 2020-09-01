@@ -169,7 +169,10 @@ const LoginModal = ({
   closeModal,
   showPw,
   onToggleShowPw,
+  loginForm,
 }) => {
+  const { email, pw } = loginForm;
+
   return (
     <StLoginModal
       modalState={modalVisible}
