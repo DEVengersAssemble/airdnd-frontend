@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { throttle } from 'lodash';
 import MainHeader from '../../Components/Main/MainHeader';
 
 const MainHeaderContainer = () => {
@@ -6,12 +7,13 @@ const MainHeaderContainer = () => {
   const [isSearchBtnClicked, setIsSearchBtnClicked] = useState(false);
 
   const onScroll = e => {
+    console.log('[onScroll]: ', window.scrollY);
     setIsScrollTop(e && window.scrollY < 20);
     setIsSearchBtnClicked(false);
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', onScroll);
+    window.addEventListener('scroll', throttle(onScroll, 150));
     return () => {
       window.removeEventListener('scroll', onScroll);
     };
