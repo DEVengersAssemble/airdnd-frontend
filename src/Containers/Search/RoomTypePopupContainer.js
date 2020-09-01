@@ -3,7 +3,7 @@ import { RoomTypePopup } from '../../Components/Search/FilterPopup';
 import { useSelector, useDispatch } from 'react-redux';
 import { saveFilter, setFilter, resetFilter } from '../../Modules/search';
 
-let prevFilter = {};
+// let prevFilter = {};
 
 const RoomTypePopupContainer = ({ popupState, onClose }) => {
   const { roomType } = useSelector(state => state.search.filterApplied);
@@ -24,7 +24,7 @@ const RoomTypePopupContainer = ({ popupState, onClose }) => {
   };
 
   useEffect(() => {
-    prevFilter = { ...roomType };
+    // prevFilter = { ...roomType };
     document.addEventListener('click', closePopup);
     return () => {
       document.removeEventListener('click', closePopup);

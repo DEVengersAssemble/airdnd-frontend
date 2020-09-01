@@ -3,11 +3,11 @@ import { PricePopup } from '../../Components/Search/FilterPopup';
 import { useSelector, useDispatch } from 'react-redux';
 import { saveFilter, setFilter, resetFilter } from '../../Modules/search';
 
-let prevFilter = {};
+// let prevFilter = {};
 
 const PricePopupContainer = ({ popupState, onClose }) => {
   const { min, max } = useSelector(state => state.search.filterApplied.price);
-  const { priceArray, averagePrice } = useSelector(state => state.search);
+  const { priceArray, averagePrice } = useSelector(state => state.data.search);
   const [range, setRange] = useState({ value: [min, max] });
   const isDisabled = min === 12000 && max === 1000000;
   const regExp = /^\d{0,7}$/;
@@ -45,7 +45,7 @@ const PricePopupContainer = ({ popupState, onClose }) => {
   };
 
   useEffect(() => {
-    prevFilter = { min, max };
+    // prevFilter = { min, max };
     document.addEventListener('click', closePopup);
     return () => {
       document.removeEventListener('click', closePopup);

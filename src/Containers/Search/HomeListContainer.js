@@ -5,7 +5,8 @@ import HomeContainer from './HomeContainer';
 import HomeCardContainer from './HomeCardContainer';
 
 const HomeListContainer = () => {
-  const { homes, mapState } = useSelector(state => state.search);
+  const { data, mapState } = useSelector(state => state.search);
+  const { homes } = data;
 
   return (
     <>
