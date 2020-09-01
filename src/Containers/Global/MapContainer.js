@@ -9,6 +9,7 @@ import {
   hideMap,
   zoomIn,
   zoomOut,
+  openPopup,
 } from '../../Modules/search';
 
 const centerInit = {
@@ -47,6 +48,7 @@ const MapContainer = ({ markers }) => {
   const { mapZoom, viewState } = useSelector(state => state.search);
   const [centerState, centerDispatch] = useReducer(centerReducer, centerInit);
   const dispatch = useDispatch();
+  const openFilterModal = () => dispatch(openPopup('modal'));
   const updateZoom = zoom => dispatch(zoomSet(zoom));
   const onHideMap = () => dispatch(hideMap());
   const onCloseMap = () => dispatch(closeMap());
@@ -85,6 +87,7 @@ const MapContainer = ({ markers }) => {
         onZoomOut={onZoomOut}
         updateZoom={updateZoom}
         onCloseMarker={onCloseMarker}
+        openFilterModal={openFilterModal}
       />
     </div>
   );
