@@ -48,7 +48,7 @@ const MsgDetailReservedHomeBoxContainer = () => {
   const coH = coHour >= 12 ? `오후 ${coHour - 12}` : `오전 ${coHour}`;
   const coM = coMin < 10 && `0${coMin}`;
 
-  // ! event
+  // ! carousel event
   const onMouseOver = () => {
     setHover(true);
   };

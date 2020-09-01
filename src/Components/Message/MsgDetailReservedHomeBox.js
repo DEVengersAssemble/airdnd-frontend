@@ -31,7 +31,7 @@ const MsgDetailReservedHomeBox = ({
 }) => {
   return (
     <MsgDetailRhBoxWrapper>
-      <div onMouseOver={() => onMouseOver()} onMouseLeave={onMouseLeave}>
+      <div onMouseOver={onMouseOver} onMouseLeave={onMouseLeave}>
         <CarouselContainer
           size="superLarge"
           isHovered={hover}
