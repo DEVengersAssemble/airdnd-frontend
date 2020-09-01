@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import Button from '../Global/Button';
 import Toggle from '../Global/Toggle';
 import ModalFooter from '../Global/ModalFooter';
-import RangeSlider from './RangeSlider';
+import RangeSliderContainer from '../../Containers/Search/RangeSliderContainer';
 import RoomType from './RoomType';
 
 const RefundPopup = ({
@@ -61,47 +61,21 @@ const RoomTypePopup = ({
 const PricePopup = ({
   popupState,
   isDisabled,
-  priceArray,
-  averagePrice,
-  min,
-  max,
-  left,
-  right,
-  start,
-  end,
   range,
-  onHandler,
-  onSetRange,
-  onChangeMinPrice,
-  onChangeMaxPrice,
+  setRange,
   onReset,
   onSave,
 }) => {
   return (
     <FilterPopup
+      size="430px"
       popupState={popupState}
       isDisabled={isDisabled}
-      size="430px"
       onReset={onReset}
       onSave={onSave}
     >
       <StContentWrapper content="price">
-        <RangeSlider
-          priceArray={priceArray}
-          averagePrice={averagePrice}
-          isDisabled={isDisabled}
-          min={min}
-          max={max}
-          left={left}
-          right={right}
-          start={start}
-          end={end}
-          range={range}
-          onHandler={onHandler}
-          onSetRange={onSetRange}
-          onChangeMinPrice={onChangeMinPrice}
-          onChangeMaxPrice={onChangeMaxPrice}
-        />
+        <RangeSliderContainer range={range} setRange={setRange} />
       </StContentWrapper>
     </FilterPopup>
   );
@@ -157,10 +131,21 @@ const FilterPopup = ({
   );
 };
 
+const spanStyle = css`
+  line-height: 2rem;
+  margin-right: 3rem;
+  word-break: keep-all;
+  display: block;
+`;
+
 const StPopup = styled(Popup)`
   top: 5rem;
   padding: 0;
   width: ${({ size }) => size};
+`;
+
+const StFooter = styled(ModalFooter)`
+  padding: 1.5rem 1.5rem 1.5rem 0.5rem;
 `;
 
 const contentStyles = {
@@ -193,17 +178,6 @@ export const StContentWrapper = styled.div`
     css`
       ${contentStyles[content]}
     `}
-`;
-
-const StFooter = styled(ModalFooter)`
-  padding: 1.5rem 1.5rem 1.5rem 0.5rem;
-`;
-
-const spanStyle = css`
-  line-height: 2rem;
-  margin-right: 3rem;
-  word-break: keep-all;
-  display: block;
 `;
 
 export const StSmallSpan = styled.span`
