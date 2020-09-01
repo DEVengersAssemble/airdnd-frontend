@@ -1,10 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import {
-  RefundPopup,
-  RoomTypePopup,
-  PricePopup,
-  SetDatePopup,
-} from '../../Components/Search/FilterPopup';
+import React, { useEffect, useRef } from 'react';
+import { RoomTypePopup } from '../../Components/Search/FilterPopup';
 import { useSelector, useDispatch } from 'react-redux';
 import { saveFilter, setFilter, resetFilter } from '../../Modules/search';
 

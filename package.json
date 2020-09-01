@@ -11,6 +11,7 @@
     "eslint-config-prettier": "^6.11.0",
     "polished": "^3.6.5",
     "proxy": "^1.0.2",
+    "qs": "^6.9.4",
     "rc-slider": "^9.3.1",
     "react": "^16.13.1",
     "react-copy-to-clipboard": "^5.0.2",
