@@ -1,22 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Division from './Division';
 import Button from '../Global/Button';
 
-const Amenities = ({ home }) => {
-  const [screen, setScreen] = useState(
-    window.matchMedia('screen and (max-width: 1127px)').matches,
-  );
+const Amenities = ({ home, isScreenMedium }) => {
+  // const [screen, setScreen] = useState(
+  //   window.matchMedia('screen and (max-width: 1127px)').matches,
+  // );
 
-  window.onresize = function () {
-    setScreen(window.matchMedia('screen and (max-width: 1127px)').matches);
-  };
+  // window.onresize = function () {
+  //   setScreen(window.matchMedia('screen and (max-width: 1127px)').matches);
+  // };
 
   return (
     <Division title="편의시설">
       <StAmenityList>
         {home.amenities.map((amenity, i) => {
-          if (screen && i > 4) return;
+          if (isScreenMedium && i > 4) return;
 
           return (
             <StAmenity key={i}>

@@ -1,14 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-// import ReservationBox from './ReservationBox';
 import HomeExplain from './HomeExplain';
 import Bedrooms from './Bedrooms';
 import Amenities from './Amenities';
 import ScheduleContainer from '../../Containers/Detail/ScheduleContainer';
 import ReservationBoxContainer from '../../Containers/Detail/ReservationBoxContainer';
-// import Schedule from './Schedule';
 
-const HomeInfos = ({ isLoading, home }) => {
+const HomeInfos = ({ isLoading, home, isScreenMedium }) => {
   return (
     <StHomeInfos>
       <StInfosWrapper>
@@ -16,13 +14,11 @@ const HomeInfos = ({ isLoading, home }) => {
         {!isLoading && (
           <>
             <Bedrooms home={home} />
-            <Amenities home={home} />
-            {/* <Schedule home={home} /> */}
+            <Amenities home={home} isScreenMedium={isScreenMedium} />
             <ScheduleContainer home={home} />
           </>
         )}
       </StInfosWrapper>
-      {/* {!isLoading && <ReservationBox home={home} />} */}
       {!isLoading && <ReservationBoxContainer home={home} />}
     </StHomeInfos>
   );
@@ -37,6 +33,7 @@ const StHomeInfos = styled.div`
 
 const StInfosWrapper = styled.div`
   width: 58%;
+  padding-top: 48px;
 `;
 
 export default HomeInfos;

@@ -4,6 +4,7 @@ import * as homeApi from '../Api/homeApi';
 const GET_HOME = 'home/GET_HOME';
 const GET_HOME_SUCCESS = 'home/GET_HOME_SUCCESS';
 const GET_HOME_ERROR = 'home/GET_HOME_ERROR';
+const RESIZE_SCREEN = 'home/RESIZE_SCREEN';
 
 export const getHome = id => async dispatch => {
   console.log('gethome');
@@ -16,9 +17,17 @@ export const getHome = id => async dispatch => {
   }
 };
 
+export const onResize = () => {
+  console.log('resizing...');
+  return { type: RESIZE_SCREEN };
+};
+
 const initialState = {
   homeState: { isLoading: false, home: null, error: null },
-  reservationState: {},
+  screenState: {
+    isScreenMedium: window.matchMedia('screen and (max-width: 1127px)').matches,
+    isScreenLarge: window.matchMedia('screen and (max-width: 1200px)').matches,
+  },
 };
 
 // 리듀서
@@ -38,6 +47,17 @@ const home = (state = initialState, action) => {
       return {
         ...state,
         homeState: { isLoading: false, home: null, error: action.error },
+      };
+    case RESIZE_SCREEN:
+      return {
+        ...state,
+        screenState: {
+          ...state.screenState,
+          isScreenMedium: window.matchMedia('screen and (max-width: 1127px)')
+            .matches,
+          isScreenLarge: window.matchMedia('screen and (max-width: 1200px)')
+            .matches,
+        },
       };
     default:
       return state;

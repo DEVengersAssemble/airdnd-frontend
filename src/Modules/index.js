@@ -7,6 +7,7 @@ import trips from './trips';
 import message from './message';
 import home from './home';
 import modal from './modal';
+import reservation from './reservation';
 
 const rootReducer = combineReducers({
   user,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   message,
   home,
   modal,
+  reservation,
 });
 
 export default rootReducer;

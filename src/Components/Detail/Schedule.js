@@ -1,7 +1,7 @@
 import React from 'react';
 import Division from './Division';
 import styled from 'styled-components';
-import Calendar from '../Global/Calendar';
+import CalendarContainer from '../../Containers/Global/CalendarContainer';
 import Button from '../Global/Button';
 
 const Schedule = () => {
@@ -10,7 +10,7 @@ const Schedule = () => {
       <StTravelTerm>
         여행 날짜를 입력하여 정확한 요금을 확인하세요.
       </StTravelTerm>
-      <Calendar />
+      <CalendarContainer />
       <StKeybordBtn transition transScale="0.88">
         <svg
           aria-hidden="true"
