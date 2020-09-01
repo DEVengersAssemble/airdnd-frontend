@@ -14,7 +14,8 @@ let prevFilter = {};
 
 const FilterModalContainer = () => {
   const { popup, data, filterApplied } = useSelector(state => state.search);
-  const { filterCondition } = data;
+  console.log('data', data);
+  const { filterCondition } = data && data;
   const dispatch = useDispatch();
   const onClose = () => dispatch(closePopup('modal'));
   const onToggle = (name, value) => dispatch(applyToggleFilter(name, value));
@@ -47,4 +48,4 @@ const FilterModalContainer = () => {
   );
 };
 
-export default FilterModalContainer;
+export default React.memo(FilterModalContainer);

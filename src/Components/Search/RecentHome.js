@@ -56,4 +56,4 @@ const Heart = styled(CkHeart)`
   right: 0.5rem;
 `;
 
-export default RecentHome;
+export default React.memo(RecentHome);

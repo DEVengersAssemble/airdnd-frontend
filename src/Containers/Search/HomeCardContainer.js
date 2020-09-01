@@ -38,4 +38,4 @@ const HomeCardContainer = ({ home, type }) => {
   );
 };
 
-export default HomeCardContainer;
+export default React.memo(HomeCardContainer);

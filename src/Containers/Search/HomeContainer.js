@@ -6,7 +6,7 @@ import { removeBookmark, openListModal } from '../../Modules/wishlists';
 
 const HomeContainer = ({ home }) => {
   const { id } = useSelector(state => state.user);
-  const { dateDiff } = useSelector(state => state.search.searchForm);
+  const { dateDiff } = useSelector(state => state.searchForm);
   const { hoveredHome } = useSelector(state => state.search);
   const isHovered = hoveredHome === home.homeId;
   const dispatch = useDispatch();
@@ -18,10 +18,12 @@ const HomeContainer = ({ home }) => {
     if (!id) return console.log('로그인 해라~~~~~~~~~~~~~ 로그인 팝업 띄우기');
     if (home.isBookmarked) {
       dispatch(removeBookmark(home.homeId));
+      console.log(home.homeId, '하트색좀 바꿔조라ㅠㅠ');
       dispatch(changeHeart(home.homeId));
       return;
     }
     dispatch(openListModal(home.homeId, home.imageArray[0]));
+    console.log(home.homeId, home.isBookmarked, '하트색좀 바꿔조라ㅠㅠ');
   };
 
   return (
@@ -36,4 +38,4 @@ const HomeContainer = ({ home }) => {
   );
 };
 
-export default HomeContainer;
+export default React.memo(HomeContainer);

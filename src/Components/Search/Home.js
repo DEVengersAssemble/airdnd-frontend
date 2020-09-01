@@ -66,7 +66,9 @@ const Home = ({
             count={reviewCount}
             className="rating"
           />
-          <HomePrice type="list" price={price} dateDiff={dateDiff} />
+          {dateDiff && (
+            <HomePrice type="list" price={price} dateDiff={dateDiff} />
+          )}
         </StDetailWrapper>
         <Heart ckType hover checked={isBookmarked} onCheck={onClickHeart} />
       </StHome>
@@ -163,4 +165,4 @@ const StSmallPrice = styled.span`
   }
 `;
 
-export default Home;
+export default React.memo(Home);

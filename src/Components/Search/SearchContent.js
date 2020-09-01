@@ -24,4 +24,4 @@ const StContent = styled.div`
   display: flex;
 `;
 
-export default SearchContent;
+export default React.memo(SearchContent);

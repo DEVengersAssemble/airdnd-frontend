@@ -39,4 +39,4 @@ const SearchHeaderContainer = () => {
   );
 };
 
-export default SearchHeaderContainer;
+export default React.memo(SearchHeaderContainer);

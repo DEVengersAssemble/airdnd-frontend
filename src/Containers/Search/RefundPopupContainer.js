@@ -49,4 +49,4 @@ const RefundPopupContainer = ({ popupState, onClose }) => {
   );
 };
 
-export default RefundPopupContainer;
+export default React.memo(RefundPopupContainer);
