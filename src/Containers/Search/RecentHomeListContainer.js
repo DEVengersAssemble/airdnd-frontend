@@ -6,6 +6,7 @@ const RecentHomeListContainer = () => {
   const { data, mapState } = useSelector(state => state.search);
   const { recentHomes } = data;
 
+  if (!recentHomes) return null;
   return <RecentHomeList recentHomes={recentHomes} mapState={mapState} />;
 };
 

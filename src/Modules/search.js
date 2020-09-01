@@ -457,11 +457,11 @@ const search = (state = initialState, action) => {
               ? { ...home, isBookmarked: !home.isBookmarked }
               : home,
           ),
-          recentHomes: state.data.recentHomes.map(home =>
-            home.homeId === action.homeId
-              ? { ...home, isBookmarked: !home.isBookmarked }
-              : home,
-          ),
+          // recentHomes: state.data.recentHomes.map(home =>
+          //   home.homeId === action.homeId
+          //     ? { ...home, isBookmarked: !home.isBookmarked }
+          //     : home,
+          // ),
         },
       };
     case SHOW_MAP:
