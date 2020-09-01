@@ -193,8 +193,6 @@ const SignupEmailModal = ({
   } = signup;
   const { pwLevel, pwLength, pwContain, pwCase } = pwValidation;
   const { emailRef, firstNameRef, lastNameRef, pwRef } = refObj;
-  console.log('-----[Signup Modal]-----');
-  console.log(pwLevel, pwLength, pwContain, pwCase);
 
   return (
     <StSignupEmailModal

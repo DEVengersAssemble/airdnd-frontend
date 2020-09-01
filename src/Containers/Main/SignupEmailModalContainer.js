@@ -104,7 +104,7 @@ const SignupModalContainer = () => {
     birthDay,
     birthYear,
   } = signup;
-  const { pwLevel, pwContain, pwLength, pwCase } = pwValidation;
+  const { pwLevel } = pwValidation;
   const onPwFocus = () => {
     setPwFocus(true);
   };

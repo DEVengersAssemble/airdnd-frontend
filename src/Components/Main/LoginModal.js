@@ -8,7 +8,9 @@ import { FaFacebookF } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { RiMailLine, RiLock2Line } from 'react-icons/ri';
 
-const StLoginModal = styled(Modal)``;
+const StLoginModal = styled(Modal)`
+  overflow-y: scroll;
+`;
 
 const StLoginModalWrapper = styled.div`
   padding: 20px;
@@ -99,9 +101,75 @@ const StInput = styled(Input)`
     `};
 `;
 
-const StLoginButton = styled(Button)``;
+const StShowPwButtonWrapper = styled.div`
+  height: 20px;
+  padding-right: 4px;
+  display: flex;
+  justify-content: flex-end;
+`;
 
-const LoginModal = ({ modalVisible, openSignupMenuModal, closeModal }) => {
+const StShowPwButton = styled(Button)`
+  color: ${({ theme }) => theme.color.green};
+  font-size: 14px;
+  padding: 0;
+  border: none;
+  border-radius: unset;
+  &:hover {
+    background: transparent;
+    text-decoration: underline;
+  }
+`;
+
+const StSubmitButton = styled(Button)`
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  width: 100%;
+  padding: 20px 0;
+  color: ${({ theme }) => theme.color.white};
+  background: ${({ theme }) => theme.color.main};
+  transition: 0.125s all ease-in;
+  height: 52px;
+  &:hover {
+    background: ${({ theme }) => theme.color.main};
+    box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.25);
+  }
+`;
+
+const StSignupButtonWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  padding-left: 4px;
+`;
+
+const StSignupText = styled.span`
+  font-size: 16px;
+  line-height: 20px;
+`;
+
+const StSignupButton = styled(Button)`
+  color: ${({ theme }) => theme.color.green};
+  margin-top: 4px;
+  margin-left: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 0;
+  border: none;
+  border-radius: unset;
+  &:hover {
+    background: transparent;
+    text-decoration: underline;
+  }
+`;
+
+const LoginModal = ({
+  modalVisible,
+  openSignupMenuModal,
+  closeModal,
+  showPw,
+  onToggleShowPw,
+}) => {
   return (
     <StLoginModal
       modalState={modalVisible}
@@ -157,7 +225,7 @@ const LoginModal = ({ modalVisible, openSignupMenuModal, closeModal }) => {
           </StInputWrapper>
           <StInputWrapper name="password">
             <StInput
-              type="password"
+              type={showPw ? 'text' : 'password'}
               // value={pw.value}
               // onChange={e => onChangeForm(e, 'pw')}
               // onFocus={onPwFocus}
@@ -173,10 +241,22 @@ const LoginModal = ({ modalVisible, openSignupMenuModal, closeModal }) => {
               </StValidationText>
             )} */}
           </StInputWrapper>
+          <StShowPwButtonWrapper>
+            <StShowPwButton onClick={onToggleShowPw}>
+              {showPw ? '비밀번호 숨기기' : '비밀번호 보이기'}
+            </StShowPwButton>
+          </StShowPwButtonWrapper>
+          <StSubmitButton border="none" type="submit">
+            로그인
+          </StSubmitButton>
         </StLoginForm>
-        <StLoginButton btnType="color" onClick={openSignupMenuModal}>
-          회원가입하기
-        </StLoginButton>
+        <StDividerLine />
+        <StSignupButtonWrapper>
+          <StSignupText>에어비앤비 계정이 없으세요? </StSignupText>
+          <StSignupButton btnType="color" onClick={openSignupMenuModal}>
+            회원가입
+          </StSignupButton>
+        </StSignupButtonWrapper>
       </StLoginModalWrapper>
     </StLoginModal>
   );
