@@ -7,7 +7,7 @@ import { removeBookmark, openListModal } from '../../Modules/wishlists';
 const HomeCardContainer = ({ home, type }) => {
   const { id } = useSelector(state => state.user);
   const { dateDiff } = useSelector(state => state.searchForm);
-  const { hoveredHome } = useSelector(state => state.search);
+  const { hoveredHome, mapState } = useSelector(state => state.search);
   const isHovered = hoveredHome === home.homeId;
   const dispatch = useDispatch();
 
@@ -30,6 +30,7 @@ const HomeCardContainer = ({ home, type }) => {
       type={type}
       isHovered={isHovered}
       dateDiff={dateDiff}
+      mapState={mapState}
       onClickHeart={onClickHeart}
       onHoverHome={onHoverHome}
       onBlurHome={onBlurHome}
