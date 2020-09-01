@@ -25,7 +25,14 @@ export const HomeCaption = ({
       <StRating scale="1.4" rate={rating} count={reviewCount} theme={theme} />
       <StSpan>{subTitle}</StSpan>
       <StSpan>{title}</StSpan>
-      <HomePrice price={price} dateDiff={dateDiff} type="card" theme={theme} />
+      {dateDiff && (
+        <HomePrice
+          price={price}
+          dateDiff={dateDiff}
+          type="card"
+          theme={theme}
+        />
+      )}
     </a>
   );
 };
