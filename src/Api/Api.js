@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const getSearchData = async ({
+export const fetchSearchedData = async ({
   location,
   checkIn,
   checkOut,

@@ -1,4 +1,4 @@
-export const createPromiseThunk = (type, promiseCreator) => {
+export const fetchDataThunk = (type, promiseCreator) => {
   const [SUCCESS, ERROR] = [`${type}_SUCCESS`, `${type}_ERROR`];
 
   return param => async dispatch => {

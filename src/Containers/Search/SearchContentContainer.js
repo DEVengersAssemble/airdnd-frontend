@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { getData } from '../../Modules/search';
+import { fetchData } from '../../Modules/search';
 import SearchContent from '../../Components/Search/SearchContent';
 import qs from 'qs';
 
@@ -13,7 +13,7 @@ const SearchContentContainer = () => {
   });
 
   useEffect(() => {
-    dispatch(getData(searchForm));
+    dispatch(fetchData(searchForm));
   }, []);
 
   return <SearchContent />;
