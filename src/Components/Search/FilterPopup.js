@@ -5,7 +5,7 @@ import Button from '../Global/Button';
 import Toggle from '../Global/Toggle';
 import ModalFooter from '../Global/ModalFooter';
 import RangeSliderContainer from '../../Containers/Search/RangeSliderContainer';
-import RoomType from './RoomType';
+import RoomTypeContainer from '../../Containers/Search/RoomTypeContainer';
 
 const RefundPopup = ({
   popupState,
@@ -52,7 +52,7 @@ const RoomTypePopup = ({
         onSave={onSave}
         check={check}
       >
-        <RoomType check={check} onChange={onChange} />
+        <RoomTypeContainer />
       </FilterPopup>
     )
   );
