@@ -9,7 +9,6 @@
     "axios": "^0.19.2",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-config-prettier": "^6.11.0",
-    "http-proxy-middleware": "^1.0.5",
     "polished": "^3.6.5",
     "proxy": "^1.0.2",
     "rc-slider": "^9.3.1",
