@@ -66,6 +66,7 @@ const MyPagePopup = ({
   closePopup,
   isLoggedIn,
   openModalByName,
+  movePage,
 }) => {
   const popupRef = useRef();
   const handlePopup = ({ target }) => {
@@ -102,13 +103,31 @@ const MyPagePopup = ({
           {isLoggedIn && (
             <>
               <StMyPageOptionItem>
-                <StMyPageOptionButton>메시지</StMyPageOptionButton>
+                <StMyPageOptionButton
+                  onClick={() => {
+                    movePage('message');
+                  }}
+                >
+                  메시지
+                </StMyPageOptionButton>
               </StMyPageOptionItem>
               <StMyPageOptionItem>
-                <StMyPageOptionButton>여행</StMyPageOptionButton>
+                <StMyPageOptionButton
+                  onClick={() => {
+                    movePage('trips');
+                  }}
+                >
+                  여행
+                </StMyPageOptionButton>
               </StMyPageOptionItem>
               <StMyPageOptionItem>
-                <StMyPageOptionButton>저장목록</StMyPageOptionButton>
+                <StMyPageOptionButton
+                  onClick={() => {
+                    movePage('wishlists');
+                  }}
+                >
+                  저장목록
+                </StMyPageOptionButton>
               </StMyPageOptionItem>
             </>
           )}
