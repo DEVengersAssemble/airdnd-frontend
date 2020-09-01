@@ -1,4 +1,4 @@
-const GET_QUERY = 'search/GET_QUERY';
+const GET_DATA = 'search/GET_DATA';
 
 const HOVER_HOME = 'search/HOVER_HOME';
 const BLUR_HOME = 'search/BLUR_HOME';
@@ -27,7 +27,8 @@ const APPLY_CHECK_FILTER = 'search/APPLY_CHECK_FILTER';
 const SET_MODAL_FILTER = 'search/SET_MODAL_FILTER';
 const RESET_MODAL_FILTER = 'search/RESET_MODAL/FILTER';
 
-export const getQuery = searchForm => ({ type: GET_QUERY, searchForm });
+export const getData = searchForm => ({ type: GET_DATA, searchForm });
+
 export const hoverHome = homeId => ({ type: HOVER_HOME, homeId });
 export const blurHome = () => ({ type: BLUR_HOME });
 export const changeHeart = homeId => ({ type: CHANGE_HEART, homeId });
@@ -422,7 +423,7 @@ const initialState = {
 // reducer
 const search = (state = initialState, action) => {
   switch (action.type) {
-    case GET_QUERY:
+    case GET_DATA:
       return {
         ...state,
         searchForm: action.searchForm,
