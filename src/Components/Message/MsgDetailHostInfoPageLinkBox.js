@@ -6,19 +6,19 @@ import Profile from '../Global/Profile';
 import Button from '../Global/Button';
 import { MdKeyboardArrowRight, MdPhoneIphone } from 'react-icons/md';
 
-const MsgDetailHostInfoPageLinkBox = () => {
+const MsgDetailHostInfoPageLinkBox = ({ hostname, hostProfileImg }) => {
   return (
     <MsgDetailHpLinkWrapper>
       <MsgDetailHpLinkOuterWrapper>
         <MsgDetailHpLinkInnerWrapper>
           <MsgDetailHpLinkTitleWrapper>
-            <MsgDetailHpLinkTitle>호스트 호스트이름님</MsgDetailHpLinkTitle>
+            <MsgDetailHpLinkTitle>호스트 {hostname}님</MsgDetailHpLinkTitle>
             <StLink to="/users/show/hostId" target="_blank">
               프로필 보기
             </StLink>
           </MsgDetailHpLinkTitleWrapper>
           <MsgDetailHpLinkProfileWrapper>
-            <Profile />
+            <Profile lastName="김" profileImg={hostProfileImg} />
           </MsgDetailHpLinkProfileWrapper>
         </MsgDetailHpLinkInnerWrapper>
         <a href="tel:+8210-6415-4738">

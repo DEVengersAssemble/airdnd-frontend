@@ -7,11 +7,11 @@ import Profile from '../Global/Profile';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 
 const TripsUpcomingCardItem = ({ trip, myInfo, ci, co }) => {
-  const { title, homeImage, location, withGuest, guest } = trip;
+  const { title, homeImage, address, withGuest, guest } = trip;
   const { lastName: myLastName, profileImg: myProfileImg } = myInfo;
   const { lastName: gstLastName, profileImg: gstProfileImg } = guest;
 
-  // TODO: co - ci 만큼 mapping 필요
+  // TODO: co - ci 만큼 mapping 필요 dateDiff
 
   return (
     <TripsUpcomingCardItemWrapper>
@@ -37,7 +37,7 @@ const TripsUpcomingCardItem = ({ trip, myInfo, ci, co }) => {
           <TripsUpcomingCheckInOut>
             {ci} - {co}
           </TripsUpcomingCheckInOut>
-          <TripsUpcomingLocation>{location}</TripsUpcomingLocation>
+          <TripsUpcomingLocation>{address}</TripsUpcomingLocation>
         </TripsUpcomingCkLcWrapper>
         <Link to="/schedule/1">
           <StButton>
