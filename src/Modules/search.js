@@ -129,7 +129,6 @@ const popupInit = {
   refund: false,
   roomType: false,
   price: false,
-  setDate: false,
   modal: false,
 };
 

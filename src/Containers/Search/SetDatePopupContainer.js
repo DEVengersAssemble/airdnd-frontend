@@ -7,7 +7,11 @@ const SetDatePopupContainer = ({ popupState, onClose }) => {
   const popup = useRef();
   const closePopup = ({ target }) => {
     if (!popupState || popup.current.contains(target)) return;
-    onClose('setDate');
+    onClose('price');
+  };
+
+  const onClickBtn = () => {
+    onClose('price');
   };
 
   useEffect(() => {
@@ -17,9 +21,11 @@ const SetDatePopupContainer = ({ popupState, onClose }) => {
     };
   }, [closePopup]);
 
+  console.log(popupState, '열렷니 닫혓니');
+
   return (
     <div ref={popup}>
-      <SetDatePopup popupState={popupState} />
+      <SetDatePopup popupState={popupState} onClickBtn={onClickBtn} />
     </div>
   );
 };

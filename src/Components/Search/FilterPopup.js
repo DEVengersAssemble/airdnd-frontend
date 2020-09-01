@@ -74,12 +74,17 @@ const PricePopup = ({
   );
 };
 
-const SetDatePopup = ({ popupState }) => {
+const SetDatePopup = ({ popupState, onClickBtn }) => {
   return (
     <StPopup popupState={popupState} size="350px">
       <StContentWrapper content="setDate">
         <StLargeSpan>요금을 확인하려면 여행 날짜를 입력하세요</StLargeSpan>
-        <Button btnType="color" color="black" fontSize="1.4rem">
+        <Button
+          btnType="color"
+          color="black"
+          fontSize="1.4rem"
+          onClick={onClickBtn}
+        >
           날짜 입력
         </Button>
       </StContentWrapper>
