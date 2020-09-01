@@ -129,7 +129,6 @@ const popupInit = {
   refund: false,
   roomType: false,
   price: false,
-  setDate: false,
   modal: false,
 };
 
@@ -193,6 +192,63 @@ const initialState = {
           'https://a0.muscache.com/im/pictures/d0a5e471-b1a5-43c1-8ec3-8570440857a6.jpg?aki_policy=large',
           'https://a0.muscache.com/im/pictures/3276d8ad-d455-4c59-923c-3f6926301a93.jpg?aki_policy=large',
         ],
+        imageCount: 6, // 이미지 개수
+        subTitle: 'MongMong-Toto의 호텔 객실',
+        title: 'Pia Resort Hotel Corner Studio Room',
+        feature: '최대 인원 2명 ﹒ 침실 1개 ﹒ 침대 2개 ﹒ 단독 사용 욕실 1개',
+        rating: 4.25,
+        reviewCount: 89,
+        price: 54324,
+        location: { lat: 37.650333, lng: 127.072783 },
+      },
+      {
+        homeId: 2,
+        isSuperhost: false,
+        isBookmarked: false,
+        imageArray: [
+          'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large',
+        ],
+        imageCount: 1, // 이미지 개수
+        subTitle: 'MongMong-Toto의 호텔 객실이지롱',
+        title: 'Pia Resort Hotel Corner Studio Room~~~',
+        feature:
+          '최대 인원 2명 ﹒ 침실 1개 ﹒ 침대 2개 ﹒ 단독 사용 욕실 1개!!!',
+        rating: 3.95,
+        reviewCount: 111,
+        price: 98839,
+        location: { lat: 37.651791, lng: 127.060944 },
+      },
+      {
+        homeId: 3,
+        isSuperhost: false,
+        isBookmarked: false,
+        imageArray: [
+          'https://a0.muscache.com/im/pictures/f30f7f4c-8900-44ff-bf05-30eb49447961.jpg?aki_policy=large',
+          'https://a0.muscache.com/im/pictures/3276d8ad-d455-4c59-923c-3f6926301a93.jpg?aki_policy=large',
+          'https://a0.muscache.com/im/pictures/d0a5e471-b1a5-43c1-8ec3-8570440857a6.jpg?aki_policy=large',
+        ],
+        imageCount: 3, // 이미지 개수
+        subTitle: 'MongMong-Toto의 호텔 객실이지롱',
+        title: 'Pia Resort Hotel Corner Studio Room~~~',
+        feature:
+          '최대 인원 2명 ﹒ 침실 1개 ﹒ 침대 2개 ﹒ 단독 사용 욕실 1개!!!',
+        rating: 3.95,
+        reviewCount: 111,
+        price: 98839,
+        location: { lat: 37.64993, lng: 127.065379 },
+      },
+    ],
+    recentHomes: [
+      {
+        homeId: 5,
+        isSuperhost: false,
+        isBookmarked: false,
+        imageArray: [
+          'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small',
+          'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large',
+          'https://a0.muscache.com/im/pictures/3276d8ad-d455-4c59-923c-3f6926301a93.jpg?aki_policy=large',
+          'https://a0.muscache.com/im/pictures/2013c2de-4727-4cd9-b9cd-77d85238d440.jpg?aki_policy=large',
+        ],
         imageCount: 4, // 이미지 개수
         subTitle: 'MongMong-Toto의 호텔 객실이답',
         title: 'Pia Resort Hotel Corner Studio Room 기기',
@@ -201,12 +257,82 @@ const initialState = {
         price: 98839,
         location: { lat: 0, lng: 0 },
       },
-    ],
-    recentHomes: [
       {
-        homeId: 5,
+        homeId: 6,
+        isSuperhost: true,
+        isBookmarked: false,
+        imageArray: [
+          'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small',
+          'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large',
+          'https://a0.muscache.com/im/pictures/3276d8ad-d455-4c59-923c-3f6926301a93.jpg?aki_policy=large',
+          'https://a0.muscache.com/im/pictures/2013c2de-4727-4cd9-b9cd-77d85238d440.jpg?aki_policy=large',
+        ],
+        imageCount: 4, // 이미지 개수
+        subTitle: 'MongMong-Toto의 호텔 객실이답',
+        title: 'Pia Resort Hotel Corner Studio Room 기기',
+        rating: 3.33,
+        reviewCount: 312,
+        price: 98839,
+        location: { lat: 37.651791, lng: 127.060944 },
+      },
+      {
+        homeId: 7,
+        isSuperhost: true,
+        isBookmarked: true,
+        imageArray: [
+          'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small',
+          'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large',
+          'https://a0.muscache.com/im/pictures/3276d8ad-d455-4c59-923c-3f6926301a93.jpg?aki_policy=large',
+          'https://a0.muscache.com/im/pictures/2013c2de-4727-4cd9-b9cd-77d85238d440.jpg?aki_policy=large',
+        ],
+        imageCount: 4, // 이미지 개수
+        subTitle: 'MongMong-Toto의 호텔 객실이답',
+        title: 'Pia Resort Hotel Corner Studio Room 기기',
+        rating: 3.33,
+        reviewCount: 312,
+        price: 98839,
+        location: { lat: 0, lng: 0 },
+      },
+      {
+        homeId: 8,
         isSuperhost: false,
         isBookmarked: false,
+        imageArray: [
+          'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small',
+          'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large',
+          'https://a0.muscache.com/im/pictures/3276d8ad-d455-4c59-923c-3f6926301a93.jpg?aki_policy=large',
+          'https://a0.muscache.com/im/pictures/2013c2de-4727-4cd9-b9cd-77d85238d440.jpg?aki_policy=large',
+        ],
+        imageCount: 4, // 이미지 개수
+        subTitle: 'MongMong-Toto의 호텔 객실이답',
+        title: 'Pia Resort Hotel Corner Studio Room 기기',
+        rating: 3.33,
+        reviewCount: 312,
+        price: 98839,
+        location: { lat: 0, lng: 0 },
+      },
+      {
+        homeId: 9,
+        isSuperhost: true,
+        isBookmarked: true,
+        imageArray: [
+          'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small',
+          'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large',
+          'https://a0.muscache.com/im/pictures/3276d8ad-d455-4c59-923c-3f6926301a93.jpg?aki_policy=large',
+          'https://a0.muscache.com/im/pictures/2013c2de-4727-4cd9-b9cd-77d85238d440.jpg?aki_policy=large',
+        ],
+        imageCount: 4, // 이미지 개수
+        subTitle: 'MongMong-Toto의 호텔 객실이답',
+        title: 'Pia Resort Hotel Corner Studio Room 기기',
+        rating: 3.33,
+        reviewCount: 312,
+        price: 98839,
+        location: { lat: 0, lng: 0 },
+      },
+      {
+        homeId: 10,
+        isSuperhost: true,
+        isBookmarked: true,
         imageArray: [
           'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small',
           'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large',
@@ -231,10 +357,61 @@ const initialState = {
       hostLangList: ['영어', '프랑스어'],
     },
     dataTotal: 190,
-    priceArray: [],
+    priceArray: [
+      0,
+      0,
+      0,
+      0,
+      0,
+      54,
+      13,
+      45,
+      76,
+      43,
+      21,
+      32,
+      12,
+      43,
+      8,
+      21,
+      24,
+      23,
+      45,
+      7,
+      78,
+      77,
+      56,
+      54,
+      63,
+      22,
+      45,
+      77,
+      1,
+      3,
+      44,
+      54,
+      65,
+      22,
+      37,
+      48,
+      73,
+      24,
+      54,
+      45,
+      7,
+      78,
+      77,
+      56,
+      54,
+      63,
+      22,
+      45,
+      1,
+      3,
+    ],
     averagePrice: 82094,
   },
-
+  // data: null,
   // map 범위 보낼때
   // mapSend: {
   //   from: { lat: 0, lng: 0 },
@@ -273,16 +450,19 @@ const search = (state = initialState, action) => {
     case CHANGE_HEART:
       return {
         ...state,
-        homes: state.data.homes.map(home =>
-          home.homeId === action.homeId
-            ? { ...home, isBookmarked: !home.isBookmarked }
-            : home,
-        ),
-        recentHomes: state.data.recentHomes.map(home =>
-          home.homeId === action.homeId
-            ? { ...home, isBookmarked: !home.isBookmarked }
-            : home,
-        ),
+        data: {
+          ...state.data,
+          homes: state.data.homes.map(home =>
+            home.homeId === action.homeId
+              ? { ...home, isBookmarked: !home.isBookmarked }
+              : home,
+          ),
+          // recentHomes: state.data.recentHomes.map(home =>
+          //   home.homeId === action.homeId
+          //     ? { ...home, isBookmarked: !home.isBookmarked }
+          //     : home,
+          // ),
+        },
       };
     case SHOW_MAP:
       return {

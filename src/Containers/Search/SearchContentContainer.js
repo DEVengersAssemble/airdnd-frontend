@@ -13,12 +13,17 @@ const SearchContentContainer = () => {
     ignoreQueryPrefix: true,
   });
 
-  // dispatch(fetchData(searchForm));
+  console.log('렌더링시작한다~~~~~~~~~~', searchForm);
 
+  useEffect(() => {
+    dispatch(fetchData(searchForm));
+  }, []);
+
+  console.log(loading, error, data);
   if (loading) console.log('==================loading========');
   if (error) console.log('========ERROR================');
   if (!data) return null;
   return <SearchContent />;
 };
 
-export default SearchContentContainer;
+export default React.memo(SearchContentContainer);

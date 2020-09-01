@@ -6,6 +6,7 @@ import { PrevButton, NextButton } from './SlideButton';
 const Carousel = ({
   size,
   theme,
+  blockLink,
   responsive,
   homeWidth,
   isHovered,
@@ -23,7 +24,13 @@ const Carousel = ({
 }) => {
   useEffect(() => setWidth(), []);
   return (
-    <StWrapper size={size} homeWidth={homeWidth} theme={theme} {...rest}>
+    <StWrapper
+      size={size}
+      homeWidth={homeWidth}
+      blockLink={blockLink}
+      theme={theme}
+      {...rest}
+    >
       {imageCount > 1 ? (
         <>
           <StPrevBtn
@@ -42,8 +49,8 @@ const Carousel = ({
       ) : null}
       <StLink
         rel="noopener noreferrer"
-        target="_blank"
-        href="https://www.airbnb.co.kr/rooms/36094960?adults=1&location=%EB%A7%88%EB%93%9C%EB%A6%AC%EB%93%9C&source_impression_id=p3_1597324281_lNy0Q31ggfi0f1St&check_in=2020-09-26&guests=1&check_out=2020-09-30"
+        target={!blockLink && '_blank'}
+        href={!blockLink && `http://localhost:3000/detail/${''}`}
       >
         {isSuperhost && <StBadge theme={theme}>슈퍼호스트</StBadge>}
         <StImageList
@@ -204,6 +211,7 @@ const StImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
+  cursor: ${({ blockLink }) => blockLink && 'initial'};
 `;
 
 const StPrevBtn = styled(PrevButton)`
@@ -224,4 +232,4 @@ const StNextBtn = styled(NextButton)`
   transition: 0.3s;
 `;
 
-export default Carousel;
+export default React.memo(Carousel);

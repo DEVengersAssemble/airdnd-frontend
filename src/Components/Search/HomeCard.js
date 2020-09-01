@@ -25,7 +25,14 @@ export const HomeCaption = ({
       <StRating scale="1.4" rate={rating} count={reviewCount} theme={theme} />
       <StSpan>{subTitle}</StSpan>
       <StSpan>{title}</StSpan>
-      <HomePrice price={price} dateDiff={dateDiff} type="card" theme={theme} />
+      {dateDiff && (
+        <HomePrice
+          price={price}
+          dateDiff={dateDiff}
+          type="card"
+          theme={theme}
+        />
+      )}
     </a>
   );
 };
@@ -84,8 +91,6 @@ const HomeCard = ({
   );
 };
 
-export default HomeCard;
-
 const StWrapper = styled.li`
   position: relative;
   padding: 1rem 1rem 3rem;
@@ -118,3 +123,5 @@ const Heart = styled(CkHeart)`
   top: 1em;
   right: 1.1em;
 `;
+
+export default React.memo(HomeCard);
