@@ -3,7 +3,7 @@ import { RefundPopup } from '../../Components/Search/FilterPopup';
 import { useSelector, useDispatch } from 'react-redux';
 import { saveFilter, setFilter, resetFilter } from '../../Modules/search';
 
-let prevFilter = {};
+// let prevFilter = {};
 
 const RefundPopupContainer = ({ popupState, onClose }) => {
   const { refund } = useSelector(state => state.search.filterApplied);
@@ -28,7 +28,7 @@ const RefundPopupContainer = ({ popupState, onClose }) => {
   };
 
   useEffect(() => {
-    prevFilter = refund;
+    // prevFilter = refund;
     document.addEventListener('click', closePopup);
     return () => {
       document.removeEventListener('click', closePopup);

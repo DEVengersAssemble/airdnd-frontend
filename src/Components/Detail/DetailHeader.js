@@ -11,7 +11,7 @@ import { FiSearch } from 'react-icons/fi';
 const StDetailHeaderWrapper = styled.div`
   width: 100vw;
   z-index: 100;
-  position: fixed;
+  position: relative;
   background: ${({ theme }) => theme.color.white};
   border-bottom: 1px solid ${({ theme }) => theme.color.line};
 `;

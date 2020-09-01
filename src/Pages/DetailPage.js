@@ -15,7 +15,7 @@ const DetailPage = () => {
   return (
     <>
       <DetailHeaderContainer />
-      <main style={{ paddingTop: '80px' }}>
+      <main>
         <Subject />
         <HomeInfos />
         <FullsizeWrapper />

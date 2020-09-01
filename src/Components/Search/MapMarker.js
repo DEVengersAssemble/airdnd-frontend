@@ -21,7 +21,8 @@ const MapMarker = ({
   dateDiff,
   clickMarker,
 }) => {
-  const { homeId, location, price, isBookmarked } = marker;
+  const { location, price, isBookmarked } = marker;
+
   return (
     <Marker
       position={location}

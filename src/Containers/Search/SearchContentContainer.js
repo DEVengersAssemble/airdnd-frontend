@@ -1,24 +1,23 @@
 import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchData } from '../../Modules/search';
 import SearchContent from '../../Components/Search/SearchContent';
-import axios from 'axios';
-
-const homes = axios.create();
+import qs from 'qs';
 
 const SearchContentContainer = () => {
-  useEffect(() => {
-    const test = async () => {
-      try {
-        const response = await homes.get(
-          `back/initialState/location/${'seoul'}/checkIn/${'2020-09-02'}/checkOut/${'2020-09-06'}/adults/${'3'}`,
-        );
-        console.log(response);
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    test();
-  }, []);
+  const { loading, data, error } = useSelector(state => state.search);
+  const dispatch = useDispatch();
+  const query = useLocation();
+  const searchForm = qs.parse(query.search, {
+    ignoreQueryPrefix: true,
+  });
 
+  // dispatch(fetchData(searchForm));
+
+  if (loading) console.log('==================loading========');
+  if (error) console.log('========ERROR================');
+  if (!data) return null;
   return <SearchContent />;
 };
 

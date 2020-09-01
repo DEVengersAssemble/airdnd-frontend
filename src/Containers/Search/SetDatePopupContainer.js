@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { SetDatePopup } from '../../Components/Search/FilterPopup';
 
-let prevFilter = {};
+// let prevFilter = {};
 
 const SetDatePopupContainer = ({ popupState, onClose }) => {
   const popup = useRef();
