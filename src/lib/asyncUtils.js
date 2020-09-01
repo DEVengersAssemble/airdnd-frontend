@@ -2,7 +2,8 @@ export const fetchDataThunk = (type, promiseCreator) => {
   const [SUCCESS, ERROR] = [`${type}_SUCCESS`, `${type}_ERROR`];
 
   return param => async dispatch => {
-    dispatch({ type });
+    // param은 필요할 때만 쓰세요
+    dispatch({ type, param });
     try {
       const payload = await promiseCreator(param);
       console.log('할당햇고요!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', payload);

@@ -136,7 +136,7 @@ const initialState = {
   searchForm: {},
   viewState: 'result',
   mapState: true,
-  mapZoom: 15,
+  mapZoom: 12,
   markerState: null,
   hoveredHome: null,
   popup: popupInit,
@@ -427,6 +427,7 @@ const search = (state = initialState, action) => {
       return {
         ...state,
         ...reducerUtils.loading(),
+        searchForm: action.param,
       };
     case FETCH_DATA_SUCCESS:
       return {
