@@ -13,6 +13,7 @@ const MsgDetailSectionMainContainer = () => {
 
   return (
     <MsgDetailSectionMain
+      activeMsg={activeMsg && activeMsg}
       isCanceled={activeMsg && activeMsg.contents.isCanceled}
     />
   );

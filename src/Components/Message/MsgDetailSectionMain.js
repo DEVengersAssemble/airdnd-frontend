@@ -10,30 +10,32 @@ import MsgDetailHostInfoPageLinkBoxContainer from '../../Containers/Message/MsgD
 import MsgDetailSettlementBoxContainer from '../../Containers/Message/MsgDetailSettlementBoxContainer';
 import MsgDetailAirbnbSupportTeamBoxContainer from '../../Containers/Message/MsgDetailAirbnbSupportTeamBoxContainer';
 
-const MsgDetailSectionMain = ({ isCanceled }) => {
+const MsgDetailSectionMain = ({ activeMsg, isCanceled }) => {
   return (
     <MsgDetailSectionMainWrapper>
-      <MsgDetailSectionMainInner>
-        {isCanceled ? (
-          <>
-            <MsgDetailTitleBoxContainer />
-            <MsgDetailReservedHomeBoxContainer />
-            <MsgDetailSubInfoBoxContainer />
-            <MsgDetailAirbnbSupportTeamBoxContainer />
-          </>
-        ) : (
-          <>
-            <MsgDetailTitleBoxContainer />
-            <MsgDetailReservedHomeBoxContainer />
-            <MsgDetailSubInfoBoxContainer />
-            <MsgDetailAddressBoxContainer />
-            <MsgDetailReservedHomeLinkBoxContainer />
-            <MsgDetailHostInfoPageLinkBoxContainer />
-            <MsgDetailSettlementBoxContainer />
-            <MsgDetailAirbnbSupportTeamBoxContainer />
-          </>
-        )}
-      </MsgDetailSectionMainInner>
+      {activeMsg && (
+        <MsgDetailSectionMainInner>
+          {isCanceled ? (
+            <>
+              <MsgDetailTitleBoxContainer />
+              <MsgDetailReservedHomeBoxContainer />
+              <MsgDetailSubInfoBoxContainer />
+              <MsgDetailAirbnbSupportTeamBoxContainer />
+            </>
+          ) : (
+            <>
+              <MsgDetailTitleBoxContainer />
+              <MsgDetailReservedHomeBoxContainer />
+              <MsgDetailSubInfoBoxContainer />
+              <MsgDetailAddressBoxContainer />
+              <MsgDetailReservedHomeLinkBoxContainer />
+              <MsgDetailHostInfoPageLinkBoxContainer />
+              <MsgDetailSettlementBoxContainer />
+              <MsgDetailAirbnbSupportTeamBoxContainer />
+            </>
+          )}
+        </MsgDetailSectionMainInner>
+      )}
     </MsgDetailSectionMainWrapper>
   );
 };

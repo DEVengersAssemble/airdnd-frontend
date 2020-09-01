@@ -55,6 +55,8 @@ const MsgDetailReservedHomeBoxContainer = () => {
   const onMouseLeave = () => {
     setHover(false);
   };
+  console.log('homeImage', reservation.homeImage);
+  console.log('imagecount, reservation.length', reservation.homeImage);
 
   return (
     <MsgDetailReservedHomeBox
