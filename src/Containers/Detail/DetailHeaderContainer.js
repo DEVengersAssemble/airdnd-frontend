@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { throttle } from 'lodash';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import DetailHeader from '../../Components/Detail/DetailHeader';
@@ -12,7 +13,7 @@ const DetailHeaderContainer = () => {
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', onScroll);
+    window.addEventListener('scroll', throttle(onScroll, 150));
     return () => {
       window.removeEventListener('scroll', onScroll);
     };
