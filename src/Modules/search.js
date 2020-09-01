@@ -248,14 +248,17 @@ const search = (state = initialState, action) => {
     case FETCH_DATA:
       return {
         ...state,
+        ...reducerUtils.loading(),
       };
     case FETCH_DATA_SUCCESS:
       return {
         ...state,
+        ...reducerUtils.success(action.payload),
       };
     case FETCH_DATA_ERROR:
       return {
         ...state,
+        ...reducerUtils.error(action.payload),
       };
     case HOVER_HOME:
       return {

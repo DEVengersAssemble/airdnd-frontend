@@ -6,7 +6,6 @@ import SearchResult from '../../Components/Search/SearchResult';
 const SearchResultContainer = () => {
   const { mapState, viewState, data } = useSelector(state => state.search);
   const { location, guests } = useSelector(state => state.search.searchForm);
-  const guestCount = guests.adult + guests.child;
   const { dataTotal } = data;
   const dispatch = useDispatch();
 
@@ -18,7 +17,7 @@ const SearchResultContainer = () => {
       view={viewState}
       dataTotal={dataTotal}
       location={location}
-      guestCount={guestCount}
+      guestCount={guests}
       onOpenMap={onOpenMap}
     />
   );

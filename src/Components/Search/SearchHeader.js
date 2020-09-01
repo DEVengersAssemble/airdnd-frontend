@@ -131,10 +131,10 @@ const SearchHeader = ({
   searchForm,
 }) => {
   const { location, checkIn, checkOut, guests } = searchForm;
-  const [, checkInMonth, checkInDay] = checkIn.replace(/\b0/g, '').split('/');
-  const [, checkOutMonth, checkOutDay] = checkOut
-    .replace(/\b0/g, '')
-    .split('/');
+  const [, checkInMonth, checkInDay] =
+    checkIn && checkIn.replace(/\b0/g, '').split('/');
+  const [, checkOutMonth, checkOutDay] =
+    checkOut && checkOut.replace(/\b0/g, '').split('/');
   const { adult, child } = guests;
   const guestCount = adult + child;
   return (

@@ -6,7 +6,7 @@ import SearchHeader from '../../Components/Search/SearchHeader';
 const SearchHeaderContainer = () => {
   const history = useHistory();
   const [isSearchBtnClicked, setIsSearchBtnClicked] = useState(false);
-  const searchForm = useSelector(state => state.search.searchForm);
+  const searchForm = useSelector(state => state.searchForm);
   const onScroll = () => {
     setIsSearchBtnClicked(false);
   };
