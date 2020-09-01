@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
+import { debounce } from 'lodash';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import SearchForm from '../../Components/Main/SearchForm';
@@ -12,7 +13,6 @@ const SearchFormContainer = ({ isSearchBtnClicked }) => {
   const [locationResult, setLocationResult] = useState([]);
   const [type, setType] = useState(null);
 
-  // console.log('[type]', type);
   const closePopup = () => {
     setType(() => null);
   };
@@ -43,15 +43,22 @@ const SearchFormContainer = ({ isSearchBtnClicked }) => {
     dispatch(setSearchData(data));
   };
 
-  const changeAutoComplete = async value => {
+  const debounceGetAutoCompleteResult = useCallback(
+    debounce(async value => {
+      const result = await getLocationAutoComplete(value);
+      setLocationResult(result || []);
+    }, 300),
+    [],
+  );
+
+  const changeAutoComplete = value => {
     if (!value) {
       dispatch(setSearchData({ name: 'location', value: '' }));
       setLocationResult([]);
       return;
     } else {
       dispatch(setSearchData({ name: 'location', value }));
-      const result = await getLocationAutoComplete(value);
-      setLocationResult(result);
+      debounceGetAutoCompleteResult(value);
       setType('location');
     }
   };
