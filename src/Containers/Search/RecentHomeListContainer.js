@@ -3,7 +3,8 @@ import RecentHomeList from '../../Components/Search/RecentHomeList';
 import { useSelector } from 'react-redux';
 
 const RecentHomeListContainer = () => {
-  const { recentHomes, mapState } = useSelector(state => state.search);
+  const { data, mapState } = useSelector(state => state.search);
+  const { recentHomes } = data;
 
   return <RecentHomeList recentHomes={recentHomes} mapState={mapState} />;
 };
