@@ -3,9 +3,7 @@ import { useSelector } from 'react-redux';
 import MsgSectionMain from '../../Components/Message/MsgSectionMain';
 
 const MsgSectionMainContainer = () => {
-  const { activeIndex, filteredMsgs, isHost } = useSelector(
-    state => state.message,
-  );
+  const { activeIndex, filteredMsgs } = useSelector(state => state.message);
 
   const activeMsg = filteredMsgs.find(
     (_, index) => filteredMsgs[index] === filteredMsgs[activeIndex],
@@ -13,8 +11,8 @@ const MsgSectionMainContainer = () => {
 
   return (
     <MsgSectionMain
+      activeMsg={activeMsg}
       chatHistory={activeMsg && activeMsg.chatHistory}
-      isHost={isHost}
     />
   );
 };

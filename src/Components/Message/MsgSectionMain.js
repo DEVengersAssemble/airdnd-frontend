@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import MsgSectionChatItemContainer from '../../Containers/Message/MsgSectionChatItemContainer';
 
-const MsgSectionMain = ({ chatHistory, isHost }) => {
+const MsgSectionMain = ({ activeMsg, chatHistory, isHost }) => {
   return (
     <MsgSectionMainWrapper>
       <MsgSectionMainChattingWrapper>
@@ -10,6 +10,7 @@ const MsgSectionMain = ({ chatHistory, isHost }) => {
           <MsgSectionMainChattingBox>
             {chatHistory.map(chat => (
               <MsgSectionChatItemContainer
+                activeMsg={activeMsg}
                 key={chat.id}
                 chat={chat}
                 isHost={isHost}

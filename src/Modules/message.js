@@ -62,6 +62,8 @@ export const isHost = isHost => ({ type: MESSAGE_HOST_FLAG, isHost });
 
 // INITIAL STATE
 const initialState = {
+  profileImg:
+    'https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cg_face%2Cq_auto:good%2Cw_300/MTY2MzU3Nzk2OTM2MjMwNTkx/elon_musk_royal_society.jpg',
   msgDetailSectionState: true, // default
   msgListSectionState: true, // default
   media: 'large', // large, medium, ipad
