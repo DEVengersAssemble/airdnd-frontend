@@ -8,8 +8,7 @@ import MsgDetailAddressBoxContainer from '../../Containers/Message/MsgDetailAddr
 import MsgDetailReservedHomeLinkBoxContainer from '../../Containers/Message/MsgDetailReservedHomeLinkBoxContainer';
 import MsgDetailHostInfoPageLinkBoxContainer from '../../Containers/Message/MsgDetailHostInfoPageLinkBoxContainer';
 import MsgDetailSettlementBoxContainer from '../../Containers/Message/MsgDetailSettlementBoxContainer';
-
-import MsgDetailAirbnbSupportTeamBox from '../Message/MsgDetailAirbnbSupportTeamBox';
+import MsgDetailAirbnbSupportTeamBoxContainer from '../../Containers/Message/MsgDetailAirbnbSupportTeamBoxContainer';
 
 const MsgDetailSectionMain = () => {
   const isCanceled = false; // 전역관리
@@ -22,7 +21,7 @@ const MsgDetailSectionMain = () => {
             <MsgDetailTitleBoxContainer />
             <MsgDetailReservedHomeBoxContainer />
             <MsgDetailSubInfoBoxContainer />
-            <MsgDetailAirbnbSupportTeamBox />
+            <MsgDetailAirbnbSupportTeamBoxContainer />
           </>
         ) : (
           <>
@@ -33,7 +32,7 @@ const MsgDetailSectionMain = () => {
             <MsgDetailReservedHomeLinkBoxContainer />
             <MsgDetailHostInfoPageLinkBoxContainer />
             <MsgDetailSettlementBoxContainer />
-            <MsgDetailAirbnbSupportTeamBox />
+            <MsgDetailAirbnbSupportTeamBoxContainer />
           </>
         )}
       </MsgDetailSectionMainInner>
