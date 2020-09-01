@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 import DetailMainContainer from '../Containers/Detail/DetailMainContainer';
-// import Subject from '../Components/Detail/Subject';
-// import HomeInfos from '../Components/Detail/HomeInfos';
-// import FullsizeWrapper from '../Components/Detail/FullsizeWrapper';
 import HomeFooter from '../Components/Detail/HomeFooter';
 import DetailHeaderContainer from '../Containers/Detail/DetailHeaderContainer';
 
@@ -18,9 +15,6 @@ const DetailPage = () => {
       <DetailHeaderContainer />
       <main style={{ paddingTop: '80px' }}>
         <DetailMainContainer />
-        {/* <Subject />
-        <HomeInfos />
-        <FullsizeWrapper /> */}
         <HomeFooter />
       </main>
     </>

@@ -22,8 +22,6 @@ const Reviews = ({ home }) => {
     return (num + '').length === 1 ? num + '.0' : num;
   };
 
-  console.log(window.screen.availWidth);
-
   return (
     <Division
       title={

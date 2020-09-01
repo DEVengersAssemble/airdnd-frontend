@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import LuckyChance from '../Global/LuckyChance';
-import Aside from './Aside';
+import AsideContainer from '../../Containers/Reservation/AsideContainer';
 
 const StMain = styled.main`
   display: flex;
@@ -37,7 +37,7 @@ const CommonLayout = ({ children, title }) => {
         {almostFull && <LuckyChance lastName="haeun" margin="16px 0 36px" />}
         {children}
       </StLeftWrapper>
-      <Aside />
+      <AsideContainer />
     </StMain>
   );
 };

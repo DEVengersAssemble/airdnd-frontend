@@ -5,10 +5,11 @@ const GET_HOME = 'home/GET_HOME';
 const GET_HOME_SUCCESS = 'home/GET_HOME_SUCCESS';
 const GET_HOME_ERROR = 'home/GET_HOME_ERROR';
 
-export const getHome = () => async dispatch => {
+export const getHome = id => async dispatch => {
+  console.log('gethome');
   dispatch({ type: GET_HOME }); // 요청이 시작됨
   try {
-    const home = await homeApi.getHome(); // Api 호출
+    const home = await homeApi.getHome(id); // Api 호출
     dispatch({ type: GET_HOME_SUCCESS, home }); // 성공
   } catch (e) {
     dispatch({ type: GET_HOME_ERROR, error: e }); // 실패

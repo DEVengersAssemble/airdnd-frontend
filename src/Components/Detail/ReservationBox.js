@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import Rating from '../Global/Rating';
 import Button from '../Global/Button';
@@ -9,6 +10,8 @@ const ReservationBox = ({ home, getPercentage, getTotalPrice }) => {
   const { price } = home;
   const percentage = getPercentage(price);
   const totalPrice = getTotalPrice(price, percentage);
+
+  const history = useHistory();
 
   return (
     <StWarpper>
@@ -48,7 +51,9 @@ const ReservationBox = ({ home, getPercentage, getTotalPrice }) => {
             <span>₩{totalPrice}</span>
           </StTotalCharge>
         </StReserveBox>
-        <StButton>숙소 신고하기</StButton>
+        <StButton onClick={() => history.push('Reservation/HouseRules')}>
+          숙소 신고하기
+        </StButton>
       </StStickyWrapper>
     </StWarpper>
   );
@@ -165,6 +170,7 @@ const StButton = styled.button`
   font-size: 14px;
   text-decoration: underline;
   color: ${({ theme }) => theme.color.darkGray};
+  outline: none;
 `;
 
 export default ReservationBox;

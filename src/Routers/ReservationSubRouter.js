@@ -1,15 +1,15 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import HouseRules from '../Components/Reservation/HouseRules';
-import GuestInfo from '../Components/Reservation/GuestInfo';
+import HouseRulesContainer from '../Containers/Reservation/HouseRulesContainer';
 import Payment from '../Components/Reservation/Payment';
+import GuestInfoContainer from '../Containers/Reservation/GuestInfoContainer';
 
 const ReservationSubRouter = () => {
   return (
     <Switch>
-      <Route exact path="/Reservation" component={HouseRules} />
-      <Route path="/Reservation/HouseRules" component={HouseRules} />
-      <Route path="/Reservation/GuestInfo" component={GuestInfo} />
+      <Route exact path="/Reservation" component={HouseRulesContainer} />
+      <Route path="/Reservation/HouseRules" component={HouseRulesContainer} />
+      <Route path="/Reservation/GuestInfo" component={GuestInfoContainer} />
       <Route path="/Reservation/Payment" component={Payment} />
       <Route
         render={({ location }) => (

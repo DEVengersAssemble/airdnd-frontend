@@ -10,6 +10,7 @@ const DetailMainContainer = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (home) return;
     dispatch(getHome());
   }, [dispatch]);
 
