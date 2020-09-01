@@ -10,9 +10,7 @@ import MsgDetailHostInfoPageLinkBoxContainer from '../../Containers/Message/MsgD
 import MsgDetailSettlementBoxContainer from '../../Containers/Message/MsgDetailSettlementBoxContainer';
 import MsgDetailAirbnbSupportTeamBoxContainer from '../../Containers/Message/MsgDetailAirbnbSupportTeamBoxContainer';
 
-const MsgDetailSectionMain = () => {
-  const isCanceled = false; // 전역관리
-
+const MsgDetailSectionMain = ({ isCanceled }) => {
   return (
     <MsgDetailSectionMainWrapper>
       <MsgDetailSectionMainInner>
