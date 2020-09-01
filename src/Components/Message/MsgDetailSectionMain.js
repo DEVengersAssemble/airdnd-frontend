@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { darken } from 'polished';
-import MsgDetailTitleBox from '../Message/MsgDetailTitleBox';
-import MsgDetailReservedHomeBox from '../Message/MsgDetailReservedHomeBox';
+import MsgDetailTitleBoxContainer from '../../Containers/Message/MsgDetailTitleBoxContainer';
+import MsgDetailReservedHomeBoxContainer from '../../Containers/Message/MsgDetailReservedHomeBoxContainer';
+
 import MsgDetailSubInfoBox from '../Message/MsgDetailSubInfoBox';
 import MsgDetailAddressBox from '../Message/MsgDetailAddressBox';
 import MsgDetailReservedHomeLinkBox from '../Message/MsgDetailReservedHomeLinkBox';
@@ -18,15 +19,15 @@ const MsgDetailSectionMain = () => {
       <MsgDetailSectionMainInner>
         {isCanceled ? (
           <>
-            <MsgDetailTitleBox />
-            <MsgDetailReservedHomeBox />
+            <MsgDetailTitleBoxContainer />
+            <MsgDetailReservedHomeBoxContainer />
             <MsgDetailSubInfoBox />
             <MsgDetailAirbnbSupportTeamBox />
           </>
         ) : (
           <>
-            <MsgDetailTitleBox />
-            <MsgDetailReservedHomeBox />
+            <MsgDetailTitleBoxContainer />
+            <MsgDetailReservedHomeBoxContainer />
             <MsgDetailSubInfoBox />
             <MsgDetailAddressBox />
             <MsgDetailReservedHomeLinkBox />

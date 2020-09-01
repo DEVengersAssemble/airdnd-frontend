@@ -33,7 +33,7 @@ const initialState = {
       isCanceled: false,
       title: 'Pia Resort Hotel Corner Studio Room~~~',
       withGuest: false,
-      guest: {},
+      guest: [],
     },
     {
       reservationId: 2,
@@ -53,13 +53,15 @@ const initialState = {
       isCanceled: false,
       title: 'Comfortable Bedroom for 2',
       withGuest: true,
-      guest: {
-        id: 1,
-        firstName: '지미',
-        lastName: '주',
-        profileImg:
-          'https://media.short-biography.com/wp-content/uploads/mark-zuckerberg/Mark-Zuckerberg.jpg',
-      },
+      guest: [
+        {
+          id: 1,
+          firstName: '지미',
+          lastName: '주',
+          profileImg:
+            'https://media.short-biography.com/wp-content/uploads/mark-zuckerberg/Mark-Zuckerberg.jpg',
+        },
+      ],
     },
     {
       reservationId: 3,
@@ -79,7 +81,7 @@ const initialState = {
       isCanceled: true,
       title: 'Sky Gardens Apartment 307(Central Guam)',
       withGuest: false,
-      guest: {},
+      guest: [],
     },
     {
       reservationId: 4,
@@ -99,7 +101,7 @@ const initialState = {
       isCanceled: true,
       title: '최고 부유층 동네 "바리가다 하이츠"에 위치, 선셋House Room102',
       withGuest: false,
-      guest: {},
+      guest: [],
     },
     {
       reservationId: 5,
@@ -120,13 +122,15 @@ const initialState = {
       title:
         '#튤립# "영원한 사랑의 고백"의꽃말을 가진 포근한숙소~바다와 함께 아침에 눈뜨는 오션뷰~',
       withGuest: true,
-      guest: {
-        id: 1,
-        firstName: '지미',
-        lastName: '주',
-        profileImg:
-          'https://media.short-biography.com/wp-content/uploads/mark-zuckerberg/Mark-Zuckerberg.jpg',
-      },
+      guest: [
+        {
+          id: 1,
+          firstName: '지미',
+          lastName: '주',
+          profileImg:
+            'https://media.short-biography.com/wp-content/uploads/mark-zuckerberg/Mark-Zuckerberg.jpg',
+        },
+      ],
     },
     {
       reservationId: 6,
@@ -146,7 +150,7 @@ const initialState = {
       isCanceled: false,
       title: 'Vibrant mini house.',
       withGuest: false,
-      guest: {},
+      guest: [],
     },
     {
       reservationId: 7,
@@ -166,7 +170,7 @@ const initialState = {
       isCanceled: false,
       title: '포근한 정원이 있는 엄마의 정원 "낭안트레" 2인실',
       withGuest: false,
-      guest: {},
+      guest: [],
     },
     {
       reservationId: 8,
@@ -186,7 +190,7 @@ const initialState = {
       isCanceled: true,
       title: 'Amazing Private Ocean Apartment',
       withGuest: false,
-      guest: {},
+      guest: [],
     },
     {
       reservationId: 9,
@@ -206,7 +210,7 @@ const initialState = {
       isCanceled: false,
       title: '~Beach Front~ Ocean Villa - Studio - Unit 106',
       withGuest: false,
-      guest: {},
+      guest: [],
     },
     {
       reservationId: 10,
@@ -226,7 +230,7 @@ const initialState = {
       isCanceled: false,
       title: '메리조 씨사이드 게스트 하우스 - 유닛 1',
       withGuest: false,
-      guest: {},
+      guest: [],
     },
   ],
 };

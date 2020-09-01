@@ -6,21 +6,35 @@ import { lighten, darken } from 'polished';
 import Button from '../Global/Button';
 import Profile from '../Global/Profile';
 
-const MsgDetailReservedHomeBox = () => {
+const MsgDetailReservedHomeBox = ({
+  title,
+  ciDateString,
+  ciDayName,
+  ciH,
+  ciM,
+  coDateString,
+  coDayName,
+  coH,
+  coM,
+  profileImg,
+  hostname,
+  guest,
+  price,
+  isCanceled,
+}) => {
   // Canceled props일때 render 작업 필요
 
   return (
     <MsgDetailRhBoxWrapper>
       {/* <CarouselContainer size="superLarge" /> */}
-      <MsgDetailRhBoxTitle>
-        [헤드오피스] 502호 4인실, 성수역 인근 내 도보 5분거리
-      </MsgDetailRhBoxTitle>
+      <MsgDetailRhBoxTitle>{title}</MsgDetailRhBoxTitle>
       <MsgDetailRhBoxReservedStateText>
-        예약이 종료되었습니다.
+        {isCanceled ? '예약이 종료되었습니다.' : '예약이 완료된 숙소입니다.'}
       </MsgDetailRhBoxReservedStateText>
       <MsgDetailRhBoxDescription>
-        여행 중 발생한 문제로 인해 상대방에게 금액을 지급하거나 요청해야 할
-        경우, 해결 센터를 이용하시기 바랍니다.
+        {isCanceled
+          ? `환불액 ₩${price}을(를) 지급해드립니다. 아직 환불을 받지 못한 경우 거래 은행에 문의하여 입금 예정일을 확인하세요.`
+          : '여행 중 발생한 문제로 인해 상대방에게 금액을 지급하거나 요청해야 할 경우, 해결 센터를 이용하시기 바랍니다.'}
       </MsgDetailRhBoxDescription>
       <MsgDetailRhBoxButtonWrapper>
         <Link to="/resolutions" target="_blank">
@@ -30,13 +44,21 @@ const MsgDetailReservedHomeBox = () => {
       <MsgDetailRhCheckInOutWrapper>
         <MsgDetailRhCheckInWrapper>
           <MsgDetailRhCheckInOutText>체크인</MsgDetailRhCheckInOutText>
-          <MsgDetailRhCheckInOutDate>8월 16일 (일)</MsgDetailRhCheckInOutDate>
-          <MsgDetailRhCheckInOutTime>오후 3:00</MsgDetailRhCheckInOutTime>
+          <MsgDetailRhCheckInOutDate>
+            {ciDateString} ({ciDayName})
+          </MsgDetailRhCheckInOutDate>
+          <MsgDetailRhCheckInOutTime>
+            {ciH}:{ciM}
+          </MsgDetailRhCheckInOutTime>
         </MsgDetailRhCheckInWrapper>
         <MsgDetailRhCheckOutWrapper>
           <MsgDetailRhCheckInOutText>체크아웃</MsgDetailRhCheckInOutText>
-          <MsgDetailRhCheckInOutDate>8월 17일 (월)</MsgDetailRhCheckInOutDate>
-          <MsgDetailRhCheckInOutTime>오전 10:00</MsgDetailRhCheckInOutTime>
+          <MsgDetailRhCheckInOutDate>
+            {coDateString} ({coDayName})
+          </MsgDetailRhCheckInOutDate>
+          <MsgDetailRhCheckInOutTime>
+            {coH}:{coM}
+          </MsgDetailRhCheckInOutTime>
         </MsgDetailRhCheckOutWrapper>
       </MsgDetailRhCheckInOutWrapper>
       <MsgDetailRhSimpleInfoWrapper>
@@ -50,17 +72,17 @@ const MsgDetailReservedHomeBox = () => {
                 style={{ textDecoration: 'underline' }}
                 target="_blank"
               >
-                호스트이름
+                {hostname}
               </StLink>
               님
             </MsgDetailRhSimpleInfoHostName>
             <MsgDetailRhSimpleInfoHomeInfo>
-              펜션(한국)의 개인실 · 게스트 2명
+              펜션(한국)의 개인실 · 게스트 {guest + 1}명
             </MsgDetailRhSimpleInfoHomeInfo>
             <MsgDetailRhSimpleInfoPrice>₩78049</MsgDetailRhSimpleInfoPrice>
           </MsgDetailRhSimpleInfoHostDataWrapper>
           <MsgDetailRhSimpleInfoProfileWrapper>
-            <Profile lastName="박" size="4.8rem" />
+            <Profile lastName="박" size="4.8rem" profileImg={profileImg} />
           </MsgDetailRhSimpleInfoProfileWrapper>
         </MsgDetailRhSimpleInfoHostWrapper>
       </MsgDetailRhSimpleInfoWrapper>

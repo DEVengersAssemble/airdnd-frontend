@@ -7,9 +7,10 @@ const MsgSectionChatItemContainer = ({ activeMsg, chat }) => {
   const { name, timeStamp, text } = chat;
   const chatDate = new Date(timeStamp);
   const hour = chatDate.getHours();
-  const m = chatDate.getMinutes();
-  const h = hour >= 12 ? `오후 ${hour - 12}` : `오전 ${hour}`;
+  const min = chatDate.getMinutes();
   const host = chat.name !== 'Jay' && true;
+  const h = hour >= 12 ? `오후 ${hour - 12}` : `오전 ${hour}`;
+  const m = min < 10 && `0${min}`;
 
   return (
     <MsgSectionChatItem
