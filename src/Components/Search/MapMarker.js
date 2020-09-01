@@ -99,7 +99,7 @@ const buttonStyle = css`
     border: none;
     transition: 0.3s;
     transform: scale(1.1);
-    z-index: 20;
+    z-index: 90;
   }
 `;
 
@@ -111,7 +111,7 @@ const focusStyle = css`
           color: ${theme.color.white};
           transition: 0.3s;
           transform: scale(1.1);
-          z-index: 20;
+          z-index: 90;
         `
       : css`
           background: ${theme.color.white};

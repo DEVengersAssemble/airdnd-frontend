@@ -26,6 +26,7 @@ const HomePopupContainer = ({ home, dateDiff, theme, store }) => {
   return (
     <HomePopup
       home={home}
+      store={store}
       dateDiff={dateDiff}
       hover={hoveredHome === home.homeId}
       onHoverHome={onHoverHome}

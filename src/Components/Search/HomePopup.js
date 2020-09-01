@@ -6,6 +6,7 @@ import CarouselContainer from '../../Containers/Global/CarouselContainer';
 
 const HomePopup = ({
   home,
+  // store,
   hover,
   theme,
   dateDiff,
@@ -37,6 +38,7 @@ const HomePopup = ({
         isSuperhost={isSuperhost}
         imageArray={imageArray}
         imageCount={imageCount}
+        // store={store}
       />
       <Caption
         theme={theme}
