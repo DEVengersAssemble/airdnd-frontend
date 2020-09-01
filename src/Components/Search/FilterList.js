@@ -20,7 +20,6 @@ export const FilterButton = ({ children, text, onClick, isApplied }) => {
 };
 
 export const FilterList = ({ popupState, mapState, onShowMap, dateDiff }) => {
-  console.log(dateDiff);
   return (
     <StWrapper>
       <FilterButtonContainer

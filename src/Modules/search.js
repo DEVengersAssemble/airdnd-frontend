@@ -451,16 +451,19 @@ const search = (state = initialState, action) => {
     case CHANGE_HEART:
       return {
         ...state,
-        homes: state.data.homes.map(home =>
-          home.homeId === action.homeId
-            ? { ...home, isBookmarked: !home.isBookmarked }
-            : home,
-        ),
-        recentHomes: state.data.recentHomes.map(home =>
-          home.homeId === action.homeId
-            ? { ...home, isBookmarked: !home.isBookmarked }
-            : home,
-        ),
+        data: {
+          ...state.data,
+          homes: state.data.homes.map(home =>
+            home.homeId === action.homeId
+              ? { ...home, isBookmarked: !home.isBookmarked }
+              : home,
+          ),
+          recentHomes: state.data.recentHomes.map(home =>
+            home.homeId === action.homeId
+              ? { ...home, isBookmarked: !home.isBookmarked }
+              : home,
+          ),
+        },
       };
     case SHOW_MAP:
       return {
