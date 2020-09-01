@@ -13,8 +13,9 @@ const SearchMap = ({ view, markers, mapState }) => {
 const StWrapper = styled.aside`
   width: calc(100vw - 840px);
   display: ${({ mapState }) => (mapState ? 'block' : 'none')};
-  /* position: relative;
-  top: 0; */
+  max-height: 100vh;
+  position: sticky;
+  top: 0;
 
   @media ${({ theme }) => theme.size.medium} {
     display: ${({ view }) => (view === 'map' ? 'block' : 'none')};
