@@ -6,8 +6,8 @@ import MsgDetailReservedHomeBoxContainer from '../../Containers/Message/MsgDetai
 import MsgDetailSubInfoBoxContainer from '../../Containers/Message/MsgDetailSubInfoBoxContainer';
 import MsgDetailAddressBoxContainer from '../../Containers/Message/MsgDetailAddressBoxContainer';
 import MsgDetailReservedHomeLinkBoxContainer from '../../Containers/Message/MsgDetailReservedHomeLinkBoxContainer';
+import MsgDetailHostInfoPageLinkBoxContainer from '../../Containers/Message/MsgDetailHostInfoPageLinkBoxContainer';
 
-import MsgDetailHostInfoPageLinkBox from '../Message/MsgDetailHostInfoPageLinkBox';
 import MsgDetailSettlementBox from '../Message/MsgDetailSettlementBox';
 import MsgDetailAirbnbSupportTeamBox from '../Message/MsgDetailAirbnbSupportTeamBox';
 
@@ -31,7 +31,7 @@ const MsgDetailSectionMain = () => {
             <MsgDetailSubInfoBoxContainer />
             <MsgDetailAddressBoxContainer />
             <MsgDetailReservedHomeLinkBoxContainer />
-            <MsgDetailHostInfoPageLinkBox />
+            <MsgDetailHostInfoPageLinkBoxContainer />
             <MsgDetailSettlementBox />
             <MsgDetailAirbnbSupportTeamBox />
           </>
