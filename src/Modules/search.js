@@ -1,3 +1,5 @@
+const GET_QUERY = 'search/GET_QUERY';
+
 const HOVER_HOME = 'search/HOVER_HOME';
 const BLUR_HOME = 'search/BLUR_HOME';
 const CHANGE_HEART = 'search/CHANGE_HEART';
@@ -25,6 +27,7 @@ const APPLY_CHECK_FILTER = 'search/APPLY_CHECK_FILTER';
 const SET_MODAL_FILTER = 'search/SET_MODAL_FILTER';
 const RESET_MODAL_FILTER = 'search/RESET_MODAL/FILTER';
 
+export const getQuery = searchForm => ({ type: GET_QUERY, searchForm });
 export const hoverHome = homeId => ({ type: HOVER_HOME, homeId });
 export const blurHome = () => ({ type: BLUR_HOME });
 export const changeHeart = homeId => ({ type: CHANGE_HEART, homeId });
@@ -125,6 +128,7 @@ const popupInit = {
 };
 
 const initialState = {
+  searchForm: {},
   homes: [
     {
       homeId: 1,
@@ -418,6 +422,11 @@ const initialState = {
 // reducer
 const search = (state = initialState, action) => {
   switch (action.type) {
+    case GET_QUERY:
+      return {
+        ...state,
+        searchForm: action.searchForm,
+      };
     case HOVER_HOME:
       return {
         ...state,
