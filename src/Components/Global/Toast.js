@@ -5,13 +5,13 @@ import Button from './Button';
 import { FaBox } from 'react-icons/fa';
 import { MdCheckCircle } from 'react-icons/md';
 
-const Toast = ({ state, toast, onClickUndo, ...rest }) => {
+const Toast = ({ state, toast, onClickUndo, fmLength, ...rest }) => {
   // Message에서 archive box클릭시 토스트 알람
   return (
     <ToastWrapper toast={toast}>
       <StFaBox />
       <ToastText>
-        {state === 'hide' ? '대화 보관 처리 취소됨' : '대화 보관 처리됨'}
+        {state === 'all' ? '대화 보관 처리됨' : '대화 보관 처리 취소됨'}
         {' · '}
       </ToastText>
       <Button
@@ -55,6 +55,7 @@ const toastWrapperStyle = css`
   align-items: center;
   border: 1px solid ${({ theme }) => lighten(0.2, theme.color.gray)};
   border-radius: 3rem;
+  background-color: ${({ theme }) => theme.color.white};
   padding: 0.9rem 1.5rem;
   width: fit-content;
   box-shadow: 0rem 0rem 2rem ${({ theme }) => lighten(0.1, theme.color.gray)};

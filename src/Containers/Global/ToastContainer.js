@@ -3,9 +3,19 @@ import { useSelector } from 'react-redux';
 import { Toast, UndoToast } from '../../Components/Global/Toast';
 
 const ToastContainer = ({ state, onClickUndo }) => {
+  const filteredMsgs = useSelector(state => state.message.filteredMsgs);
   const toast = useSelector(state => state.message.toast);
 
-  return <Toast state={state} toast={toast} onClickUndo={onClickUndo} />;
+  const fmLength = filteredMsgs.length;
+  console.log(fmLength);
+  return (
+    <Toast
+      state={state}
+      toast={toast}
+      onClickUndo={onClickUndo}
+      fmLength={fmLength}
+    />
+  );
 };
 
 const UndoToastContainer = () => {

@@ -82,6 +82,38 @@ const initialState = {
         checkin: '2020/09/25',
         checkout: '2020/09/26',
       },
+      chatHistory: [
+        {
+          id: 1,
+          userId: 1,
+          name: 'Jay',
+          timeStamp: '2020/09/10/16:00',
+          text:
+            'Host님 안녕하세요. 예약한 Jay입니다. 반갑습니다. 고양이 졸귀 여행가고시펑시펑. 채팅 잘 보내지는중?? 갔음?',
+        },
+        {
+          id: 2,
+          userId: 2,
+          name: 'hostname',
+          timeStamp: '2020/09/10/16:02',
+          text: 'Hello Jay! 메시지 잘와씀둥 커먼커먼 여행커먼!',
+        },
+        {
+          id: 3,
+          userId: 1,
+          name: 'Jay',
+          timeStamp: '2020/09/10/16:00',
+          text: '코로나 이즈 너무 심해~~ 괜찮아지면 갈게',
+        },
+        {
+          id: 4,
+          userId: 2,
+          name: 'hostname',
+          timeStamp: '2020/09/10/16:02',
+          text:
+            '예압... 코로나 쏘 호러블~ 그켬그켬~ 하루퐐리 갠촤놔 져씀 조케써',
+        },
+      ],
     },
     {
       id: 2,
@@ -97,6 +129,23 @@ const initialState = {
         checkin: '2020/09/10',
         checkout: '2020/09/12',
       },
+      chatHistory: [
+        {
+          id: 1,
+          userId: 1,
+          name: 'Jay',
+          timeStamp: '2020/09/10/16:00',
+          text:
+            'Host님 안녕하세요. 예약한 Jay입니다. 반갑습니다. 고양이 졸귀 여행가고시펑시펑. 채팅 잘 보내지는중?? 갔음?',
+        },
+        {
+          id: 2,
+          userId: 2,
+          name: 'hostname',
+          timeStamp: '2020/09/10/16:02',
+          text: 'Hello Jay! 메시지 잘와씀둥 커먼커먼 여행커먼!',
+        },
+      ],
     },
     {
       id: 3,
@@ -112,6 +161,23 @@ const initialState = {
         checkin: '2020/08/15',
         checkout: '2020/08/16',
       },
+      chatHistory: [
+        {
+          id: 1,
+          userId: 1,
+          name: 'Jay',
+          timeStamp: '2020/09/10/16:00',
+          text:
+            'Host님 안녕하세요. 예약한 Jay입니다. 반갑습니다. 고양이 졸귀 여행가고시펑시펑. 채팅 잘 보내지는중?? 갔음?',
+        },
+        {
+          id: 2,
+          userId: 2,
+          name: 'hostname',
+          timeStamp: '2020/09/10/16:02',
+          text: 'Hello Jay! 메시지 잘와씀둥 커먼커먼 여행커먼!',
+        },
+      ],
     },
     {
       id: 4,
@@ -127,6 +193,23 @@ const initialState = {
         checkin: '2020/06/01',
         checkout: '2020/06/03',
       },
+      chatHistory: [
+        {
+          id: 1,
+          userId: 1,
+          name: 'Jay',
+          timeStamp: '2020/09/10/16:00',
+          text:
+            'Host님 안녕하세요. 예약한 Jay입니다. 반갑습니다. 고양이 졸귀 여행가고시펑시펑. 채팅 잘 보내지는중?? 갔음?',
+        },
+        {
+          id: 2,
+          userId: 2,
+          name: 'hostname',
+          timeStamp: '2020/09/10/16:02',
+          text: 'Hello Jay! 메시지 잘와씀둥 커먼커먼 여행커먼!',
+        },
+      ],
     },
     {
       id: 5,
@@ -142,6 +225,23 @@ const initialState = {
         checkin: '2020/07/30',
         checkout: '2020/08/01',
       },
+      chatHistory: [
+        {
+          id: 1,
+          userId: 1,
+          name: 'Jay',
+          timeStamp: '2020/09/10/16:00',
+          text:
+            'Host님 안녕하세요. 예약한 Jay입니다. 반갑습니다. 고양이 졸귀 여행가고시펑시펑. 채팅 잘 보내지는중?? 갔음?',
+        },
+        {
+          id: 2,
+          userId: 2,
+          name: 'hostname',
+          timeStamp: '2020/09/10/16:02',
+          text: 'Hello Jay! 메시지 잘와씀둥 커먼커먼 여행커먼!',
+        },
+      ],
     },
     {
       id: 6,
@@ -157,6 +257,23 @@ const initialState = {
         checkin: '2020/08/08',
         checkout: '2020/08/09',
       },
+      chatHistory: [
+        {
+          id: 1,
+          userId: 1,
+          name: 'Jay',
+          timeStamp: '2020/09/10/16:00',
+          text:
+            'Host님 안녕하세요. 예약한 Jay입니다. 반갑습니다. 고양이 졸귀 여행가고시펑시펑. 채팅 잘 보내지는중?? 갔음?',
+        },
+        {
+          id: 2,
+          userId: 2,
+          name: 'hostname',
+          timeStamp: '2020/09/10/16:02',
+          text: 'Hello Jay! 메시지 잘와씀둥 커먼커먼 여행커먼!',
+        },
+      ],
     },
     {
       id: 7,
@@ -172,6 +289,23 @@ const initialState = {
         checkin: '2020/9/28',
         checkout: '2020/9/30',
       },
+      chatHistory: [
+        {
+          id: 1,
+          userId: 1,
+          name: 'Jay',
+          timeStamp: '2020/09/10/16:00',
+          text:
+            'Host님 안녕하세요. 예약한 Jay입니다. 반갑습니다. 고양이 졸귀 여행가고시펑시펑. 채팅 잘 보내지는중?? 갔음?',
+        },
+        {
+          id: 2,
+          userId: 2,
+          name: 'hostname',
+          timeStamp: '2020/09/10/16:02',
+          text: 'Hello Jay! 메시지 잘와씀둥 커먼커먼 여행커먼!',
+        },
+      ],
     },
     {
       id: 8,
@@ -187,6 +321,23 @@ const initialState = {
         checkin: '2020/11/20',
         checkout: '2020/11/21',
       },
+      chatHistory: [
+        {
+          id: 1,
+          userId: 1,
+          name: 'Jay',
+          timeStamp: '2020/09/10/16:00',
+          text:
+            'Host님 안녕하세요. 예약한 Jay입니다. 반갑습니다. 고양이 졸귀 여행가고시펑시펑. 채팅 잘 보내지는중?? 갔음?',
+        },
+        {
+          id: 2,
+          userId: 2,
+          name: 'hostname',
+          timeStamp: '2020/09/10/16:02',
+          text: 'Hello Jay! 메시지 잘와씀둥 커먼커먼 여행커먼!',
+        },
+      ],
     },
     {
       id: 9,
@@ -202,6 +353,23 @@ const initialState = {
         checkin: '2020/12/15',
         checkout: '2020/12/16',
       },
+      chatHistory: [
+        {
+          id: 1,
+          userId: 1,
+          name: 'Jay',
+          timeStamp: '2020/09/10/16:00',
+          text:
+            'Host님 안녕하세요. 예약한 Jay입니다. 반갑습니다. 고양이 졸귀 여행가고시펑시펑. 채팅 잘 보내지는중?? 갔음?',
+        },
+        {
+          id: 2,
+          userId: 2,
+          name: 'hostname',
+          timeStamp: '2020/09/10/16:02',
+          text: 'Hello Jay! 메시지 잘와씀둥 커먼커먼 여행커먼!',
+        },
+      ],
     },
     {
       id: 10,
@@ -217,6 +385,23 @@ const initialState = {
         checkin: '2020/10/15',
         checkout: '2020/10/16',
       },
+      chatHistory: [
+        {
+          id: 1,
+          userId: 1,
+          name: 'Jay',
+          timeStamp: '2020/09/10/16:00',
+          text:
+            'Host님 안녕하세요. 예약한 Jay입니다. 반갑습니다. 고양이 졸귀 여행가고시펑시펑. 채팅 잘 보내지는중?? 갔음?',
+        },
+        {
+          id: 2,
+          userId: 2,
+          name: 'hostname',
+          timeStamp: '2020/09/10/16:02',
+          text: 'Hello Jay! 메시지 잘와씀둥 커먼커먼 여행커먼!',
+        },
+      ],
     },
   ],
   // popup filter를 통해 걸러진 messages
@@ -237,6 +422,23 @@ const initialState = {
         checkin: '2020/09/25',
         checkout: '2020/09/26',
       },
+      chatHistory: [
+        {
+          id: 1,
+          userId: 1,
+          name: 'Jay',
+          timeStamp: '2020/09/10/16:00',
+          text:
+            'Host님 안녕하세요. 예약한 Jay입니다. 반갑습니다. 고양이 졸귀 여행가고시펑시펑. 채팅 잘 보내지는중?? 갔음?',
+        },
+        {
+          id: 2,
+          userId: 2,
+          name: 'hostname',
+          timeStamp: '2020/09/10/16:02',
+          text: 'Hello Jay! 메시지 잘와씀둥 커먼커먼 여행커먼!',
+        },
+      ],
     },
     {
       id: 2,
@@ -252,6 +454,23 @@ const initialState = {
         checkin: '2020/09/10',
         checkout: '2020/09/12',
       },
+      chatHistory: [
+        {
+          id: 1,
+          userId: 1,
+          name: 'Jay',
+          timeStamp: '2020/09/10/16:00',
+          text:
+            'Host님 안녕하세요. 예약한 Jay입니다. 반갑습니다. 고양이 졸귀 여행가고시펑시펑. 채팅 잘 보내지는중?? 갔음?',
+        },
+        {
+          id: 2,
+          userId: 2,
+          name: 'hostname',
+          timeStamp: '2020/09/10/16:02',
+          text: 'Hello Jay! 메시지 잘와씀둥 커먼커먼 여행커먼!',
+        },
+      ],
     },
     {
       id: 3,
@@ -267,6 +486,23 @@ const initialState = {
         checkin: '2020/08/15',
         checkout: '2020/08/16',
       },
+      chatHistory: [
+        {
+          id: 1,
+          userId: 1,
+          name: 'Jay',
+          timeStamp: '2020/09/10/16:00',
+          text:
+            'Host님 안녕하세요. 예약한 Jay입니다. 반갑습니다. 고양이 졸귀 여행가고시펑시펑. 채팅 잘 보내지는중?? 갔음?',
+        },
+        {
+          id: 2,
+          userId: 2,
+          name: 'hostname',
+          timeStamp: '2020/09/10/16:02',
+          text: 'Hello Jay! 메시지 잘와씀둥 커먼커먼 여행커먼!',
+        },
+      ],
     },
     {
       id: 4,
@@ -282,6 +518,23 @@ const initialState = {
         checkin: '2020/06/01',
         checkout: '2020/06/03',
       },
+      chatHistory: [
+        {
+          id: 1,
+          userId: 1,
+          name: 'Jay',
+          timeStamp: '2020/09/10/16:00',
+          text:
+            'Host님 안녕하세요. 예약한 Jay입니다. 반갑습니다. 고양이 졸귀 여행가고시펑시펑. 채팅 잘 보내지는중?? 갔음?',
+        },
+        {
+          id: 2,
+          userId: 2,
+          name: 'hostname',
+          timeStamp: '2020/09/10/16:02',
+          text: 'Hello Jay! 메시지 잘와씀둥 커먼커먼 여행커먼!',
+        },
+      ],
     },
   ],
   toast: false,

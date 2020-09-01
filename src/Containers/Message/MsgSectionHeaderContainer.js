@@ -87,17 +87,21 @@ const MsgSectionHeaderContainer = () => {
   const clearToast = () => dispatch(hideToast());
   const clearUndoToast = () => dispatch(hideUndoToast());
 
-  const emitToast = () =>
+  const emitToast = () => {
+    clearUndoToast();
     setTimeout(() => {
       dispatch(showToast());
       setTimeout(() => clearTimeout(clearToast()), 6000);
     });
+  };
 
-  const emitUndoToast = () =>
+  const emitUndoToast = () => {
+    clearToast();
     setTimeout(() => {
       dispatch(showUndoToast());
       setTimeout(() => clearTimeout(clearUndoToast()), 6000);
     });
+  };
 
   const onClickArchive = () => {
     if (activeMsg && activeMsg.state === 'all') {

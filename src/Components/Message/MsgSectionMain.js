@@ -2,18 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 import MsgSectionChatItem from '../Message/MsgSectionChatItem';
 
-const MsgSectionMain = () => {
-  const isHost = true;
-
+const MsgSectionMain = ({ chatHistory, isHost }) => {
   return (
     <MsgSectionMainWrapper>
       <MsgSectionMainChattingWrapper>
-        <MsgSectionMainChattingBox>
-          <MsgSectionChatItem host={isHost} />
-          <MsgSectionChatItem />
-          <MsgSectionChatItem />
-          <MsgSectionChatItem />
-        </MsgSectionMainChattingBox>
+        {chatHistory && (
+          <MsgSectionMainChattingBox>
+            {chatHistory.map(chat => (
+              <MsgSectionChatItem key={chat.id} chat={chat} isHost={isHost} />
+            ))}
+          </MsgSectionMainChattingBox>
+        )}
       </MsgSectionMainChattingWrapper>
     </MsgSectionMainWrapper>
   );
