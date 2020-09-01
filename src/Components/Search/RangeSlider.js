@@ -1,6 +1,5 @@
 import React from 'react';
 import Slider from 'rc-slider';
-import Popup from '../Global/Popup';
 import styled, { css } from 'styled-components';
 import { NewInput } from '../Global/Input';
 
