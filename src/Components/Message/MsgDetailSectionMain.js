@@ -4,8 +4,8 @@ import { darken } from 'polished';
 import MsgDetailTitleBoxContainer from '../../Containers/Message/MsgDetailTitleBoxContainer';
 import MsgDetailReservedHomeBoxContainer from '../../Containers/Message/MsgDetailReservedHomeBoxContainer';
 import MsgDetailSubInfoBoxContainer from '../../Containers/Message/MsgDetailSubInfoBoxContainer';
+import MsgDetailAddressBoxContainer from '../../Containers/Message/MsgDetailAddressBoxContainer';
 
-import MsgDetailAddressBox from '../Message/MsgDetailAddressBox';
 import MsgDetailReservedHomeLinkBox from '../Message/MsgDetailReservedHomeLinkBox';
 import MsgDetailHostInfoPageLinkBox from '../Message/MsgDetailHostInfoPageLinkBox';
 import MsgDetailSettlementBox from '../Message/MsgDetailSettlementBox';
@@ -29,7 +29,7 @@ const MsgDetailSectionMain = () => {
             <MsgDetailTitleBoxContainer />
             <MsgDetailReservedHomeBoxContainer />
             <MsgDetailSubInfoBoxContainer />
-            <MsgDetailAddressBox />
+            <MsgDetailAddressBoxContainer />
             <MsgDetailReservedHomeLinkBox />
             <MsgDetailHostInfoPageLinkBox />
             <MsgDetailSettlementBox />
