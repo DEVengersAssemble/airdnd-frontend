@@ -7,7 +7,7 @@ import { saveFilter, setFilter, resetFilter } from '../../Modules/search';
 
 const PricePopupContainer = ({ popupState, onClose }) => {
   const { min, max } = useSelector(state => state.search.filterApplied.price);
-  const { priceArray, averagePrice } = useSelector(state => state.data.search);
+  const { priceArray, averagePrice } = useSelector(state => state.search.data);
   const [range, setRange] = useState({ value: [min, max] });
   const isDisabled = min === 12000 && max === 1000000;
   const regExp = /^\d{0,7}$/;

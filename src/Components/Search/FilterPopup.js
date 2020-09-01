@@ -6,6 +6,7 @@ import Button from '../Global/Button';
 import Toggle from '../Global/Toggle';
 import ModalFooter from '../Global/ModalFooter';
 import Checkbox from '../Global/Checkbox';
+import RangeSlider from './RangeSlider';
 import { NewInput } from '../Global/Input';
 
 const Range = Slider.createSliderWithTooltip(Slider.Range);
@@ -105,10 +106,10 @@ const RoomTypePopup = ({
 };
 
 const PricePopup = ({
-  priceArray,
-  averagePrice,
   popupState,
   isDisabled,
+  priceArray,
+  averagePrice,
   min,
   max,
   left,
@@ -132,53 +133,22 @@ const PricePopup = ({
       onSave={onSave}
     >
       <StContentWrapper content="price">
-        <StLargeSpan>
-          평균 1박 요금은 ₩{averagePrice.toLocaleString()}입니다
-        </StLargeSpan>
-        <StRangeWrapper>
-          <Range
-            min={12000}
-            max={1000000}
-            allowCross={false}
-            value={range.value}
-            defaultValue={[12000, 1000000]}
-            onChange={onHandler}
-          />
-          <StGraph>
-            {priceArray.map((price, i) => {
-              const isSmaller = right > end - (priceArray.length - i) * 7;
-              const isBigger = left < start + i * 7;
-              return (
-                <StStick
-                  key={i}
-                  height={price}
-                  inRange={isDisabled || (isSmaller && isBigger)}
-                />
-              );
-            })}
-          </StGraph>
-        </StRangeWrapper>
-        <StInputWrapper>
-          <NewInput
-            type="number"
-            title="최저 요금"
-            value={min}
-            short
-            pay="₩"
-            onChange={onChangeMinPrice}
-            onBlur={onSetRange}
-          />
-          <span>―</span>
-          <NewInput
-            type="number"
-            title="최고 요금"
-            value={max}
-            short
-            pay="₩"
-            onChange={onChangeMaxPrice}
-            onBlur={onSetRange}
-          />
-        </StInputWrapper>
+        <RangeSlider
+          priceArray={priceArray}
+          averagePrice={averagePrice}
+          isDisabled={isDisabled}
+          min={min}
+          max={max}
+          left={left}
+          right={right}
+          start={start}
+          end={end}
+          range={range}
+          onHandler={onHandler}
+          onSetRange={onSetRange}
+          onChangeMinPrice={onChangeMinPrice}
+          onChangeMaxPrice={onChangeMaxPrice}
+        />
       </StContentWrapper>
     </FilterPopup>
   );

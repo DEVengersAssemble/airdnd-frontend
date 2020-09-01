@@ -24,7 +24,7 @@ const FilterButtonContainer = ({ name, text, children }) => {
 };
 
 const FilterListContainer = ({ mapState }) => {
-  const { dateDiff } = useSelector(state => state.search.searchForm);
+  const { dateDiff } = useSelector(state => state.searchForm);
   const dispatch = useDispatch();
   const onShowMap = () => dispatch(showMap());
 
