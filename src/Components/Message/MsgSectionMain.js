@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import MsgSectionChatItem from '../Message/MsgSectionChatItem';
+import MsgSectionChatItemContainer from '../../Containers/Message/MsgSectionChatItemContainer';
 
 const MsgSectionMain = ({ chatHistory, isHost }) => {
   return (
@@ -9,7 +9,11 @@ const MsgSectionMain = ({ chatHistory, isHost }) => {
         {chatHistory && (
           <MsgSectionMainChattingBox>
             {chatHistory.map(chat => (
-              <MsgSectionChatItem key={chat.id} chat={chat} isHost={isHost} />
+              <MsgSectionChatItemContainer
+                key={chat.id}
+                chat={chat}
+                isHost={isHost}
+              />
             ))}
           </MsgSectionMainChattingBox>
         )}
