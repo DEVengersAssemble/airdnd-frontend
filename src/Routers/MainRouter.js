@@ -15,7 +15,6 @@ const MainRouter = () => {
       <Route path="/" component={MainPage} exact />
       <Route path="/Search" component={SearchPage} />
       <Route path="/Detail" component={DetailPage} />
-      <Route path="/Detail/:id" component={DetailPage} />
       <Route path="/Reservation" component={ReservationPage} />
       <Route path="/message" component={MessagePage} />
       <Route path="/trips" component={TripsPage} />
@@ -34,7 +33,5 @@ const MainRouter = () => {
     </Switch>
   );
 };
-
-// 나중에 Detail 삭제해야함
 
 export default MainRouter;
