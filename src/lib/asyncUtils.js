@@ -5,8 +5,10 @@ export const fetchDataThunk = (type, promiseCreator) => {
     dispatch({ type });
     try {
       const payload = await promiseCreator(param);
+      console.log('할당햇고요!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', payload);
       dispatch({ type: SUCCESS, payload });
     } catch (e) {
+      console.log('에러 무슨일이야', e);
       dispatch({ type: ERROR, payload: e, error: true });
     }
   };

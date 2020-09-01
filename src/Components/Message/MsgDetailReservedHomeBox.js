@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { lighten, darken } from 'polished';
-// import CarouselContainer from '../../Containers/Global/CarouselContainer';
+import CarouselContainer from '../../Containers/Global/CarouselContainer';
 import Button from '../Global/Button';
 import Profile from '../Global/Profile';
 
@@ -11,7 +11,7 @@ const MsgDetailReservedHomeBox = () => {
 
   return (
     <MsgDetailRhBoxWrapper>
-      {/* <CarouselContainer size="superLarge" /> */}
+      <CarouselContainer size="superLarge" />
       <MsgDetailRhBoxTitle>
         [헤드오피스] 502호 4인실, 성수역 인근 내 도보 5분거리
       </MsgDetailRhBoxTitle>
