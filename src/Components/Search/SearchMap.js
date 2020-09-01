@@ -22,4 +22,4 @@ const StWrapper = styled.aside`
   }
 `;
 
-export default SearchMap;
+export default React.memo(SearchMap);

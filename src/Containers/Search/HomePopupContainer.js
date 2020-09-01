@@ -36,4 +36,4 @@ const HomePopupContainer = ({ home, dateDiff, theme, store }) => {
   );
 };
 
-export default HomePopupContainer;
+export default React.memo(HomePopupContainer);

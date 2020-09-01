@@ -84,8 +84,6 @@ const HomeCard = ({
   );
 };
 
-export default HomeCard;
-
 const StWrapper = styled.li`
   position: relative;
   padding: 1rem 1rem 3rem;
@@ -118,3 +116,5 @@ const Heart = styled(CkHeart)`
   top: 1em;
   right: 1.1em;
 `;
+
+export default React.memo(HomeCard);

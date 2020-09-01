@@ -46,4 +46,4 @@ const PricePopupContainer = ({ popupState, onClose }) => {
   );
 };
 
-export default PricePopupContainer;
+export default React.memo(PricePopupContainer);

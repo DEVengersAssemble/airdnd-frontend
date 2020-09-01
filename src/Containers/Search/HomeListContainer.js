@@ -25,4 +25,4 @@ const HomeListContainer = () => {
   );
 };
 
-export default HomeListContainer;
+export default React.memo(HomeListContainer);

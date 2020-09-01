@@ -48,4 +48,4 @@ const FilterModalContainer = () => {
   );
 };
 
-export default FilterModalContainer;
+export default React.memo(FilterModalContainer);

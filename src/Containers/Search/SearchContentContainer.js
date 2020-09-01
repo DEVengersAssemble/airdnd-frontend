@@ -42,4 +42,4 @@ const SearchContentContainer = () => {
   return <SearchContent />;
 };
 
-export default SearchContentContainer;
+export default React.memo(SearchContentContainer);

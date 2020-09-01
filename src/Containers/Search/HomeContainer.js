@@ -36,4 +36,4 @@ const HomeContainer = ({ home }) => {
   );
 };
 
-export default HomeContainer;
+export default React.memo(HomeContainer);

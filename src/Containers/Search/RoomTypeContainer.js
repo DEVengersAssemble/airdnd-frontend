@@ -13,4 +13,4 @@ const RoomTypeContainer = () => {
   return <RoomType check={roomType} onChange={onChange} />;
 };
 
-export default RoomTypeContainer;
+export default React.memo(RoomTypeContainer);

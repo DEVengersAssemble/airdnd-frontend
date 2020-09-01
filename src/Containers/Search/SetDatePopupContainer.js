@@ -24,4 +24,4 @@ const SetDatePopupContainer = ({ popupState, onClose }) => {
   );
 };
 
-export default SetDatePopupContainer;
+export default React.memo(SetDatePopupContainer);

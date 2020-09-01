@@ -23,4 +23,4 @@ const SearchResultContainer = () => {
   );
 };
 
-export default SearchResultContainer;
+export default React.memo(SearchResultContainer);

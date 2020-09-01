@@ -9,4 +9,4 @@ const RecentHomeListContainer = () => {
   return <RecentHomeList recentHomes={recentHomes} mapState={mapState} />;
 };
 
-export default RecentHomeListContainer;
+export default React.memo(RecentHomeListContainer);

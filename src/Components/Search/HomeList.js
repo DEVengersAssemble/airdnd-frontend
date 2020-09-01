@@ -29,4 +29,4 @@ const StWrapper = styled.ul`
   ${fullSizeStyle}
 `;
 
-export default HomeList;
+export default React.memo(HomeList);

@@ -34,14 +34,7 @@ const RefundPopup = ({
   );
 };
 
-const RoomTypePopup = ({
-  popupState,
-  isDisabled,
-  check,
-  onChange,
-  onReset,
-  onSave,
-}) => {
+const RoomTypePopup = ({ popupState, isDisabled, check, onReset, onSave }) => {
   return (
     check && (
       <FilterPopup
@@ -83,7 +76,7 @@ const PricePopup = ({
 
 const SetDatePopup = ({ popupState }) => {
   return (
-    <StPopup popupState={popupState} size="35px">
+    <StPopup popupState={popupState} size="350px">
       <StContentWrapper content="setDate">
         <StLargeSpan>요금을 확인하려면 여행 날짜를 입력하세요</StLargeSpan>
         <Button btnType="color" color="black" fontSize="1.4rem">

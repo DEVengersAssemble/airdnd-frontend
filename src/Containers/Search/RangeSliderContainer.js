@@ -49,4 +49,4 @@ const RangeSliderContainer = ({ range, setRange }) => {
   );
 };
 
-export default RangeSliderContainer;
+export default React.memo(RangeSliderContainer);

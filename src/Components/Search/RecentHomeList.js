@@ -53,4 +53,4 @@ const StSpan = styled.span`
   font-size: 1.6rem;
 `;
 
-export default RecentHomeList;
+export default React.memo(RecentHomeList);
