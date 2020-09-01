@@ -5,25 +5,36 @@ import Profile from '../Global/Profile';
 import Button from '../Global/Button';
 import { AiFillFlag } from 'react-icons/ai';
 
-const MsgSectionChatItem = ({ host }) => {
+const MsgSectionChatItem = ({
+  hostname,
+  hostProfileImg,
+  profileImg,
+  name,
+  text,
+  isHost,
+  h,
+  m,
+}) => {
   return (
     <MsgItemWrapper>
       <MsgProfileWrapper>
-        <Profile size="4.2rem" lastName="Kim" />
+        <Profile
+          size="4.2rem"
+          lastName="Kim"
+          profileImg={isHost ? hostProfileImg : profileImg}
+        />
       </MsgProfileWrapper>
       <MsgItemInner>
         <MsgSendUserWrapper>
-          <MsgUserName>태진</MsgUserName>
-          <MsgSendTime>오후 16:00</MsgSendTime>
+          <MsgUserName>{isHost ? hostname : name}</MsgUserName>
+          <MsgSendTime>
+            {h}:{m}
+          </MsgSendTime>
         </MsgSendUserWrapper>
-        <MsgText>
-          Host님 안녕하세요. 이번에 예약한 방이 너무 만족스럽습니다.Host님
-          안녕하세요. 이번에 예약한 방이 너무 만족스럽습니다.Host님 안녕하세요.
-          이번에 예약한 방이 너무 만족스럽습니다.
-        </MsgText>
+        <MsgText>{text}</MsgText>
       </MsgItemInner>
       <MsgButtonWrapper>
-        {host && (
+        {isHost && (
           <StMsgButton
             btnType="circle"
             border="none"

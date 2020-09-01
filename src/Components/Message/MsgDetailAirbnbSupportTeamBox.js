@@ -4,11 +4,14 @@ import styled from 'styled-components';
 import { lighten } from 'polished';
 import Button from '../Global/Button';
 import { AiFillHome } from 'react-icons/ai';
-import { MdKeyboardArrowRight, MdHelp, MdPhoneIphone } from 'react-icons/md';
+import {
+  MdKeyboardArrowRight,
+  MdHelp,
+  MdPhoneIphone,
+  MdFlag,
+} from 'react-icons/md';
 
-const MsgDetailAirbnbSupportTeamBox = () => {
-  // Canceled props일때 render 작업 필요
-
+const MsgDetailAirbnbSupportTeamBox = ({ isCanceled }) => {
   return (
     <MsgDetailAstWrapper>
       <MsgDetailAstOuterWrapper>
@@ -37,30 +40,44 @@ const MsgDetailAirbnbSupportTeamBox = () => {
             </MsgDetailAstButtonWrapper>
           </StButton>
         </Link>
-        <a href="tel:+8210-6415-4738">
+        {isCanceled ? (
           <StButton>
             <MsgDetailAstButtonWrapper>
               <MsgDetailAstButtonInnerWrapper>
-                <MdPhoneIphone />
-                <MsgDetailAstButtonText>
-                  호스트에게 전화하기
-                </MsgDetailAstButtonText>
+                <MdFlag />
+                <MsgDetailAstButtonText>호스트 신고하기</MsgDetailAstButtonText>
               </MsgDetailAstButtonInnerWrapper>
               <MdKeyboardArrowRight />
             </MsgDetailAstButtonWrapper>
           </StButton>
-        </a>
-        <StButton>
-          <MsgDetailAstButtonWrapper>
-            <MsgDetailAstButtonInnerWrapper>
-              <MdPhoneIphone />
-              <MsgDetailAstButtonText>
-                출장자를 위한 고객 지원팀에 연락하기
-              </MsgDetailAstButtonText>
-            </MsgDetailAstButtonInnerWrapper>
-            <MdKeyboardArrowRight />
-          </MsgDetailAstButtonWrapper>
-        </StButton>
+        ) : (
+          <>
+            <a href="tel:+8210-6415-4738">
+              <StButton>
+                <MsgDetailAstButtonWrapper>
+                  <MsgDetailAstButtonInnerWrapper>
+                    <MdPhoneIphone />
+                    <MsgDetailAstButtonText>
+                      호스트에게 전화하기
+                    </MsgDetailAstButtonText>
+                  </MsgDetailAstButtonInnerWrapper>
+                  <MdKeyboardArrowRight />
+                </MsgDetailAstButtonWrapper>
+              </StButton>
+            </a>
+            <StButton>
+              <MsgDetailAstButtonWrapper>
+                <MsgDetailAstButtonInnerWrapper>
+                  <MdPhoneIphone />
+                  <MsgDetailAstButtonText>
+                    출장자를 위한 고객 지원팀에 연락하기
+                  </MsgDetailAstButtonText>
+                </MsgDetailAstButtonInnerWrapper>
+                <MdKeyboardArrowRight />
+              </MsgDetailAstButtonWrapper>
+            </StButton>
+          </>
+        )}
       </MsgDetailAstOuterWrapper>
     </MsgDetailAstWrapper>
   );

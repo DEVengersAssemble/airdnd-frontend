@@ -5,21 +5,22 @@ import { lighten } from 'polished';
 import Button from '../Global/Button';
 import { FaDoorOpen } from 'react-icons/fa';
 import { MdKeyboardArrowRight } from 'react-icons/md';
+import MsgDetailRhLbRulesItem from './MsgDetailRhLbRulesItem';
 
-const MsgDetailReservedHomeLinkBox = () => {
-  const rules = false;
-
+const MsgDetailReservedHomeLinkBox = ({ rules }) => {
   return (
     <MsgDetailRhLbWrapper>
       <MsgDetailRhLbOuterWrapper>
         <MsgDetailRhLbInnerWrapper>
           <MsgDetailRhLbTitle rules={rules}>숙소</MsgDetailRhLbTitle>
-          {rules && (
+          {rules && rules.length !== 0 && (
             <MsgDetailRhLbAddrestWrapper>
-              <MsgDetailRhLbAddressTitle>
-                숙소 이용규칙
-              </MsgDetailRhLbAddressTitle>
-              <MsgDetailRhLbAddress>밤 11시 이후에는 정숙</MsgDetailRhLbAddress>
+              <MsgDetailRhLbRulesTitle>숙소 이용규칙</MsgDetailRhLbRulesTitle>
+              <MsgDetailRhLbRulesWrapper>
+                {rules.map((rule, i) => (
+                  <MsgDetailRhLbRulesItem key={i} rule={rule} />
+                ))}
+              </MsgDetailRhLbRulesWrapper>
             </MsgDetailRhLbAddrestWrapper>
           )}
         </MsgDetailRhLbInnerWrapper>
@@ -54,11 +55,11 @@ const MsgDetailRhLbInnerWrapper = styled.div`
 
 const MsgDetailRhLbTitle = styled.h3`
   ${({ rules }) =>
-    rules
-      ? null
-      : css`
-          padding-bottom: 3rem;
-        `}
+    rules &&
+    rules.length === 0 &&
+    css`
+      padding-bottom: 3rem;
+    `}
   font-size: 2.2rem;
   font-weight: 500;
 `;
@@ -70,11 +71,11 @@ const MsgDetailRhLbAddrestWrapper = styled.div`
   word-break: keep-all;
 `;
 
-const MsgDetailRhLbAddressTitle = styled.div`
+const MsgDetailRhLbRulesTitle = styled.div`
   font-weight: bold;
 `;
 
-const MsgDetailRhLbAddress = styled.div`
+const MsgDetailRhLbRulesWrapper = styled.div`
   padding-top: 1rem;
 `;
 
