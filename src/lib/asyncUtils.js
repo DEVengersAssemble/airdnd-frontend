@@ -4,9 +4,7 @@ export const fetchDataThunk = (type, promiseCreator) => {
   return param => async dispatch => {
     dispatch({ type });
     try {
-      console.log('==========parameter', param);
       const payload = await promiseCreator(param);
-      console.log('000000000', payload);
       dispatch({ type: SUCCESS, payload });
     } catch (e) {
       dispatch({ type: ERROR, payload: e, error: true });

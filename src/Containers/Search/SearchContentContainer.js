@@ -12,10 +12,8 @@ const SearchContentContainer = () => {
   const searchForm = qs.parse(query.search, {
     ignoreQueryPrefix: true,
   });
-  console.log(searchForm);
 
-  dispatch(fetchData(searchForm));
-  useEffect(() => {}, []);
+  // dispatch(fetchData(searchForm));
 
   if (loading) console.log('==================loading========');
   if (error) console.log('========ERROR================');
