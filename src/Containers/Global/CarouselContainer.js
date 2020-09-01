@@ -73,6 +73,7 @@ const CarouselContainer = ({
     width: 0,
     marker: 0,
   };
+  const { mapState } = useSelector(state => state.search);
   const [carouselState, dispatch] = useReducer(carouselReducer, carouselInit);
   const {
     isSliding,
