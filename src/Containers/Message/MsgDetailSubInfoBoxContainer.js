@@ -27,6 +27,7 @@ const MsgDetailSubInfoBoxContainer = () => {
         reservation.guest[0].profileImg
       }
       reservationId={reservation && reservation.reservationId}
+      isCanceled={reservation && reservation.isCanceled}
     />
   );
 };
