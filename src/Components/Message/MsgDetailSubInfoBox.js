@@ -1,13 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { lighten } from 'polished';
 import { MdKeyboardArrowRight, MdPrint, MdReceipt } from 'react-icons/md';
 import { FaGlobe } from 'react-icons/fa';
 import Profile from '../Global/Profile';
 import Button from '../Global/Button';
 
-const MsgDetailSubInfoBox = () => {
+const MsgDetailSubInfoBox = ({
+  guest,
+  profileImg,
+  guestProfileImg,
+  reservationId,
+}) => {
   // Canceled props일때 render 작업 필요
 
   return (
@@ -18,14 +23,22 @@ const MsgDetailSubInfoBox = () => {
           <MsgDetailSiGuestProfilesWrapper>
             <MsgDetailSiGuestWrapper>
               <MsgDetailSiGuestText>게스트</MsgDetailSiGuestText>
-              <MsgDetailSiGuestCount>게스트 2명</MsgDetailSiGuestCount>
+              <MsgDetailSiGuestCount>
+                게스트 {guest + 1}명
+              </MsgDetailSiGuestCount>
             </MsgDetailSiGuestWrapper>
-            <MsgDetailSiGuestProfileLists>
+            <MsgDetailSiGuestProfileLists guest={guest}>
+              {!!guest && (
+                <MsgDetailSiGuestProfileItem>
+                  <Profile
+                    lastName="박"
+                    size="4.8rem"
+                    profileImg={guestProfileImg}
+                  />
+                </MsgDetailSiGuestProfileItem>
+              )}
               <MsgDetailSiGuestProfileItem>
-                <Profile lastName="박" size="4.8rem" />
-              </MsgDetailSiGuestProfileItem>
-              <MsgDetailSiGuestProfileItem>
-                <Profile lastName="박" size="4.8rem" />
+                <Profile lastName="박" size="4.8rem" profileImg={profileImg} />
               </MsgDetailSiGuestProfileItem>
             </MsgDetailSiGuestProfileLists>
           </MsgDetailSiGuestProfilesWrapper>
@@ -33,7 +46,9 @@ const MsgDetailSubInfoBox = () => {
             <MsgDetailSiReservedNumberText>
               예약 번호
             </MsgDetailSiReservedNumberText>
-            <MsgDetailSiReservedNumber>HMAAHJX3BX</MsgDetailSiReservedNumber>
+            <MsgDetailSiReservedNumber>
+              {reservationId}
+            </MsgDetailSiReservedNumber>
           </MsgDetailSiReservedNumberWrapper>
         </MsgDetailSiInnerWrapper>
         <StButton>
@@ -114,16 +129,20 @@ const MsgDetailSiGuestCount = styled.div`
 const MsgDetailSiGuestProfileLists = styled.ul`
   display: flex;
   position: relative;
-  & > :first-child {
-    position: absolute;
-    right: 3rem;
-  }
-  & > :first-child > :first-child :first-child {
-    border: 1px solid ${({ theme }) => theme.color.white};
-  }
-  & > :last-child > :first-child :first-child {
-    border: 1px solid ${({ theme }) => theme.color.white};
-  }
+  ${({ guest }) =>
+    guest &&
+    css`
+      & > :first-child {
+        position: absolute;
+        right: 3rem;
+      }
+      & > :first-child > :first-child :first-child {
+        border: 1px solid ${({ theme }) => theme.color.white};
+      }
+      & > :last-child > :first-child :first-child {
+        border: 1px solid ${({ theme }) => theme.color.white};
+      }
+    `}
 `;
 
 const MsgDetailSiGuestProfileItem = styled.li``;

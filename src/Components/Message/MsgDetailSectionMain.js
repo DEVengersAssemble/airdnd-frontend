@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { darken } from 'polished';
 import MsgDetailTitleBoxContainer from '../../Containers/Message/MsgDetailTitleBoxContainer';
 import MsgDetailReservedHomeBoxContainer from '../../Containers/Message/MsgDetailReservedHomeBoxContainer';
+import MsgDetailSubInfoBoxContainer from '../../Containers/Message/MsgDetailSubInfoBoxContainer';
 
-import MsgDetailSubInfoBox from '../Message/MsgDetailSubInfoBox';
 import MsgDetailAddressBox from '../Message/MsgDetailAddressBox';
 import MsgDetailReservedHomeLinkBox from '../Message/MsgDetailReservedHomeLinkBox';
 import MsgDetailHostInfoPageLinkBox from '../Message/MsgDetailHostInfoPageLinkBox';
@@ -21,14 +21,14 @@ const MsgDetailSectionMain = () => {
           <>
             <MsgDetailTitleBoxContainer />
             <MsgDetailReservedHomeBoxContainer />
-            <MsgDetailSubInfoBox />
+            <MsgDetailSubInfoBoxContainer />
             <MsgDetailAirbnbSupportTeamBox />
           </>
         ) : (
           <>
             <MsgDetailTitleBoxContainer />
             <MsgDetailReservedHomeBoxContainer />
-            <MsgDetailSubInfoBox />
+            <MsgDetailSubInfoBoxContainer />
             <MsgDetailAddressBox />
             <MsgDetailReservedHomeLinkBox />
             <MsgDetailHostInfoPageLinkBox />

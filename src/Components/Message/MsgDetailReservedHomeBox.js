@@ -16,8 +16,9 @@ const MsgDetailReservedHomeBox = ({
   coDayName,
   coH,
   coM,
-  profileImg,
+  hostProfileImg,
   hostname,
+  address,
   guest,
   price,
   isCanceled,
@@ -77,12 +78,12 @@ const MsgDetailReservedHomeBox = ({
               님
             </MsgDetailRhSimpleInfoHostName>
             <MsgDetailRhSimpleInfoHomeInfo>
-              펜션(한국)의 개인실 · 게스트 {guest + 1}명
+              숙소({address})의 집 전체 · 게스트 {guest + 1}명
             </MsgDetailRhSimpleInfoHomeInfo>
             <MsgDetailRhSimpleInfoPrice>₩78049</MsgDetailRhSimpleInfoPrice>
           </MsgDetailRhSimpleInfoHostDataWrapper>
           <MsgDetailRhSimpleInfoProfileWrapper>
-            <Profile lastName="박" size="4.8rem" profileImg={profileImg} />
+            <Profile lastName="박" size="4.8rem" profileImg={hostProfileImg} />
           </MsgDetailRhSimpleInfoProfileWrapper>
         </MsgDetailRhSimpleInfoHostWrapper>
       </MsgDetailRhSimpleInfoWrapper>

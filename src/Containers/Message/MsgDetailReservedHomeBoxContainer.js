@@ -5,7 +5,7 @@ import MsgDetailReservedHomeBox from '../../Components/Message/MsgDetailReserved
 const MsgDetailReservedHomeBoxContainer = () => {
   // ! redux
   const { activeIndex, filteredMsgs } = useSelector(state => state.message);
-  const { reservations, profileImg } = useSelector(state => state.trips);
+  const { reservations } = useSelector(state => state.trips);
 
   // ! variable
   const activeMsg = filteredMsgs.find(
@@ -56,8 +56,9 @@ const MsgDetailReservedHomeBoxContainer = () => {
       coDayName={coDayName}
       coH={coH}
       coM={coM}
-      profileImg={profileImg}
+      hostProfileImg={activeMsg && activeMsg.contents.hostProfileImg}
       hostname={reservation && reservation.hostname}
+      address={reservation && reservation.address}
       guest={reservation && reservation.guest.length}
       price={reservation && reservation.price}
       isCanceled={reservation && reservation.isCanceled}
