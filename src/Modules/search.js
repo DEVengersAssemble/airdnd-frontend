@@ -176,6 +176,7 @@ const initialState = {
       // ...
     },
   },
+  // ...reducerUtils.inital(),
   loading: false,
   error: null,
   data: {

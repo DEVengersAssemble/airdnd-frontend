@@ -72,6 +72,7 @@ const MapContainer = ({ markers }) => {
     };
     getCenter(location);
   }, []);
+  console.log(centerState);
 
   if (!centerState.center) return null;
   return (
