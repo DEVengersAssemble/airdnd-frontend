@@ -5,7 +5,7 @@ import { lighten, darken } from 'polished';
 import { FcExport } from 'react-icons/fc';
 import Button from '../Global/Button';
 import Profile from '../Global/Profile';
-// import CarouselContainer from '../../Containers/Global/CarouselContainer';
+import CarouselContainer from '../../Containers/Global/CarouselContainer';
 
 const MsgDetailReservedHomeBox = ({
   title,
@@ -23,12 +23,22 @@ const MsgDetailReservedHomeBox = ({
   guest,
   price,
   isCanceled,
+  hover,
+  onMouseOver,
+  onMouseLeave,
+  imageArray,
+  imageCount,
 }) => {
-  // Canceled props일때 render 작업 필요
-
   return (
     <MsgDetailRhBoxWrapper>
-      {/* <CarouselContainer size="superLarge" /> */}
+      <div onMouseOver={() => onMouseOver()} onMouseLeave={onMouseLeave}>
+        <CarouselContainer
+          size="superLarge"
+          isHovered={hover}
+          imageArray={imageArray}
+          imageCount={imageCount}
+        />
+      </div>
       <MsgDetailRhBoxTitle>{title}</MsgDetailRhBoxTitle>
       <MsgDetailRhBoxReservedStateText>
         {!isCanceled && '예약이 완료되었습니다.'}

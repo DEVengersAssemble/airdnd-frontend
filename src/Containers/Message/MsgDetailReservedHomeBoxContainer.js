@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import MsgDetailReservedHomeBox from '../../Components/Message/MsgDetailReservedHomeBox';
 
@@ -6,6 +6,9 @@ const MsgDetailReservedHomeBoxContainer = () => {
   // ! redux
   const { activeIndex, filteredMsgs } = useSelector(state => state.message);
   const { reservations } = useSelector(state => state.trips);
+
+  // ! hook
+  const [hover, setHover] = useState(false);
 
   // ! variable
   const activeMsg = filteredMsgs.find(
@@ -45,6 +48,14 @@ const MsgDetailReservedHomeBoxContainer = () => {
   const coH = coHour >= 12 ? `오후 ${coHour - 12}` : `오전 ${coHour}`;
   const coM = coMin < 10 && `0${coMin}`;
 
+  // ! event
+  const onMouseOver = () => {
+    setHover(true);
+  };
+  const onMouseLeave = () => {
+    setHover(false);
+  };
+
   return (
     <MsgDetailReservedHomeBox
       title={reservation && reservation.title}
@@ -62,6 +73,11 @@ const MsgDetailReservedHomeBoxContainer = () => {
       guest={reservation && reservation.guest.length}
       price={reservation && reservation.price}
       isCanceled={reservation && reservation.isCanceled}
+      hover={hover}
+      onMouseOver={onMouseOver}
+      onMouseLeave={onMouseLeave}
+      imageArray={reservation && reservation.homeImage}
+      imageCount={reservation && reservation.homeImage.length}
     />
   );
 };

@@ -21,6 +21,7 @@ const initialState = {
       hostname: 'Paul',
       homeImage: [
         'https://a0.muscache.com/im/pictures/2db2f15d-df90-4208-a004-78423c0f1452.jpg?aki_policy=xx_large',
+        'https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large',
       ],
       hostId: 1,
       checkin: '2020/09/25/15:00',
