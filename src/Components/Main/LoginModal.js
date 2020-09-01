@@ -121,7 +121,7 @@ const StShowPwButton = styled(Button)`
 `;
 
 const StSubmitButton = styled(Button)`
-  margin-top: 10px;
+  margin-top: 15px;
   font-size: 16px;
   font-weight: 600;
   letter-spacing: 3px;
@@ -144,15 +144,15 @@ const StSignupButtonWrapper = styled.div`
 `;
 
 const StSignupText = styled.span`
-  font-size: 16px;
+  font-size: 14px;
   line-height: 20px;
 `;
 
 const StSignupButton = styled(Button)`
   color: ${({ theme }) => theme.color.green};
-  margin-top: 4px;
   margin-left: 10px;
-  font-size: 16px;
+  font-size: 14px;
+  line-height: 20px;
   font-weight: 600;
   padding: 0;
   border: none;
@@ -175,7 +175,7 @@ const LoginModal = ({
       modalState={modalVisible}
       header
       width="570px"
-      height="600px"
+      height="545px"
       title="로그인"
       setModalState={closeModal}
     >

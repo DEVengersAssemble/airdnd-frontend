@@ -143,18 +143,20 @@ const StLoginButtonWrapper = styled.div`
 
 const StLoginText = styled.span`
   font-size: 14px;
-  line-height: 19px;
+  line-height: 20px;
 `;
 
 const StLoginButton = styled(Button)`
-  margin-top: 5px;
-  margin-left: 10px;
-  padding: 0;
-  font-size: 15px;
-  font-weight: 600;
   color: ${({ theme }) => theme.color.green};
-  border-radius: 0;
+  margin-left: 10px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  padding: 0;
+  border: none;
+  border-radius: unset;
   &:hover {
+    background: transparent;
     text-decoration: underline;
   }
 `;
@@ -192,7 +194,7 @@ const SignupEmailModal = ({
       header
       title="회원가입"
       width="570px"
-      height="680px"
+      height="670px"
       setModalState={closeModal}
     >
       <StSignupFormWrapper>
