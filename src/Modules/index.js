@@ -6,6 +6,7 @@ import wishlists from './wishlists';
 import trips from './trips';
 import message from './message';
 import home from './home';
+import modal from './modal';
 
 const rootReducer = combineReducers({
   user,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   trips,
   message,
   home,
+  modal,
 });
 
 export default rootReducer;

@@ -7,43 +7,22 @@ import { Input } from '../Global/Input';
 import { RiEyeCloseLine, RiMailLine, RiUserLine } from 'react-icons/ri';
 import { MdCheck, MdClose } from 'react-icons/md';
 
-const StSignupModal = styled(Modal)`
+const StSignupEmailModal = styled(Modal)`
   overflow-y: scroll;
 `;
 
 const StDividerLine = styled.hr`
   border: none;
+  margin: 20px 0;
   border-top: 1px solid ${({ theme }) => theme.color.line};
-`;
-
-const StDividerText = styled.span`
-  position: absolute;
-  font-size: 14px;
-  top: 120px;
-  left: calc(50% - 34px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: white;
-  padding: 0 20px;
-  color: ${({ theme }) => theme.color.darkGray};
 `;
 
 const StSignupFormWrapper = styled.div`
   padding: 20px;
 `;
 
-const StSocialLoginWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 15px;
-  padding: 0 0 20px 0;
-`;
-
 const StSignupForm = styled.form`
   width: 100%;
-  margin-top: 30px;
 `;
 
 const StInputWrapper = styled.div`
@@ -141,14 +120,19 @@ const StBirthDayDropDown = styled(DropDown)`
 `;
 
 const StSubmitButton = styled(Button)`
-  margin: 30px 0 20px 0;
+  margin-top: 30px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 3px;
   width: 100%;
   padding: 20px 0;
   color: ${({ theme }) => theme.color.white};
   background: ${({ theme }) => theme.color.main};
+  transition: 0.125s all ease-in;
+  height: 52px;
   &:hover {
-    color: ${({ theme }) => theme.color.white};
     background: ${({ theme }) => theme.color.main};
+    box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.25);
   }
 `;
 
@@ -159,24 +143,26 @@ const StLoginButtonWrapper = styled.div`
 
 const StLoginText = styled.span`
   font-size: 14px;
-  line-height: 19px;
+  line-height: 20px;
 `;
 
 const StLoginButton = styled(Button)`
-  margin-top: 5px;
-  margin-left: 10px;
-  padding: 0;
-  font-size: 15px;
-  font-weight: 600;
   color: ${({ theme }) => theme.color.green};
-  border-radius: 0;
+  margin-left: 10px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  padding: 0;
+  border: none;
+  border-radius: unset;
   &:hover {
+    background: transparent;
     text-decoration: underline;
   }
 `;
 
-const SignupModal = ({
-  signupModalVisible,
+const SignupEmailModal = ({
+  modalVisible,
   openLoginModal,
   closeModal,
   signup,
@@ -186,6 +172,8 @@ const SignupModal = ({
   refObj,
   onPwFocus,
   pwFocus,
+  onGoogleLoginSuccess,
+  onGoogleLoginFailure,
 }) => {
   const {
     email,
@@ -199,23 +187,17 @@ const SignupModal = ({
   } = signup;
   const { pwLevel, pwLength, pwContain, pwCase } = pwValidation;
   const { emailRef, firstNameRef, lastNameRef, pwRef } = refObj;
-  console.log('-----[Signup Modal]-----');
-  console.log(pwLevel, pwLength, pwContain, pwCase);
+
   return (
-    <StSignupModal
-      modalState={signupModalVisible}
+    <StSignupEmailModal
+      modalState={modalVisible}
       header
       title="회원가입"
       width="570px"
-      height="680px"
-      setModalState={() => closeModal('signup')}
+      height="670px"
+      setModalState={closeModal}
     >
       <StSignupFormWrapper>
-        <StSocialLoginWrapper>
-          페이스북 또는 구글로 회원 가입하세요.
-        </StSocialLoginWrapper>
-        <StDividerLine />
-        <StDividerText>또는</StDividerText>
         <StSignupForm onSubmit={onSignup}>
           <StInputWrapper>
             <StInput
@@ -233,7 +215,6 @@ const SignupModal = ({
               </StValidationText>
             )}
           </StInputWrapper>
-
           <StInputWrapper>
             <StInput
               value={firstName.value}
@@ -267,7 +248,6 @@ const SignupModal = ({
               </StValidationText>
             )}
           </StInputWrapper>
-
           <StInputWrapper name="password">
             <StInput
               type="password"
@@ -372,8 +352,8 @@ const SignupModal = ({
           </StLoginButton>
         </StLoginButtonWrapper>
       </StSignupFormWrapper>
-    </StSignupModal>
+    </StSignupEmailModal>
   );
 };
 
-export default SignupModal;
+export default SignupEmailModal;

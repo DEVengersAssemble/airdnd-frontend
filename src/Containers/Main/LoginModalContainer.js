@@ -1,19 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useReducer } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { openModal, closeModal } from '../../Modules/modal';
 import LoginModal from '../../Components/Main/LoginModal';
 
-const LoginModalContainer = ({ loginModalVisible, openModal, closeModal }) => {
-  const [form, setForm] = useState({});
-  // {email: '', firstName: '', lastName: '', pw:'', birthMonth: 0, birthDay: 0, birthYear: 0}
+const LoginModalContainer = () => {
+  const dispatch = useDispatch();
+  const { name } = useSelector(state => state.modal);
+  const modalVisible = name === 'login';
+  const [showPw, setShowPw] = useState(false);
 
-  const openSignupModal = () => {
-    closeModal('login');
-    openModal('signup');
+  const emailRef = useRef();
+  const pwRef = useRef();
+  const onToggleShowPw = () => {
+    setShowPw(prevState => !prevState);
   };
+
+  const openSignupMenuModal = () => {
+    dispatch(openModal('signup_menu'));
+  };
+
   return (
     <LoginModal
-      loginModalVisible={loginModalVisible}
-      openSignupModal={openSignupModal}
-      closeModal={closeModal}
+      modalVisible={modalVisible}
+      openSignupMenuModal={openSignupMenuModal}
+      closeModal={() => {
+        dispatch(closeModal());
+      }}
+      showPw={showPw}
+      onToggleShowPw={onToggleShowPw}
     ></LoginModal>
   );
 };
