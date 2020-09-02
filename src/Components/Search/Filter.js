@@ -1,15 +1,13 @@
 /* eslint-disable react/display-name */
 import React from 'react';
 import styled, { css, keyframes } from 'styled-components';
-import Modal from '../Global/Modal';
-import ModalFooter from '../Global/ModalFooter';
 import Button from '../Global/Button';
 import Toggle from '../Global/Toggle';
 import { MinusButton, PlusButton } from '../Global/CounterButton';
 import Checkbox from '../Global/Checkbox';
 import { GrFormDown } from 'react-icons/gr';
 
-const ToggleFilter = ({ onToggle, filter }) => {
+export const ToggleFilter = ({ onToggle, filter }) => {
   return (
     <StFilterWrapper direction="row">
       <StContentWrapper direction="column">
@@ -26,7 +24,7 @@ const ToggleFilter = ({ onToggle, filter }) => {
   );
 };
 
-const MoreFilters = ({ onToggle, filter }) => {
+export const MoreFilters = ({ onToggle, filter }) => {
   return (
     <StFilterWrapper>
       <StTitle>편의시설 더 보기</StTitle>
@@ -50,7 +48,7 @@ const MoreFilters = ({ onToggle, filter }) => {
   );
 };
 
-const Counter = ({ onIncrease, onDecrease, filter, name }) => {
+export const Counter = ({ onIncrease, onDecrease, filter, name }) => {
   return (
     <StContentWrapper align="center" width="10rem">
       <MinusButton
@@ -66,7 +64,7 @@ const Counter = ({ onIncrease, onDecrease, filter, name }) => {
   );
 };
 
-const CounterFilter = ({ onIncrease, onDecrease, filter }) => {
+export const CounterFilter = ({ onIncrease, onDecrease, filter }) => {
   return (
     <StFilterWrapper>
       <StTitle>침실과 침대</StTitle>
@@ -101,7 +99,7 @@ const CounterFilter = ({ onIncrease, onDecrease, filter }) => {
   );
 };
 
-const CheckboxFilter = React.memo(
+export const CheckboxFilter = React.memo(
   ({ title, listName, list, filter, onCheck, seeMore, onSeeMore }) => {
     return (
       <StFilterWrapper>
@@ -134,117 +132,6 @@ const CheckboxFilter = React.memo(
     );
   },
 );
-
-const FilterModal = ({
-  popupState,
-  mapState,
-  filterCondition,
-  filter,
-  seeMore,
-  onSeeMore,
-  onClose,
-  onSave,
-  onCheck,
-  onReset,
-  onToggle,
-  onIncrease,
-  onDecrease,
-}) => {
-  const {
-    instantBooking,
-    bedroom,
-    convenience,
-    convenienceList,
-    facilityList,
-    hostLangList,
-  } = filterCondition;
-
-  return (
-    <StModal
-      modalState={popupState}
-      setModalState={() => onClose('modal')}
-      header
-      title="필터 추가하기"
-    >
-      <StFilterList>
-        {instantBooking && <ToggleFilter filter={filter} onToggle={onToggle} />}
-        {bedroom && (
-          <CounterFilter
-            filter={filter.bedroom}
-            onIncrease={onIncrease}
-            onDecrease={onDecrease}
-          />
-        )}
-        {convenience && <MoreFilters filter={filter} onToggle={onToggle} />}
-        {convenienceList && (
-          <CheckboxFilter
-            title="편의 시설"
-            listName="convenienceList"
-            list={convenienceList}
-            filter={filter.convenienceList}
-            onCheck={onCheck}
-            seeMore={seeMore.convenience}
-            onSeeMore={() => onSeeMore('convenience')}
-          />
-        )}
-        {facilityList && (
-          <CheckboxFilter
-            title="시설"
-            listName="facilityList"
-            list={facilityList}
-            filter={filter.facilityList}
-            onCheck={onCheck}
-            seeMore={seeMore.facility}
-            onSeeMore={() => onSeeMore('facility')}
-          />
-        )}
-        {hostLangList && (
-          <CheckboxFilter
-            title="호스트 언어"
-            listName="hostLangList"
-            list={hostLangList}
-            filter={filter.hostLangList}
-            onCheck={onCheck}
-            seeMore={seeMore.hostLang}
-            onSeeMore={() => onSeeMore('hostLang')}
-          />
-        )}
-      </StFilterList>
-      <StFooter align="space-between">
-        <Button btnType="underlined" hover="background: none" onClick={onReset}>
-          전체 삭제
-        </Button>
-        <Button
-          btnType="color"
-          color="black"
-          hover="background: #000"
-          padding="1.5rem 2rem"
-          transition
-          onClick={onSave}
-        >
-          <span>300개 이상</span>의 숙소 보기
-        </Button>
-      </StFooter>
-    </StModal>
-  );
-};
-
-const StModal = styled(Modal)`
-  width: 780px;
-  height: 92vh;
-`;
-
-const StFilterList = styled.ul`
-  padding: 3rem 5rem 0;
-  display: flex;
-  flex-direction: column;
-  max-height: calc(92vh - 144px);
-  overflow: auto;
-
-  & li:nth-last-child(1) {
-    border: none;
-  }
-`;
 
 const StFilterWrapper = styled.li`
   display: flex;
@@ -330,9 +217,3 @@ const ArrowIcon = styled(GrFormDown)`
   transition: 0.5s ease-out;
   transform: ${({ seeMore }) => (seeMore ? 'rotate(180deg)' : 'rotate(0deg)')};
 `;
-
-const StFooter = styled(ModalFooter)`
-  padding: 1.5rem 2rem 1.5rem 0.5rem;
-`;
-
-export default FilterModal;

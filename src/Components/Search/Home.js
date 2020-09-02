@@ -119,6 +119,10 @@ const StTitle = styled.span`
   color: ${({ theme }) => theme.color.black};
   font-size: 1.8rem;
   padding: 8px 0;
+  width: 450px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 `;
 
 const StLine = styled.hr`

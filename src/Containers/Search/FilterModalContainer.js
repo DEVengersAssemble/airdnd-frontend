@@ -13,13 +13,16 @@ import {
 let prevFilter = {};
 
 const FilterModalContainer = () => {
-  const [seeMore, setSeeMore] = useState({
+  const seeInit = {
     conveninence: false,
     facility: false,
     hostLang: false,
-  });
-  const onSeeMore = name => setSeeMore({ ...seeMore, [name]: !seeMore[name] });
-  const { popup, data, filterApplied } = useSelector(state => state.search);
+  };
+  const [seeMore, setSeeMore] = useState({ seeInit });
+  const onSeeMore = name => setSeeMore({ ...seeInit, [name]: !seeMore[name] });
+  const { popup, data, filterApplied, mapState } = useSelector(
+    state => state.search,
+  );
   const { filterCondition } = data && data;
   const dispatch = useDispatch();
   const onClose = () => dispatch(closePopup('modal'));
@@ -39,6 +42,7 @@ const FilterModalContainer = () => {
   return (
     <FilterModal
       popupState={popup.modal}
+      mapState={mapState}
       filterCondition={filterCondition}
       filter={filterApplied}
       // onClose={onUnsave}
