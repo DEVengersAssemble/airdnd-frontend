@@ -3,15 +3,10 @@ import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import { ellipsis } from 'polished';
 
-const Wishlist = ({ bmList }) => {
-  console.log('wishlist', bmList);
-  const { bookmarkListId, bookmarkListTitle, bookmarks } = bmList;
-  const homeCount = bookmarks.length;
-  // styled-component에 background image props로 넘기기
-
+const Wishlist = ({ bookmarkListTitle, homeCount, idx }) => {
   return (
     <WishlistCardWrapper>
-      <Link to={`/wishlist/${bookmarkListId}`}>
+      <Link to={`/wishlist/${idx}`}>
         <WishlistImgWrapper>
           <WishlistFirstImg homeCount={homeCount} />
           <WishlistSubImgWrapper homeCount={homeCount}>
@@ -26,7 +21,7 @@ const Wishlist = ({ bmList }) => {
         <WishlistContent>
           <WishlistTitle>{bookmarkListTitle}</WishlistTitle>
           <WishlistHomeCount>
-            {homeCount ? `숙소 ${homeCount}` : '저장된 항목 없음'}
+            {homeCount ? `숙소 ${homeCount}개` : '저장된 항목 없음'}
           </WishlistHomeCount>
         </WishlistContent>
       </Link>

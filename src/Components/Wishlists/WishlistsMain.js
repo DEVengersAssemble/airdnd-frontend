@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import Button from '../Global/Button';
-import Wishlist from './Wishlist';
+import WishlistContainer from '../../Containers/Wishlists/WishlistContainer';
 import WishlistsPopup from './WishlistsPopup';
 
 const WishlistsMain = ({
   title,
   bmLists,
+  bmListItem,
   onChangeTitleInput,
   onCreateBookMarkList,
   openPopup,
@@ -37,7 +38,11 @@ const WishlistsMain = ({
         </WishlistsTitleWrapper>
         <WishlistsItems>
           {bmLists.map(bmList => (
-            <Wishlist key={bmList.bookmarkListId} bmList={bmList} />
+            <WishlistContainer
+              key={bmList.idx}
+              bmList={bmList}
+              bmListItem={bmListItem}
+            />
           ))}
         </WishlistsItems>
       </WishlistsMainInner>
