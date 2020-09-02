@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import FilterModal from '../../Components/Search/FilterModal';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -13,8 +13,13 @@ import {
 let prevFilter = {};
 
 const FilterModalContainer = () => {
+  const [seeMore, setSeeMore] = useState({
+    conveninence: false,
+    facility: false,
+    hostLang: false,
+  });
+  const onSeeMore = name => setSeeMore({ ...seeMore, [name]: !seeMore[name] });
   const { popup, data, filterApplied } = useSelector(state => state.search);
-  console.log('data', data);
   const { filterCondition } = data && data;
   const dispatch = useDispatch();
   const onClose = () => dispatch(closePopup('modal'));
@@ -37,6 +42,8 @@ const FilterModalContainer = () => {
       filterCondition={filterCondition}
       filter={filterApplied}
       // onClose={onUnsave}
+      seeMore={seeMore}
+      onSeeMore={onSeeMore}
       onClose={onClose}
       onSave={onSave}
       onCheck={onCheck}

@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import Modal from '../Global/Modal';
 import ModalFooter from '../Global/ModalFooter';
 import Button from '../Global/Button';
@@ -100,15 +100,25 @@ const CounterFilter = ({ onIncrease, onDecrease, filter }) => {
   );
 };
 
-const CheckboxFilter = ({ title, listName, list, filter, onCheck }) => {
+const CheckboxFilter = ({
+  title,
+  listName,
+  list,
+  filter,
+  onCheck,
+  seeMore,
+  onSeeMore,
+}) => {
   return (
     <StFilterWrapper>
       <StTitle>{title}</StTitle>
-      <StCheckboxList>
+      <StCheckboxList seeMore={seeMore}>
         {list.map((name, i) => (
           <StCheckbox
             key={i}
             value
+            animation={i > 3}
+            seeMore={seeMore}
             checked={filter[name]}
             onCheck={() => onCheck(listName, name, !filter[name])}
           >
@@ -121,9 +131,10 @@ const CheckboxFilter = ({ title, listName, list, filter, onCheck }) => {
         width="fit-content"
         padding="1rem 0 0"
         hover="background: none"
+        onClick={onSeeMore}
       >
         편의시설 모두 보기
-        <GrFormDown />
+        <ArrowIcon seeMore={seeMore} />
       </Button>
     </StFilterWrapper>
   );
@@ -133,6 +144,8 @@ const FilterModal = ({
   popupState,
   filterCondition,
   filter,
+  seeMore,
+  onSeeMore,
   onClose,
   onSave,
   onCheck,
@@ -174,6 +187,8 @@ const FilterModal = ({
             list={convenienceList}
             filter={filter.convenienceList}
             onCheck={onCheck}
+            seeMore={seeMore.convenience}
+            onSeeMore={() => onSeeMore('convenience')}
           />
         )}
         {facilityList && (
@@ -183,6 +198,8 @@ const FilterModal = ({
             list={facilityList}
             filter={filter.facilityList}
             onCheck={onCheck}
+            seeMore={seeMore.facility}
+            onSeeMore={() => onSeeMore('facility')}
           />
         )}
         {hostLangList && (
@@ -192,6 +209,8 @@ const FilterModal = ({
             list={hostLangList}
             filter={filter.hostLangList}
             onCheck={onCheck}
+            seeMore={seeMore.hostLang}
+            onSeeMore={() => onSeeMore('hostLang')}
           />
         )}
       </StFilterList>
@@ -282,11 +301,50 @@ const StLink = styled.a`
 const StCheckboxList = styled.ul`
   display: flex;
   flex-wrap: wrap;
+  overflow: hidden;
+  transition: height 0.5s;
+  height: 85px;
+  height: ${({ seeMore }) => seeMore && 'fit-content'};
+`;
+
+const seeMoreAnimation = keyframes`
+  from {
+    opacity: 0;
+    background: red;
+    transform: scale(1)
+  }
+  to {
+    opacity: 1;
+    background: green;
+    transform: scale(4)
+  }
+`;
+
+const applyAnimation = direction => css`
+  animation-name: ${seeMoreAnimation};
+  animation-duration: 0.5s;
+  animation-delay: 0.2s;
+  /* animation-fill-mode: forwards; */
+  /* animation-direction: ${!direction && 'reverse'}; */
 `;
 
 const StCheckbox = styled(Checkbox)`
   width: 30rem;
   margin: 0 4rem 1rem 0;
+  ${({ animation, seeMore }) =>
+    animation && seeMore && applyAnimation(seeMore)};
+  ${({ animation, seeMore }) =>
+    animation &&
+    seeMore &&
+    css`
+      background: red;
+    `};
+`;
+
+const ArrowIcon = styled(GrFormDown)`
+  margin: -0.2rem 0 0 0.5rem;
+  transition: 0.5s ease-out;
+  transform: ${({ seeMore }) => (seeMore ? 'rotate(180deg)' : 'rotate(0deg)')};
 `;
 
 const StFooter = styled(ModalFooter)`
