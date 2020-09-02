@@ -1,7 +1,6 @@
-import React, { useReducer, useEffect } from 'react';
+import React from 'react';
 import Map from '../../Components/Global/Map';
 import { useSelector, useDispatch } from 'react-redux';
-import axios from 'axios';
 import {
   closeMarker,
   zoomSet,
@@ -13,7 +12,7 @@ import {
 } from '../../Modules/search';
 
 const MapContainer = ({ markers }) => {
-  const { data } = useSelector(state => state.map);
+  const { mapCenter } = useSelector(state => state.search.data);
   const { mapZoom, viewState } = useSelector(state => state.search);
   const dispatch = useDispatch();
   const openFilterModal = () => dispatch(openPopup('modal'));
@@ -26,12 +25,11 @@ const MapContainer = ({ markers }) => {
     e.target.nodeName === 'DIV' && dispatch(closeMarker());
   };
 
-  if (!data) return null;
   return (
     <div onClick={onCloseMarker}>
       <Map
         view={viewState}
-        center={data}
+        center={mapCenter}
         mapZoom={mapZoom}
         markers={markers}
         onCloseMap={onCloseMap}

@@ -121,16 +121,18 @@ export const CheckboxFilter = React.memo(
             </StCheckbox>
           ))}
         </StCheckboxList>
-        <Button
-          btnType="underlined"
-          width="fit-content"
-          padding="1rem 0 0"
-          hover="background: none"
-          onClick={onSeemore}
-        >
-          편의시설 모두 보기
-          <ArrowIcon seemore={seemore} />
-        </Button>
+        {list.length > 4 && (
+          <Button
+            btnType="underlined"
+            width="fit-content"
+            padding="1rem 0 0"
+            hover="background: none"
+            onClick={onSeemore}
+          >
+            편의시설 모두 보기
+            <ArrowIcon seemore={seemore} />
+          </Button>
+        )}
       </StFilterWrapper>
     );
   },
@@ -236,7 +238,7 @@ const applyAnimation = direction => css`
 `;
 
 const StCheckbox = styled(Checkbox)`
-  width: 30rem;
+  width: 27rem;
   margin: 0 4rem 1rem 0;
   ${({ animation, seemore }) =>
     animation && seemore === true && applyAnimation(seemore)};
