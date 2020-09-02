@@ -6,7 +6,7 @@ export const setReservation = payload => ({ type: SET_RESERVATION });
 
 // initialState
 const initialState = {
-  id: null,
+  id: 1,
   email: '',
   pw: '',
   fistName: '',

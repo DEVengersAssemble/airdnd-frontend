@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import HomePopup from '../../Components/Search/HomePopup';
-import { changeHeart } from '../../Modules/search';
-import { removeBookmark, openListModal } from '../../Modules/wishlists';
-import { openModal } from '../../Modules/modal';
+import { toggleBookmark } from '../../lib/bookmarkUtils';
 
 const HomePopupContainer = ({ home, dateDiff, theme, store }) => {
   const { id } = store.getState().user;
@@ -10,16 +8,6 @@ const HomePopupContainer = ({ home, dateDiff, theme, store }) => {
   const [isHovered, setIsHovered] = useState(false);
   const onHoverHome = () => setIsHovered(true);
   const onBlurHome = () => setIsHovered(false);
-
-  const onClickHeart = () => {
-    if (!id) return dispatch(openModal('login'));
-    if (home.isBookmarked) {
-      dispatch(removeBookmark(home.homeId));
-      dispatch(changeHeart(home.homeId));
-      return;
-    }
-    dispatch(openListModal(home.homeId, home.imageArray[0]));
-  };
 
   return (
     <HomePopup
@@ -29,7 +17,7 @@ const HomePopupContainer = ({ home, dateDiff, theme, store }) => {
       isHovered={isHovered}
       onHoverHome={onHoverHome}
       onBlurHome={onBlurHome}
-      onClickHeart={onClickHeart}
+      onClickHeart={() => toggleBookmark(id, home, dispatch)}
       theme={theme}
     />
   );

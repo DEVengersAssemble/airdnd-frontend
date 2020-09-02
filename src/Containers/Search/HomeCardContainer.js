@@ -1,9 +1,8 @@
 import React from 'react';
 import HomeCard from '../../Components/Search/HomeCard';
 import { useSelector, useDispatch } from 'react-redux';
-import { hoverHome, blurHome, changeHeart } from '../../Modules/search';
-import { removeBookmark, openListModal } from '../../Modules/wishlists';
-import { openModal } from '../../Modules/modal';
+import { hoverHome, blurHome } from '../../Modules/search';
+import { toggleBookmark } from '../../lib/bookmarkUtils';
 
 const HomeCardContainer = ({ home, type }) => {
   const { id } = useSelector(state => state.user);
@@ -15,17 +14,6 @@ const HomeCardContainer = ({ home, type }) => {
   const onHoverHome = () =>
     hoveredHome !== home.homeId && dispatch(hoverHome(home.homeId));
   const onBlurHome = () => dispatch(blurHome());
-  const onClickHeart = () => {
-    if (!id) return dispatch(openModal('login'));
-    if (home.isBookmarked) {
-      dispatch(removeBookmark(home.homeId));
-      dispatch(changeHeart(home.homeId));
-      return;
-    }
-    dispatch(openListModal(home.homeId, home.imageArray[0]));
-  };
-
-  console.log('여기 홈카드인데 데이트디프', dateDiff);
 
   return (
     <HomeCard
@@ -34,7 +22,7 @@ const HomeCardContainer = ({ home, type }) => {
       isHovered={isHovered}
       dateDiff={dateDiff}
       mapState={mapState}
-      onClickHeart={onClickHeart}
+      onClickHeart={() => toggleBookmark(id, home, dispatch)}
       onHoverHome={onHoverHome}
       onBlurHome={onBlurHome}
     />

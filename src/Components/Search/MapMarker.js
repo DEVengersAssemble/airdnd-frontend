@@ -8,10 +8,8 @@ import { Heart } from '../Global/Heart';
 import HomePopupContainer from '../../Containers/Search/HomePopupContainer';
 
 const getPixelPositionOffset = (width, height) => ({
-  // x: width + width / 2,
-  // y: -(height * 2),
-  x: width / 20,
-  y: height / 20,
+  x: width + width / 2,
+  y: -(height * 2),
 });
 
 const MapMarker = ({
@@ -35,7 +33,7 @@ const MapMarker = ({
       <OverlayView
         position={location}
         mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
-        // getPixelPositionOffset={getPixelPositionOffset}
+        getPixelPositionOffset={getPixelPositionOffset}
       >
         {dateDiff ? (
           <PriceMarker
