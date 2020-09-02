@@ -24,6 +24,7 @@ const MessageDetailSectionWrapper = styled.section`
   ${({ msgDetailSectionState }) =>
     !msgDetailSectionState &&
     css`
+      visibility: hidden;
       opacity: 0;
     `}
 
