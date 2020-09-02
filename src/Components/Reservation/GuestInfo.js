@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import CommonLayout from './CommonLayout';
-import DropDown from '../Global/DropDown';
 import Toggle from '../Global/Toggle';
 import Profile from '../Global/Profile';
 import Button from '../Global/Button';
+import DeatailGuestPopupContainer from '../../Containers/Detail/DeatailGuestPopupContainer';
 
 const GuestInfo = ({
   hostFirstName,
@@ -19,7 +19,7 @@ const GuestInfo = ({
     <CommonLayout title="일행이 있나요?">
       <StGuestsWrapper>
         <StSubTitle padding="16px 0">인원</StSubTitle>
-        <StDropDown title="게스트 1명" options={[]} width="100%" />
+        <StGuestPopup />
       </StGuestsWrapper>
       <StBusinessWrapper>
         <StSubTitle>출장을 떠나시나요?</StSubTitle>
@@ -66,9 +66,17 @@ const StSubTitle = styled.h3`
   padding: ${props => props.padding || '0'};
 `;
 
-const StDropDown = styled(DropDown)`
-  height: 40px;
-  border-color: ${({ theme }) => theme.color.line};
+const StGuestPopup = styled(DeatailGuestPopupContainer)`
+  padding: 8px 16px;
+  height: auto;
+  border: 1px solid ${({ theme }) => theme.color.line};
+  border-radius: 2px;
+  div {
+    font-size: 1.6rem;
+  }
+  div:last-child {
+    top: 38px;
+  }
 `;
 
 const StBusinessWrapper = styled.div`
