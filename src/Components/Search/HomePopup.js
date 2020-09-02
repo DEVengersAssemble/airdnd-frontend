@@ -6,8 +6,7 @@ import CarouselContainer from '../../Containers/Global/CarouselContainer';
 
 const HomePopup = ({
   home,
-  // store,
-  hover,
+  isHovered,
   theme,
   dateDiff,
   onHoverHome,
@@ -15,7 +14,6 @@ const HomePopup = ({
   onClickHeart,
 }) => {
   const {
-    homeId,
     isSuperhost,
     isBookmarked,
     imageArray,
@@ -27,18 +25,14 @@ const HomePopup = ({
     price,
   } = home;
   return (
-    <StWrapper
-      onMouseOver={() => onHoverHome(homeId)}
-      onMouseLeave={onBlurHome}
-    >
+    <StWrapper onMouseOver={onHoverHome} onMouseLeave={onBlurHome}>
       <Carousel
         size="large"
         theme={theme}
-        isHovered={hover}
+        isHovered={isHovered}
         isSuperhost={isSuperhost}
         imageArray={imageArray}
         imageCount={imageCount}
-        // store={store}
       />
       <Caption
         theme={theme}
