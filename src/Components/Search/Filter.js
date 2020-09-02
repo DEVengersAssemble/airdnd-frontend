@@ -7,7 +7,7 @@ import { MinusButton, PlusButton } from '../Global/CounterButton';
 import Checkbox from '../Global/Checkbox';
 import { GrFormDown } from 'react-icons/gr';
 
-export const ToggleFilter = ({ onToggle, filter }) => {
+export const BookingFilter = ({ onToggle, filter }) => {
   return (
     <StFilterWrapper direction="row">
       <StContentWrapper direction="column">

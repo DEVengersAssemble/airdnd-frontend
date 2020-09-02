@@ -2,33 +2,22 @@ import React from 'react';
 import Popup from '../Global/Popup';
 import styled, { css } from 'styled-components';
 import Button from '../Global/Button';
-import Toggle from '../Global/Toggle';
 import ModalFooter from '../Global/ModalFooter';
+import RefundContainer from '../../Containers/Search/RefundContainer';
 import RangeSliderContainer from '../../Containers/Search/RangeSliderContainer';
 import RoomTypeContainer from '../../Containers/Search/RoomTypeContainer';
 
-const RefundPopup = ({
-  popupState,
-  isDisabled,
-  toggle,
-  handleClick,
-  onReset,
-  onSave,
-}) => {
+const RefundPopup = ({ popupState, isDisabled, onReset, onSave }) => {
   return (
     <FilterPopup
       popupState={popupState}
       isDisabled={isDisabled}
       size="350px"
-      value={toggle}
       onSave={onSave}
       onReset={() => onReset(false)}
     >
       <StContentWrapper content="refund">
-        <StSmallSpan>
-          유연한 환불 정책을 제공하는 숙소만 검색 결과에 표시
-        </StSmallSpan>
-        <Toggle checked={toggle} handleClick={handleClick} />
+        <RefundContainer />
       </StContentWrapper>
     </FilterPopup>
   );

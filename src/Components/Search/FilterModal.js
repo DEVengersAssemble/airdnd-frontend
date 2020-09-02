@@ -7,7 +7,7 @@ import Button from '../Global/Button';
 import RangeSliderContainer from '../../Containers/Search/RangeSliderContainer';
 import RoomTypeContainer from '../../Containers/Search/RoomTypeContainer';
 import {
-  ToggleFilter,
+  BookingFilter,
   CounterFilter,
   MoreFilters,
   CheckboxFilter,
@@ -51,7 +51,9 @@ const FilterModal = ({
         {viewState === 'map' && (
           <RangeSliderContainer range={range} setRange={setRange} />
         )}
-        {instantBooking && <ToggleFilter filter={filter} onToggle={onToggle} />}
+        {instantBooking && (
+          <BookingFilter filter={filter} onToggle={onToggle} />
+        )}
         {bedroom && (
           <CounterFilter
             filter={filter.bedroom}
