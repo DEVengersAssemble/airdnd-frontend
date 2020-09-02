@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
 import Calendar from '../../Components/Global/Calendar';
 
 const CalendarContainer = ({
@@ -8,13 +7,14 @@ const CalendarContainer = ({
   setCheckoutData,
   checkin,
   checkout,
+  changeInitialDate,
+  setChangeDataTrue,
+  reservedDates = [],
 }) => {
-  const { checkIn, checkOut } = useSelector(state => state.searchForm);
   const [count, setCount] = useState(0);
-  const [isChangeDate, setIsChangeDate] = useState(false);
 
-  const confirmCheckin = isChangeDate ? checkin : checkIn;
-  const confirmCheckout = isChangeDate ? checkout : checkOut;
+  const onClickBeforeMonth = () => setCount(count - 1);
+  const onClickNextMonth = () => setCount(count + 1);
 
   const today = new Date();
 
@@ -52,26 +52,64 @@ const CalendarContainer = ({
     (v, i) => i + 1,
   );
 
-  const onClickBeforeMonth = () => setCount(count - 1);
-  const onClickNextMonth = () => setCount(count + 1);
+  const checkBeforeDate = date => {
+    const targetTime = new Date(date).getTime();
+    const checkinTime = new Date(checkin).getTime();
+    return checkinTime > targetTime;
+  };
 
-  const onClickCheckDate = e => {
-    if (!isChangeDate) setIsChangeDate(true);
+  const [hoverDate, setHoverDate] = useState('');
+
+  const getDiff = (date, getReserved) => {
+    const hoverDateTime = new Date(hoverDate).getTime();
+    const checkinTime = new Date(checkin).getTime();
+    const checkoutTime = new Date(checkout).getTime();
+    const btnTime = new Date(date).getTime();
+    if (changeInitialDate === false) {
+      return btnTime >= checkinTime && btnTime <= checkoutTime;
+    }
+    if (getReserved) {
+      return reservedDates.find(v => {
+        const vTime = new Date(v).getTime();
+        return vTime >= checkinTime && vTime <= hoverDateTime;
+      });
+    }
+    return btnTime >= checkinTime && btnTime <= hoverDateTime;
+  };
+
+  const onClickCheckDate = (e, reserved) => {
+    if (changeInitialDate === false) setChangeDataTrue(true);
 
     const date = e.target.id.slice(7);
+    if (date === reserved) return;
+
     if (!checkin) {
-      console.log('checkin', date);
+      console.log('checkin1', date);
       setCheckinData(date);
     }
-    if (checkin) {
+    if (checkBeforeDate(date)) {
+      console.log('beforecheckin', date);
+      setCheckinData(date);
+    }
+    if (getDiff(reserved, true)) {
+      console.log('reject', date);
+      return;
+    }
+    if (checkin && !checkBeforeDate(date)) {
       console.log('checkout', date);
       setCheckoutData(date);
     }
     if (checkout) {
-      console.log('checkin', date);
+      console.log('recheckin', date);
       setCheckinData(date);
       setCheckoutData('');
     }
+  };
+
+  const onMouseenter = e => {
+    const date = e.target.id.slice(7);
+    if (!checkin || checkout || checkBeforeDate(date)) return;
+    setHoverDate(date);
   };
 
   return (
@@ -85,10 +123,13 @@ const CalendarContainer = ({
       nextMonthDates={nextMonthDates}
       onClickBeforeMonth={onClickBeforeMonth}
       onClickNextMonth={onClickNextMonth}
-      checkin={confirmCheckin}
-      checkout={confirmCheckout}
+      checkin={checkin}
+      checkout={checkout}
       onClickCheckDate={onClickCheckDate}
-      isChangeDate={isChangeDate}
+      onMouseenter={onMouseenter}
+      getDiff={getDiff}
+      hoverDate={hoverDate}
+      reservedDates={reservedDates}
     />
   );
 };
