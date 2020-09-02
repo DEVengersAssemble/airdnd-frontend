@@ -1,10 +1,55 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { AiOutlineRight, AiOutlineLeft } from 'react-icons/ai';
 import Button from './Button';
 
 const Calendar = ({ isScreenLarge }) => {
-  const days = Array.from({ length: 30 }, (v, i) => i + 1);
+  const today = new Date();
+  const initialState = {
+    thisMonth: {
+      firstDay: new Date(today.getFullYear(), today.getMonth(), 1).getDay(),
+      lastDate: new Date(
+        today.getFullYear(),
+        today.getMonth() + 1,
+        0,
+      ).getDate(),
+      month: today.getMonth() + 1,
+      year: today.getFullYear(),
+    },
+    nextMonth: {
+      firstDay: new Date(today.getFullYear(), today.getMonth() + 1, 1).getDay(),
+      lastDate: new Date(
+        today.getFullYear(),
+        today.getMonth() + 2,
+        0,
+      ).getDate(),
+      month: today.getMonth() + 2,
+      year: today.getFullYear(),
+    },
+  };
+
+  const [dateState, setDateState] = useState(initialState);
+  const { thisMonth, nextMonth } = dateState;
+  // firstDay.getMonth() //?
+  console.log(dateState);
+
+  // const firstDay = new Date(today.getFullYear(), today.getMonth(), 1).getDay();
+  // const lastDate = new Date(
+  //   today.getFullYear(),
+  //   today.getMonth() + 1,
+  //   0,
+  // ).getDate();
+
+  // console.log(firstDay, lastDate);
+
+  const thisMonthDays = Array.from(
+    { length: thisMonth.lastDate },
+    (v, i) => i + 1,
+  );
+  const nextMonthDays = Array.from(
+    { length: nextMonth.lastDate },
+    (v, i) => i + 1,
+  );
 
   return (
     <>
@@ -27,8 +72,8 @@ const Calendar = ({ isScreenLarge }) => {
             <li>토</li>
           </StDays>
           <StDates>
-            {days.map((day, i) => (
-              <StDateBtn key={i} btnType="circle">
+            {thisMonthDays.map((day, i) => (
+              <StDateBtn key={i} btnType="circle" margin={thisMonth.firstDay}>
                 {day}
               </StDateBtn>
             ))}
@@ -47,8 +92,8 @@ const Calendar = ({ isScreenLarge }) => {
               <li>토</li>
             </StDays>
             <StDates>
-              {days.map((day, i) => (
-                <StDateBtn key={i} btnType="circle">
+              {nextMonthDays.map((day, i) => (
+                <StDateBtn key={i} btnType="circle" margin={nextMonth.firstDay}>
                   {day}
                 </StDateBtn>
               ))}
@@ -133,6 +178,10 @@ const StDateBtn = styled(Button)`
   &:focus {
     background-color: ${({ theme }) => theme.color.black};
     color: ${({ theme }) => theme.color.white};
+  }
+
+  :first-child {
+    margin-left: ${({ margin }) => margin * 44}px;
   }
 `;
 
