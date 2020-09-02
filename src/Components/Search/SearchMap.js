@@ -4,13 +4,13 @@ import MapContainer from '../../Containers/Global/MapContainer';
 
 const SearchMap = ({ view, markers, mapState }) => {
   return (
-    <StWrapper mapState={mapState} view={view}>
+    <MapWrapper mapState={mapState} view={view}>
       <MapContainer markers={markers} />
-    </StWrapper>
+    </MapWrapper>
   );
 };
 
-const StWrapper = styled.aside`
+const MapWrapper = styled.aside`
   width: calc(100vw - 840px);
   display: ${({ mapState }) => (mapState ? 'block' : 'none')};
   max-height: 100vh;

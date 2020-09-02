@@ -125,30 +125,30 @@ const StSearchFormResultWrapper = styled.div`
 `;
 
 const SearchHeader = ({
-  isSearchBtnClicked,
+  headerState,
   handleLogoClick,
   handleSearchBtnClick,
   searchForm,
 }) => {
-  const { location, checkIn, checkOut, guests } = searchForm;
+  const { location, checkIn, checkOut, guests, adult, child } = searchForm;
+  console.log(checkIn, checkOut, guests);
   const [, checkInMonth, checkInDay] =
     checkIn && checkIn.replace(/\b0/g, '').split('/');
   const [, checkOutMonth, checkOutDay] =
     checkOut && checkOut.replace(/\b0/g, '').split('/');
-  const { adult, child } = guests;
-  const guestCount = adult + child;
+  const guestCount = +adult + +child;
   return (
-    <StSearchHeader isSearchBtnClicked={isSearchBtnClicked}>
+    <StSearchHeader headerState={headerState}>
       <Logo handleLogoClick={handleLogoClick}></Logo>
-      <StNavSearchWrapper isSearchBtnClicked={isSearchBtnClicked}>
-        <Navigation isSearchBtnClicked={isSearchBtnClicked}></Navigation>
-        <SearchFormContainer isSearchBtnClicked={isSearchBtnClicked} />
+      <StNavSearchWrapper headerState={headerState}>
+        <Navigation headerState={headerState}></Navigation>
+        <SearchFormContainer headerState={headerState} />
       </StNavSearchWrapper>
 
       <StOnScrollSearchButton
         btnType="oval"
         fontSize="14px"
-        isSearchBtnClicked={isSearchBtnClicked}
+        headerState={headerState}
         onClick={handleSearchBtnClick}
       >
         <StSearchFormResultWrapper dataExists={location}>

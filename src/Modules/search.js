@@ -9,6 +9,9 @@ const HOVER_HOME = 'search/HOVER_HOME';
 const BLUR_HOME = 'search/BLUR_HOME';
 const CHANGE_HEART = 'search/CHANGE_HEART';
 
+const OPEN_HEADER = 'search/OPEN_HEADER';
+const CLOSE_HEADER = 'search/CLOSE_HEADER';
+
 const OPEN_MAP = 'search/OPEN_MAP';
 const CLOSE_MAP = 'search/CLOSE_MAP';
 const SHOW_MAP = 'search/SHOW_MAP';
@@ -37,6 +40,9 @@ export const fetchData = fetchDataThunk(FETCH_DATA, api.fetchSearchedData);
 export const hoverHome = homeId => ({ type: HOVER_HOME, homeId });
 export const blurHome = () => ({ type: BLUR_HOME });
 export const changeHeart = homeId => ({ type: CHANGE_HEART, homeId });
+
+export const openHeader = () => ({ type: OPEN_HEADER });
+export const closeHeader = () => ({ type: CLOSE_HEADER });
 
 export const openMap = () => ({ type: OPEN_MAP });
 export const closeMap = () => ({ type: CLOSE_MAP });
@@ -135,6 +141,7 @@ const popupInit = {
 const initialState = {
   ...reducerUtils.initial(),
   searchForm: {},
+  headerState: false,
   viewState: 'result',
   mapState: true,
   mapZoom: 12,
@@ -235,6 +242,16 @@ const search = (state = initialState, action) => {
           //     : home,
           // ),
         },
+      };
+    case OPEN_HEADER:
+      return {
+        ...state,
+        headerState: true,
+      };
+    case CLOSE_HEADER:
+      return {
+        ...state,
+        headerState: false,
       };
     case SHOW_MAP:
       return {

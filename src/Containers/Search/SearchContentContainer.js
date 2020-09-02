@@ -21,10 +21,12 @@ const SearchContentContainer = () => {
     dispatch(fetchCenter(searchForm.location));
   }, []);
 
-  console.log(loading, error, data);
-  if (loading) console.log('==================loading========');
-  if (error) console.log('========ERROR================');
-  if (!data) return null;
+  if (loading)
+    return <div style={{ width: '100%', height: 'calc(100vh - 8rem)' }}></div>;
+  if (error)
+    return <div style={{ width: '100%', height: 'calc(100vh - 8rem)' }}></div>;
+  if (!data)
+    return <div style={{ width: '100%', height: 'calc(100vh - 8rem)' }}></div>;
   return <SearchContent />;
 };
 
