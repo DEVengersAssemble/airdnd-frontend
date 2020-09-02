@@ -91,7 +91,7 @@ const StWrapper = styled.li`
 const StHome = styled.a`
   text-decoration: none;
   display: flex;
-  width: 100%;
+  width: calc(100% - 300px);
   position: relative;
 `;
 
@@ -101,6 +101,7 @@ const StDetailWrapper = styled.div`
   padding: 0 1.7rem;
   position: relative;
   flex-grow: 1;
+  width: calc(100% - 300px);
 `;
 
 const StRating = styled(Rating)`
@@ -119,7 +120,7 @@ const StTitle = styled.span`
   color: ${({ theme }) => theme.color.black};
   font-size: 1.8rem;
   padding: 8px 0;
-  width: 450px;
+  width: 95%;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;

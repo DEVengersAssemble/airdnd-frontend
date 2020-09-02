@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import { StSmallSpan, StContentWrapper } from './FilterPopup';
 import Toggle from '../Global/Toggle';
 
@@ -13,7 +12,5 @@ const Refund = ({ toggle, handleClick, isModal }) => {
     </StContentWrapper>
   );
 };
-
-// const Wrapper = styled(StContentWrapper)``;
 
 export default Refund;
