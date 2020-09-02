@@ -1,14 +1,16 @@
 import React from 'react';
 import Division from './Division';
 import styled from 'styled-components';
-import Calendar from '../Global/Calendar';
+import CalendarContainer from '../../Containers/Global/CalendarContainer';
 import Button from '../Global/Button';
 
 const Schedule = () => {
   return (
-    <Division title="Ara-dong, Jeju-si에서 38박" padding="8px">
-      <StTravelTerm>2020년 9월 10일 - 2020년 9월 12일</StTravelTerm>
-      <Calendar />
+    <Division title="체크인 날짜를 선택해주세요." padding="8px">
+      <StTravelTerm>
+        여행 날짜를 입력하여 정확한 요금을 확인하세요.
+      </StTravelTerm>
+      <CalendarContainer />
       <StKeybordBtn transition transScale="0.88">
         <svg
           aria-hidden="true"

@@ -5,8 +5,10 @@ import searchForm from './searchForm';
 import wishlists from './wishlists';
 import trips from './trips';
 import message from './message';
+import home from './home';
 import modal from './modal';
 import map from './map';
+import reservation from './reservation';
 
 const rootReducer = combineReducers({
   user,
@@ -15,8 +17,10 @@ const rootReducer = combineReducers({
   wishlists,
   trips,
   message,
+  home,
   modal,
   map,
+  reservation,
 });
 
 export default rootReducer;

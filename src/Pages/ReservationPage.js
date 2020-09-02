@@ -1,12 +1,14 @@
 import React from 'react';
-import SubRouter from '../Routers/SubRouter';
 import ReservationHeader from '../Components/Reservation/ReservationHeader';
+import ReservationFooter from '../Components/Reservation/ReservationFooter';
+import ReservationMainContainer from '../Containers/Reservation/ReservationMainContainer';
 
 const ReservationPage = () => {
   return (
     <>
       <ReservationHeader />
-      <SubRouter />
+      <ReservationMainContainer />
+      <ReservationFooter />
     </>
   );
 };
