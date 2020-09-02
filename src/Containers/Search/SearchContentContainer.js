@@ -18,7 +18,8 @@ const SearchContentContainer = () => {
 
   useEffect(() => {
     dispatch(fetchData(searchForm));
-    dispatch(fetchCenter(searchForm.location));
+    // dispatch(fetchCenter(searchForm.location));
+    // window.scrollTo(0, 0);
   }, []);
 
   if (loading)
