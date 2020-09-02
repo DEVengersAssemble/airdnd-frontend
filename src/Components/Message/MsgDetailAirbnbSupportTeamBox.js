@@ -10,8 +10,14 @@ import {
   MdPhoneIphone,
   MdFlag,
 } from 'react-icons/md';
+import MsgDetailSupportModalContainer from '../../Containers/Message/MsgDetailSupportModalContainer';
+import MsgFlagModalContainer from '../../Containers/Message/MsgFlagModalContainer';
 
-const MsgDetailAirbnbSupportTeamBox = ({ isCanceled }) => {
+const MsgDetailAirbnbSupportTeamBox = ({
+  isCanceled,
+  onClickOpenModal,
+  onClickOpenFlagModal,
+}) => {
   return (
     <MsgDetailAstWrapper>
       <MsgDetailAstOuterWrapper>
@@ -41,7 +47,7 @@ const MsgDetailAirbnbSupportTeamBox = ({ isCanceled }) => {
           </StButton>
         </Link>
         {isCanceled ? (
-          <StButton>
+          <StButton onClick={onClickOpenFlagModal}>
             <MsgDetailAstButtonWrapper>
               <MsgDetailAstButtonInnerWrapper>
                 <MdFlag />
@@ -65,7 +71,7 @@ const MsgDetailAirbnbSupportTeamBox = ({ isCanceled }) => {
                 </MsgDetailAstButtonWrapper>
               </StButton>
             </a>
-            <StButton>
+            <StButton onClick={onClickOpenModal}>
               <MsgDetailAstButtonWrapper>
                 <MsgDetailAstButtonInnerWrapper>
                   <MdPhoneIphone />
@@ -79,6 +85,8 @@ const MsgDetailAirbnbSupportTeamBox = ({ isCanceled }) => {
           </>
         )}
       </MsgDetailAstOuterWrapper>
+      <MsgDetailSupportModalContainer />
+      <MsgFlagModalContainer />
     </MsgDetailAstWrapper>
   );
 };

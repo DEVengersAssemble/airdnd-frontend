@@ -1,12 +1,12 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import MsgDetailSubInfoBox from '../../Components/Message/MsgDetailSubInfoBox';
+import MsgDetailRefundBox from '../../Components/Message/MsgDetailRefundBox';
 import { openModal } from '../../Modules/message';
 
-const MsgDetailSubInfoBoxContainer = () => {
+const MsgDetailRefundBoxContainer = () => {
   // ! redux
   const { activeIndex, filteredMsgs } = useSelector(state => state.message);
-  const { reservations, profileImg } = useSelector(state => state.trips);
+  const { reservations } = useSelector(state => state.trips);
   const dispatch = useDispatch();
 
   // ! variable
@@ -21,23 +21,15 @@ const MsgDetailSubInfoBoxContainer = () => {
 
   // ! modal event
   const onClickOpenModal = () => {
-    dispatch(openModal('pdf'));
+    dispatch(openModal('business'));
   };
 
   return (
-    <MsgDetailSubInfoBox
-      guest={reservation && reservation.guest.length}
-      profileImg={profileImg}
-      guestProfileImg={
-        reservation &&
-        reservation.guest.length &&
-        reservation.guest[0].profileImg
-      }
-      reservationId={reservation && reservation.reservationId}
-      isCanceled={reservation && reservation.isCanceled}
+    <MsgDetailRefundBox
+      price={reservation && reservation.price}
       onClickOpenModal={onClickOpenModal}
     />
   );
 };
 
-export default MsgDetailSubInfoBoxContainer;
+export default MsgDetailRefundBoxContainer;
