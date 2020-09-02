@@ -16,14 +16,12 @@ const StSearchHeader = styled.header`
   width: 100%;
   justify-content: space-between;
   margin: 0;
-  height: ${({ isSearchBtnClicked }) =>
-    isSearchBtnClicked ? '180px' : '80px'};
+  height: ${({ headerState }) => (headerState ? '180px' : '80px')};
   background: ${({ theme }) => theme.color.white};
   border-bottom: 1px solid ${({ theme }) => theme.color.line};
   padding: 20px 20px 15px 20px;
   @media ${({ theme }) => theme.size.iPad} {
-    height: ${({ isSearchBtnClicked }) =>
-      isSearchBtnClicked ? '230px' : '80px'};
+    height: ${({ headerState }) => (headerState ? '230px' : '80px')};
   }
 `;
 
@@ -60,8 +58,7 @@ const StNavSearchWrapper = styled.div`
   animation-duration: 0.2s;
   animation-timing-function: ease-out;
   animation-fill-mode: forwards;
-  animation-name: ${({ isSearchBtnClicked }) =>
-    isSearchBtnClicked ? slideDown : slideUp};
+  animation-name: ${({ headerState }) => (headerState ? slideDown : slideUp)};
 
   @media ${({ theme }) => theme.size.medium} {
     width: 76%;
@@ -82,8 +79,8 @@ const StButtonGroupWrapper = styled.div`
 `;
 
 const StOnScrollSearchButton = styled(Button)`
-  ${({ isSearchBtnClicked }) =>
-    isSearchBtnClicked &&
+  ${({ headerState }) =>
+    headerState &&
     css`
       display: none;
     `}
@@ -125,7 +122,7 @@ const StSearchFormResultWrapper = styled.div`
 `;
 
 const SearchHeader = ({
-  isSearchBtnClicked,
+  headerState,
   handleLogoClick,
   handleSearchBtnClick,
   searchForm,
@@ -135,20 +132,19 @@ const SearchHeader = ({
     checkIn && checkIn.replace(/\b0/g, '').split('/');
   const [, checkOutMonth, checkOutDay] =
     checkOut && checkOut.replace(/\b0/g, '').split('/');
-  const { adult, child } = guests;
-  const guestCount = adult + child;
+  const guestCount = guests;
   return (
-    <StSearchHeader isSearchBtnClicked={isSearchBtnClicked}>
+    <StSearchHeader headerState={headerState}>
       <Logo handleLogoClick={handleLogoClick}></Logo>
-      <StNavSearchWrapper isSearchBtnClicked={isSearchBtnClicked}>
-        <Navigation isSearchBtnClicked={isSearchBtnClicked}></Navigation>
-        <SearchFormContainer isSearchBtnClicked={isSearchBtnClicked} />
+      <StNavSearchWrapper headerState={headerState}>
+        <Navigation headerState={headerState}></Navigation>
+        <SearchFormContainer headerState={headerState} />
       </StNavSearchWrapper>
 
       <StOnScrollSearchButton
         btnType="oval"
         fontSize="14px"
-        isSearchBtnClicked={isSearchBtnClicked}
+        headerState={headerState}
         onClick={handleSearchBtnClick}
       >
         <StSearchFormResultWrapper dataExists={location}>
