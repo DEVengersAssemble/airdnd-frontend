@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setSearchData } from '../../Modules/searchForm';
 import DetailGuestPopup from '../../Components/Detail/DetailGuestPopup';
 
-const DeatailGuestPopupContainer = () => {
+const DeatailGuestPopupContainer = ({ displayName, ...rest }) => {
   const { guests } = useSelector(state => state.searchForm);
   const dispatch = useDispatch();
   const [popupState, SetPopupState] = useState(false);
@@ -62,6 +62,8 @@ const DeatailGuestPopupContainer = () => {
       onClosePopup={onClosePopup}
       increaseGuestCount={increaseGuestCount}
       decreaseGuestCount={decreaseGuestCount}
+      displayName={displayName}
+      {...rest}
     />
   );
 };

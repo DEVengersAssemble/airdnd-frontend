@@ -13,12 +13,14 @@ const DetailGuestPopup = ({
   increaseGuestCount,
   decreaseGuestCount,
   guests,
+  displayName,
+  ...rest
 }) => {
   const { adult, child, infant } = guests;
 
   return (
-    <StGuests tabIndex="0" ref={popup} onClick={onOpenPopup}>
-      <StName>인원</StName>
+    <StGuests tabIndex="0" ref={popup} onClick={onOpenPopup} {...rest}>
+      {displayName && <StName>인원</StName>}
       <StContent>
         게스트 {adult + child > 0 ? adult + child : 0}명
         {!!infant && infant > 0 && `, 유아 ${infant}명`}
