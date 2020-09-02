@@ -16,6 +16,7 @@ const MsgDetailSubInfoBox = ({
   reservationId,
   isCanceled,
   onClickOpenModal,
+  homeId,
 }) => {
   return (
     <MsgDetailSiWrapper>
@@ -62,12 +63,12 @@ const MsgDetailSubInfoBox = ({
               </MsgDetailSiReservedNumber>
             </MsgDetailSiReservedNumberWrapper>
           </MsgDetailSiInnerWrapper>
-          <Link to="/detail" target="_blank">
+          <Link to={`/detail/${homeId}`} target="_blank">
             <StButton>
               <MsgDetailSiButtonWrapper>
                 <MsgDetailSiButtonInnerWrapper>
                   <FaDoorOpen />
-                  <MsgDetailSiButtonText>숙소 보기</MsgDetailSiButtonText>
+                  <MsgDetailSiButtonText>기 보기</MsgDetailSiButtonText>
                 </MsgDetailSiButtonInnerWrapper>
                 <MdKeyboardArrowRight />
               </MsgDetailSiButtonWrapper>

@@ -18,7 +18,10 @@ const MsgDetailReservedHomeLinkBoxContainer = () => {
   );
 
   return (
-    <MsgDetailReservedHomeLinkBox rules={reservation && reservation.rules} />
+    <MsgDetailReservedHomeLinkBox
+      rules={reservation && reservation.rules}
+      homeId={reservation && reservation.homeId}
+    />
   );
 };
 

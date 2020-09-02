@@ -18,6 +18,7 @@ const MessageSection = ({ msgDetailSectionState, msgListSectionState }) => {
 };
 
 const MessageSectionWrapper = styled.section`
+  border: 1px solid red;
   background-color: ${({ theme }) => theme.color.white};
   display: flex;
   flex-direction: column;

@@ -3,8 +3,6 @@ import styled from 'styled-components';
 import { MdClear } from 'react-icons/md';
 
 const Tooltip = ({ state }) => {
-  console.log(state);
-  // state: all, hide
   return (
     <>
       <StTooltip>

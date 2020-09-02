@@ -36,6 +36,7 @@ const MsgDetailSubInfoBoxContainer = () => {
       reservationId={reservation && reservation.reservationId}
       isCanceled={reservation && reservation.isCanceled}
       onClickOpenModal={onClickOpenModal}
+      homeId={reservation && reservation.homeId}
     />
   );
 };

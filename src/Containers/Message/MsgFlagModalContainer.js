@@ -5,7 +5,6 @@ import { closeModal } from '../../Modules/message';
 
 const MsgFlagModalContainer = () => {
   const flag = useSelector(state => state.message.modalState.flag);
-  console.log('flag', flag);
   const dispatch = useDispatch();
 
   const onClickCloseModal = () => {

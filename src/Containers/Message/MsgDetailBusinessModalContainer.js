@@ -5,7 +5,6 @@ import { closeModal } from '../../Modules/message';
 
 const MsgDetailBusinessModalContainer = () => {
   const business = useSelector(state => state.message.modalState.business);
-  console.log(business);
   const dispatch = useDispatch();
 
   const onClickCloseModal = () => {
