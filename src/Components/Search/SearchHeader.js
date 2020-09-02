@@ -127,12 +127,12 @@ const SearchHeader = ({
   handleSearchBtnClick,
   searchForm,
 }) => {
-  const { location, checkIn, checkOut, adult, child } = searchForm;
+  const { location, checkIn, checkOut, guests } = searchForm;
   const [, checkInMonth, checkInDay] =
     checkIn && checkIn.replace(/\b0/g, '').split('/');
   const [, checkOutMonth, checkOutDay] =
     checkOut && checkOut.replace(/\b0/g, '').split('/');
-  const guestCount = +adult + +child;
+  const guestCount = guests;
   return (
     <StSearchHeader headerState={headerState}>
       <Logo handleLogoClick={handleLogoClick}></Logo>
