@@ -1,13 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { SetDatePopup } from '../../Components/Search/FilterPopup';
-
-let prevFilter = {};
 
 const SetDatePopupContainer = ({ popupState, onClose }) => {
   const popup = useRef();
   const closePopup = ({ target }) => {
     if (!popupState || popup.current.contains(target)) return;
-    onClose('setDate');
+    onClose('price');
+  };
+
+  const onClickBtn = () => {
+    onClose('price');
   };
 
   useEffect(() => {
@@ -19,9 +21,9 @@ const SetDatePopupContainer = ({ popupState, onClose }) => {
 
   return (
     <div ref={popup}>
-      <SetDatePopup popupState={popupState} />
+      <SetDatePopup popupState={popupState} onClickBtn={onClickBtn} />
     </div>
   );
 };
 
-export default SetDatePopupContainer;
+export default React.memo(SetDatePopupContainer);

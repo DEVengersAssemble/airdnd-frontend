@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import MsgDetailSectionHeaderContainer from '../../Containers/Message/MsgDetailSectionHeaderContainer';
-import MsgDetailSectionMain from './MsgDetailSectionMain';
+import MsgDetailSectionMainContainer from '../../Containers/Message/MsgDetailSectionMainContainer';
 
 const MessageDetailSection = ({ msgSectionStates }) => {
   const { msgDetailSectionState, msgListSectionState } = msgSectionStates;
@@ -9,7 +9,7 @@ const MessageDetailSection = ({ msgSectionStates }) => {
   return (
     <MessageDetailSectionWrapper msgDetailSectionState={msgDetailSectionState}>
       <MsgDetailSectionHeaderContainer />
-      <MsgDetailSectionMain />
+      <MsgDetailSectionMainContainer />
     </MessageDetailSectionWrapper>
   );
 };

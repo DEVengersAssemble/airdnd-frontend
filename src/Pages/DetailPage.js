@@ -13,7 +13,7 @@ const DetailPage = () => {
   return (
     <>
       <DetailHeaderContainer />
-      <main style={{ paddingTop: '80px' }}>
+      <main>
         <DetailMainContainer />
         <HomeFooter />
       </main>

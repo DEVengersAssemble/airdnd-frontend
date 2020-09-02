@@ -7,7 +7,7 @@ import Profile from '../Global/Profile';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 
 const TripsPastCardItem = ({ trip, myInfo, ci, co }) => {
-  const { title, homeImage, location, withGuest, guest } = trip;
+  const { title, homeImage, address, withGuest, guest } = trip;
   const { lastName: myLastName, profileImg: myProfileImg } = myInfo;
   const { lastName: gstLastName, profileImg: gstProfileImg } = guest;
 
@@ -35,7 +35,7 @@ const TripsPastCardItem = ({ trip, myInfo, ci, co }) => {
           <TripsPastCheckInOut>
             {ci} - {co}
           </TripsPastCheckInOut>
-          <TripsPastLocation>{location}</TripsPastLocation>
+          <TripsPastLocation>{address}</TripsPastLocation>
         </TripsPastCkLcWrapper>
         <Link to="/schedule/1">
           <StButton>

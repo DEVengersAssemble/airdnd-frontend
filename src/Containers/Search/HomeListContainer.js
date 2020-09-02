@@ -5,8 +5,11 @@ import HomeContainer from './HomeContainer';
 import HomeCardContainer from './HomeCardContainer';
 
 const HomeListContainer = () => {
-  const { homes, mapState } = useSelector(state => state.search);
+  const { data, mapState } = useSelector(state => state.search);
+  const { homes } = data;
 
+  // console.log('data 받아왓다매ㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐ', data);
+  // console.log(homes);
   return (
     <>
       <HomeList mapState={mapState}>
@@ -22,4 +25,4 @@ const HomeListContainer = () => {
   );
 };
 
-export default HomeListContainer;
+export default React.memo(HomeListContainer);

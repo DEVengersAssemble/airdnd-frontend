@@ -6,8 +6,8 @@ import Button from '../Global/Button';
 import { IoIosCopy } from 'react-icons/io';
 import { MdKeyboardArrowRight, MdLocationOn } from 'react-icons/md';
 
-const MsgDetailAddressBox = () => {
-  const address = '한국, 서울특별시, 성동구, 성수2가3동, 연무장13길, 9';
+const MsgDetailAddressBox = ({ address, lat, lng }) => {
+  // const address = '한국, 서울특별시, 성동구, 성수2가3동, 연무장13길, 9';
 
   return (
     <MsgDetailAdrsWrapper>
@@ -16,9 +16,7 @@ const MsgDetailAddressBox = () => {
           <MsgDetailAdrsTitle>찾아가는 방법</MsgDetailAdrsTitle>
           <MsgDetailAdrsAddrestWrapper>
             <MsgDetailAdrsAddressTitle>주소</MsgDetailAdrsAddressTitle>
-            <MsgDetailAdrsAddress>
-              한국, 서울특별시, 성동구, 성수2가3동, 연무장13길, 9
-            </MsgDetailAdrsAddress>
+            <MsgDetailAdrsAddress>{address}</MsgDetailAdrsAddress>
           </MsgDetailAdrsAddrestWrapper>
         </MsgDetailAdrsInnerWrapper>
         <CopyToClipboard text={address}>
@@ -33,7 +31,7 @@ const MsgDetailAddressBox = () => {
           </StButton>
         </CopyToClipboard>
         <a
-          href={`https://www.google.com/maps/place/<homename>/<lang>/<long>`}
+          href={`https://www.google.com/maps/place/서울특별시+관악구+봉천동+1668-16/@${lat}/@${lng}`}
           target="_blank"
           rel="noopener noreferrer"
         >
