@@ -127,8 +127,7 @@ const SearchHeader = ({
   handleSearchBtnClick,
   searchForm,
 }) => {
-  const { location, checkIn, checkOut, guests, adult, child } = searchForm;
-  console.log(checkIn, checkOut, guests);
+  const { location, checkIn, checkOut, adult, child } = searchForm;
   const [, checkInMonth, checkInDay] =
     checkIn && checkIn.replace(/\b0/g, '').split('/');
   const [, checkOutMonth, checkOutDay] =

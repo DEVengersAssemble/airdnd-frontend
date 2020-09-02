@@ -13,7 +13,7 @@ export const fetchSearchedData = async ({
   const CO = checkOut.split('/').join('-');
   console.log(location);
   const response = await axios.get(
-    `back/initialState/location/${location}/checkIn/${CI}/checkOut/${CO}/adults/${guests}`,
+    `back/search/location/${location}/checkIn/${CI}/checkOut/${CO}/adults/${guests}`,
   );
   console.log('데이터 겟햇다=======================', response);
   return response.data;

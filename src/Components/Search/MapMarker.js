@@ -6,10 +6,14 @@ import { AiFillHome } from 'react-icons/ai';
 import Button from '../Global/Button';
 import { Heart } from '../Global/Heart';
 import HomePopupContainer from '../../Containers/Search/HomePopupContainer';
+
 const getPixelPositionOffset = (width, height) => ({
-  x: width + width / 2,
-  y: -(height * 2),
+  // x: width + width / 2,
+  // y: -(height * 2),
+  x: width / 20,
+  y: height / 20,
 });
+
 const MapMarker = ({
   theme,
   store,
@@ -31,7 +35,7 @@ const MapMarker = ({
       <OverlayView
         position={location}
         mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
-        getPixelPositionOffset={getPixelPositionOffset}
+        // getPixelPositionOffset={getPixelPositionOffset}
       >
         {dateDiff ? (
           <PriceMarker
@@ -133,4 +137,4 @@ const MiniHeart = styled(Heart)`
   top: -0.3rem;
   right: -0.3rem;
 `;
-export default MapMarker;
+export default React.memo(MapMarker);
