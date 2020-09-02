@@ -8,26 +8,52 @@ import {
   resetModalFilter,
   setModalFilter,
   closePopup,
+  modalFilterInit,
 } from '../../Modules/search';
+import _ from 'lodash';
 
 let prevFilter = {};
 
+const seeInit = {
+  conveninence: false,
+  facility: false,
+  hostLang: false,
+};
+
 const FilterModalContainer = () => {
-  const seeInit = {
-    conveninence: false,
-    facility: false,
-    hostLang: false,
-  };
   const [seemore, setSeemore] = useState({ seeInit });
   const onSeemore = name => setSeemore({ ...seeInit, [name]: !seemore[name] });
-  const { popup, data, filterApplied, viewState } = useSelector(
+
+  const { filterCondition } = useSelector(state => state.search.data);
+  const { popup, filterApplied, viewState } = useSelector(
     state => state.search,
   );
-  const { filterCondition } = data && data;
+
+  const {
+    instantBooking,
+    bedroom,
+    convenience,
+    convenienceList,
+    facilityList,
+    hostLangList,
+  } = filterApplied;
+
+  const current = {
+    instantBooking,
+    bedroom,
+    convenience,
+    convenienceList,
+    facilityList,
+    hostLangList,
+  };
+
+  const isDisabled = _.isEqual(current, modalFilterInit(filterCondition));
+
   const { min, max } = filterApplied.price;
   const [range, setRange] = useState({ value: [min, max] });
+
   const dispatch = useDispatch();
-  const onClose = () => dispatch(closePopup('modal'));
+  const onClose = () => dispatch(closePopup('modal', isDisabled));
   const onToggle = (name, value) => dispatch(applyToggleFilter(name, value));
   const onIncrease = (name, value) => dispatch(applyCounterFilter(name, value));
   const onDecrease = (name, value) => dispatch(applyCounterFilter(name, value));
