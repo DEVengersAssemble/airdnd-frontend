@@ -1,8 +1,11 @@
 import React, { useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
 import { SetDatePopup } from '../../Components/Search/FilterPopup';
+import { openHeader } from '../../Modules/search';
 
 const SetDatePopupContainer = ({ popupState, onClose }) => {
   const popup = useRef();
+  const dispatch = useDispatch();
   const closePopup = ({ target }) => {
     if (!popupState || popup.current.contains(target)) return;
     onClose('price');
@@ -10,6 +13,7 @@ const SetDatePopupContainer = ({ popupState, onClose }) => {
 
   const onClickBtn = () => {
     onClose('price');
+    dispatch(openHeader());
   };
 
   useEffect(() => {

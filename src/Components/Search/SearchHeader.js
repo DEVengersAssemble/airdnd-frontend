@@ -16,14 +16,12 @@ const StSearchHeader = styled.header`
   width: 100%;
   justify-content: space-between;
   margin: 0;
-  height: ${({ isSearchBtnClicked }) =>
-    isSearchBtnClicked ? '180px' : '80px'};
+  height: ${({ headerState }) => (headerState ? '180px' : '80px')};
   background: ${({ theme }) => theme.color.white};
   border-bottom: 1px solid ${({ theme }) => theme.color.line};
   padding: 20px 20px 15px 20px;
   @media ${({ theme }) => theme.size.iPad} {
-    height: ${({ isSearchBtnClicked }) =>
-      isSearchBtnClicked ? '230px' : '80px'};
+    height: ${({ headerState }) => (headerState ? '230px' : '80px')};
   }
 `;
 
@@ -60,8 +58,7 @@ const StNavSearchWrapper = styled.div`
   animation-duration: 0.2s;
   animation-timing-function: ease-out;
   animation-fill-mode: forwards;
-  animation-name: ${({ isSearchBtnClicked }) =>
-    isSearchBtnClicked ? slideDown : slideUp};
+  animation-name: ${({ headerState }) => (headerState ? slideDown : slideUp)};
 
   @media ${({ theme }) => theme.size.medium} {
     width: 76%;
@@ -82,8 +79,8 @@ const StButtonGroupWrapper = styled.div`
 `;
 
 const StOnScrollSearchButton = styled(Button)`
-  ${({ isSearchBtnClicked }) =>
-    isSearchBtnClicked &&
+  ${({ headerState }) =>
+    headerState &&
     css`
       display: none;
     `}
