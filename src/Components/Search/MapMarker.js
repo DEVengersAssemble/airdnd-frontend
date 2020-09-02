@@ -25,7 +25,7 @@ const MapMarker = ({
 
   return (
     <Marker
-      position={location}
+      position={{ lat: +location.lat, lng: +location.lng }}
       icon={{
         scale: 0,
         path: '',
@@ -77,10 +77,7 @@ const MapMarker = ({
         )}
       </OverlayView>
       {isOpen && (
-        <InfoBox
-          options={{ closeBoxURL: '', enableEventPropagation: true }}
-          onClick={() => console.log('infoBox')}
-        >
+        <InfoBox options={{ closeBoxURL: '', enableEventPropagation: true }}>
           <HomePopupContainer
             home={marker}
             store={store}

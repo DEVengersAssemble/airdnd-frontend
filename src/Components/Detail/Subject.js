@@ -1,40 +1,77 @@
-import React from 'react';
-import styled, { css } from 'styled-components';
+import React, { useState } from 'react';
+import styled, { css, keyframes } from 'styled-components';
 import { FaCrown } from 'react-icons/fa';
 import { FiShare } from 'react-icons/fi';
-import { MdShare } from 'react-icons/md';
 import Rating from '../Global/Rating';
 import Button from '../Global/Button';
 import HomePhotos from './HomePhotos';
 import { Heart } from '../Global/Heart';
 
-const Subject = () => {
+const Subject = ({ isLoading, home }) => {
+  const [bookmark, setBookmark] = useState(false);
+
+  const onClick = () => setBookmark(!bookmark);
+
   return (
     <StDetailTitle>
-      <h2>S9[공항 1.7km, 5분] 퀸베드 1개 프리미엄 레지던스,제주의 중심</h2>
-      <StLinkWrapper>
-        <Rating scale="1.4" rate="4.55" count="67" />
-        <StDot>·</StDot>
-        <StSuperHost>
-          <FaCrown style={{ color: '#FF385C' }} />
-          <span>슈퍼호스트</span>
-        </StSuperHost>
-        <StDot>·</StDot>
-        <StLocationLink>Cheiu, 제주도, 한국</StLocationLink>
-        <StButton transition>
-          <FiShare />
-          공유하기
-        </StButton>
-        <StButton transition>
-          <StHeart size="smaller" bgColor="white" stroke="black" />
-          <StHeart size="smaller" bgColor="main" stroke="main" />
-          저장
-        </StButton>
+      <StH2 isLoading={isLoading}>{home && home.title}</StH2>
+      <StLinkWrapper isLoading={isLoading}>
+        {!isLoading && (
+          <>
+            <Rating
+              scale="1.4"
+              rate={home.reviews.rating}
+              count={home.reviews.count}
+            />
+            {home.host.isSupperhost && (
+              <>
+                <StDot>·</StDot>
+                <StSuperHost>
+                  <FaCrown style={{ color: '#FF385C' }} />
+                  <span>슈퍼호스트</span>
+                </StSuperHost>
+              </>
+            )}
+            <StDot>·</StDot>
+            <StLocationLink>{home.address}</StLocationLink>
+            <StButton transition>
+              <FiShare />
+              공유하기
+            </StButton>
+            <StButton transition onClick={onClick}>
+              <StHeart
+                size="smaller"
+                bgColor={bookmark ? 'main' : 'white'}
+                stroke={bookmark ? 'main' : 'black'}
+              />
+              저장
+            </StButton>
+          </>
+        )}
       </StLinkWrapper>
-      <HomePhotos />
+      <HomePhotos isLoading={isLoading} home={home} />
     </StDetailTitle>
   );
 };
+
+const skeleton = keyframes`
+  0% {
+    opacity: 0.1;
+  }
+  100% {
+    opacity: 0.3;
+  }
+`;
+
+const skeletonUi = css`
+  background-color: currentColor;
+  animation-name: ${skeleton};
+  animation-duration: 0.6s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+`;
 
 const inlineFlex = css`
   display: inline-flex;
@@ -42,25 +79,44 @@ const inlineFlex = css`
 `;
 
 const StDetailTitle = styled.section`
-  /* background-color: #f5f9e8; */
   max-width: 1200px;
   padding: 0 40px;
+  padding-top: 2.4rem;
   margin: 0 auto;
-  & h2 {
-    padding-top: 2.4rem;
-    margin-bottom: 0.5rem;
-    font-size: 2.6rem;
-    line-height: 30px;
-    font-weight: 600;
-    word-break: break-word;
-  }
+`;
+
+const StH2 = styled.h2`
+  margin-bottom: 0.5rem;
+  font-size: 2.6rem;
+  line-height: 3rem;
+  font-weight: 600;
+  word-break: break-word;
+
+  ${({ isLoading }) =>
+    isLoading &&
+    css`
+      width: 48rem;
+      height: 3rem;
+      ${skeletonUi}
+    `}
 `;
 
 const StLinkWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 1.6rem;
   font-size: 14px;
+
+  ${({ isLoading }) =>
+    isLoading &&
+    css`
+      width: 32rem;
+      height: 16px;
+      margin-top: 1.6rem;
+      margin-bottom: 2.2rem;
+      ${skeletonUi};
+    `}
 `;
 
 const StDot = styled.span`
@@ -98,4 +154,4 @@ const StHeart = styled(Heart)`
   height: 16px;
 `;
 
-export default Subject;
+export default React.memo(Subject);

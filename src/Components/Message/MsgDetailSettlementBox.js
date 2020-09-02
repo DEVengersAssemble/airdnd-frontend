@@ -9,7 +9,7 @@ import {
   MdReceipt,
 } from 'react-icons/md';
 
-const MsgDetailSettlementBox = () => {
+const MsgDetailSettlementBox = ({ price }) => {
   return (
     <MsgDetailSettlementWrapper>
       <MsgDetailSettlementOuterWrapper>
@@ -19,7 +19,7 @@ const MsgDetailSettlementBox = () => {
             <MsgDetailSettlementAddressTitle>
               총 비용
             </MsgDetailSettlementAddressTitle>
-            <MsgDetailSettlementAddress>₩78010</MsgDetailSettlementAddress>
+            <MsgDetailSettlementAddress>₩{price}</MsgDetailSettlementAddress>
           </MsgDetailSettlementAddrestWrapper>
         </MsgDetailSettlementInnerWrapper>
         <StButton>

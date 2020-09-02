@@ -53,4 +53,4 @@ const StSpan = styled.span`
   font-size: 1.4rem;
 `;
 
-export default SearchResult;
+export default React.memo(SearchResult);

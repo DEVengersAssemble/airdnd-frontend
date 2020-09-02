@@ -1,75 +1,152 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { lighten } from 'polished';
 import { MdKeyboardArrowRight, MdPrint, MdReceipt } from 'react-icons/md';
-import { FaGlobe } from 'react-icons/fa';
+import { FaGlobe, FaDoorOpen } from 'react-icons/fa';
 import Profile from '../Global/Profile';
 import Button from '../Global/Button';
 
-const MsgDetailSubInfoBox = () => {
-  // Canceled props일때 render 작업 필요
-
+const MsgDetailSubInfoBox = ({
+  guest,
+  profileImg,
+  guestProfileImg,
+  reservationId,
+  isCanceled,
+}) => {
   return (
     <MsgDetailSiWrapper>
-      <MsgDetailSiOuterWrapper>
-        <MsgDetailSiInnerWrapper>
-          <MsgDetailSiTitle>예약 세부정보</MsgDetailSiTitle>
-          <MsgDetailSiGuestProfilesWrapper>
-            <MsgDetailSiGuestWrapper>
-              <MsgDetailSiGuestText>게스트</MsgDetailSiGuestText>
-              <MsgDetailSiGuestCount>게스트 2명</MsgDetailSiGuestCount>
-            </MsgDetailSiGuestWrapper>
-            <MsgDetailSiGuestProfileLists>
-              <MsgDetailSiGuestProfileItem>
-                <Profile lastName="박" size="4.8rem" />
-              </MsgDetailSiGuestProfileItem>
-              <MsgDetailSiGuestProfileItem>
-                <Profile lastName="박" size="4.8rem" />
-              </MsgDetailSiGuestProfileItem>
-            </MsgDetailSiGuestProfileLists>
-          </MsgDetailSiGuestProfilesWrapper>
-          <MsgDetailSiReservedNumberWrapper>
-            <MsgDetailSiReservedNumberText>
-              예약 번호
-            </MsgDetailSiReservedNumberText>
-            <MsgDetailSiReservedNumber>HMAAHJX3BX</MsgDetailSiReservedNumber>
-          </MsgDetailSiReservedNumberWrapper>
-        </MsgDetailSiInnerWrapper>
-        <StButton>
-          <MsgDetailSiButtonWrapper>
-            <MsgDetailSiButtonInnerWrapper>
-              <FaGlobe />
-              <MsgDetailSiButtonText>
-                여행일정표 PDF로 받기(비자신청용)
-              </MsgDetailSiButtonText>
-            </MsgDetailSiButtonInnerWrapper>
-            <MdKeyboardArrowRight />
-          </MsgDetailSiButtonWrapper>
-        </StButton>
-        <Link to="/printsubinfo" target="_blank">
+      {isCanceled ? (
+        <MsgDetailSiOuterWrapper>
+          <MsgDetailSiInnerWrapper>
+            <MsgDetailSiTitle>예약 세부정보</MsgDetailSiTitle>
+            <MsgDetailSiReservedNumberWrapper isCanceled={isCanceled}>
+              <MsgDetailSiReservedNumberText>
+                예약 번호
+              </MsgDetailSiReservedNumberText>
+              <MsgDetailSiReservedNumber>
+                {reservationId}
+              </MsgDetailSiReservedNumber>
+            </MsgDetailSiReservedNumberWrapper>
+            <MsgDetailSiReservedNumberWrapper>
+              <MsgDetailSiReservedNumberText>
+                환불 정책
+              </MsgDetailSiReservedNumberText>
+              <MsgDetailSiReservedNumber>
+                유연. 체크인 1일 전까지 취소 시 전액 환불.
+              </MsgDetailSiReservedNumber>
+            </MsgDetailSiReservedNumberWrapper>
+            <MsgDetailSiReservedNumberWrapper>
+              <MsgDetailSiReservedNumberText>
+                결제 세부정보
+              </MsgDetailSiReservedNumberText>
+              <MsgDetailSiReservedNumber>
+                <div>총 비용: ₩0</div>
+                <Link to="/printreceipt" target="_blank">
+                  <Button
+                    btnType="underlined"
+                    padding="0rem"
+                    hover={'color: black'}
+                    style={{
+                      color: 'gray',
+                      borderRadius: '0px',
+                      marginTop: '1rem',
+                    }}
+                  >
+                    영수증 보기
+                  </Button>
+                </Link>
+              </MsgDetailSiReservedNumber>
+            </MsgDetailSiReservedNumberWrapper>
+          </MsgDetailSiInnerWrapper>
+          <Link to="/detail" target="_blank">
+            <StButton>
+              <MsgDetailSiButtonWrapper>
+                <MsgDetailSiButtonInnerWrapper>
+                  <FaDoorOpen />
+                  <MsgDetailSiButtonText>숙소 보기</MsgDetailSiButtonText>
+                </MsgDetailSiButtonInnerWrapper>
+                <MdKeyboardArrowRight />
+              </MsgDetailSiButtonWrapper>
+            </StButton>
+          </Link>
+        </MsgDetailSiOuterWrapper>
+      ) : (
+        <MsgDetailSiOuterWrapper>
+          <MsgDetailSiInnerWrapper>
+            <MsgDetailSiTitle>예약 세부정보</MsgDetailSiTitle>
+            <MsgDetailSiGuestProfilesWrapper>
+              <MsgDetailSiGuestWrapper>
+                <MsgDetailSiGuestText>게스트</MsgDetailSiGuestText>
+                <MsgDetailSiGuestCount>
+                  게스트 {guest + 1}명
+                </MsgDetailSiGuestCount>
+              </MsgDetailSiGuestWrapper>
+              <MsgDetailSiGuestProfileLists guest={guest}>
+                {!!guest && (
+                  <MsgDetailSiGuestProfileItem>
+                    <Profile
+                      lastName="박"
+                      size="4.8rem"
+                      profileImg={guestProfileImg}
+                    />
+                  </MsgDetailSiGuestProfileItem>
+                )}
+                <MsgDetailSiGuestProfileItem>
+                  <Profile
+                    lastName="박"
+                    size="4.8rem"
+                    profileImg={profileImg}
+                  />
+                </MsgDetailSiGuestProfileItem>
+              </MsgDetailSiGuestProfileLists>
+            </MsgDetailSiGuestProfilesWrapper>
+            <MsgDetailSiReservedNumberWrapper>
+              <MsgDetailSiReservedNumberText>
+                예약 번호
+              </MsgDetailSiReservedNumberText>
+              <MsgDetailSiReservedNumber>
+                {reservationId}
+              </MsgDetailSiReservedNumber>
+            </MsgDetailSiReservedNumberWrapper>
+          </MsgDetailSiInnerWrapper>
           <StButton>
             <MsgDetailSiButtonWrapper>
               <MsgDetailSiButtonInnerWrapper>
-                <MdPrint />
-                <MsgDetailSiButtonText>세부정보 인쇄하기</MsgDetailSiButtonText>
+                <FaGlobe />
+                <MsgDetailSiButtonText>
+                  여행일정표 PDF로 받기(비자신청용)
+                </MsgDetailSiButtonText>
               </MsgDetailSiButtonInnerWrapper>
               <MdKeyboardArrowRight />
             </MsgDetailSiButtonWrapper>
           </StButton>
-        </Link>
-        <Link to="/printreceipt" target="_blank">
-          <StButton>
-            <MsgDetailSiButtonWrapper>
-              <MsgDetailSiButtonInnerWrapper>
-                <MdReceipt />
-                <MsgDetailSiButtonText>영수증 받기</MsgDetailSiButtonText>
-              </MsgDetailSiButtonInnerWrapper>
-              <MdKeyboardArrowRight />
-            </MsgDetailSiButtonWrapper>
-          </StButton>
-        </Link>
-      </MsgDetailSiOuterWrapper>
+          <Link to="/printsubinfo" target="_blank">
+            <StButton>
+              <MsgDetailSiButtonWrapper>
+                <MsgDetailSiButtonInnerWrapper>
+                  <MdPrint />
+                  <MsgDetailSiButtonText>
+                    세부정보 인쇄하기
+                  </MsgDetailSiButtonText>
+                </MsgDetailSiButtonInnerWrapper>
+                <MdKeyboardArrowRight />
+              </MsgDetailSiButtonWrapper>
+            </StButton>
+          </Link>
+          <Link to="/printreceipt" target="_blank">
+            <StButton>
+              <MsgDetailSiButtonWrapper>
+                <MsgDetailSiButtonInnerWrapper>
+                  <MdReceipt />
+                  <MsgDetailSiButtonText>영수증 받기</MsgDetailSiButtonText>
+                </MsgDetailSiButtonInnerWrapper>
+                <MdKeyboardArrowRight />
+              </MsgDetailSiButtonWrapper>
+            </StButton>
+          </Link>
+        </MsgDetailSiOuterWrapper>
+      )}
     </MsgDetailSiWrapper>
   );
 };
@@ -114,23 +191,34 @@ const MsgDetailSiGuestCount = styled.div`
 const MsgDetailSiGuestProfileLists = styled.ul`
   display: flex;
   position: relative;
-  & > :first-child {
-    position: absolute;
-    right: 3rem;
-  }
-  & > :first-child > :first-child :first-child {
-    border: 1px solid ${({ theme }) => theme.color.white};
-  }
-  & > :last-child > :first-child :first-child {
-    border: 1px solid ${({ theme }) => theme.color.white};
-  }
+  ${({ guest }) =>
+    guest &&
+    css`
+      & > :first-child {
+        position: absolute;
+        right: 3rem;
+      }
+      & > :first-child > :first-child :first-child {
+        border: 1px solid ${({ theme }) => theme.color.white};
+      }
+      & > :last-child > :first-child :first-child {
+        border: 1px solid ${({ theme }) => theme.color.white};
+      }
+    `}
 `;
 
 const MsgDetailSiGuestProfileItem = styled.li``;
 
 const MsgDetailSiReservedNumberWrapper = styled.div`
   padding: 3rem 0rem;
-  border-top: 1px solid ${({ theme }) => lighten(0.1, theme.color.gray)};
+  ${({ isCanceled }) =>
+    isCanceled
+      ? css`
+          border-top: none;
+        `
+      : css`
+          border-top: 1px solid ${({ theme }) => lighten(0.1, theme.color.gray)};
+        `}
 `;
 
 const MsgDetailSiReservedNumberText = styled.div`

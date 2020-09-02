@@ -1,25 +1,31 @@
 import React from 'react';
 import styled from 'styled-components';
-import MsgSectionChatItem from '../Message/MsgSectionChatItem';
+import MsgSectionChatItemContainer from '../../Containers/Message/MsgSectionChatItemContainer';
 
-const MsgSectionMain = () => {
-  const isHost = true;
-
+const MsgSectionMain = ({ activeMsg, chatHistory, isHost }) => {
   return (
     <MsgSectionMainWrapper>
       <MsgSectionMainChattingWrapper>
-        <MsgSectionMainChattingBox>
-          <MsgSectionChatItem host={isHost} />
-          <MsgSectionChatItem />
-          <MsgSectionChatItem />
-          <MsgSectionChatItem />
-        </MsgSectionMainChattingBox>
+        {chatHistory && (
+          <MsgSectionMainChattingBox>
+            {chatHistory.map(chat => (
+              <MsgSectionChatItemContainer
+                activeMsg={activeMsg}
+                key={chat.id}
+                chat={chat}
+                isHost={isHost}
+              />
+            ))}
+          </MsgSectionMainChattingBox>
+        )}
       </MsgSectionMainChattingWrapper>
     </MsgSectionMainWrapper>
   );
 };
 
 const MsgSectionMainWrapper = styled.div`
+  overflow-y: hidden;
+  max-height: calc(100% - 8rem);
   display: flex;
   flex-direction: column;
 `;

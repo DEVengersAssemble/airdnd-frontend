@@ -42,11 +42,11 @@ const getDateDiff = (date1, date2) => {
 
 // initialState
 const initialState = {
-  location: '은행사거리',
+  location: '서울',
   checkIn: '2020/09/02',
   checkOut: '2020/09/05',
-  dateDiff: getDateDiff('2020/09/02', '2020/09/05'),
-  // dateDiff: null,
+  // dateDiff: getDateDiff('2020/09/02', '2020/09/05'),
+  dateDiff: null,
   flexibleDate: 0,
   guests: {
     adult: 0,

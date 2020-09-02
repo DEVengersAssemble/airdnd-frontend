@@ -9,4 +9,4 @@ const SearchMapContainer = () => {
   return <SearchMap view={viewState} markers={homes} mapState={mapState} />;
 };
 
-export default SearchMapContainer;
+export default React.memo(SearchMapContainer);

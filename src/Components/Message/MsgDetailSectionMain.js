@@ -1,41 +1,41 @@
 import React from 'react';
 import styled from 'styled-components';
 import { darken } from 'polished';
-import MsgDetailTitleBox from '../Message/MsgDetailTitleBox';
-import MsgDetailReservedHomeBox from '../Message/MsgDetailReservedHomeBox';
-import MsgDetailSubInfoBox from '../Message/MsgDetailSubInfoBox';
-import MsgDetailAddressBox from '../Message/MsgDetailAddressBox';
-import MsgDetailReservedHomeLinkBox from '../Message/MsgDetailReservedHomeLinkBox';
-import MsgDetailHostInfoPageLinkBox from '../Message/MsgDetailHostInfoPageLinkBox';
-import MsgDetailSettlementBox from '../Message/MsgDetailSettlementBox';
-import MsgDetailAirbnbSupportTeamBox from '../Message/MsgDetailAirbnbSupportTeamBox';
+import MsgDetailTitleBoxContainer from '../../Containers/Message/MsgDetailTitleBoxContainer';
+import MsgDetailReservedHomeBoxContainer from '../../Containers/Message/MsgDetailReservedHomeBoxContainer';
+import MsgDetailSubInfoBoxContainer from '../../Containers/Message/MsgDetailSubInfoBoxContainer';
+import MsgDetailAddressBoxContainer from '../../Containers/Message/MsgDetailAddressBoxContainer';
+import MsgDetailReservedHomeLinkBoxContainer from '../../Containers/Message/MsgDetailReservedHomeLinkBoxContainer';
+import MsgDetailHostInfoPageLinkBoxContainer from '../../Containers/Message/MsgDetailHostInfoPageLinkBoxContainer';
+import MsgDetailSettlementBoxContainer from '../../Containers/Message/MsgDetailSettlementBoxContainer';
+import MsgDetailAirbnbSupportTeamBoxContainer from '../../Containers/Message/MsgDetailAirbnbSupportTeamBoxContainer';
 
-const MsgDetailSectionMain = () => {
-  const isCanceled = false; // 전역관리
-
+const MsgDetailSectionMain = ({ activeMsg, isCanceled }) => {
   return (
     <MsgDetailSectionMainWrapper>
-      <MsgDetailSectionMainInner>
-        {isCanceled ? (
-          <>
-            <MsgDetailTitleBox />
-            <MsgDetailReservedHomeBox />
-            <MsgDetailSubInfoBox />
-            <MsgDetailAirbnbSupportTeamBox />
-          </>
-        ) : (
-          <>
-            <MsgDetailTitleBox />
-            <MsgDetailReservedHomeBox />
-            <MsgDetailSubInfoBox />
-            <MsgDetailAddressBox />
-            <MsgDetailReservedHomeLinkBox />
-            <MsgDetailHostInfoPageLinkBox />
-            <MsgDetailSettlementBox />
-            <MsgDetailAirbnbSupportTeamBox />
-          </>
-        )}
-      </MsgDetailSectionMainInner>
+      {activeMsg && (
+        <MsgDetailSectionMainInner>
+          {isCanceled ? (
+            <>
+              <MsgDetailTitleBoxContainer />
+              <MsgDetailReservedHomeBoxContainer />
+              <MsgDetailSubInfoBoxContainer />
+              <MsgDetailAirbnbSupportTeamBoxContainer />
+            </>
+          ) : (
+            <>
+              <MsgDetailTitleBoxContainer />
+              <MsgDetailReservedHomeBoxContainer />
+              <MsgDetailSubInfoBoxContainer />
+              <MsgDetailAddressBoxContainer />
+              <MsgDetailReservedHomeLinkBoxContainer />
+              <MsgDetailHostInfoPageLinkBoxContainer />
+              <MsgDetailSettlementBoxContainer />
+              <MsgDetailAirbnbSupportTeamBoxContainer />
+            </>
+          )}
+        </MsgDetailSectionMainInner>
+      )}
     </MsgDetailSectionMainWrapper>
   );
 };

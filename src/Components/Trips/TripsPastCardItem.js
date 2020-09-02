@@ -7,7 +7,7 @@ import Profile from '../Global/Profile';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 
 const TripsPastCardItem = ({ trip, myInfo, ci, co }) => {
-  const { title, homeImage, location, withGuest, guest } = trip;
+  const { title, homeImage, address, withGuest, guest } = trip;
   const { lastName: myLastName, profileImg: myProfileImg } = myInfo;
   const { lastName: gstLastName, profileImg: gstProfileImg } = guest;
 
@@ -35,7 +35,7 @@ const TripsPastCardItem = ({ trip, myInfo, ci, co }) => {
           <TripsPastCheckInOut>
             {ci} - {co}
           </TripsPastCheckInOut>
-          <TripsPastLocation>{location}</TripsPastLocation>
+          <TripsPastLocation>{address}</TripsPastLocation>
         </TripsPastCkLcWrapper>
         <Link to="/schedule/1">
           <StButton>
@@ -104,7 +104,12 @@ const TripsPastImgWrapper = styled.div`
 const TripsPastImg = styled.div`
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+<<<<<<< HEAD
+  background: no-repeat center/100%
+    url('https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large');
+=======
   background: no-repeat center/100% url(${({ homeImage }) => homeImage[0]});
+>>>>>>> a0b74daac04906641223ff4d6978c2f32087f291
   height: 20rem;
 `;
 

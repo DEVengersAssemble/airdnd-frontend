@@ -2,25 +2,59 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { lighten, darken } from 'polished';
-// import CarouselContainer from '../../Containers/Global/CarouselContainer';
+import { FcExport } from 'react-icons/fc';
 import Button from '../Global/Button';
 import Profile from '../Global/Profile';
+import CarouselContainer from '../../Containers/Global/CarouselContainer';
 
-const MsgDetailReservedHomeBox = () => {
-  // Canceled props일때 render 작업 필요
-
+const MsgDetailReservedHomeBox = ({
+  title,
+  ciDateString,
+  ciDayName,
+  ciH,
+  ciM,
+  coDateString,
+  coDayName,
+  coH,
+  coM,
+  hostProfileImg,
+  hostname,
+  address,
+  guest,
+  price,
+  isCanceled,
+  hover,
+  onMouseOver,
+  onMouseLeave,
+  imageArray,
+  imageCount,
+}) => {
   return (
     <MsgDetailRhBoxWrapper>
-      {/* <CarouselContainer size="superLarge" /> */}
-      <MsgDetailRhBoxTitle>
-        [헤드오피스] 502호 4인실, 성수역 인근 내 도보 5분거리
-      </MsgDetailRhBoxTitle>
+      <div onMouseOver={onMouseOver} onMouseLeave={onMouseLeave}>
+        <CarouselContainer
+          size="superLarge"
+          isHovered={hover}
+          imageArray={imageArray}
+          imageCount={imageCount}
+        />
+      </div>
+      <MsgDetailRhBoxTitle>{title}</MsgDetailRhBoxTitle>
       <MsgDetailRhBoxReservedStateText>
-        예약이 종료되었습니다.
+        {!isCanceled && '예약이 완료되었습니다.'}
       </MsgDetailRhBoxReservedStateText>
-      <MsgDetailRhBoxDescription>
-        여행 중 발생한 문제로 인해 상대방에게 금액을 지급하거나 요청해야 할
-        경우, 해결 센터를 이용하시기 바랍니다.
+      <MsgDetailRhBoxDescription isCanceled={isCanceled}>
+        {isCanceled ? (
+          <>
+            <StFcExport />
+            <StRefundText>
+              환불액 ₩{price}을(를) 지급해드립니다. 아직 환불을 받지 못한 경우
+              거래 은행에 문의하여 입금 예정일을 확인하세요.
+            </StRefundText>
+          </>
+        ) : (
+          '여행 중 발생한 문제로 인해 상대방에게 금액을 지급하거나 요청해야 할 경우, 해결 센터를 이용하시기 바랍니다.'
+        )}
       </MsgDetailRhBoxDescription>
       <MsgDetailRhBoxButtonWrapper>
         <Link to="/resolutions" target="_blank">
@@ -28,16 +62,36 @@ const MsgDetailReservedHomeBox = () => {
         </Link>
       </MsgDetailRhBoxButtonWrapper>
       <MsgDetailRhCheckInOutWrapper>
-        <MsgDetailRhCheckInWrapper>
-          <MsgDetailRhCheckInOutText>체크인</MsgDetailRhCheckInOutText>
-          <MsgDetailRhCheckInOutDate>8월 16일 (일)</MsgDetailRhCheckInOutDate>
-          <MsgDetailRhCheckInOutTime>오후 3:00</MsgDetailRhCheckInOutTime>
-        </MsgDetailRhCheckInWrapper>
-        <MsgDetailRhCheckOutWrapper>
-          <MsgDetailRhCheckInOutText>체크아웃</MsgDetailRhCheckInOutText>
-          <MsgDetailRhCheckInOutDate>8월 17일 (월)</MsgDetailRhCheckInOutDate>
-          <MsgDetailRhCheckInOutTime>오전 10:00</MsgDetailRhCheckInOutTime>
-        </MsgDetailRhCheckOutWrapper>
+        {isCanceled ? (
+          <MsgDetailRhRefund>
+            <div>회원님의 예약이 취소되었습니다</div>
+            <div>
+              회원님은 ₩{price} 전액을 환불받을 수 있습니다. 회원님의 환불
+              계좌로 입금됩니다.
+            </div>
+          </MsgDetailRhRefund>
+        ) : (
+          <>
+            <MsgDetailRhCheckInWrapper>
+              <MsgDetailRhCheckInOutText>체크인</MsgDetailRhCheckInOutText>
+              <MsgDetailRhCheckInOutDate>
+                {ciDateString} ({ciDayName})
+              </MsgDetailRhCheckInOutDate>
+              <MsgDetailRhCheckInOutTime>
+                {ciH}:{ciM}
+              </MsgDetailRhCheckInOutTime>
+            </MsgDetailRhCheckInWrapper>
+            <MsgDetailRhCheckOutWrapper>
+              <MsgDetailRhCheckInOutText>체크아웃</MsgDetailRhCheckInOutText>
+              <MsgDetailRhCheckInOutDate>
+                {coDateString} ({coDayName})
+              </MsgDetailRhCheckInOutDate>
+              <MsgDetailRhCheckInOutTime>
+                {coH}:{coM}
+              </MsgDetailRhCheckInOutTime>
+            </MsgDetailRhCheckOutWrapper>
+          </>
+        )}
       </MsgDetailRhCheckInOutWrapper>
       <MsgDetailRhSimpleInfoWrapper>
         <MsgDetailRhSimpleInfoText>간략 정보</MsgDetailRhSimpleInfoText>
@@ -50,17 +104,19 @@ const MsgDetailReservedHomeBox = () => {
                 style={{ textDecoration: 'underline' }}
                 target="_blank"
               >
-                호스트이름
+                {hostname}
               </StLink>
               님
             </MsgDetailRhSimpleInfoHostName>
             <MsgDetailRhSimpleInfoHomeInfo>
-              펜션(한국)의 개인실 · 게스트 2명
+              숙소({address})의 집 전체 · 게스트 {guest + 1}명
             </MsgDetailRhSimpleInfoHomeInfo>
-            <MsgDetailRhSimpleInfoPrice>₩78049</MsgDetailRhSimpleInfoPrice>
+            <MsgDetailRhSimpleInfoPrice>
+              {isCanceled ? '₩0' : `₩${price}`}
+            </MsgDetailRhSimpleInfoPrice>
           </MsgDetailRhSimpleInfoHostDataWrapper>
           <MsgDetailRhSimpleInfoProfileWrapper>
-            <Profile lastName="박" size="4.8rem" />
+            <Profile lastName="박" size="4.8rem" profileImg={hostProfileImg} />
           </MsgDetailRhSimpleInfoProfileWrapper>
         </MsgDetailRhSimpleInfoHostWrapper>
       </MsgDetailRhSimpleInfoWrapper>
@@ -88,15 +144,41 @@ const MsgDetailRhBoxReservedStateText = styled.div`
 `;
 
 const MsgDetailRhBoxDescription = styled.div`
+  display: flex;
+  justify-content: space-between;
   padding-top: 1rem;
   font-size: 1.6rem;
+  line-height: 2.5rem;
   font-weight: light;
+`;
+
+const StFcExport = styled(FcExport)`
+  font-size: 10rem;
+  & > svg {
+    padding: 0rem;
+  }
+  margin-top: -3.1rem;
+`;
+
+const StRefundText = styled.div`
+  padding-left: 1rem;
+  line-height: 2.5rem;
 `;
 
 const MsgDetailRhBoxButtonWrapper = styled.div`
   padding-top: 1rem;
   & > a > button {
     width: 100%;
+  }
+`;
+const MsgDetailRhRefund = styled.div`
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+  & > :last-child {
+    padding-top: 1rem;
+    font-weight: 400;
+    line-height: 2.5rem;
   }
 `;
 

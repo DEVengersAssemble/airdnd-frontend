@@ -45,4 +45,4 @@ const RoomTypePopupContainer = ({ popupState, onClose }) => {
   );
 };
 
-export default RoomTypePopupContainer;
+export default React.memo(RoomTypePopupContainer);

@@ -27,4 +27,4 @@ const MapMarkerContainer = ({ marker, theme }) => {
   );
 };
 
-export default MapMarkerContainer;
+export default React.memo(MapMarkerContainer);

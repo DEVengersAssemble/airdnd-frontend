@@ -1,50 +1,67 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { FaCrown } from 'react-icons/fa';
 import { AiFillStar, AiFillSafetyCertificate } from 'react-icons/ai';
 import Division from './Division';
 import Profile from '../Global/Profile';
 import Button from '../Global/Button';
 
-const HostInfo = () => {
+const HostInfo = ({ home }) => {
+  const {
+    hostFirstName,
+    profileImg,
+    isSupperhost,
+    signupDate,
+    reviewCount,
+    identityVerified,
+    communication,
+    responseRate,
+    responseTime,
+  } = home.host;
+
   return (
     <Division>
       <StHostWrapper>
-        <Profile isSupperhost mark />
+        <Profile isSupperhost={isSupperhost} mark profileImg={profileImg} />
         <div>
-          <h3>호스트: 제주도님</h3>
-          <span>회원 가입일: 2017년 6월</span>
+          <h3>호스트: {hostFirstName}님</h3>
+          <span>회원 가입일: {signupDate}</span>
         </div>
       </StHostWrapper>
       <StInfoWrapper>
         <StMarkList>
           <li>
             <AiFillStar />
-            후기 12개
+            후기 {reviewCount}개
           </li>
-          <li>
-            <FaCrown />
-            본인 인증 완료
-          </li>
-          <li>
-            <AiFillSafetyCertificate />
-            슈퍼호스트
-          </li>
+          {identityVerified && (
+            <li>
+              <FaCrown />
+              본인 인증 완료
+            </li>
+          )}
+          {isSupperhost && (
+            <li>
+              <AiFillSafetyCertificate />
+              슈퍼호스트
+            </li>
+          )}
         </StMarkList>
         <strong>숙박 중 게스트와의 교류</strong>
-        <span>
-          문의사항등은 언제나 빠른답변으로 답장해드립니다 이용시 연락처를
-          안내하고 있으니 부담없이 연락주세요
-        </span>
-        <strong>제주도님은 슈퍼호스트입니다.</strong>
-        <span>
-          슈퍼호스트는 풍부한 경험과 높은 평점을 자랑하며 게스트가 숙소에서
-          편안히 머무를 수 있도록 최선을 다하는 호스트입니다.
-        </span>
+        <span>{communication}</span>
+        {isSupperhost && (
+          <>
+            <strong>제주도님은 슈퍼호스트입니다.</strong>
+            <span>
+              슈퍼호스트는 풍부한 경험과 높은 평점을 자랑하며 게스트가 숙소에서
+              편안히 머무를 수 있도록 최선을 다하는 호스트입니다.
+            </span>
+          </>
+        )}
       </StInfoWrapper>
       <StSafetyWrapper>
-        <span>응답률: 100%</span>
-        <span>응답시간: 몇 시간 이내</span>
+        <span>응답률: {responseRate}</span>
+        <span>응답시간: {responseTime}</span>
         <Button padding="13px 23px" transition>
           호스트에게 연락하기
         </Button>
@@ -96,13 +113,15 @@ const StHostWrapper = styled.div`
 
 const StMarkList = styled.ul`
   li {
-    display: inline-block;
+    /* display: inline-block; */
+    display: inline-flex;
+    align-items: center;
     margin: 0 24px 24px 0;
   }
 
   li:nth-of-type(1) svg {
     font-size: 18px;
-    vertical-align: bottom;
+    /* vertical-align: bottom; */
   }
 
   svg {

@@ -6,7 +6,7 @@ import Button from '../Global/Button';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 
 const TripsCanceledItem = ({ trip, ci, co }) => {
-  const { reservationId, homeImage, title, location } = trip;
+  const { reservationId, homeImage, title, address } = trip;
 
   return (
     <TripsCanceledItemWrapper>
@@ -18,7 +18,7 @@ const TripsCanceledItem = ({ trip, ci, co }) => {
               <TripsCanceledTextWrapper>
                 <TripsCanceledTitle>{title}</TripsCanceledTitle>
                 <TripsCanceledCkLc>
-                  {location} · {ci} - {co}
+                  {address} · {ci} - {co}
                 </TripsCanceledCkLc>
               </TripsCanceledTextWrapper>
             </TripsCanceledButtonInnerWrapper>

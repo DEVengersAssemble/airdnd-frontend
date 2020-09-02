@@ -54,6 +54,7 @@ const getMarkerIndex = (imageCount, currentIndex) => {
 const CarouselContainer = ({
   size,
   theme,
+  blockLink,
   isHovered,
   responsive,
   imageArray,
@@ -103,6 +104,7 @@ const CarouselContainer = ({
     <Carousel
       size={size}
       theme={theme}
+      blockLink={blockLink}
       marker={marker}
       responsive={responsive}
       direction={direction}
@@ -121,4 +123,4 @@ const CarouselContainer = ({
   );
 };
 
-export default CarouselContainer;
+export default React.memo(CarouselContainer);
