@@ -68,92 +68,92 @@ const initialState = {
   selectedImg: '',
   bookmark: reducerUtils.initial(),
 
-  // bookmarkLists: [
-  //   {
-  //     bookmarkListId: 1,
-  //     bookmarkListTitle: '흐앙 놀러가자ㅠㅠ 코로나님꺼져주세여',
-  //     bookmarks: [
-  //       {
-  //         homeId: 0,
-  //         images: [
-  //           'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small',
-  //         ], // 첫번째 이미지만 노출
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     bookmarkListId: 2,
-  //     bookmarkListTitle: '서울특별시',
-  //     bookmarks: [
-  //       {
-  //         homeId: 1,
-  //         images: [
-  //           'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small',
-  //         ],
-  //       },
-  //       {
-  //         homeId: 2,
-  //         images: [
-  //           'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small',
-  //         ],
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     bookmarkListId: 3,
-  //     bookmarkListTitle: '제주도가고싶다',
-  //     bookmarks: [
-  //       {
-  //         homeId: 3,
-  //         images: [
-  //           'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small',
-  //         ],
-  //       },
-  //       {
-  //         homeId: 4,
-  //         images: [
-  //           'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small',
-  //         ],
-  //       },
-  //       {
-  //         homeId: 5,
-  //         images: [
-  //           'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small',
-  //         ],
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     bookmarkListId: 4,
-  //     bookmarkListTitle: '괌으로 고고씽',
-  //     bookmarks: [
-  //       {
-  //         homeId: 6,
-  //         images: [
-  //           'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small',
-  //         ],
-  //       },
-  //       {
-  //         homeId: 7,
-  //         images: [
-  //           'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small',
-  //         ],
-  //       },
-  //       {
-  //         homeId: 8,
-  //         images: [
-  //           'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small',
-  //         ],
-  //       },
-  //       {
-  //         homeId: 9,
-  //         images: [
-  //           'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small',
-  //         ],
-  //       },
-  //     ],
-  //   },
-  // ],
+  bookmarkLists: [
+    {
+      bookmarkListId: 1,
+      bookmarkListTitle: '흐앙 놀러가자ㅠㅠ 코로나님꺼져주세여',
+      bookmarks: [
+        {
+          homeId: 0,
+          images: [
+            'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small',
+          ], // 첫번째 이미지만 노출
+        },
+      ],
+    },
+    {
+      bookmarkListId: 2,
+      bookmarkListTitle: '서울특별시',
+      bookmarks: [
+        {
+          homeId: 1,
+          images: [
+            'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small',
+          ],
+        },
+        {
+          homeId: 2,
+          images: [
+            'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small',
+          ],
+        },
+      ],
+    },
+    {
+      bookmarkListId: 3,
+      bookmarkListTitle: '제주도가고싶다',
+      bookmarks: [
+        {
+          homeId: 3,
+          images: [
+            'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small',
+          ],
+        },
+        {
+          homeId: 4,
+          images: [
+            'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small',
+          ],
+        },
+        {
+          homeId: 5,
+          images: [
+            'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small',
+          ],
+        },
+      ],
+    },
+    {
+      bookmarkListId: 4,
+      bookmarkListTitle: '괌으로 고고씽',
+      bookmarks: [
+        {
+          homeId: 6,
+          images: [
+            'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small',
+          ],
+        },
+        {
+          homeId: 7,
+          images: [
+            'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small',
+          ],
+        },
+        {
+          homeId: 8,
+          images: [
+            'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small',
+          ],
+        },
+        {
+          homeId: 9,
+          images: [
+            'https://a0.muscache.com/im/pictures/45739202/a5c377f1_original.jpg?aki_policy=small',
+          ],
+        },
+      ],
+    },
+  ],
 };
 
 // reducer

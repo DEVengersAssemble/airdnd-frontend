@@ -4,7 +4,7 @@ import MsgDetailSectionHeaderContainer from '../../Containers/Message/MsgDetailS
 import MsgDetailSectionMainContainer from '../../Containers/Message/MsgDetailSectionMainContainer';
 
 const MessageDetailSection = ({ msgSectionStates }) => {
-  const { msgDetailSectionState, msgListSectionState } = msgSectionStates;
+  const { msgDetailSectionState } = msgSectionStates;
 
   return (
     <MessageDetailSectionWrapper msgDetailSectionState={msgDetailSectionState}>
@@ -20,13 +20,14 @@ const MessageDetailSectionWrapper = styled.section`
   width: 37.5rem;
   min-width: 37.5rem;
 
-  /* ${({ msgDetailSectionState }) =>
+  transition: all 0.3s linear;
+  ${({ msgDetailSectionState }) =>
     !msgDetailSectionState &&
     css`
       opacity: 0;
     `}
 
-  @media ${({ theme }) => theme.size.medium} {
+  /* @media ${({ theme }) => theme.size.medium} {
   } */
 `;
 
