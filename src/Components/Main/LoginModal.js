@@ -109,14 +109,14 @@ const StValidationText = styled.p`
   padding: 5px 0 0 5px;
 `;
 
-const StShowPwButtonWrapper = styled.div`
+const StShowPwdButtonWrapper = styled.div`
   height: 20px;
   padding-right: 4px;
   display: flex;
   justify-content: flex-end;
 `;
 
-const StShowPwButton = styled(Button)`
+const StShowPwdButton = styled(Button)`
   color: ${({ theme }) => theme.color.green};
   font-size: 14px;
   padding: 0;
@@ -179,15 +179,15 @@ const LoginModal = ({
   openSignupMenuModal,
   closeModal,
   loginForm,
-  showPw,
-  onToggleShowPw,
+  showPwd,
+  onToggleShowPwd,
   loading,
   handleSubmit,
   onChangeForm,
   refObj,
 }) => {
-  const { email, pw } = loginForm;
-  const { emailRef, pwRef } = refObj;
+  const { email, pwd } = loginForm;
+  const { emailRef, pwdRef } = refObj;
   return (
     <StLoginModal
       modalState={modalVisible}
@@ -248,31 +248,31 @@ const LoginModal = ({
           </StInputWrapper>
           <StInputWrapper name="password">
             <StInput
-              type={showPw ? 'text' : 'password'}
-              value={pw.value}
-              onChange={e => onChangeForm(e, 'pw')}
+              type={showPwd ? 'text' : 'password'}
+              value={pwd.value}
+              onChange={e => onChangeForm(e, 'pwd')}
               focusBorderColor
               placeholder="비밀번호"
-              ref={pwRef}
-              isInvalid={pw.invalid}
+              ref={pwdRef}
+              isInvalid={pwd.invalid}
             ></StInput>
             <RiLock2Line />
-            {pw.value.length === 0 && pw.invalid && (
-              <StValidationText isInvalid={pw.invalid}>
+            {pwd.value.length === 0 && pwd.invalid && (
+              <StValidationText isInvalid={pwd.invalid}>
                 비밀번호를 입력하세요.
               </StValidationText>
             )}
-            {pw.value.length > 0 && pw.invalid && (
-              <StValidationText isInvalid={pw.invalid}>
+            {pwd.value.length > 0 && pwd.invalid && (
+              <StValidationText isInvalid={pwd.invalid}>
                 비밀번호는 최소 8글자 이상이어야 합니다. 다시 시도해 주세요.
               </StValidationText>
             )}
           </StInputWrapper>
-          <StShowPwButtonWrapper>
-            <StShowPwButton onClick={onToggleShowPw}>
-              {showPw ? '비밀번호 숨기기' : '비밀번호 보이기'}
-            </StShowPwButton>
-          </StShowPwButtonWrapper>
+          <StShowPwdButtonWrapper>
+            <StShowPwdButton onClick={onToggleShowPwd}>
+              {showPwd ? '비밀번호 숨기기' : '비밀번호 보이기'}
+            </StShowPwdButton>
+          </StShowPwdButtonWrapper>
           <StSubmitButton border="none" type="submit" disabled={loading}>
             {loading ? <StSubmitLoader /> : '로그인하기'}
           </StSubmitButton>
