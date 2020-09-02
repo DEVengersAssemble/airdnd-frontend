@@ -5,13 +5,13 @@ import Reviews from './Reviews';
 import HostInfo from './HostInfo';
 import HomeNotice from './HomeNotice';
 
-const FullsizeWrapper = () => {
+const FullsizeWrapper = ({ home }) => {
   return (
     <StWrapper>
-      <Reviews />
+      <Reviews home={home} />
       {/* <HomeMap /> */}
-      <HostInfo />
-      <HomeNotice />
+      <HostInfo home={home} />
+      <HomeNotice home={home} />
     </StWrapper>
   );
 };

@@ -93,14 +93,14 @@ const StCheckbox = styled(Checkbox)`
   box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
   border-radius: 8px;
   white-space: nowrap;
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.color.white};
 
   &:hover {
     background-color: ${({ theme }) => theme.lightGray};
   }
 
   span:nth-of-type(1) {
-    background-color: #fff;
+    background-color: ${({ theme }) => theme.color.white};
   }
 
   span:last-child {
@@ -120,7 +120,7 @@ const StScaleBtn = styled.div`
   right: 24px;
   border-radius: 8px;
   overflow: hidden;
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.color.white};
   box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
 
   button {
@@ -163,7 +163,7 @@ const StNotice = styled.div`
   border-radius: 8px;
   font-size: 14px;
   line-height: 18px;
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.color.white};
 `;
 
 const StHomeIconWapper = styled.div`
@@ -179,7 +179,7 @@ const StHomeIconWapper = styled.div`
   background-color: #000;
   border-radius: 50%;
   z-index: 10;
-  color: #fff;
+  color: ${({ theme }) => theme.color.white};
   box-shadow: rgba(0, 0, 0, 0.24) 0px 0px 0px 1px inset,
     rgba(0, 0, 0, 0.18) 0px 1px 2px;
 
@@ -192,10 +192,10 @@ const StHomeIconWapper = styled.div`
     position: absolute;
     top: -1px;
     right: 0;
-    fill: rgb(255, 56, 92);
+    fill: ${({ theme }) => theme.color.main};
     height: 16px;
     width: 16px;
-    stroke: rgb(255, 255, 255);
+    stroke: ${({ theme }) => theme.color.white};
     stroke-width: 8;
     overflow: visible;
     paint-order: stroke;

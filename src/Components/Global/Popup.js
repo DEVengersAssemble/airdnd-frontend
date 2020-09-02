@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 // Popup 사용방법
 // <PopupWrapper>  << 여기에 position: relative; 해야함
@@ -44,7 +44,7 @@ const StPopupBox = styled.div`
   padding: ${props => props.padding || '2rem'};
   overflow-y: auto;
   overflow-x: hidden;
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.color.white};
   border: 0.5px solid rgba(118, 118, 118, 0.28);
   border-radius: ${props => props.radius || '1.2rem'};
   box-shadow: rgba(0, 0, 0, 0.15) 0px 10px 37px;
