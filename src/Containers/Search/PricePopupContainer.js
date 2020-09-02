@@ -21,7 +21,7 @@ const PricePopupContainer = ({ popupState, onClose }) => {
   const closePopup = ({ target }) => {
     if (!popupState || popup.current.contains(target)) return;
     // dispatch(saveFilter('price'), prevFilter);
-    onClose('price');
+    onClose('price', isDisabled);
   };
 
   useEffect(() => {

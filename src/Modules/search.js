@@ -57,7 +57,7 @@ export const openMarker = id => ({ type: OPEN_MARKER, id });
 export const closeMarker = () => ({ type: CLOSE_MARKER });
 
 export const openPopup = name => ({ type: OPEN_POPUP, name });
-export const closePopup = name => ({ type: CLOSE_POPUP, name });
+export const closePopup = (name, state) => ({ type: CLOSE_POPUP, name, state });
 export const handleRange = handler => ({ type: HANDLE_RANGE, handler });
 export const setFilter = (name, value) => ({ type: SET_FILTER, name, value });
 export const resetFilter = name => ({ type: RESET_FILTER, name });
@@ -287,6 +287,10 @@ const search = (state = initialState, action) => {
         popup: {
           ...state.popup,
           [action.name]: false,
+        },
+        filterDisabled: {
+          ...state.filterDisabled,
+          [action.name]: action.state,
         },
       };
     case SET_FILTER:

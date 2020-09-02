@@ -61,7 +61,6 @@ const FilterModalContainer = () => {
     dispatch(applyCheckFilter(list, name, value));
   const onReset = () => dispatch(resetModalFilter());
   const onUnsave = () => dispatch(setModalFilter(prevFilter));
-  const onSave = () => onClose();
 
   useEffect(() => {
     prevFilter = { ...filterApplied };
@@ -79,7 +78,7 @@ const FilterModalContainer = () => {
       setRange={setRange}
       onSeemore={onSeemore}
       onClose={onClose}
-      onSave={onSave}
+      onSave={onClose}
       onCheck={onCheck}
       onReset={onReset}
       onToggle={onToggle}

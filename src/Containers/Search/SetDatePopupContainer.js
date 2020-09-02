@@ -8,11 +8,11 @@ const SetDatePopupContainer = ({ popupState, onClose }) => {
   const dispatch = useDispatch();
   const closePopup = ({ target }) => {
     if (!popupState || popup.current.contains(target)) return;
-    onClose('price');
+    onClose('price', true);
   };
 
   const onClickBtn = () => {
-    onClose('price');
+    onClose('price', true);
     dispatch(openHeader());
   };
 

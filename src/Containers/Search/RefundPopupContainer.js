@@ -23,7 +23,7 @@ const RefundPopupContainer = ({ popupState, onClose }) => {
     )
       return;
     // dispatch(saveFilter('refund'), prevFilter);
-    onClose('refund');
+    onClose('refund', isDisabled);
   };
 
   useEffect(() => {
