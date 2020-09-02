@@ -11,7 +11,6 @@ export const fetchSearchedData = async ({
 }) => {
   const CI = checkIn.split('.').join('-');
   const CO = checkOut.split('.').join('-');
-  console.log(location);
   const response = await axios.get(
     `back/search/location/${location}/checkIn/${CI}/checkOut/${CO}/adults/${guests}`,
   );

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import HomePopup from '../../Components/Search/HomePopup';
 import { changeHeart } from '../../Modules/search';
 import { removeBookmark, openListModal } from '../../Modules/wishlists';
+import { openModal } from '../../Modules/modal';
 
 const HomePopupContainer = ({ home, dateDiff, theme, store }) => {
   const { id } = store.getState().user;
@@ -11,7 +12,7 @@ const HomePopupContainer = ({ home, dateDiff, theme, store }) => {
   const onBlurHome = () => setIsHovered(false);
 
   const onClickHeart = () => {
-    if (!id) return console.log('로그인 해라~~~~~~~~~~~~~ 로그인 팝업 띄우기');
+    if (!id) return dispatch(openModal('login'));
     if (home.isBookmarked) {
       dispatch(removeBookmark(home.homeId));
       dispatch(changeHeart(home.homeId));

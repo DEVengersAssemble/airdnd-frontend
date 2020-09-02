@@ -3,10 +3,11 @@ import Home from '../../Components/Search/Home';
 import { useSelector, useDispatch } from 'react-redux';
 import { hoverHome, blurHome, changeHeart } from '../../Modules/search';
 import { removeBookmark, openListModal } from '../../Modules/wishlists';
+import { openModal } from '../../Modules/modal';
 
 const HomeContainer = ({ home }) => {
   const { id } = useSelector(state => state.user);
-  const { dateDiff } = useSelector(state => state.searchForm);
+  const { dateDiff } = useSelector(state => state.search.searchForm);
   const { hoveredHome } = useSelector(state => state.search);
   const isHovered = hoveredHome === home.homeId;
   const dispatch = useDispatch();
@@ -15,7 +16,7 @@ const HomeContainer = ({ home }) => {
     hoveredHome !== home.homeId && dispatch(hoverHome(home.homeId));
   const onBlurHome = () => dispatch(blurHome());
   const onClickHeart = () => {
-    if (!id) return console.log('로그인 해라~~~~~~~~~~~~~ 로그인 팝업 띄우기');
+    if (!id) return dispatch(openModal());
     if (home.isBookmarked) {
       dispatch(removeBookmark(home.homeId));
       console.log(home.homeId, '하트색좀 바꿔조라ㅠㅠ');
