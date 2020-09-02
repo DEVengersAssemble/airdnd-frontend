@@ -4,13 +4,14 @@ import styled from 'styled-components';
 import Modal from '../Global/Modal';
 import ModalFooter from '../Global/ModalFooter';
 import Button from '../Global/Button';
-import RangeSliderContainer from '../../Containers/Search/RangeSliderContainer';
-import RoomTypeContainer from '../../Containers/Search/RoomTypeContainer';
 import {
   BookingFilter,
   CounterFilter,
   MoreFilters,
   CheckboxFilter,
+  PriceFilter,
+  RoomTypeFilter,
+  RefundFilter,
 } from './Filter';
 
 const FilterModal = ({
@@ -47,9 +48,10 @@ const FilterModal = ({
       title="필터 추가하기"
     >
       <StFilterList>
-        {viewState === 'map' && <RoomTypeContainer />}
+        {viewState === 'map' && <RefundFilter />}
+        {viewState === 'map' && <RoomTypeFilter />}
         {viewState === 'map' && (
-          <RangeSliderContainer range={range} setRange={setRange} />
+          <PriceFilter range={range} setRange={setRange} />
         )}
         {instantBooking && (
           <BookingFilter filter={filter} onToggle={onToggle} />

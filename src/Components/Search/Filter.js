@@ -6,6 +6,9 @@ import Toggle from '../Global/Toggle';
 import { MinusButton, PlusButton } from '../Global/CounterButton';
 import Checkbox from '../Global/Checkbox';
 import { GrFormDown } from 'react-icons/gr';
+import RangeSliderContainer from '../../Containers/Search/RangeSliderContainer';
+import RefundContainer from '../../Containers/Search/RefundContainer';
+import RoomTypeContainer from '../../Containers/Search/RoomTypeContainer';
 
 export const BookingFilter = ({ onToggle, filter }) => {
   return (
@@ -133,7 +136,34 @@ export const CheckboxFilter = React.memo(
   },
 );
 
-const StFilterWrapper = styled.li`
+export const PriceFilter = ({ range, setRange }) => {
+  return (
+    <StFilterWrapper>
+      <StTitle>가격 범위</StTitle>
+      <RangeSliderContainer range={range} setRange={setRange} />
+    </StFilterWrapper>
+  );
+};
+
+export const RefundFilter = () => {
+  return (
+    <StFilterWrapper>
+      <StTitle>유연한 환불 정책</StTitle>
+      <RefundContainer />
+    </StFilterWrapper>
+  );
+};
+
+export const RoomTypeFilter = () => {
+  return (
+    <StFilterWrapper>
+      <StTitle>숙소 유형</StTitle>
+      <RoomTypeContainer />
+    </StFilterWrapper>
+  );
+};
+
+export const StFilterWrapper = styled.li`
   display: flex;
   justify-content: space-between;
   flex-direction: ${({ direction }) => direction || 'column'};
