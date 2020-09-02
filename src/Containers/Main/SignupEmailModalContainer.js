@@ -1,7 +1,9 @@
 import React, { useEffect, useState, useRef, useReducer } from 'react';
+import axios from 'axios';
 import SignupEmailModal from '../../Components/Main/SignupEmailModal';
 import { useSelector, useDispatch } from 'react-redux';
 import { openModal, closeModal } from '../../Modules/modal';
+import { sendSignUpReq } from '../../Api/signUpApi';
 
 const initialState = {
   email: {
@@ -221,8 +223,25 @@ const SignupModalContainer = () => {
     dispatch(openModal('login'));
   };
 
-  const onSuccess = () => {
+  const onSuccess = async () => {
     console.log('===유저를 등록합니다====');
+    const payload = {
+      email: email.value,
+      first_name: firstName.value,
+      last_name: lastName.value,
+      pwd: pw.value,
+      birthday: `${birthYear.value}/${birthMonth.value}/${birthDay.value}`,
+      phone: '010-1111-1111',
+      profileImg: '',
+      description: '',
+    };
+    try {
+      const { response } = await axios.post('/back/signUp', payload);
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+
     setPwFocus(false);
     _dispatch({ type: 'RESET' });
   };
