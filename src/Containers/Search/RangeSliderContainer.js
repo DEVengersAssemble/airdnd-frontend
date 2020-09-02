@@ -4,6 +4,7 @@ import { setFilter } from '../../Modules/search';
 import RangeSlider from '../../Components/Search/RangeSlider';
 
 const RangeSliderContainer = ({ range, setRange }) => {
+  console.log(range);
   const { min, max } = useSelector(state => state.search.filterApplied.price);
   const { priceArray, averagePrice } = useSelector(state => state.search.data);
   const isDisabled = min === 12000 && max === 1000000;
