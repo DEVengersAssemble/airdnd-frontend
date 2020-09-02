@@ -48,7 +48,7 @@ export const MoreFilters = ({ onToggle, filter }) => {
   );
 };
 
-export const Counter = ({ onIncrease, onDecrease, filter, name }) => {
+const Counter = ({ onIncrease, onDecrease, filter, name }) => {
   return (
     <StContentWrapper align="center" width="10rem">
       <MinusButton
@@ -100,17 +100,17 @@ export const CounterFilter = ({ onIncrease, onDecrease, filter }) => {
 };
 
 export const CheckboxFilter = React.memo(
-  ({ title, listName, list, filter, onCheck, seeMore, onSeeMore }) => {
+  ({ title, listName, list, filter, onCheck, seemore, onSeemore }) => {
     return (
       <StFilterWrapper>
         <StTitle>{title}</StTitle>
-        <StCheckboxList seeMore={seeMore}>
+        <StCheckboxList seemore={seemore}>
           {list.map((name, i) => (
             <StCheckbox
               key={i}
               value
               animation={i > 3}
-              seeMore={seeMore}
+              seemore={seemore}
               checked={filter[name]}
               onCheck={() => onCheck(listName, name, !filter[name])}
             >
@@ -123,10 +123,10 @@ export const CheckboxFilter = React.memo(
           width="fit-content"
           padding="1rem 0 0"
           hover="background: none"
-          onClick={onSeeMore}
+          onClick={onSeemore}
         >
           편의시설 모두 보기
-          <ArrowIcon seeMore={seeMore} />
+          <ArrowIcon seemore={seemore} />
         </Button>
       </StFilterWrapper>
     );
@@ -185,7 +185,7 @@ const StCheckboxList = styled.ul`
   display: flex;
   flex-wrap: wrap;
   overflow: hidden;
-  height: ${({ seeMore }) => (seeMore ? 'fit-content' : '85px')};
+  height: ${({ seemore }) => (seemore ? 'fit-content' : '85px')};
 `;
 
 const seeMoreAnimation = keyframes`
@@ -208,12 +208,12 @@ const applyAnimation = direction => css`
 const StCheckbox = styled(Checkbox)`
   width: 30rem;
   margin: 0 4rem 1rem 0;
-  ${({ animation, seeMore }) =>
-    animation && seeMore === true && applyAnimation(seeMore)};
+  ${({ animation, seemore }) =>
+    animation && seemore === true && applyAnimation(seemore)};
 `;
 
 const ArrowIcon = styled(GrFormDown)`
   margin: -0.2rem 0 0 0.5rem;
   transition: 0.5s ease-out;
-  transform: ${({ seeMore }) => (seeMore ? 'rotate(180deg)' : 'rotate(0deg)')};
+  transform: ${({ seemore }) => (seemore ? 'rotate(180deg)' : 'rotate(0deg)')};
 `;
