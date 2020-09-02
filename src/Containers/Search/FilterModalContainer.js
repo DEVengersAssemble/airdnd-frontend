@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import FilterModal from '../../Components/Search/FilterModal';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -13,9 +13,19 @@ import {
 let prevFilter = {};
 
 const FilterModalContainer = () => {
-  const { popup, data, filterApplied } = useSelector(state => state.search);
-  console.log('data', data);
+  const seeInit = {
+    conveninence: false,
+    facility: false,
+    hostLang: false,
+  };
+  const [seemore, setSeemore] = useState({ seeInit });
+  const onSeemore = name => setSeemore({ ...seeInit, [name]: !seemore[name] });
+  const { popup, data, filterApplied, viewState } = useSelector(
+    state => state.search,
+  );
   const { filterCondition } = data && data;
+  const { min, max } = filterApplied.price;
+  const [range, setRange] = useState({ value: [min, max] });
   const dispatch = useDispatch();
   const onClose = () => dispatch(closePopup('modal'));
   const onToggle = (name, value) => dispatch(applyToggleFilter(name, value));
@@ -34,9 +44,14 @@ const FilterModalContainer = () => {
   return (
     <FilterModal
       popupState={popup.modal}
+      viewState={viewState}
+      range={range}
       filterCondition={filterCondition}
       filter={filterApplied}
       // onClose={onUnsave}
+      seemore={seemore}
+      setRange={setRange}
+      onSeemore={onSeemore}
       onClose={onClose}
       onSave={onSave}
       onCheck={onCheck}

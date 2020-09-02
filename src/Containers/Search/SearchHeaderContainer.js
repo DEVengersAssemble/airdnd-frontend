@@ -1,16 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { throttle } from 'lodash';
-import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { useHistory, useLocation } from 'react-router-dom';
 import SearchHeader from '../../Components/Search/SearchHeader';
+import { closeHeader, openHeader } from '../../Modules/search';
+import qs from 'qs';
 
 const SearchHeaderContainer = () => {
+  const { headerState } = useSelector(state => state.search);
+  const dispatch = useDispatch();
   const history = useHistory();
-  const [isSearchBtnClicked, setIsSearchBtnClicked] = useState(false);
-  const searchForm = useSelector(state => state.searchForm);
-  const onScroll = () => {
-    setIsSearchBtnClicked(false);
-  };
+  const query = useLocation();
+  const onScroll = () => dispatch(closeHeader());
+  const searchForm = qs.parse(query.search, {
+    ignoreQueryPrefix: true,
+  });
 
   useEffect(() => {
     window.addEventListener('scroll', throttle(onScroll, 150));
@@ -25,13 +29,11 @@ const SearchHeaderContainer = () => {
     window.scrollTo({ top: 0 });
   };
 
-  const handleSearchBtnClick = () => {
-    setIsSearchBtnClicked(true);
-  };
+  const handleSearchBtnClick = () => dispatch(openHeader());
 
   return (
     <SearchHeader
-      isSearchBtnClicked={isSearchBtnClicked}
+      headerState={headerState}
       handleLogoClick={handleLogoClick}
       handleSearchBtnClick={handleSearchBtnClick}
       searchForm={searchForm}

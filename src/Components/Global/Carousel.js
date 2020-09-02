@@ -64,6 +64,7 @@ const Carousel = ({
               key={i}
               theme={theme}
               size={size}
+              homeWidth={homeWidth}
               imageCount={imageCount}
               responsive={responsive}
             >
@@ -204,6 +205,8 @@ const StImageList = styled.ul`
 
 const StImageWrapper = styled.li`
   min-width: 100%;
+  height: ${({ homeWidth }) => homeWidth && `${homeWidth * 0.75}px`};
+  width: ${({ homeWidth }) => homeWidth && `${homeWidth}px`};
   ${({ size }) => size && fixedSizes(size)};
 `;
 

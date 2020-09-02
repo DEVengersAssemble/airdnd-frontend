@@ -7,6 +7,7 @@ import trips from './trips';
 import message from './message';
 import home from './home';
 import modal from './modal';
+import map from './map';
 import reservation from './reservation';
 
 const rootReducer = combineReducers({
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   message,
   home,
   modal,
+  map,
   reservation,
 });
 

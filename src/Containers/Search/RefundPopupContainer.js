@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { RefundPopup } from '../../Components/Search/FilterPopup';
 import { useSelector, useDispatch } from 'react-redux';
-import { saveFilter, setFilter, resetFilter } from '../../Modules/search';
+import { saveFilter, resetFilter } from '../../Modules/search';
 
 // let prevFilter = {};
 
@@ -10,7 +10,6 @@ const RefundPopupContainer = ({ popupState, onClose }) => {
   const isDisabled = !refund;
   const dispatch = useDispatch();
 
-  const onToggle = () => dispatch(setFilter('refund', !refund));
   const onReset = () => dispatch(resetFilter('refund'));
   const onSave = () => dispatch(saveFilter('refund', refund, isDisabled));
 
@@ -38,12 +37,10 @@ const RefundPopupContainer = ({ popupState, onClose }) => {
   return (
     <div ref={popup}>
       <RefundPopup
-        toggle={refund}
         popupState={popupState}
         isDisabled={isDisabled}
         onSave={onSave}
         onReset={onReset}
-        handleClick={onToggle}
       />
     </div>
   );
