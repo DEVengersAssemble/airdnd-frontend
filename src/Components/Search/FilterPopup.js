@@ -16,9 +16,7 @@ const RefundPopup = ({ popupState, isDisabled, onReset, onSave }) => {
       onSave={onSave}
       onReset={() => onReset(false)}
     >
-      <StContentWrapper content="refund">
-        <RefundContainer />
-      </StContentWrapper>
+      <RefundContainer />
     </FilterPopup>
   );
 };
@@ -136,6 +134,11 @@ const StFooter = styled(ModalFooter)`
 `;
 
 const contentStyles = {
+  modal: css`
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+  `,
   refund: css`
     display: flex;
     height: 165px;
