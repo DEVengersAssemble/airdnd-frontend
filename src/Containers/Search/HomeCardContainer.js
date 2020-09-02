@@ -24,6 +24,8 @@ const HomeCardContainer = ({ home, type }) => {
     dispatch(openListModal(home.homeId, home.imageArray[0]));
   };
 
+  console.log('여기 홈카드인데 데이트디프', dateDiff)
+
   return (
     <HomeCard
       home={home}
