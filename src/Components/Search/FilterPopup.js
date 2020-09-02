@@ -177,13 +177,4 @@ export const StLargeSpan = styled.span`
   ${spanStyle}
 `;
 
-export const StCheckboxList = styled.ul`
-  padding: 2rem;
-  height: 380px;
-`;
-
-export const StCheckboxWrapper = styled.li`
-  margin-bottom: 1rem;
-`;
-
 export { RefundPopup, RoomTypePopup, PricePopup, SetDatePopup };
