@@ -1,67 +1,38 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { AiOutlineRight, AiOutlineLeft } from 'react-icons/ai';
 import Button from './Button';
 
-const Calendar = ({ isScreenLarge }) => {
-  const today = new Date();
-  const initialState = {
-    thisMonth: {
-      firstDay: new Date(today.getFullYear(), today.getMonth(), 1).getDay(),
-      lastDate: new Date(
-        today.getFullYear(),
-        today.getMonth() + 1,
-        0,
-      ).getDate(),
-      month: today.getMonth() + 1,
-      year: today.getFullYear(),
-    },
-    nextMonth: {
-      firstDay: new Date(today.getFullYear(), today.getMonth() + 1, 1).getDay(),
-      lastDate: new Date(
-        today.getFullYear(),
-        today.getMonth() + 2,
-        0,
-      ).getDate(),
-      month: today.getMonth() + 2,
-      year: today.getFullYear(),
-    },
-  };
-
-  const [dateState, setDateState] = useState(initialState);
-  const { thisMonth, nextMonth } = dateState;
-  // firstDay.getMonth() //?
-  console.log(dateState);
-
-  // const firstDay = new Date(today.getFullYear(), today.getMonth(), 1).getDay();
-  // const lastDate = new Date(
-  //   today.getFullYear(),
-  //   today.getMonth() + 1,
-  //   0,
-  // ).getDate();
-
-  // console.log(firstDay, lastDate);
-
-  const thisMonthDays = Array.from(
-    { length: thisMonth.lastDate },
-    (v, i) => i + 1,
-  );
-  const nextMonthDays = Array.from(
-    { length: nextMonth.lastDate },
-    (v, i) => i + 1,
-  );
+const Calendar = ({
+  responsiveScreen,
+  thisMonth,
+  nextMonth,
+  thisMonthDates,
+  nextMonthDates,
+  onClickBeforeMonth,
+  onClickNextMonth,
+  checkin,
+  checkout,
+  onClickCheckDate,
+  isChangeDate,
+}) => {
+  const addZero = num => ((num + '').length === 1 ? '0' + num : num);
+  const _thisMonth = addZero(thisMonth.month);
+  const _nextMonth = addZero(nextMonth.month);
 
   return (
     <>
       <StWrapper>
-        <StNextMonthBtn btnType="circle">
+        <StNextMonthBtn btnType="circle" onClick={onClickBeforeMonth}>
           <AiOutlineLeft />
         </StNextMonthBtn>
-        <StNextMonthBtn btnType="circle">
+        <StNextMonthBtn btnType="circle" onClick={onClickNextMonth}>
           <AiOutlineRight />
         </StNextMonthBtn>
         <StCalendarWrapper>
-          <StMonth>9월 2020</StMonth>
+          <StMonth>
+            {thisMonth.month}월 {thisMonth.year}
+          </StMonth>
           <StDays>
             <li>일</li>
             <li>월</li>
@@ -72,16 +43,32 @@ const Calendar = ({ isScreenLarge }) => {
             <li>토</li>
           </StDays>
           <StDates>
-            {thisMonthDays.map((day, i) => (
-              <StDateBtn key={i} btnType="circle" margin={thisMonth.firstDay}>
-                {day}
-              </StDateBtn>
+            {thisMonthDates.map((date, i) => (
+              <StDateWrapper key={i} margin={thisMonth.firstDay}>
+                <StDateBtn
+                  btnType="circle"
+                  id={`dateId-${thisMonth.year}.${_thisMonth}.${addZero(date)}`}
+                  onClick={onClickCheckDate}
+                  checkin={
+                    checkin ===
+                    `${thisMonth.year}.${_thisMonth}.${addZero(date)}`
+                  }
+                  checkout={
+                    checkout ===
+                    `${thisMonth.year}.${_thisMonth}.${addZero(date)}`
+                  }
+                >
+                  {date}
+                </StDateBtn>
+              </StDateWrapper>
             ))}
           </StDates>
         </StCalendarWrapper>
-        {!isScreenLarge && (
+        {!responsiveScreen && (
           <StCalendarWrapper>
-            <StMonth>10월 2020</StMonth>
+            <StMonth>
+              {nextMonth.month}월 {nextMonth.year}
+            </StMonth>
             <StDays>
               <li>일</li>
               <li>월</li>
@@ -92,10 +79,26 @@ const Calendar = ({ isScreenLarge }) => {
               <li>토</li>
             </StDays>
             <StDates>
-              {nextMonthDays.map((day, i) => (
-                <StDateBtn key={i} btnType="circle" margin={nextMonth.firstDay}>
-                  {day}
-                </StDateBtn>
+              {nextMonthDates.map((date, i) => (
+                <StDateWrapper key={i} margin={nextMonth.firstDay}>
+                  <StDateBtn
+                    btnType="circle"
+                    id={`dateId-${nextMonth.year}.${_nextMonth}.${addZero(
+                      date,
+                    )}`}
+                    onClick={onClickCheckDate}
+                    checkin={
+                      checkin ===
+                      `${nextMonth.year}.${_nextMonth}.${addZero(date)}`
+                    }
+                    checkout={
+                      checkout ===
+                      `${nextMonth.year}.${_nextMonth}.${addZero(date)}`
+                    }
+                  >
+                    {date}
+                  </StDateBtn>
+                </StDateWrapper>
               ))}
             </StDates>
           </StCalendarWrapper>
@@ -164,11 +167,22 @@ const StDays = styled.ul`
 
 const StDates = styled.div``;
 
+const StDateWrapper = styled.div`
+  display: inline-block;
+  width: 42px;
+  height: 42px;
+  margin: 1px;
+
+  :first-child {
+    margin-left: ${({ margin }) => margin * 44}px;
+  }
+`;
+
 const StDateBtn = styled(Button)`
   border: none;
   width: 42px;
   height: 42px;
-  margin: 1px;
+  /* margin: 1px; */
   font-size: 14px;
   font-weight: 500;
 
@@ -180,9 +194,12 @@ const StDateBtn = styled(Button)`
     color: ${({ theme }) => theme.color.white};
   }
 
-  :first-child {
-    margin-left: ${({ margin }) => margin * 44}px;
-  }
+  ${({ checkin, checkout }) =>
+    (checkin || checkout) &&
+    css`
+      background-color: ${({ theme }) => theme.color.black};
+      color: ${({ theme }) => theme.color.white};
+    `}
 `;
 
 export default Calendar;
