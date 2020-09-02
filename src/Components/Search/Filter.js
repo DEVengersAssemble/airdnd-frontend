@@ -140,7 +140,7 @@ export const PriceFilter = ({ range, setRange }) => {
   return (
     <StFilterWrapper>
       <StTitle>가격 범위</StTitle>
-      <RangeSliderContainer range={range} setRange={setRange} />
+      <RangeSliderContainer isModal range={range} setRange={setRange} />
     </StFilterWrapper>
   );
 };
@@ -149,7 +149,7 @@ export const RefundFilter = () => {
   return (
     <StFilterWrapper>
       <StTitle>유연한 환불 정책</StTitle>
-      <RefundContainer />
+      <RefundContainer isModal />
     </StFilterWrapper>
   );
 };
@@ -158,7 +158,7 @@ export const RoomTypeFilter = () => {
   return (
     <StFilterWrapper>
       <StTitle>숙소 유형</StTitle>
-      <RoomTypeContainer />
+      <RoomTypeContainer isModal />
     </StFilterWrapper>
   );
 };

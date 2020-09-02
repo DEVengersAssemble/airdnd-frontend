@@ -1,6 +1,7 @@
 import * as api from '../Api/Api';
 import { fetchDataThunk, reducerUtils } from '../lib/asyncUtils';
 
+// action type
 const FETCH_DATA = 'search/FETCH_DATA';
 const FETCH_DATA_SUCCESS = 'search/FETCH_DATA_SUCCESS';
 const FETCH_DATA_ERROR = 'search/FETCH_DATA_ERROR';
@@ -35,6 +36,7 @@ const APPLY_CHECK_FILTER = 'search/APPLY_CHECK_FILTER';
 const SET_MODAL_FILTER = 'search/SET_MODAL_FILTER';
 const RESET_MODAL_FILTER = 'search/RESET_MODAL/FILTER';
 
+// action creator
 export const fetchData = fetchDataThunk(FETCH_DATA, api.fetchSearchedData);
 
 export const hoverHome = homeId => ({ type: HOVER_HOME, homeId });
@@ -118,6 +120,7 @@ export const modalFilterInit = filterCondition => {
   return filter;
 };
 
+// initial state
 const filterInit = {
   refund: false,
   roomType: {
@@ -162,35 +165,7 @@ const initialState = {
       room: 0,
       bathroom: 0,
     },
-    // convenience: false,
-    // convenienceList: {
-    //   주방: false,
-    //   샴푸: false,
-    //   난방: false,
-    //   에어컨: false,
-    //   다리미: false,
-    //   // ...
-    // },
-
-    // facilityList: {
-    //   헬스장: false,
-    //   수영장: false,
-    //   // ...
-    // },
-
-    // hostLangList: {
-    //   영어: false,
-    //   프랑스어: false,
-    //   // ...
-    // },
   },
-
-  // data: null,
-  // map 범위 보낼때
-  // mapSend: {
-  //   from: { lat: 0, lng: 0 },
-  //   to: { lat: 0, lng: 0 },
-  // },
 };
 
 // reducer

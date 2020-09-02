@@ -118,7 +118,7 @@ const FilterModal = ({
 };
 
 const StModal = styled(Modal)`
-  width: 780px;
+  width: 720px;
   height: 92vh;
 `;
 

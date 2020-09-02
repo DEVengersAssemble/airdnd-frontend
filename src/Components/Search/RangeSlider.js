@@ -9,6 +9,7 @@ const RangeSlider = ({
   priceArray,
   averagePrice,
   isDisabled,
+  isModal,
   min,
   max,
   left,
@@ -50,9 +51,10 @@ const RangeSlider = ({
         </StGraph>
       </StRangeWrapper>
       <StInputWrapper>
-        <NewInput
+        <PriceInput
           type="number"
           title="최저 요금"
+          isModal={isModal}
           value={min}
           short
           pay="₩"
@@ -60,9 +62,10 @@ const RangeSlider = ({
           onBlur={onSetRange}
         />
         <span>―</span>
-        <NewInput
+        <PriceInput
           type="number"
           title="최고 요금"
+          isModal={isModal}
           value={max}
           short
           pay="₩"
@@ -84,6 +87,10 @@ const spanStyle = css`
 const StLargeSpan = styled.span`
   font-size: 1.6rem;
   ${spanStyle}
+`;
+
+const PriceInput = styled(NewInput)`
+  width: ${({ isModal }) => isModal && '250px'};
 `;
 
 const StInputWrapper = styled.div`
