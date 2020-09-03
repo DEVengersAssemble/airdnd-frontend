@@ -14,6 +14,7 @@ const HomePopup = ({
   onClickHeart,
 }) => {
   const {
+    homeId,
     isSuperhost,
     isBookmarked,
     imageArray,
@@ -35,6 +36,7 @@ const HomePopup = ({
         imageCount={imageCount}
       />
       <Caption
+        homeId={homeId}
         theme={theme}
         subTitle={subTitle}
         title={title}

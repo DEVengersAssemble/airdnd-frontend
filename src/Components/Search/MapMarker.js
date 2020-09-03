@@ -6,10 +6,12 @@ import { AiFillHome } from 'react-icons/ai';
 import Button from '../Global/Button';
 import { Heart } from '../Global/Heart';
 import HomePopupContainer from '../../Containers/Search/HomePopupContainer';
+
 const getPixelPositionOffset = (width, height) => ({
   x: width + width / 2,
   y: -(height * 2),
 });
+
 const MapMarker = ({
   theme,
   store,
@@ -133,4 +135,4 @@ const MiniHeart = styled(Heart)`
   top: -0.3rem;
   right: -0.3rem;
 `;
-export default MapMarker;
+export default React.memo(MapMarker);

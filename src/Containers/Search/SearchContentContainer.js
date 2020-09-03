@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchData } from '../../Modules/search';
-import { fetchCenter } from '../../Modules/map';
 import SearchContent from '../../Components/Search/SearchContent';
 import qs from 'qs';
 
@@ -14,11 +13,12 @@ const SearchContentContainer = () => {
     ignoreQueryPrefix: true,
   });
 
-  console.log('렌더링시작한다~~~~~~~~~~', searchForm.location);
+  console.log('렌더링시작한다~~~~~~~~~~', data);
 
   useEffect(() => {
     dispatch(fetchData(searchForm));
-    dispatch(fetchCenter(searchForm.location));
+    // dispatch(fetchCenter(searchForm.location));
+    // window.scrollTo(0, 0);
   }, []);
 
   if (loading)

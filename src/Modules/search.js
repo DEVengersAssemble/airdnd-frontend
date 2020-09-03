@@ -147,7 +147,7 @@ const initialState = {
   headerState: false,
   viewState: 'result',
   mapState: true,
-  mapZoom: 12,
+  mapZoom: 10,
   markerState: null,
   hoveredHome: null,
   popup: popupInit,
@@ -211,11 +211,11 @@ const search = (state = initialState, action) => {
               ? { ...home, isBookmarked: !home.isBookmarked }
               : home,
           ),
-          // recentHomes: state.data.recentHomes.map(home =>
-          //   home.homeId === action.homeId
-          //     ? { ...home, isBookmarked: !home.isBookmarked }
-          //     : home,
-          // ),
+          recentHomes: state.data.recentHomes.map(home =>
+            home.homeId === action.homeId
+              ? { ...home, isBookmarked: !home.isBookmarked }
+              : home,
+          ),
         },
       };
     case OPEN_HEADER:

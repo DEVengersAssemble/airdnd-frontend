@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 import { AiOutlineRight, AiOutlineLeft } from 'react-icons/ai';
 import Button from './Button';
@@ -14,7 +14,11 @@ const Calendar = ({
   checkin,
   checkout,
   onClickCheckDate,
-  isChangeDate,
+  onMouseenter,
+  getDiff,
+  hoverDate,
+  reservedDates,
+  isDetailPage,
 }) => {
   const addZero = num => ((num + '').length === 1 ? '0' + num : num);
   const _thisMonth = addZero(thisMonth.month);
@@ -22,7 +26,7 @@ const Calendar = ({
 
   return (
     <>
-      <StWrapper>
+      <StWrapper isDetailPage={isDetailPage}>
         <StNextMonthBtn btnType="circle" onClick={onClickBeforeMonth}>
           <AiOutlineLeft />
         </StNextMonthBtn>
@@ -43,29 +47,41 @@ const Calendar = ({
             <li>토</li>
           </StDays>
           <StDates>
-            {thisMonthDates.map((date, i) => (
-              <StDateWrapper key={i} margin={thisMonth.firstDay}>
-                <StDateBtn
-                  btnType="circle"
-                  id={`dateId-${thisMonth.year}.${_thisMonth}.${addZero(date)}`}
-                  onClick={onClickCheckDate}
-                  checkin={
-                    checkin ===
-                    `${thisMonth.year}.${_thisMonth}.${addZero(date)}`
-                  }
-                  checkout={
-                    checkout ===
-                    `${thisMonth.year}.${_thisMonth}.${addZero(date)}`
-                  }
+            {thisMonthDates.map((date, i) => {
+              const thisDate = `${thisMonth.year}.${_thisMonth}.${addZero(
+                date,
+              )}`;
+              const reserved = reservedDates.find(v => v === thisDate);
+              return (
+                <StDateWrapper
+                  key={i}
+                  margin={thisMonth.firstDay}
+                  darken={getDiff(thisDate)}
+                  checkin={checkin === thisDate}
+                  checkout={checkout === thisDate}
+                  hoverDate={hoverDate === thisDate}
                 >
-                  {date}
-                </StDateBtn>
-              </StDateWrapper>
-            ))}
+                  <StDateBtn
+                    onMouseEnter={onMouseenter}
+                    btnType="circle"
+                    id={`dateId-${thisMonth.year}.${_thisMonth}.${addZero(
+                      date,
+                    )}`}
+                    onClick={e => onClickCheckDate(e, reserved)}
+                    checkin={checkin === thisDate}
+                    checkout={checkout === thisDate}
+                    reserved={reserved}
+                    // reserved={reserved}
+                  >
+                    {date}
+                  </StDateBtn>
+                </StDateWrapper>
+              );
+            })}
           </StDates>
         </StCalendarWrapper>
         {!responsiveScreen && (
-          <StCalendarWrapper>
+          <StCalendarWrapper className="nextMonth">
             <StMonth>
               {nextMonth.month}월 {nextMonth.year}
             </StMonth>
@@ -79,27 +95,36 @@ const Calendar = ({
               <li>토</li>
             </StDays>
             <StDates>
-              {nextMonthDates.map((date, i) => (
-                <StDateWrapper key={i} margin={nextMonth.firstDay}>
-                  <StDateBtn
-                    btnType="circle"
-                    id={`dateId-${nextMonth.year}.${_nextMonth}.${addZero(
-                      date,
-                    )}`}
-                    onClick={onClickCheckDate}
-                    checkin={
-                      checkin ===
-                      `${nextMonth.year}.${_nextMonth}.${addZero(date)}`
-                    }
-                    checkout={
-                      checkout ===
-                      `${nextMonth.year}.${_nextMonth}.${addZero(date)}`
-                    }
+              {nextMonthDates.map((date, i) => {
+                const nextDate = `${nextMonth.year}.${_nextMonth}.${addZero(
+                  date,
+                )}`;
+                const reserved = reservedDates.find(v => v === nextDate);
+                return (
+                  <StDateWrapper
+                    key={i}
+                    margin={nextMonth.firstDay}
+                    darken={getDiff(nextDate)}
+                    checkin={checkin === nextDate}
+                    checkout={checkout === nextDate}
+                    hoverDate={hoverDate === nextDate}
                   >
-                    {date}
-                  </StDateBtn>
-                </StDateWrapper>
-              ))}
+                    <StDateBtn
+                      onMouseEnter={onMouseenter}
+                      btnType="circle"
+                      id={`dateId-${nextMonth.year}.${_nextMonth}.${addZero(
+                        date,
+                      )}`}
+                      onClick={e => onClickCheckDate(e, reserved)}
+                      checkin={checkin === nextDate}
+                      checkout={checkout === nextDate}
+                      reserved={reserved}
+                    >
+                      {date}
+                    </StDateBtn>
+                  </StDateWrapper>
+                );
+              })}
             </StDates>
           </StCalendarWrapper>
         )}
@@ -115,9 +140,17 @@ const StWrapper = styled.div`
   min-height: 300px;
   margin-top: 30px;
 
-  @media screen and (max-width: 1200px) {
-    width: 308px;
-  }
+  ${({ isDetailPage }) =>
+    isDetailPage &&
+    css`
+      @media screen and (max-width: 1200px) {
+        width: 308px;
+
+        .nextMonth {
+          display: none;
+        }
+      }
+    `}
 `;
 
 const StNextMonthBtn = styled(Button)`
@@ -169,29 +202,45 @@ const StDates = styled.div``;
 
 const StDateWrapper = styled.div`
   display: inline-block;
-  width: 42px;
-  height: 42px;
-  margin: 1px;
+  width: 44px;
+  height: 44px;
 
   :first-child {
     margin-left: ${({ margin }) => margin * 44}px;
   }
+
+  ${({ darken }) =>
+    darken &&
+    css`
+      background-color: ${({ theme }) => theme.color.softGray};
+    `}
+
+  ${({ checkin }) =>
+    checkin &&
+    css`
+      border-top-left-radius: 50%;
+      border-bottom-left-radius: 50%;
+    `}
+
+  ${({ checkout, hoverDate }) =>
+    (checkout || hoverDate) &&
+    css`
+      border-top-right-radius: 50%;
+      border-bottom-right-radius: 50%;
+    `}
 `;
 
 const StDateBtn = styled(Button)`
   border: none;
   width: 42px;
   height: 42px;
-  /* margin: 1px; */
+  margin: 1px;
   font-size: 14px;
   font-weight: 500;
+  background-color: rgba(0, 0, 0, 0);
 
   &:hover {
     border: 2px solid ${({ theme }) => theme.color.black};
-  }
-  &:focus {
-    background-color: ${({ theme }) => theme.color.black};
-    color: ${({ theme }) => theme.color.white};
   }
 
   ${({ checkin, checkout }) =>
@@ -199,6 +248,14 @@ const StDateBtn = styled(Button)`
     css`
       background-color: ${({ theme }) => theme.color.black};
       color: ${({ theme }) => theme.color.white};
+    `}
+
+  ${({ reserved }) =>
+    reserved &&
+    css`
+      color: ${({ theme }) => theme.color.gray};
+      text-decoration: line-through;
+      font-weight: 400;
     `}
 `;
 
