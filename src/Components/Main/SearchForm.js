@@ -309,6 +309,7 @@ const SearchForm = ({
           ref={checkInResetBtnRef}
           onClick={() => {
             changeSearchData('checkIn', '');
+            checkOut && changeSearchData('checkOut', '');
           }}
         >
           <MdClose />
