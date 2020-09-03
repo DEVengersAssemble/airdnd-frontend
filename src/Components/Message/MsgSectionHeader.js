@@ -9,7 +9,6 @@ import { MdKeyboardArrowLeft } from 'react-icons/md';
 
 const MsgSectionHeader = ({
   media,
-  msgListSectionState,
   msgDetailSectionState,
   onClickShowList,
   onClickDetail,
@@ -21,7 +20,7 @@ const MsgSectionHeader = ({
   return (
     <MsgSectionHeaderWrapper>
       <MsgSectionHeaderTitle>
-        {media === 'medium' && !msgListSectionState && (
+        {media === 'medium' && msgDetailSectionState && (
           <Button
             btnType="circle"
             border="none"
@@ -33,16 +32,6 @@ const MsgSectionHeader = ({
             <MdKeyboardArrowLeft />
           </Button>
         )}
-        {/* <Button
-          btnType="circle"
-          border="none"
-          hover={{ backgroundColor: theme.color.lightGray }}
-          fontSize="3rem"
-          style={{ width: '4rem', height: '4rem', marginRight: '3rem' }}
-          onClick={onClickShowList}
-        >
-          <MdKeyboardArrowLeft />
-        </Button> */}
         {hostname}
       </MsgSectionHeaderTitle>
       <MsgSectionHeaderButtonWrapper>

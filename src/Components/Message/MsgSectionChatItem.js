@@ -6,6 +6,7 @@ import Button from '../Global/Button';
 import { AiFillFlag } from 'react-icons/ai';
 
 const MsgSectionChatItem = ({
+  onClickOpenModal,
   hostname,
   hostProfileImg,
   profileImg,
@@ -41,6 +42,7 @@ const MsgSectionChatItem = ({
             hover={{
               backgroundColor: theme.color.lightGray,
             }}
+            onClick={onClickOpenModal}
           >
             <AiFillFlag />
           </StMsgButton>

@@ -8,8 +8,9 @@ import {
   MdAssignmentTurnedIn,
   MdReceipt,
 } from 'react-icons/md';
+import MsgDetailBusinessModalContainer from '../../Containers/Message/MsgDetailBusinessModalContainer';
 
-const MsgDetailSettlementBox = ({ price }) => {
+const MsgDetailRefundBox = ({ price, onClickOpenModal }) => {
   return (
     <MsgDetailSettlementWrapper>
       <MsgDetailSettlementOuterWrapper>
@@ -22,7 +23,7 @@ const MsgDetailSettlementBox = ({ price }) => {
             <MsgDetailSettlementAddress>₩{price}</MsgDetailSettlementAddress>
           </MsgDetailSettlementAddrestWrapper>
         </MsgDetailSettlementInnerWrapper>
-        <StButton>
+        <StButton onClick={onClickOpenModal}>
           <MsgDetailSettlementButtonWrapper>
             <MsgDetailSettlementButtonInnerWrapper>
               <MdAssignmentTurnedIn />
@@ -47,6 +48,7 @@ const MsgDetailSettlementBox = ({ price }) => {
           </StButton>
         </Link>
       </MsgDetailSettlementOuterWrapper>
+      <MsgDetailBusinessModalContainer />
     </MsgDetailSettlementWrapper>
   );
 };
@@ -108,4 +110,4 @@ const MsgDetailSettlementButtonText = styled.div`
   font-size: 1.4rem;
 `;
 
-export default MsgDetailSettlementBox;
+export default MsgDetailRefundBox;
