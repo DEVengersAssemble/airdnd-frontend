@@ -28,8 +28,15 @@ const MessageDetailSectionWrapper = styled.section`
       opacity: 0;
     `}
 
-  /* @media ${({ theme }) => theme.size.medium} {
-  } */
+  @media ${({ theme }) => theme.size.medium} {
+    min-width: 37.5rem;
+    transition: all 0.3s ease;
+    ${({ msgDetailSectionState }) =>
+      msgDetailSectionState &&
+      css`
+        transform: translate3d(-37.5rem, 0, 0);
+      `}
+  }
 `;
 
 export default MessageDetailSection;

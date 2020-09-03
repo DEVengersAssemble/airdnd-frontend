@@ -34,6 +34,12 @@ const MessageSectionWrapper = styled.section`
 
   @media ${({ theme }) => theme.size.medium} {
     min-width: calc(100% - 37.5rem);
+    transition: all 0.3s ease;
+    ${({ msgDetailSectionState }) =>
+      msgDetailSectionState &&
+      css`
+        transform: translate3d(-37.5rem, 0, 0);
+      `}
   }
 `;
 

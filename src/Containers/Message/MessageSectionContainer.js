@@ -1,21 +1,33 @@
 import React, { useEffect } from 'react';
 import MessageSection from '../../Components/Message/MessageSection';
 import { useSelector, useDispatch } from 'react-redux';
-import { changeMediaSize } from '../../Modules/message';
+import {
+  changeMediaSize,
+  showMsgDetailSection,
+  hideMsgDetailSection,
+} from '../../Modules/message';
 import { debounce } from 'lodash';
 
 const MessageSectionContainer = () => {
   // ! redux
   const msgSectionStates = useSelector(state => state.message);
+
   const dispatch = useDispatch();
   // ! variable
   const { msgDetailSectionState, msgListSectionState } = msgSectionStates;
 
   const onResizeMedia = () => {
-    window.innerWidth <= 1127 && dispatch(changeMediaSize('medium'));
+    if (window.innerWidth <= 1127) {
+      dispatch(changeMediaSize('medium'));
+      dispatch(hideMsgDetailSection());
+    }
   };
+
   const onResizeLarge = () => {
-    window.innerWidth > 1128 && dispatch(changeMediaSize('large'));
+    if (window.innerWidth > 1128) {
+      dispatch(changeMediaSize('large'));
+      dispatch(showMsgDetailSection());
+    }
   };
 
   useEffect(() => {
