@@ -24,6 +24,7 @@ const MsgSectionFooter = ({ onTextChange, onMsgSubmit }) => {
             message
             placeholder="메시지를 입력하세요."
             onChange={onTextChange}
+            onSubmit={onMsgSubmit}
           />
         </StForm>
       </MsgSectionFooterInner>
