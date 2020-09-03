@@ -4,14 +4,6 @@ import Division from './Division';
 import Button from '../Global/Button';
 
 const Amenities = ({ home, isScreenMedium }) => {
-  // const [screen, setScreen] = useState(
-  //   window.matchMedia('screen and (max-width: 1127px)').matches,
-  // );
-
-  // window.onresize = function () {
-  //   setScreen(window.matchMedia('screen and (max-width: 1127px)').matches);
-  // };
-
   return (
     <Division title="편의시설">
       <StAmenityList>
@@ -42,6 +34,10 @@ const Amenities = ({ home, isScreenMedium }) => {
 
 const StAmenityList = styled.ul`
   margin-bottom: 24px;
+  @media ${({ theme }) => theme.size.medium} {
+    max-height: 200px;
+    overflow: hidden;
+  }
 `;
 
 const StAmenity = styled.li`

@@ -18,18 +18,19 @@ const SearchFormContainer = ({ isSearchBtnClicked }) => {
     setType(() => type);
   };
 
+  const getDateDiff = (date1, date2) => {
+    const checkIn = new Date(date1);
+    const checkOut = new Date(date2);
+    const timeDiff = checkOut.getTime() - checkIn.getTime();
+    return Math.ceil(timeDiff / (1000 * 3600 * 24));
+  };
+
   const handleSubmit = e => {
     e.preventDefault();
-    const {
-      location,
-      checkIn,
-      checkOut,
-      dateDiff,
-      flexibleDate,
-      guests,
-    } = searchData;
+    const { location, checkIn, checkOut, flexibleDate, guests } = searchData;
     const { adult, child, infant } = guests;
     const guestCount = adult + child + infant;
+    const dateDiff = getDateDiff(checkIn, checkOut);
     const url = `/search?location=${location}&checkIn=${checkIn}&checkOut=${checkOut}&dateDiff=${dateDiff}&flexibleDate=${flexibleDate}&guests=${guestCount}&adult=${adult}&child=${child}&infant=${infant}`;
     history.push(url);
     window.scrollTo({ top: 0 });

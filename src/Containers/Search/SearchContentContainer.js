@@ -13,16 +13,20 @@ const SearchContentContainer = () => {
     ignoreQueryPrefix: true,
   });
 
-  console.log('렌더링시작한다~~~~~~~~~~', searchForm);
+  console.log('렌더링시작한다~~~~~~~~~~', data);
 
   useEffect(() => {
     dispatch(fetchData(searchForm));
+    // dispatch(fetchCenter(searchForm.location));
+    // window.scrollTo(0, 0);
   }, []);
 
-  console.log(loading, error, data);
-  if (loading) console.log('==================loading========');
-  if (error) console.log('========ERROR================');
-  if (!data) return null;
+  if (loading)
+    return <div style={{ width: '100%', height: 'calc(100vh - 8rem)' }}></div>;
+  if (error)
+    return <div style={{ width: '100%', height: 'calc(100vh - 8rem)' }}></div>;
+  if (!data)
+    return <div style={{ width: '100%', height: 'calc(100vh - 8rem)' }}></div>;
   return <SearchContent />;
 };
 
