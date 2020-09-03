@@ -13,7 +13,7 @@ const CalendarContainer = ({
   const [count, setCount] = useState(0);
   const [isChangeDate, setIsChangeDate] = useState(false);
 
-  console.log('test', checkin, checkout);
+  // console.log('test', checkin, checkout);
 
   const confirmCheckin = isChangeDate ? checkin : checkIn;
   const confirmCheckout = isChangeDate ? checkout : checkOut;

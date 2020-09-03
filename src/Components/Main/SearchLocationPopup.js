@@ -57,7 +57,7 @@ const SearchLocationPopup = forwardRef(
       searchData,
       locationResult,
       changeSearchData,
-      changeFocus,
+      // changeFocus,
     },
     ref,
   ) => {
@@ -75,7 +75,7 @@ const SearchLocationPopup = forwardRef(
                   onClick={() => {
                     changeSearchData('location', item);
                     changeType('checkIn');
-                    changeFocus('checkIn');
+                    // changeFocus('checkIn');
                   }}
                 >
                   <StSearchLocationIconWrapper>

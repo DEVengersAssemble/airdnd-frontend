@@ -235,6 +235,7 @@ const SignupModalContainer = () => {
       profileImg: '',
       description: '',
     };
+    console.log('payload: ', payload);
     try {
       const { response } = await axios.post('/back/signUp', payload);
       console.log(response);
