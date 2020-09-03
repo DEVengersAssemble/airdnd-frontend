@@ -7,17 +7,21 @@ import SearchHeader from '../../Components/Search/SearchHeader';
 const SearchHeaderContainer = () => {
   const history = useHistory();
   const [isSearchBtnClicked, setIsSearchBtnClicked] = useState(false);
+  const [initAnimation, setInitAnimation] = useState(false);
   const searchForm = useSelector(state => state.searchForm);
   const onScroll = () => {
     setIsSearchBtnClicked(false);
   };
 
   useEffect(() => {
+    if (!initAnimation && isSearchBtnClicked) {
+      setInitAnimation(true);
+    }
     window.addEventListener('scroll', throttle(onScroll, 150));
     return () => {
       window.removeEventListener('scroll', onScroll);
     };
-  }, []);
+  }, [onScroll, initAnimation]);
 
   const handleLogoClick = e => {
     e.preventDefault();
@@ -31,6 +35,7 @@ const SearchHeaderContainer = () => {
 
   return (
     <SearchHeader
+      initAnimation={initAnimation}
       isSearchBtnClicked={isSearchBtnClicked}
       handleLogoClick={handleLogoClick}
       handleSearchBtnClick={handleSearchBtnClick}

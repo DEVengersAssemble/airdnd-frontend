@@ -62,7 +62,8 @@ const StNavSearchWrapper = styled.div`
   animation-fill-mode: forwards;
   animation-name: ${({ isSearchBtnClicked }) =>
     isSearchBtnClicked ? slideDown : slideUp};
-
+  animation: ${({ initAnimation }) => !initAnimation && 'none'};
+  display: ${({ initAnimation }) => (initAnimation ? 'flex' : 'none')};
   @media ${({ theme }) => theme.size.medium} {
     width: 76%;
     top: 0;
@@ -125,6 +126,7 @@ const StSearchFormResultWrapper = styled.div`
 `;
 
 const SearchHeader = ({
+  initAnimation,
   isSearchBtnClicked,
   handleLogoClick,
   handleSearchBtnClick,
@@ -140,7 +142,10 @@ const SearchHeader = ({
   return (
     <StSearchHeader isSearchBtnClicked={isSearchBtnClicked}>
       <Logo handleLogoClick={handleLogoClick}></Logo>
-      <StNavSearchWrapper isSearchBtnClicked={isSearchBtnClicked}>
+      <StNavSearchWrapper
+        isSearchBtnClicked={isSearchBtnClicked}
+        initAnimation={initAnimation}
+      >
         <Navigation isSearchBtnClicked={isSearchBtnClicked}></Navigation>
         <SearchFormContainer isSearchBtnClicked={isSearchBtnClicked} />
       </StNavSearchWrapper>
