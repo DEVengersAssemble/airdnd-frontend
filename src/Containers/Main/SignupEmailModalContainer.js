@@ -224,7 +224,7 @@ const SignupModalContainer = () => {
   };
 
   const onSuccess = async () => {
-    console.log('===유저를 등록합니다====');
+    console.log('===회원가입 시도====');
     const payload = {
       email: email.value,
       firstName: firstName.value,
@@ -237,8 +237,8 @@ const SignupModalContainer = () => {
     };
     console.log('payload: ', payload);
     try {
-      const { response } = await axios.post('/back/signUp', payload);
-      console.log(response);
+      const { data } = await axios.post('/back/signUp', payload);
+      console.log(data);
     } catch (error) {
       console.error(error);
     }
