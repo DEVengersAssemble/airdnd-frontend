@@ -3,21 +3,26 @@ import { throttle } from 'lodash';
 import MainHeader from '../../Components/Main/MainHeader';
 
 const MainHeaderContainer = () => {
-  const [isScrollTop, setIsScrollTop] = useState(window.scrollY === 0);
+  const [isScrollTop, setIsScrollTop] = useState(window.scrollY < 40);
   const [isSearchBtnClicked, setIsSearchBtnClicked] = useState(false);
-
+  const [initAnimation, setInitAnimation] = useState(false);
+  console.log(initAnimation);
   const onScroll = e => {
-    console.log('[onScroll]: ', window.scrollY);
-    setIsScrollTop(e && window.scrollY < 20);
+    setIsScrollTop(e && window.scrollY < 40);
     setIsSearchBtnClicked(false);
   };
 
   useEffect(() => {
+    console.log('useEffect: ', window.scrollY);
+    console.log('initAnimation: ', initAnimation);
+    if (!initAnimation && window.scrollY > 40) {
+      setInitAnimation(true);
+    }
     window.addEventListener('scroll', throttle(onScroll, 150));
     return () => {
       window.removeEventListener('scroll', onScroll);
     };
-  }, []);
+  }, [onScroll, initAnimation]);
 
   const handleLogoClick = e => {
     e.preventDefault();
@@ -29,6 +34,7 @@ const MainHeaderContainer = () => {
   };
   return (
     <MainHeader
+      initAnimation={initAnimation}
       isScrollTop={isScrollTop}
       isSearchBtnClicked={isSearchBtnClicked}
       handleLogoClick={handleLogoClick}
