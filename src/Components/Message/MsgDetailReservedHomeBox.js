@@ -5,7 +5,7 @@ import { lighten, darken } from 'polished';
 import { FcExport } from 'react-icons/fc';
 import Button from '../Global/Button';
 import Profile from '../Global/Profile';
-import CarouselContainer from '../../Containers/Global/CarouselContainer';
+// import CarouselContainer from '../../Containers/Global/CarouselContainer';
 
 const MsgDetailReservedHomeBox = ({
   title,
@@ -31,7 +31,7 @@ const MsgDetailReservedHomeBox = ({
 }) => {
   return (
     <MsgDetailRhBoxWrapper>
-      <div onMouseOver={onMouseOver} onMouseLeave={onMouseLeave}>
+      {/* <div onMouseOver={onMouseOver} onMouseLeave={onMouseLeave}>
         <CarouselContainer
           size="superLarge"
           isHovered={hover}
@@ -39,7 +39,7 @@ const MsgDetailReservedHomeBox = ({
           imageCount={imageCount}
           blockLink
         />
-      </div>
+      </div> */}
       <MsgDetailRhBoxTitle>{title}</MsgDetailRhBoxTitle>
       <MsgDetailRhBoxReservedStateText>
         {!isCanceled && '예약이 완료되었습니다.'}

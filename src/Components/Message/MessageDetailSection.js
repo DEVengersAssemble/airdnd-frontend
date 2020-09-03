@@ -20,13 +20,23 @@ const MessageDetailSectionWrapper = styled.section`
   width: 37.5rem;
   min-width: 37.5rem;
 
-  transition: all 0.3s linear;
+  transition: all 0.3s ease;
   ${({ msgDetailSectionState }) =>
     !msgDetailSectionState &&
     css`
       visibility: hidden;
       opacity: 0;
     `}
+  
+  /* @media ${({ theme }) => theme.size.medium} {
+    min-width: 37.5rem;
+    transition: all 0.3s ease;
+    ${({ msgDetailSectionState }) =>
+      !msgDetailSectionState &&
+      css`
+        min-width: calc(100% - 37.5rem);
+      `}
+  } */
 
   @media ${({ theme }) => theme.size.medium} {
     min-width: 37.5rem;
