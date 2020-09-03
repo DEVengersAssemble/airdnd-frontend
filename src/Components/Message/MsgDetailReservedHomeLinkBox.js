@@ -7,7 +7,7 @@ import { FaDoorOpen } from 'react-icons/fa';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 import MsgDetailRhLbRulesItem from './MsgDetailRhLbRulesItem';
 
-const MsgDetailReservedHomeLinkBox = ({ rules }) => {
+const MsgDetailReservedHomeLinkBox = ({ rules, homeId }) => {
   return (
     <MsgDetailRhLbWrapper>
       <MsgDetailRhLbOuterWrapper>
@@ -24,7 +24,7 @@ const MsgDetailReservedHomeLinkBox = ({ rules }) => {
             </MsgDetailRhLbAddrestWrapper>
           )}
         </MsgDetailRhLbInnerWrapper>
-        <Link to="/detail" target="_blank">
+        <Link to={`/detail/${homeId}`} target="_blank">
           <StButton>
             <MsgDetailRhLbButtonWrapper>
               <MsgDetailRhLbButtonInnerWrapper>

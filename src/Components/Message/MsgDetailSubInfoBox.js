@@ -6,6 +6,8 @@ import { MdKeyboardArrowRight, MdPrint, MdReceipt } from 'react-icons/md';
 import { FaGlobe, FaDoorOpen } from 'react-icons/fa';
 import Profile from '../Global/Profile';
 import Button from '../Global/Button';
+import MsgDetailPdfModalContainer from '../../Containers/Message/MsgDetailPdfModalContainer';
+import MsgDetailLanguageModalContainer from '../../Containers/Message/MsgDetailLanguageModalContainer';
 
 const MsgDetailSubInfoBox = ({
   guest,
@@ -13,6 +15,8 @@ const MsgDetailSubInfoBox = ({
   guestProfileImg,
   reservationId,
   isCanceled,
+  onClickOpenModal,
+  homeId,
 }) => {
   return (
     <MsgDetailSiWrapper>
@@ -59,12 +63,12 @@ const MsgDetailSubInfoBox = ({
               </MsgDetailSiReservedNumber>
             </MsgDetailSiReservedNumberWrapper>
           </MsgDetailSiInnerWrapper>
-          <Link to="/detail" target="_blank">
+          <Link to={`/detail/${homeId}`} target="_blank">
             <StButton>
               <MsgDetailSiButtonWrapper>
                 <MsgDetailSiButtonInnerWrapper>
                   <FaDoorOpen />
-                  <MsgDetailSiButtonText>숙소 보기</MsgDetailSiButtonText>
+                  <MsgDetailSiButtonText>기 보기</MsgDetailSiButtonText>
                 </MsgDetailSiButtonInnerWrapper>
                 <MdKeyboardArrowRight />
               </MsgDetailSiButtonWrapper>
@@ -110,7 +114,7 @@ const MsgDetailSubInfoBox = ({
               </MsgDetailSiReservedNumber>
             </MsgDetailSiReservedNumberWrapper>
           </MsgDetailSiInnerWrapper>
-          <StButton>
+          <StButton onClick={onClickOpenModal}>
             <MsgDetailSiButtonWrapper>
               <MsgDetailSiButtonInnerWrapper>
                 <FaGlobe />
@@ -147,6 +151,8 @@ const MsgDetailSubInfoBox = ({
           </Link>
         </MsgDetailSiOuterWrapper>
       )}
+      <MsgDetailPdfModalContainer />
+      <MsgDetailLanguageModalContainer />
     </MsgDetailSiWrapper>
   );
 };

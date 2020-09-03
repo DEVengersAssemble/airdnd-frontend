@@ -22,7 +22,6 @@ const MapMarker = ({
   clickMarker,
 }) => {
   const { location, price, isBookmarked } = marker;
-
   return (
     <Marker
       position={{ lat: +location.lat, lng: +location.lng }}
@@ -89,7 +88,6 @@ const MapMarker = ({
     </Marker>
   );
 };
-
 const buttonStyle = css`
   box-shadow: 0 0 2px ${({ theme }) => theme.color.gray};
   border: none;
@@ -102,7 +100,6 @@ const buttonStyle = css`
     z-index: 20;
   }
 `;
-
 const focusStyle = css`
   ${({ isOpen, isHovered, theme }) =>
     isOpen || isHovered
@@ -118,29 +115,24 @@ const focusStyle = css`
           color: ${theme.color.black};
         `}
 `;
-
 const HomeMarker = styled(Button)`
   ${buttonStyle};
   ${focusStyle};
   overflow: visible;
   position: relative;
 `;
-
 const PriceMarker = styled(Button)`
   ${buttonStyle};
   ${focusStyle};
   font-size: 1.4rem;
   padding: 0.6rem 0.8rem;
 `;
-
 const Strong = styled.strong`
   padding: 0 3px;
 `;
-
 const MiniHeart = styled(Heart)`
   position: absolute;
   top: -0.3rem;
   right: -0.3rem;
 `;
-
-export default MapMarker;
+export default React.memo(MapMarker);

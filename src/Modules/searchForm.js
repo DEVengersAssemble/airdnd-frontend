@@ -33,19 +33,11 @@ export const setSearchData = data => {
 // });
 // export const setGuests = payload => ({ type: SET_GUESTS, payload });
 
-const getDateDiff = (date1, date2) => {
-  const checkIn = new Date(date1);
-  const checkOut = new Date(date2);
-  const timeDiff = checkOut.getTime() - checkIn.getTime();
-  return Math.ceil(timeDiff / (1000 * 3600 * 24));
-};
-
 // initialState
 const initialState = {
   location: '서울',
   checkIn: '2020.09.02',
   checkOut: '2020.09.05',
-  // dateDiff: getDateDiff('2020/09/02', '2020/09/05'),
   dateDiff: null,
   flexibleDate: 0,
   guests: {

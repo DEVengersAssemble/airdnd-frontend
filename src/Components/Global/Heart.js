@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { rgba } from 'polished';
@@ -115,62 +116,66 @@ const StCkDiv = styled.div`
   ${hoverStyles}
 `;
 
-const Heart = ({ size, bgColor, stroke, ckType, hover, checked, ...rest }) => {
-  return hover ? (
-    <StCkDiv // hover={true}
-      size={size}
-      bgColor={bgColor}
-      stroke={stroke}
-      ckType={ckType}
-      hover={hover} // CkHeart의 hover기능 props 여부에 따라 hover 적용, 없으면 무시
-      checked={checked} // checked=true, checked=false
-      {...rest}
-    >
-      <HeartIcon />
-    </StCkDiv>
-  ) : (
-    <StDiv // default heart
-      size={size}
-      bgColor={bgColor}
-      stroke={stroke}
-      ckType={ckType}
-      hover={hover} // hover={false}
-      checked={checked}
-      {...rest}
-    >
-      <HeartIcon />
-    </StDiv>
-  );
-};
+const Heart = React.memo(
+  ({ size, bgColor, stroke, ckType, hover, checked, ...rest }) => {
+    return hover ? (
+      <StCkDiv // hover={true}
+        size={size}
+        bgColor={bgColor}
+        stroke={stroke}
+        ckType={ckType}
+        hover={hover} // CkHeart의 hover기능 props 여부에 따라 hover 적용, 없으면 무시
+        checked={checked} // checked=true, checked=false
+        {...rest}
+      >
+        <HeartIcon />
+      </StCkDiv>
+    ) : (
+      <StDiv // default heart
+        size={size}
+        bgColor={bgColor}
+        stroke={stroke}
+        ckType={ckType}
+        hover={hover} // hover={false}
+        checked={checked}
+        {...rest}
+      >
+        <HeartIcon />
+      </StDiv>
+    );
+  },
+);
 
 // onClick 이벤트는 onCheck 이름으로 내려주세요
-const CkHeart = ({ ckType, hover, checked, onCheck, theme, ...event }) => {
-  return (
-    <StHeartLabel hover={hover} {...event}>
-      <StHeartInput type="checkbox" />
-      {hover ? (
-        // hover=true
-        <Heart
-          size="large"
-          ckType={ckType}
-          hover={hover}
-          checked={checked}
-          theme={theme}
-          onClick={onCheck}
-        />
-      ) : (
-        // hover=false
-        <Heart
-          size="large"
-          ckType={ckType}
-          checked={checked}
-          theme={theme}
-          onClick={onCheck}
-        />
-      )}
-    </StHeartLabel>
-  );
-};
+const CkHeart = React.memo(
+  ({ ckType, hover, checked, onCheck, theme, ...event }) => {
+    return (
+      <StHeartLabel hover={hover} {...event}>
+        <StHeartInput type="checkbox" />
+        {hover ? (
+          // hover=true
+          <Heart
+            size="large"
+            ckType={ckType}
+            hover={hover}
+            checked={checked}
+            theme={theme}
+            onClick={onCheck}
+          />
+        ) : (
+          // hover=false
+          <Heart
+            size="large"
+            ckType={ckType}
+            checked={checked}
+            theme={theme}
+            onClick={onCheck}
+          />
+        )}
+      </StHeartLabel>
+    );
+  },
+);
 
 Heart.defaultProps = {
   size: 'small',

@@ -37,6 +37,7 @@ const MsgDetailReservedHomeBox = ({
           isHovered={hover}
           imageArray={imageArray}
           imageCount={imageCount}
+          blockLink
         />
       </div>
       <MsgDetailRhBoxTitle>{title}</MsgDetailRhBoxTitle>

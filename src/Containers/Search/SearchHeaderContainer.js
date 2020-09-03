@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { throttle } from 'lodash';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -9,6 +9,7 @@ const SearchHeaderContainer = () => {
   const [isSearchBtnClicked, setIsSearchBtnClicked] = useState(false);
   const [initAnimation, setInitAnimation] = useState(false);
   const searchForm = useSelector(state => state.searchForm);
+
   const onScroll = () => {
     setIsSearchBtnClicked(false);
   };
@@ -32,7 +33,6 @@ const SearchHeaderContainer = () => {
   const handleSearchBtnClick = () => {
     setIsSearchBtnClicked(true);
   };
-
   return (
     <SearchHeader
       initAnimation={initAnimation}

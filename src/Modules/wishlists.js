@@ -1,4 +1,15 @@
+import * as api from '../Api/bookmarkApi';
+import {
+  fetchDataThunk,
+  reducerUtils,
+  handleAsyncActions,
+} from '../lib/asyncUtils';
+
 // action type
+const FETCH_BOOKMARKLISTS = 'wishlists/FETCH_BOOKMARKLISTS'; // 요청 시작
+const FETCH_BOOKMARKLISTS_SUCCESS = 'wishlists/FETCH_BOOKMARKLISTS_SUCCESS'; // 요청 성공
+const FETCH_BOOKMARKLISTS_ERROR = 'wishlists/FETCH_BOOKMARKLISTS_ERROR'; // 요청 실패
+
 const CREATE_BOOKMARKLIST = 'wishlists/CREATE_BOOKMARKLIST';
 const ADD_BOOKMARK_OLD_LIST = 'wishlists/ADD_BOOKMARK_OLD_LIST';
 const ADD_BOOKMARK_NEW_LIST = 'wishlists/ADD_BOOKMARK_NEW_LIST';
@@ -10,6 +21,11 @@ const OPEN_NEW_MODAL = 'wishlists/OPEN_NEW_MODAL';
 const CLOSE_NEW_MODAL = 'wishlists/CLOSE_NEW_MODAL';
 
 // action creator
+export const fetchBookmark = fetchDataThunk(
+  FETCH_BOOKMARKLISTS,
+  api.fetchBookmarkData,
+);
+
 let id = 5;
 export const createBookmarkList = value => ({
   type: CREATE_BOOKMARKLIST,
@@ -50,6 +66,8 @@ const initialState = {
   newModal: false,
   selectedId: null,
   selectedImg: '',
+  bookmark: reducerUtils.initial(),
+
   bookmarkLists: [
     {
       bookmarkListId: 1,
@@ -141,6 +159,11 @@ const initialState = {
 // reducer
 const wishlists = (state = initialState, action) => {
   switch (action.type) {
+    case FETCH_BOOKMARKLISTS:
+    case FETCH_BOOKMARKLISTS_SUCCESS:
+    case FETCH_BOOKMARKLISTS_ERROR:
+      return handleAsyncActions(FETCH_BOOKMARKLISTS, 'bookmark')(state, action);
+
     case CREATE_BOOKMARKLIST:
       return {
         ...state,

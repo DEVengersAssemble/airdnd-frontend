@@ -190,10 +190,15 @@ const NewInput = ({
   onBlur,
   ...rest
 }) => {
-  // console.log(rest);
   return (
     <>
-      <StNewLabel short={short} pay={pay} animation={animation} value={value}>
+      <StNewLabel
+        short={short}
+        pay={pay}
+        animation={animation}
+        value={value}
+        {...rest}
+      >
         <StNewName animation={animation} value={value}>
           {title}
         </StNewName>

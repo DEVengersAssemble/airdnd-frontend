@@ -1,16 +1,11 @@
 import React from 'react';
+import styled from 'styled-components';
 import Checkbox from '../Global/Checkbox';
-import {
-  StCheckboxList,
-  StCheckboxWrapper,
-  StContentWrapper,
-  StLargeSpan,
-  StSmallSpan,
-} from './FilterPopup';
+import { StContentWrapper, StLargeSpan, StSmallSpan } from './FilterPopup';
 
-const RoomType = ({ check, onChange }) => {
+const RoomType = ({ check, onChange, isModal }) => {
   return (
-    <StCheckboxList>
+    <StCheckboxList isModal={isModal}>
       <StCheckboxWrapper>
         <Checkbox
           value
@@ -56,5 +51,14 @@ const RoomType = ({ check, onChange }) => {
     </StCheckboxList>
   );
 };
+
+const StCheckboxWrapper = styled.li`
+  margin-bottom: 1rem;
+`;
+
+const StCheckboxList = styled.ul`
+  padding: ${({ isModal }) => (isModal ? '0' : '2rem')};
+  height: ${({ isModal }) => (isModal ? 'fit-content' : '380px')};
+`;
 
 export default RoomType;

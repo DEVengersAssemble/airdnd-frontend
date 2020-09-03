@@ -50,7 +50,7 @@ const Map = compose(
       />
     ),
   }),
-  withState('zoom', 'onZoomChange', 15),
+  withState('zoom', 'onZoomChange', 10),
   withHandlers(() => {
     const refs = {
       map: undefined,
@@ -88,7 +88,7 @@ const Map = compose(
       <GoogleMap
         ref={setRef}
         zoom={mapZoom}
-        defaultZoom={13}
+        defaultZoom={10}
         defaultCenter={{
           lat: center.lat,
           lng: center.lng,

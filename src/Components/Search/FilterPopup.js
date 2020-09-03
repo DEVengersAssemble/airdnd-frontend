@@ -2,34 +2,21 @@ import React from 'react';
 import Popup from '../Global/Popup';
 import styled, { css } from 'styled-components';
 import Button from '../Global/Button';
-import Toggle from '../Global/Toggle';
 import ModalFooter from '../Global/ModalFooter';
+import RefundContainer from '../../Containers/Search/RefundContainer';
 import RangeSliderContainer from '../../Containers/Search/RangeSliderContainer';
 import RoomTypeContainer from '../../Containers/Search/RoomTypeContainer';
 
-const RefundPopup = ({
-  popupState,
-  isDisabled,
-  toggle,
-  handleClick,
-  onReset,
-  onSave,
-}) => {
+const RefundPopup = ({ popupState, isDisabled, onReset, onSave }) => {
   return (
     <FilterPopup
       popupState={popupState}
       isDisabled={isDisabled}
       size="350px"
-      value={toggle}
       onSave={onSave}
       onReset={() => onReset(false)}
     >
-      <StContentWrapper content="refund">
-        <StSmallSpan>
-          유연한 환불 정책을 제공하는 숙소만 검색 결과에 표시
-        </StSmallSpan>
-        <Toggle checked={toggle} handleClick={handleClick} />
-      </StContentWrapper>
+      <RefundContainer />
     </FilterPopup>
   );
 };
@@ -147,6 +134,11 @@ const StFooter = styled(ModalFooter)`
 `;
 
 const contentStyles = {
+  modal: css`
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+  `,
   refund: css`
     display: flex;
     height: 165px;
@@ -186,15 +178,6 @@ export const StSmallSpan = styled.span`
 export const StLargeSpan = styled.span`
   font-size: 1.6rem;
   ${spanStyle}
-`;
-
-export const StCheckboxList = styled.ul`
-  padding: 2rem;
-  height: 380px;
-`;
-
-export const StCheckboxWrapper = styled.li`
-  margin-bottom: 1rem;
 `;
 
 export { RefundPopup, RoomTypePopup, PricePopup, SetDatePopup };

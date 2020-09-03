@@ -153,8 +153,8 @@ const SearchHeader = ({
       <StOnScrollSearchButton
         btnType="oval"
         fontSize="14px"
-        isSearchBtnClicked={isSearchBtnClicked}
         onClick={handleSearchBtnClick}
+        isSearchBtnClicked={isSearchBtnClicked}
       >
         <StSearchFormResultWrapper dataExists={location}>
           {location || '장소 추가'}

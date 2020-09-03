@@ -1,6 +1,6 @@
 import React, { useReducer, useEffect } from 'react';
 import Carousel from '../../Components/Global/Carousel';
-import { useSelector } from 'react-redux';
+import { throttle } from 'lodash';
 
 const carouselReducer = (state, action) => {
   switch (action.type) {
@@ -74,7 +74,6 @@ const CarouselContainer = ({
     width: 0,
     marker: 0,
   };
-  const { mapState } = useSelector(state => state.search);
   const [carouselState, dispatch] = useReducer(carouselReducer, carouselInit);
   const {
     isSliding,
@@ -88,7 +87,7 @@ const CarouselContainer = ({
   const onSlidePrev = () => dispatch({ type: 'SLIDE_PREV' });
   const setWidth = () =>
     dispatch({ type: 'SET_WIDTH', width: !size && getWidth() });
-  window.addEventListener('resize', setWidth);
+  window.addEventListener('resize', throttle(setWidth, 300));
 
   useEffect(() => {
     dispatch({

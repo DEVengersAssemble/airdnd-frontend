@@ -3,8 +3,11 @@ import { useSelector } from 'react-redux';
 import MsgSectionMain from '../../Components/Message/MsgSectionMain';
 
 const MsgSectionMainContainer = () => {
+  // ! redux
   const { activeIndex, filteredMsgs } = useSelector(state => state.message);
+  const chat = useSelector(state => state.socket.chat);
 
+  // ! variable
   const activeMsg = filteredMsgs.find(
     (_, index) => filteredMsgs[index] === filteredMsgs[activeIndex],
   );
@@ -13,6 +16,7 @@ const MsgSectionMainContainer = () => {
     <MsgSectionMain
       activeMsg={activeMsg}
       chatHistory={activeMsg && activeMsg.chatHistory}
+      chat={chat}
     />
   );
 };
