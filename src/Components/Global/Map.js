@@ -8,7 +8,12 @@ import {
   MapFilterButton,
 } from '../Search/MapButton';
 import { compose, withProps, withState, withHandlers } from 'recompose';
-import { withScriptjs, withGoogleMap, GoogleMap } from 'react-google-maps';
+import {
+  withScriptjs,
+  withGoogleMap,
+  GoogleMap,
+  Marker,
+} from 'react-google-maps';
 import theme from '../../style/theme';
 import MapMarkerContainer from '../../Containers/Search/MapMarkerContainer';
 
@@ -22,7 +27,6 @@ const Map = compose(
           width: '100%',
           height: `100vh`,
           position: 'sticky',
-          // position: 'absolute',
           top: '0',
         }}
       />
@@ -33,7 +37,6 @@ const Map = compose(
           width: '100%',
           height: `100vh`,
           position: 'sticky',
-          // position: 'absolute',
           top: '0',
         }}
       />
@@ -44,7 +47,6 @@ const Map = compose(
           width: '100%',
           height: `100vh`,
           position: 'sticky',
-          // position: 'absolute',
           top: '0',
         }}
       />
@@ -127,6 +129,10 @@ const Map = compose(
           markers.map((marker, i) => (
             <MapMarkerContainer key={i} marker={marker} theme={theme} />
           ))}
+        <Marker position={{ lat: 37.5384272, lng: 126.9654442 }} />
+        <Marker position={{ lat: 37.5384273, lng: 126.9654442 }} />
+        <Marker position={{ lat: 37.5384273, lng: 126.9644442 }} />
+        <Marker position={{ lat: 37.5284272, lng: 126.9654432 }} />
       </GoogleMap>
     );
   },
