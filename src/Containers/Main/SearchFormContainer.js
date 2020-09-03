@@ -7,7 +7,6 @@ import { setSearchData } from '../../Modules/searchForm';
 import { getLocationAutoComplete } from '../../Api/searchFormApi';
 
 const SearchFormContainer = ({ isSearchBtnClicked }) => {
-  console.log('@@@@@@@@@@@@@@');
   let history = useHistory();
   const dispatch = useDispatch();
   const searchData = useSelector(state => state.searchForm);
@@ -125,25 +124,27 @@ const SearchFormContainer = ({ isSearchBtnClicked }) => {
 
   console.log(checkInWrapperRef);
   const changeFocus = () => {
-    if (type === 'location') locationWrapperRef.current.focus();
-    else if (type === 'checkIn') checkInWrapperRef.current.focus();
+    if (type === 'checkIn') checkInWrapperRef.current.focus();
     else if (type === 'checkOut') checkOutWrapperRef.current.focus();
     else if (type === 'guests') guestsWrapperRef.current.focus();
   };
 
   const handlePopup = ({ target }) => {
     console.log('handlePopup...', type);
-    if (locationWrapperRef.current.contains(target)) changeType('location');
-    else if (checkInWrapperRef.current.contains(target)) changeType('checkIn');
-    else if (checkOutWrapperRef.current.contains(target))
-      changeType('checkOut');
-    else if (guestsWrapperRef.current.contains(target)) changeType('guests');
-    else if (
-      locationListRef.current &&
-      locationListRef.current.contains(target)
-    ) {
+    if (locationListRef.current && locationListRef.current.contains(target)) {
+      console.log(1);
       changeType('checkIn');
-    } else if (
+    } else if (locationWrapperRef.current.contains(target)) {
+      console.log(2);
+      changeType('location');
+    } else if (checkInWrapperRef.current.contains(target)) {
+      console.log(3);
+      changeType('checkIn');
+    } else if (checkOutWrapperRef.current.contains(target)) {
+      console.log(4);
+      changeType('checkOut');
+    } else if (guestsWrapperRef.current.contains(target)) changeType('guests');
+    else if (
       (type === 'location' &&
         !locationResetBtnRef.current.contains(target) &&
         !locationWrapperRef.current.contains(target)) ||
@@ -157,6 +158,7 @@ const SearchFormContainer = ({ isSearchBtnClicked }) => {
         !guestsPopupRef.current.contains(target) &&
         !guestsResetBtnRef.current.contains(target))
     ) {
+      console.log(5);
       console.log(
         type === 'location' &&
           !locationResetBtnRef.current.contains(target) &&
