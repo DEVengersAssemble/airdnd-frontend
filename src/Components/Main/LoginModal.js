@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import Modal from '../Global/Modal';
 import Button from '../Global/Button';
+import Loader from '../Global/Loader';
 import { Input } from '../Global/Input';
 import { GoogleLogin } from 'react-google-login';
 import { FaFacebookF } from 'react-icons/fa';
@@ -101,14 +102,21 @@ const StInput = styled(Input)`
     `};
 `;
 
-const StShowPwButtonWrapper = styled.div`
+const StValidationText = styled.p`
+  color: ${({ theme }) => theme.color.warning};
+  font-size: 14px;
+  font-weight: 600;
+  padding: 5px 0 0 5px;
+`;
+
+const StShowPwdButtonWrapper = styled.div`
   height: 20px;
   padding-right: 4px;
   display: flex;
   justify-content: flex-end;
 `;
 
-const StShowPwButton = styled(Button)`
+const StShowPwdButton = styled(Button)`
   color: ${({ theme }) => theme.color.green};
   font-size: 14px;
   padding: 0;
@@ -126,7 +134,7 @@ const StSubmitButton = styled(Button)`
   font-weight: 600;
   letter-spacing: 3px;
   width: 100%;
-  padding: 20px 0;
+  padding: 0;
   color: ${({ theme }) => theme.color.white};
   background: ${({ theme }) => theme.color.main};
   transition: 0.125s all ease-in;
@@ -137,6 +145,9 @@ const StSubmitButton = styled(Button)`
   }
 `;
 
+const StSubmitLoader = styled(Loader)`
+  top: -22px;
+`;
 const StSignupButtonWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -167,12 +178,16 @@ const LoginModal = ({
   modalVisible,
   openSignupMenuModal,
   closeModal,
-  showPw,
-  onToggleShowPw,
   loginForm,
+  showPwd,
+  onToggleShowPwd,
+  loading,
+  handleSubmit,
+  onChangeForm,
+  refObj,
 }) => {
-  const { email, pw } = loginForm;
-
+  const { email, pwd } = loginForm;
+  const { emailRef, pwdRef } = refObj;
   return (
     <StLoginModal
       modalState={modalVisible}
@@ -209,55 +224,64 @@ const LoginModal = ({
         ></GoogleLogin>
         <StDividerLine />
         <StDividerText>또는</StDividerText>
-        <StLoginForm>
+        <StLoginForm onSubmit={handleSubmit}>
           <StInputWrapper>
             <StInput
-              // value={email.value}
-              // onChange={e => onChangeForm(e, 'email')}
+              value={email.value}
+              onChange={e => onChangeForm(e, 'email')}
               focusBorderColor
               placeholder="이메일 주소"
-              // ref={emailRef}
-              // isInvalid={email.invalid}
+              ref={emailRef}
+              isInvalid={email.invalid}
             ></StInput>
             <RiMailLine />
-            {/* {email.invalid && (
+            {email.value.length === 0 && email.invalid && (
               <StValidationText isInvalid={email.invalid}>
-                이메일이 필요합니다.
+                이메일을 입력하세요.
               </StValidationText>
-            )} */}
+            )}
+            {email.value.length > 0 && email.invalid && (
+              <StValidationText isInvalid={email.invalid}>
+                이메일 형식이 맞지 않습니다.
+              </StValidationText>
+            )}
           </StInputWrapper>
           <StInputWrapper name="password">
             <StInput
-              type={showPw ? 'text' : 'password'}
-              // value={pw.value}
-              // onChange={e => onChangeForm(e, 'pw')}
-              // onFocus={onPwFocus}
+              type={showPwd ? 'text' : 'password'}
+              value={pwd.value}
+              onChange={e => onChangeForm(e, 'pwd')}
               focusBorderColor
               placeholder="비밀번호"
-              // ref={pwRef}
-              // isInvalid={pw.invalid}
+              ref={pwdRef}
+              isInvalid={pwd.invalid}
             ></StInput>
             <RiLock2Line />
-            {/* {pw.invalid && (
-              <StValidationText isInvalid={pw.invalid}>
+            {pwd.value.length === 0 && pwd.invalid && (
+              <StValidationText isInvalid={pwd.invalid}>
                 비밀번호를 입력하세요.
               </StValidationText>
-            )} */}
+            )}
+            {pwd.value.length > 0 && pwd.invalid && (
+              <StValidationText isInvalid={pwd.invalid}>
+                비밀번호는 최소 8글자 이상이어야 합니다. 다시 시도해 주세요.
+              </StValidationText>
+            )}
           </StInputWrapper>
-          <StShowPwButtonWrapper>
-            <StShowPwButton onClick={onToggleShowPw}>
-              {showPw ? '비밀번호 숨기기' : '비밀번호 보이기'}
-            </StShowPwButton>
-          </StShowPwButtonWrapper>
-          <StSubmitButton border="none" type="submit">
-            로그인
+          <StShowPwdButtonWrapper>
+            <StShowPwdButton onClick={onToggleShowPwd}>
+              {showPwd ? '비밀번호 숨기기' : '비밀번호 보이기'}
+            </StShowPwdButton>
+          </StShowPwdButtonWrapper>
+          <StSubmitButton border="none" type="submit" disabled={loading}>
+            {loading ? <StSubmitLoader /> : '로그인하기'}
           </StSubmitButton>
         </StLoginForm>
         <StDividerLine />
         <StSignupButtonWrapper>
           <StSignupText>에어비앤비 계정이 없으세요? </StSignupText>
           <StSignupButton btnType="color" onClick={openSignupMenuModal}>
-            회원가입
+            회원가입하기
           </StSignupButton>
         </StSignupButtonWrapper>
       </StLoginModalWrapper>
