@@ -6,15 +6,12 @@ const MainHeaderContainer = () => {
   const [isScrollTop, setIsScrollTop] = useState(window.scrollY < 40);
   const [isSearchBtnClicked, setIsSearchBtnClicked] = useState(false);
   const [initAnimation, setInitAnimation] = useState(false);
-  console.log(initAnimation);
   const onScroll = e => {
     setIsScrollTop(e && window.scrollY < 40);
     setIsSearchBtnClicked(false);
   };
 
   useEffect(() => {
-    console.log('useEffect: ', window.scrollY);
-    console.log('initAnimation: ', initAnimation);
     if (!initAnimation && window.scrollY > 40) {
       setInitAnimation(true);
     }
