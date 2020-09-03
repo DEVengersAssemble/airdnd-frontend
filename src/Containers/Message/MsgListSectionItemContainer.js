@@ -1,7 +1,12 @@
 import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import MsgListSectionItem from '../../Components/Message/MsgListSectionItem';
-import { allMsgList, hideMsgList, unreadMsgList } from '../../Modules/message';
+import {
+  allMsgList,
+  hideMsgList,
+  unreadMsgList,
+  showMsgDetailSection,
+} from '../../Modules/message';
 
 const MsgListSectionItemContainer = ({ msg, index }) => {
   // redux
@@ -34,12 +39,15 @@ const MsgListSectionItemContainer = ({ msg, index }) => {
   const onClickActive = useCallback(() => {
     if (msg.state === 'all') {
       dispatch(allMsgList(index));
+      dispatch(showMsgDetailSection());
     }
     if (msg.state === 'hide') {
       dispatch(hideMsgList(index));
+      dispatch(showMsgDetailSection());
     }
     if (msg.state === 'unread') {
       dispatch(unreadMsgList(index));
+      dispatch(showMsgDetailSection());
     }
   }, [dispatch, index, msg]);
 

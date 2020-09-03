@@ -3,19 +3,13 @@ import styled from 'styled-components';
 import Modal from '../Global/Modal';
 import Button from '../Global/Button';
 
-const MsgDetailSupportModal = () => {
-  const [modal, setModal] = React.useState(false);
-  const onClickDelete = () => {
-    setModal(!modal);
-  };
-
+const MsgDetailSupportModal = ({ modalState, onClickCloseModal }) => {
   return (
     <StSupportModal
       width="55rem"
       height="fit-content"
-      // modalState="true"
-      modalState={modal}
-      setModalState={onClickDelete}
+      modalState={modalState}
+      setModalState={onClickCloseModal}
       header
       title="출장자를 위한 고객 지원팀에게 연락하기"
     >

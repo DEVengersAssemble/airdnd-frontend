@@ -1,11 +1,13 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import MsgDetailSubInfoBox from '../../Components/Message/MsgDetailSubInfoBox';
+import { openModal } from '../../Modules/message';
 
 const MsgDetailSubInfoBoxContainer = () => {
   // ! redux
   const { activeIndex, filteredMsgs } = useSelector(state => state.message);
   const { reservations, profileImg } = useSelector(state => state.trips);
+  const dispatch = useDispatch();
 
   // ! variable
   const activeMsg = filteredMsgs.find(
@@ -16,6 +18,11 @@ const MsgDetailSubInfoBoxContainer = () => {
     reservation =>
       reservation.reservationId === (activeMsg && activeMsg.reservationId),
   );
+
+  // ! modal event
+  const onClickOpenModal = () => {
+    dispatch(openModal('pdf'));
+  };
 
   return (
     <MsgDetailSubInfoBox
@@ -28,6 +35,8 @@ const MsgDetailSubInfoBoxContainer = () => {
       }
       reservationId={reservation && reservation.reservationId}
       isCanceled={reservation && reservation.isCanceled}
+      onClickOpenModal={onClickOpenModal}
+      homeId={reservation && reservation.homeId}
     />
   );
 };

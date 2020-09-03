@@ -6,32 +6,19 @@ import { MdKeyboardArrowLeft } from 'react-icons/md';
 import Modal from '../Global/Modal';
 import Button from '../Global/Button';
 
-const MsgFlagModal = () => {
-  // Radio값 상태로 유지해서 다시 작업(현재 간단한 기능은 기타 선택시 모습)
-  const [modal, setModal] = React.useState(false);
-  const [next, setNext] = React.useState(false);
-  const [back, setBack] = React.useState(false);
-
-  const onClickDelete = () => {
-    setModal(!modal);
-  };
-
-  const onClickNext = () => {
-    setNext(!next);
-  };
-
-  const onClickBack = () => {
-    setBack(!back);
-    setNext(!next);
-  };
-
+const MsgFlagModal = ({
+  modalState,
+  onClickCloseModal,
+  onClickNext,
+  onClickPrev,
+  next,
+}) => {
   return (
     <StFlagModal
       width="55rem"
       height="fit-content"
-      // modalState="true"
-      modalState={modal}
-      setModalState={onClickDelete}
+      modalState={modalState}
+      setModalState={onClickCloseModal}
     >
       <StFlagModalTitle>어떤 문제가 있나요?</StFlagModalTitle>
       <StFlagModalSub>
@@ -75,7 +62,7 @@ const MsgFlagModal = () => {
             border="none"
             hover="none"
             padding="1.5rem 0rem"
-            onClick={onClickBack}
+            onClick={onClickPrev}
           >
             <MdKeyboardArrowLeft />
             뒤로
@@ -86,7 +73,7 @@ const MsgFlagModal = () => {
           color="green"
           padding="1.5rem 2.5rem"
           hover="none"
-          onClick={next ? null : onClickNext}
+          onClick={next ? onClickCloseModal : onClickNext}
         >
           {next ? '다음' : '확인'}
         </StFlagButton>

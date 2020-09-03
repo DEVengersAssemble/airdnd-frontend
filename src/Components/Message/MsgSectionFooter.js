@@ -5,7 +5,7 @@ import Button from '../Global/Button';
 import { Input } from '../Global/Input';
 import { AiOutlinePicture } from 'react-icons/ai';
 
-const MsgSectionFooter = () => {
+const MsgSectionFooter = ({ onTextChange, onMsgSubmit }) => {
   return (
     <MsgSectionFooterWrapper>
       <MsgSectionFooterInner>
@@ -19,7 +19,14 @@ const MsgSectionFooter = () => {
         >
           <MsgSectionFooterImageUploadIcon />
         </Button>
-        <Input message placeholder="메시지를 입력하세요." />
+        <StForm onSubmit={onMsgSubmit}>
+          <Input
+            message
+            placeholder="메시지를 입력하세요."
+            onChange={onTextChange}
+            onSubmit={onMsgSubmit}
+          />
+        </StForm>
       </MsgSectionFooterInner>
     </MsgSectionFooterWrapper>
   );
@@ -45,6 +52,10 @@ const MsgSectionFooterInner = styled.div`
 
 const MsgSectionFooterImageUploadIcon = styled(AiOutlinePicture)`
   font-size: 2rem;
+`;
+
+const StForm = styled.form`
+  width: 100%;
 `;
 
 export default MsgSectionFooter;
