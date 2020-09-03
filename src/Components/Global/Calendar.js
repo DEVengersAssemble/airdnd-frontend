@@ -1,7 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { AiOutlineRight, AiOutlineLeft } from 'react-icons/ai';
-import { ReactSelect } from 'react-query-selector';
 import Button from './Button';
 
 const Calendar = ({
@@ -19,6 +18,7 @@ const Calendar = ({
   getDiff,
   hoverDate,
   reservedDates,
+  isDetailPage,
 }) => {
   const addZero = num => ((num + '').length === 1 ? '0' + num : num);
   const _thisMonth = addZero(thisMonth.month);
@@ -26,7 +26,7 @@ const Calendar = ({
 
   return (
     <>
-      <StWrapper>
+      <StWrapper isDetailPage={isDetailPage}>
         <StNextMonthBtn btnType="circle" onClick={onClickBeforeMonth}>
           <AiOutlineLeft />
         </StNextMonthBtn>
@@ -140,13 +140,17 @@ const StWrapper = styled.div`
   min-height: 300px;
   margin-top: 30px;
 
-  @media screen and (max-width: 1200px) {
-    width: 308px;
+  ${({ isDetailPage }) =>
+    isDetailPage &&
+    css`
+      @media screen and (max-width: 1200px) {
+        width: 308px;
 
-    .nextMonth {
-      display: none;
-    }
-  }
+        .nextMonth {
+          display: none;
+        }
+      }
+    `}
 `;
 
 const StNextMonthBtn = styled(Button)`

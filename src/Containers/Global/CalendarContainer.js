@@ -10,6 +10,7 @@ const CalendarContainer = ({
   changeInitialDate,
   setChangeDataTrue,
   reservedDates = [],
+  isDetailPage,
 }) => {
   const [count, setCount] = useState(0);
 
@@ -130,6 +131,7 @@ const CalendarContainer = ({
       getDiff={getDiff}
       hoverDate={hoverDate}
       reservedDates={reservedDates}
+      isDetailPage={isDetailPage}
     />
   );
 };
