@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import MsgSectionChatItemContainer from '../../Containers/Message/MsgSectionChatItemContainer';
 
 const MsgSectionMain = ({ activeMsg, chatHistory, isHost, chat }) => {
-  console.log(chat);
   return (
     <MsgSectionMainWrapper>
       <MsgSectionMainChattingWrapper>

@@ -5,7 +5,6 @@ const RECEIVE_CHAT = 'socket/RECEIVE_CHAT';
 // action creator
 export const sendChat = msg => ({ type: SEND_CHAT, msg });
 export const receiveChat = (id, msg) => ({ type: RECEIVE_CHAT, id, msg });
-
 // initialState
 const initialState = {
   msg: '',
