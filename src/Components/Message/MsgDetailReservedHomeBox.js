@@ -58,9 +58,13 @@ const MsgDetailReservedHomeBox = ({
         )}
       </MsgDetailRhBoxDescription>
       <MsgDetailRhBoxButtonWrapper>
-        <Link to="/resolutions" target="_blank">
+        <a
+          href="https://www.airbnb.co.kr/resolutions"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           <Button padding="1.3rem 0rem">지급 또는 결제 요청</Button>
-        </Link>
+        </a>
       </MsgDetailRhBoxButtonWrapper>
       <MsgDetailRhCheckInOutWrapper>
         {isCanceled ? (
