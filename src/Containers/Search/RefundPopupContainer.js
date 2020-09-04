@@ -3,6 +3,7 @@ import { RefundPopup } from '../../Components/Search/FilterPopup';
 import { useSelector, useDispatch } from 'react-redux';
 import { saveFilter, resetFilter } from '../../Modules/search';
 import { useHistory, useLocation } from 'react-router-dom';
+import { updateQuery } from '../../lib/searchUtils';
 
 // let prevFilter = {};
 
@@ -12,6 +13,7 @@ const RefundPopupContainer = ({ popupState, onClose }) => {
   const history = useHistory();
   const { search: query } = useLocation();
   const dispatch = useDispatch();
+  const filterQuery = '&refund?1';
 
   const onReset = () => dispatch(resetFilter('refund'));
   const onSave = () => dispatch(saveFilter('refund', refund, isDisabled));
@@ -27,13 +29,7 @@ const RefundPopupContainer = ({ popupState, onClose }) => {
       return;
     // dispatch(saveFilter('refund'), prevFilter);
 
-    if (isDisabled) {
-      console.log('query가 리펀드 가지고 잇니r', query.includes('&refund?1'));
-      history.replace(`/search${query.replace('&refund?1', '')}`);
-    } else {
-      !query.includes('&refund?1') &&
-        history.replace(`/search${query}&refund?1`);
-    }
+    updateQuery(history, isDisabled, query, filterQuery);
     onClose('refund', isDisabled);
   };
 
