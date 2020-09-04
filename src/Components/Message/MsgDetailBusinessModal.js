@@ -28,6 +28,7 @@ const MsgDetailBusinessModal = ({ modalState, onClickCloseModal }) => {
     </StBusinessModal>
   );
 };
+
 const StBusinessModal = styled(Modal)`
   padding-bottom: 7rem;
   max-height: 85rem;
