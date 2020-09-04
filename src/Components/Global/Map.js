@@ -52,7 +52,7 @@ const Map = compose(
       />
     ),
   }),
-  withState('zoom', 'onZoomChange', 10),
+  withState('zoom', 'onZoomChange', 13),
   withHandlers(() => {
     const refs = {
       map: undefined,
@@ -90,7 +90,7 @@ const Map = compose(
       <GoogleMap
         ref={setRef}
         zoom={mapZoom}
-        defaultZoom={10}
+        defaultZoom={13}
         defaultCenter={{
           lat: center.lat,
           lng: center.lng,
@@ -129,10 +129,6 @@ const Map = compose(
           markers.map((marker, i) => (
             <MapMarkerContainer key={i} marker={marker} theme={theme} />
           ))}
-        <Marker position={{ lat: 37.5384272, lng: 126.9654442 }} />
-        <Marker position={{ lat: 37.5384273, lng: 126.9654442 }} />
-        <Marker position={{ lat: 37.5384273, lng: 126.9644442 }} />
-        <Marker position={{ lat: 37.5284272, lng: 126.9654432 }} />
       </GoogleMap>
     );
   },

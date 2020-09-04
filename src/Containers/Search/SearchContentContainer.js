@@ -15,11 +15,11 @@ const SearchContentContainer = () => {
 
   console.log('렌더링시작한다~~~~~~~~~~', query);
 
-  // useEffect(() => {
-  // dispatch(fetchData(query));
-  // dispatch(getSearchForm(searchForm));
-  // window.scrollTo(0, 0);
-  // }, []);
+  useEffect(() => {
+    dispatch(fetchData(query));
+    dispatch(getSearchForm(searchForm));
+    // window.scrollTo(0, 0);
+  }, []);
 
   if (loading)
     return <div style={{ width: '100%', height: 'calc(100vh - 8rem)' }}></div>;

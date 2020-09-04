@@ -128,6 +128,19 @@ export const modalFilterInit = filterCondition => {
 };
 
 // initial state
+const modals = [
+  'instantBooking',
+  'bedroomBed',
+  'bedroomRoom',
+  'bedroomBath',
+  'convenience',
+  'convenienceList',
+  'facilityList',
+  'hostLangList',
+];
+const roomTypes = ['roomTypeHouse', 'roomTypePrivate', 'roomTypeShared'];
+const prices = ['priceMin', 'priceMax'];
+
 const popupInit = {
   refund: false,
   roomType: false,
@@ -153,113 +166,19 @@ const filterInit = {
 };
 
 const initialState = {
-  loading: false,
-  error: null,
-  data: {
-    homes: [
-      {
-        homeId: 1,
-        isSuperhost: true,
-        isBookmarked: true,
-        imageArray: ['https://a0.muscache.com/im/pictures'],
-        imageCount: 6, // 이미지 개수
-        subTitle: 'MongMong-Toto의 호텔 객실',
-        title: 'Pia Resort Hotel Corner Studio Room',
-        feature: '최대 인원 2명 ﹒ 침실 1개 ﹒ 침대 2개 ﹒ 단독 사용 욕실 1개',
-        rating: 4.25,
-        reviewCount: 89,
-        price: 54324,
-        location: { lat: 37.650333, lng: 127.072783 },
-      },
-    ],
-    recentHomes: [],
-    filterCondition: {
-      instantBooking: true,
-      bedroom: true,
-      convenience: true,
-      convenienceList: [],
-      facilityList: [],
-      hostLangList: [],
-    },
-    mapCenter: { lat: 37.650333, lng: 127.072783 },
-    dataTotal: 783,
-    averagePrice: 3432479,
-    priceArray: [
-      0,
-      0,
-      0,
-      0,
-      0,
-      54,
-      13,
-      45,
-      76,
-      43,
-      21,
-      32,
-      12,
-      43,
-      8,
-      21,
-      24,
-      23,
-      45,
-      7,
-      78,
-      77,
-      56,
-      54,
-      63,
-      22,
-      45,
-      77,
-      1,
-      3,
-      44,
-      54,
-      65,
-      22,
-      37,
-      48,
-      73,
-      24,
-      54,
-      45,
-      7,
-      78,
-      77,
-      56,
-      54,
-      63,
-      22,
-      45,
-      1,
-      3,
-    ],
-  },
-  searchForm: {
-    location: '서울',
-    checkIn: '2020.09.02',
-    checkOut: '2020.09.05',
-    dateDiff: '',
-    guests: '0',
-  },
-  // ...reducerUtils.initial(),
-  // searchForm: {},
+  ...reducerUtils.initial(),
+  searchForm: {},
   headerState: false,
   viewState: 'result',
   mapState: true,
-  mapZoom: 10,
+  mapZoom: 13,
   markerState: null,
   hoveredHome: null,
   popupState: popupInit,
   filterPrevState: {},
-  popupApplied: { ...popupInit },
-  filterApplied: { ...filterInit },
+  popupApplied: popupInit,
+  filterApplied: filterInit,
 };
-
-const roomTypes = ['roomTypeHouse', 'roomTypePrivate', 'roomTypeShared'];
-const prices = ['priceMin', 'priceMax'];
 
 const getFilterGroup = (filterName, state) => {
   const obj = state ? state.filterApplied : filterInit;
@@ -269,7 +188,7 @@ const getFilterGroup = (filterName, state) => {
     case 'price':
       return _.pick(obj, prices);
     case 'modal':
-      return _.omit(obj, [...roomTypes, ...prices]);
+      return _.pick(obj, [...modals]);
     default:
       return { [filterName]: false };
   }
@@ -290,6 +209,7 @@ const search = (state = initialState, action) => {
         filterApplied: {
           ...state.filterApplied,
           ...modalFilterInit(action.payload.filterCondition),
+          ..._.pick(state.searchForm, modals),
         },
       };
     case FETCH_DATA_ERROR:
