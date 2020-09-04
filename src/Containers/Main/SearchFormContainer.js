@@ -133,7 +133,7 @@ const SearchFormContainer = ({ isSearchBtnClicked }) => {
   };
 
   const handlePopup = ({ target }) => {
-    console.log('handlePopup...', type);
+    // console.log('handlePopup...', type);
     if (locationWrapperRef.current.contains(target)) changeType('location');
     else if (checkInWrapperRef.current.contains(target)) changeType('checkIn');
     else if (checkOutWrapperRef.current.contains(target))
