@@ -9,7 +9,11 @@ import {
   MdReceipt,
 } from 'react-icons/md';
 
-const MsgDetailRefundBox = ({ price, onClickOpenModal }) => {
+const MsgDetailRefundBox = ({
+  price,
+  onClickOpenModal,
+  onClickOpenReceiptPDF,
+}) => {
   return (
     <MsgDetailSettlementWrapper>
       <MsgDetailSettlementOuterWrapper>
@@ -33,19 +37,17 @@ const MsgDetailRefundBox = ({ price, onClickOpenModal }) => {
             <MdKeyboardArrowRight />
           </MsgDetailSettlementButtonWrapper>
         </StButton>
-        <Link to="/receipt" target="_blank">
-          <StButton>
-            <MsgDetailSettlementButtonWrapper>
-              <MsgDetailSettlementButtonInnerWrapper>
-                <MdReceipt />
-                <MsgDetailSettlementButtonText>
-                  영수증 받기
-                </MsgDetailSettlementButtonText>
-              </MsgDetailSettlementButtonInnerWrapper>
-              <MdKeyboardArrowRight />
-            </MsgDetailSettlementButtonWrapper>
-          </StButton>
-        </Link>
+        <StButton onClick={onClickOpenReceiptPDF}>
+          <MsgDetailSettlementButtonWrapper>
+            <MsgDetailSettlementButtonInnerWrapper>
+              <MdReceipt />
+              <MsgDetailSettlementButtonText>
+                영수증 받기
+              </MsgDetailSettlementButtonText>
+            </MsgDetailSettlementButtonInnerWrapper>
+            <MdKeyboardArrowRight />
+          </MsgDetailSettlementButtonWrapper>
+        </StButton>
       </MsgDetailSettlementOuterWrapper>
     </MsgDetailSettlementWrapper>
   );

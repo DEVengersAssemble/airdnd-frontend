@@ -15,6 +15,7 @@ const MsgDetailSubInfoBox = ({
   isCanceled,
   onClickOpenModal,
   onClickOpenPrint,
+  onClickOpenReceiptPDF,
   homeId,
 }) => {
   return (
@@ -133,17 +134,15 @@ const MsgDetailSubInfoBox = ({
               <MdKeyboardArrowRight />
             </MsgDetailSiButtonWrapper>
           </StButton>
-          <Link to="/printreceipt" target="_blank">
-            <StButton>
-              <MsgDetailSiButtonWrapper>
-                <MsgDetailSiButtonInnerWrapper>
-                  <MdReceipt />
-                  <MsgDetailSiButtonText>영수증 받기</MsgDetailSiButtonText>
-                </MsgDetailSiButtonInnerWrapper>
-                <MdKeyboardArrowRight />
-              </MsgDetailSiButtonWrapper>
-            </StButton>
-          </Link>
+          <StButton onClick={onClickOpenReceiptPDF}>
+            <MsgDetailSiButtonWrapper>
+              <MsgDetailSiButtonInnerWrapper>
+                <MdReceipt />
+                <MsgDetailSiButtonText>영수증 받기</MsgDetailSiButtonText>
+              </MsgDetailSiButtonInnerWrapper>
+              <MdKeyboardArrowRight />
+            </MsgDetailSiButtonWrapper>
+          </StButton>
         </MsgDetailSiOuterWrapper>
       )}
     </MsgDetailSiWrapper>
