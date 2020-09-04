@@ -26,10 +26,10 @@ export const FilterList = ({ mapState, onShowMap, dateDiff }) => {
         <RefundPopupContainer />
       </FilterButtonContainer>
       <FilterButtonContainer name="roomType" text="숙소 유형">
-        {/* <RoomTypePopupContainer /> */}
+        <RoomTypePopupContainer />
       </FilterButtonContainer>
       <FilterButtonContainer name="price" text="요금">
-        {/* {dateDiff ? <PricePopupContainer /> : <SetDatePopupContainer />} */}
+        {dateDiff ? <PricePopupContainer /> : <SetDatePopupContainer />}
       </FilterButtonContainer>
       <FilterButtonContainer
         name="modal"

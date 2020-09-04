@@ -46,7 +46,7 @@ const PricePopupContainer = () => {
   return (
     // <div ref={popup}>
     <PricePopup
-      popupState={popupState}
+      popupState={popupState.price}
       isDisabled={isDisabled}
       range={range}
       setRange={setRange}

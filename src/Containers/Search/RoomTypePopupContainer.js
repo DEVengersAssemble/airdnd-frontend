@@ -22,7 +22,7 @@ const RoomTypePopupContainer = () => {
   });
 
   const onReset = () => dispatch(resetFilter('roomType'));
-  const onSave = () => dispatch(closePopup());
+  const onSave = () => dispatch(closePopup('roomType'));
   const onClose = () => dispatch(unsaveFilter());
 
   // const popup = useRef();
@@ -60,11 +60,9 @@ const RoomTypePopupContainer = () => {
   return (
     // <div ref={popup}>
     <RoomTypePopup
-      // check={roomType}
-      popupState={popupState}
+      popupState={popupState.roomType}
       isDisabled={isDisabled}
       onSave={onSave}
-      // onChange={onChange}
       onReset={onReset}
     />
     // </div>
