@@ -15,6 +15,7 @@ const Calendar = ({
   checkout,
   onClickCheckDate,
   onMouseenter,
+  onMouseLeave,
   getDiff,
   hoverDate,
   reservedDates,
@@ -46,7 +47,7 @@ const Calendar = ({
             <li>금</li>
             <li>토</li>
           </StDays>
-          <StDates>
+          <StDates onMouseLeave={onMouseLeave}>
             {thisMonthDates.map((date, i) => {
               const thisDate = `${thisMonth.year}.${_thisMonth}.${addZero(
                 date,
@@ -71,7 +72,6 @@ const Calendar = ({
                     checkin={checkin === thisDate}
                     checkout={checkout === thisDate}
                     reserved={reserved}
-                    // reserved={reserved}
                   >
                     {date}
                   </StDateBtn>
@@ -94,7 +94,7 @@ const Calendar = ({
               <li>금</li>
               <li>토</li>
             </StDays>
-            <StDates>
+            <StDates onMouseLeave={onMouseLeave}>
               {nextMonthDates.map((date, i) => {
                 const nextDate = `${nextMonth.year}.${_nextMonth}.${addZero(
                   date,
@@ -135,6 +135,7 @@ const Calendar = ({
 
 const StWrapper = styled.div`
   position: relative;
+  display: flex;
   width: 100%;
   max-width: 642px;
   min-height: 300px;

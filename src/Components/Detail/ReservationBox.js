@@ -5,36 +5,50 @@ import Button from '../Global/Button';
 import DeatailGuestPopupContainer from '../../Containers/Detail/DeatailGuestPopupContainer';
 
 const ReservationBox = ({
-  home,
+  price,
+  removedCommaPrice,
+  rating,
+  count,
   getPercentage,
   getTotalPrice,
+  getmultipliedPrice,
   history,
-  searchData,
+  dateDiff,
+  checkin,
+  checkout,
 }) => {
-  const { rating, count } = home.reviews;
-  const { price } = home;
-  const percentage = getPercentage(price);
-  const totalPrice = getTotalPrice(price, percentage);
-  const { checkIn, checkOut } = searchData;
+  const multipliedPrice = getmultipliedPrice(removedCommaPrice, dateDiff);
+  const percentage = getPercentage(removedCommaPrice * dateDiff);
+  const totalPrice = getTotalPrice(removedCommaPrice * dateDiff, percentage);
 
   return (
     <StWarpper>
       <StStickyWrapper>
         <StReserveBox>
-          <h3>요금을 확인하려면 날짜를 입력하세요</h3>
+          <h3>
+            {dateDiff ? (
+              <>
+                ₩{price}
+                <span>/박</span>
+              </>
+            ) : (
+              '요금을 확인하려면 날짜를 입력하세요'
+            )}
+          </h3>
           <Rating rate={rating} count={count} />
 
           <StWriteWrapper>
             <StCheckWrapper tabIndex="0">
               <StCheckIn>
                 <StName>체크인</StName>
-                <StContent>{checkIn ? checkIn : '날짜 추가'}</StContent>
+                <StContent>{checkin ? checkin : '날짜 추가'}</StContent>
               </StCheckIn>
               <StCheckOut>
                 <StName>체크아웃</StName>
-                <StContent>{checkOut ? checkOut : '날짜 추가'}</StContent>
+                <StContent>{checkout ? checkout : '날짜 추가'}</StContent>
               </StCheckOut>
             </StCheckWrapper>
+
             <DeatailGuestPopupContainer displayName />
           </StWriteWrapper>
 
@@ -45,27 +59,33 @@ const ReservationBox = ({
             padding="14px"
             hover
           >
-            예약 가능 여부 보기
+            {dateDiff ? '예약하기' : '예약 가능 여부 보기'}
           </StReserveBtn>
-          <StChargeMsg>예약 확정 전에는 요금이 청구되지 않습니다.</StChargeMsg>
-          <StChargeList>
-            <li>
-              <Button btnType="underlined" padding="0" hover>
-                ₩{price} x 2박
-              </Button>
-              <span>₩{price}</span>
-            </li>
-            <li>
-              <Button btnType="underlined" padding="0" hover>
-                서비스 수수료
-              </Button>
-              <span>₩{percentage}</span>
-            </li>
-          </StChargeList>
-          <StTotalCharge>
-            <span>총합계</span>
-            <span>₩{totalPrice}</span>
-          </StTotalCharge>
+          {!!dateDiff && (
+            <>
+              <StChargeMsg>
+                예약 확정 전에는 요금이 청구되지 않습니다.
+              </StChargeMsg>
+              <StChargeList>
+                <li>
+                  <Button btnType="underlined" padding="0" hover>
+                    ₩{price} x {dateDiff}박
+                  </Button>
+                  <span>₩{multipliedPrice}</span>
+                </li>
+                <li>
+                  <Button btnType="underlined" padding="0" hover>
+                    서비스 수수료
+                  </Button>
+                  <span>₩{percentage}</span>
+                </li>
+              </StChargeList>
+              <StTotalCharge>
+                <span>총합계</span>
+                <span>₩{totalPrice}</span>
+              </StTotalCharge>
+            </>
+          )}
         </StReserveBox>
         <StButton onClick={() => history.push('Reservation/HouseRules/1')}>
           숙소 신고하기
@@ -109,6 +129,15 @@ const StReserveBox = styled.div`
     font-weight: 600;
     line-height: 2.6rem;
     word-break: keep-all;
+
+    span {
+      font-weight: 400;
+      font-size: 16px;
+      vertical-align: top;
+      /* line-height: 20px; */
+      white-space: nowrap;
+      padding-left: 4px;
+    }
   }
 `;
 

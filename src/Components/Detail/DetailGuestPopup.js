@@ -24,7 +24,7 @@ const DetailGuestPopup = ({
       <StContent>
         게스트 {adult + child > 0 ? adult + child : 0}명
         {!!infant && infant > 0 && `, 유아 ${infant}명`}
-      </StContent>{' '}
+      </StContent>
       <StPopup popupState={popupState} top="57px" left="-2px">
         <ul>
           <StCountGuest>
