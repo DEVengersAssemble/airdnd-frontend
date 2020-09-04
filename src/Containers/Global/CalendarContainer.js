@@ -113,6 +113,11 @@ const CalendarContainer = ({
     setHoverDate(date);
   };
 
+  const onMouseLeave = () => {
+    if (!hoverDate) return;
+    setHoverDate('');
+  };
+
   return (
     <Calendar
       responsiveScreen={responsiveScreen}
@@ -128,6 +133,7 @@ const CalendarContainer = ({
       checkout={checkout}
       onClickCheckDate={onClickCheckDate}
       onMouseenter={onMouseenter}
+      onMouseLeave={onMouseLeave}
       getDiff={getDiff}
       hoverDate={hoverDate}
       reservedDates={reservedDates}
