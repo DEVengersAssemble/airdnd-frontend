@@ -22,7 +22,11 @@ const MsgDetailAirbnbSupportTeamBox = ({
         <MsgDetailAstInnerWrapper>
           <MsgDetailAstTitle>에어비엔비 지원</MsgDetailAstTitle>
         </MsgDetailAstInnerWrapper>
-        <Link to="/help" target="_blank">
+        <a
+          href="https://www.airbnb.co.kr/help/home"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           <StButton>
             <MsgDetailAstButtonWrapper>
               <MsgDetailAstButtonInnerWrapper>
@@ -32,8 +36,12 @@ const MsgDetailAirbnbSupportTeamBox = ({
               <MdKeyboardArrowRight />
             </MsgDetailAstButtonWrapper>
           </StButton>
-        </Link>
-        <Link to="/resolutions" target="_blank">
+        </a>
+        <a
+          href="https://www.airbnb.co.kr/resolutions"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           <StButton>
             <MsgDetailAstButtonWrapper>
               <MsgDetailAstButtonInnerWrapper>
@@ -43,7 +51,7 @@ const MsgDetailAirbnbSupportTeamBox = ({
               <MdKeyboardArrowRight />
             </MsgDetailAstButtonWrapper>
           </StButton>
-        </Link>
+        </a>
         {isCanceled ? (
           <StButton onClick={onClickOpenFlagModal}>
             <MsgDetailAstButtonWrapper>

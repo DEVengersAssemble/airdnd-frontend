@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import MsgDetailSubInfoBox from '../../Components/Message/MsgDetailSubInfoBox';
 import { openModal } from '../../Modules/message';
+import RECEIPT from '../../Assets/docs/receipt.pdf';
 
 const MsgDetailSubInfoBoxContainer = () => {
   // ! redux
@@ -24,6 +25,16 @@ const MsgDetailSubInfoBoxContainer = () => {
     dispatch(openModal('pdf'));
   };
 
+  // ! print event
+  const onClickOpenPrint = () => {
+    window.print();
+  };
+
+  // ! pdf open event
+  const onClickOpenReceiptPDF = () => {
+    window.open(RECEIPT, '_blank');
+  };
+
   return (
     <MsgDetailSubInfoBox
       guest={reservation && reservation.guest.length}
@@ -36,6 +47,8 @@ const MsgDetailSubInfoBoxContainer = () => {
       reservationId={reservation && reservation.reservationId}
       isCanceled={reservation && reservation.isCanceled}
       onClickOpenModal={onClickOpenModal}
+      onClickOpenPrint={onClickOpenPrint}
+      onClickOpenReceiptPDF={onClickOpenReceiptPDF}
       homeId={reservation && reservation.homeId}
     />
   );

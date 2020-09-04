@@ -21,7 +21,7 @@ const OPEN_NEW_MODAL = 'wishlists/OPEN_NEW_MODAL';
 const CLOSE_NEW_MODAL = 'wishlists/CLOSE_NEW_MODAL';
 
 // action creator
-export const fetchBookmark = fetchDataThunk(
+export const fetchBookmarkLists = fetchDataThunk(
   FETCH_BOOKMARKLISTS,
   api.fetchWishlistsData,
 );

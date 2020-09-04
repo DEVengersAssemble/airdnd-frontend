@@ -48,7 +48,7 @@ export const unarchiveMsg = (index, id, state) => ({
 
 export const showToast = () => ({ type: SHOW_TOAST });
 export const hideToast = () => ({ type: HIDE_TOAST });
-export const undo = () => ({ type: UNDO });
+export const undo = (id, state) => ({ type: UNDO, id, state });
 export const showUndoToast = () => ({ type: SHOW_UNDO_TOAST });
 export const hideUndoToast = () => ({ type: HIDE_UNDO_TOAST });
 
@@ -587,7 +587,7 @@ const message = (state = initialState, action) => {
       return {
         ...state,
         messages: state.messages.map(msg =>
-          msg.id === action.id ? { ...msg, state: 'hide' } : msg,
+          msg.id === action.id ? { ...msg, state: action.state } : msg,
         ),
         tempMsgs: state.filteredMsgs,
         filteredMsgs: state.filteredMsgs.filter(
@@ -598,7 +598,7 @@ const message = (state = initialState, action) => {
       return {
         ...state,
         messages: state.messages.map(msg =>
-          msg.id === action.id ? { ...msg, state: 'all' } : msg,
+          msg.id === action.id ? { ...msg, state: action.state } : msg,
         ),
         tempMsgs: state.filteredMsgs,
         filteredMsgs: state.filteredMsgs.filter(
@@ -618,6 +618,10 @@ const message = (state = initialState, action) => {
     case UNDO:
       return {
         ...state,
+        messages: state.messages.map(msg =>
+          msg.id === action.id ? { ...msg, state: action.state } : msg,
+        ),
+        tempMsgs: [],
         filteredMsgs: state.tempMsgs,
       };
     case SHOW_UNDO_TOAST:
