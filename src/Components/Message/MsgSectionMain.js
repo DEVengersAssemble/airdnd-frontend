@@ -3,11 +3,10 @@ import styled from 'styled-components';
 import MsgSectionChatItemContainer from '../../Containers/Message/MsgSectionChatItemContainer';
 
 const MsgSectionMain = ({ activeMsg, chatHistory, isHost, chat }) => {
-  console.log(chat);
   return (
     <MsgSectionMainWrapper>
       <MsgSectionMainChattingWrapper>
-        {/* {chatHistory && (
+        {chatHistory && (
           <MsgSectionMainChattingBox>
             {chatHistory.map(chat => (
               <MsgSectionChatItemContainer
@@ -18,15 +17,22 @@ const MsgSectionMain = ({ activeMsg, chatHistory, isHost, chat }) => {
               />
             ))}
           </MsgSectionMainChattingBox>
+        )}
+        {/* socket */}
+        {/* {chat && (
+          <MsgSectionMainChattingBox>
+            {chat.map(({ id, msg }, idx) => (
+              <MsgSectionChatItemContainer
+                key={idx}
+                activeMsg={activeMsg}
+                isHost={isHost}
+                id={id}
+                chatHistory={chatHistory && chatHistory} // 나중에 chat으로 대체
+                msg={msg} // socket msg
+              />
+            ))}
+          </MsgSectionMainChattingBox>
         )} */}
-        <MsgSectionMainChattingBox>
-          {chat.map(({ id, msg }, idx) => (
-            <li key={idx}>
-              <div style={{ color: 'green' }}>{id}: </div>
-              <div>{msg}</div>
-            </li>
-          ))}
-        </MsgSectionMainChattingBox>
       </MsgSectionMainChattingWrapper>
     </MsgSectionMainWrapper>
   );
@@ -49,7 +55,7 @@ const MsgSectionMainChattingWrapper = styled.div`
 `;
 
 const MsgSectionMainChattingBox = styled.ul`
-  border: 1px solid red;
+  /* border: 1px solid red; */
   width: 100%;
   max-width: 57rem;
   min-width: 37.5rem;

@@ -25,7 +25,7 @@ const MessageSectionWrapper = styled.section`
   flex-grow: 1;
   min-width: 37.5rem;
 
-  transition: all 0.3s linear;
+  transition: all 0.3s ease;
   ${({ msgDetailSectionState }) =>
     !msgDetailSectionState &&
     css`

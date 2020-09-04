@@ -3,6 +3,7 @@ export const fetchDataThunk = (type, promiseCreator) => {
 
   return param => async dispatch => {
     // param은 필요할 때만 쓰세요
+    console.log(param);
     dispatch({ type, param });
     try {
       const payload = await promiseCreator(param); // API 호출

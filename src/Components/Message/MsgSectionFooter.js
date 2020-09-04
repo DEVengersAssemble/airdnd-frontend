@@ -5,7 +5,7 @@ import Button from '../Global/Button';
 import { Input } from '../Global/Input';
 import { AiOutlinePicture } from 'react-icons/ai';
 
-const MsgSectionFooter = ({ onTextChange, onMsgSubmit }) => {
+const MsgSectionFooter = ({ msg, onTextChange, onMsgSubmit }) => {
   return (
     <MsgSectionFooterWrapper>
       <MsgSectionFooterInner>
@@ -23,8 +23,8 @@ const MsgSectionFooter = ({ onTextChange, onMsgSubmit }) => {
           <Input
             message
             placeholder="메시지를 입력하세요."
+            // value={msg} //sochet msg (clearInput을 통해 전송 후 메시지 리셋)
             onChange={onTextChange}
-            onSubmit={onMsgSubmit}
           />
         </StForm>
       </MsgSectionFooterInner>

@@ -165,8 +165,7 @@ html {
 }
 @media screen and (max-width: 768px) {
   html {
-    background-color: #eee;
-    font-size: 9px;
+    font-size: 10px;
   }
 }
 `;

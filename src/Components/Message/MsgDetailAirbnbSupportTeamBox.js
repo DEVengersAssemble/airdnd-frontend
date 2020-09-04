@@ -10,8 +10,6 @@ import {
   MdPhoneIphone,
   MdFlag,
 } from 'react-icons/md';
-import MsgDetailSupportModalContainer from '../../Containers/Message/MsgDetailSupportModalContainer';
-import MsgFlagModalContainer from '../../Containers/Message/MsgFlagModalContainer';
 
 const MsgDetailAirbnbSupportTeamBox = ({
   isCanceled,
@@ -85,8 +83,6 @@ const MsgDetailAirbnbSupportTeamBox = ({
           </>
         )}
       </MsgDetailAstOuterWrapper>
-      <MsgDetailSupportModalContainer />
-      <MsgFlagModalContainer />
     </MsgDetailAstWrapper>
   );
 };
