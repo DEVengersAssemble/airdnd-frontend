@@ -269,7 +269,7 @@ const getFilterGroup = (filterName, state) => {
     case 'modal':
       return _.omit(obj, [...roomTypes, ...prices]);
     default:
-      return { filterName: false };
+      return { [filterName]: false };
   }
 };
 
@@ -385,8 +385,8 @@ const search = (state = initialState, action) => {
     case OPEN_POPUP:
       return {
         ...state,
-        popup: {
-          ...state.popup,
+        popupState: {
+          ...state.popupState,
           [action.name]: true,
         },
         filterPrevState: getFilterGroup(action.name, state),
@@ -394,8 +394,8 @@ const search = (state = initialState, action) => {
     case CLOSE_POPUP:
       return {
         ...state,
-        popup: {
-          ...state.popup,
+        popupState: {
+          ...state.popupState,
           [action.name]: false,
         },
       };

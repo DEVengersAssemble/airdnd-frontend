@@ -16,7 +16,7 @@ const RefundPopupContainer = () => {
     ignoreQueryPrefix: true,
   });
 
-  const onSave = () => dispatch(closePopup());
+  const onSave = () => dispatch(closePopup('refund'));
   const onReset = () => dispatch(resetFilter('refund'));
   const onClose = () => dispatch(unsaveFilter());
 
@@ -50,7 +50,7 @@ const RefundPopupContainer = () => {
   return (
     // <div ref={popup}>
     <RefundPopup
-      popupState={popupState}
+      popupState={popupState.refund}
       isDisabled={isDisabled}
       onSave={onSave}
       onReset={onReset}
