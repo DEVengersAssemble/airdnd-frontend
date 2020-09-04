@@ -70,6 +70,7 @@ const WishlistImgWrapper = styled.div`
 `;
 
 const WishlistFirstImg = styled.div`
+  /* homeCount === 0 이면 background gray */
   /* 이미지가 하나면 꽉차게  */
   /* 이미지가 2개이상이면 모자이크 */
   /* 0, 1, 2, 3개이상 */
@@ -78,7 +79,7 @@ const WishlistFirstImg = styled.div`
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   ${({ homeCount }) =>
-    homeCount === 0 &&
+    !homeCount &&
     css`
       width: 100%;
       background-color: ${({ theme }) => theme.color.gray};
@@ -114,7 +115,7 @@ const WishlistFirstImg = styled.div`
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
-    `}   
+    `}
 `;
 
 const WishlistSubImgWrapper = styled.div`

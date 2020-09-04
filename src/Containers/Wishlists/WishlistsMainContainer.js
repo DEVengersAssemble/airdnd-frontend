@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import WishlistsMain from '../../Components/Wishlists/WishlistsMain';
-import { createBookmarkList, fetchBookmark } from '../../Modules/wishlists';
+import {
+  createBookmarkList,
+  fetchBookmarkLists,
+} from '../../Modules/wishlists';
 
 const WishlistsMainContainer = () => {
   // ! redux
@@ -16,9 +19,7 @@ const WishlistsMainContainer = () => {
   const [title, setTitle] = useState('');
 
   // ! event
-  const onClickPopup = () => {
-    setOpenPopup(!openPopup);
-  };
+  const onClickPopup = () => setOpenPopup(!openPopup);
 
   const onChangeTitleInput = e => setTitle(e.target.value);
 
@@ -29,9 +30,9 @@ const WishlistsMainContainer = () => {
     setOpenPopup(!openPopup);
   };
 
-  // ! fetch data
+  // ! fetch bookmarkLists data
   useEffect(() => {
-    dispatch(fetchBookmark());
+    dispatch(fetchBookmarkLists());
   }, [dispatch]);
 
   if (loading) return <div>로딩중... </div>;
