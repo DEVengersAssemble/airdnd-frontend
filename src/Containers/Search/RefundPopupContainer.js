@@ -2,12 +2,15 @@ import React, { useEffect, useRef } from 'react';
 import { RefundPopup } from '../../Components/Search/FilterPopup';
 import { useSelector, useDispatch } from 'react-redux';
 import { saveFilter, resetFilter } from '../../Modules/search';
+import { useHistory, useLocation } from 'react-router-dom';
 
 // let prevFilter = {};
 
 const RefundPopupContainer = ({ popupState, onClose }) => {
   const { refund } = useSelector(state => state.search.filterApplied);
   const isDisabled = !refund;
+  const history = useHistory();
+  const { search: query } = useLocation();
   const dispatch = useDispatch();
 
   const onReset = () => dispatch(resetFilter('refund'));
@@ -23,6 +26,14 @@ const RefundPopupContainer = ({ popupState, onClose }) => {
     )
       return;
     // dispatch(saveFilter('refund'), prevFilter);
+
+    if (isDisabled) {
+      console.log('query가 리펀드 가지고 잇니r', query.includes('&refund?1'));
+      history.replace(`/search${query.replace('&refund?1', '')}`);
+    } else {
+      !query.includes('&refund?1') &&
+        history.replace(`/search${query}&refund?1`);
+    }
     onClose('refund', isDisabled);
   };
 
