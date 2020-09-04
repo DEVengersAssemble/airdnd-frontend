@@ -24,6 +24,11 @@ const MsgDetailSubInfoBoxContainer = () => {
     dispatch(openModal('pdf'));
   };
 
+  // ! print evnet
+  const onClickOpenPrint = () => {
+    window.print();
+  };
+
   return (
     <MsgDetailSubInfoBox
       guest={reservation && reservation.guest.length}
@@ -36,6 +41,7 @@ const MsgDetailSubInfoBoxContainer = () => {
       reservationId={reservation && reservation.reservationId}
       isCanceled={reservation && reservation.isCanceled}
       onClickOpenModal={onClickOpenModal}
+      onClickOpenPrint={onClickOpenPrint}
       homeId={reservation && reservation.homeId}
     />
   );

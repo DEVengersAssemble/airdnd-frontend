@@ -14,6 +14,7 @@ const MsgDetailSubInfoBox = ({
   reservationId,
   isCanceled,
   onClickOpenModal,
+  onClickOpenPrint,
   homeId,
 }) => {
   return (
@@ -123,19 +124,15 @@ const MsgDetailSubInfoBox = ({
               <MdKeyboardArrowRight />
             </MsgDetailSiButtonWrapper>
           </StButton>
-          <Link to="/printsubinfo" target="_blank">
-            <StButton>
-              <MsgDetailSiButtonWrapper>
-                <MsgDetailSiButtonInnerWrapper>
-                  <MdPrint />
-                  <MsgDetailSiButtonText>
-                    세부정보 인쇄하기
-                  </MsgDetailSiButtonText>
-                </MsgDetailSiButtonInnerWrapper>
-                <MdKeyboardArrowRight />
-              </MsgDetailSiButtonWrapper>
-            </StButton>
-          </Link>
+          <StButton onClick={onClickOpenPrint}>
+            <MsgDetailSiButtonWrapper>
+              <MsgDetailSiButtonInnerWrapper>
+                <MdPrint />
+                <MsgDetailSiButtonText>세부정보 인쇄하기</MsgDetailSiButtonText>
+              </MsgDetailSiButtonInnerWrapper>
+              <MdKeyboardArrowRight />
+            </MsgDetailSiButtonWrapper>
+          </StButton>
           <Link to="/printreceipt" target="_blank">
             <StButton>
               <MsgDetailSiButtonWrapper>
