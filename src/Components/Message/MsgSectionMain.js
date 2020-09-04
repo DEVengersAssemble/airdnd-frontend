@@ -18,6 +18,7 @@ const MsgSectionMain = ({ activeMsg, chatHistory, isHost, chat }) => {
             ))}
           </MsgSectionMainChattingBox>
         )}
+        {/* socket */}
         {/* {chat && (
           <MsgSectionMainChattingBox>
             {chat.map(({ id, msg }, idx) => (
@@ -26,8 +27,8 @@ const MsgSectionMain = ({ activeMsg, chatHistory, isHost, chat }) => {
                 activeMsg={activeMsg}
                 isHost={isHost}
                 id={id}
-                msg={msg}
                 chatHistory={chatHistory && chatHistory} // 나중에 chat으로 대체
+                msg={msg} // socket msg
               />
             ))}
           </MsgSectionMainChattingBox>

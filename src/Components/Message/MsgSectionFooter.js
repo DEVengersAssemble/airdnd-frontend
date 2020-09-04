@@ -23,6 +23,7 @@ const MsgSectionFooter = ({ msg, onTextChange, onMsgSubmit }) => {
           <Input
             message
             placeholder="메시지를 입력하세요."
+            // value={msg} //sochet msg (clearInput을 통해 전송 후 메시지 리셋)
             onChange={onTextChange}
           />
         </StForm>

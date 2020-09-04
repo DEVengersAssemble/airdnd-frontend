@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import MsgSectionFooter from '../../Components/Message/MsgSectionFooter';
 import io from 'socket.io-client';
-import { sendChat, receiveChat } from '../../Modules/socket';
+import { sendChat, receiveChat, clearInput } from '../../Modules/socket';
 
 const MsgSectionFooterContainer = () => {
   // ! redux
@@ -13,6 +13,7 @@ const MsgSectionFooterContainer = () => {
   const activeMsg = filteredMsgs.find(
     (_, index) => filteredMsgs[index] === filteredMsgs[activeIndex],
   );
+
   // ! socket
   // const socket = io.connect('http://localhost:4000');
 
@@ -27,14 +28,13 @@ const MsgSectionFooterContainer = () => {
   //   e.preventDefault();
   //   console.log(msg);
   //   socket.emit('chat message', msg);
-  //   // setMsg('');
+  //   dispatch(clearInput());
   // };
 
   // React.useEffect(() => {
   //   socket.on('chat message', message => {
   //     // console.log(id, message);
   //     dispatch(receiveChat(firstName, message));
-  //     // setChat(chat.concat({ id: id, msg: msg }));
   //   });
   // }, [dispatch, firstName]);
 
@@ -42,6 +42,7 @@ const MsgSectionFooterContainer = () => {
     <MsgSectionFooter
     // onTextChange={onTextChange}
     // onMsgSubmit={onMsgSubmit}
+    // msg={msg}
     />
   );
 };

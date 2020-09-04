@@ -18,7 +18,7 @@ const MsgSectionMainContainer = () => {
     <MsgSectionMain
       activeMsg={activeMsg}
       chatHistory={activeMsg && activeMsg.chatHistory}
-      chat={chat}
+      // chat={chat} // socket chat
     />
   );
 };
