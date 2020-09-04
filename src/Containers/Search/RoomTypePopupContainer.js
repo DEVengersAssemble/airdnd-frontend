@@ -1,7 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import { RoomTypePopup } from '../../Components/Search/FilterPopup';
 import { useSelector, useDispatch } from 'react-redux';
-import { saveFilter, setFilter, resetFilter } from '../../Modules/search';
+import {
+  unsaveFilter,
+  setFilter,
+  resetFilter,
+  closePopup,
+} from '../../Modules/search';
 import { useHistory, useLocation } from 'react-router-dom';
 import qs from 'qs';
 
@@ -17,9 +22,7 @@ const RoomTypePopupContainer = () => {
   });
 
   const onReset = dispatch(resetFilter('roomType'));
-  const onSave = dispatch(
-    saveFilter('romType', { roomTypeHouse, roomTypePrivate, roomTypeShared }),
-  );
+  const onSave = dispatch(closePopup());
 
   // const popup = useRef();
   // const closePopup = ({ target }) => {

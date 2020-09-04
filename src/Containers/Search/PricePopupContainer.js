@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { PricePopup } from '../../Components/Search/FilterPopup';
 import { useSelector, useDispatch } from 'react-redux';
-import { saveFilter, resetFilter } from '../../Modules/search';
+import { unsaveFilter, resetFilter, closePopup } from '../../Modules/search';
 import { useHistory, useLocation } from 'react-router-dom';
 import { updateQuery } from '../../lib/searchUtils';
 import qs from 'qs';
 
-const PricePopupContainer = ({ popupState, onClose }) => {
+const PricePopupContainer = () => {
   const { filterApplied, popupState } = useSelector(state => state.search);
   const { priceMin, priceMax } = filterApplied;
   const [range, setRange] = useState({ value: [priceMin, priceMax] });
@@ -18,7 +18,7 @@ const PricePopupContainer = ({ popupState, onClose }) => {
     ignoreQueryPrefix: true,
   });
 
-  const onSave = () => dispatch(saveFilter('price', { priceMin, priceMax }));
+  const onSave = dispatch(closePopup());
   const onReset = () => dispatch(resetFilter('price'));
 
   // const popup = useRef();

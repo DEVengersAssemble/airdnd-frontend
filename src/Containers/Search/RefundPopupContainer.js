@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { RefundPopup } from '../../Components/Search/FilterPopup';
 import { useSelector, useDispatch } from 'react-redux';
-import { saveFilter, resetFilter } from '../../Modules/search';
+import { unsaveFilter, resetFilter, closePopup } from '../../Modules/search';
 import { useHistory, useLocation } from 'react-router-dom';
 import qs from 'qs';
 
@@ -16,8 +16,8 @@ const RefundPopupContainer = () => {
     ignoreQueryPrefix: true,
   });
 
-  const onSave = () => dispatch(saveFilter('refund', refund));
-  const onReset = () => dispatch(resetFilter('refund', { refund }));
+  const onSave = dispatch(closePopup());
+  const onReset = () => dispatch(resetFilter('refund'));
 
   // const popup = useRef();
   // const closePopup = ({ target }) => {

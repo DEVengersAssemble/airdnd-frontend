@@ -49,7 +49,7 @@ const FilterModalContainer = () => {
 
   const isDisabled = _.isEqual(current, modalFilterInit(filterCondition));
 
-  const { min, max } = filterApplied.price;
+  const { priceMin: min, priceMax: max } = filterApplied;
   const [range, setRange] = useState({ value: [min, max] });
 
   const dispatch = useDispatch();

@@ -4,7 +4,9 @@ import { setFilter } from '../../Modules/search';
 import RangeSlider from '../../Components/Search/RangeSlider';
 
 const RangeSliderContainer = ({ range, setRange, isModal }) => {
-  const { min, max } = useSelector(state => state.search.filterApplied.price);
+  const { priceMin: min, priceMax: max } = useSelector(
+    state => state.search.filterApplied,
+  );
   const { priceArray, averagePrice } = useSelector(state => state.search.data);
   const isDisabled = min === 12000 && max === 1000000;
   const regExp = /^\d{0,7}$/;
