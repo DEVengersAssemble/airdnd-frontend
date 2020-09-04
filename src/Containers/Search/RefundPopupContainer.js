@@ -4,17 +4,17 @@ import { useSelector, useDispatch } from 'react-redux';
 import { saveFilter, resetFilter } from '../../Modules/search';
 import { useHistory, useLocation } from 'react-router-dom';
 import { updateQuery } from '../../lib/searchUtils';
-
-// let prevFilter = {};
+import qs from 'qs';
 
 const RefundPopupContainer = ({ popupState, onClose }) => {
   const { refund } = useSelector(state => state.search.filterApplied);
   const isDisabled = !refund;
   const history = useHistory();
-  const { search: query } = useLocation();
+  const { search } = useLocation();
+  const queryObj = qs.parse(search, {
+    ignoreQueryPrefix: true,
+  });
   const dispatch = useDispatch();
-  const filterQuery = '&refund?1';
-
   const onReset = () => dispatch(resetFilter('refund'));
   const onSave = () => dispatch(saveFilter('refund', refund, isDisabled));
 
@@ -27,14 +27,18 @@ const RefundPopupContainer = ({ popupState, onClose }) => {
       target.nodeName === 'path'
     )
       return;
-    // dispatch(saveFilter('refund'), prevFilter);
 
-    updateQuery(history, isDisabled, query, filterQuery);
+    if (isDisabled) {
+      const { refund, ...newQueryObj } = queryObj;
+      history.replace(`/search${qs.stringify(newQueryObj)}`);
+    } else {
+      const newQueryObj = { ...queryObj, refund };
+      history.replace(`/search?${qs.stringify(newQueryObj)}`);
+    }
     onClose('refund', isDisabled);
   };
 
   useEffect(() => {
-    // prevFilter = refund;
     document.addEventListener('click', closePopup);
     return () => {
       document.removeEventListener('click', closePopup);
