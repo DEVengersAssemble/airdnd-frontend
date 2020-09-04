@@ -12,8 +12,6 @@ import {
 } from '../../Modules/search';
 import _ from 'lodash';
 
-let prevFilter = {};
-
 const seeInit = {
   conveninence: false,
   facility: false,
@@ -25,7 +23,7 @@ const FilterModalContainer = () => {
   const onSeemore = name => setSeemore({ ...seeInit, [name]: !seemore[name] });
 
   const { filterCondition } = useSelector(state => state.search.data);
-  const { popup, filterApplied, viewState } = useSelector(
+  const { popupState, filterApplied, viewState } = useSelector(
     state => state.search,
   );
 
@@ -60,20 +58,14 @@ const FilterModalContainer = () => {
   const onCheck = (list, name, value) =>
     dispatch(applyCheckFilter(list, name, value));
   const onReset = () => dispatch(resetModalFilter());
-  const onUnsave = () => dispatch(setModalFilter(prevFilter));
-
-  useEffect(() => {
-    prevFilter = { ...filterApplied };
-  }, []);
 
   return (
     <FilterModal
-      popupState={popup.modal}
+      popupState={popupState.modal}
       viewState={viewState}
       range={range}
       filterCondition={filterCondition}
       filter={filterApplied}
-      // onClose={onUnsave}
       seemore={seemore}
       setRange={setRange}
       onSeemore={onSeemore}
