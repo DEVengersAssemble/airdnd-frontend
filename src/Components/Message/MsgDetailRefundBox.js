@@ -8,7 +8,6 @@ import {
   MdAssignmentTurnedIn,
   MdReceipt,
 } from 'react-icons/md';
-import MsgDetailBusinessModalContainer from '../../Containers/Message/MsgDetailBusinessModalContainer';
 
 const MsgDetailRefundBox = ({ price, onClickOpenModal }) => {
   return (
@@ -48,7 +47,6 @@ const MsgDetailRefundBox = ({ price, onClickOpenModal }) => {
           </StButton>
         </Link>
       </MsgDetailSettlementOuterWrapper>
-      <MsgDetailBusinessModalContainer />
     </MsgDetailSettlementWrapper>
   );
 };

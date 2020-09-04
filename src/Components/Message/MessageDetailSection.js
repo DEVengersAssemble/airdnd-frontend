@@ -20,7 +20,7 @@ const MessageDetailSectionWrapper = styled.section`
   width: 37.5rem;
   min-width: 37.5rem;
 
-  transition: all 0.3s linear;
+  transition: all 0.3s ease;
   ${({ msgDetailSectionState }) =>
     !msgDetailSectionState &&
     css`

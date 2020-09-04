@@ -24,6 +24,16 @@ const MessageListSectionWrapper = styled.section`
   min-width: 37.5rem;
   opacity: 1;
 
+  /* @media ${({ theme }) => theme.size.medium} {
+    transition: all 0.3s ease;
+    ${({ msgDetailSectionState }) =>
+      msgDetailSectionState &&
+      css`
+        opacity: 0;
+        min-width: 0;
+      `}
+  } */
+
   @media ${({ theme }) => theme.size.medium} {
     transition: all 0.3s ease;
     ${({ msgDetailSectionState }) =>

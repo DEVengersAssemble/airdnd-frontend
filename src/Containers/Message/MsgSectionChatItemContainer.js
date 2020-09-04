@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import MsgSectionChatItem from '../../Components/Message/MsgSectionChatItem';
 import { openModal } from '../../Modules/message';
 
-const MsgSectionChatItemContainer = ({ activeMsg, chat }) => {
+const MsgSectionChatItemContainer = ({ activeMsg, chat, msg }) => {
   // ! redux
   const profileImg = useSelector(state => state.message.profileImg);
   const dispatch = useDispatch();
@@ -33,6 +33,7 @@ const MsgSectionChatItemContainer = ({ activeMsg, chat }) => {
       isHost={host}
       h={h}
       m={m}
+      // msg={msg} // socket msg
     />
   );
 };

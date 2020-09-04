@@ -6,10 +6,9 @@ import { createBookmarkList, fetchBookmark } from '../../Modules/wishlists';
 const WishlistsMainContainer = () => {
   // ! redux
   const { data, loading, error } = useSelector(
-    state => state.wishlists.bookmark,
+    state => state.wishlists.bookmarkLists,
   );
 
-  console.log(data && data.bookmark, data && data.bookmarkHome);
   const dispatch = useDispatch();
 
   // ! hook
@@ -41,8 +40,7 @@ const WishlistsMainContainer = () => {
 
   return (
     <WishlistsMain
-      bmLists={data && data.bookmark}
-      bmListItem={data && data.bookmarkHome}
+      bookmarkLists={data && data.bookmarkLists}
       title={title}
       onChangeTitleInput={onChangeTitleInput}
       onCreateBookMarkList={onCreateBookMarkList}

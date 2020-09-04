@@ -6,8 +6,7 @@ import WishlistsPopup from './WishlistsPopup';
 
 const WishlistsMain = ({
   title,
-  bmLists,
-  bmListItem,
+  bookmarkLists,
   onChangeTitleInput,
   onCreateBookMarkList,
   openPopup,
@@ -37,13 +36,10 @@ const WishlistsMain = ({
           </PopupWrapper>
         </WishlistsTitleWrapper>
         <WishlistsItems>
-          {bmLists.map(bmList => (
-            <WishlistContainer
-              key={bmList.idx}
-              bmList={bmList}
-              bmListItem={bmListItem}
-            />
-          ))}
+          {bookmarkLists &&
+            bookmarkLists.map(bmList => (
+              <WishlistContainer key={bmList.bookmarkListId} bmList={bmList} />
+            ))}
         </WishlistsItems>
       </WishlistsMainInner>
     </WishlistsMainWrapper>
