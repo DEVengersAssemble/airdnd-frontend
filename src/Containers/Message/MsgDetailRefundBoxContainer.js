@@ -1,11 +1,12 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import MsgDetailAirbnbSupportTeamBox from '../../Components/Message/MsgDetailAirbnbSupportTeamBox';
+import MsgDetailRefundBox from '../../Components/Message/MsgDetailRefundBox';
 import { openModal } from '../../Modules/message';
 
-const MsgDetailAirbnbSupportTeamBoxContainer = () => {
+const MsgDetailRefundBoxContainer = () => {
   // ! redux
   const { activeIndex, filteredMsgs } = useSelector(state => state.message);
+  const { reservations } = useSelector(state => state.trips);
   const dispatch = useDispatch();
 
   // ! variable
@@ -13,22 +14,22 @@ const MsgDetailAirbnbSupportTeamBoxContainer = () => {
     (_, index) => filteredMsgs[index] === filteredMsgs[activeIndex],
   );
 
+  const reservation = reservations.find(
+    reservation =>
+      reservation.reservationId === (activeMsg && activeMsg.reservationId),
+  );
+
   // ! modal event
   const onClickOpenModal = () => {
-    dispatch(openModal('support'));
-  };
-
-  const onClickOpenFlagModal = () => {
-    dispatch(openModal('flag'));
+    dispatch(openModal('business'));
   };
 
   return (
-    <MsgDetailAirbnbSupportTeamBox
-      isCanceled={activeMsg && activeMsg.contents.isCanceled}
+    <MsgDetailRefundBox
+      price={reservation && reservation.price}
       onClickOpenModal={onClickOpenModal}
-      onClickOpenFlagModal={onClickOpenFlagModal}
     />
   );
 };
 
-export default MsgDetailAirbnbSupportTeamBoxContainer;
+export default MsgDetailRefundBoxContainer;

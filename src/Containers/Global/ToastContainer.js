@@ -7,7 +7,6 @@ const ToastContainer = ({ state, onClickUndo }) => {
   const toast = useSelector(state => state.message.toast);
 
   const fmLength = filteredMsgs.length;
-  console.log(fmLength);
   return (
     <Toast
       state={state}
@@ -22,4 +21,5 @@ const UndoToastContainer = () => {
   const undoToast = useSelector(state => state.message.undoToast);
   return <UndoToast undoToast={undoToast} />;
 };
+
 export { ToastContainer, UndoToastContainer };

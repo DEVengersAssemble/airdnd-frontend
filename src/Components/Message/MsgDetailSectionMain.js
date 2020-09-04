@@ -7,7 +7,7 @@ import MsgDetailSubInfoBoxContainer from '../../Containers/Message/MsgDetailSubI
 import MsgDetailAddressBoxContainer from '../../Containers/Message/MsgDetailAddressBoxContainer';
 import MsgDetailReservedHomeLinkBoxContainer from '../../Containers/Message/MsgDetailReservedHomeLinkBoxContainer';
 import MsgDetailHostInfoPageLinkBoxContainer from '../../Containers/Message/MsgDetailHostInfoPageLinkBoxContainer';
-import MsgDetailSettlementBoxContainer from '../../Containers/Message/MsgDetailSettlementBoxContainer';
+import MsgDetailRefundBoxContainer from '../../Containers/Message/MsgDetailRefundBoxContainer';
 import MsgDetailAirbnbSupportTeamBoxContainer from '../../Containers/Message/MsgDetailAirbnbSupportTeamBoxContainer';
 
 const MsgDetailSectionMain = ({ activeMsg, isCanceled }) => {
@@ -30,7 +30,7 @@ const MsgDetailSectionMain = ({ activeMsg, isCanceled }) => {
               <MsgDetailAddressBoxContainer />
               <MsgDetailReservedHomeLinkBoxContainer />
               <MsgDetailHostInfoPageLinkBoxContainer />
-              <MsgDetailSettlementBoxContainer />
+              <MsgDetailRefundBoxContainer />
               <MsgDetailAirbnbSupportTeamBoxContainer />
             </>
           )}

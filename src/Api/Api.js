@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 export const fetchSearchedData = async ({
   location,
   checkIn,
@@ -24,6 +23,5 @@ export const fetchMapCenter = async location => {
   );
   console.log(response);
   const center = response.data.results[0].geometry.location;
-
   return center;
 };

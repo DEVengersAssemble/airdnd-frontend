@@ -9,6 +9,7 @@ import home from './home';
 import modal from './modal';
 import map from './map';
 import reservation from './reservation';
+import socket from './socket';
 
 const rootReducer = combineReducers({
   user,
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   modal,
   map,
   reservation,
+  socket,
 });
 
 export default rootReducer;

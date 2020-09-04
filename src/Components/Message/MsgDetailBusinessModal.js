@@ -4,19 +4,13 @@ import Modal from '../Global/Modal';
 import ModalFooter from '../Global/ModalFooter';
 import Button from '../Global/Button';
 
-const MsgDetailBusinessModal = () => {
-  const [modal, setModal] = React.useState(false);
-  const onClickDelete = () => {
-    setModal(!modal);
-  };
-
+const MsgDetailBusinessModal = ({ modalState, onClickCloseModal }) => {
   return (
     <StBusinessModal
       width="55rem"
       height="fit-content"
-      // modalState="true"
-      modalState={modal}
-      setModalState={onClickDelete}
+      modalState={modalState}
+      setModalState={onClickCloseModal}
       header
     >
       <StBusinessModalWrapper>
