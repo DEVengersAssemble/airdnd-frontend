@@ -69,12 +69,7 @@ export const closePopup = name => ({ type: CLOSE_POPUP, name });
 export const handleRange = handler => ({ type: HANDLE_RANGE, handler });
 export const setFilter = (name, value) => ({ type: SET_FILTER, name, value });
 export const resetFilter = name => ({ type: RESET_FILTER, name });
-export const unsaveFilter = (name, value, state) => ({
-  type: UNSAVE_FILTER,
-  name,
-  value,
-  state,
-});
+export const unsaveFilter = name => ({ type: UNSAVE_FILTER, name });
 
 export const applyToggleFilter = (name, value) => ({
   type: APPLY_TOGGLE_FILTER,
@@ -242,7 +237,7 @@ const initialState = {
     location: '서울',
     checkIn: '2020.09.02',
     checkOut: '2020.09.05',
-    dateDiff: '',
+    dateDiff: '3',
     guests: '0',
   },
   // ...reducerUtils.initial(),
@@ -431,7 +426,11 @@ const search = (state = initialState, action) => {
           ...state.filterApplied,
           ...state.filterPrevState,
         },
-        popup: popupInit,
+        popupState: {
+          ...popupInit,
+          [action.name]: false,
+        },
+        filterPrevState: {},
       };
     case APPLY_TOGGLE_FILTER:
       return {

@@ -10,52 +10,52 @@ const RefundPopupContainer = () => {
   const { refund } = filterApplied;
   const isDisabled = !refund;
   const history = useHistory();
+  const popupRef = useRef();
   const dispatch = useDispatch();
   const { search } = useLocation();
   const queryObj = qs.parse(search, {
     ignoreQueryPrefix: true,
   });
 
-  const onSave = () => dispatch(closePopup('refund'));
+  const onClose = () => dispatch(closePopup('refund'));
   const onReset = () => dispatch(resetFilter('refund'));
-  const onClose = () => dispatch(unsaveFilter());
+  const onUnsave = () => dispatch(unsaveFilter('refund'));
 
-  // const popup = useRef();
-  // const closePopup = ({ target }) => {
-  //   if (
-  //     !popupState ||
-  //     popup.current.contains(target) ||
-  //     target.nodeName === 'svg' ||
-  //     target.nodeName === 'path'
-  //   )
-  //     return;
+  const onClosePopup = ({ target }) => {
+    if (
+      !popupState.refund ||
+      popupRef.current.contains(target) ||
+      target.nodeName === 'svg' ||
+      target.nodeName === 'path'
+    )
+      return;
 
-  //   if (isDisabled) {
-  //     const { refund, ...newQueryObj } = queryObj;
-  //     history.replace(`/search${qs.stringify(newQueryObj)}`);
-  //   } else {
-  //     const newQueryObj = { ...queryObj, refund };
-  //     history.replace(`/search?${qs.stringify(newQueryObj)}`);
-  //   }
-  //   onClose('refund', isDisabled);
-  // };
+    if (isDisabled) {
+      const { refund, ...newQueryObj } = queryObj;
+      history.replace(`/search?${qs.stringify(newQueryObj)}`);
+    } else {
+      const newQueryObj = { ...queryObj, refund };
+      history.replace(`/search?${qs.stringify(newQueryObj)}`);
+    }
+    onUnsave();
+  };
 
-  // useEffect(() => {
-  //   document.addEventListener('click', closePopup);
-  //   return () => {
-  //     document.removeEventListener('click', closePopup);
-  //   };
-  // }, [closePopup]);
+  useEffect(() => {
+    document.addEventListener('click', onClosePopup);
+    return () => {
+      document.removeEventListener('click', onClosePopup);
+    };
+  }, [onClosePopup]);
 
   return (
-    // <div ref={popup}>
-    <RefundPopup
-      popupState={popupState.refund}
-      isDisabled={isDisabled}
-      onSave={onSave}
-      onReset={onReset}
-    />
-    // </div>
+    <div ref={popupRef}>
+      <RefundPopup
+        popupState={popupState.refund}
+        isDisabled={isDisabled}
+        onSave={onClose}
+        onReset={onReset}
+      />
+    </div>
   );
 };
 

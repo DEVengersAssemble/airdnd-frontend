@@ -1,12 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { RoomTypePopup } from '../../Components/Search/FilterPopup';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  unsaveFilter,
-  setFilter,
-  resetFilter,
-  closePopup,
-} from '../../Modules/search';
+import { unsaveFilter, resetFilter, closePopup } from '../../Modules/search';
 import { useHistory, useLocation } from 'react-router-dom';
 import qs from 'qs';
 
@@ -16,56 +11,56 @@ const RoomTypePopupContainer = () => {
   const isDisabled = !roomTypeHouse && !roomTypePrivate && !roomTypeShared;
   const dispatch = useDispatch();
   const history = useHistory();
+  const popupRef = useRef();
   const { search } = useLocation();
   const queryObj = qs.parse(search, {
     ignoreQueryPrefix: true,
   });
 
   const onReset = () => dispatch(resetFilter('roomType'));
-  const onSave = () => dispatch(closePopup('roomType'));
-  const onClose = () => dispatch(unsaveFilter());
+  const onClose = () => dispatch(closePopup('roomType'));
+  const onUnsave = () => dispatch(unsaveFilter('roomType'));
 
-  // const popup = useRef();
-  // const closePopup = ({ target }) => {
-  //   if (!popupState || popup.current.contains(target)) return;
+  const onClosePopup = ({ target }) => {
+    if (!popupState.roomType || popupRef.current.contains(target)) return;
 
-  //   if (isDisabled) {
-  //     const {
-  //       roomTypeHouse,
-  //       roomTypePrivate,
-  //       roomTypeShared,
-  //       ...newQueryObj
-  //     } = queryObj;
-  //     history.replace(`/search${qs.stringify(newQueryObj)}`);
-  //   } else {
-  //     const newQueryObj = {
-  //       ...queryObj,
-  //       roomTypeHouse,
-  //       roomTypePrivate,
-  //       roomTypeShared,
-  //     };
-  //     history.replace(`/search?${qs.stringify(newQueryObj)}`);
-  //   }
+    if (isDisabled) {
+      const {
+        roomTypeHouse,
+        roomTypePrivate,
+        roomTypeShared,
+        ...newQueryObj
+      } = queryObj;
+      history.replace(`/search?${qs.stringify(newQueryObj)}`);
+    } else {
+      const newQueryObj = {
+        ...queryObj,
+        roomTypeHouse,
+        roomTypePrivate,
+        roomTypeShared,
+      };
+      history.replace(`/search?${qs.stringify(newQueryObj)}`);
+    }
 
-  //   onClose('roomType', isDisabled);
-  // };
+    onUnsave();
+  };
 
-  // useEffect(() => {
-  //   document.addEventListener('click', closePopup);
-  //   return () => {
-  //     document.removeEventListener('click', closePopup);
-  //   };
-  // }, [closePopup]);
+  useEffect(() => {
+    document.addEventListener('click', onClosePopup);
+    return () => {
+      document.removeEventListener('click', onClosePopup);
+    };
+  }, [onClosePopup]);
 
   return (
-    // <div ref={popup}>
-    <RoomTypePopup
-      popupState={popupState.roomType}
-      isDisabled={isDisabled}
-      onSave={onSave}
-      onReset={onReset}
-    />
-    // </div>
+    <div ref={popupRef}>
+      <RoomTypePopup
+        popupState={popupState.roomType}
+        isDisabled={isDisabled}
+        onSave={onClose}
+        onReset={onReset}
+      />
+    </div>
   );
 };
 

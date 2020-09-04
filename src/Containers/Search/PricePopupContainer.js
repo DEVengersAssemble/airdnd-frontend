@@ -8,9 +8,10 @@ import qs from 'qs';
 
 const PricePopupContainer = () => {
   const { filterApplied, popupState } = useSelector(state => state.search);
-  const { priceMin, priceMax } = filterApplied;
-  const [range, setRange] = useState({ value: [priceMin, priceMax] });
-  const isDisabled = priceMin === 12000 && priceMax === 1000000;
+  const { priceMin: min, priceMax: max } = filterApplied;
+  const [range, setRange] = useState({ value: [min, max] });
+  const isDisabled = min === 12000 && max === 1000000;
+  const popupRef = useRef();
   const history = useHistory();
   const dispatch = useDispatch();
   const { search } = useLocation();
@@ -18,42 +19,42 @@ const PricePopupContainer = () => {
     ignoreQueryPrefix: true,
   });
 
-  const onSave = () => dispatch(closePopup('price'));
+  const onClose = () => dispatch(closePopup('price'));
   const onReset = () => dispatch(resetFilter('price'));
-  const onClose = () => dispatch(unsaveFilter());
-  // const popup = useRef();
-  // const closePopup = ({ target }) => {
-  //   if (!popupState || popup.current.contains(target)) return;
+  const onUnsave = () => dispatch(unsaveFilter('price'));
 
-  //   if (isDisabled) {
-  //     const { priceMin, priceMax, ...newQueryObj } = queryObj;
-  //     history.replace(`/search?${qs.stringify(newQueryObj)}`);
-  //   } else {
-  //     const newQueryObj = { ...queryObj, priceMin: min, priceMax: max };
-  //     history.replace(`/search?${qs.stringify(newQueryObj)}`);
-  //   }
+  const onClosePopup = ({ target }) => {
+    if (!popupState.price || popupRef.current.contains(target)) return;
 
-  //   onClose('price', isDisabled);
-  // };
+    if (isDisabled) {
+      const { priceMin, priceMax, ...newQueryObj } = queryObj;
+      history.replace(`/search?${qs.stringify(newQueryObj)}`);
+    } else {
+      const newQueryObj = { ...queryObj, priceMin: min, priceMax: max };
+      history.replace(`/search?${qs.stringify(newQueryObj)}`);
+    }
 
-  // useEffect(() => {
-  //   document.addEventListener('click', closePopup);
-  //   return () => {
-  //     document.removeEventListener('click', closePopup);
-  //   };
-  // }, [closePopup]);
+    onUnsave();
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', onClosePopup);
+    return () => {
+      document.removeEventListener('click', onClosePopup);
+    };
+  }, [onClosePopup]);
 
   return (
-    // <div ref={popup}>
-    <PricePopup
-      popupState={popupState.price}
-      isDisabled={isDisabled}
-      range={range}
-      setRange={setRange}
-      onSave={onSave}
-      onReset={onReset}
-    />
-    // </div>
+    <div ref={popupRef}>
+      <PricePopup
+        popupState={popupState.price}
+        isDisabled={isDisabled}
+        range={range}
+        setRange={setRange}
+        onSave={onClose}
+        onReset={onReset}
+      />
+    </div>
   );
 };
 
