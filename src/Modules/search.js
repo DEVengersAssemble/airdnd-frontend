@@ -1,5 +1,6 @@
 import * as api from '../Api/searchApi';
 import { fetchDataThunk, reducerUtils } from '../lib/asyncUtils';
+import _ from 'lodash';
 
 // action type
 const FETCH_DATA = 'search/FETCH_DATA';
@@ -29,7 +30,7 @@ const CLOSE_POPUP = 'search/CLOSE_POPUP';
 const HANDLE_RANGE = 'search/HANDLE_RANGE';
 const SET_FILTER = 'search/SET_FILTER';
 const RESET_FILTER = 'search/RESET_FILTER';
-const SAVE_FILTER = 'search/SAVE_FILTER';
+const UNSAVE_FILTER = 'search/UNSAVE_FILTER';
 
 const APPLY_TOGGLE_FILTER = 'search/APPLY_TOGGLE_FILTER';
 const APPLY_COUNTER_FILTER = 'search/APPLY_COUNTER_FILTER';
@@ -66,8 +67,8 @@ export const closePopup = name => ({ type: CLOSE_POPUP, name });
 export const handleRange = handler => ({ type: HANDLE_RANGE, handler });
 export const setFilter = (name, value) => ({ type: SET_FILTER, name, value });
 export const resetFilter = name => ({ type: RESET_FILTER, name });
-export const saveFilter = (name, value, state) => ({
-  type: SAVE_FILTER,
+export const unsaveFilter = (name, value, state) => ({
+  type: UNSAVE_FILTER,
   name,
   value,
   state,
@@ -126,6 +127,13 @@ export const modalFilterInit = filterCondition => {
 };
 
 // initial state
+const popupInit = {
+  refund: false,
+  roomType: false,
+  price: false,
+  modal: false,
+};
+
 const filterInit = {
   refund: false,
   roomTypeHouse: false,
@@ -133,13 +141,14 @@ const filterInit = {
   roomTypeShared: false,
   priceMin: 12000,
   priceMax: 1000000,
-};
-
-const popupInit = {
-  refund: false,
-  roomType: false,
-  price: false,
-  modal: false,
+  instantBooking: false,
+  bedroomBed: 0,
+  bedroomRoom: 0,
+  bedroomBath: 0,
+  convenience: false,
+  convenienceList: [],
+  facilityList: [],
+  hostLangList: [],
 };
 
 const initialState = {
@@ -151,21 +160,26 @@ const initialState = {
   mapZoom: 10,
   markerState: null,
   hoveredHome: null,
-  popup: popupInit,
+  popupState: popupInit,
   filterPrevState: {},
-  filterApplied: {
-    refund: false,
-    roomTypeHouse: false,
-    roomTypePrivate: false,
-    roomTypeShared: false,
-    priceMin: 12000,
-    priceMax: 1000000,
-    instantBooking: false,
-    bedroomBed: 0,
-    bedroomRoom: 0,
-    bedroomBath: 0,
-    convenience: false,
-  },
+  filterApplied: { ...filterInit },
+};
+
+const roomTypes = ['roomTypeHouse', 'roomTypePrivate', 'roomTypeShared'];
+const prices = ['priceMin', 'priceMax'];
+
+const getFilterGroup = (filterName, state) => {
+  const obj = state ? state.filterApplied : filterInit;
+  switch (filterName) {
+    case 'roomType':
+      return _.pick(obj, roomTypes);
+    case 'price':
+      return _.pick(obj, prices);
+    case 'modal':
+      return _.omit(obj, [...roomTypes, ...prices]);
+    default:
+      return { filterName: false };
+  }
 };
 
 // reducer
@@ -284,6 +298,7 @@ const search = (state = initialState, action) => {
           ...state.popup,
           [action.name]: true,
         },
+        filterPrevState: getFilterGroup(action.name, state),
       };
     case CLOSE_POPUP:
       return {
@@ -291,10 +306,6 @@ const search = (state = initialState, action) => {
         popup: {
           ...state.popup,
           [action.name]: false,
-        },
-        filterDisabled: {
-          ...state.filterDisabled,
-          [action.name]: action.state,
         },
       };
     case SET_FILTER:
@@ -310,19 +321,15 @@ const search = (state = initialState, action) => {
         ...state,
         filterApplied: {
           ...state.filterApplied,
-          [action.name]: filterInit[action.name],
+          ...getFilterGroup(action.name),
         },
       };
-    case SAVE_FILTER:
+    case UNSAVE_FILTER:
       return {
         ...state,
         filterApplied: {
           ...state.filterApplied,
-          [action.name]: action.value,
-        },
-        filterDisabled: {
-          ...state.filterDisabled,
-          [action.name]: action.state,
+          ...state.filterPrevState,
         },
         popup: popupInit,
       };
