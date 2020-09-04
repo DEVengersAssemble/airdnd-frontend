@@ -5,14 +5,19 @@ import { saveFilter, resetFilter } from '../../Modules/search';
 import { useHistory, useLocation } from 'react-router-dom';
 import qs from 'qs';
 
-const RefundPopupContainer = ({ popupState, onClose }) => {
-  const { refund } = useSelector(state => state.search.filterApplied);
+const RefundPopupContainer = () => {
+  const { filterApplied, popupState } = useSelector(state => state.search);
+  const { refund } = filterApplied;
+  const isDisabled = !refund;
   const history = useHistory();
   const dispatch = useDispatch();
   const { search } = useLocation();
   const queryObj = qs.parse(search, {
     ignoreQueryPrefix: true,
   });
+
+  const onSave = () => dispatch(saveFilter('refund', refund));
+  const onReset = () => dispatch(resetFilter('refund', { refund }));
 
   // const popup = useRef();
   // const closePopup = ({ target }) => {
@@ -45,9 +50,9 @@ const RefundPopupContainer = ({ popupState, onClose }) => {
     // <div ref={popup}>
     <RefundPopup
       popupState={popupState}
-      // isDisabled={isDisabled}
-      // onSave={onSave}
-      // onReset={onReset}
+      isDisabled={isDisabled}
+      onSave={onSave}
+      onReset={onReset}
     />
     // </div>
   );

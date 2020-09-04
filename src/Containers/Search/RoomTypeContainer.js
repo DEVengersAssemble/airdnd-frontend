@@ -4,13 +4,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setFilter } from '../../Modules/search';
 
 const RoomTypeContainer = ({ isModal }) => {
-  const { roomType } = useSelector(state => state.search.filterApplied);
+  const { filterApplied } = useSelector(state => state.search);
+  const { roomTypeHouse, roomTypePrivate, roomTypeShared } = filterApplied;
   const dispatch = useDispatch();
 
-  const onChange = type =>
-    dispatch(setFilter('roomType', { ...roomType, [type]: !roomType[type] }));
+  // const onChange = type =>
+  //   dispatch(setFilter('roomType', { ...roomType, [type]: !roomType[type] }));
 
-  return <RoomType isModal={isModal} check={roomType} onChange={onChange} />;
+  // return <RoomType isModal={isModal} check={roomType} onChange={onChange} />;
 };
 
 export default React.memo(RoomTypeContainer);

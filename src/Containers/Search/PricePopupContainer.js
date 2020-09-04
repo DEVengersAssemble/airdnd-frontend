@@ -7,14 +7,19 @@ import { updateQuery } from '../../lib/searchUtils';
 import qs from 'qs';
 
 const PricePopupContainer = ({ popupState, onClose }) => {
-  const { min, max } = useSelector(state => state.search.filterApplied.price);
-  const [range, setRange] = useState({ value: [min, max] });
+  const { filterApplied, popupState } = useSelector(state => state.search);
+  const { priceMin, priceMax } = filterApplied;
+  const [range, setRange] = useState({ value: [priceMin, priceMax] });
+  const isDisabled = priceMin === 12000 && priceMax === 1000000;
   const history = useHistory();
   const dispatch = useDispatch();
   const { search } = useLocation();
   const queryObj = qs.parse(search, {
     ignoreQueryPrefix: true,
   });
+
+  const onSave = () => dispatch(saveFilter('price', { priceMin, priceMax }));
+  const onReset = () => dispatch(resetFilter('price'));
 
   // const popup = useRef();
   // const closePopup = ({ target }) => {
@@ -42,11 +47,11 @@ const PricePopupContainer = ({ popupState, onClose }) => {
     // <div ref={popup}>
     <PricePopup
       popupState={popupState}
-      // isDisabled={isDisabled}
+      isDisabled={isDisabled}
       range={range}
       setRange={setRange}
-      // onSave={onSave}
-      // onReset={onReset}
+      onSave={onSave}
+      onReset={onReset}
     />
     // </div>
   );

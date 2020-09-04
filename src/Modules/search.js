@@ -152,12 +152,7 @@ const initialState = {
   markerState: null,
   hoveredHome: null,
   popup: popupInit,
-  filterDisabled: {
-    refund: true,
-    roomType: true,
-    price: true,
-    modal: true,
-  },
+  filterPrevState: {},
   filterApplied: {
     refund: false,
     roomTypeHouse: false,
@@ -169,6 +164,7 @@ const initialState = {
     bedroomBed: 0,
     bedroomRoom: 0,
     bedroomBath: 0,
+    convenience: false,
   },
 };
 

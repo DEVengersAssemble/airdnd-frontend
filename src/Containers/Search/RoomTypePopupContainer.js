@@ -5,14 +5,21 @@ import { saveFilter, setFilter, resetFilter } from '../../Modules/search';
 import { useHistory, useLocation } from 'react-router-dom';
 import qs from 'qs';
 
-const RoomTypePopupContainer = ({ popupState, onClose }) => {
-  const { roomType } = useSelector(state => state.search.filterApplied);
+const RoomTypePopupContainer = () => {
+  const { filterApplied, popupState } = useSelector(state => state.search);
+  const { roomTypeHouse, roomTypePrivate, roomTypeShared } = filterApplied;
+  const isDisabled = !roomTypeHouse && !roomTypePrivate && !roomTypeShared;
   const dispatch = useDispatch();
   const history = useHistory();
   const { search } = useLocation();
   const queryObj = qs.parse(search, {
     ignoreQueryPrefix: true,
   });
+
+  const onReset = dispatch(resetFilter('roomType'));
+  const onSave = dispatch(
+    saveFilter('romType', { roomTypeHouse, roomTypePrivate, roomTypeShared }),
+  );
 
   // const popup = useRef();
   // const closePopup = ({ target }) => {
@@ -49,12 +56,12 @@ const RoomTypePopupContainer = ({ popupState, onClose }) => {
   return (
     // <div ref={popup}>
     <RoomTypePopup
-      check={roomType}
+      // check={roomType}
       popupState={popupState}
-      // isDisabled={isDisabled}
-      // onSave={onSave}
+      isDisabled={isDisabled}
+      onSave={onSave}
       // onChange={onChange}
-      // onReset={onReset}
+      onReset={onReset}
     />
     // </div>
   );
