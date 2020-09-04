@@ -14,6 +14,7 @@ const CHANGE_HEART = 'search/CHANGE_HEART';
 
 const OPEN_HEADER = 'search/OPEN_HEADER';
 const CLOSE_HEADER = 'search/CLOSE_HEADER';
+const SET_DATE_HEADER = 'search/SET_DATE_HEADER';
 
 const OPEN_MAP = 'search/OPEN_MAP';
 const CLOSE_MAP = 'search/CLOSE_MAP';
@@ -51,6 +52,7 @@ export const changeHeart = homeId => ({ type: CHANGE_HEART, homeId });
 
 export const openHeader = () => ({ type: OPEN_HEADER });
 export const closeHeader = () => ({ type: CLOSE_HEADER });
+export const setDateHeader = () => ({ type: SET_DATE_HEADER });
 
 export const openMap = () => ({ type: OPEN_MAP });
 export const closeMap = () => ({ type: CLOSE_MAP });
@@ -240,7 +242,7 @@ const initialState = {
     location: '서울',
     checkIn: '2020.09.02',
     checkOut: '2020.09.05',
-    dateDiff: '3',
+    dateDiff: '',
     guests: '0',
   },
   // ...reducerUtils.initial(),
@@ -336,6 +338,12 @@ const search = (state = initialState, action) => {
       return {
         ...state,
         headerState: false,
+      };
+    case SET_DATE_HEADER:
+      return {
+        ...state,
+        popupState: popupInit,
+        headerState: true,
       };
     case SHOW_MAP:
       return {

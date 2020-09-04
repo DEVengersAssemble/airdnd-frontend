@@ -58,7 +58,7 @@ const PricePopup = ({
   );
 };
 
-const SetDatePopup = ({ popupState, onClickBtn }) => {
+const SetDatePopup = ({ popupState, onSetDate }) => {
   return (
     <StPopup popupState={popupState} size="350px">
       <StContentWrapper content="setDate">
@@ -67,7 +67,7 @@ const SetDatePopup = ({ popupState, onClickBtn }) => {
           btnType="color"
           color="black"
           fontSize="1.4rem"
-          onClick={onClickBtn}
+          onClick={onSetDate}
         >
           날짜 입력
         </Button>
