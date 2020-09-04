@@ -23,7 +23,7 @@ export const FilterList = ({ mapState, onShowMap, dateDiff }) => {
   return (
     <StWrapper>
       <FilterButtonContainer name="refund" text="유연한 환불 정책">
-        {/* <RefundPopupContainer /> */}
+        <RefundPopupContainer />
       </FilterButtonContainer>
       <FilterButtonContainer name="roomType" text="숙소 유형">
         {/* <RoomTypePopupContainer /> */}

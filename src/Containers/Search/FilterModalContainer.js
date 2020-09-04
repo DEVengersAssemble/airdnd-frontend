@@ -51,7 +51,7 @@ const FilterModalContainer = () => {
   const [range, setRange] = useState({ value: [min, max] });
 
   const dispatch = useDispatch();
-  const onClose = () => dispatch(closePopup('modal', isDisabled));
+  const onClose = () => dispatch(closePopup('modal'));
   const onToggle = (name, value) => dispatch(applyToggleFilter(name, value));
   const onIncrease = (name, value) => dispatch(applyCounterFilter(name, value));
   const onDecrease = (name, value) => dispatch(applyCounterFilter(name, value));

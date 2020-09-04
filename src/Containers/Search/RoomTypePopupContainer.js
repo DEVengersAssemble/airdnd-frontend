@@ -21,8 +21,9 @@ const RoomTypePopupContainer = () => {
     ignoreQueryPrefix: true,
   });
 
-  const onReset = dispatch(resetFilter('roomType'));
-  const onSave = dispatch(closePopup());
+  const onReset = () => dispatch(resetFilter('roomType'));
+  const onSave = () => dispatch(closePopup());
+  const onClose = () => dispatch(unsaveFilter());
 
   // const popup = useRef();
   // const closePopup = ({ target }) => {

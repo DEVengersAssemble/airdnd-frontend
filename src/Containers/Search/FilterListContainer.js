@@ -13,7 +13,7 @@ const FilterButtonContainer = React.memo(({ name, text, children }) => {
   const dispatch = useDispatch();
   const onClick = () =>
     dispatch(popupState[name] ? closePopup(name) : openPopup(name));
-
+  console.log(name, '이름 뭐니', popupState[name], '팝업 열렷니 닫혓니');
   return (
     <FilterButton text={text} isApplied={isApplied} onClick={onClick}>
       {children}

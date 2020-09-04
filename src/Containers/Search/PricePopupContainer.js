@@ -18,9 +18,9 @@ const PricePopupContainer = () => {
     ignoreQueryPrefix: true,
   });
 
-  const onSave = dispatch(closePopup());
+  const onSave = () => dispatch(closePopup());
   const onReset = () => dispatch(resetFilter('price'));
-
+  const onClose = () => dispatch(unsaveFilter());
   // const popup = useRef();
   // const closePopup = ({ target }) => {
   //   if (!popupState || popup.current.contains(target)) return;
