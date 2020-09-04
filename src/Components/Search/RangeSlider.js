@@ -58,7 +58,7 @@ const RangeSlider = ({
           value={min}
           short
           pay="₩"
-          onChange={onChangeMinPrice}
+          onChange={e => onChangeMinPrice(e, 'priceMin')}
           onBlur={onSetRange}
         />
         <span>―</span>
@@ -69,7 +69,7 @@ const RangeSlider = ({
           value={max}
           short
           pay="₩"
-          onChange={onChangeMaxPrice}
+          onChange={e => onChangeMaxPrice(e, 'priceMax')}
           onBlur={onSetRange}
         />
       </StInputWrapper>

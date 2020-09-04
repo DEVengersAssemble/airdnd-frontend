@@ -18,7 +18,7 @@ const PricePopupContainer = () => {
     ignoreQueryPrefix: true,
   });
 
-  const onSave = () => dispatch(closePopup());
+  const onSave = () => dispatch(closePopup('price'));
   const onReset = () => dispatch(resetFilter('price'));
   const onClose = () => dispatch(unsaveFilter());
   // const popup = useRef();

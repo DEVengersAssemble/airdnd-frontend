@@ -398,6 +398,7 @@ const search = (state = initialState, action) => {
           ...state.popupState,
           [action.name]: false,
         },
+        filterPrevState: {},
       };
     case SET_FILTER:
       return {
