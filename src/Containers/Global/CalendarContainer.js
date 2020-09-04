@@ -75,7 +75,7 @@ const CalendarContainer = ({
         return vTime >= checkinTime && vTime <= hoverDateTime;
       });
     }
-    return btnTime >= checkinTime && btnTime <= hoverDateTime;
+    return btnTime >= checkinTime && btnTime <= (hoverDateTime || checkoutTime);
   };
 
   const onClickCheckDate = (e, reserved) => {
