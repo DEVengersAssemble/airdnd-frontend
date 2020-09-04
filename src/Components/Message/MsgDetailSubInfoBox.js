@@ -67,7 +67,7 @@ const MsgDetailSubInfoBox = ({
               <MsgDetailSiButtonWrapper>
                 <MsgDetailSiButtonInnerWrapper>
                   <FaDoorOpen />
-                  <MsgDetailSiButtonText>기 보기</MsgDetailSiButtonText>
+                  <MsgDetailSiButtonText>숙소 보기</MsgDetailSiButtonText>
                 </MsgDetailSiButtonInnerWrapper>
                 <MdKeyboardArrowRight />
               </MsgDetailSiButtonWrapper>
