@@ -1,20 +1,7 @@
 import axios from 'axios';
-export const fetchSearchedData = async ({
-  location,
-  checkIn,
-  checkOut,
-  adults,
-  guests,
-  page,
-  filter,
-}) => {
-  const CI = checkIn.split('.').join('-');
-  const CO = checkOut.split('.').join('-');
-  const response = await axios.get(
-    'back/search?location=서울&checkIn=2020-09-02&checkOut=2020-09-05&guests=0',
-    // `back/search/location/${location}/checkIn/${CI}/checkOut/${CO}/adults/${guests}`,
-    // `back/search/user/${213}/location/${location}/checkIn/${CI}/checkOut/${CO}/guests/${guests}/lat_from/${0}/lng_from/${0}/lat_to/${0}/lng_to/${0}/filter_refund/${0}/filter_roomType_house/${0}/filter_roomType_private/${0}/filter_roomType_shared/${0}/filter_price_min/${12000}/filter_price_max/${1000000}/filter_instantBooking/${0}/filter_bedroom_bed/${0}/filter_bedroom_room/${0}/filter_bedroom_bathroom/${0}/filter_convenience/${0}/filter_convenienceList/${0}/filter_facilityList/${0}/filter_hostLangList/${0}/page/${1}`,
-  );
+export const fetchSearchedData = async query => {
+  console.log(query);
+  const response = await axios.get(`back/search${query}`);
   console.log('데이터 겟햇다=======================', response);
   return response.data;
 };

@@ -5,6 +5,7 @@ import { fetchDataThunk, reducerUtils } from '../lib/asyncUtils';
 const FETCH_DATA = 'search/FETCH_DATA';
 const FETCH_DATA_SUCCESS = 'search/FETCH_DATA_SUCCESS';
 const FETCH_DATA_ERROR = 'search/FETCH_DATA_ERROR';
+const GET_SEARCH_FORM = 'search/GET_SEARCH_FORM';
 
 const HOVER_HOME = 'search/HOVER_HOME';
 const BLUR_HOME = 'search/BLUR_HOME';
@@ -38,6 +39,10 @@ const RESET_MODAL_FILTER = 'search/RESET_MODAL/FILTER';
 
 // action creator
 export const fetchData = fetchDataThunk(FETCH_DATA, api.fetchSearchedData);
+export const getSearchForm = searchForm => ({
+  type: GET_SEARCH_FORM,
+  searchForm,
+});
 
 export const hoverHome = homeId => ({ type: HOVER_HOME, homeId });
 export const blurHome = () => ({ type: BLUR_HOME });
@@ -175,7 +180,6 @@ const search = (state = initialState, action) => {
       return {
         ...state,
         ...reducerUtils.loading(),
-        searchForm: action.param,
       };
     case FETCH_DATA_SUCCESS:
       return {
@@ -190,6 +194,11 @@ const search = (state = initialState, action) => {
       return {
         ...state,
         ...reducerUtils.error(action.payload),
+      };
+    case GET_SEARCH_FORM:
+      return {
+        ...state,
+        searchForm: action.searchForm,
       };
     case HOVER_HOME:
       return {
