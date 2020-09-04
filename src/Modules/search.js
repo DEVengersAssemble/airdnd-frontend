@@ -62,7 +62,7 @@ export const openMarker = id => ({ type: OPEN_MARKER, id });
 export const closeMarker = () => ({ type: CLOSE_MARKER });
 
 export const openPopup = name => ({ type: OPEN_POPUP, name });
-export const closePopup = (name, state) => ({ type: CLOSE_POPUP, name, state });
+export const closePopup = name => ({ type: CLOSE_POPUP, name });
 export const handleRange = handler => ({ type: HANDLE_RANGE, handler });
 export const setFilter = (name, value) => ({ type: SET_FILTER, name, value });
 export const resetFilter = name => ({ type: RESET_FILTER, name });
@@ -128,15 +128,11 @@ export const modalFilterInit = filterCondition => {
 // initial state
 const filterInit = {
   refund: false,
-  roomType: {
-    house: false,
-    private: false,
-    shared: false,
-  },
-  price: {
-    min: 12000,
-    max: 1000000,
-  },
+  roomTypeHouse: false,
+  roomTypePrivate: false,
+  roomTypeShared: false,
+  priceMin: 12000,
+  priceMax: 1000000,
 };
 
 const popupInit = {
@@ -163,13 +159,16 @@ const initialState = {
     modal: true,
   },
   filterApplied: {
-    ...filterInit,
+    refund: false,
+    roomTypeHouse: false,
+    roomTypePrivate: false,
+    roomTypeShared: false,
+    priceMin: 12000,
+    priceMax: 1000000,
     instantBooking: false,
-    bedroom: {
-      bed: 0,
-      room: 0,
-      bathroom: 0,
-    },
+    bedroomBed: 0,
+    bedroomRoom: 0,
+    bedroomBath: 0,
   },
 };
 

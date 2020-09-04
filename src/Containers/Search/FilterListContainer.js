@@ -15,12 +15,13 @@ const FilterButtonContainer = React.memo(({ name, text, children }) => {
 
   return (
     <FilterButton text={text} isApplied={isApplied} onClick={onClick}>
-      {Children.map(children, child => {
+      {/* {Children.map(children, child => {
         return cloneElement(child, {
           popupState: popup[name],
           onClose,
         });
-      })}
+      })} */}
+      {children}
     </FilterButton>
   );
 });
