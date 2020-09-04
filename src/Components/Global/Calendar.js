@@ -135,6 +135,7 @@ const Calendar = ({
 
 const StWrapper = styled.div`
   position: relative;
+  display: flex;
   width: 100%;
   max-width: 642px;
   min-height: 300px;
