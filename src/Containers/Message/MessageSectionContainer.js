@@ -30,15 +30,15 @@ const MessageSectionContainer = () => {
     }
   };
 
-  useEffect(() => {
-    window.addEventListener('resize', debounce(onResizeMedia, 1000));
-    return () => window.removeEventListener('resize', onResizeMedia);
-  }, [dispatch]);
+  // useEffect(() => {
+  //   window.addEventListener('resize', debounce(onResizeMedia, 1000));
+  //   return () => window.removeEventListener('resize', onResizeMedia);
+  // }, [dispatch]);
 
-  useEffect(() => {
-    window.addEventListener('resize', debounce(onResizeLarge, 1000));
-    return () => window.removeEventListener('resize', onResizeLarge);
-  }, [dispatch]);
+  // useEffect(() => {
+  //   window.addEventListener('resize', debounce(onResizeLarge, 1000));
+  //   return () => window.removeEventListener('resize', onResizeLarge);
+  // }, [dispatch]);
 
   return (
     <MessageSection
