@@ -17,7 +17,7 @@ const RefundPopupContainer = () => {
     ignoreQueryPrefix: true,
   });
 
-  const onClose = () => dispatch(closePopup('refund'));
+  const onClose = () => dispatch(closePopup('refund', !isDisabled));
   const onReset = () => dispatch(resetFilter('refund'));
   const onUnsave = () => dispatch(unsaveFilter('refund'));
 
@@ -37,6 +37,7 @@ const RefundPopupContainer = () => {
       const newQueryObj = { ...queryObj, refund };
       history.replace(`/search?${qs.stringify(newQueryObj)}`);
     }
+
     onUnsave();
   };
 

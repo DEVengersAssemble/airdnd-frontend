@@ -1,31 +1,31 @@
 import React, { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { SetDatePopup } from '../../Components/Search/FilterPopup';
-import { setDateHeader } from '../../Modules/search';
+import { setDateHeader, closePopup } from '../../Modules/search';
 
 const SetDatePopupContainer = () => {
   const { popupState } = useSelector(state => state.search);
-  const popup = useRef();
+  const popupRef = useRef();
   const dispatch = useDispatch();
 
-  // const closePopup = ({ target }) => {
-  //   if (!popupState || popup.current.contains(target)) return;
-  //   onClose('price', true);
-  // };
+  const onClosePopup = ({ target }) => {
+    if (!popupState.price || popupRef.current.contains(target)) return;
+    dispatch(closePopup('price'));
+  };
 
   const onSetDate = () => dispatch(setDateHeader());
 
-  // useEffect(() => {
-  //   document.addEventListener('click', closePopup);
-  //   return () => {
-  //     document.removeEventListener('click', closePopup);
-  //   };
-  // }, [closePopup]);
+  useEffect(() => {
+    document.addEventListener('click', onClosePopup);
+    return () => {
+      document.removeEventListener('click', onClosePopup);
+    };
+  }, [onClosePopup]);
 
   return (
-    // <div ref={popup}>
-    <SetDatePopup popupState={popupState.price} onSetDate={onSetDate} />
-    // </div>
+    <div ref={popupRef}>
+      <SetDatePopup popupState={popupState.price} onSetDate={onSetDate} />
+    </div>
   );
 };
 

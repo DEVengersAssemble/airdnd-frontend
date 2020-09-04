@@ -19,7 +19,7 @@ const PricePopupContainer = () => {
     ignoreQueryPrefix: true,
   });
 
-  const onClose = () => dispatch(closePopup('price'));
+  const onClose = () => dispatch(closePopup('price', !isDisabled));
   const onReset = () => dispatch(resetFilter('price'));
   const onUnsave = () => dispatch(unsaveFilter('price'));
 

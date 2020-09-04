@@ -18,7 +18,7 @@ const RoomTypePopupContainer = () => {
   });
 
   const onReset = () => dispatch(resetFilter('roomType'));
-  const onClose = () => dispatch(closePopup('roomType'));
+  const onClose = () => dispatch(closePopup('roomType', !isDisabled));
   const onUnsave = () => dispatch(unsaveFilter('roomType'));
 
   const onClosePopup = ({ target }) => {

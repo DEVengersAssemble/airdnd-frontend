@@ -1,14 +1,12 @@
 /* eslint-disable react/display-name */
-import React, { Children, cloneElement } from 'react';
+import React from 'react';
 import { FilterList, FilterButton } from '../../Components/Search/FilterList';
 import { useSelector, useDispatch } from 'react-redux';
 import { closePopup, openPopup, showMap } from '../../Modules/search';
 
 const FilterButtonContainer = React.memo(({ name, text, children }) => {
-  const { popupState, filterApplied } = useSelector(state => state.search);
-  const keys = Object.keys(filterApplied);
-  const filters = keys.filter(key => key.includes(name));
-  const isApplied = filters.every(filter => !filterApplied[filter]);
+  const { popupState, popupApplied } = useSelector(state => state.search);
+  const isApplied = popupApplied[name];
 
   const dispatch = useDispatch();
   const onClick = () =>

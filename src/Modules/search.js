@@ -65,7 +65,11 @@ export const openMarker = id => ({ type: OPEN_MARKER, id });
 export const closeMarker = () => ({ type: CLOSE_MARKER });
 
 export const openPopup = name => ({ type: OPEN_POPUP, name });
-export const closePopup = name => ({ type: CLOSE_POPUP, name });
+export const closePopup = (name, isApplied) => ({
+  type: CLOSE_POPUP,
+  name,
+  isApplied,
+});
 export const handleRange = handler => ({ type: HANDLE_RANGE, handler });
 export const setFilter = (name, value) => ({ type: SET_FILTER, name, value });
 export const resetFilter = name => ({ type: RESET_FILTER, name });
@@ -237,7 +241,7 @@ const initialState = {
     location: '서울',
     checkIn: '2020.09.02',
     checkOut: '2020.09.05',
-    dateDiff: '3',
+    dateDiff: '',
     guests: '0',
   },
   // ...reducerUtils.initial(),
@@ -250,6 +254,7 @@ const initialState = {
   hoveredHome: null,
   popupState: popupInit,
   filterPrevState: {},
+  popupApplied: { ...popupInit },
   filterApplied: { ...filterInit },
 };
 
@@ -401,6 +406,10 @@ const search = (state = initialState, action) => {
           ...state.popupState,
           [action.name]: false,
         },
+        popupApplied: {
+          ...state.popupApplied,
+          [action.name]: action.isApplied,
+        },
         filterPrevState: {},
       };
     case SET_FILTER:
@@ -427,7 +436,7 @@ const search = (state = initialState, action) => {
           ...state.filterPrevState,
         },
         popupState: {
-          ...popupInit,
+          ...state.popupState,
           [action.name]: false,
         },
         filterPrevState: {},
