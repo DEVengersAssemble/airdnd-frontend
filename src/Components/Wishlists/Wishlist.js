@@ -3,17 +3,24 @@ import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import { ellipsis } from 'polished';
 
-const Wishlist = ({ bookmarkListTitle, homeCount, idx }) => {
+const Wishlist = ({
+  bookmarkListTitle,
+  homeCount,
+  bookmarkListId,
+  bmImage1,
+  bmImage2,
+  bmImage3,
+}) => {
   return (
     <WishlistCardWrapper>
-      <Link to={`/wishlist/${idx}`}>
+      <Link to={`/wishlist/${bookmarkListId}`}>
         <WishlistImgWrapper>
-          <WishlistFirstImg homeCount={homeCount} />
+          <WishlistFirstImg homeCount={homeCount} bmImage1={bmImage1} />
           <WishlistSubImgWrapper homeCount={homeCount}>
             {homeCount >= 2 && (
               <>
-                <WishlistSecondImg homeCount={homeCount} />
-                {homeCount >= 3 && <WishlistThirdImg />}
+                <WishlistSecondImg homeCount={homeCount} bmImage2={bmImage2} />
+                {homeCount >= 3 && <WishlistThirdImg bmImage3={bmImage3} />}
               </>
             )}
           </WishlistSubImgWrapper>
@@ -29,6 +36,7 @@ const Wishlist = ({ bookmarkListTitle, homeCount, idx }) => {
   );
 };
 
+// ! Need to refactor
 const WishlistCardWrapper = styled.li`
   &:nth-child(3n + 2),
   &:nth-child(3n + 1) {
@@ -75,34 +83,34 @@ const WishlistFirstImg = styled.div`
       width: 100%;
       background-color: ${({ theme }) => theme.color.gray};
     `}
-  ${({ homeCount }) =>
+  ${({ homeCount, bmImage1 }) =>
     homeCount === 1 &&
     css`
-      background: url('https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large');
+      background: url(${bmImage1});
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
     `}
-  ${({ homeCount }) =>
+  ${({ homeCount, bmImage1 }) =>
     homeCount === 2 &&
     css`
       width: 100%;
       height: 20rem;
       border-top-left-radius: 10px;
       border-top-right-radius: 0rem;
-      background: url('https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large');
+      background: url(${bmImage1});
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
     `}
-  ${({ homeCount }) =>
+  ${({ homeCount, bmImage1 }) =>
     homeCount >= 3 &&
     css`
       width: 100%;
       height: 20rem;
       border-top-left-radius: 10px;
       border-top-right-radius: 0rem;
-      background: url('https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large');
+      background: url(${bmImage1});
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
@@ -138,13 +146,13 @@ const WishlistSubImgWrapper = styled.div`
 `;
 
 const WishlistSecondImg = styled.div`
-  ${({ homeCount }) =>
+  ${({ homeCount, bmImage2 }) =>
     homeCount === 2
       ? css`
           width: 100%;
           height: 20rem;
           border-top-right-radius: 10px;
-          background: url('https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large');
+          background: url(${bmImage2});
           background-size: cover;
           background-repeat: no-repeat;
           background-position: center;
@@ -154,7 +162,7 @@ const WishlistSecondImg = styled.div`
           height: 9.75rem;
           margin-bottom: 0.5rem;
           border-top-right-radius: 10px;
-          background: url('https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large');
+          background: url(${bmImage2});
           background-size: cover;
           background-repeat: no-repeat;
           background-position: center;
@@ -164,7 +172,7 @@ const WishlistSecondImg = styled.div`
 const WishlistThirdImg = styled.div`
   width: 100%;
   height: 9.75rem;
-  background: url('https://a0.muscache.com/im/pictures/a3912086-e317-4913-ab09-fb38e2737ee5.jpg?aki_policy=large');
+  background: ${({ bmImage3 }) => bmImage3 && css`url(${bmImage3})`};
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
