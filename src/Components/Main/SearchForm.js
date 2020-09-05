@@ -50,23 +50,30 @@ const StFormItemWrapper = styled.div`
     height: 100%;
     width: 1px;
     background: ${({ theme }) => theme.color.gray};
-  }
-
-  &:hover {
-    background: rgba(0, 0, 0, 0.07);
-    border-radius: 34px;
-    margin-top: -1px;
-    height: 66px;
-    ${StTextWrapper}::before {
-      display: none;
+    @media screen and (max-width: 950px) {
+      left: -17px;
     }
   }
 
-  &:hover + & {
-    ${StTextWrapper}::before {
-      display: none;
-    }
-  }
+  ${({ type, name }) =>
+    !(type === 'checkIn' && name === 'checkOut') &&
+    css`
+      &:hover {
+        background: rgba(0, 0, 0, 0.07);
+        border-radius: 34px;
+        margin-top: -1px;
+        height: 66px;
+        ${StTextWrapper}::before {
+          display: none;
+        }
+      }
+
+      &:hover + & {
+        ${StTextWrapper}::before {
+          display: none;
+        }
+      }
+    `}
 
   &:focus-within {
     background: white;
@@ -94,6 +101,9 @@ const StFormItemWrapper = styled.div`
       align-items: center;
       padding-left: 20px;
       cursor: pointer;
+      @media screen and (max-width: 950px) {
+        padding-left: 17px;
+      }
     `}
 `;
 
@@ -146,6 +156,10 @@ const StPlaceInput = styled.input`
   &::placeholder {
     color: ${({ theme }) => theme.color.darkGray};
   }
+  @media screen and (max-width: 950px) {
+    font-size: 12px;
+    width: 100px;
+  }
 `;
 
 const StTypeText = styled.p`
@@ -167,14 +181,18 @@ const StContentText = styled.p`
         `};
   font-weight: ${({ value }) => value && 500};
   @media ${({ theme }) => theme.size.iPad} {
-    ${({ name }) =>
-      name === 'guests' &&
-      css`
-        width: 80px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      `}
+    font-size: 12px;
+    width: 75px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  @media screen and (max-width: 950px) {
+    font-size: 12px;
+    width: 75px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 `;
 
@@ -202,7 +220,15 @@ const StResetBtn = styled(Button)`
     background: ${({ theme }) => theme.color.line};
   }
   @media ${({ theme }) => theme.size.iPad} {
-    right: ${({ name }) => (name === 'guests' ? '60px' : '10px')};
+    right: ${({ name }) => (name === 'guests' ? '55px' : '10px')};
+  }
+
+  @media screen and (max-width: 950px) {
+    width: 22px;
+    height: 22px;
+    font-size: 14px;
+    top: calc(50% - 11px);
+    right: ${({ name }) => (name === 'guests' ? '55px' : '10px')};
   }
 `;
 
@@ -221,12 +247,13 @@ const SearchForm = ({
   decreaseGuestCount,
   refObj,
 }) => {
-  console.log('[SEARCHFORM]', type);
+  // console.log('[SEARCHFORM]', type);
   const { location, checkIn, checkOut, flexibleDate, guests } = searchData;
   const { adult, child, infant } = guests;
   const guestCount = adult + child + infant;
 
   const {
+    searchFormRef,
     locationWrapperRef,
     checkInWrapperRef,
     checkOutWrapperRef,
@@ -244,8 +271,10 @@ const SearchForm = ({
     <StSearchForm
       onSubmit={handleSubmit}
       isSearchBtnClicked={isSearchBtnClicked}
+      ref={searchFormRef}
     >
       <StFormItemWrapper
+        type={type}
         name="location"
         width="30%"
         tabIndex="1"
@@ -291,6 +320,7 @@ const SearchForm = ({
         </StResetBtn>
       </StFormItemWrapper>
       <StFormItemWrapper
+        type={type}
         name="checkIn"
         width="20%"
         tabIndex="2"
@@ -314,6 +344,14 @@ const SearchForm = ({
         >
           <MdClose />
         </StResetBtn>
+      </StFormItemWrapper>
+      <StFormItemWrapper
+        type={type}
+        name="checkOut"
+        width="20%"
+        tabIndex="3"
+        ref={checkOutWrapperRef}
+      >
         <SearchCalendarPopup
           type={type}
           changeType={changeType}
@@ -322,13 +360,6 @@ const SearchForm = ({
           setCheckIn={setCheckIn}
           setCheckOut={setCheckOut}
         ></SearchCalendarPopup>
-      </StFormItemWrapper>
-      <StFormItemWrapper
-        name="checkOut"
-        width="20%"
-        tabIndex="3"
-        ref={checkOutWrapperRef}
-      >
         <StTextWrapper>
           <StTypeText>체크아웃</StTypeText>
           <StContentText value={checkOut}>
@@ -348,6 +379,7 @@ const SearchForm = ({
         </StResetBtn>
       </StFormItemWrapper>
       <StFormItemWrapper
+        type={type}
         name="guests"
         width="30%"
         tabIndex="4"
