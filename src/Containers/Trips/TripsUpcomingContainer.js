@@ -1,9 +1,22 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useLocation } from 'react-router';
 import TripsUpcoming from '../../Components/Trips/TripsUpcoming';
+import qs from 'qs';
 
 const TripsUpcomingContainer = () => {
+  // ! redux
   const trips = useSelector(state => state.trips.reservations);
+  const dispatch = useDispatch();
+
+  // ! hook
+  const location = useLocation();
+  const { tab } = qs.parse(location.search, {
+    ignoreQueryPrefix: true,
+  });
+  console.log(tab);
+
+  // ! variable
   const upcomingTrips = trips.filter(trip => {
     const { checkin, checkout } = trip;
     const nowDate = new Date();
@@ -22,6 +35,11 @@ const TripsUpcomingContainer = () => {
   });
 
   const tripsCount = upcomingTrips.length;
+
+  // ! effect
+  // useEffect(() => {
+  //   dispatch(fetchTripsData(tab));
+  // }, [dispatch]);
 
   return (
     <TripsUpcoming upcomingTrips={upcomingTrips} tripsCount={tripsCount} />

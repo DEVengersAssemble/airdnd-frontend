@@ -1,13 +1,27 @@
+import * as api from '../Api/tripsApi';
+import {
+  fetchDataThunk,
+  reducerUtils,
+  handleAsyncActions,
+} from '../lib/asyncUtils';
+
 // action type
+const FETCH_TRIPS = 'trips/FETCH_TRIPS';
+const FETCH_TRIPS_SUCCESS = 'trips/FETCH_TRIPS_SUCCESS';
+const FETCH_TRIPS_ERROR = 'trips/FETCH_TRIPS_ERROR';
+
 const SHOW_RESERVATION = 'trips/SHOW_RESERVATION';
 
 // action creator
+export const fetchTrips = fetchDataThunk(FETCH_TRIPS, api.fetchTripsData);
+
 export const showReservation = () => ({
   type: SHOW_RESERVATION,
 });
 
 // initial state
 const initialState = {
+  trips: reducerUtils.initial(),
   id: 0,
   firstName: '태진',
   lastName: '김',
@@ -258,6 +272,10 @@ const initialState = {
 // reducer
 const trips = (state = initialState, action) => {
   switch (action.type) {
+    case FETCH_TRIPS:
+    case FETCH_TRIPS_SUCCESS:
+    case FETCH_TRIPS_ERROR:
+      return handleAsyncActions(FETCH_TRIPS, 'trips')(state, action);
     case SHOW_RESERVATION:
       return state;
     default:
