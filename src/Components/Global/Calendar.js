@@ -1,7 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { AiOutlineRight, AiOutlineLeft } from 'react-icons/ai';
-import { ReactSelect } from 'react-query-selector';
 import Button from './Button';
 
 const Calendar = ({
