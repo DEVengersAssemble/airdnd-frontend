@@ -3,7 +3,7 @@ import axios from 'axios';
 import SignupEmailModal from '../../Components/Main/SignupEmailModal';
 import { useSelector, useDispatch } from 'react-redux';
 import { openModal, closeModal } from '../../Modules/modal';
-import { sendSignUpReq } from '../../Api/signupApi';
+import { signupRequest } from '../../Modules/user';
 
 const initialState = {
   email: {
@@ -73,8 +73,25 @@ const signupReducer = (state, action) => {
 
 const SignupModalContainer = () => {
   const dispatch = useDispatch();
+  const { loading, error, signupRes } = useSelector(state => state.user);
   const { name } = useSelector(state => state.modal);
   const modalVisible = name === 'signup_email';
+  const [signup, _dispatch] = useReducer(signupReducer, initialState);
+  const [isChecking, setIsChecking] = useState(false);
+  const [isPwdChanged, setIsPwdChanged] = useState(false);
+  const [pwdFocus, setPwdFocus] = useState(false);
+  const {
+    email,
+    firstName,
+    lastName,
+    pwd,
+    pwdValidation,
+    birthMonth,
+    birthDay,
+    birthYear,
+  } = signup;
+  const { pwdLevel } = pwdValidation;
+
   const emailRef = useRef();
   const firstNameRef = useRef();
   const lastNameRef = useRef();
@@ -92,21 +109,6 @@ const SignupModalContainer = () => {
     birthYearRef,
   };
 
-  const [signup, _dispatch] = useReducer(signupReducer, initialState);
-  const [isChecking, setIsChecking] = useState(false);
-  const [isPwdChanged, setIsPwdChanged] = useState(false);
-  const [pwdFocus, setPwdFocus] = useState(false);
-  const {
-    email,
-    firstName,
-    lastName,
-    pwd,
-    pwdValidation,
-    birthMonth,
-    birthDay,
-    birthYear,
-  } = signup;
-  const { pwdLevel } = pwdValidation;
   const onPwdFocus = () => {
     setPwdFocus(true);
   };
@@ -225,7 +227,7 @@ const SignupModalContainer = () => {
 
   const onSuccess = async () => {
     console.log('===회원가입 시도====');
-    const payload = {
+    const userInfo = {
       email: email.value,
       firstName: firstName.value,
       lastName: lastName.value,
@@ -235,13 +237,8 @@ const SignupModalContainer = () => {
       profileImg: '',
       description: '',
     };
-    console.log('payload: ', payload);
-    try {
-      const { data } = await axios.post('/back/signUp', payload);
-      console.log(data);
-    } catch (error) {
-      console.error(error);
-    }
+    console.log('userInfo: ', userInfo);
+    dispatch(signupRequest(userInfo));
 
     setPwdFocus(false);
     _dispatch({ type: 'RESET' });
@@ -290,6 +287,8 @@ const SignupModalContainer = () => {
         dispatch(closeModal());
       }}
       signup={signup}
+      loading={loading}
+      signupRes={signupRes}
       pwdValidation={pwdValidation}
       onChangeForm={onChangeForm}
       onChangeSelect={onChangeSelect}
