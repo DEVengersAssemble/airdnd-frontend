@@ -21,7 +21,6 @@ const FilterModalContainer = () => {
   const [seemore, setSeemore] = useState({ seeInit });
   const onSeemore = name => setSeemore({ ...seeInit, [name]: !seemore[name] });
 
-  const name = viewState === 'map' ? 'all' : 'modal';
   const { filterCondition } = useSelector(state => state.search.data);
   const { popupState, filterApplied, viewState } = useSelector(
     state => state.search,
@@ -45,6 +44,7 @@ const FilterModalContainer = () => {
   };
 
   const isDisabled = _.isEqual(current, modalFilterInit(filterCondition));
+  const name = viewState === 'map' ? 'all' : 'modal';
 
   const { priceMin: min, priceMax: max } = filterApplied;
   const [range, setRange] = useState({ value: [min, max] });

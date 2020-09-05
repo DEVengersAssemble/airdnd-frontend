@@ -91,18 +91,23 @@ export const applyCheckFilter = (list, name, value) => ({
   name,
   value,
 });
-export const resetModalFilter = filterCondition => ({
+export const resetModalFilter = name => ({
   type: RESET_MODAL_FILTER,
-  filterCondition,
+  name,
 });
 export const modalFilterInit = filterCondition => {
-  const filter = {};
   const {
     superhost,
     amenityList,
     facilityList,
     hostLangList,
   } = filterCondition;
+  const filter = {
+    instantBooking: false,
+    bedCount: 0,
+    bedroomCount: 0,
+    bathroomCount: 0,
+  };
   if (superhost) filter.superhost = false;
   if (amenityList) filter.amenityList = [];
   if (facilityList) filter.facilityList = [];
@@ -139,14 +144,6 @@ const filterInit = {
   roomTypeShared: false,
   priceMin: 12000,
   priceMax: 1000000,
-  instantBooking: false,
-  bedCount: 0,
-  bedroomCount: 0,
-  bathroomCount: 0,
-  // superhost: false,
-  // amenityList: [],
-  // facilityList: [],
-  // hostLangList: [],
 };
 
 const initialState = {
@@ -178,17 +175,21 @@ const initialState = {
   filterApplied: filterInit,
 };
 
-const getFilterGroup = (filterName, state) => {
-  const obj = state ? state.filterApplied : filterInit;
+const getFilterGroup = (filterName, state, keep) => {
+  const obj = keep ? state.filterApplied : filterInit;
   switch (filterName) {
     case 'roomType':
       return _.pick(obj, roomTypes);
     case 'price':
       return _.pick(obj, prices);
     case 'modal':
-      return _.pick(obj, [...modals]);
+      return keep
+        ? _.pick(obj, [...modals])
+        : modalFilterInit(state.data.filterCondition);
     case 'all':
-      return state ? obj : { ...filterInit, ...modalFilterInit() };
+      return keep
+        ? obj
+        : { ...filterInit, ...modalFilterInit(state.data.filterCondition) };
     default:
       return { [filterName]: false };
   }
@@ -317,7 +318,7 @@ const search = (state = initialState, action) => {
           ...state.popupState,
           [action.name]: true,
         },
-        filterPrevState: getFilterGroup(action.name, state),
+        filterPrevState: getFilterGroup(action.name, state, 'keep'),
       };
     case CLOSE_POPUP:
       return {
@@ -394,7 +395,7 @@ const search = (state = initialState, action) => {
         ...state,
         filterApplied: {
           ...state.filterApplied,
-          ...getFilterGroup(action.name),
+          ...getFilterGroup(action.name, state),
         },
       };
     case UNSAVE_MODAL_FILTER:
