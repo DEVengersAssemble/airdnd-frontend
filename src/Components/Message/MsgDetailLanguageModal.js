@@ -5,6 +5,7 @@ import theme from '../../style/theme';
 import Modal from '../Global/Modal';
 import ModalFooter from '../Global/ModalFooter';
 import Button from '../Global/Button';
+import scheduleDoc from '../../Assets/docs/schedule.doc';
 
 const MsgDetailLanguageModal = ({ modalState, onClickCloseModal }) => {
   return (
@@ -23,7 +24,7 @@ const MsgDetailLanguageModal = ({ modalState, onClickCloseModal }) => {
         <StPdfModalRadioWrapper>
           <StPdfModalLabel>
             <StPdfModalText>선호하는 언어</StPdfModalText>
-            <StPdfModalInput type="radio" name="lang" checked />
+            <StPdfModalInput type="radio" name="lang" checked={true} />
           </StPdfModalLabel>
           <StPdfModalLabel>
             <StPdfModalText>중국어</StPdfModalText>
@@ -68,15 +69,18 @@ const MsgDetailLanguageModal = ({ modalState, onClickCloseModal }) => {
         </StPdfModalRadioWrapper>
       </StPdfModalWrapper>
       <StModalFooter>
-        <Button
-          color="black"
-          width="100%"
-          height="4.5rem"
-          hover={`background: ${rgba(theme.color.black, 0.9)}`}
-          onClick={onClickCloseModal}
-        >
-          저장
-        </Button>
+        <StForm method="get" action={scheduleDoc}>
+          <Button
+            type="submit"
+            color="black"
+            width="100%"
+            height="4.5rem"
+            hover={`background: ${rgba(theme.color.black, 0.9)}`}
+            onClick={onClickCloseModal}
+          >
+            저장
+          </Button>
+        </StForm>
       </StModalFooter>
     </StPdfModal>
   );
@@ -139,4 +143,9 @@ const StModalFooter = styled(ModalFooter)`
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
 `;
+
+const StForm = styled.form`
+  width: 100%;
+`;
+
 export default MsgDetailLanguageModal;

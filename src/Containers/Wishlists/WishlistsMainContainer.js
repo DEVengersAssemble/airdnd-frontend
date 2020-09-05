@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import WishlistsMain from '../../Components/Wishlists/WishlistsMain';
-import { createBookmarkList, fetchBookmark } from '../../Modules/wishlists';
+import {
+  createBookmarkList,
+  fetchBookmarkLists,
+} from '../../Modules/wishlists';
 
 const WishlistsMainContainer = () => {
   // ! redux
   const { data, loading, error } = useSelector(
-    state => state.wishlists.bookmark,
+    state => state.wishlists.bookmarkLists,
   );
 
-  console.log(data && data.bookmark, data && data.bookmarkHome);
   const dispatch = useDispatch();
 
   // ! hook
@@ -17,9 +19,7 @@ const WishlistsMainContainer = () => {
   const [title, setTitle] = useState('');
 
   // ! event
-  const onClickPopup = () => {
-    setOpenPopup(!openPopup);
-  };
+  const onClickPopup = () => setOpenPopup(!openPopup);
 
   const onChangeTitleInput = e => setTitle(e.target.value);
 
@@ -30,9 +30,9 @@ const WishlistsMainContainer = () => {
     setOpenPopup(!openPopup);
   };
 
-  // ! fetch data
+  // ! fetch bookmarkLists data
   useEffect(() => {
-    dispatch(fetchBookmark());
+    dispatch(fetchBookmarkLists());
   }, [dispatch]);
 
   if (loading) return <div>로딩중... </div>;
@@ -41,8 +41,7 @@ const WishlistsMainContainer = () => {
 
   return (
     <WishlistsMain
-      bmLists={data && data.bookmark}
-      bmListItem={data && data.bookmarkHome}
+      bookmarkLists={data && data.bookmarkLists}
       title={title}
       onChangeTitleInput={onChangeTitleInput}
       onCreateBookMarkList={onCreateBookMarkList}

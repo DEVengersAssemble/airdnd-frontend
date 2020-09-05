@@ -15,6 +15,7 @@ const MsgSectionChatItem = ({
   isHost,
   h,
   m,
+  msg,
 }) => {
   return (
     <MsgItemWrapper>
@@ -33,6 +34,7 @@ const MsgSectionChatItem = ({
           </MsgSendTime>
         </MsgSendUserWrapper>
         <MsgText>{text}</MsgText>
+        <MsgText>{msg}</MsgText>
       </MsgItemInner>
       <MsgButtonWrapper>
         {isHost && (
