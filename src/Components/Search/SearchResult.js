@@ -41,6 +41,7 @@ const StWrapper = styled.div`
 const StHeader = styled.h2`
   font-size: 3.2rem;
   font-weight: 800;
+  line-height: 3.2rem;
   margin: 1rem 0;
 `;
 

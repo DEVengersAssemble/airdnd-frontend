@@ -166,12 +166,26 @@ const filterInit = {
 };
 
 const initialState = {
-  ...reducerUtils.initial(),
+  // ...reducerUtils.initial(),
+  data: {
+    homes: [],
+    dataTotal: 0,
+    filterCondition: {
+      superhost: false,
+      amenityList: [],
+      facilityList: [],
+      hostLangList: [],
+    },
+    mapCenter: { lat: 0, lng: 0 },
+    priceArray: [],
+    averagePrice: 0,
+    recentHomes: [],
+  },
   searchForm: {},
   headerState: false,
   viewState: 'result',
   mapState: true,
-  mapZoom: 11,
+  mapZoom: 12,
   markerState: null,
   hoveredHome: null,
   popupState: popupInit,

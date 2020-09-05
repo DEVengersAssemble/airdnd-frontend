@@ -58,7 +58,7 @@ const StWrapper = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 3rem 0 2rem;
+  padding: 2rem 0 2rem;
 `;
 
 const StFilterWrapper = styled.div`

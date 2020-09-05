@@ -43,8 +43,7 @@ const StWrapper = styled.ul`
 
 const NoResultBox = styled.div`
   width: 100%;
-  border-bottom: 1px solid ${({ theme }) => theme.color.shadow};
-  padding-bottom: 2rem;
+  margin-top: 2rem;
 `;
 
 const NoResultTitle = styled.span`
@@ -53,7 +52,10 @@ const NoResultTitle = styled.span`
 `;
 
 const NoResultDetail = styled.span`
+  display: block;
   font-size: 1.6rem;
+  padding: 1rem 0 4rem;
+  border-bottom: 1px solid ${({ theme }) => theme.color.shadow};
 `;
 
 export default React.memo(HomeList);
