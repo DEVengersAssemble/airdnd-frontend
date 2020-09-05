@@ -38,8 +38,8 @@ export const SuperhostFilters = ({ onToggle, filter }) => {
           <StLink>더 알아보기</StLink>
         </StContentWrapper>
         <Toggle
-          checked={filter.convenience}
-          handleClick={() => onToggle('convenience', !filter.convenience)}
+          checked={filter.superhost}
+          handleClick={() => onToggle('superhost', !filter.superhost)}
         />
       </StContentWrapper>
       <StLargeSpan>장애인 편의시설</StLargeSpan>
