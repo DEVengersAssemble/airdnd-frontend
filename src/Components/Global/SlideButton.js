@@ -4,7 +4,7 @@ import { MdNavigateBefore, MdNavigateNext } from 'react-icons/md';
 import styled, { css } from 'styled-components';
 
 // styleType: transparent, plane
-const NextButton = ({ styleType, ...rest }) => {
+const NextButton = React.memo(({ styleType, ...rest }) => {
   return (
     <StSlideButton
       styleType={styleType}
@@ -15,9 +15,9 @@ const NextButton = ({ styleType, ...rest }) => {
       <MdNavigateNext />
     </StSlideButton>
   );
-};
+});
 
-const PrevButton = ({ styleType, ...rest }) => {
+const PrevButton = React.memo(({ styleType, ...rest }) => {
   return (
     <StSlideButton
       styleType={styleType}
@@ -28,7 +28,7 @@ const PrevButton = ({ styleType, ...rest }) => {
       <MdNavigateBefore />
     </StSlideButton>
   );
-};
+});
 
 const styleTypes = {
   transparent: css`

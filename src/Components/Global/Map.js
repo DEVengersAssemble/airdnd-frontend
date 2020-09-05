@@ -64,6 +64,7 @@ const Map = compose(
       },
       setZoom: ({ onZoomChange }) => () => {
         onZoomChange(refs.map.getZoom());
+        console.log(refs.map.getBounds());
       },
     };
   }),

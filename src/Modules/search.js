@@ -130,11 +130,11 @@ export const modalFilterInit = filterCondition => {
 // initial state
 const modals = [
   'instantBooking',
-  'bedroomBed',
-  'bedroomRoom',
-  'bedroomBath',
-  'convenience',
-  'convenienceList',
+  'bedCount',
+  'bedroomCount',
+  'BathroomCount',
+  'superhost',
+  'amenityList',
   'facilityList',
   'hostLangList',
 ];
@@ -155,14 +155,14 @@ const filterInit = {
   roomTypeShared: false,
   priceMin: 12000,
   priceMax: 1000000,
-  instantBooking: false,
-  bedroomBed: 0,
-  bedroomRoom: 0,
-  bedroomBath: 0,
-  convenience: false,
-  convenienceList: [],
-  facilityList: [],
-  hostLangList: [],
+  // instantBooking: false,
+  // bedCount: 0,
+  // bedroomCount: 0,
+  // bathroomCount: 0,
+  // superhost: false,
+  // amenityList: [],
+  // facilityList: [],
+  // hostLangList: [],
 };
 
 const initialState = {
@@ -171,7 +171,7 @@ const initialState = {
   headerState: false,
   viewState: 'result',
   mapState: true,
-  mapZoom: 13,
+  mapZoom: 11,
   markerState: null,
   hoveredHome: null,
   popupState: popupInit,
