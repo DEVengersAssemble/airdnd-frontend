@@ -59,7 +59,7 @@ const FilterModalContainer = () => {
 
   return (
     <FilterModal
-      popupState={popupState.modal}
+      popupState={popupState[name]}
       viewState={viewState}
       range={range}
       filterCondition={filterCondition}

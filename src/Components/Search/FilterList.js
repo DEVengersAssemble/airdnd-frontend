@@ -19,13 +19,7 @@ export const FilterButton = ({ children, text, onClick, isApplied }) => {
   );
 };
 
-export const FilterList = ({
-  mapState,
-  viewState,
-  onShowMap,
-  dateDiff,
-  dataTotal,
-}) => {
+export const FilterList = ({ mapState, onShowMap, dateDiff, dataTotal }) => {
   return (
     <StWrapper>
       {dataTotal !== 0 && (
@@ -42,7 +36,7 @@ export const FilterList = ({
         {dateDiff ? <PricePopupContainer /> : <SetDatePopupContainer />}
       </FilterButtonContainer>
       <FilterButtonContainer
-        name={viewState === 'map' ? 'all' : 'modal'}
+        name="modal"
         text="필터 추가하기"
       ></FilterButtonContainer>
       <MapButton mapState={mapState} onShowMap={onShowMap} />

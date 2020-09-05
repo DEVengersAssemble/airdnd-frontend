@@ -20,7 +20,7 @@ const FilterButtonContainer = React.memo(({ name, text, children }) => {
 });
 
 const FilterListContainer = React.memo(({ mapState }) => {
-  const { searchForm, viewState, data } = useSelector(state => state.search);
+  const { searchForm, data } = useSelector(state => state.search);
 
   const dispatch = useDispatch();
   const onShowMap = () => dispatch(showMap());
@@ -28,7 +28,6 @@ const FilterListContainer = React.memo(({ mapState }) => {
   return (
     <FilterList
       mapState={mapState}
-      viewState={viewState}
       dateDiff={searchForm.dateDiff}
       dataTotal={data.dataTotal}
       onShowMap={onShowMap}
