@@ -21,6 +21,7 @@ const FilterModalContainer = () => {
   const [seemore, setSeemore] = useState({ seeInit });
   const onSeemore = name => setSeemore({ ...seeInit, [name]: !seemore[name] });
 
+  const name = viewState === 'map' ? 'all' : 'modal';
   const { filterCondition } = useSelector(state => state.search.data);
   const { popupState, filterApplied, viewState } = useSelector(
     state => state.search,
@@ -49,12 +50,12 @@ const FilterModalContainer = () => {
   const [range, setRange] = useState({ value: [min, max] });
 
   const dispatch = useDispatch();
-  const onClose = () => dispatch(closePopup('modal', !isDisabled));
+  const onClose = () => dispatch(closePopup(name, !isDisabled));
   const onToggle = (name, value) => dispatch(applyToggleFilter(name, value));
   const onCounter = (name, value) => dispatch(applyCounterFilter(name, value));
   const onCheck = (list, name, value) =>
     dispatch(applyCheckFilter(list, name, value));
-  const onReset = () => dispatch(resetModalFilter());
+  const onReset = () => dispatch(resetModalFilter(name));
 
   return (
     <FilterModal

@@ -36,8 +36,8 @@ const UNSAVE_FILTER = 'search/UNSAVE_FILTER';
 const APPLY_TOGGLE_FILTER = 'search/APPLY_TOGGLE_FILTER';
 const APPLY_COUNTER_FILTER = 'search/APPLY_COUNTER_FILTER';
 const APPLY_CHECK_FILTER = 'search/APPLY_CHECK_FILTER';
-const SET_MODAL_FILTER = 'search/SET_MODAL_FILTER';
 const RESET_MODAL_FILTER = 'search/RESET_MODAL/FILTER';
+const UNSAVE_MODAL_FILTER = 'search/UNSAVE_MODAL_FILTER';
 
 // action creator
 export const fetchData = fetchDataThunk(FETCH_DATA, api.fetchSearchedData);
@@ -91,10 +91,6 @@ export const applyCheckFilter = (list, name, value) => ({
   name,
   value,
 });
-export const setModalFilter = modalFilter => ({
-  type: SET_MODAL_FILTER,
-  modalFilter,
-});
 export const resetModalFilter = filterCondition => ({
   type: RESET_MODAL_FILTER,
   filterCondition,
@@ -133,6 +129,7 @@ const popupInit = {
   roomType: false,
   price: false,
   modal: false,
+  all: false,
 };
 
 const filterInit = {
@@ -190,6 +187,8 @@ const getFilterGroup = (filterName, state) => {
       return _.pick(obj, prices);
     case 'modal':
       return _.pick(obj, [...modals]);
+    case 'all':
+      return state ? obj : { ...filterInit, ...modalFilterInit() };
     default:
       return { [filterName]: false };
   }
@@ -390,21 +389,20 @@ const search = (state = initialState, action) => {
             : state.filterApplied[action.list].concat(action.name),
         },
       };
-    case SET_MODAL_FILTER:
-      return {
-        ...state,
-        filterApplied: {
-          ...state.filterApplied,
-          ...action.modalFilter,
-        },
-        popup: popupInit,
-      };
     case RESET_MODAL_FILTER:
       return {
         ...state,
         filterApplied: {
           ...state.filterApplied,
-          ...modalFilterInit(state.data.filterCondition),
+          ...getFilterGroup(action.name),
+        },
+      };
+    case UNSAVE_MODAL_FILTER:
+      return {
+        ...state,
+        filterApplied: {
+          ...state.filterApplied,
+          ...state.filterPrevState,
         },
       };
     default:
