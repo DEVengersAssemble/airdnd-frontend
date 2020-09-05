@@ -53,64 +53,113 @@ const CalendarContainer = ({
     (v, i) => i + 1,
   );
 
-  const checkBeforeDate = date => {
+  // events
+
+  const checkBeforeCheckin = date => {
     const targetTime = new Date(date).getTime();
     const checkinTime = new Date(checkin).getTime();
     return checkinTime > targetTime;
   };
 
+  const checkAfterReserved = date => {
+    const checkinTime = new Date(checkin).getTime();
+    const dateTime = new Date(date).getTime();
+    const firstReserved = reservedDates.find(reservedDate => {
+      const reservedTime = new Date(reservedDate).getTime();
+      return reservedTime > checkinTime;
+    });
+    const firstReservedTime = new Date(firstReserved).getTime();
+    return firstReservedTime < dateTime;
+  };
+
   const [hoverDate, setHoverDate] = useState('');
 
   const getDiff = (date, getReserved) => {
-    const hoverDateTime = new Date(hoverDate).getTime();
+    if (!checkin) return;
+    const dateTime = new Date(date).getTime();
     const checkinTime = new Date(checkin).getTime();
     const checkoutTime = new Date(checkout).getTime();
-    const btnTime = new Date(date).getTime();
-    if (changeInitialDate === false) {
-      return btnTime >= checkinTime && btnTime <= checkoutTime;
-    }
+    const hoverDateTime = new Date(hoverDate).getTime();
+    // switch case
     if (getReserved) {
       return reservedDates.find(v => {
         const vTime = new Date(v).getTime();
-        return vTime >= checkinTime && vTime <= hoverDateTime;
+        return vTime >= checkinTime && vTime <= dateTime;
       });
     }
-    return btnTime >= checkinTime && btnTime <= hoverDateTime;
+    if (!checkout) {
+      return dateTime >= checkinTime && dateTime <= hoverDateTime;
+    }
+    return dateTime >= checkinTime && dateTime <= checkoutTime;
   };
 
   const onClickCheckDate = (e, reserved) => {
     if (changeInitialDate === false) setChangeDataTrue(true);
-
     const date = e.target.id.slice(7);
-    if (date === reserved) return;
 
+    if (date === reserved) return;
     if (!checkin) {
-      console.log('checkin1', date);
+      console.log('■■■ checkin', date);
       setCheckinData(date);
-    }
-    if (checkBeforeDate(date)) {
-      console.log('beforecheckin', date);
-      setCheckinData(date);
-    }
-    if (getDiff(reserved, true)) {
-      console.log('reject', date);
       return;
     }
-    if (checkin && !checkBeforeDate(date)) {
-      console.log('checkout', date);
-      setCheckoutData(date);
-    }
-    if (checkout) {
-      console.log('recheckin', date);
+    if (checkBeforeCheckin(date) && !isDetailPage) {
+      console.log('■■■ beforecheckin - mainPage', date);
       setCheckinData(date);
       setCheckoutData('');
+      return;
+    }
+    if (!checkout && getDiff(date, true)) {
+      console.log('■■■ reject reserved', date);
+      return;
+    }
+    if (checkin === date) {
+      console.log('■■■ reject sameDate checkin checkout');
+      return;
+    }
+    if (checkout) {
+      console.log('■■■ recheckin', date, checkout);
+      setCheckinData(date);
+      setCheckoutData('');
+      return;
+    }
+    if (checkin && !checkBeforeCheckin(date)) {
+      console.log('■■■ checkout', date);
+      setCheckoutData(date);
+      return;
+    }
+    if (checkBeforeCheckin(date) && isDetailPage) {
+      console.log('■■■ reject beforecheckin - datailPage');
+      return;
     }
   };
 
+  console.log('now rendering..');
+
   const onMouseenter = e => {
+    if (!checkin || checkout) return;
     const date = e.target.id.slice(7);
-    if (!checkin || checkout || checkBeforeDate(date)) return;
+    if (checkAfterReserved(date)) {
+      setHoverDate('');
+      return;
+    }
+    if (checkBeforeCheckin(date)) {
+      setHoverDate('');
+      return;
+    }
     setHoverDate(date);
+  };
+
+  const onMouseLeave = () => {
+    if (!checkin || checkout) return;
+    console.log('leave');
+    if (!hoverDate) return;
+    setHoverDate('');
+  };
+
+  const onClickWrapper = e => {
+    if (e.target.nodeName !== 'DIV') return;
+    e.target.firstElementChild.click();
   };
 
   return (
@@ -128,10 +177,14 @@ const CalendarContainer = ({
       checkout={checkout}
       onClickCheckDate={onClickCheckDate}
       onMouseenter={onMouseenter}
+      onMouseLeave={onMouseLeave}
       getDiff={getDiff}
       hoverDate={hoverDate}
       reservedDates={reservedDates}
       isDetailPage={isDetailPage}
+      onClickWrapper={onClickWrapper}
+      checkAfterReserved={checkAfterReserved}
+      checkBeforeCheckin={checkBeforeCheckin}
     />
   );
 };

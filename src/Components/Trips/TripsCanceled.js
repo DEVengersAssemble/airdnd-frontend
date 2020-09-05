@@ -6,8 +6,6 @@ import Button from '../Global/Button';
 import TripsCanceledItemContainer from '../../Containers/Trips/TripsCanceledItemContainer';
 
 const TripsCanceled = ({ canceledTrips }) => {
-  console.log('tripsCancled', canceledTrips);
-
   return (
     <>
       <TripsCanceledWrapper>

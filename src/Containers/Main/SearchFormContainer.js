@@ -7,12 +7,13 @@ import { setSearchData } from '../../Modules/searchForm';
 import { getLocationAutoComplete } from '../../Api/searchFormApi';
 
 const SearchFormContainer = ({ isSearchBtnClicked }) => {
+  console.log('component rerenders........');
   let history = useHistory();
   const dispatch = useDispatch();
   const searchData = useSelector(state => state.searchForm);
   const [locationResult, setLocationResult] = useState([]);
   const [type, setType] = useState(null);
-
+  console.log('[type]: ', type);
   const changeType = type => {
     setType(() => type);
   };
@@ -83,11 +84,13 @@ const SearchFormContainer = ({ isSearchBtnClicked }) => {
   };
 
   const setCheckIn = date => {
+    console.log('setCheckIn()');
     changeSearchData('checkIn', date);
     changeType('checkOut');
   };
 
   const setCheckOut = date => {
+    console.log('setCheckOut()');
     changeSearchData('checkOut', date);
     changeType('guests');
   };
@@ -144,74 +147,85 @@ const SearchFormContainer = ({ isSearchBtnClicked }) => {
   };
 
   const changeFocus = () => {
+    console.log('changeFocus...', type);
     if (type === 'checkIn') checkInWrapperRef.current.focus();
     else if (type === 'checkOut') checkOutWrapperRef.current.focus();
     else if (type === 'guests') guestsWrapperRef.current.focus();
   };
 
-  const handlePopup = ({ target }, clickType) => {
-    console.log('handlePopup...', clickType);
-    if (locationListRef.current && locationListRef.current.contains(target)) {
-      console.log(1);
-      changeType('checkIn');
-    } else if (locationWrapperRef.current.contains(target)) {
-      console.log(2);
-      changeType('location');
-    } else if (checkInWrapperRef.current.contains(target)) {
-      console.log(3);
-      changeType('checkIn');
-    } else if (checkOutWrapperRef.current.contains(target)) {
-      console.log(4);
-      changeType('checkOut');
-    } else if (guestsWrapperRef.current.contains(target)) changeType('guests');
-    else if (
-      (type === 'location' &&
-        !locationResetBtnRef.current.contains(target) &&
-        !locationWrapperRef.current.contains(target)) ||
-      (type === 'checkIn' &&
-        !calendarPopupRef.current.contains(target) &&
-        !checkInWrapperRef.current.contains(target)) ||
-      (type === 'checkOut' &&
-        !calendarPopupRef.current.contains(target) &&
-        !checkOutWrapperRef.current.contains(target)) ||
-      (type === 'guests' &&
-        !guestsPopupRef.current.contains(target) &&
-        !guestsResetBtnRef.current.contains(target))
-    ) {
-      console.log(5);
-      // console.log(
-      //   type === 'location' &&
-      //     !locationResetBtnRef.current.contains(target) &&
-      //     !locationWrapperRef.current.contains(target),
-      // );
-      // console.log(
-      //   type === 'checkIn' &&
-      //     !calendarPopupRef.current.contains(target) &&
-      //     !checkInWrapperRef.current.contains(target),
-      // );
-      // console.log(
-      //   type === 'checkOut' &&
-      //     !calendarPopupRef.current.contains(target) &&
-      //     !checkOutWrapperRef.current.contains(target),
-      // );
-      // console.log(
-      //   type === 'guests' &&
-      //     !guestsPopupRef.current.contains(target) &&
-      //     !guestsResetBtnRef.current.contains(target),
-      // );
-      // console.log('close...');
-      changeType(null);
-    }
-  };
+  const handlePopup = useCallback(
+    ({ target }) => {
+      console.log('====handlePopup..type:', type);
+      if (locationListRef.current && locationListRef.current.contains(target)) {
+        console.log(1);
+        changeType('checkIn');
+      } else if (locationWrapperRef.current.contains(target)) {
+        console.log(2);
+        changeType('location');
+      } else if (
+        checkInWrapperRef.current.contains(target) &&
+        !calendarPopupRef.current.contains(target)
+      ) {
+        console.log(3);
+        changeType('checkIn');
+      } else if (
+        checkOutWrapperRef.current.contains(target) &&
+        !calendarPopupRef.current.contains(target)
+      ) {
+        console.log(4);
+        changeType('checkOut');
+      } else if (guestsWrapperRef.current.contains(target))
+        changeType('guests');
+      else if (
+        (type === 'location' &&
+          !locationResetBtnRef.current.contains(target) &&
+          !locationWrapperRef.current.contains(target)) ||
+        (type === 'checkIn' &&
+          !calendarPopupRef.current.contains(target) &&
+          !checkInWrapperRef.current.contains(target)) ||
+        (type === 'checkOut' &&
+          !calendarPopupRef.current.contains(target) &&
+          !checkOutWrapperRef.current.contains(target)) ||
+        (type === 'guests' &&
+          !guestsPopupRef.current.contains(target) &&
+          !guestsResetBtnRef.current.contains(target))
+      ) {
+        console.log(5);
+        // console.log(
+        //   type === 'location' &&
+        //     !locationResetBtnRef.current.contains(target) &&
+        //     !locationWrapperRef.current.contains(target),
+        // );
+        // console.log(
+        //   type === 'checkIn' &&
+        //     !calendarPopupRef.current.contains(target) &&
+        //     !checkInWrapperRef.current.contains(target),
+        // );
+        // console.log(
+        //   type === 'checkOut' &&
+        //     !calendarPopupRef.current.contains(target) &&
+        //     !checkOutWrapperRef.current.contains(target),
+        // );
+        // console.log(
+        //   type === 'guests' &&
+        //     !guestsPopupRef.current.contains(target) &&
+        //     !guestsResetBtnRef.current.contains(target),
+        // );
+        // console.log('close...');
+        changeType(null);
+      }
+    },
+    [type],
+  );
 
   useEffect(() => {
     console.log('2...useEffect...type: ', type);
-    document.addEventListener('click', e => handlePopup(e, type));
+    document.addEventListener('click', e => handlePopup(e));
     type && changeFocus();
     return () => {
-      document.removeEventListener('click', e => handlePopup(e, type));
+      document.removeEventListener('click', e => handlePopup(e));
     };
-  }, [type]);
+  }, [type, handlePopup]);
 
   return (
     <SearchForm

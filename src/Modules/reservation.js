@@ -29,7 +29,7 @@ const initialState = {
     '2020.09.25',
     '2020.10.25',
   ],
-  guests: { adult: 0, child: 0, infant: 0 },
+  guests: { adult: 1, child: 0, infant: 0 },
   totalGuest: 0,
   changeInitialDate: false,
 };
@@ -40,7 +40,7 @@ const reservation = (state = initialState, action) => {
       return {
         ...state,
         checkin: action.checkin,
-        dateDiff: getDateDiff(action.checkin, state.checkout),
+        dateDiff: 0,
       };
     }
     case SET_CHECKOUT: {
