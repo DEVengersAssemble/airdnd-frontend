@@ -42,8 +42,8 @@ const StWrapper = styled.ul`
 `;
 
 const NoResultBox = styled.div`
+  margin-top: 1rem;
   width: 100%;
-  margin-top: 2rem;
 `;
 
 const NoResultTitle = styled.span`

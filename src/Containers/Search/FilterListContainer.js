@@ -11,7 +11,7 @@ const FilterButtonContainer = React.memo(({ name, text, children }) => {
   const dispatch = useDispatch();
   const onClick = () =>
     dispatch(popupState[name] ? closePopup(name) : openPopup(name));
-  console.log(name, '이름 뭐니', popupState[name], '팝업 열렷니 닫혓니');
+
   return (
     <FilterButton text={text} isApplied={isApplied} onClick={onClick}>
       {children}
@@ -20,12 +20,18 @@ const FilterButtonContainer = React.memo(({ name, text, children }) => {
 });
 
 const FilterListContainer = React.memo(({ mapState }) => {
-  const { dateDiff } = useSelector(state => state.search.searchForm);
+  const { searchForm, data } = useSelector(state => state.search);
+
   const dispatch = useDispatch();
   const onShowMap = () => dispatch(showMap());
 
   return (
-    <FilterList mapState={mapState} onShowMap={onShowMap} dateDiff={dateDiff} />
+    <FilterList
+      mapState={mapState}
+      onShowMap={onShowMap}
+      dateDiff={searchForm.dateDiff}
+      dataTotal={data.dataTotal}
+    />
   );
 });
 
