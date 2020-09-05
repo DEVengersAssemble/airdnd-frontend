@@ -102,28 +102,15 @@ export const resetModalFilter = filterCondition => ({
 export const modalFilterInit = filterCondition => {
   const filter = {};
   const {
-    instantBooking,
-    bedroom,
-    convenience,
-    convenienceList,
+    superhost,
+    amenityList,
     facilityList,
     hostLangList,
   } = filterCondition;
-  if (instantBooking) filter.instantBooking = false;
-  if (bedroom) filter.bedroom = { bed: 0, room: 0, bathroom: 0 };
-  if (convenience) filter.convenience = false;
-  if (convenienceList) {
-    filter.convenienceList = {};
-    convenienceList.forEach(item => (filter.convenienceList[item] = false));
-  }
-  if (facilityList) {
-    filter.facilityList = {};
-    facilityList.forEach(item => (filter.facilityList[item] = false));
-  }
-  if (hostLangList) {
-    filter.hostLangList = {};
-    hostLangList.forEach(item => (filter.hostLangList[item] = false));
-  }
+  if (superhost) filter.superhost = false;
+  if (amenityList) filter.amenityList = [];
+  if (facilityList) filter.facilityList = [];
+  if (hostLangList) filter.hostLangList = [];
   return filter;
 };
 
@@ -396,10 +383,11 @@ const search = (state = initialState, action) => {
         ...state,
         filterApplied: {
           ...state.filterApplied,
-          [action.list]: {
-            ...state.filterApplied[action.list],
-            [action.name]: action.value,
-          },
+          [action.list]: action.value
+            ? state.filterApplied[action.list].filter(
+                name => name !== action.name,
+              )
+            : state.filterApplied[action.list].concat(action.name),
         },
       };
     case SET_MODAL_FILTER:

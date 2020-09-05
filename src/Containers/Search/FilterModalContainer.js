@@ -12,7 +12,7 @@ import {
 import _ from 'lodash';
 
 const seeInit = {
-  conveninence: false,
+  amenity: false,
   facility: false,
   hostLang: false,
 };
@@ -34,7 +34,6 @@ const FilterModalContainer = () => {
     facilityList,
     hostLangList,
   } = filterApplied;
-
   const current = {
     instantBooking,
     bedroom,

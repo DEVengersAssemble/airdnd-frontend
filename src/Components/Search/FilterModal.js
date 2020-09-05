@@ -32,7 +32,7 @@ const FilterModal = ({
 }) => {
   const {
     superhost,
-    convenienceList,
+    amenityList,
     facilityList,
     hostLangList,
   } = filterCondition;
@@ -53,15 +53,15 @@ const FilterModal = ({
         <BookingFilter filter={filter} onToggle={onToggle} />
         <CounterFilter filter={filter} onCounter={onCounter} />
         {superhost && <SuperhostFilters filter={filter} onToggle={onToggle} />}
-        {convenienceList && (
+        {amenityList && (
           <CheckboxFilter
             title="편의 시설"
-            listName="convenienceList"
-            list={convenienceList}
-            filter={filter.convenienceList}
+            listName="amenityList"
+            list={amenityList}
+            filter={filter.amenityList}
             onCheck={onCheck}
-            seemore={seemore.convenience}
-            onSeemore={() => onSeemore('convenience')}
+            seemore={seemore.amenity}
+            onSeemore={() => onSeemore('amenity')}
           />
         )}
         {facilityList && (

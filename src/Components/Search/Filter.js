@@ -105,18 +105,21 @@ export const CheckboxFilter = React.memo(
       <StFilterWrapper>
         <StTitle>{title}</StTitle>
         <StCheckboxList seemore={seemore}>
-          {list.map((name, i) => (
-            <StCheckbox
-              key={i}
-              value
-              animation={i > 3}
-              seemore={seemore}
-              checked={filter[name]}
-              onCheck={() => onCheck(listName, name, !filter[name])}
-            >
-              <StLargeSpan>{name}</StLargeSpan>
-            </StCheckbox>
-          ))}
+          {list.map((name, i) => {
+            const checked = filter.includes(name);
+            return (
+              <StCheckbox
+                key={i}
+                value
+                animation={i > 3}
+                seemore={seemore}
+                checked={checked}
+                onCheck={() => onCheck(listName, name, checked)}
+              >
+                <StLargeSpan>{name}</StLargeSpan>
+              </StCheckbox>
+            );
+          })}
         </StCheckboxList>
         {list.length > 4 && (
           <Button
