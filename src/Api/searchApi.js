@@ -1,7 +1,7 @@
 import axios from 'axios';
 export const fetchSearchedData = async query => {
   console.log(query);
-  const response = await axios.get(`back/search${query}&page=5`);
+  const response = await axios.get(`back/search${query}`);
   console.log('데이터 겟햇다=======================', response);
   return response.data;
 };
