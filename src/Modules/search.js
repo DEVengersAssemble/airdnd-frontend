@@ -166,21 +166,21 @@ const filterInit = {
 };
 
 const initialState = {
-  // ...reducerUtils.initial(),
-  data: {
-    homes: [],
-    dataTotal: 0,
-    filterCondition: {
-      superhost: false,
-      amenityList: [],
-      facilityList: [],
-      hostLangList: [],
-    },
-    mapCenter: { lat: 0, lng: 0 },
-    priceArray: [],
-    averagePrice: 0,
-    recentHomes: [],
-  },
+  ...reducerUtils.initial(),
+  // data: {
+  //   homes: [],
+  //   dataTotal: 0,
+  //   filterCondition: {
+  //     superhost: false,
+  //     amenityList: [],
+  //     facilityList: [],
+  //     hostLangList: [],
+  //   },
+  //   mapCenter: { lat: 0, lng: 0 },
+  //   priceArray: [],
+  //   averagePrice: 0,
+  //   recentHomes: [],
+  // },
   searchForm: {},
   headerState: false,
   viewState: 'result',
@@ -388,10 +388,7 @@ const search = (state = initialState, action) => {
         ...state,
         filterApplied: {
           ...state.filterApplied,
-          bedroom: {
-            ...state.filterApplied.bedroom,
-            [action.name]: action.value,
-          },
+          [action.name]: action.value,
         },
       };
     case APPLY_CHECK_FILTER:

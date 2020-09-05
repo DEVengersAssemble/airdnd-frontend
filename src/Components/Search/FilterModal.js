@@ -7,7 +7,7 @@ import Button from '../Global/Button';
 import {
   BookingFilter,
   CounterFilter,
-  MoreFilters,
+  SuperhostFilters,
   CheckboxFilter,
   PriceFilter,
   RoomTypeFilter,
@@ -28,8 +28,7 @@ const FilterModal = ({
   onCheck,
   onReset,
   onToggle,
-  onIncrease,
-  onDecrease,
+  onCounter,
 }) => {
   const {
     instantBooking,
@@ -53,17 +52,11 @@ const FilterModal = ({
         {viewState === 'map' && (
           <PriceFilter range={range} setRange={setRange} />
         )}
-        {instantBooking && (
-          <BookingFilter filter={filter} onToggle={onToggle} />
+        <BookingFilter filter={filter} onToggle={onToggle} />
+        <CounterFilter filter={filter} onCounter={onCounter} />
+        {convenience && (
+          <SuperhostFilters filter={filter} onToggle={onToggle} />
         )}
-        {bedroom && (
-          <CounterFilter
-            filter={filter.bedroom}
-            onIncrease={onIncrease}
-            onDecrease={onDecrease}
-          />
-        )}
-        {convenience && <MoreFilters filter={filter} onToggle={onToggle} />}
         {convenienceList && (
           <CheckboxFilter
             title="편의 시설"

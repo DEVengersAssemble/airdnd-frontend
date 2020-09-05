@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import FilterModal from '../../Components/Search/FilterModal';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -6,7 +6,6 @@ import {
   applyCounterFilter,
   applyCheckFilter,
   resetModalFilter,
-  setModalFilter,
   closePopup,
   modalFilterInit,
 } from '../../Modules/search';
@@ -51,10 +50,9 @@ const FilterModalContainer = () => {
   const [range, setRange] = useState({ value: [min, max] });
 
   const dispatch = useDispatch();
-  const onClose = () => dispatch(closePopup('modal'));
+  const onClose = () => dispatch(closePopup('modal', !isDisabled));
   const onToggle = (name, value) => dispatch(applyToggleFilter(name, value));
-  const onIncrease = (name, value) => dispatch(applyCounterFilter(name, value));
-  const onDecrease = (name, value) => dispatch(applyCounterFilter(name, value));
+  const onCounter = (name, value) => dispatch(applyCounterFilter(name, value));
   const onCheck = (list, name, value) =>
     dispatch(applyCheckFilter(list, name, value));
   const onReset = () => dispatch(resetModalFilter());
@@ -74,8 +72,7 @@ const FilterModalContainer = () => {
       onCheck={onCheck}
       onReset={onReset}
       onToggle={onToggle}
-      onIncrease={onIncrease}
-      onDecrease={onDecrease}
+      onCounter={onCounter}
     />
   );
 };
