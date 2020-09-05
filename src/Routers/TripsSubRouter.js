@@ -7,13 +7,10 @@ import TripsCanceledContainer from '../Containers/Trips/TripsCanceledContainer';
 const SubRouter = () => {
   return (
     <Switch>
-      <Route
-        exact
-        path={['/trips', '/trips/upcoming']}
-        component={TripsUpcomingContainer}
-      />
-      <Route path="/trips/past" component={TripsPastContainer} />
-      <Route path="/trips/canceled" component={TripsCanceledContainer} />
+      <Route exact path="/trips/v1" component={TripsUpcomingContainer} />
+      <Route path="/trips/v1?tab=upcoming" component={TripsUpcomingContainer} />
+      <Route path="/trips/v1?tab=past" component={TripsPastContainer} />
+      <Route path="/trips/v1?tab=canceled" component={TripsCanceledContainer} />
       <Route
         render={({ location }) => (
           <div>
