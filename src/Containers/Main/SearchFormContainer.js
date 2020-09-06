@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { debounce } from 'lodash';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -12,29 +12,84 @@ const SearchFormContainer = ({ isSearchBtnClicked }) => {
   const searchData = useSelector(state => state.searchForm);
   const [locationResult, setLocationResult] = useState([]);
   const [type, setType] = useState(null);
+  const latestType = useRef(type);
 
-  const closePopup = () => {
-    setType(() => null);
+  latestType.current = type;
+
+  const {
+    location,
+    checkIn,
+    checkOut,
+    dateDiff,
+    flexibleDate,
+    guests,
+  } = searchData;
+
+  const searchFormRef = useRef();
+  const locationWrapperRef = useRef();
+  const checkInWrapperRef = useRef();
+  const checkOutWrapperRef = useRef();
+  const guestsWrapperRef = useRef();
+
+  const locationListRef = useRef();
+  const calendarPopupRef = useRef();
+  const checkOutPopupRef = useRef();
+  const guestsPopupRef = useRef();
+
+  const locationResetBtnRef = useRef();
+  const checkInResetBtnRef = useRef();
+  const checkOutResetBtnRef = useRef();
+  const guestsResetBtnRef = useRef();
+
+  const refObj = {
+    searchFormRef,
+    locationWrapperRef,
+    checkInWrapperRef,
+    checkOutWrapperRef,
+    guestsWrapperRef,
+    locationListRef,
+    calendarPopupRef,
+    checkOutPopupRef,
+    guestsPopupRef,
+    locationResetBtnRef,
+    checkInResetBtnRef,
+    checkOutResetBtnRef,
+    guestsResetBtnRef,
   };
 
-  const changeType = type => {
-    setType(() => type);
-  };
-
-  const getDateDiff = (date1, date2) => {
-    const checkIn = new Date(date1);
-    const checkOut = new Date(date2);
-    const timeDiff = checkOut.getTime() - checkIn.getTime();
-    return Math.ceil(timeDiff / (1000 * 3600 * 24));
+  const changeType = newType => {
+    setType(newType);
   };
 
   const handleSubmit = e => {
     e.preventDefault();
-    const { location, checkIn, checkOut, flexibleDate, guests } = searchData;
+
+    let newCheckIn = checkIn;
+    let newCheckOut = checkOut;
+    if (checkIn && !checkOut) {
+      const checkInDate = new Date(checkIn);
+      const checkOutDate = new Date();
+      checkOutDate.setDate(checkInDate.getDate() + 1);
+      const year = checkOutDate.getFullYear();
+      const month = `0${checkOutDate.getMonth() + 1}`.slice(-2);
+      const date = `0${checkOutDate.getDate()}`.slice(-2);
+      const payload = `${year}.${month}.${date}`;
+      newCheckOut = payload;
+      changeSearchData('checkOut', payload);
+    } else if (!checkIn && checkOut) {
+      const checkOutDate = new Date(checkIn);
+      const checkInDate = new Date();
+      checkInDate.setDate(checkOutDate.getDate() - 1);
+      const year = checkOutDate.getFullYear();
+      const month = `0${checkOutDate.getMonth() + 1}`.slice(-2);
+      const date = `0${checkOutDate.getDate()}`.slice(-2);
+      const payload = `${year}.${month}.${date}`;
+      newCheckIn = payload;
+      changeSearchData('checkIn', payload);
+    }
     const { adult, child, infant } = guests;
     const guestCount = adult + child + infant;
-    const dateDiff = getDateDiff(checkIn, checkOut);
-    const url = `/search?location=${location}&checkIn=${checkIn}&checkOut=${checkOut}&dateDiff=${dateDiff}&flexibleDate=${flexibleDate}&guests=${guestCount}&adult=${adult}&child=${child}&infant=${infant}`;
+    const url = `/search?location=${location}&checkIn=${newCheckIn}&checkOut=${newCheckOut}&dateDiff=${dateDiff}&flexibleDate=${flexibleDate}&guests=${guestCount}&adult=${adult}&child=${child}&infant=${infant}`;
     history.push(url);
     window.scrollTo({ top: 0 });
   };
@@ -54,14 +109,24 @@ const SearchFormContainer = ({ isSearchBtnClicked }) => {
 
   const changeAutoComplete = value => {
     if (!value) {
-      dispatch(setSearchData({ name: 'location', value: '' }));
+      changeSearchData('location', '');
       setLocationResult([]);
       return;
     } else {
-      dispatch(setSearchData({ name: 'location', value }));
+      changeSearchData('location', value);
       debounceGetAutoCompleteResult(value);
       setType('location');
     }
+  };
+
+  const setCheckIn = date => {
+    changeSearchData('checkIn', date);
+    changeType('checkOut');
+  };
+
+  const setCheckOut = date => {
+    changeSearchData('checkOut', date);
+    changeType('guests');
   };
 
   const increaseGuestCount = (guestsData, guestType) => {
@@ -85,21 +150,71 @@ const SearchFormContainer = ({ isSearchBtnClicked }) => {
     changeSearchData('guests', value);
   };
 
+  const changeFocus = () => {
+    if (latestType.current === 'checkIn') checkInWrapperRef.current.focus();
+    else if (latestType.current === 'checkOut')
+      checkOutWrapperRef.current.focus();
+    else if (latestType.current === 'guests') guestsWrapperRef.current.focus();
+  };
+
+  const handlePopup = useCallback(
+    ({ target }) => {
+      if (locationListRef.current && locationListRef.current.contains(target)) {
+        changeType('checkIn');
+      } else if (locationWrapperRef.current.contains(target)) {
+        changeType('location');
+      } else if (
+        checkInWrapperRef.current.contains(target) &&
+        !calendarPopupRef.current.contains(target)
+      ) {
+        changeType('checkIn');
+      } else if (
+        checkOutWrapperRef.current.contains(target) &&
+        !calendarPopupRef.current.contains(target)
+      ) {
+        changeType('checkOut');
+      } else if (guestsWrapperRef.current.contains(target)) {
+        changeType('guests');
+      } else if (type === 'checkOut' && latestType.current === 'guests') {
+        changeType('guests');
+      } else if (
+        latestType.current &&
+        !searchFormRef.current.contains(target) &&
+        !calendarPopupRef.current.contains(target)
+      ) {
+        changeType(null);
+      }
+    },
+    [latestType.current],
+  );
+  useEffect(() => {
+    document.addEventListener('click', handlePopup);
+    return () => {
+      document.removeEventListener('click', handlePopup);
+    };
+  }, [handlePopup]);
+
+  useEffect(() => {
+    if (type) changeFocus();
+  });
+
   return (
     <SearchForm
       isSearchBtnClicked={isSearchBtnClicked}
       type={type}
+      refObj={refObj}
       changeType={changeType}
-      closePopup={closePopup}
       searchData={searchData}
       changeSearchData={changeSearchData}
       changeAutoComplete={changeAutoComplete}
       locationResult={locationResult}
       handleSubmit={handleSubmit}
+      setCheckIn={setCheckIn}
+      setCheckOut={setCheckOut}
       increaseGuestCount={increaseGuestCount}
       decreaseGuestCount={decreaseGuestCount}
     ></SearchForm>
   );
 };
 
-export default SearchFormContainer;
+export default React.memo(SearchFormContainer);

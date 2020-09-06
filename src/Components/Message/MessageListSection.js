@@ -22,22 +22,27 @@ const MessageListSectionWrapper = styled.section`
   display: flex;
   flex-direction: column;
   min-width: 37.5rem;
-
-  /* ${({ msgListSectionState }) =>
-    msgListSectionState &&
-    css`
-      min-width: 37.5rem;
-    `} */
+  opacity: 1;
 
   /* @media ${({ theme }) => theme.size.medium} {
-    display: none;
-
+    transition: all 0.3s ease;
     ${({ msgDetailSectionState }) =>
-      !msgDetailSectionState &&
+      msgDetailSectionState &&
       css`
-        display: flex;
+        opacity: 0;
+        min-width: 0;
       `}
   } */
+
+  @media ${({ theme }) => theme.size.medium} {
+    transition: all 0.3s ease;
+    ${({ msgDetailSectionState }) =>
+      msgDetailSectionState &&
+      css`
+        opacity: 0;
+        transform: translate3d(-37.5rem, 0, 0);
+      `}
+  }
 `;
 
 export default MessageListSection;

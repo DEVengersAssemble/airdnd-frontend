@@ -7,17 +7,22 @@ import DetailHeader from '../../Components/Detail/DetailHeader';
 const DetailHeaderContainer = () => {
   const history = useHistory();
   const [isSearchBtnClicked, setIsSearchBtnClicked] = useState(false);
+  const [initAnimation, setInitAnimation] = useState(false);
   const searchForm = useSelector(state => state.searchForm);
   const onScroll = () => {
     setIsSearchBtnClicked(false);
   };
 
   useEffect(() => {
+    console.log(isSearchBtnClicked);
+    if (!initAnimation && isSearchBtnClicked) {
+      setInitAnimation(true);
+    }
     window.addEventListener('scroll', throttle(onScroll, 150));
     return () => {
       window.removeEventListener('scroll', onScroll);
     };
-  }, []);
+  }, [onScroll, initAnimation]);
 
   const handleLogoClick = e => {
     e.preventDefault();
@@ -31,6 +36,7 @@ const DetailHeaderContainer = () => {
 
   return (
     <DetailHeader
+      initAnimation={initAnimation}
       isSearchBtnClicked={isSearchBtnClicked}
       handleLogoClick={handleLogoClick}
       handleSearchBtnClick={handleSearchBtnClick}

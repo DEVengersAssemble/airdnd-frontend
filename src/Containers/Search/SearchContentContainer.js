@@ -1,23 +1,23 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchData } from '../../Modules/search';
+import { fetchData, getSearchForm } from '../../Modules/search';
 import SearchContent from '../../Components/Search/SearchContent';
 import qs from 'qs';
 
 const SearchContentContainer = () => {
   const { loading, data, error } = useSelector(state => state.search);
   const dispatch = useDispatch();
-  const query = useLocation();
-  const searchForm = qs.parse(query.search, {
+  const { search: query } = useLocation();
+  const searchForm = qs.parse(query, {
     ignoreQueryPrefix: true,
   });
 
-  console.log('렌더링시작한다~~~~~~~~~~', data);
+  console.log('렌더링시작한다~~~~~~~~~~', searchForm);
 
   useEffect(() => {
-    dispatch(fetchData(searchForm));
-    // dispatch(fetchCenter(searchForm.location));
+    dispatch(fetchData(query));
+    dispatch(getSearchForm(searchForm));
     // window.scrollTo(0, 0);
   }, []);
 

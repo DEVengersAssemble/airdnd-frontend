@@ -24,14 +24,14 @@ export const setSearchData = data => {
   }
 };
 
-// export const setLocation = payload => ({ type: SET_LOCATION, payload });
-// export const setCheckIn = payload => ({ type: SET_CHECKIN, payload });
-// export const setCheckOut = payload => ({ type: SET_CHECKOUT, payload });
-// export const setFlexibleDate = payload => ({
-//   type: SET_FLEXIBLE_DATE,
-//   payload,
-// });
-// export const setGuests = payload => ({ type: SET_GUESTS, payload });
+const getDateDiff = (date1, date2) => {
+  console.log('dates: ', date1, date2);
+  if (!date1 || !date2) return 0;
+  const checkIn = new Date(date1);
+  const checkOut = new Date(date2);
+  const timeDiff = checkOut.getTime() - checkIn.getTime();
+  return Math.ceil(timeDiff / (1000 * 3600 * 24));
+};
 
 // initialState
 const initialState = {
@@ -59,12 +59,14 @@ const searchForm = (state = initialState, action) => {
       return {
         ...state,
         checkIn: action.payload,
+        dateDiff: getDateDiff(action.payload, state.checkOut),
       };
     }
     case SET_CHECKOUT: {
       return {
         ...state,
         checkOut: action.payload,
+        dateDiff: getDateDiff(state.checkIn, action.payload),
       };
     }
     case SET_FLEXIBLE_DATE: {

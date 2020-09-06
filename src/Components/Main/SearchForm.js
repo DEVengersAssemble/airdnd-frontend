@@ -1,8 +1,9 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 import Button from '../Global/Button';
 import SearchButton from './SearchButton';
 import SearchLocationPopup from './SearchLocationPopup';
+import SearchCalendarPopup from './SearchCalendarPopup';
 import SearchGuestsPopup from './SearchGuestsPopup';
 import { MdClose } from 'react-icons/md';
 
@@ -49,23 +50,30 @@ const StFormItemWrapper = styled.div`
     height: 100%;
     width: 1px;
     background: ${({ theme }) => theme.color.gray};
-  }
-
-  &:hover {
-    background: rgba(0, 0, 0, 0.07);
-    border-radius: 34px;
-    margin-top: -1px;
-    height: 66px;
-    ${StTextWrapper}::before {
-      display: none;
+    @media screen and (max-width: 950px) {
+      left: -17px;
     }
   }
 
-  &:hover + & {
-    ${StTextWrapper}::before {
-      display: none;
-    }
-  }
+  ${({ type, name }) =>
+    !(type === 'checkIn' && name === 'checkOut') &&
+    css`
+      &:hover {
+        background: rgba(0, 0, 0, 0.07);
+        border-radius: 34px;
+        margin-top: -1px;
+        height: 66px;
+        ${StTextWrapper}::before {
+          display: none;
+        }
+      }
+
+      &:hover + & {
+        ${StTextWrapper}::before {
+          display: none;
+        }
+      }
+    `}
 
   &:focus-within {
     background: white;
@@ -93,6 +101,9 @@ const StFormItemWrapper = styled.div`
       align-items: center;
       padding-left: 20px;
       cursor: pointer;
+      @media screen and (max-width: 950px) {
+        padding-left: 17px;
+      }
     `}
 `;
 
@@ -145,6 +156,10 @@ const StPlaceInput = styled.input`
   &::placeholder {
     color: ${({ theme }) => theme.color.darkGray};
   }
+  @media screen and (max-width: 950px) {
+    font-size: 12px;
+    width: 100px;
+  }
 `;
 
 const StTypeText = styled.p`
@@ -166,14 +181,18 @@ const StContentText = styled.p`
         `};
   font-weight: ${({ value }) => value && 500};
   @media ${({ theme }) => theme.size.iPad} {
-    ${({ name }) =>
-      name === 'guests' &&
-      css`
-        width: 80px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      `}
+    font-size: 12px;
+    width: 75px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  @media screen and (max-width: 950px) {
+    font-size: 12px;
+    width: 75px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 `;
 
@@ -201,7 +220,15 @@ const StResetBtn = styled(Button)`
     background: ${({ theme }) => theme.color.line};
   }
   @media ${({ theme }) => theme.size.iPad} {
-    right: ${({ name }) => (name === 'guests' ? '60px' : '10px')};
+    right: ${({ name }) => (name === 'guests' ? '55px' : '10px')};
+  }
+
+  @media screen and (max-width: 950px) {
+    width: 22px;
+    height: 22px;
+    font-size: 14px;
+    top: calc(50% - 11px);
+    right: ${({ name }) => (name === 'guests' ? '55px' : '10px')};
   }
 `;
 
@@ -209,79 +236,48 @@ const SearchForm = ({
   isSearchBtnClicked,
   type,
   changeType,
-  closePopup,
   searchData,
   changeSearchData,
   changeAutoComplete,
   locationResult,
   handleSubmit,
+  setCheckIn,
+  setCheckOut,
   increaseGuestCount,
   decreaseGuestCount,
+  refObj,
 }) => {
-  console.log('[SEARCHFORM]', type);
+  // console.log('[SEARCHFORM]', type);
   const { location, checkIn, checkOut, flexibleDate, guests } = searchData;
   const { adult, child, infant } = guests;
   const guestCount = adult + child + infant;
-  const locationResetBtnRef = useRef();
-  const locationListRef = useRef();
-  const checkInResetBtnRef = useRef();
-  const checkInPopupRef = useRef();
-  const checkOutResetBtnRef = useRef();
-  const checkOutPopupRef = useRef();
-  const guestsResetBtnRef = useRef();
-  const guestsPopupRef = useRef();
 
-  const locationWrapperRef = useRef();
-  const checkInWrapperRef = useRef();
-  const checkOutWrapperRef = useRef();
-  const guestsWrapperRef = useRef();
-
-  const changeFocus = nextRef => {
-    if (nextRef === 'location') {
-      locationWrapperRef.current.focus();
-    } else if (nextRef === 'checkIn') checkInWrapperRef.current.focus();
-    else if (nextRef === 'checkOut') checkOutWrapperRef.current.focus();
-    else if (nextRef === 'guests') guestsWrapperRef.current.focus();
-  };
-
-  const handlePopup = ({ target }) => {
-    if (locationListRef.current && locationListRef.current.contains(target)) {
-      changeType('checkIn');
-      return;
-    } else if (
-      (type === 'location' &&
-        !locationResetBtnRef.current.contains(target) &&
-        !locationWrapperRef.current.contains(target)) ||
-      // (type === 'checkIn' &&
-      //   !checkInPopupRef.current.contains(target) &&
-      //   !checkInResetBtnRef.current.contains(target)) ||
-      // (type === 'checkOut' &&
-      //   !checkOutPopupRef.current.contains(target) &&
-      //   !checkOutResetBtnRef.current.contains(target)) ||
-      (type === 'guests' &&
-        !guestsPopupRef.current.contains(target) &&
-        !guestsResetBtnRef.current.contains(target))
-    ) {
-      closePopup();
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener('click', handlePopup);
-    return () => {
-      document.removeEventListener('click', handlePopup);
-    };
-  }, [handlePopup]);
+  const {
+    searchFormRef,
+    locationWrapperRef,
+    checkInWrapperRef,
+    checkOutWrapperRef,
+    guestsWrapperRef,
+    locationListRef,
+    calendarPopupRef,
+    guestsPopupRef,
+    locationResetBtnRef,
+    checkInResetBtnRef,
+    checkOutResetBtnRef,
+    guestsResetBtnRef,
+  } = refObj;
 
   return (
     <StSearchForm
       onSubmit={handleSubmit}
       isSearchBtnClicked={isSearchBtnClicked}
+      ref={searchFormRef}
     >
       <StFormItemWrapper
+        type={type}
         name="location"
         width="30%"
-        tabIndex="0"
+        tabIndex="1"
         ref={locationWrapperRef}
         onClick={() => changeType('location')}
       >
@@ -307,10 +303,9 @@ const SearchForm = ({
           type={type}
           changeType={changeType}
           searchData={searchData}
+          ref={locationListRef}
           locationResult={locationResult}
           changeSearchData={changeSearchData}
-          ref={locationListRef}
-          changeFocus={changeFocus}
         ></SearchLocationPopup>
         <StResetBtn
           btnType="circle"
@@ -319,18 +314,17 @@ const SearchForm = ({
           pointer={type === 'location' && location}
           onClick={() => {
             changeSearchData('location', '');
-            changeFocus('location');
           }}
         >
           <MdClose />
         </StResetBtn>
       </StFormItemWrapper>
       <StFormItemWrapper
+        type={type}
         name="checkIn"
         width="20%"
-        tabIndex="0"
+        tabIndex="2"
         ref={checkInWrapperRef}
-        onClick={() => changeType('checkIn')}
       >
         <StTextWrapper>
           <StTypeText>체크인</StTypeText>
@@ -345,19 +339,27 @@ const SearchForm = ({
           ref={checkInResetBtnRef}
           onClick={() => {
             changeSearchData('checkIn', '');
-            changeFocus('checkIn');
+            checkOut && changeSearchData('checkOut', '');
           }}
         >
           <MdClose />
         </StResetBtn>
       </StFormItemWrapper>
       <StFormItemWrapper
+        type={type}
         name="checkOut"
         width="20%"
-        tabIndex="0"
+        tabIndex="3"
         ref={checkOutWrapperRef}
-        onClick={() => changeType('checkOut')}
       >
+        <SearchCalendarPopup
+          type={type}
+          changeType={changeType}
+          searchData={searchData}
+          ref={calendarPopupRef}
+          setCheckIn={setCheckIn}
+          setCheckOut={setCheckOut}
+        ></SearchCalendarPopup>
         <StTextWrapper>
           <StTypeText>체크아웃</StTypeText>
           <StContentText value={checkOut}>
@@ -371,18 +373,17 @@ const SearchForm = ({
           ref={checkOutResetBtnRef}
           onClick={() => {
             changeSearchData('checkOut', '');
-            changeFocus('checkOut');
           }}
         >
           <MdClose />
         </StResetBtn>
       </StFormItemWrapper>
       <StFormItemWrapper
+        type={type}
         name="guests"
         width="30%"
-        tabIndex="0"
+        tabIndex="4"
         ref={guestsWrapperRef}
-        onClick={() => changeType('guests')}
       >
         <StTextWrapper>
           <StTypeText>인원</StTypeText>
@@ -399,14 +400,12 @@ const SearchForm = ({
           ref={guestsResetBtnRef}
           onClick={() => {
             changeSearchData('guests', { adult: 0, child: 0, infant: 0 });
-            changeFocus('guests');
           }}
         >
           <MdClose />
         </StResetBtn>
         <SearchGuestsPopup
           type={type}
-          closePopup={closePopup}
           searchData={searchData}
           increaseGuestCount={increaseGuestCount}
           decreaseGuestCount={decreaseGuestCount}
@@ -417,5 +416,4 @@ const SearchForm = ({
     </StSearchForm>
   );
 };
-
 export default React.memo(SearchForm);

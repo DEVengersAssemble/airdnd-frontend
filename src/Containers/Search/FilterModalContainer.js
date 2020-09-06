@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import FilterModal from '../../Components/Search/FilterModal';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -6,59 +6,74 @@ import {
   applyCounterFilter,
   applyCheckFilter,
   resetModalFilter,
-  setModalFilter,
   closePopup,
+  modalFilterInit,
 } from '../../Modules/search';
+import _ from 'lodash';
 
-let prevFilter = {};
+const seeInit = {
+  amenity: false,
+  facility: false,
+  hostLang: false,
+};
 
 const FilterModalContainer = () => {
-  const seeInit = {
-    conveninence: false,
-    facility: false,
-    hostLang: false,
-  };
   const [seemore, setSeemore] = useState({ seeInit });
   const onSeemore = name => setSeemore({ ...seeInit, [name]: !seemore[name] });
-  const { popup, data, filterApplied, viewState } = useSelector(
+
+  const { filterCondition } = useSelector(state => state.search.data);
+  const { popupState, filterApplied, viewState, data } = useSelector(
     state => state.search,
   );
-  const { filterCondition } = data && data;
-  const { min, max } = filterApplied.price;
+
+  const {
+    instantBooking,
+    bedroom,
+    convenience,
+    convenienceList,
+    facilityList,
+    hostLangList,
+  } = filterApplied;
+  const current = {
+    instantBooking,
+    bedroom,
+    convenience,
+    convenienceList,
+    facilityList,
+    hostLangList,
+  };
+
+  const isDisabled = _.isEqual(current, modalFilterInit(filterCondition));
+  const name = viewState === 'map' ? 'all' : 'modal';
+
+  const { priceMin: min, priceMax: max } = filterApplied;
   const [range, setRange] = useState({ value: [min, max] });
+
   const dispatch = useDispatch();
-  const onClose = () => dispatch(closePopup('modal'));
+  const onClose = () => dispatch(closePopup(name, !isDisabled));
   const onToggle = (name, value) => dispatch(applyToggleFilter(name, value));
-  const onIncrease = (name, value) => dispatch(applyCounterFilter(name, value));
-  const onDecrease = (name, value) => dispatch(applyCounterFilter(name, value));
+  const onCounter = (name, value) => dispatch(applyCounterFilter(name, value));
   const onCheck = (list, name, value) =>
     dispatch(applyCheckFilter(list, name, value));
-  const onReset = () => dispatch(resetModalFilter());
-  const onUnsave = () => dispatch(setModalFilter(prevFilter));
-  const onSave = () => onClose();
-
-  useEffect(() => {
-    prevFilter = { ...filterApplied };
-  }, []);
+  const onReset = () => dispatch(resetModalFilter(name));
 
   return (
     <FilterModal
-      popupState={popup.modal}
+      popupState={popupState[name]}
+      dataTotal={data.dataTotal}
       viewState={viewState}
       range={range}
       filterCondition={filterCondition}
       filter={filterApplied}
-      // onClose={onUnsave}
       seemore={seemore}
       setRange={setRange}
       onSeemore={onSeemore}
       onClose={onClose}
-      onSave={onSave}
+      onSave={onClose}
       onCheck={onCheck}
       onReset={onReset}
       onToggle={onToggle}
-      onIncrease={onIncrease}
-      onDecrease={onDecrease}
+      onCounter={onCounter}
     />
   );
 };

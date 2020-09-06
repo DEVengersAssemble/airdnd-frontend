@@ -20,8 +20,9 @@ const TripsUpcomingContainer = () => {
 
     return !trip.isCanceled && tripState; // 예정된 예약
   });
+
   const tripsCount = upcomingTrips.length;
-  console.log(upcomingTrips);
+
   return (
     <TripsUpcoming upcomingTrips={upcomingTrips} tripsCount={tripsCount} />
   );

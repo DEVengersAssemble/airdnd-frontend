@@ -66,7 +66,8 @@ const StNavSearchWrapper = styled.div`
   animation-fill-mode: forwards;
   animation-name: ${({ isSearchBtnClicked }) =>
     isSearchBtnClicked ? slideDown : slideUp};
-
+  animation: ${({ initAnimation }) => !initAnimation && 'none'};
+  display: ${({ initAnimation }) => (initAnimation ? 'flex' : 'none')};
   @media ${({ theme }) => theme.size.medium} {
     width: 76%;
     top: 0;
@@ -129,23 +130,27 @@ const StSearchFormResultWrapper = styled.div`
 `;
 
 const DetailHeader = ({
+  initAnimation,
   isSearchBtnClicked,
   handleLogoClick,
   handleSearchBtnClick,
   searchForm,
 }) => {
   const { location, checkIn, checkOut, guests } = searchForm;
-  const [, checkInMonth, checkInDay] = checkIn.replace(/\b0/g, '').split('/');
+  const [, checkInMonth, checkInDay] = checkIn.replace(/\b0/g, '').split('.');
   const [, checkOutMonth, checkOutDay] = checkOut
     .replace(/\b0/g, '')
-    .split('/');
+    .split('.');
   const { adult, child } = guests;
   const guestCount = adult + child;
   return (
     <StDetailHeaderWrapper>
       <StDetailHeader isSearchBtnClicked={isSearchBtnClicked}>
         <Logo handleLogoClick={handleLogoClick}></Logo>
-        <StNavSearchWrapper isSearchBtnClicked={isSearchBtnClicked}>
+        <StNavSearchWrapper
+          isSearchBtnClicked={isSearchBtnClicked}
+          initAnimation={initAnimation}
+        >
           <Navigation isSearchBtnClicked={isSearchBtnClicked}></Navigation>
           <SearchFormContainer isSearchBtnClicked={isSearchBtnClicked} />
         </StNavSearchWrapper>

@@ -33,7 +33,8 @@ const MsgListSectionFilterPopupContainer = ({
     setOpenPopup(false);
   }, [dispatch, setOpenPopup]);
   const onClickUnread = useCallback(() => {
-    dispatch(unreadMsgList(activeIndex));
+    // ! 읽지않은 메시지는 activeIndex값을 빼서 포커스가 안잡히도록 설정
+    dispatch(unreadMsgList());
     setOpenPopup(false);
   }, [dispatch, setOpenPopup]);
 

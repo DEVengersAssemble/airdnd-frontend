@@ -5,7 +5,7 @@ import { lighten, darken } from 'polished';
 import { FcExport } from 'react-icons/fc';
 import Button from '../Global/Button';
 import Profile from '../Global/Profile';
-import CarouselContainer from '../../Containers/Global/CarouselContainer';
+// import CarouselContainer from '../../Containers/Global/CarouselContainer';
 
 const MsgDetailReservedHomeBox = ({
   title,
@@ -31,14 +31,15 @@ const MsgDetailReservedHomeBox = ({
 }) => {
   return (
     <MsgDetailRhBoxWrapper>
-      <div onMouseOver={onMouseOver} onMouseLeave={onMouseLeave}>
+      {/* <div onMouseOver={onMouseOver} onMouseLeave={onMouseLeave}>
         <CarouselContainer
           size="superLarge"
           isHovered={hover}
           imageArray={imageArray}
           imageCount={imageCount}
+          blockLink
         />
-      </div>
+      </div> */}
       <MsgDetailRhBoxTitle>{title}</MsgDetailRhBoxTitle>
       <MsgDetailRhBoxReservedStateText>
         {!isCanceled && '예약이 완료되었습니다.'}
@@ -57,9 +58,13 @@ const MsgDetailReservedHomeBox = ({
         )}
       </MsgDetailRhBoxDescription>
       <MsgDetailRhBoxButtonWrapper>
-        <Link to="/resolutions" target="_blank">
+        <a
+          href="https://www.airbnb.co.kr/resolutions"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           <Button padding="1.3rem 0rem">지급 또는 결제 요청</Button>
-        </Link>
+        </a>
       </MsgDetailRhBoxButtonWrapper>
       <MsgDetailRhCheckInOutWrapper>
         {isCanceled ? (

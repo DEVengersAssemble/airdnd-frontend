@@ -15,118 +15,83 @@ const Calendar = ({
   checkout,
   onClickCheckDate,
   onMouseenter,
+  onMouseLeave,
   getDiff,
   hoverDate,
   reservedDates,
+  isDetailPage,
+  onClickWrapper,
+  checkAfterReserved,
+  checkBeforeCheckin,
 }) => {
   const addZero = num => ((num + '').length === 1 ? '0' + num : num);
-  const _thisMonth = addZero(thisMonth.month);
-  const _nextMonth = addZero(nextMonth.month);
+
+  const renderCalendar = (nowMonthDates, nowMonth) => {
+    const _nowMonth = addZero(nowMonth.month);
+    return (
+      <StCalendarWrapper>
+        <StMonth>
+          {nowMonth.month}월 {nowMonth.year}
+        </StMonth>
+        <StDays>
+          <li>일</li>
+          <li>월</li>
+          <li>화</li>
+          <li>수</li>
+          <li>목</li>
+          <li>금</li>
+          <li>토</li>
+        </StDays>
+        <StDates onMouseLeave={onMouseLeave}>
+          {nowMonthDates.map((date, i) => {
+            const nowDate = `${nowMonth.year}.${_nowMonth}.${addZero(date)}`;
+            const reserved = reservedDates.find(v => v === nowDate);
+            const isAfterReserved = reserved || checkAfterReserved(nowDate);
+            return (
+              <StDateWrapper
+                key={i}
+                onClick={onClickWrapper}
+                margin={nowMonth.firstDay}
+                darken={checkin && !isAfterReserved && getDiff(nowDate)}
+                checkin={checkin === nowDate}
+                checkout={checkout === nowDate}
+                hoverDate={hoverDate === nowDate}
+              >
+                <StDateBtn
+                  id={`dateId-${nowMonth.year}.${_nowMonth}.${addZero(date)}`}
+                  onClick={e => onClickCheckDate(e, reserved)}
+                  onMouseEnter={onMouseenter}
+                  checkin={checkin === nowDate}
+                  checkout={checkout === nowDate}
+                  hoverDate={hoverDate === nowDate && !isAfterReserved}
+                  reserved={reserved}
+                  afterReserved={isAfterReserved && !checkout}
+                  beforeCheckin={
+                    isDetailPage && !checkout && checkBeforeCheckin(nowDate)
+                  }
+                  btnType="circle"
+                >
+                  {date}
+                </StDateBtn>
+              </StDateWrapper>
+            );
+          })}
+        </StDates>
+      </StCalendarWrapper>
+    );
+  };
 
   return (
     <>
-      <StWrapper>
+      <StWrapper isDetailPage={isDetailPage}>
         <StNextMonthBtn btnType="circle" onClick={onClickBeforeMonth}>
           <AiOutlineLeft />
         </StNextMonthBtn>
         <StNextMonthBtn btnType="circle" onClick={onClickNextMonth}>
           <AiOutlineRight />
         </StNextMonthBtn>
-        <StCalendarWrapper>
-          <StMonth>
-            {thisMonth.month}월 {thisMonth.year}
-          </StMonth>
-          <StDays>
-            <li>일</li>
-            <li>월</li>
-            <li>화</li>
-            <li>수</li>
-            <li>목</li>
-            <li>금</li>
-            <li>토</li>
-          </StDays>
-          <StDates>
-            {thisMonthDates.map((date, i) => {
-              const thisDate = `${thisMonth.year}.${_thisMonth}.${addZero(
-                date,
-              )}`;
-              const reserved = reservedDates.find(v => v === thisDate);
-              return (
-                <StDateWrapper
-                  key={i}
-                  margin={thisMonth.firstDay}
-                  darken={getDiff(thisDate)}
-                  checkin={checkin === thisDate}
-                  checkout={checkout === thisDate}
-                  hoverDate={hoverDate === thisDate}
-                >
-                  <StDateBtn
-                    onMouseEnter={onMouseenter}
-                    btnType="circle"
-                    id={`dateId-${thisMonth.year}.${_thisMonth}.${addZero(
-                      date,
-                    )}`}
-                    onClick={e => onClickCheckDate(e, reserved)}
-                    checkin={checkin === thisDate}
-                    checkout={checkout === thisDate}
-                    reserved={reserved}
-                    // reserved={reserved}
-                  >
-                    {date}
-                  </StDateBtn>
-                </StDateWrapper>
-              );
-            })}
-          </StDates>
-        </StCalendarWrapper>
-        {!responsiveScreen && (
-          <StCalendarWrapper className="nextMonth">
-            <StMonth>
-              {nextMonth.month}월 {nextMonth.year}
-            </StMonth>
-            <StDays>
-              <li>일</li>
-              <li>월</li>
-              <li>화</li>
-              <li>수</li>
-              <li>목</li>
-              <li>금</li>
-              <li>토</li>
-            </StDays>
-            <StDates>
-              {nextMonthDates.map((date, i) => {
-                const nextDate = `${nextMonth.year}.${_nextMonth}.${addZero(
-                  date,
-                )}`;
-                const reserved = reservedDates.find(v => v === nextDate);
-                return (
-                  <StDateWrapper
-                    key={i}
-                    margin={nextMonth.firstDay}
-                    darken={getDiff(nextDate)}
-                    checkin={checkin === nextDate}
-                    checkout={checkout === nextDate}
-                    hoverDate={hoverDate === nextDate}
-                  >
-                    <StDateBtn
-                      onMouseEnter={onMouseenter}
-                      btnType="circle"
-                      id={`dateId-${nextMonth.year}.${_nextMonth}.${addZero(
-                        date,
-                      )}`}
-                      onClick={e => onClickCheckDate(e, reserved)}
-                      checkin={checkin === nextDate}
-                      checkout={checkout === nextDate}
-                      reserved={reserved}
-                    >
-                      {date}
-                    </StDateBtn>
-                  </StDateWrapper>
-                );
-              })}
-            </StDates>
-          </StCalendarWrapper>
-        )}
+        {renderCalendar(thisMonthDates, thisMonth)}
+        {!responsiveScreen && renderCalendar(nextMonthDates, nextMonth)}
       </StWrapper>
     </>
   );
@@ -134,18 +99,24 @@ const Calendar = ({
 
 const StWrapper = styled.div`
   position: relative;
+  display: flex;
   width: 100%;
   max-width: 642px;
   min-height: 300px;
   margin-top: 30px;
+  cursor: pointer;
 
-  @media screen and (max-width: 1200px) {
-    width: 308px;
+  ${({ isDetailPage }) =>
+    isDetailPage &&
+    css`
+      @media screen and (max-width: 1200px) {
+        width: 308px;
 
-    .nextMonth {
-      display: none;
-    }
-  }
+        .nextMonth {
+          display: none;
+        }
+      }
+    `}
 `;
 
 const StNextMonthBtn = styled(Button)`
@@ -234,7 +205,7 @@ const StDateBtn = styled(Button)`
   font-weight: 500;
   background-color: rgba(0, 0, 0, 0);
 
-  &:hover {
+  :hover {
     border: 2px solid ${({ theme }) => theme.color.black};
   }
 
@@ -245,12 +216,16 @@ const StDateBtn = styled(Button)`
       color: ${({ theme }) => theme.color.white};
     `}
 
-  ${({ reserved }) =>
-    reserved &&
+  ${({ reserved, beforeCheckin, afterReserved }) =>
+    (reserved || beforeCheckin || afterReserved) &&
     css`
       color: ${({ theme }) => theme.color.gray};
       text-decoration: line-through;
       font-weight: 400;
+
+      :hover {
+        border: none;
+      }
     `}
 `;
 

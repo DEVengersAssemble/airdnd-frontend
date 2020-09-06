@@ -17,13 +17,9 @@ const ALL_MESSAGE_LIST = 'message/ALL_MESSAGE_LIST';
 const HIDE_MESSAGE_LIST = 'message/HIDE_MESSAGE_LIST';
 const UNREAD_MESSAGE_LIST = 'message/UNREAD_MESSAGE_LIST';
 
-const SHOW_MESSAGE = 'message/SHOW_MESSAGE';
-const HIDE_MESSAGE = 'message/HIDE_MESSAGE';
-
-const MESSAGE_HOST_FLAG = 'message/MESSAGE_HOST_FLAG';
-
 const OPEN_MODAL = 'message/OPEN_MODAL';
 const CLOSE_MODAL = 'message/CLOSE_MODAL';
+const PDF_INPUT = 'message/PDF_INPUT';
 
 // ACTION CREATOR
 export const showMsgDetailSection = () => ({
@@ -42,15 +38,17 @@ export const archiveMsg = (index, id, state) => ({
   id,
   state,
 });
+
 export const unarchiveMsg = (index, id, state) => ({
   type: UNARCHAIVE_MESSAGE,
   index,
   id,
   state,
 });
+
 export const showToast = () => ({ type: SHOW_TOAST });
 export const hideToast = () => ({ type: HIDE_TOAST });
-export const undo = () => ({ type: UNDO });
+export const undo = (id, state) => ({ type: UNDO, id, state });
 export const showUndoToast = () => ({ type: SHOW_UNDO_TOAST });
 export const hideUndoToast = () => ({ type: HIDE_UNDO_TOAST });
 
@@ -58,10 +56,23 @@ export const allMsgList = index => ({ type: ALL_MESSAGE_LIST, index });
 export const hideMsgList = index => ({ type: HIDE_MESSAGE_LIST, index });
 export const unreadMsgList = index => ({ type: UNREAD_MESSAGE_LIST, index });
 
-export const isHost = isHost => ({ type: MESSAGE_HOST_FLAG, isHost });
+export const openModal = name => ({ type: OPEN_MODAL, name });
+export const closeModal = name => ({ type: CLOSE_MODAL, name });
+
+export const pdfInput = value => ({ type: PDF_INPUT, value });
 
 // INITIAL STATE
+const modalInit = {
+  business: false,
+  flag: false,
+  support: false,
+  pdf: false,
+  language: false,
+  value: '',
+};
+
 const initialState = {
+  modalState: modalInit,
   profileImg:
     'https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cg_face%2Cq_auto:good%2Cw_300/MTY2MzU3Nzk2OTM2MjMwNTkx/elon_musk_royal_society.jpg',
   msgDetailSectionState: true, // default
@@ -541,7 +552,6 @@ const initialState = {
   ],
   toast: false,
   undoToast: false,
-  schedulePdf: { text: '', language: '' },
   isHost: false,
 };
 
@@ -577,7 +587,7 @@ const message = (state = initialState, action) => {
       return {
         ...state,
         messages: state.messages.map(msg =>
-          msg.id === action.id ? { ...msg, state: 'hide' } : msg,
+          msg.id === action.id ? { ...msg, state: action.state } : msg,
         ),
         tempMsgs: state.filteredMsgs,
         filteredMsgs: state.filteredMsgs.filter(
@@ -588,7 +598,7 @@ const message = (state = initialState, action) => {
       return {
         ...state,
         messages: state.messages.map(msg =>
-          msg.id === action.id ? { ...msg, state: 'all' } : msg,
+          msg.id === action.id ? { ...msg, state: action.state } : msg,
         ),
         tempMsgs: state.filteredMsgs,
         filteredMsgs: state.filteredMsgs.filter(
@@ -608,6 +618,10 @@ const message = (state = initialState, action) => {
     case UNDO:
       return {
         ...state,
+        messages: state.messages.map(msg =>
+          msg.id === action.id ? { ...msg, state: action.state } : msg,
+        ),
+        tempMsgs: [],
         filteredMsgs: state.tempMsgs,
       };
     case SHOW_UNDO_TOAST:
@@ -641,11 +655,29 @@ const message = (state = initialState, action) => {
           state.activeIndex === action.index ? state.activeIndex : action.index,
         filteredMsgs: state.messages.filter(msg => msg.state === 'unread'),
       };
-    case MESSAGE_HOST_FLAG:
+    case OPEN_MODAL:
       return {
         ...state,
-        activeIndex: 0,
-        isHost: action.isHost,
+        modalState: {
+          ...state.modalState,
+          [action.name]: true,
+        },
+      };
+    case CLOSE_MODAL:
+      return {
+        ...state,
+        modalState: {
+          ...state.modalState,
+          [action.name]: false,
+        },
+      };
+    case PDF_INPUT:
+      return {
+        ...state,
+        modalState: {
+          ...state.modalState,
+          value: action.value,
+        },
       };
     default:
       return state;

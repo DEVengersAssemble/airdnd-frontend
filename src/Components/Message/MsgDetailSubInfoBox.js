@@ -13,6 +13,10 @@ const MsgDetailSubInfoBox = ({
   guestProfileImg,
   reservationId,
   isCanceled,
+  onClickOpenModal,
+  onClickOpenPrint,
+  onClickOpenReceiptPDF,
+  homeId,
 }) => {
   return (
     <MsgDetailSiWrapper>
@@ -59,7 +63,7 @@ const MsgDetailSubInfoBox = ({
               </MsgDetailSiReservedNumber>
             </MsgDetailSiReservedNumberWrapper>
           </MsgDetailSiInnerWrapper>
-          <Link to="/detail" target="_blank">
+          <Link to={`/detail/${homeId}`} target="_blank">
             <StButton>
               <MsgDetailSiButtonWrapper>
                 <MsgDetailSiButtonInnerWrapper>
@@ -110,7 +114,7 @@ const MsgDetailSubInfoBox = ({
               </MsgDetailSiReservedNumber>
             </MsgDetailSiReservedNumberWrapper>
           </MsgDetailSiInnerWrapper>
-          <StButton>
+          <StButton onClick={onClickOpenModal}>
             <MsgDetailSiButtonWrapper>
               <MsgDetailSiButtonInnerWrapper>
                 <FaGlobe />
@@ -121,30 +125,24 @@ const MsgDetailSubInfoBox = ({
               <MdKeyboardArrowRight />
             </MsgDetailSiButtonWrapper>
           </StButton>
-          <Link to="/printsubinfo" target="_blank">
-            <StButton>
-              <MsgDetailSiButtonWrapper>
-                <MsgDetailSiButtonInnerWrapper>
-                  <MdPrint />
-                  <MsgDetailSiButtonText>
-                    세부정보 인쇄하기
-                  </MsgDetailSiButtonText>
-                </MsgDetailSiButtonInnerWrapper>
-                <MdKeyboardArrowRight />
-              </MsgDetailSiButtonWrapper>
-            </StButton>
-          </Link>
-          <Link to="/printreceipt" target="_blank">
-            <StButton>
-              <MsgDetailSiButtonWrapper>
-                <MsgDetailSiButtonInnerWrapper>
-                  <MdReceipt />
-                  <MsgDetailSiButtonText>영수증 받기</MsgDetailSiButtonText>
-                </MsgDetailSiButtonInnerWrapper>
-                <MdKeyboardArrowRight />
-              </MsgDetailSiButtonWrapper>
-            </StButton>
-          </Link>
+          <StButton onClick={onClickOpenPrint}>
+            <MsgDetailSiButtonWrapper>
+              <MsgDetailSiButtonInnerWrapper>
+                <MdPrint />
+                <MsgDetailSiButtonText>세부정보 인쇄하기</MsgDetailSiButtonText>
+              </MsgDetailSiButtonInnerWrapper>
+              <MdKeyboardArrowRight />
+            </MsgDetailSiButtonWrapper>
+          </StButton>
+          <StButton onClick={onClickOpenReceiptPDF}>
+            <MsgDetailSiButtonWrapper>
+              <MsgDetailSiButtonInnerWrapper>
+                <MdReceipt />
+                <MsgDetailSiButtonText>영수증 받기</MsgDetailSiButtonText>
+              </MsgDetailSiButtonInnerWrapper>
+              <MdKeyboardArrowRight />
+            </MsgDetailSiButtonWrapper>
+          </StButton>
         </MsgDetailSiOuterWrapper>
       )}
     </MsgDetailSiWrapper>

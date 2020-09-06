@@ -1,18 +1,32 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import HomeList from '../../Components/Search/HomeList';
 import HomeContainer from './HomeContainer';
 import HomeCardContainer from './HomeCardContainer';
+import { useLocation } from 'react-router-dom';
+import qs from 'qs';
+import { fetchData } from '../../Modules/search';
 
 const HomeListContainer = () => {
-  const { data, mapState } = useSelector(state => state.search);
-  const { homes } = data;
+  const { mapState, isFilterChanged } = useSelector(state => state.search);
+  const { homes, dataTotal } = useSelector(state => state.search.data);
+  const { search } = useLocation();
+  const dispatch = useDispatch();
+  const searchForm = qs.parse(search, {
+    ignoreQueryPrefix: true,
+  });
 
-  // console.log('data 받아왓다매ㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐ', data);
-  // console.log(homes);
+  // useEffect(() => {
+  //   if (!isFilterChanged) return;
+  //   if (isFilterChanged) {
+  //     delete searchForm.page;
+  //     dispatch(fetchData(`?${qs.stringify(searchForm)}`));
+  //   }
+  // }, [isFilterChanged]);
+
   return (
     <>
-      <HomeList mapState={mapState}>
+      <HomeList mapState={mapState} dataTotal={dataTotal}>
         {homes.map(home =>
           mapState ? (
             <HomeContainer key={home.homeId} home={home} />

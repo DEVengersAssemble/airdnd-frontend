@@ -9,7 +9,11 @@ import {
   MdReceipt,
 } from 'react-icons/md';
 
-const MsgDetailSettlementBox = ({ price }) => {
+const MsgDetailRefundBox = ({
+  price,
+  onClickOpenModal,
+  onClickOpenReceiptPDF,
+}) => {
   return (
     <MsgDetailSettlementWrapper>
       <MsgDetailSettlementOuterWrapper>
@@ -22,7 +26,7 @@ const MsgDetailSettlementBox = ({ price }) => {
             <MsgDetailSettlementAddress>₩{price}</MsgDetailSettlementAddress>
           </MsgDetailSettlementAddrestWrapper>
         </MsgDetailSettlementInnerWrapper>
-        <StButton>
+        <StButton onClick={onClickOpenModal}>
           <MsgDetailSettlementButtonWrapper>
             <MsgDetailSettlementButtonInnerWrapper>
               <MdAssignmentTurnedIn />
@@ -33,19 +37,17 @@ const MsgDetailSettlementBox = ({ price }) => {
             <MdKeyboardArrowRight />
           </MsgDetailSettlementButtonWrapper>
         </StButton>
-        <Link to="/receipt" target="_blank">
-          <StButton>
-            <MsgDetailSettlementButtonWrapper>
-              <MsgDetailSettlementButtonInnerWrapper>
-                <MdReceipt />
-                <MsgDetailSettlementButtonText>
-                  영수증 받기
-                </MsgDetailSettlementButtonText>
-              </MsgDetailSettlementButtonInnerWrapper>
-              <MdKeyboardArrowRight />
-            </MsgDetailSettlementButtonWrapper>
-          </StButton>
-        </Link>
+        <StButton onClick={onClickOpenReceiptPDF}>
+          <MsgDetailSettlementButtonWrapper>
+            <MsgDetailSettlementButtonInnerWrapper>
+              <MdReceipt />
+              <MsgDetailSettlementButtonText>
+                영수증 받기
+              </MsgDetailSettlementButtonText>
+            </MsgDetailSettlementButtonInnerWrapper>
+            <MdKeyboardArrowRight />
+          </MsgDetailSettlementButtonWrapper>
+        </StButton>
       </MsgDetailSettlementOuterWrapper>
     </MsgDetailSettlementWrapper>
   );
@@ -108,4 +110,4 @@ const MsgDetailSettlementButtonText = styled.div`
   font-size: 1.4rem;
 `;
 
-export default MsgDetailSettlementBox;
+export default MsgDetailRefundBox;

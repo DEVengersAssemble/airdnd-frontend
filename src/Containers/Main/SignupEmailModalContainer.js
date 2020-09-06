@@ -1,7 +1,9 @@
-import React, { useState, useRef, useReducer } from 'react';
+import React, { useEffect, useState, useRef, useReducer } from 'react';
+import axios from 'axios';
 import SignupEmailModal from '../../Components/Main/SignupEmailModal';
 import { useSelector, useDispatch } from 'react-redux';
 import { openModal, closeModal } from '../../Modules/modal';
+import { signupRequest } from '../../Modules/user';
 
 const initialState = {
   email: {
@@ -16,15 +18,15 @@ const initialState = {
     value: '',
     invalid: null,
   },
-  pw: {
+  pwd: {
     value: '',
     invalid: null,
   },
-  pwValidation: {
-    pwLevel: 0,
-    pwContain: null,
-    pwLength: null,
-    pwCase: null,
+  pwdValidation: {
+    pwdLevel: 0,
+    pwdContain: null,
+    pwdLength: null,
+    pwdCase: null,
   },
   birthMonth: {
     value: '월',
@@ -52,10 +54,10 @@ const signupReducer = (state, action) => {
           invalid: false,
         },
       };
-    case 'VALIDATE_PW':
+    case 'VALIDATE_PWD':
       return {
         ...state,
-        pwValidation: action.payload,
+        pwdValidation: action.payload,
       };
     case 'RESET':
       return initialState;
@@ -71,12 +73,29 @@ const signupReducer = (state, action) => {
 
 const SignupModalContainer = () => {
   const dispatch = useDispatch();
+  const { loading, error, signupRes } = useSelector(state => state.user);
   const { name } = useSelector(state => state.modal);
   const modalVisible = name === 'signup_email';
+  const [signup, _dispatch] = useReducer(signupReducer, initialState);
+  const [isChecking, setIsChecking] = useState(false);
+  const [isPwdChanged, setIsPwdChanged] = useState(false);
+  const [pwdFocus, setPwdFocus] = useState(false);
+  const {
+    email,
+    firstName,
+    lastName,
+    pwd,
+    pwdValidation,
+    birthMonth,
+    birthDay,
+    birthYear,
+  } = signup;
+  const { pwdLevel } = pwdValidation;
+
   const emailRef = useRef();
   const firstNameRef = useRef();
   const lastNameRef = useRef();
-  const pwRef = useRef();
+  const pwdRef = useRef();
   const birthMonthRef = useRef();
   const birthDayRef = useRef();
   const birthYearRef = useRef();
@@ -84,83 +103,78 @@ const SignupModalContainer = () => {
     emailRef,
     firstNameRef,
     lastNameRef,
-    pwRef,
+    pwdRef,
     birthMonthRef,
     birthDayRef,
     birthYearRef,
   };
 
-  const [signup, _dispatch] = useReducer(signupReducer, initialState);
-  const [isChecking, setIsChecking] = useState(false);
-  const [isPwChanged, setIsPwChanged] = useState(false);
-  const [pwFocus, setPwFocus] = useState(false);
-  const {
-    email,
-    firstName,
-    lastName,
-    pw,
-    pwValidation,
-    birthMonth,
-    birthDay,
-    birthYear,
-  } = signup;
-  const { pwLevel } = pwValidation;
-  const onPwFocus = () => {
-    setPwFocus(true);
+  const onPwdFocus = () => {
+    setPwdFocus(true);
   };
 
-  const checkPwValidation = () => {
-    const pwLength = pw.value && pw.value.length >= 8;
+  const checkPwdValidation = () => {
+    const pwdLength = pwd.value && pwd.value.length >= 8;
     const emailResult =
       !email.value.split('@')[0] ||
-      !pw.value.includes(email.value.split('@')[0]);
+      !pwd.value.includes(email.value.split('@')[0]);
     const firstNameResult =
-      !firstName.value || !pw.value.includes(firstName.value);
+      !firstName.value || !pwd.value.includes(firstName.value);
     const lastNameResult =
-      !lastName.value || !pw.value.includes(lastName.value);
-    const pwContain =
-      pw.value && emailResult && firstNameResult && lastNameResult;
+      !lastName.value || !pwd.value.includes(lastName.value);
+    const pwdContain =
+      pwd.value && emailResult && firstNameResult && lastNameResult;
     const numberPattern = /[0-9]/;
     const specialCasePattern = /[~!@#$%^&*()_+|<>?:{}]/;
-    const pwCase =
-      numberPattern.test(pw.value) || specialCasePattern.test(pw.value);
-    const pwCaseBoth =
-      numberPattern.test(pw.value) && specialCasePattern.test(pw.value);
-    const pwLevel =
-      pwContain && pwLength && pwCaseBoth
+    const pwdCase =
+      numberPattern.test(pwd.value) || specialCasePattern.test(pwd.value);
+    const pwdCaseBoth =
+      numberPattern.test(pwd.value) && specialCasePattern.test(pwd.value);
+    const pwdLevel =
+      pwdContain && pwdLength && pwdCaseBoth
         ? 2
-        : pwContain && pwLength && pwCase
+        : pwdContain && pwdLength && pwdCase
         ? 1
         : 0;
 
-    const pwValidation = {
-      pwLevel,
-      pwContain,
-      pwLength,
-      pwCase,
+    const pwdValidation = {
+      pwdLevel,
+      pwdContain,
+      pwdLength,
+      pwdCase,
     };
 
-    return pwValidation;
+    return pwdValidation;
   };
   const checkFormValidation = () => {
-    const emailRegExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+    const emailRegExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+    const numberRegExp = /[\d]/;
+    const specialCharRegExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/gi;
     const emailObj = {
       value: email.value,
       invalid: !emailRegExp.test(email.value),
     };
     const firstNameObj = {
       value: firstName.value,
-      invalid: !firstName.value,
+      invalid:
+        firstName.value.length < 1 ||
+        firstName.value.length > 35 ||
+        numberRegExp.test(firstName.value) ||
+        specialCharRegExp.test(firstName.value),
     };
     const lastNameObj = {
       value: lastName.value,
-      invalid: !lastName.value,
+      invalid:
+        lastName.value.length < 1 ||
+        lastName.value.length > 35 ||
+        numberRegExp.test(lastName.value) ||
+        specialCharRegExp.test(lastName.value),
     };
-    const pwObj = {
-      value: pw.value,
-      invalid: !pwLevel,
+    const pwdObj = {
+      value: pwd.value,
+      invalid: !pwdLevel,
     };
-    const pwValidationObj = checkPwValidation();
+    const pwdValidationObj = checkPwdValidation();
     const birthMonthObj = {
       value: birthMonth.value,
       invalid: isNaN(birthMonth.value),
@@ -177,8 +191,8 @@ const SignupModalContainer = () => {
       email: emailObj,
       firstName: firstNameObj,
       lastName: lastNameObj,
-      pw: pwObj,
-      pwValidation: pwValidationObj,
+      pwd: pwdObj,
+      pwdValidation: pwdValidationObj,
       birthMonth: birthMonthObj,
       birthDay: birthDayObj,
       birthYear: birthYearObj,
@@ -187,15 +201,15 @@ const SignupModalContainer = () => {
     setIsChecking(true);
   };
 
-  const updatePwValidation = () => {
-    const payload = checkPwValidation();
-    _dispatch({ type: 'VALIDATE_PW', payload });
+  const updatePwdValidation = () => {
+    const payload = checkPwdValidation();
+    _dispatch({ type: 'VALIDATE_PWD', payload });
   };
 
   const onChangeForm = ({ target }, key) => {
     const value = target.value;
     _dispatch({ type: 'UPDATE_VALUE', key, payload: value });
-    setIsPwChanged(true);
+    setIsPwdChanged(true);
   };
 
   const onChangeSelect = ({ target }, key) => {
@@ -211,9 +225,22 @@ const SignupModalContainer = () => {
     dispatch(openModal('login'));
   };
 
-  const onSuccess = () => {
-    console.log('===유저를 등록합니다====');
-    setPwFocus(false);
+  const onSuccess = async () => {
+    console.log('===회원가입 시도====');
+    const userInfo = {
+      email: email.value,
+      firstName: firstName.value,
+      lastName: lastName.value,
+      pwd: pwd.value,
+      birthday: `${birthYear.value}/${birthMonth.value}/${birthDay.value}`,
+      phone: '010-1111-1111',
+      profileImg: '',
+      description: '',
+    };
+    console.log('userInfo: ', userInfo);
+    dispatch(signupRequest(userInfo));
+
+    setPwdFocus(false);
     _dispatch({ type: 'RESET' });
   };
 
@@ -245,12 +272,12 @@ const SignupModalContainer = () => {
     checkFormValidation();
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     isChecking && changeFocus();
-    isPwChanged && updatePwValidation();
+    isPwdChanged && updatePwdValidation();
     setIsChecking(false);
-    setIsPwChanged(false);
-  }, [isChecking, isPwChanged, signup]);
+    setIsPwdChanged(false);
+  }, [isChecking, isPwdChanged, signup]);
 
   return (
     <SignupEmailModal
@@ -260,13 +287,15 @@ const SignupModalContainer = () => {
         dispatch(closeModal());
       }}
       signup={signup}
-      pwValidation={pwValidation}
+      loading={loading}
+      signupRes={signupRes}
+      pwdValidation={pwdValidation}
       onChangeForm={onChangeForm}
       onChangeSelect={onChangeSelect}
       onSignup={onSignup}
       refObj={refObj}
-      onPwFocus={onPwFocus}
-      pwFocus={pwFocus}
+      onPwdFocus={onPwdFocus}
+      pwdFocus={pwdFocus}
       onGoogleLoginSuccess={onGoogleLoginSuccess}
       onGoogleLoginFailure={onGoogleLoginFailure}
     ></SignupEmailModal>

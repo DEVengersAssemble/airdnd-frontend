@@ -76,26 +76,27 @@ const StValidationText = styled.p`
   padding: 5px 0 0 5px;
 `;
 
-const StPwValidationList = styled.div`
+const StPwdValidationList = styled.div`
   margin-top: 5px;
   padding-left: 5px;
 `;
 
-const StPwValidationItem = styled.div`
+const StPwdValidationItem = styled.div`
   display: flex;
   align-items: center;
   font-size: 22px;
-  color: ${({ theme, isPwValid }) =>
-    isPwValid ? '#2f9e44' : theme.color.warning};
+  color: ${({ theme, isPwdValid }) =>
+    isPwdValid ? '#2f9e44' : theme.color.warning};
 `;
 
-const StPwValidationText = styled.span`
+const StPwdValidationText = styled.span`
   font-size: 14px;
   padding-left: 5px;
 `;
 
-const StPwValidationLevelText = styled.span`
-  color: ${({ pwLevel, theme }) => (pwLevel ? '#2f9e44' : theme.color.warning)};
+const StPwdValidationLevelText = styled.span`
+  color: ${({ pwdLevel, theme }) =>
+    pwdLevel ? '#2f9e44' : theme.color.warning};
 `;
 
 const StBirthDayWrapper = styled.div`
@@ -170,8 +171,8 @@ const SignupEmailModal = ({
   onChangeSelect,
   onSignup,
   refObj,
-  onPwFocus,
-  pwFocus,
+  onPwdFocus,
+  pwdFocus,
   onGoogleLoginSuccess,
   onGoogleLoginFailure,
 }) => {
@@ -179,15 +180,14 @@ const SignupEmailModal = ({
     email,
     firstName,
     lastName,
-    pw,
-    pwValidation,
+    pwd,
+    pwdValidation,
     birthMonth,
     birthDay,
     birthYear,
   } = signup;
-  const { pwLevel, pwLength, pwContain, pwCase } = pwValidation;
-  const { emailRef, firstNameRef, lastNameRef, pwRef } = refObj;
-
+  const { pwdLevel, pwdLength, pwdContain, pwdCase } = pwdValidation;
+  const { emailRef, firstNameRef, lastNameRef, pwdRef } = refObj;
   return (
     <StSignupEmailModal
       modalState={modalVisible}
@@ -209,9 +209,14 @@ const SignupEmailModal = ({
               isInvalid={email.invalid}
             ></StInput>
             <RiMailLine />
-            {email.invalid && (
+            {email.value.length === 0 && email.invalid && (
               <StValidationText isInvalid={email.invalid}>
-                이메일이 필요합니다.
+                이메일을 입력하세요.
+              </StValidationText>
+            )}
+            {email.value.length > 0 && email.invalid && (
+              <StValidationText isInvalid={email.invalid}>
+                이메일 형식이 맞지 않습니다.
               </StValidationText>
             )}
           </StInputWrapper>
@@ -225,11 +230,24 @@ const SignupEmailModal = ({
               isInvalid={firstName.invalid}
             ></StInput>
             <RiUserLine />
-            {firstName.invalid && (
+            {firstName.value.length === 0 && firstName.invalid && (
               <StValidationText isInvalid={firstName.invalid}>
                 이름을 입력하세요.
               </StValidationText>
             )}
+            {firstName.value.length > 35 && firstName.invalid && (
+              <StValidationText isInvalid={firstName.invalid}>
+                이름을 입력할 수 있는 최대 글자 수는 35자입니다. 다시
+                시도하세요.
+              </StValidationText>
+            )}
+            {firstName.value.length !== 0 &&
+              firstName.value.length < 35 &&
+              firstName.invalid && (
+                <StValidationText isInvalid={firstName.invalid}>
+                  이름에 유효한 글자를 입력하세요.
+                </StValidationText>
+              )}
           </StInputWrapper>
 
           <StInputWrapper>
@@ -242,62 +260,83 @@ const SignupEmailModal = ({
               isInvalid={lastName.invalid}
             ></StInput>
             <RiUserLine />
-            {lastName.invalid && (
+            {lastName.value.length === 0 && lastName.invalid && (
               <StValidationText isInvalid={lastName.invalid}>
                 성을 입력하세요.
               </StValidationText>
             )}
+            {lastName.value.length > 35 && lastName.invalid && (
+              <StValidationText isInvalid={lastName.invalid}>
+                성을 입력할 수 있는 최대 글자 수는 35자입니다. 다시 시도하세요.
+              </StValidationText>
+            )}
+            {lastName.value.length !== 0 &&
+              lastName.value.length < 35 &&
+              lastName.invalid && (
+                <StValidationText isInvalid={lastName.invalid}>
+                  성에 유효한 글자를 입력하세요.
+                </StValidationText>
+              )}
           </StInputWrapper>
           <StInputWrapper name="password">
             <StInput
               type="password"
-              value={pw.value}
-              onChange={e => onChangeForm(e, 'pw')}
-              onFocus={onPwFocus}
+              value={pwd.value}
+              onChange={e => onChangeForm(e, 'pwd')}
+              onFocus={onPwdFocus}
               focusBorderColor
               placeholder="비밀번호 설정하기"
-              ref={pwRef}
-              isInvalid={pw.invalid}
+              ref={pwdRef}
+              isInvalid={pwd.invalid}
             ></StInput>
             <RiEyeCloseLine />
-            {pw.invalid && (
-              <StValidationText isInvalid={pw.invalid}>
+            {pwd.value.length === 0 && pwd.invalid && (
+              <StValidationText isInvalid={pwd.invalid}>
                 비밀번호를 입력하세요.
               </StValidationText>
             )}
-            {pwFocus && (
-              <StPwValidationList>
-                <StPwValidationItem isPwValid={pwLevel}>
-                  {pwLevel >= 1 ? <MdCheck /> : <MdClose />}
-                  <StPwValidationText>
+            {pwd.value.length > 0 && pwd.invalid && (
+              <StValidationText isInvalid={pwd.invalid}>
+                비밀번호 형식이 맞지 않습니다.
+              </StValidationText>
+            )}
+            {pwdFocus && (
+              <StPwdValidationList>
+                <StPwdValidationItem isPwdValid={pwdLevel}>
+                  {pwdLevel >= 1 ? <MdCheck /> : <MdClose />}
+                  <StPwdValidationText>
                     비밀번호 보안 수준:
-                    <StPwValidationLevelText pwLevel={pwLevel}>
-                      {pwLevel ? (pwLevel === 2 ? ' 강함' : ' 보통') : ' 약함'}
-                    </StPwValidationLevelText>
-                  </StPwValidationText>
-                </StPwValidationItem>
-                {pwLevel === 0 && (
+                    <StPwdValidationLevelText pwdLevel={pwdLevel}>
+                      {pwdLevel
+                        ? pwdLevel === 2
+                          ? ' 강함'
+                          : ' 보통'
+                        : ' 약함'}
+                    </StPwdValidationLevelText>
+                  </StPwdValidationText>
+                </StPwdValidationItem>
+                {pwdLevel === 0 && (
                   <>
-                    <StPwValidationItem isPwValid={pwContain}>
-                      {pwContain ? <MdCheck /> : <MdClose />}
-                      <StPwValidationText>
+                    <StPwdValidationItem isPwdValid={pwdContain}>
+                      {pwdContain ? <MdCheck /> : <MdClose />}
+                      <StPwdValidationText>
                         비밀번호에 본인 이름이나 이메일 주소를 포함할 수
                         없습니다.
-                      </StPwValidationText>
-                    </StPwValidationItem>
-                    <StPwValidationItem isPwValid={pwLength}>
-                      {pwLength ? <MdCheck /> : <MdClose />}
-                      <StPwValidationText>최소 8자</StPwValidationText>
-                    </StPwValidationItem>
-                    <StPwValidationItem isPwValid={pwCase}>
-                      {pwCase ? <MdCheck /> : <MdClose />}
-                      <StPwValidationText>
+                      </StPwdValidationText>
+                    </StPwdValidationItem>
+                    <StPwdValidationItem isPwdValid={pwdLength}>
+                      {pwdLength ? <MdCheck /> : <MdClose />}
+                      <StPwdValidationText>최소 8자</StPwdValidationText>
+                    </StPwdValidationItem>
+                    <StPwdValidationItem isPwdValid={pwdCase}>
+                      {pwdCase ? <MdCheck /> : <MdClose />}
+                      <StPwdValidationText>
                         숫자나 기호를 포함하세요
-                      </StPwValidationText>
-                    </StPwValidationItem>
+                      </StPwdValidationText>
+                    </StPwdValidationItem>
                   </>
                 )}
-              </StPwValidationList>
+              </StPwdValidationList>
             )}
           </StInputWrapper>
           <StBirthDayTitle>생일</StBirthDayTitle>

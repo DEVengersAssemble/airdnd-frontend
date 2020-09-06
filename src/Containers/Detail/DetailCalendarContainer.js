@@ -33,6 +33,7 @@ const DetailCalendarContainer = () => {
       changeInitialDate={changeInitialDate}
       setChangeDataTrue={setChangeDataTrue}
       reservedDates={reservedDates}
+      isDetailPage={true}
     />
   );
 };

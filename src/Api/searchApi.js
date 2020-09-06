@@ -1,19 +1,7 @@
 import axios from 'axios';
-
-export const fetchSearchedData = async ({
-  location,
-  checkIn,
-  checkOut,
-  adults,
-  guests,
-  page,
-  filter,
-}) => {
-  const CI = checkIn.split('.').join('-');
-  const CO = checkOut.split('.').join('-');
-  const response = await axios.get(
-    `back/search/location/${location}/checkIn/${CI}/checkOut/${CO}/adults/${guests}`,
-  );
+export const fetchSearchedData = async query => {
+  console.log(query);
+  const response = await axios.get(`back/search${query}`);
   console.log('데이터 겟햇다=======================', response);
   return response.data;
 };
@@ -24,6 +12,5 @@ export const fetchMapCenter = async location => {
   );
   console.log(response);
   const center = response.data.results[0].geometry.location;
-
   return center;
 };

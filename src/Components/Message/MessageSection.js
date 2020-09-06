@@ -24,8 +24,9 @@ const MessageSectionWrapper = styled.section`
   width: 100%;
   flex-grow: 1;
   min-width: 37.5rem;
-  
-  /* ${({ msgDetailSectionState }) =>
+
+  transition: all 0.3s ease;
+  ${({ msgDetailSectionState }) =>
     !msgDetailSectionState &&
     css`
       min-width: calc(100% - 37.5rem);
@@ -33,7 +34,13 @@ const MessageSectionWrapper = styled.section`
 
   @media ${({ theme }) => theme.size.medium} {
     min-width: calc(100% - 37.5rem);
-  } */
+    transition: all 0.3s ease;
+    ${({ msgDetailSectionState }) =>
+      msgDetailSectionState &&
+      css`
+        transform: translate3d(-37.5rem, 0, 0);
+      `}
+  }
 `;
 
 export default MessageSection;
