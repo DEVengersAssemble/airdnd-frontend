@@ -96,12 +96,7 @@ export const resetModalFilter = name => ({
   name,
 });
 export const modalFilterInit = filterCondition => {
-  const {
-    superhost,
-    amenityList,
-    facilityList,
-    hostLangList,
-  } = filterCondition;
+  const { amenityList, facilityList, hostLangList } = filterCondition;
   const filter = {
     instantBooking: false,
     bedCount: 0,
@@ -109,7 +104,6 @@ export const modalFilterInit = filterCondition => {
     bathroomCount: 0,
     superhost: false,
   };
-  // if (superhost) filter.superhost = false;
   if (amenityList) filter.amenityList = [];
   if (facilityList) filter.facilityList = [];
   if (hostLangList) filter.hostLangList = [];
@@ -171,9 +165,10 @@ const initialState = {
   markerState: null,
   hoveredHome: null,
   popupState: popupInit,
-  filterPrevState: {},
   popupApplied: popupInit,
   filterApplied: filterInit,
+  filterPrevState: {},
+  isFilterChanged: false,
 };
 
 const getFilterGroup = (filterName, state, keep) => {
@@ -217,6 +212,7 @@ const search = (state = initialState, action) => {
             value => parseInt(value),
           ),
         },
+        isFilterChanged: false,
       };
     case FETCH_DATA_ERROR:
       return {
@@ -336,6 +332,7 @@ const search = (state = initialState, action) => {
           ...state.popupApplied,
           [action.name]: action.isApplied,
         },
+        isFilterChanged: !_.isEqual(state.filterPrevState, state.filterApplied),
         filterPrevState: {},
       };
     case SET_FILTER:
