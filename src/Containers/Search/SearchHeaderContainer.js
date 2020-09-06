@@ -1,27 +1,28 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { throttle } from 'lodash';
-import { useSelector, useDispatch } from 'react-redux';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import SearchHeader from '../../Components/Search/SearchHeader';
-import { closeHeader, openHeader } from '../../Modules/search';
-import qs from 'qs';
 
 const SearchHeaderContainer = () => {
-  const { headerState } = useSelector(state => state.search);
-  const dispatch = useDispatch();
   const history = useHistory();
-  const query = useLocation();
-  const onScroll = () => dispatch(closeHeader());
-  const searchForm = qs.parse(query.search, {
-    ignoreQueryPrefix: true,
-  });
+  const [isSearchBtnClicked, setIsSearchBtnClicked] = useState(false);
+  const [initAnimation, setInitAnimation] = useState(false);
+  const searchForm = useSelector(state => state.searchForm);
+
+  const onScroll = () => {
+    setIsSearchBtnClicked(false);
+  };
 
   useEffect(() => {
+    if (!initAnimation && isSearchBtnClicked) {
+      setInitAnimation(true);
+    }
     window.addEventListener('scroll', throttle(onScroll, 150));
     return () => {
       window.removeEventListener('scroll', onScroll);
     };
-  }, []);
+  }, [onScroll, initAnimation]);
 
   const handleLogoClick = e => {
     e.preventDefault();
@@ -29,11 +30,13 @@ const SearchHeaderContainer = () => {
     window.scrollTo({ top: 0 });
   };
 
-  const handleSearchBtnClick = () => dispatch(openHeader());
-
+  const handleSearchBtnClick = () => {
+    setIsSearchBtnClicked(true);
+  };
   return (
     <SearchHeader
-      headerState={headerState}
+      initAnimation={initAnimation}
+      isSearchBtnClicked={isSearchBtnClicked}
       handleLogoClick={handleLogoClick}
       handleSearchBtnClick={handleSearchBtnClick}
       searchForm={searchForm}

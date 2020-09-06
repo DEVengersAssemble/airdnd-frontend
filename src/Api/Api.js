@@ -16,7 +16,6 @@ export const fetchSearchedData = async ({
   console.log('데이터 겟햇다=======================', response);
   return response.data;
 };
-
 export const fetchMapCenter = async location => {
   const response = await axios.get(
     `https://maps.googleapis.com/maps/api/geocode/json?address=${location}&key=AIzaSyCqryK5lMUxY0i_-Zu1cUrgW3_Geg4BrWA`,

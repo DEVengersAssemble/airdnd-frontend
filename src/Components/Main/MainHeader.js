@@ -71,7 +71,7 @@ const StNavSearchWrapper = styled.div`
   animation-fill-mode: forwards;
   animation-name: ${({ isScrollTop, isSearchBtnClicked }) =>
     isScrollTop || isSearchBtnClicked ? slideDown : slideUp};
-
+  animation: ${({ initAnimation }) => !initAnimation && 'none'};
   @media ${({ theme }) => theme.size.medium} {
     width: 76%;
     top: 0;
@@ -123,6 +123,7 @@ const StOnScrollSearchButtonIconWrapper = styled.div`
 `;
 
 const MainHeader = ({
+  initAnimation,
   isScrollTop,
   handleLogoClick,
   isSearchBtnClicked,
@@ -135,6 +136,7 @@ const MainHeader = ({
     >
       <Logo isScrollTop={isScrollTop} handleLogoClick={handleLogoClick}></Logo>
       <StNavSearchWrapper
+        initAnimation={initAnimation}
         isScrollTop={isScrollTop}
         isSearchBtnClicked={isSearchBtnClicked}
       >
