@@ -166,6 +166,7 @@ const SignupEmailModal = ({
   modalVisible,
   openLoginModal,
   closeModal,
+  range,
   signup,
   onChangeForm,
   onChangeSelect,
@@ -349,7 +350,7 @@ const SignupEmailModal = ({
               name="birthMonth"
               width="40%"
               title="월"
-              options={[1, 2, 3]}
+              options={range(1, 12, 1)}
               outline
               value={birthMonth.value}
               isSelectInvalid={birthMonth.invalid}
@@ -359,7 +360,7 @@ const SignupEmailModal = ({
               name="birthDay"
               width="22%"
               title="일"
-              options={[1, 2, 3]}
+              options={range(1, 31, 1)}
               outline
               value={birthDay.value}
               isSelectInvalid={birthDay.invalid}
@@ -369,7 +370,7 @@ const SignupEmailModal = ({
               name="birthYear"
               width="33%"
               title="년"
-              options={[1, 2, 3]}
+              options={range(1900, new Date().getFullYear(), 1).reverse()}
               outline
               value={birthYear.value}
               isSelectInvalid={birthYear.invalid}

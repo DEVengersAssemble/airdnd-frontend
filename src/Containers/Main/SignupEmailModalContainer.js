@@ -272,6 +272,12 @@ const SignupModalContainer = () => {
     checkFormValidation();
   };
 
+  const range = (start, stop, step) =>
+    Array.from(
+      { length: (stop - start) / step + 1 },
+      (_, i) => start + i * step,
+    );
+
   useEffect(() => {
     isChecking && changeFocus();
     isPwdChanged && updatePwdValidation();
@@ -286,6 +292,7 @@ const SignupModalContainer = () => {
       closeModal={() => {
         dispatch(closeModal());
       }}
+      range={range}
       signup={signup}
       loading={loading}
       signupRes={signupRes}
