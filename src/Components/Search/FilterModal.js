@@ -16,6 +16,7 @@ import {
 
 const FilterModal = ({
   popupState,
+  dataTotal,
   viewState,
   filterCondition,
   filter,
@@ -45,8 +46,8 @@ const FilterModal = ({
       title="필터 추가하기"
     >
       <StFilterList>
-        {viewState === 'map' && <RefundFilter />}
-        {viewState === 'map' && <RoomTypeFilter />}
+        {viewState === 'map' && dataTotal !== 0 && <RefundFilter />}
+        {viewState === 'map' && dataTotal !== 0 && <RoomTypeFilter />}
         {viewState === 'map' && (
           <PriceFilter range={range} setRange={setRange} />
         )}

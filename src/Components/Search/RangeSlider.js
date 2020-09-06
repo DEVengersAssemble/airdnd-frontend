@@ -25,7 +25,8 @@ const RangeSlider = ({
   return (
     <>
       <StLargeSpan>
-        평균 1박 요금은 ₩{averagePrice.toLocaleString()}입니다
+        {averagePrice !== 0 &&
+          `평균 1박 요금은 ₩${averagePrice.toLocaleString()}입니다`}
       </StLargeSpan>
       <StRangeWrapper>
         <Range

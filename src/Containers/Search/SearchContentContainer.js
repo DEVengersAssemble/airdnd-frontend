@@ -13,7 +13,7 @@ const SearchContentContainer = () => {
     ignoreQueryPrefix: true,
   });
 
-  console.log('렌더링시작한다~~~~~~~~~~', query);
+  console.log('렌더링시작한다~~~~~~~~~~', searchForm);
 
   useEffect(() => {
     dispatch(fetchData(query));

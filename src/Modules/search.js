@@ -107,8 +107,9 @@ export const modalFilterInit = filterCondition => {
     bedCount: 0,
     bedroomCount: 0,
     bathroomCount: 0,
+    superhost: false,
   };
-  if (superhost) filter.superhost = false;
+  // if (superhost) filter.superhost = false;
   if (amenityList) filter.amenityList = [];
   if (facilityList) filter.facilityList = [];
   if (hostLangList) filter.hostLangList = [];
@@ -147,21 +148,21 @@ const filterInit = {
 };
 
 const initialState = {
-  ...reducerUtils.initial(),
-  // data: {
-  //   homes: [],
-  //   dataTotal: 0,
-  //   filterCondition: {
-  //     superhost: false,
-  //     amenityList: [],
-  //     facilityList: [],
-  //     hostLangList: [],
-  //   },
-  //   mapCenter: { lat: 0, lng: 0 },
-  //   priceArray: [],
-  //   averagePrice: 0,
-  //   recentHomes: [],
-  // },
+  // ...reducerUtils.initial(),
+  data: {
+    homes: [],
+    dataTotal: 0,
+    filterCondition: {
+      // superhost: false,
+      // amenityList: [],
+      // facilityList: [],
+      // hostLangList: [],
+    },
+    mapCenter: { lat: 0, lng: 0 },
+    priceArray: [],
+    averagePrice: 0,
+    recentHomes: [],
+  },
   searchForm: {},
   headerState: false,
   viewState: 'result',
@@ -210,7 +211,11 @@ const search = (state = initialState, action) => {
         filterApplied: {
           ...state.filterApplied,
           ...modalFilterInit(action.payload.filterCondition),
-          ..._.pick(state.searchForm, modals),
+          // ..._.pick(state.searchForm, [...roomTypes, ...prices, ...modals]),
+          ..._.mapValues(
+            _.pick(state.searchForm, [...roomTypes, ...prices, ...modals]),
+            value => parseInt(value),
+          ),
         },
       };
     case FETCH_DATA_ERROR:

@@ -22,7 +22,7 @@ const FilterModalContainer = () => {
   const onSeemore = name => setSeemore({ ...seeInit, [name]: !seemore[name] });
 
   const { filterCondition } = useSelector(state => state.search.data);
-  const { popupState, filterApplied, viewState } = useSelector(
+  const { popupState, filterApplied, viewState, data } = useSelector(
     state => state.search,
   );
 
@@ -60,6 +60,7 @@ const FilterModalContainer = () => {
   return (
     <FilterModal
       popupState={popupState[name]}
+      dataTotal={data.dataTotal}
       viewState={viewState}
       range={range}
       filterCondition={filterCondition}
