@@ -1,4 +1,14 @@
+import * as api from '../Api/messageApi';
+import {
+  fetchDataThunk,
+  reducerUtils,
+  handleAsyncActions,
+} from '../lib/asyncUtils';
 // ACTION TYPE
+const FETCH_MESSAGE = 'message/FETCH_MESSAGE';
+const FETCH_MESSAGE_SUCCESS = 'message/FETCH_MESSAGE_SUCCESS';
+const FETCH_MESSAGE_ERROR = 'message/FETCH_MESSAGE_ERROR';
+
 const SHOW_MESSAGE_DETAIL_SECTION = 'message/SHOW_MESSAGE_DETAIL_SECTION';
 const HIDE_MESSAGE_DETAIL_SECTION = 'message/HIDE_MESSAGE_DETAIL_SECTION';
 const SHOW_MESSAGE_LIST_SECTION = 'message/SHOW_MESSAGE_LIST_SECTION';
