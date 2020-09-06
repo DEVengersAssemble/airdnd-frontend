@@ -8,10 +8,21 @@ import PricePopupContainer from '../../Containers/Search/PricePopupContainer';
 import RoomTypePopupContainer from '../../Containers/Search/RoomTypePopupContainer';
 import RefundPopupContainer from '../../Containers/Search/RefundPopupContainer';
 
-export const FilterButton = ({ children, text, onClick, isApplied }) => {
+export const FilterButton = ({
+  children,
+  text,
+  onClick,
+  isOpen,
+  isApplied,
+}) => {
   return (
     <StFilterWrapper>
-      <FilterBtn btnType="oval" onClick={onClick} isApplied={isApplied}>
+      <FilterBtn
+        btnType="oval"
+        onClick={onClick}
+        isApplied={isApplied}
+        isOpen={isOpen}
+      >
         {text}
       </FilterBtn>
       {children}
@@ -47,8 +58,8 @@ export const FilterList = ({ mapState, onShowMap, dateDiff, dataTotal }) => {
 const FilterBtn = styled(Button)`
   margin-right: 1rem;
   font-size: 14px;
-  ${({ isApplied, theme }) =>
-    isApplied &&
+  ${({ isApplied, isOpen, theme }) =>
+    (isApplied || isOpen) &&
     css`
       border: 2px solid ${theme.color.black};
       background: ${theme.color.lightGray};

@@ -124,21 +124,21 @@ export const modals = [
 export const roomTypes = ['roomTypeHouse', 'roomTypePrivate', 'roomTypeShared'];
 export const prices = ['priceMin', 'priceMax'];
 
-const popupInit = {
-  refund: false,
-  roomType: false,
-  price: false,
-  modal: false,
-  all: false,
-};
-
-const filterInit = {
+export const filterInit = {
   refund: 0,
   roomTypeHouse: 0,
   roomTypePrivate: 0,
   roomTypeShared: 0,
   priceMin: 12000,
   priceMax: 1000000,
+};
+
+const popupInit = {
+  refund: false,
+  roomType: false,
+  price: false,
+  modal: false,
+  all: false,
 };
 
 const initialState = {
@@ -169,6 +169,7 @@ const initialState = {
   filterApplied: filterInit,
   filterPrevState: {},
   isFilterChanged: false,
+  page: 1,
 };
 
 const getFilterGroup = (filterName, state, keep) => {
