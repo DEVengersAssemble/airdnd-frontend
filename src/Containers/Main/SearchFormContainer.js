@@ -7,27 +7,63 @@ import { setSearchData } from '../../Modules/searchForm';
 import { getLocationAutoComplete } from '../../Api/searchFormApi';
 
 const SearchFormContainer = ({ isSearchBtnClicked }) => {
-  console.log('component rerenders........');
   let history = useHistory();
   const dispatch = useDispatch();
   const searchData = useSelector(state => state.searchForm);
   const [locationResult, setLocationResult] = useState([]);
   const [type, setType] = useState(null);
-  console.log('[type]: ', type);
-  const changeType = type => {
-    setType(() => type);
+  const latestType = useRef(type);
+
+  latestType.current = type;
+
+  const {
+    location,
+    checkIn,
+    checkOut,
+    dateDiff,
+    flexibleDate,
+    guests,
+  } = searchData;
+
+  const searchFormRef = useRef();
+  const locationWrapperRef = useRef();
+  const checkInWrapperRef = useRef();
+  const checkOutWrapperRef = useRef();
+  const guestsWrapperRef = useRef();
+
+  const locationListRef = useRef();
+  const calendarPopupRef = useRef();
+  const checkOutPopupRef = useRef();
+  const guestsPopupRef = useRef();
+
+  const locationResetBtnRef = useRef();
+  const checkInResetBtnRef = useRef();
+  const checkOutResetBtnRef = useRef();
+  const guestsResetBtnRef = useRef();
+
+  const refObj = {
+    searchFormRef,
+    locationWrapperRef,
+    checkInWrapperRef,
+    checkOutWrapperRef,
+    guestsWrapperRef,
+    locationListRef,
+    calendarPopupRef,
+    checkOutPopupRef,
+    guestsPopupRef,
+    locationResetBtnRef,
+    checkInResetBtnRef,
+    checkOutResetBtnRef,
+    guestsResetBtnRef,
+  };
+
+  const changeType = newType => {
+    setType(newType);
   };
 
   const handleSubmit = e => {
     e.preventDefault();
-    const {
-      location,
-      checkIn,
-      checkOut,
-      dateDiff,
-      flexibleDate,
-      guests,
-    } = searchData;
+
     let newCheckIn = checkIn;
     let newCheckOut = checkOut;
     if (checkIn && !checkOut) {
@@ -84,13 +120,11 @@ const SearchFormContainer = ({ isSearchBtnClicked }) => {
   };
 
   const setCheckIn = date => {
-    console.log('setCheckIn()');
     changeSearchData('checkIn', date);
     changeType('checkOut');
   };
 
   const setCheckOut = date => {
-    console.log('setCheckOut()');
     changeSearchData('checkOut', date);
     changeType('guests');
   };
@@ -116,116 +150,53 @@ const SearchFormContainer = ({ isSearchBtnClicked }) => {
     changeSearchData('guests', value);
   };
 
-  const locationWrapperRef = useRef();
-  const checkInWrapperRef = useRef();
-  const checkOutWrapperRef = useRef();
-  const guestsWrapperRef = useRef();
-
-  const locationListRef = useRef();
-  const calendarPopupRef = useRef();
-  const checkOutPopupRef = useRef();
-  const guestsPopupRef = useRef();
-
-  const locationResetBtnRef = useRef();
-  const checkInResetBtnRef = useRef();
-  const checkOutResetBtnRef = useRef();
-  const guestsResetBtnRef = useRef();
-
-  const refObj = {
-    locationWrapperRef,
-    checkInWrapperRef,
-    checkOutWrapperRef,
-    guestsWrapperRef,
-    locationListRef,
-    calendarPopupRef,
-    checkOutPopupRef,
-    guestsPopupRef,
-    locationResetBtnRef,
-    checkInResetBtnRef,
-    checkOutResetBtnRef,
-    guestsResetBtnRef,
-  };
-
   const changeFocus = () => {
-    console.log('changeFocus...', type);
-    if (type === 'checkIn') checkInWrapperRef.current.focus();
-    else if (type === 'checkOut') checkOutWrapperRef.current.focus();
-    else if (type === 'guests') guestsWrapperRef.current.focus();
+    if (latestType.current === 'checkIn') checkInWrapperRef.current.focus();
+    else if (latestType.current === 'checkOut')
+      checkOutWrapperRef.current.focus();
+    else if (latestType.current === 'guests') guestsWrapperRef.current.focus();
   };
 
   const handlePopup = useCallback(
     ({ target }) => {
-      console.log('====handlePopup..type:', type);
       if (locationListRef.current && locationListRef.current.contains(target)) {
-        console.log(1);
         changeType('checkIn');
       } else if (locationWrapperRef.current.contains(target)) {
-        console.log(2);
         changeType('location');
       } else if (
         checkInWrapperRef.current.contains(target) &&
         !calendarPopupRef.current.contains(target)
       ) {
-        console.log(3);
         changeType('checkIn');
       } else if (
         checkOutWrapperRef.current.contains(target) &&
         !calendarPopupRef.current.contains(target)
       ) {
-        console.log(4);
         changeType('checkOut');
-      } else if (guestsWrapperRef.current.contains(target))
+      } else if (guestsWrapperRef.current.contains(target)) {
         changeType('guests');
-      else if (
-        (type === 'location' &&
-          !locationResetBtnRef.current.contains(target) &&
-          !locationWrapperRef.current.contains(target)) ||
-        (type === 'checkIn' &&
-          !calendarPopupRef.current.contains(target) &&
-          !checkInWrapperRef.current.contains(target)) ||
-        (type === 'checkOut' &&
-          !calendarPopupRef.current.contains(target) &&
-          !checkOutWrapperRef.current.contains(target)) ||
-        (type === 'guests' &&
-          !guestsPopupRef.current.contains(target) &&
-          !guestsResetBtnRef.current.contains(target))
+      } else if (type === 'checkOut' && latestType.current === 'guests') {
+        changeType('guests');
+      } else if (
+        latestType.current &&
+        !searchFormRef.current.contains(target) &&
+        !calendarPopupRef.current.contains(target)
       ) {
-        console.log(5);
-        // console.log(
-        //   type === 'location' &&
-        //     !locationResetBtnRef.current.contains(target) &&
-        //     !locationWrapperRef.current.contains(target),
-        // );
-        // console.log(
-        //   type === 'checkIn' &&
-        //     !calendarPopupRef.current.contains(target) &&
-        //     !checkInWrapperRef.current.contains(target),
-        // );
-        // console.log(
-        //   type === 'checkOut' &&
-        //     !calendarPopupRef.current.contains(target) &&
-        //     !checkOutWrapperRef.current.contains(target),
-        // );
-        // console.log(
-        //   type === 'guests' &&
-        //     !guestsPopupRef.current.contains(target) &&
-        //     !guestsResetBtnRef.current.contains(target),
-        // );
-        // console.log('close...');
         changeType(null);
       }
     },
-    [type],
+    [latestType.current],
   );
+  useEffect(() => {
+    document.addEventListener('click', handlePopup);
+    return () => {
+      document.removeEventListener('click', handlePopup);
+    };
+  }, [handlePopup]);
 
   useEffect(() => {
-    console.log('2...useEffect...type: ', type);
-    document.addEventListener('click', e => handlePopup(e));
-    type && changeFocus();
-    return () => {
-      document.removeEventListener('click', e => handlePopup(e));
-    };
-  }, [type, handlePopup]);
+    if (type) changeFocus();
+  });
 
   return (
     <SearchForm
