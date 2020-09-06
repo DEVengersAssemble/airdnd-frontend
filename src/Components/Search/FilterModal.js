@@ -7,7 +7,7 @@ import Button from '../Global/Button';
 import {
   BookingFilter,
   CounterFilter,
-  MoreFilters,
+  SuperhostFilters,
   CheckboxFilter,
   PriceFilter,
   RoomTypeFilter,
@@ -16,6 +16,7 @@ import {
 
 const FilterModal = ({
   popupState,
+  dataTotal,
   viewState,
   filterCondition,
   filter,
@@ -28,14 +29,11 @@ const FilterModal = ({
   onCheck,
   onReset,
   onToggle,
-  onIncrease,
-  onDecrease,
+  onCounter,
 }) => {
   const {
-    instantBooking,
-    bedroom,
-    convenience,
-    convenienceList,
+    superhost,
+    amenityList,
     facilityList,
     hostLangList,
   } = filterCondition;
@@ -48,31 +46,23 @@ const FilterModal = ({
       title="필터 추가하기"
     >
       <StFilterList>
-        {viewState === 'map' && <RefundFilter />}
-        {viewState === 'map' && <RoomTypeFilter />}
+        {viewState === 'map' && dataTotal !== 0 && <RefundFilter />}
+        {viewState === 'map' && dataTotal !== 0 && <RoomTypeFilter />}
         {viewState === 'map' && (
           <PriceFilter range={range} setRange={setRange} />
         )}
-        {instantBooking && (
-          <BookingFilter filter={filter} onToggle={onToggle} />
-        )}
-        {bedroom && (
-          <CounterFilter
-            filter={filter.bedroom}
-            onIncrease={onIncrease}
-            onDecrease={onDecrease}
-          />
-        )}
-        {convenience && <MoreFilters filter={filter} onToggle={onToggle} />}
-        {convenienceList && (
+        <BookingFilter filter={filter} onToggle={onToggle} />
+        <CounterFilter filter={filter} onCounter={onCounter} />
+        {superhost && <SuperhostFilters filter={filter} onToggle={onToggle} />}
+        {amenityList && (
           <CheckboxFilter
             title="편의 시설"
-            listName="convenienceList"
-            list={convenienceList}
-            filter={filter.convenienceList}
+            listName="amenityList"
+            list={amenityList}
+            filter={filter.amenityList}
             onCheck={onCheck}
-            seemore={seemore.convenience}
-            onSeemore={() => onSeemore('convenience')}
+            seemore={seemore.amenity}
+            onSeemore={() => onSeemore('amenity')}
           />
         )}
         {facilityList && (

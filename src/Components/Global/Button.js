@@ -171,4 +171,4 @@ export const StBtn = styled.button`
   ${transitionStyles};
 `;
 
-export default Button;
+export default React.memo(Button);
