@@ -111,7 +111,7 @@ export const modalFilterInit = filterCondition => {
 };
 
 // initial state
-export const modals = [
+const modals = [
   'instantBooking',
   'bedCount',
   'bedroomCount',
@@ -121,8 +121,9 @@ export const modals = [
   'facilityList',
   'hostLangList',
 ];
-export const roomTypes = ['roomTypeHouse', 'roomTypePrivate', 'roomTypeShared'];
-export const prices = ['priceMin', 'priceMax'];
+const roomTypes = ['roomTypeHouse', 'roomTypePrivate', 'roomTypeShared'];
+const prices = ['priceMin', 'priceMax'];
+export const all = [...modals, ...roomTypes, ...prices, 'refund'];
 
 export const filterInit = {
   refund: 0,
@@ -172,9 +173,9 @@ const initialState = {
   page: 1,
 };
 
-const getFilterGroup = (filterName, state, keep) => {
+const getFilterGroup = (key, state, keep) => {
   const obj = keep ? state.filterApplied : filterInit;
-  switch (filterName) {
+  switch (key) {
     case 'roomType':
       return _.pick(obj, roomTypes);
     case 'price':
@@ -188,7 +189,7 @@ const getFilterGroup = (filterName, state, keep) => {
         ? obj
         : { ...filterInit, ...modalFilterInit(state.data.filterCondition) };
     default:
-      return { [filterName]: false };
+      return { [key]: false };
   }
 };
 
@@ -207,11 +208,7 @@ const search = (state = initialState, action) => {
         filterApplied: {
           ...state.filterApplied,
           ...modalFilterInit(action.payload.filterCondition),
-          // ..._.pick(state.searchForm, [...roomTypes, ...prices, ...modals]),
-          ..._.mapValues(
-            _.pick(state.searchForm, [...roomTypes, ...prices, ...modals]),
-            value => parseInt(value),
-          ),
+          ..._.pick(state.searchForm, [...all, 'page']),
         },
         isFilterChanged: false,
       };
