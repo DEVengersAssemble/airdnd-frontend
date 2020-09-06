@@ -5,3 +5,6 @@ export const fetchMessageData = async () => {
   console.log('==========================', response);
   return response.data;
 };
+
+export const patchMessageFilter = async payload =>
+  await axios.patch(`/back/message/${payload.id}`, payload);
