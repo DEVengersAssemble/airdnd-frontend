@@ -36,7 +36,7 @@ const MsgSectionHeaderContainer = () => {
   const tempMsg = tempMsgs.find(
     (_, index) => tempMsgs[index] === tempMsgs[activeIndex],
   );
-  console.log(tempMsg);
+
   // ! event
   const onClickShowList = () => {
     dispatch(hideMsgDetailSection());

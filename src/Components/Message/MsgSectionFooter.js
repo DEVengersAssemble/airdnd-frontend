@@ -1,7 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import theme from '../../style/theme';
-import Button from '../Global/Button';
 import { Input } from '../Global/Input';
 import { AiOutlinePicture } from 'react-icons/ai';
 
@@ -9,21 +7,11 @@ const MsgSectionFooter = ({ msg, onTextChange, onMsgSubmit }) => {
   return (
     <MsgSectionFooterWrapper>
       <MsgSectionFooterInner>
-        <Button
-          btnType="circle"
-          border="none"
-          hover={{
-            backgroundColor: theme.color.lightGray,
-          }}
-          style={{ width: '4rem', height: '4rem' }}
-        >
-          <MsgSectionFooterImageUploadIcon />
-        </Button>
         <StForm onSubmit={onMsgSubmit}>
           <Input
             message
             placeholder="메시지를 입력하세요."
-            // value={msg} //sochet msg (clearInput을 통해 전송 후 메시지 리셋)
+            value={msg} //sochet msg (clearInput을 통해 전송 후 메시지 리셋)
             onChange={onTextChange}
           />
         </StForm>
@@ -54,8 +42,33 @@ const MsgSectionFooterImageUploadIcon = styled(AiOutlinePicture)`
   font-size: 2rem;
 `;
 
+// const StImageButton = styled.button`
+//   width: 4.5rem;
+//   height: 4.5rem;
+//   border: none;
+//   border-radius: 50%;
+//   &:hover {
+//     background: ${({ theme }) => theme.color.lightGray};
+//   }
+//   cursor: pointer;
+// `;
+
+// const StImageLable = styled.label`
+//   width: 100%;
+//   height: 100%;
+//   cursor: pointer;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// `;
+
+// const StImageInput = styled.input`
+//   display: none;
+// `;
+
 const StForm = styled.form`
-  width: 100%;
+  margin-left: 1rem;
+  width: 90%;
 `;
 
 export default MsgSectionFooter;
