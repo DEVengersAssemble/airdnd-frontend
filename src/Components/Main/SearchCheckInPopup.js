@@ -7,13 +7,12 @@ import CalendarContainer from '../../Containers/Global/CalendarContainer';
 
 const StSearchCalendarPopupWrapper = styled.div`
   position: relative;
-  left: -20px;
 `;
 
 const StSearchCalendarPopup = styled(Popup)`
   top: 46px;
-  left: 0;
-  transform: translate(-50%, 0);
+  right: 0;
+  transform: translate(50%, 0);
   border-radius: 20px;
   padding: 20px;
 `;
@@ -39,9 +38,7 @@ const SearchCalendarPopup = forwardRef(
     const { checkIn, checkOut } = searchData;
     return (
       <StSearchCalendarPopupWrapper ref={ref}>
-        <StSearchCalendarPopup
-          popupState={type === 'checkIn' || type === 'checkOut'}
-        >
+        <StSearchCalendarPopup popupState={type === 'checkIn'}>
           <CalendarContainer
             responsiveScreen={isResponsive}
             setCheckinData={setCheckIn}
