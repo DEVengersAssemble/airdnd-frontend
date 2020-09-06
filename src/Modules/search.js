@@ -98,11 +98,11 @@ export const resetModalFilter = name => ({
 export const modalFilterInit = filterCondition => {
   const { amenityList, facilityList, hostLangList } = filterCondition;
   const filter = {
-    instantBooking: false,
+    instantBooking: 0,
     bedCount: 0,
     bedroomCount: 0,
     bathroomCount: 0,
-    superhost: false,
+    superhost: 0,
   };
   if (amenityList) filter.amenityList = [];
   if (facilityList) filter.facilityList = [];
@@ -111,7 +111,7 @@ export const modalFilterInit = filterCondition => {
 };
 
 // initial state
-const modals = [
+export const modals = [
   'instantBooking',
   'bedCount',
   'bedroomCount',
@@ -121,8 +121,8 @@ const modals = [
   'facilityList',
   'hostLangList',
 ];
-const roomTypes = ['roomTypeHouse', 'roomTypePrivate', 'roomTypeShared'];
-const prices = ['priceMin', 'priceMax'];
+export const roomTypes = ['roomTypeHouse', 'roomTypePrivate', 'roomTypeShared'];
+export const prices = ['priceMin', 'priceMax'];
 
 const popupInit = {
   refund: false,
@@ -133,30 +133,30 @@ const popupInit = {
 };
 
 const filterInit = {
-  refund: false,
-  roomTypeHouse: false,
-  roomTypePrivate: false,
-  roomTypeShared: false,
+  refund: 0,
+  roomTypeHouse: 0,
+  roomTypePrivate: 0,
+  roomTypeShared: 0,
   priceMin: 12000,
   priceMax: 1000000,
 };
 
 const initialState = {
-  // ...reducerUtils.initial(),
-  data: {
-    homes: [],
-    dataTotal: 0,
-    filterCondition: {
-      // superhost: false,
-      // amenityList: [],
-      // facilityList: [],
-      // hostLangList: [],
-    },
-    mapCenter: { lat: 0, lng: 0 },
-    priceArray: [],
-    averagePrice: 0,
-    recentHomes: [],
-  },
+  ...reducerUtils.initial(),
+  // data: {
+  //   homes: [],
+  //   dataTotal: 0,
+  //   filterCondition: {
+  // superhost: false,
+  // amenityList: [],
+  // facilityList: [],
+  // hostLangList: [],
+  //   },
+  //   mapCenter: { lat: 0, lng: 0 },
+  //   priceArray: [],
+  //   averagePrice: 0,
+  //   recentHomes: [],
+  // },
   searchForm: {},
   headerState: false,
   viewState: 'result',
