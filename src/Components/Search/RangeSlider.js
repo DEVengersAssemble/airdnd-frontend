@@ -25,7 +25,8 @@ const RangeSlider = ({
   return (
     <>
       <StLargeSpan>
-        평균 1박 요금은 ₩{averagePrice.toLocaleString()}입니다
+        {averagePrice !== 0 &&
+          `평균 1박 요금은 ₩${averagePrice.toLocaleString()}입니다`}
       </StLargeSpan>
       <StRangeWrapper>
         <Range
@@ -58,7 +59,7 @@ const RangeSlider = ({
           value={min}
           short
           pay="₩"
-          onChange={onChangeMinPrice}
+          onChange={e => onChangeMinPrice(e, 'priceMin')}
           onBlur={onSetRange}
         />
         <span>―</span>
@@ -69,7 +70,7 @@ const RangeSlider = ({
           value={max}
           short
           pay="₩"
-          onChange={onChangeMaxPrice}
+          onChange={e => onChangeMaxPrice(e, 'priceMax')}
           onBlur={onSetRange}
         />
       </StInputWrapper>

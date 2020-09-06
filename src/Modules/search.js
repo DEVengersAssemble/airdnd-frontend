@@ -1,10 +1,12 @@
-import * as api from '../Api/Api';
+import * as api from '../Api/searchApi';
 import { fetchDataThunk, reducerUtils } from '../lib/asyncUtils';
+import _ from 'lodash';
 
 // action type
 const FETCH_DATA = 'search/FETCH_DATA';
 const FETCH_DATA_SUCCESS = 'search/FETCH_DATA_SUCCESS';
 const FETCH_DATA_ERROR = 'search/FETCH_DATA_ERROR';
+const GET_SEARCH_FORM = 'search/GET_SEARCH_FORM';
 
 const HOVER_HOME = 'search/HOVER_HOME';
 const BLUR_HOME = 'search/BLUR_HOME';
@@ -12,6 +14,7 @@ const CHANGE_HEART = 'search/CHANGE_HEART';
 
 const OPEN_HEADER = 'search/OPEN_HEADER';
 const CLOSE_HEADER = 'search/CLOSE_HEADER';
+const SET_DATE_HEADER = 'search/SET_DATE_HEADER';
 
 const OPEN_MAP = 'search/OPEN_MAP';
 const CLOSE_MAP = 'search/CLOSE_MAP';
@@ -28,16 +31,20 @@ const CLOSE_POPUP = 'search/CLOSE_POPUP';
 const HANDLE_RANGE = 'search/HANDLE_RANGE';
 const SET_FILTER = 'search/SET_FILTER';
 const RESET_FILTER = 'search/RESET_FILTER';
-const SAVE_FILTER = 'search/SAVE_FILTER';
+const UNSAVE_FILTER = 'search/UNSAVE_FILTER';
 
 const APPLY_TOGGLE_FILTER = 'search/APPLY_TOGGLE_FILTER';
 const APPLY_COUNTER_FILTER = 'search/APPLY_COUNTER_FILTER';
 const APPLY_CHECK_FILTER = 'search/APPLY_CHECK_FILTER';
-const SET_MODAL_FILTER = 'search/SET_MODAL_FILTER';
 const RESET_MODAL_FILTER = 'search/RESET_MODAL/FILTER';
+const UNSAVE_MODAL_FILTER = 'search/UNSAVE_MODAL_FILTER';
 
 // action creator
 export const fetchData = fetchDataThunk(FETCH_DATA, api.fetchSearchedData);
+export const getSearchForm = searchForm => ({
+  type: GET_SEARCH_FORM,
+  searchForm,
+});
 
 export const hoverHome = homeId => ({ type: HOVER_HOME, homeId });
 export const blurHome = () => ({ type: BLUR_HOME });
@@ -45,6 +52,7 @@ export const changeHeart = homeId => ({ type: CHANGE_HEART, homeId });
 
 export const openHeader = () => ({ type: OPEN_HEADER });
 export const closeHeader = () => ({ type: CLOSE_HEADER });
+export const setDateHeader = () => ({ type: SET_DATE_HEADER });
 
 export const openMap = () => ({ type: OPEN_MAP });
 export const closeMap = () => ({ type: CLOSE_MAP });
@@ -57,16 +65,15 @@ export const openMarker = id => ({ type: OPEN_MARKER, id });
 export const closeMarker = () => ({ type: CLOSE_MARKER });
 
 export const openPopup = name => ({ type: OPEN_POPUP, name });
-export const closePopup = name => ({ type: CLOSE_POPUP, name });
+export const closePopup = (name, isApplied) => ({
+  type: CLOSE_POPUP,
+  name,
+  isApplied,
+});
 export const handleRange = handler => ({ type: HANDLE_RANGE, handler });
 export const setFilter = (name, value) => ({ type: SET_FILTER, name, value });
 export const resetFilter = name => ({ type: RESET_FILTER, name });
-export const saveFilter = (name, value, state) => ({
-  type: SAVE_FILTER,
-  name,
-  value,
-  state,
-});
+export const unsaveFilter = name => ({ type: UNSAVE_FILTER, name });
 
 export const applyToggleFilter = (name, value) => ({
   type: APPLY_TOGGLE_FILTER,
@@ -84,88 +91,104 @@ export const applyCheckFilter = (list, name, value) => ({
   name,
   value,
 });
-export const setModalFilter = modalFilter => ({
-  type: SET_MODAL_FILTER,
-  modalFilter,
-});
-export const resetModalFilter = filterCondition => ({
+export const resetModalFilter = name => ({
   type: RESET_MODAL_FILTER,
-  filterCondition,
+  name,
 });
 export const modalFilterInit = filterCondition => {
-  const filter = {};
-  const {
-    instantBooking,
-    bedroom,
-    convenience,
-    convenienceList,
-    facilityList,
-    hostLangList,
-  } = filterCondition;
-  if (instantBooking) filter.instantBooking = false;
-  if (bedroom) filter.bedroom = { bed: 0, room: 0, bathroom: 0 };
-  if (convenience) filter.convenience = false;
-  if (convenienceList) {
-    filter.convenienceList = {};
-    convenienceList.forEach(item => (filter.convenienceList[item] = false));
-  }
-  if (facilityList) {
-    filter.facilityList = {};
-    facilityList.forEach(item => (filter.facilityList[item] = false));
-  }
-  if (hostLangList) {
-    filter.hostLangList = {};
-    hostLangList.forEach(item => (filter.hostLangList[item] = false));
-  }
+  const { amenityList, facilityList, hostLangList } = filterCondition;
+  const filter = {
+    instantBooking: false,
+    bedCount: 0,
+    bedroomCount: 0,
+    bathroomCount: 0,
+    superhost: false,
+  };
+  if (amenityList) filter.amenityList = [];
+  if (facilityList) filter.facilityList = [];
+  if (hostLangList) filter.hostLangList = [];
   return filter;
 };
 
 // initial state
-const filterInit = {
-  refund: false,
-  roomType: {
-    house: false,
-    private: false,
-    shared: false,
-  },
-  price: {
-    min: 12000,
-    max: 1000000,
-  },
-};
+const modals = [
+  'instantBooking',
+  'bedCount',
+  'bedroomCount',
+  'BathroomCount',
+  'superhost',
+  'amenityList',
+  'facilityList',
+  'hostLangList',
+];
+const roomTypes = ['roomTypeHouse', 'roomTypePrivate', 'roomTypeShared'];
+const prices = ['priceMin', 'priceMax'];
 
 const popupInit = {
   refund: false,
   roomType: false,
   price: false,
   modal: false,
+  all: false,
+};
+
+const filterInit = {
+  refund: false,
+  roomTypeHouse: false,
+  roomTypePrivate: false,
+  roomTypeShared: false,
+  priceMin: 12000,
+  priceMax: 1000000,
 };
 
 const initialState = {
-  ...reducerUtils.initial(),
+  // ...reducerUtils.initial(),
+  data: {
+    homes: [],
+    dataTotal: 0,
+    filterCondition: {
+      // superhost: false,
+      // amenityList: [],
+      // facilityList: [],
+      // hostLangList: [],
+    },
+    mapCenter: { lat: 0, lng: 0 },
+    priceArray: [],
+    averagePrice: 0,
+    recentHomes: [],
+  },
   searchForm: {},
   headerState: false,
   viewState: 'result',
   mapState: true,
-  mapZoom: 10,
+  mapZoom: 12,
   markerState: null,
   hoveredHome: null,
-  popup: popupInit,
-  filterDisabled: {
-    refund: true,
-    roomType: true,
-    price: true,
-    modal: true,
-  },
-  filterApplied: {
-    ...filterInit,
-    instantBooking: false,
-    bedroom: {
-      bed: 0,
-      room: 0,
-      bathroom: 0,
-    },
-  },
+  popupState: popupInit,
+  popupApplied: popupInit,
+  filterApplied: filterInit,
+  filterPrevState: {},
+  isFilterChanged: false,
+};
+
+const getFilterGroup = (filterName, state, keep) => {
+  const obj = keep ? state.filterApplied : filterInit;
+  switch (filterName) {
+    case 'roomType':
+      return _.pick(obj, roomTypes);
+    case 'price':
+      return _.pick(obj, prices);
+    case 'modal':
+      return keep
+        ? _.pick(obj, [...modals])
+        : modalFilterInit(state.data.filterCondition);
+    case 'all':
+      return keep
+        ? obj
+        : { ...filterInit, ...modalFilterInit(state.data.filterCondition) };
+    default:
+      return { [filterName]: false };
+  }
 };
 
 // reducer
@@ -175,7 +198,6 @@ const search = (state = initialState, action) => {
       return {
         ...state,
         ...reducerUtils.loading(),
-        searchForm: action.param,
       };
     case FETCH_DATA_SUCCESS:
       return {
@@ -184,12 +206,23 @@ const search = (state = initialState, action) => {
         filterApplied: {
           ...state.filterApplied,
           ...modalFilterInit(action.payload.filterCondition),
+          // ..._.pick(state.searchForm, [...roomTypes, ...prices, ...modals]),
+          ..._.mapValues(
+            _.pick(state.searchForm, [...roomTypes, ...prices, ...modals]),
+            value => parseInt(value),
+          ),
         },
+        isFilterChanged: false,
       };
     case FETCH_DATA_ERROR:
       return {
         ...state,
         ...reducerUtils.error(action.payload),
+      };
+    case GET_SEARCH_FORM:
+      return {
+        ...state,
+        searchForm: action.searchForm,
       };
     case HOVER_HOME:
       return {
@@ -227,6 +260,12 @@ const search = (state = initialState, action) => {
       return {
         ...state,
         headerState: false,
+      };
+    case SET_DATE_HEADER:
+      return {
+        ...state,
+        popupState: popupInit,
+        headerState: true,
       };
     case SHOW_MAP:
       return {
@@ -276,18 +315,25 @@ const search = (state = initialState, action) => {
     case OPEN_POPUP:
       return {
         ...state,
-        popup: {
-          ...state.popup,
+        popupState: {
+          ...state.popupState,
           [action.name]: true,
         },
+        filterPrevState: getFilterGroup(action.name, state, 'keep'),
       };
     case CLOSE_POPUP:
       return {
         ...state,
-        popup: {
-          ...state.popup,
+        popupState: {
+          ...state.popupState,
           [action.name]: false,
         },
+        popupApplied: {
+          ...state.popupApplied,
+          [action.name]: action.isApplied,
+        },
+        isFilterChanged: !_.isEqual(state.filterPrevState, state.filterApplied),
+        filterPrevState: {},
       };
     case SET_FILTER:
       return {
@@ -302,21 +348,21 @@ const search = (state = initialState, action) => {
         ...state,
         filterApplied: {
           ...state.filterApplied,
-          [action.name]: filterInit[action.name],
+          ...getFilterGroup(action.name),
         },
       };
-    case SAVE_FILTER:
+    case UNSAVE_FILTER:
       return {
         ...state,
         filterApplied: {
           ...state.filterApplied,
-          [action.name]: action.value,
+          ...state.filterPrevState,
         },
-        filterDisabled: {
-          ...state.filterDisabled,
-          [action.name]: action.state,
+        popupState: {
+          ...state.popupState,
+          [action.name]: false,
         },
-        popup: popupInit,
+        filterPrevState: {},
       };
     case APPLY_TOGGLE_FILTER:
       return {
@@ -331,10 +377,7 @@ const search = (state = initialState, action) => {
         ...state,
         filterApplied: {
           ...state.filterApplied,
-          bedroom: {
-            ...state.filterApplied.bedroom,
-            [action.name]: action.value,
-          },
+          [action.name]: action.value,
         },
       };
     case APPLY_CHECK_FILTER:
@@ -342,27 +385,27 @@ const search = (state = initialState, action) => {
         ...state,
         filterApplied: {
           ...state.filterApplied,
-          [action.list]: {
-            ...state.filterApplied[action.list],
-            [action.name]: action.value,
-          },
+          [action.list]: action.value
+            ? state.filterApplied[action.list].filter(
+                name => name !== action.name,
+              )
+            : state.filterApplied[action.list].concat(action.name),
         },
-      };
-    case SET_MODAL_FILTER:
-      return {
-        ...state,
-        filterApplied: {
-          ...state.filterApplied,
-          ...action.modalFilter,
-        },
-        popup: popupInit,
       };
     case RESET_MODAL_FILTER:
       return {
         ...state,
         filterApplied: {
           ...state.filterApplied,
-          ...modalFilterInit(state.data.filterCondition),
+          ...getFilterGroup(action.name, state),
+        },
+      };
+    case UNSAVE_MODAL_FILTER:
+      return {
+        ...state,
+        filterApplied: {
+          ...state.filterApplied,
+          ...state.filterPrevState,
         },
       };
     default:

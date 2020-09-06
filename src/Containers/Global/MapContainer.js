@@ -15,7 +15,7 @@ const MapContainer = ({ markers }) => {
   const { mapCenter } = useSelector(state => state.search.data);
   const { mapZoom, viewState } = useSelector(state => state.search);
   const dispatch = useDispatch();
-  const openFilterModal = () => dispatch(openPopup('modal'));
+  const openFilterModal = () => dispatch(openPopup('all'));
   const updateZoom = zoom => dispatch(zoomSet(zoom));
   const onHideMap = () => dispatch(hideMap());
   const onCloseMap = () => dispatch(closeMap());

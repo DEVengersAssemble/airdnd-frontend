@@ -8,7 +8,12 @@ import {
   MapFilterButton,
 } from '../Search/MapButton';
 import { compose, withProps, withState, withHandlers } from 'recompose';
-import { withScriptjs, withGoogleMap, GoogleMap } from 'react-google-maps';
+import {
+  withScriptjs,
+  withGoogleMap,
+  GoogleMap,
+  Marker,
+} from 'react-google-maps';
 import theme from '../../style/theme';
 import MapMarkerContainer from '../../Containers/Search/MapMarkerContainer';
 
@@ -22,7 +27,6 @@ const Map = compose(
           width: '100%',
           height: `100vh`,
           position: 'sticky',
-          // position: 'absolute',
           top: '0',
         }}
       />
@@ -33,7 +37,6 @@ const Map = compose(
           width: '100%',
           height: `100vh`,
           position: 'sticky',
-          // position: 'absolute',
           top: '0',
         }}
       />
@@ -44,13 +47,12 @@ const Map = compose(
           width: '100%',
           height: `100vh`,
           position: 'sticky',
-          // position: 'absolute',
           top: '0',
         }}
       />
     ),
   }),
-  withState('zoom', 'onZoomChange', 10),
+  withState('zoom', 'onZoomChange', 13),
   withHandlers(() => {
     const refs = {
       map: undefined,
@@ -62,6 +64,7 @@ const Map = compose(
       },
       setZoom: ({ onZoomChange }) => () => {
         onZoomChange(refs.map.getZoom());
+        console.log(refs.map.getBounds());
       },
     };
   }),
@@ -88,7 +91,7 @@ const Map = compose(
       <GoogleMap
         ref={setRef}
         zoom={mapZoom}
-        defaultZoom={10}
+        defaultZoom={13}
         defaultCenter={{
           lat: center.lat,
           lng: center.lng,

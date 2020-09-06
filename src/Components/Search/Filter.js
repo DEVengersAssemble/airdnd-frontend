@@ -27,7 +27,7 @@ export const BookingFilter = ({ onToggle, filter }) => {
   );
 };
 
-export const MoreFilters = ({ onToggle, filter }) => {
+export const SuperhostFilters = ({ onToggle, filter }) => {
   return (
     <StFilterWrapper>
       <StTitle>편의시설 더 보기</StTitle>
@@ -38,8 +38,8 @@ export const MoreFilters = ({ onToggle, filter }) => {
           <StLink>더 알아보기</StLink>
         </StContentWrapper>
         <Toggle
-          checked={filter.convenience}
-          handleClick={() => onToggle('convenience', !filter.convenience)}
+          checked={filter.superhost}
+          handleClick={() => onToggle('superhost', !filter.superhost)}
         />
       </StContentWrapper>
       <StLargeSpan>장애인 편의시설</StLargeSpan>
@@ -51,51 +51,48 @@ export const MoreFilters = ({ onToggle, filter }) => {
   );
 };
 
-const Counter = ({ onIncrease, onDecrease, filter, name }) => {
+const Counter = ({ onCounter, filter, name }) => {
   return (
     <StContentWrapper align="center" width="10rem">
       <MinusButton
-        onClick={() => onDecrease(name, filter - 1)}
+        onClick={() => onCounter(name, filter - 1)}
         disabled={filter <= 0}
       />
       <StLargeSpan>{filter}</StLargeSpan>
       <PlusButton
-        onClick={() => onIncrease(name, filter + 1)}
+        onClick={() => onCounter(name, filter + 1)}
         disabled={filter >= 15}
       />
     </StContentWrapper>
   );
 };
 
-export const CounterFilter = ({ onIncrease, onDecrease, filter }) => {
+export const CounterFilter = ({ onCounter, filter }) => {
   return (
     <StFilterWrapper>
       <StTitle>침실과 침대</StTitle>
       <StContentWrapper align="center" margin="0 0 2rem">
         <StLargeSpan>침대 수</StLargeSpan>
         <Counter
-          onIncrease={onIncrease}
-          onDecrease={onDecrease}
-          filter={filter.bed}
-          name="bed"
+          onCounter={onCounter}
+          filter={filter.bedCount}
+          name="bedCount"
         />
       </StContentWrapper>
       <StContentWrapper align="center" margin="0 0 2rem">
         <StLargeSpan>침실 수</StLargeSpan>
         <Counter
-          onIncrease={onIncrease}
-          onDecrease={onDecrease}
-          filter={filter.room}
-          name="room"
+          onCounter={onCounter}
+          filter={filter.bedroomCount}
+          name="bedroomCount"
         />
       </StContentWrapper>
       <StContentWrapper align="center">
         <StLargeSpan>욕실 수</StLargeSpan>
         <Counter
-          onIncrease={onIncrease}
-          onDecrease={onDecrease}
-          filter={filter.bathroom}
-          name="bathroom"
+          onCounter={onCounter}
+          filter={filter.bathroomCount}
+          name="bathroomCount"
         />
       </StContentWrapper>
     </StFilterWrapper>
@@ -108,18 +105,21 @@ export const CheckboxFilter = React.memo(
       <StFilterWrapper>
         <StTitle>{title}</StTitle>
         <StCheckboxList seemore={seemore}>
-          {list.map((name, i) => (
-            <StCheckbox
-              key={i}
-              value
-              animation={i > 3}
-              seemore={seemore}
-              checked={filter[name]}
-              onCheck={() => onCheck(listName, name, !filter[name])}
-            >
-              <StLargeSpan>{name}</StLargeSpan>
-            </StCheckbox>
-          ))}
+          {list.map((name, i) => {
+            const checked = filter.includes(name);
+            return (
+              <StCheckbox
+                key={i}
+                value
+                animation={i > 3}
+                seemore={seemore}
+                checked={checked}
+                onCheck={() => onCheck(listName, name, checked)}
+              >
+                <StLargeSpan>{name}</StLargeSpan>
+              </StCheckbox>
+            );
+          })}
         </StCheckboxList>
         {list.length > 4 && (
           <Button

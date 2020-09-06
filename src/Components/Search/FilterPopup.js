@@ -10,31 +10,28 @@ import RoomTypeContainer from '../../Containers/Search/RoomTypeContainer';
 const RefundPopup = ({ popupState, isDisabled, onReset, onSave }) => {
   return (
     <FilterPopup
+      size="350px"
       popupState={popupState}
       isDisabled={isDisabled}
-      size="350px"
       onSave={onSave}
-      onReset={() => onReset(false)}
+      onReset={onReset}
     >
       <RefundContainer />
     </FilterPopup>
   );
 };
 
-const RoomTypePopup = ({ popupState, isDisabled, check, onReset, onSave }) => {
+const RoomTypePopup = ({ popupState, isDisabled, onReset, onSave }) => {
   return (
-    check && (
-      <FilterPopup
-        popupState={popupState}
-        isDisabled={isDisabled}
-        size="365px"
-        onReset={onReset}
-        onSave={onSave}
-        check={check}
-      >
-        <RoomTypeContainer />
-      </FilterPopup>
-    )
+    <FilterPopup
+      size="365px"
+      popupState={popupState}
+      isDisabled={isDisabled}
+      onReset={onReset}
+      onSave={onSave}
+    >
+      <RoomTypeContainer />
+    </FilterPopup>
   );
 };
 
@@ -61,7 +58,7 @@ const PricePopup = ({
   );
 };
 
-const SetDatePopup = ({ popupState, onClickBtn }) => {
+const SetDatePopup = ({ popupState, onSetDate }) => {
   return (
     <StPopup popupState={popupState} size="350px">
       <StContentWrapper content="setDate">
@@ -70,7 +67,7 @@ const SetDatePopup = ({ popupState, onClickBtn }) => {
           btnType="color"
           color="black"
           fontSize="1.4rem"
-          onClick={onClickBtn}
+          onClick={onSetDate}
         >
           날짜 입력
         </Button>
