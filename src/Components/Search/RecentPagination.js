@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { NextButton, PrevButton } from '../Global/SlideButton';
 
-const RecentPagenation = () => {
+const RecentPagination = () => {
   return (
     <StWrapper>
       <StSpan>1 / 3</StSpan>
@@ -29,4 +29,4 @@ const StSpan = styled.span`
   margin-right: 1rem;
 `;
 
-export default RecentPagenation;
+export default RecentPagination;

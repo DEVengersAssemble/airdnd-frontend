@@ -10,7 +10,9 @@ const GET_SEARCH_FORM = 'search/GET_SEARCH_FORM';
 
 const HOVER_HOME = 'search/HOVER_HOME';
 const BLUR_HOME = 'search/BLUR_HOME';
+
 const CHANGE_HEART = 'search/CHANGE_HEART';
+const NAVIGATE_PAGE = 'search/NAVIGATE_PAGE';
 
 const OPEN_HEADER = 'search/OPEN_HEADER';
 const CLOSE_HEADER = 'search/CLOSE_HEADER';
@@ -48,7 +50,9 @@ export const getSearchForm = searchForm => ({
 
 export const hoverHome = homeId => ({ type: HOVER_HOME, homeId });
 export const blurHome = () => ({ type: BLUR_HOME });
+
 export const changeHeart = homeId => ({ type: CHANGE_HEART, homeId });
+export const navigatePage = page => ({ type: NAVIGATE_PAGE, page });
 
 export const openHeader = () => ({ type: OPEN_HEADER });
 export const closeHeader = () => ({ type: CLOSE_HEADER });
@@ -210,6 +214,12 @@ const search = (state = initialState, action) => {
           ..._.pick(state.searchForm, [...all, 'page']),
           ...state.filterApplied,
         },
+        popupApplied: {
+          refund: action.searchForm.refund,
+          roomType: roomTypes.some(key => state.searchForm[key]),
+          price: prices.some(key => state.searchForm[key]),
+          modal: modals.some(key => state.searchForm[key]),
+        },
         isFilterChanged: false,
       };
     case FETCH_DATA_ERROR:
@@ -248,6 +258,11 @@ const search = (state = initialState, action) => {
               : home,
           ),
         },
+      };
+    case NAVIGATE_PAGE:
+      return {
+        ...state,
+        page: action.page,
       };
     case OPEN_HEADER:
       return {

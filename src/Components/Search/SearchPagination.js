@@ -1,8 +1,8 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { NextButton } from '../Global/SlideButton';
 
-const SearchPagenation = () => {
+const SearchPagination = () => {
   return (
     <StWrapper>
       <StNumberWrapper>
@@ -61,4 +61,4 @@ const StGraySpan = styled.span`
   color: ${({ theme }) => theme.color.gray};
 `;
 
-export default SearchPagenation;
+export default SearchPagination;

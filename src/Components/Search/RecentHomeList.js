@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import RecentPagenation from './RecentPagenation';
+import RecentPagination from './RecentPagination';
 import HomeCardContainer from '../../Containers/Search/HomeCardContainer';
 
 const RecentHomeList = ({ mapState, recentHomes }) => {
@@ -10,7 +10,7 @@ const RecentHomeList = ({ mapState, recentHomes }) => {
       <StSpan>
         현재 검색 결과와 일치하도록 날짜와 가격이 업데이트되었습니다.
       </StSpan>
-      <RecentPagenation />
+      <RecentPagination />
       <StHomeWrapper>
         {recentHomes.map(home => (
           <HomeCardContainer

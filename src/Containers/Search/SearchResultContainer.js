@@ -7,7 +7,7 @@ const SearchResultContainer = () => {
   const { mapState, viewState, searchForm, data } = useSelector(
     state => state.search,
   );
-  const { dataTotal } = data;
+
   const dispatch = useDispatch();
   const onOpenMap = () => dispatch(openMap());
   const convertDate = date => {
@@ -20,7 +20,7 @@ const SearchResultContainer = () => {
     <SearchResult
       mapState={mapState}
       view={viewState}
-      dataTotal={dataTotal}
+      dataTotal={data.dataTotal}
       searchForm={searchForm}
       convertDate={convertDate}
       onOpenMap={onOpenMap}
