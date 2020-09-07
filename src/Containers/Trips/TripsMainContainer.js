@@ -20,6 +20,7 @@ const TripsMainContainer = () => {
 
   // ! effect
   useEffect(() => {
+    console.log(tab);
     dispatch(fetchTrips(tab || 'upcoming'));
   }, [dispatch, tab]);
 

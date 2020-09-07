@@ -10,7 +10,9 @@ const GET_SEARCH_FORM = 'search/GET_SEARCH_FORM';
 
 const HOVER_HOME = 'search/HOVER_HOME';
 const BLUR_HOME = 'search/BLUR_HOME';
+
 const CHANGE_HEART = 'search/CHANGE_HEART';
+const NAVIGATE_PAGE = 'search/NAVIGATE_PAGE';
 
 const OPEN_HEADER = 'search/OPEN_HEADER';
 const CLOSE_HEADER = 'search/CLOSE_HEADER';
@@ -48,7 +50,9 @@ export const getSearchForm = searchForm => ({
 
 export const hoverHome = homeId => ({ type: HOVER_HOME, homeId });
 export const blurHome = () => ({ type: BLUR_HOME });
+
 export const changeHeart = homeId => ({ type: CHANGE_HEART, homeId });
+export const navigatePage = page => ({ type: NAVIGATE_PAGE, page });
 
 export const openHeader = () => ({ type: OPEN_HEADER });
 export const closeHeader = () => ({ type: CLOSE_HEADER });
@@ -98,11 +102,11 @@ export const resetModalFilter = name => ({
 export const modalFilterInit = filterCondition => {
   const { amenityList, facilityList, hostLangList } = filterCondition;
   const filter = {
-    instantBooking: false,
+    instantBooking: 0,
     bedCount: 0,
     bedroomCount: 0,
     bathroomCount: 0,
-    superhost: false,
+    superhost: 0,
   };
   if (amenityList) filter.amenityList = [];
   if (facilityList) filter.facilityList = [];
@@ -123,6 +127,27 @@ const modals = [
 ];
 const roomTypes = ['roomTypeHouse', 'roomTypePrivate', 'roomTypeShared'];
 const prices = ['priceMin', 'priceMax'];
+export const all = [...modals, ...roomTypes, ...prices, 'refund'];
+
+export const filterInit = {
+  refund: 0,
+  roomTypeHouse: 0,
+  roomTypePrivate: 0,
+  roomTypeShared: 0,
+  priceMin: 12000,
+  priceMax: 1000000,
+};
+
+const modalInit = {
+  instantBooking: 0,
+  bedCount: 0,
+  bedroomCount: 0,
+  bathroomCount: 0,
+  superhost: 0,
+  amenityList: [],
+  facilityList: [],
+  hostLangList: [],
+};
 
 const popupInit = {
   refund: false,
@@ -132,31 +157,22 @@ const popupInit = {
   all: false,
 };
 
-const filterInit = {
-  refund: false,
-  roomTypeHouse: false,
-  roomTypePrivate: false,
-  roomTypeShared: false,
-  priceMin: 12000,
-  priceMax: 1000000,
-};
-
 const initialState = {
-  // ...reducerUtils.initial(),
-  data: {
-    homes: [],
-    dataTotal: 0,
-    filterCondition: {
-      // superhost: false,
-      // amenityList: [],
-      // facilityList: [],
-      // hostLangList: [],
-    },
-    mapCenter: { lat: 0, lng: 0 },
-    priceArray: [],
-    averagePrice: 0,
-    recentHomes: [],
-  },
+  ...reducerUtils.initial(),
+  // data: {
+  //   homes: [],
+  //   dataTotal: 0,
+  //   filterCondition: {
+  // superhost: false,
+  // amenityList: [],
+  // facilityList: [],
+  // hostLangList: [],
+  //   },
+  //   mapCenter: { lat: 0, lng: 0 },
+  //   priceArray: [],
+  //   averagePrice: 0,
+  //   recentHomes: [],
+  // },
   searchForm: {},
   headerState: false,
   viewState: 'result',
@@ -166,14 +182,18 @@ const initialState = {
   hoveredHome: null,
   popupState: popupInit,
   popupApplied: popupInit,
-  filterApplied: filterInit,
+  filterApplied: {
+    ...filterInit,
+    ...modalInit,
+  },
   filterPrevState: {},
   isFilterChanged: false,
+  page: 1,
 };
 
-const getFilterGroup = (filterName, state, keep) => {
+const getFilterGroup = (key, state, keep) => {
   const obj = keep ? state.filterApplied : filterInit;
-  switch (filterName) {
+  switch (key) {
     case 'roomType':
       return _.pick(obj, roomTypes);
     case 'price':
@@ -187,7 +207,7 @@ const getFilterGroup = (filterName, state, keep) => {
         ? obj
         : { ...filterInit, ...modalFilterInit(state.data.filterCondition) };
     default:
-      return { [filterName]: false };
+      return { [key]: false };
   }
 };
 
@@ -203,15 +223,11 @@ const search = (state = initialState, action) => {
       return {
         ...state,
         ...reducerUtils.success(action.payload),
-        filterApplied: {
-          ...state.filterApplied,
-          ...modalFilterInit(action.payload.filterCondition),
-          // ..._.pick(state.searchForm, [...roomTypes, ...prices, ...modals]),
-          ..._.mapValues(
-            _.pick(state.searchForm, [...roomTypes, ...prices, ...modals]),
-            value => parseInt(value),
-          ),
-        },
+        // filterApplied: {
+        // ...modalFilterInit(action.payload.filterCondition),
+        // ..._.pick(state.searchForm, [...all, 'page']),
+        // ...state.filterApplied,
+        // },
         isFilterChanged: false,
       };
     case FETCH_DATA_ERROR:
@@ -223,6 +239,17 @@ const search = (state = initialState, action) => {
       return {
         ...state,
         searchForm: action.searchForm,
+        filterApplied: {
+          ...state.filterApplied,
+          ..._.pick(action.searchForm, [...all, 'page']),
+        },
+        popupApplied: {
+          refund: action.searchForm.refund || false,
+          roomType: roomTypes.some(key => action.searchForm[key]),
+          price: prices.some(key => action.searchForm[key]),
+          modal: modals.some(key => action.searchForm[key]),
+          all: false,
+        },
       };
     case HOVER_HOME:
       return {
@@ -250,6 +277,11 @@ const search = (state = initialState, action) => {
               : home,
           ),
         },
+      };
+    case NAVIGATE_PAGE:
+      return {
+        ...state,
+        page: action.page,
       };
     case OPEN_HEADER:
       return {

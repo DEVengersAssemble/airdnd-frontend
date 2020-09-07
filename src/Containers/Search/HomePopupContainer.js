@@ -3,7 +3,7 @@ import HomePopup from '../../Components/Search/HomePopup';
 import { toggleBookmark } from '../../lib/bookmarkUtils';
 
 const HomePopupContainer = ({ home, dateDiff, theme, store }) => {
-  const { id } = store.getState().user;
+  const { id } = store.getState().user.data;
   const dispatch = store.dispatch;
   const [isHovered, setIsHovered] = useState(false);
   const onHoverHome = () => setIsHovered(true);

@@ -7,13 +7,19 @@ import { closePopup, openPopup, showMap } from '../../Modules/search';
 const FilterButtonContainer = React.memo(({ name, text, children }) => {
   const { popupState, popupApplied } = useSelector(state => state.search);
   const isApplied = popupApplied[name];
+  const isOpen = popupState[name];
 
   const dispatch = useDispatch();
   const onClick = () =>
     dispatch(popupState[name] ? closePopup(name) : openPopup(name));
 
   return (
-    <FilterButton text={text} isApplied={isApplied} onClick={onClick}>
+    <FilterButton
+      text={text}
+      isOpen={isOpen}
+      isApplied={isApplied}
+      onClick={onClick}
+    >
       {children}
     </FilterButton>
   );

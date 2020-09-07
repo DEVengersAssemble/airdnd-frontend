@@ -7,16 +7,22 @@ const SearchResultContainer = () => {
   const { mapState, viewState, searchForm, data } = useSelector(
     state => state.search,
   );
-  const { dataTotal } = data;
+
   const dispatch = useDispatch();
   const onOpenMap = () => dispatch(openMap());
+  const convertDate = date => {
+    const mm = parseInt(date.split('.')[1], 10);
+    const dd = parseInt(date.split('.')[2], 10);
+    return `${mm}월 ${dd}일`;
+  };
 
   return (
     <SearchResult
       mapState={mapState}
       view={viewState}
-      dataTotal={dataTotal}
+      dataTotal={data.dataTotal}
       searchForm={searchForm}
+      convertDate={convertDate}
       onOpenMap={onOpenMap}
     />
   );
