@@ -17,3 +17,11 @@ io.on('connection', socket => {
     io.emit('chat message', msg);
   });
 });
+
+io.on('connection', socket => {
+  const { id } = socket.client;
+  socket.on('chat image', image => {
+    console.log(`${id}: ${image}`);
+    io.emit('chat image', image);
+  });
+});

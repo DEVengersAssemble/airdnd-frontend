@@ -114,7 +114,7 @@ const MyPagePopup = ({
               <StMyPageOptionItem>
                 <StMyPageOptionButton
                   onClick={() => {
-                    movePage('trips');
+                    movePage('trips/v1');
                   }}
                 >
                   여행

@@ -3,24 +3,18 @@ import { useSelector } from 'react-redux';
 import TripsPast from '../../Components/Trips/TripsPast';
 
 const TripsPastContainer = () => {
-  const trips = useSelector(state => state.trips.reservations);
-  const pastTrips = trips.filter(trip => {
-    const { checkin, checkout } = trip;
-    const nowDate = new Date();
-    const checkinDate = new Date(checkin);
-    const checkoutDate = new Date(checkout);
+  // ! redux
+  const { data, error, loading } = useSelector(state => state.trips.trips);
 
-    // (checkinDate - nowDate < 0 && checkoutDate - nowDate > 0) || checkinDate - nowDate > 0
-    // => true: 아직 여행중(예정된 예약: Upcoming);
-    // => false: 여행 끝(지난 예약: Past);
+  // ! variable
+  const pastTrips = data && data.past && data.past.reservations;
+  const tripsCount = data && pastTrips && pastTrips.length;
+  console.log(pastTrips && pastTrips.length);
 
-    const tripState =
-      (checkinDate - nowDate < 0 && checkoutDate - nowDate > 0) ||
-      checkinDate - nowDate > 0;
+  if (loading) return <div>로딩중...</div>;
+  if (error) return <div>Error...</div>;
+  if (!data) return null;
 
-    return !trip.isCanceled && !tripState; // 지난 예약
-  });
-  const tripsCount = pastTrips.length;
   return <TripsPast pastTrips={pastTrips} tripsCount={tripsCount} />;
 };
 
