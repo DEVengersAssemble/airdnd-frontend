@@ -5,7 +5,7 @@ import TripsCanceled from '../../Components/Trips/TripsCanceled';
 
 const TripsCanceledContainer = () => {
   // ! redux
-  const { data, loading, error } = useSelector(state => state.trips.trips);
+  const { data, loading, error } = useSelector(state => state.trips);
 
   // ! variable
   const canceledTrips = data && data.canceled && data.canceled.reservations;

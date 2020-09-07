@@ -4,7 +4,7 @@ import TripsPastCardItem from '../../Components/Trips/TripsPastCardItem';
 
 const TripsPastCardItemContainer = ({ trip }) => {
   // ! redux
-  const { data } = useSelector(state => state.trips.trips);
+  const { data } = useSelector(state => state.trips);
 
   // ! variable
   const { title, homeImage, addr, withGuest, guest, checkin, checkout } = trip;

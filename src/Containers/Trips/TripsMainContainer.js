@@ -7,7 +7,8 @@ import { fetchTrips } from '../../Modules/trips';
 
 const TripsMainContainer = () => {
   // ! redux
-  const { data, loading, error } = useSelector(state => state.trips.trips);
+  const { data, loading, error } = useSelector(state => state.trips);
+  console.log(data && data);
   const dispatch = useDispatch();
 
   // ! hook
@@ -20,7 +21,6 @@ const TripsMainContainer = () => {
 
   // ! effect
   useEffect(() => {
-    console.log(tab);
     dispatch(fetchTrips(tab || 'upcoming'));
   }, [dispatch, tab]);
 
