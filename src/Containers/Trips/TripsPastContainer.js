@@ -9,6 +9,7 @@ const TripsPastContainer = () => {
   // ! variable
   const pastTrips = data && data.past && data.past.reservations;
   const tripsCount = data && pastTrips && pastTrips.length;
+  console.log(data);
   console.log(pastTrips && pastTrips.length);
 
   if (loading) return <div>로딩중...</div>;
