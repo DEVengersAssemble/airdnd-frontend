@@ -5,20 +5,25 @@ import { lighten } from 'polished';
 import Button from '../Global/Button';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 
-const TripsCanceledItem = ({ trip, ci, co }) => {
-  const { reservationId, homeImage, title, address } = trip;
-
+const TripsCanceledItem = ({
+  title,
+  reservationId,
+  homeImage,
+  addr,
+  ci,
+  co,
+}) => {
   return (
     <TripsCanceledItemWrapper>
       <Link to={`/schedule/${reservationId}`}>
         <StButton>
           <TripsCanceledButtonWrapper>
             <TripsCanceledButtonInnerWrapper>
-              <TripsCanceledButtonImg src={`${homeImage[0]}`} alt="#" />
+              <TripsCanceledButtonImg src={`${homeImage}`} alt="#" />
               <TripsCanceledTextWrapper>
                 <TripsCanceledTitle>{title}</TripsCanceledTitle>
                 <TripsCanceledCkLc>
-                  {address} · {ci} - {co}
+                  {addr} · {ci} - {co}
                 </TripsCanceledCkLc>
               </TripsCanceledTextWrapper>
             </TripsCanceledButtonInnerWrapper>

@@ -6,13 +6,18 @@ import Button from '../Global/Button';
 import Profile from '../Global/Profile';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 
-const TripsUpcomingCardItem = ({ trip, myInfo, ci, co }) => {
-  const { title, homeImage, address, withGuest, guest } = trip;
-  const { lastName: myLastName, profileImg: myProfileImg } = myInfo;
-  const { lastName: gstLastName, profileImg: gstProfileImg } = guest;
-
-  // TODO: co - ci 만큼 mapping 필요 dateDiff
-
+const TripsUpcomingCardItem = ({
+  title,
+  homeImage,
+  addr,
+  withGuest,
+  guest,
+  dateDiff,
+  ci,
+  co,
+  myLastName,
+  myProfileImg,
+}) => {
   return (
     <TripsUpcomingCardItemWrapper>
       <Link to="/schedule">
@@ -26,9 +31,9 @@ const TripsUpcomingCardItem = ({ trip, myInfo, ci, co }) => {
                 profileImg={myProfileImg}
               />
               <Profile
-                lastName={`${gstLastName}`}
+                // lastName={`${gstLastName}`}
                 size="4.3rem"
-                profileImg={gstProfileImg}
+                // profileImg={gstProfileImg}
               />
             </TripsProfileWrapper>
           )}
@@ -37,30 +42,34 @@ const TripsUpcomingCardItem = ({ trip, myInfo, ci, co }) => {
           <TripsUpcomingCheckInOut>
             {ci} - {co}
           </TripsUpcomingCheckInOut>
-          <TripsUpcomingLocation>{address}</TripsUpcomingLocation>
+          <TripsUpcomingAddr>{addr}</TripsUpcomingAddr>
         </TripsUpcomingCkLcWrapper>
-        <Link to="/schedule/1">
-          <StButton>
-            <TripsUpcomingButtonWrapper>
-              <TripsUpcomingButtonInnerWrapper>
-                <TripsUpcomingImgInButton src={`${homeImage[0]}`} alt="#" />
-                <TripsUpcomingButtonText>{title}</TripsUpcomingButtonText>
-              </TripsUpcomingButtonInnerWrapper>
-              <MdKeyboardArrowRight />
-            </TripsUpcomingButtonWrapper>
-          </StButton>
-        </Link>
-        <Link to="/schedues/2">
-          <StButton>
-            <TripsUpcomingButtonWrapper>
-              <TripsUpcomingButtonInnerWrapper>
-                <TripsUpcomingImgInButton src={`${homeImage[0]}`} alt="#" />
-                <TripsUpcomingButtonText>{title}</TripsUpcomingButtonText>
-              </TripsUpcomingButtonInnerWrapper>
-              <MdKeyboardArrowRight />
-            </TripsUpcomingButtonWrapper>
-          </StButton>
-        </Link>
+        <StDiv>
+          <Link to="/schedule/1">
+            <StButton>
+              <TripsUpcomingButtonWrapper>
+                <TripsUpcomingButtonInnerWrapper>
+                  <TripsUpcomingImgInButton src={`${homeImage}`} alt="#" />
+                  <TripsUpcomingButtonText>{title}</TripsUpcomingButtonText>
+                </TripsUpcomingButtonInnerWrapper>
+                <MdKeyboardArrowRight />
+              </TripsUpcomingButtonWrapper>
+            </StButton>
+          </Link>
+          {dateDiff > 1 && (
+            <Link to="/schedues/2">
+              <StButton>
+                <TripsUpcomingButtonWrapper>
+                  <TripsUpcomingButtonInnerWrapper>
+                    <TripsUpcomingImgInButton src={`${homeImage}`} alt="#" />
+                    <TripsUpcomingButtonText>{title}</TripsUpcomingButtonText>
+                  </TripsUpcomingButtonInnerWrapper>
+                  <MdKeyboardArrowRight />
+                </TripsUpcomingButtonWrapper>
+              </StButton>
+            </Link>
+          )}
+        </StDiv>
       </Link>
       <Link to="/schedule">
         <StMoreButton border="none">여행 계획 더보기</StMoreButton>
@@ -92,7 +101,7 @@ const TripsUpcomingCardItemWrapper = styled.li`
     margin-right: 0rem;
   }
 
-  height: 45rem;
+  height: 46rem;
   box-shadow: 0rem 0rem 1rem ${({ theme }) => theme.color.gray};
   &:hover {
     /* hover시 자연스러운 shadow증가를 위해 transition효과 필요 */
@@ -107,7 +116,7 @@ const TripsUpcomingImgWrapper = styled.div`
 const TripsUpcomingImg = styled.div`
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  background: no-repeat center/100% url(${({ homeImage }) => homeImage[0]});
+  background: no-repeat center/100% url(${({ homeImage }) => homeImage});
   height: 20rem;
 `;
 
@@ -140,10 +149,16 @@ const TripsUpcomingCheckInOut = styled.div`
   font-weight: 400;
 `;
 
-const TripsUpcomingLocation = styled.div`
+const TripsUpcomingAddr = styled.div`
   padding: 0.5rem 0rem 0rem;
   font-size: 2.2rem;
   font-weight: 600;
+  line-height: 2.5rem;
+  ${ellipsis('32rem')};
+`;
+
+const StDiv = styled.div`
+  min-height: 12.5rem;
 `;
 
 const StButton = styled(Button)`

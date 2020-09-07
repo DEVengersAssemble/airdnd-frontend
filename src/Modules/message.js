@@ -1,4 +1,15 @@
+import * as api from '../Api/messageApi';
+import {
+  fetchDataThunk,
+  reducerUtils,
+  handleAsyncActions,
+} from '../lib/asyncUtils';
+
 // ACTION TYPE
+const FETCH_MESSAGE = 'message/FETCH_MESSAGE';
+const FETCH_MESSAGE_SUCCESS = 'message/FETCH_MESSAGE_SUCCESS';
+const FETCH_MESSAGE_ERROR = 'message/FETCH_MESSAGE_ERROR';
+
 const SHOW_MESSAGE_DETAIL_SECTION = 'message/SHOW_MESSAGE_DETAIL_SECTION';
 const HIDE_MESSAGE_DETAIL_SECTION = 'message/HIDE_MESSAGE_DETAIL_SECTION';
 const SHOW_MESSAGE_LIST_SECTION = 'message/SHOW_MESSAGE_LIST_SECTION';
@@ -72,6 +83,7 @@ const modalInit = {
 };
 
 const initialState = {
+  // messages: reducerUtils.initial(),
   modalState: modalInit,
   profileImg:
     'https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cg_face%2Cq_auto:good%2Cw_300/MTY2MzU3Nzk2OTM2MjMwNTkx/elon_musk_royal_society.jpg',
@@ -558,6 +570,10 @@ const initialState = {
 // REDUCER
 const message = (state = initialState, action) => {
   switch (action.type) {
+    // case FETCH_MESSAGE:
+    // case FETCH_MESSAGE_SUCCESS:
+    // case FETCH_MESSAGE_ERROR:
+    //   return handleAsyncActions(FETCH_MESSAGE, 'messages')(state, action);
     case SHOW_MESSAGE_DETAIL_SECTION:
       return {
         ...state,

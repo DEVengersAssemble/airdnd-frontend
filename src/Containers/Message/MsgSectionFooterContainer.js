@@ -2,7 +2,13 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import MsgSectionFooter from '../../Components/Message/MsgSectionFooter';
 import io from 'socket.io-client';
-import { sendChat, receiveChat, clearInput } from '../../Modules/socket';
+import {
+  sendChat,
+  receiveChat,
+  clearInput,
+  receiveImage,
+  sendImage,
+} from '../../Modules/socket';
 
 const MsgSectionFooterContainer = () => {
   // ! redux
@@ -14,7 +20,7 @@ const MsgSectionFooterContainer = () => {
     (_, index) => filteredMsgs[index] === filteredMsgs[activeIndex],
   );
 
-  // ! socket
+  // // ! socket msg
   // const socket = io.connect('http://localhost:4000');
 
   // const { msg } = useSelector(state => state.socket);
@@ -24,6 +30,7 @@ const MsgSectionFooterContainer = () => {
   //   dispatch(sendChat(e.target.value));
   //   // setMsg(e.target.value);
   // };
+
   // const onMsgSubmit = e => {
   //   e.preventDefault();
   //   console.log(msg);
