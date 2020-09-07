@@ -8,8 +8,8 @@ import { Heart } from '../Global/Heart';
 import HomePopupContainer from '../../Containers/Search/HomePopupContainer';
 
 const getPixelPositionOffset = (width, height) => ({
-  x: width + width / 2,
-  y: -(height * 2),
+  x: -(width / 2),
+  y: -(height / 2),
 });
 
 const MapMarker = ({
@@ -32,7 +32,7 @@ const MapMarker = ({
     >
       <OverlayView
         key={Math.random()}
-        position={location}
+        position={{ lat: +location.lat, lng: +location.lng }}
         mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
         getPixelPositionOffset={getPixelPositionOffset}
       >
