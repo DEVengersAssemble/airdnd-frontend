@@ -31,6 +31,7 @@ const MapMarker = ({
       }}
     >
       <OverlayView
+        key={Math.random()}
         position={location}
         mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
         getPixelPositionOffset={getPixelPositionOffset}
