@@ -3,15 +3,39 @@ import { useSelector } from 'react-redux';
 import TripsUpcomingCardItem from '../../Components/Trips/TripsUpcomingCardItem';
 
 const TripsUpcomingCardItemContainer = ({ trip }) => {
-  const myInfo = useSelector(state => state.trips);
-  const { checkin, checkout } = trip;
+  // ! redux
+  const { data } = useSelector(state => state.trips.trips);
+
+  // ! variable
+  const { title, homeImage, addr, withGuest, guest, checkin, checkout } = trip;
+  const myInfo = data.upcoming;
+  const { lastName: myLastName, profileImg: myProfileImg } = myInfo;
+  console.log(myInfo);
+  console.log(trip);
+
   const ciDate = new Date(checkin);
   const coDate = new Date(checkout);
   const options = { month: 'long', day: 'numeric' };
   const ci = ciDate.toLocaleDateString('ko-KR', options);
   const co = coDate.toLocaleDateString('ko-KR', options);
+  const dateDiff = (coDate - ciDate) / 86400000;
 
-  return <TripsUpcomingCardItem trip={trip} myInfo={myInfo} ci={ci} co={co} />;
+  // TODO: guest를 직접 넘겨주는 것이 아니라 구조분해하여 guestLastName, guestProfileImg로 넘겨준다
+
+  return (
+    <TripsUpcomingCardItem
+      title={title}
+      homeImage={homeImage}
+      addr={addr}
+      withGuest={withGuest}
+      guest={guest}
+      ci={ci}
+      co={co}
+      dateDiff={dateDiff}
+      myLastName={myLastName}
+      myProfileImg={myProfileImg}
+    />
+  );
 };
 
 export default TripsUpcomingCardItemContainer;

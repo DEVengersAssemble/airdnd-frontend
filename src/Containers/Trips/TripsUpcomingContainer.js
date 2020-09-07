@@ -3,10 +3,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router';
 import TripsUpcoming from '../../Components/Trips/TripsUpcoming';
 import qs from 'qs';
+import { fetchTrips } from '../../Modules/trips';
 
 const TripsUpcomingContainer = () => {
   // ! redux
-  const trips = useSelector(state => state.trips.reservations);
+  const { data, loading, error } = useSelector(state => state.trips.trips);
   const dispatch = useDispatch();
 
   // ! hook
@@ -14,32 +15,37 @@ const TripsUpcomingContainer = () => {
   const { tab } = qs.parse(location.search, {
     ignoreQueryPrefix: true,
   });
-  console.log(tab);
 
   // ! variable
-  const upcomingTrips = trips.filter(trip => {
-    const { checkin, checkout } = trip;
-    const nowDate = new Date();
-    const checkinDate = new Date(checkin);
-    const checkoutDate = new Date(checkout);
+  const upcomingTrips = data && data.upcoming.reservations;
+  const tripsCount = data && upcomingTrips.length;
 
-    // (checkinDate - nowDate < 0 && checkoutDate - nowDate > 0) || checkinDate - nowDate > 0
-    // => true: 아직 여행중(예정된 예약: Upcoming);
-    // => false: 여행 끝(지난 예약: Past);
+  // ! variable
+  // const upcomingTrips = reservation.filter(trip => {
+  //   const { checkin, checkout } = trip;
+  //   const nowDate = new Date();
+  //   const checkinDate = new Date(checkin);
+  //   const checkoutDate = new Date(checkout);
 
-    const tripState =
-      (checkinDate - nowDate < 0 && checkoutDate - nowDate > 0) ||
-      checkinDate - nowDate > 0;
+  //   // (checkinDate - nowDate < 0 && checkoutDate - nowDate > 0) || checkinDate - nowDate > 0
+  //   // => true: 아직 여행중(예정된 예약: Upcoming);
+  //   // => false: 여행 끝(지난 예약: Past);
 
-    return !trip.isCanceled && tripState; // 예정된 예약
-  });
+  //   const tripState =
+  //     (checkinDate - nowDate < 0 && checkoutDate - nowDate > 0) ||
+  //     checkinDate - nowDate > 0;
 
-  const tripsCount = upcomingTrips.length;
+  //   return !trip.isCanceled && tripState; // 예정된 예약
+  // });
 
   // ! effect
-  // useEffect(() => {
-  //   dispatch(fetchTripsData(tab));
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchTrips(tab || 'upcoming'));
+  }, [dispatch, tab]);
+
+  if (loading) return <div>로딩중...</div>;
+  if (error) return <div>Error...</div>;
+  if (!data) return null;
 
   return (
     <TripsUpcoming upcomingTrips={upcomingTrips} tripsCount={tripsCount} />

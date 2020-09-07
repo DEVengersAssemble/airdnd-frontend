@@ -1,10 +1,24 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router';
+import { useSelector, useDispatch } from 'react-redux';
 import TripsPast from '../../Components/Trips/TripsPast';
+import qs from 'qs';
+import { fetchTrips } from '../../Modules/trips';
 
 const TripsPastContainer = () => {
-  const trips = useSelector(state => state.trips.reservations);
-  const pastTrips = trips.filter(trip => {
+  // // ! redux
+  // const dispatch = useDispatch();
+  // const { data, error, loading } = useSelector(state => state.trips.trips);
+
+  // ! hook
+  const location = useLocation();
+  const { tab } = qs.parse(location.search, {
+    ignoreQueryPrefix: true,
+  });
+  console.log(tab);
+
+  const reservation = useSelector(state => state.trips.reservations);
+  const pastTrips = reservation.filter(trip => {
     const { checkin, checkout } = trip;
     const nowDate = new Date();
     const checkinDate = new Date(checkin);
@@ -21,6 +35,16 @@ const TripsPastContainer = () => {
     return !trip.isCanceled && !tripState; // 지난 예약
   });
   const tripsCount = pastTrips.length;
+
+  // // ! effect
+  // useEffect(() => {
+  //   dispatch(fetchTrips(tab || 'upcoming'));
+  // }, [dispatch, tab]);
+
+  // if (loading) return <div>로딩중...</div>;
+  // if (error) return <div>Error...</div>;
+  // if (!data) return null;
+
   return <TripsPast pastTrips={pastTrips} tripsCount={tripsCount} />;
 };
 

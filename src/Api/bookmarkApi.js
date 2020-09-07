@@ -7,4 +7,4 @@ export const fetchWishlistsData = async () => {
 };
 
 export const postWishlists = async payload =>
-  await axios.post('/back/wishlist_insert', payload);
+  await axios.post('/back/wishlists_insert', payload);
