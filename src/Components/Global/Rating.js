@@ -61,4 +61,4 @@ Rating.defaultProps = {
   count: 0,
 };
 
-export default Rating;
+export default React.memo(Rating);

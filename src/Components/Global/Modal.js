@@ -181,4 +181,4 @@ const StModalHeader = styled.header`
   font-weight: 600;
 `;
 
-export default Modal;
+export default React.memo(Modal);

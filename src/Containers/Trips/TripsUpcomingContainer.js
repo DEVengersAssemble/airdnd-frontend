@@ -9,6 +9,7 @@ const TripsUpcomingContainer = () => {
   // ! variable
   const upcomingTrips = data && data.upcoming && data.upcoming.reservations;
   const tripsCount = upcomingTrips && upcomingTrips.length;
+  console.log(tripsCount);
 
   if (loading) return <div>로딩중...</div>;
   if (error) return <div>Error...</div>;
