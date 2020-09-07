@@ -138,6 +138,17 @@ export const filterInit = {
   priceMax: 1000000,
 };
 
+const modalInit = {
+  instantBooking: 0,
+  bedCount: 0,
+  bedroomCount: 0,
+  bathroomCount: 0,
+  superhost: 0,
+  amenityList: [],
+  facilityList: [],
+  hostLangList: [],
+};
+
 const popupInit = {
   refund: false,
   roomType: false,
@@ -171,7 +182,10 @@ const initialState = {
   hoveredHome: null,
   popupState: popupInit,
   popupApplied: popupInit,
-  filterApplied: filterInit,
+  filterApplied: {
+    ...filterInit,
+    ...modalInit,
+  },
   filterPrevState: {},
   isFilterChanged: false,
   page: 1,
@@ -209,17 +223,11 @@ const search = (state = initialState, action) => {
       return {
         ...state,
         ...reducerUtils.success(action.payload),
-        filterApplied: {
-          ...modalFilterInit(action.payload.filterCondition),
-          ..._.pick(state.searchForm, [...all, 'page']),
-          ...state.filterApplied,
-        },
-        popupApplied: {
-          refund: action.searchForm.refund,
-          roomType: roomTypes.some(key => state.searchForm[key]),
-          price: prices.some(key => state.searchForm[key]),
-          modal: modals.some(key => state.searchForm[key]),
-        },
+        // filterApplied: {
+        // ...modalFilterInit(action.payload.filterCondition),
+        // ..._.pick(state.searchForm, [...all, 'page']),
+        // ...state.filterApplied,
+        // },
         isFilterChanged: false,
       };
     case FETCH_DATA_ERROR:
@@ -231,6 +239,17 @@ const search = (state = initialState, action) => {
       return {
         ...state,
         searchForm: action.searchForm,
+        filterApplied: {
+          ...state.filterApplied,
+          ..._.pick(action.searchForm, [...all, 'page']),
+        },
+        popupApplied: {
+          refund: action.searchForm.refund || false,
+          roomType: roomTypes.some(key => action.searchForm[key]),
+          price: prices.some(key => action.searchForm[key]),
+          modal: modals.some(key => action.searchForm[key]),
+          all: false,
+        },
       };
     case HOVER_HOME:
       return {
