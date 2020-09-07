@@ -9,7 +9,7 @@ const TripsPastCardItemContainer = ({ trip }) => {
   // ! variable
   const { title, homeImage, addr, withGuest, guest, checkin, checkout } = trip;
   const myInfo = data.upcoming;
-  const { lastName: myLastName, profileImg: myProfileImg } = myInfo;
+  // const { lastName: myLastName, profileImg: myProfileImg } = myInfo;
 
   const ciDate = new Date(checkin);
   const coDate = new Date(checkout);
@@ -30,8 +30,8 @@ const TripsPastCardItemContainer = ({ trip }) => {
       ci={ci}
       co={co}
       dateDiff={dateDiff}
-      myLastName={myLastName}
-      myProfileImg={myProfileImg}
+      // myLastName={myLastName}
+      // myProfileImg={myProfileImg}
     />
   );
 };
