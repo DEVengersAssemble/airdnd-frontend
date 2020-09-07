@@ -8,10 +8,7 @@ import {
 
 const WishlistsMainContainer = () => {
   // ! redux
-  const { data, loading, error } = useSelector(
-    state => state.wishlists.bookmarkLists,
-  );
-
+  const { data, loading, error } = useSelector(state => state.wishlists);
   const dispatch = useDispatch();
 
   // ! hook

@@ -62,11 +62,11 @@ export const closeNewModal = () => ({ type: CLOSE_NEW_MODAL });
 
 // initial state
 const initialState = {
+  ...reducerUtils.initial(),
   listModal: false,
   newModal: false,
   selectedId: null,
   selectedImg: '',
-  bookmarkLists: reducerUtils.initial(),
 
   // bookmarkLists: [
   //   {
@@ -162,10 +162,7 @@ const wishlists = (state = initialState, action) => {
     case FETCH_BOOKMARKLISTS:
     case FETCH_BOOKMARKLISTS_SUCCESS:
     case FETCH_BOOKMARKLISTS_ERROR:
-      return handleAsyncActions(FETCH_BOOKMARKLISTS, 'bookmarkLists')(
-        state,
-        action,
-      );
+      return handleAsyncActions(FETCH_BOOKMARKLISTS)(state, action);
 
     case CREATE_BOOKMARKLIST:
       return {
