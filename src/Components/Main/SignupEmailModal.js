@@ -107,8 +107,8 @@ const StBirthDayWrapper = styled.div`
 `;
 
 const StBirthDayDropDown = styled(DropDown)`
-  ${({ isSelectInvalid }) =>
-    isSelectInvalid &&
+  ${({ isInvalid }) =>
+    isInvalid &&
     css`
       &:not(:focus) {
         border: 1px solid ${({ theme }) => theme.color.warning};
@@ -164,16 +164,17 @@ const StLoginButton = styled(Button)`
 
 const SignupEmailModal = ({
   modalVisible,
+  form,
+  invalid,
+  refObj,
+  range,
+  loading,
+  isPwdFocused,
   openLoginModal,
   closeModal,
-  range,
-  signup,
-  onChangeForm,
-  onChangeSelect,
-  onSignup,
-  refObj,
-  onPwdFocus,
-  pwdFocus,
+  onFormChange,
+  handleSubmit,
+  onPwdFocused,
   onGoogleLoginSuccess,
   onGoogleLoginFailure,
 }) => {
@@ -182,13 +183,15 @@ const SignupEmailModal = ({
     firstName,
     lastName,
     pwd,
-    pwdValidation,
     birthMonth,
     birthDay,
     birthYear,
-  } = signup;
-  const { pwdLevel, pwdLength, pwdContain, pwdCase } = pwdValidation;
+  } = form;
+  const {
+    pwdValidation: { pwdLevel, pwdLength, pwdContain, pwdCase },
+  } = invalid;
   const { emailRef, firstNameRef, lastNameRef, pwdRef } = refObj;
+
   return (
     <StSignupEmailModal
       modalState={modalVisible}
@@ -199,53 +202,55 @@ const SignupEmailModal = ({
       setModalState={closeModal}
     >
       <StSignupFormWrapper>
-        <StSignupForm onSubmit={onSignup}>
+        <StSignupForm onSubmit={handleSubmit}>
           <StInputWrapper>
             <StInput
-              value={email.value}
-              onChange={e => onChangeForm(e, 'email')}
+              value={email}
+              onChange={({ target: { value } }) => onFormChange('email', value)}
               focusBorderColor
               placeholder="이메일 주소"
               ref={emailRef}
-              isInvalid={email.invalid}
+              isInvalid={invalid.email}
             ></StInput>
             <RiMailLine />
-            {email.value.length === 0 && email.invalid && (
-              <StValidationText isInvalid={email.invalid}>
+            {email.length === 0 && invalid.email && (
+              <StValidationText isInvalid={invalid.email}>
                 이메일을 입력하세요.
               </StValidationText>
             )}
-            {email.value.length > 0 && email.invalid && (
-              <StValidationText isInvalid={email.invalid}>
+            {email.length > 0 && invalid.email && (
+              <StValidationText isInvalid={invalid.email}>
                 이메일 형식이 맞지 않습니다.
               </StValidationText>
             )}
           </StInputWrapper>
           <StInputWrapper>
             <StInput
-              value={firstName.value}
-              onChange={e => onChangeForm(e, 'firstName')}
+              value={firstName}
+              onChange={({ target: { value } }) =>
+                onFormChange('firstName', value)
+              }
               focusBorderColor
               placeholder="이름 (예: 길동)"
               ref={firstNameRef}
-              isInvalid={firstName.invalid}
+              isInvalid={invalid.firstName}
             ></StInput>
             <RiUserLine />
-            {firstName.value.length === 0 && firstName.invalid && (
-              <StValidationText isInvalid={firstName.invalid}>
+            {firstName.length === 0 && invalid.firstName && (
+              <StValidationText isInvalid={invalid.firstName}>
                 이름을 입력하세요.
               </StValidationText>
             )}
-            {firstName.value.length > 35 && firstName.invalid && (
-              <StValidationText isInvalid={firstName.invalid}>
+            {firstName.length > 35 && invalid.firstName && (
+              <StValidationText isInvalid={invalid.firstName}>
                 이름을 입력할 수 있는 최대 글자 수는 35자입니다. 다시
                 시도하세요.
               </StValidationText>
             )}
-            {firstName.value.length !== 0 &&
-              firstName.value.length < 35 &&
-              firstName.invalid && (
-                <StValidationText isInvalid={firstName.invalid}>
+            {firstName.length !== 0 &&
+              firstName.length < 35 &&
+              invalid.firstName && (
+                <StValidationText isInvalid={invalid.firstName}>
                   이름에 유효한 글자를 입력하세요.
                 </StValidationText>
               )}
@@ -253,28 +258,30 @@ const SignupEmailModal = ({
 
           <StInputWrapper>
             <StInput
-              value={lastName.value}
-              onChange={e => onChangeForm(e, 'lastName')}
+              value={lastName}
+              onChange={({ target: { value } }) =>
+                onFormChange('lastName', value)
+              }
               focusBorderColor
               placeholder="성 (예: 홍)"
               ref={lastNameRef}
-              isInvalid={lastName.invalid}
+              isInvalid={invalid.lastName}
             ></StInput>
             <RiUserLine />
-            {lastName.value.length === 0 && lastName.invalid && (
-              <StValidationText isInvalid={lastName.invalid}>
+            {lastName.length === 0 && invalid.lastName && (
+              <StValidationText isInvalid={invalid.lastName}>
                 성을 입력하세요.
               </StValidationText>
             )}
-            {lastName.value.length > 35 && lastName.invalid && (
-              <StValidationText isInvalid={lastName.invalid}>
+            {lastName.length > 35 && invalid.lastName && (
+              <StValidationText isInvalid={invalid.lastName}>
                 성을 입력할 수 있는 최대 글자 수는 35자입니다. 다시 시도하세요.
               </StValidationText>
             )}
-            {lastName.value.length !== 0 &&
-              lastName.value.length < 35 &&
-              lastName.invalid && (
-                <StValidationText isInvalid={lastName.invalid}>
+            {lastName.length !== 0 &&
+              lastName.length < 35 &&
+              invalid.lastName && (
+                <StValidationText isInvalid={invalid.lastName}>
                   성에 유효한 글자를 입력하세요.
                 </StValidationText>
               )}
@@ -282,26 +289,26 @@ const SignupEmailModal = ({
           <StInputWrapper name="password">
             <StInput
               type="password"
-              value={pwd.value}
-              onChange={e => onChangeForm(e, 'pwd')}
-              onFocus={onPwdFocus}
+              value={pwd}
+              onChange={({ target: { value } }) => onFormChange('pwd', value)}
+              onFocus={() => onPwdFocused(true)}
               focusBorderColor
               placeholder="비밀번호 설정하기"
               ref={pwdRef}
-              isInvalid={pwd.invalid}
+              isInvalid={invalid.pwd}
             ></StInput>
             <RiEyeCloseLine />
-            {pwd.value.length === 0 && pwd.invalid && (
-              <StValidationText isInvalid={pwd.invalid}>
+            {pwd.length === 0 && invalid.pwd && (
+              <StValidationText isInvalid={invalid.pwd}>
                 비밀번호를 입력하세요.
               </StValidationText>
             )}
-            {pwd.value.length > 0 && pwd.invalid && (
-              <StValidationText isInvalid={pwd.invalid}>
+            {pwd.length > 0 && invalid.pwd && (
+              <StValidationText isInvalid={invalid.pwd}>
                 비밀번호 형식이 맞지 않습니다.
               </StValidationText>
             )}
-            {pwdFocus && (
+            {isPwdFocused && (
               <StPwdValidationList>
                 <StPwdValidationItem isPwdValid={pwdLevel}>
                   {pwdLevel >= 1 ? <MdCheck /> : <MdClose />}
@@ -352,9 +359,11 @@ const SignupEmailModal = ({
               title="월"
               options={range(1, 12, 1)}
               outline
-              value={birthMonth.value}
-              isSelectInvalid={birthMonth.invalid}
-              onChange={e => onChangeSelect(e, 'birthMonth')}
+              value={birthMonth}
+              isInvalid={invalid.birthMonth}
+              onChange={({ target: { value } }) =>
+                onFormChange('birthMonth', value)
+              }
             ></StBirthDayDropDown>
             <StBirthDayDropDown
               name="birthDay"
@@ -362,9 +371,11 @@ const SignupEmailModal = ({
               title="일"
               options={range(1, 31, 1)}
               outline
-              value={birthDay.value}
-              isSelectInvalid={birthDay.invalid}
-              onChange={e => onChangeSelect(e, 'birthDay')}
+              value={birthDay}
+              isInvalid={invalid.birthDay}
+              onChange={({ target: { value } }) =>
+                onFormChange('birthDay', value)
+              }
             ></StBirthDayDropDown>
             <StBirthDayDropDown
               name="birthYear"
@@ -372,14 +383,28 @@ const SignupEmailModal = ({
               title="년"
               options={range(1900, new Date().getFullYear(), 1).reverse()}
               outline
-              value={birthYear.value}
-              isSelectInvalid={birthYear.invalid}
-              onChange={e => onChangeSelect(e, 'birthYear')}
+              value={birthYear}
+              isInvalid={invalid.birthYear}
+              onChange={({ target: { value } }) =>
+                onFormChange('birthYear', value)
+              }
             ></StBirthDayDropDown>
           </StBirthDayWrapper>
-          {(birthMonth.invalid || birthDay.invalid || birthYear.invalid) && (
-            <StValidationText>계속하시려면 생일을 선택하세요.</StValidationText>
-          )}
+          {(isNaN(birthMonth) || isNaN(birthDay) || isNaN(birthYear)) &&
+            (invalid.birthMonth || invalid.birthDay || invalid.birthYear) && (
+              <StValidationText>
+                계속하시려면 생일을 선택하세요.
+              </StValidationText>
+            )}
+          {!isNaN(birthMonth) &&
+            !isNaN(birthDay) &&
+            !isNaN(birthYear) &&
+            (invalid.birthMonth || invalid.birthDay || invalid.birthYear) && (
+              <StValidationText>
+                입력하신 생일을 다시 한번 확인하세요. 올바른 날짜 형식이
+                아닙니다.
+              </StValidationText>
+            )}
           <StSubmitButton border="none" type="submit">
             가입하기
           </StSubmitButton>

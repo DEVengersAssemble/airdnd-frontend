@@ -1,96 +1,51 @@
-import React, { useEffect, useState, useRef, useReducer } from 'react';
-import axios from 'axios';
+import React, { useEffect, useRef } from 'react';
 import SignupEmailModal from '../../Components/Main/SignupEmailModal';
 import { useSelector, useDispatch } from 'react-redux';
 import { openModal, closeModal } from '../../Modules/modal';
-import { signupRequest } from '../../Modules/user';
+import {
+  signupRequest,
+  resetForm,
+  setIsChecking,
+  setIsPwdFocused,
+  setIsPwdChanged,
+  setValue,
+  setInvalid,
+  setPwdValidation,
+} from '../../Modules/signup';
 
-const initialState = {
-  email: {
-    value: '',
-    invalid: null,
-  },
-  firstName: {
-    value: '',
-    invalid: null,
-  },
-  lastName: {
-    value: '',
-    invalid: null,
-  },
-  pwd: {
-    value: '',
-    invalid: null,
-  },
-  pwdValidation: {
-    pwdLevel: 0,
-    pwdContain: null,
-    pwdLength: null,
-    pwdCase: null,
-  },
-  birthMonth: {
-    value: '월',
-    invalid: null,
-  },
-  birthDay: {
-    value: '일',
-    invalid: null,
-  },
-  birthYear: {
-    value: '년',
-    invalid: null,
-  },
-};
-
-const signupReducer = (state, action) => {
-  switch (action.type) {
-    case 'CHECK_ALL_VALIDATION':
-      return action.payload;
-    case 'UPDATE_VALUE':
-      return {
-        ...state,
-        [action.key]: {
-          value: action.payload,
-          invalid: false,
-        },
-      };
-    case 'VALIDATE_PWD':
-      return {
-        ...state,
-        pwdValidation: action.payload,
-      };
-    case 'RESET':
-      return initialState;
-    case 'UPDATE_SELECT':
-      return {
-        ...state,
-        [action.key]: action.payload,
-      };
-    default:
-      return state;
-  }
-};
+let count = 0;
 
 const SignupModalContainer = () => {
+  console.log(++count);
   const dispatch = useDispatch();
-  const { loading, error, signupRes } = useSelector(state => state.user);
   const { name } = useSelector(state => state.modal);
   const modalVisible = name === 'signup_email';
-  const [signup, _dispatch] = useReducer(signupReducer, initialState);
-  const [isChecking, setIsChecking] = useState(false);
-  const [isPwdChanged, setIsPwdChanged] = useState(false);
-  const [pwdFocus, setPwdFocus] = useState(false);
+  const {
+    loading,
+    error,
+    msg,
+    isChecking,
+    isPwdFocused,
+    isPwdChanged,
+    form,
+    invalid,
+  } = useSelector(state => state.signup);
   const {
     email,
     firstName,
     lastName,
     pwd,
-    pwdValidation,
     birthMonth,
     birthDay,
     birthYear,
-  } = signup;
-  const { pwdLevel } = pwdValidation;
+    phone,
+    profileImg,
+    description,
+  } = form;
+
+  const {
+    pwdValidation: { pwdLevel },
+  } = invalid;
 
   const emailRef = useRef();
   const firstNameRef = useRef();
@@ -109,27 +64,25 @@ const SignupModalContainer = () => {
     birthYearRef,
   };
 
-  const onPwdFocus = () => {
-    setPwdFocus(true);
+  const openLoginModal = () => {
+    dispatch(openModal('login'));
   };
 
-  const checkPwdValidation = () => {
-    const pwdLength = pwd.value && pwd.value.length >= 8;
+  const onPwdFocused = value => {
+    dispatch(setIsPwdFocused(value));
+  };
+
+  const checkPwd = () => {
+    const pwdLength = pwd && pwd.length >= 8;
     const emailResult =
-      !email.value.split('@')[0] ||
-      !pwd.value.includes(email.value.split('@')[0]);
-    const firstNameResult =
-      !firstName.value || !pwd.value.includes(firstName.value);
-    const lastNameResult =
-      !lastName.value || !pwd.value.includes(lastName.value);
-    const pwdContain =
-      pwd.value && emailResult && firstNameResult && lastNameResult;
+      !email.split('@')[0] || !pwd.includes(email.split('@')[0]);
+    const firstNameResult = !firstName || !pwd.includes(firstName);
+    const lastNameResult = !lastName || !pwd.includes(lastName);
+    const pwdContain = pwd && emailResult && firstNameResult && lastNameResult;
     const numberPattern = /[0-9]/;
     const specialCasePattern = /[~!@#$%^&*()_+|<>?:{}]/;
-    const pwdCase =
-      numberPattern.test(pwd.value) || specialCasePattern.test(pwd.value);
-    const pwdCaseBoth =
-      numberPattern.test(pwd.value) && specialCasePattern.test(pwd.value);
+    const pwdCase = numberPattern.test(pwd) || specialCasePattern.test(pwd);
+    const pwdCaseBoth = numberPattern.test(pwd) && specialCasePattern.test(pwd);
     const pwdLevel =
       pwdContain && pwdLength && pwdCaseBoth
         ? 2
@@ -137,112 +90,108 @@ const SignupModalContainer = () => {
         ? 1
         : 0;
 
-    const pwdValidation = {
+    return {
       pwdLevel,
       pwdContain,
       pwdLength,
       pwdCase,
     };
-
-    return pwdValidation;
   };
-  const checkFormValidation = () => {
+
+  const updatePwd = () => {
+    const payload = checkPwd();
+    dispatch(setPwdValidation(payload));
+  };
+
+  const checkEmail = email => {
     const emailRegExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+    return !emailRegExp.test(email);
+  };
+
+  const checkName = name => {
     const numberRegExp = /[\d]/;
     const specialCharRegExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/gi;
-    const emailObj = {
-      value: email.value,
-      invalid: !emailRegExp.test(email.value),
-    };
-    const firstNameObj = {
-      value: firstName.value,
-      invalid:
-        firstName.value.length < 1 ||
-        firstName.value.length > 35 ||
-        numberRegExp.test(firstName.value) ||
-        specialCharRegExp.test(firstName.value),
-    };
-    const lastNameObj = {
-      value: lastName.value,
-      invalid:
-        lastName.value.length < 1 ||
-        lastName.value.length > 35 ||
-        numberRegExp.test(lastName.value) ||
-        specialCharRegExp.test(lastName.value),
-    };
-    const pwdObj = {
-      value: pwd.value,
-      invalid: !pwdLevel,
-    };
-    const pwdValidationObj = checkPwdValidation();
-    const birthMonthObj = {
-      value: birthMonth.value,
-      invalid: isNaN(birthMonth.value),
-    };
-    const birthDayObj = {
-      value: birthDay.value,
-      invalid: isNaN(birthDay.value),
-    };
-    const birthYearObj = {
-      value: birthYear.value,
-      invalid: isNaN(birthYear.value),
-    };
-    const payload = {
-      email: emailObj,
-      firstName: firstNameObj,
-      lastName: lastNameObj,
-      pwd: pwdObj,
-      pwdValidation: pwdValidationObj,
-      birthMonth: birthMonthObj,
-      birthDay: birthDayObj,
-      birthYear: birthYearObj,
-    };
-    _dispatch({ type: 'CHECK_ALL_VALIDATION', payload });
-    setIsChecking(true);
+    return (
+      name.length < 1 ||
+      name.length > 35 ||
+      numberRegExp.test(name) ||
+      specialCharRegExp.test(name)
+    );
   };
 
-  const updatePwdValidation = () => {
-    const payload = checkPwdValidation();
-    _dispatch({ type: 'VALIDATE_PWD', payload });
+  const checkDate = (year, month, day) => {
+    const monthLength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    if (year % 400 === 0 || (year % 100 !== 0 && year % 4 === 0)) {
+      monthLength[1] = 29;
+    }
+    return day > monthLength[month - 1];
   };
 
-  const onChangeForm = ({ target }, key) => {
-    const value = target.value;
-    _dispatch({ type: 'UPDATE_VALUE', key, payload: value });
-    setIsPwdChanged(true);
-  };
-
-  const onChangeSelect = ({ target }, key) => {
-    const value = Number(target.value);
-    const payload = {
-      value,
-      invalid: isNaN(value),
-    };
-    _dispatch({ type: 'UPDATE_SELECT', key, payload });
-  };
-
-  const openLoginModal = () => {
-    dispatch(openModal('login'));
+  const onFormChange = (key, value) => {
+    if (key.slice(0, 6) === 'birth') {
+      value = Number(value);
+    }
+    dispatch(setValue(key, value));
   };
 
   const onSuccess = async () => {
     console.log('===회원가입 시도====');
     const userInfo = {
-      email: email.value,
-      firstName: firstName.value,
-      lastName: lastName.value,
-      pwd: pwd.value,
-      birthday: `${birthYear.value}/${birthMonth.value}/${birthDay.value}`,
-      phone: '010-1111-1111',
-      profileImg: '',
-      description: '',
+      email,
+      firstName,
+      lastName,
+      pwd,
+      birthday: `${birthYear}/${birthMonth}/${birthDay}`,
+      phone,
+      profileImg,
+      description,
     };
     console.log('userInfo: ', userInfo);
     dispatch(signupRequest(userInfo));
-
-    setPwdFocus(false);
-    _dispatch({ type: 'RESET' });
   };
+
+  const changeFocus = () => {
+    console.log('changeFocus()');
+    const invalidCount = Object.values(invalid)
+      .slice(0, 6)
+      .reduce((acc, cur) => {
+        return acc + +cur.invalid;
+      }, 0);
+    if (invalidCount) {
+      refObj[
+        `${Object.entries(invalid).find(v => v[1].invalid)[0]}Ref`
+      ].current.focus();
+      return;
+    }
+    onSuccess();
+  };
+
+  const checkForm = () => {
+    const payload = {
+      email: checkEmail(email),
+      firstName: checkName(firstName),
+      lastName: checkName(lastName),
+      pwd: !pwdLevel,
+      pwdValidation: checkPwd(),
+      birthYear: isNaN(birthYear) || checkDate(birthYear, birthMonth, birthDay),
+      birthMonth:
+        isNaN(birthMonth) || checkDate(birthYear, birthMonth, birthDay),
+      birthDay: isNaN(birthDay) || checkDate(birthYear, birthMonth, birthDay),
+    };
+
+    dispatch(setInvalid(payload));
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    checkForm();
+  };
+
+  const range = (start, stop, step) =>
+    Array.from(
+      { length: (stop - start) / step + 1 },
+      (_, i) => start + i * step,
+    );
 
   const onGoogleLoginSuccess = res => {
     console.log('[googleLoginSucess]: ', res);
@@ -252,57 +201,38 @@ const SignupModalContainer = () => {
     console.log('[googleLoginFailure]: ', res);
   };
 
-  const changeFocus = () => {
-    const invalidCount = Object.values(signup)
-      .slice(0, 4)
-      .reduce((acc, cur) => {
-        return acc + +cur.invalid;
-      }, 0);
-    if (invalidCount) {
-      refObj[
-        `${Object.entries(signup).find(v => v[1].invalid)[0]}Ref`
-      ].current.focus();
-      return;
-    }
-    onSuccess();
-  };
+  if (isPwdChanged) {
+    console.log('updatePwd()...');
+    updatePwd();
+    dispatch(setIsPwdChanged(false));
+  }
 
-  const onSignup = e => {
-    e.preventDefault();
-    checkFormValidation();
-  };
-
-  const range = (start, stop, step) =>
-    Array.from(
-      { length: (stop - start) / step + 1 },
-      (_, i) => start + i * step,
-    );
+  if (isChecking) {
+    console.log('isChecking()...');
+    changeFocus();
+    dispatch(setIsChecking(false));
+  }
 
   useEffect(() => {
-    isChecking && changeFocus();
-    isPwdChanged && updatePwdValidation();
-    setIsChecking(false);
-    setIsPwdChanged(false);
-  }, [isChecking, isPwdChanged, signup]);
+    console.log('--- useEffect ---');
+  }, []);
 
   return (
     <SignupEmailModal
       modalVisible={modalVisible}
+      form={form}
+      invalid={invalid}
+      refObj={refObj}
+      range={range}
+      loading={loading}
+      isPwdFocused={isPwdFocused}
       openLoginModal={openLoginModal}
       closeModal={() => {
         dispatch(closeModal());
       }}
-      range={range}
-      signup={signup}
-      loading={loading}
-      signupRes={signupRes}
-      pwdValidation={pwdValidation}
-      onChangeForm={onChangeForm}
-      onChangeSelect={onChangeSelect}
-      onSignup={onSignup}
-      refObj={refObj}
-      onPwdFocus={onPwdFocus}
-      pwdFocus={pwdFocus}
+      onFormChange={onFormChange}
+      handleSubmit={handleSubmit}
+      onPwdFocused={onPwdFocused}
       onGoogleLoginSuccess={onGoogleLoginSuccess}
       onGoogleLoginFailure={onGoogleLoginFailure}
     ></SignupEmailModal>
