@@ -18,8 +18,9 @@ const Amenities = ({ home, isScreenMedium }) => {
                 focusable="false"
                 viewBox="0 0 32 32"
                 xmlns="http://www.w3.org/2000/svg"
-                dangerouslySetInnerHTML={{ __html: amenity.icon }}
-              />
+              >
+                <path d={amenity.icon} />
+              </svg>
               <span>{amenity.name}</span>
             </StAmenity>
           );

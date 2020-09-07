@@ -15,8 +15,9 @@ const Bedrooms = ({ home }) => {
                 role="presentation"
                 aria-hidden="true"
                 focusable="false"
-                dangerouslySetInnerHTML={{ __html: icon }}
-              ></svg>
+              >
+                <path d={icon} />
+              </svg>
             ))}
             <strong>{bedroom.room}</strong>
             <span>{bedroom.size}</span>

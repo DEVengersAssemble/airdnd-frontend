@@ -34,8 +34,9 @@ const HomeExplain = ({ isLoading, home }) => {
                   focusable="false"
                   viewBox="0 0 32 32"
                   xmlns="http://www.w3.org/2000/svg"
-                  dangerouslySetInnerHTML={{ __html: explain.icon }}
-                />
+                >
+                  <path d={explain.icon} />
+                </svg>
                 <strong>{explain.text}</strong>
                 {explain.subText && <span>{explain.subText}</span>}
               </StExplain>
