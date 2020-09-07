@@ -5,7 +5,7 @@ import { hoverHome, blurHome } from '../../Modules/search';
 import { toggleBookmark } from '../../lib/bookmarkUtils';
 
 const HomeCardContainer = ({ home, type }) => {
-  const { id } = useSelector(state => state.user);
+  const { id } = useSelector(state => state.user.data);
   const { dateDiff } = useSelector(state => state.search.searchForm);
   const { hoveredHome, mapState } = useSelector(state => state.search);
   const isHovered = hoveredHome === home.homeId;
