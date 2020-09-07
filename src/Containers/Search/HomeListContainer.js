@@ -26,7 +26,7 @@ const HomeListContainer = () => {
   const applyToQuery = obj =>
     keys.filter(key => fa[key] !== 0).forEach(key => (obj[key] = fa[key]));
 
-  const setListValues = key => (fa[key] === [] ? 0 : fa[key].join('-'));
+  const setListValues = key => (fa[key].length ? fa[key].join('-') : 0);
   const setValues = key => {
     switch (key) {
       case 'priceMin':
@@ -36,6 +36,8 @@ const HomeListContainer = () => {
       case 'amenityList':
       case 'facilityList':
       case 'hostLangList':
+        console.log(fa[key]);
+        console.log(setListValues(key));
         return setListValues(key);
       default:
         return fa[key] ? 1 : 0;

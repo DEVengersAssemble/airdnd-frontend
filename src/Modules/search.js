@@ -206,9 +206,9 @@ const search = (state = initialState, action) => {
         ...state,
         ...reducerUtils.success(action.payload),
         filterApplied: {
-          ...state.filterApplied,
           ...modalFilterInit(action.payload.filterCondition),
           ..._.pick(state.searchForm, [...all, 'page']),
+          ...state.filterApplied,
         },
         isFilterChanged: false,
       };
