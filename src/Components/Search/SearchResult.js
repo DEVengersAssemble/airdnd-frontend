@@ -6,13 +6,21 @@ import { FloatingMapButton } from './MapButton';
 import HomeListContainer from '../../Containers/Search/HomeListContainer';
 import RecentHomeListContainer from '../../Containers/Search/RecentHomeListContainer';
 
-const SearchResult = ({ mapState, view, onOpenMap, dataTotal, searchForm }) => {
+const SearchResult = ({
+  mapState,
+  view,
+  onOpenMap,
+  dataTotal,
+  searchForm,
+  convertDate,
+}) => {
   const { location, guests, checkIn, checkOut } = searchForm;
   return (
     <StWrapper mapState={mapState} view={view}>
       <StSpan>
-        숙박 {dataTotal}건 {checkIn && ` · ${checkIn} - ${checkOut}`}
-        {guests && ` · 게스트 ${guests}명`}
+        숙박 {dataTotal}건{' '}
+        {checkIn && ` · ${convertDate(checkIn)} - ${convertDate(checkOut)}`}
+        {guests > 0 && ` · 게스트 ${guests}명`}
       </StSpan>
       <StHeader>{location}의 숙소</StHeader>
       <FilterListContainer mapState={mapState} />
