@@ -10,8 +10,6 @@ const TripsUpcomingCardItemContainer = ({ trip }) => {
   const { title, homeImage, addr, withGuest, guest, checkin, checkout } = trip;
   const myInfo = data.upcoming;
   const { lastName: myLastName, profileImg: myProfileImg } = myInfo;
-  console.log(myInfo);
-  console.log(trip);
 
   const ciDate = new Date(checkin);
   const coDate = new Date(checkout);

@@ -4,10 +4,20 @@ import TripsCanceled from '../../Components/Trips/TripsCanceled';
 // import { showReservation } from '../../Modules/trips';
 
 const TripsCanceledContainer = () => {
-  const trips = useSelector(state => state.trips.reservations);
-  const canceledTrips = trips.filter(trip => trip.isCanceled);
+  // ! redux
+  const { data, loading, error } = useSelector(state => state.trips.trips);
 
-  return <TripsCanceled canceledTrips={canceledTrips} />;
+  // ! variable
+  const canceledTrips = data && data.canceled && data.canceled.reservations;
+  const tripsCount = canceledTrips && canceledTrips.length;
+
+  if (loading) return <div>로딩중...</div>;
+  if (error) return <div>Error...</div>;
+  if (!data) return null;
+
+  return (
+    <TripsCanceled canceledTrips={canceledTrips} tripsCount={tripsCount} />
+  );
 };
 
 export default TripsCanceledContainer;

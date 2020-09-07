@@ -18,8 +18,6 @@ const TripsUpcomingCardItem = ({
   myLastName,
   myProfileImg,
 }) => {
-  // TODO: co - ci 만큼 mapping 필요 dateDiff
-
   return (
     <TripsUpcomingCardItemWrapper>
       <Link to="/schedule">

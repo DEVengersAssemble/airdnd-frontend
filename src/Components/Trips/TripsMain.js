@@ -1,17 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import TripsSubRouter from '../../Routers/TripsSubRouter';
-import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
-import qs from 'qs';
 
-const TripsMain = () => {
-  const location = useLocation();
-  const { tab } = qs.parse(location.search, {
-    ignoreQueryPrefix: true,
-  });
-  const isActive = tab;
-
+const TripsMain = ({ isActive }) => {
   return (
     <TripsMainWrapper>
       <TripsMainInner>
@@ -22,7 +14,11 @@ const TripsMain = () => {
           <TripsMainNavList>
             <StLink
               to="/trips/v1?tab=upcoming"
-              className={isActive === 'upcoming' ? 'active' : ''}
+              className={
+                isActive === 'upcoming' || isActive === undefined
+                  ? 'active'
+                  : ''
+              }
             >
               <TripsMainNavItem>
                 <TripsMainNavItemInner>예정된 예약</TripsMainNavItemInner>
