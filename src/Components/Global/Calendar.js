@@ -23,6 +23,7 @@ const Calendar = ({
   onClickWrapper,
   checkAfterReserved,
   checkBeforeCheckin,
+  beforeToday,
 }) => {
   const addZero = num => ((num + '').length === 1 ? '0' + num : num);
 
@@ -45,29 +46,31 @@ const Calendar = ({
         <StDates onMouseLeave={onMouseLeave}>
           {nowMonthDates.map((date, i) => {
             const nowDate = `${nowMonth.year}.${_nowMonth}.${addZero(date)}`;
+            const dateTime = new Date(nowDate).getTime();
             const reserved = reservedDates.find(v => v === nowDate);
-            const isAfterReserved = reserved || checkAfterReserved(nowDate);
+            const isAfterReserved = reserved || checkAfterReserved(dateTime);
             return (
               <StDateWrapper
                 key={i}
                 onClick={onClickWrapper}
                 margin={nowMonth.firstDay}
-                darken={checkin && !isAfterReserved && getDiff(nowDate)}
+                darken={checkin && !isAfterReserved && getDiff(dateTime)}
                 checkin={checkin === nowDate}
                 checkout={checkout === nowDate}
                 hoverDate={hoverDate === nowDate}
               >
                 <StDateBtn
                   id={`dateId-${nowMonth.year}.${_nowMonth}.${addZero(date)}`}
-                  onClick={e => onClickCheckDate(e, reserved)}
+                  onClick={e => onClickCheckDate(e, dateTime, reserved)}
                   onMouseEnter={onMouseenter}
                   checkin={checkin === nowDate}
                   checkout={checkout === nowDate}
                   hoverDate={hoverDate === nowDate && !isAfterReserved}
                   reserved={reserved}
+                  beforeToday={beforeToday(dateTime)}
                   afterReserved={isAfterReserved && !checkout}
                   beforeCheckin={
-                    isDetailPage && !checkout && checkBeforeCheckin(nowDate)
+                    isDetailPage && !checkout && checkBeforeCheckin(dateTime)
                   }
                   btnType="circle"
                 >
@@ -102,6 +105,7 @@ const StWrapper = styled.div`
   display: flex;
   width: 100%;
   max-width: 642px;
+  min-width: 308px;
   min-height: 300px;
   margin-top: 30px;
   cursor: pointer;
@@ -137,6 +141,7 @@ const StNextMonthBtn = styled(Button)`
 const StCalendarWrapper = styled.div`
   width: 50%;
   width: 308px;
+  min-width: 308px;
   display: inline-block;
   vertical-align: top;
 
@@ -216,12 +221,14 @@ const StDateBtn = styled(Button)`
       color: ${({ theme }) => theme.color.white};
     `}
 
-  ${({ reserved, beforeCheckin, afterReserved }) =>
-    (reserved || beforeCheckin || afterReserved) &&
+  ${({ reserved, beforeToday, beforeCheckin, afterReserved }) =>
+    (reserved || beforeToday || beforeCheckin || afterReserved) &&
     css`
-      color: ${({ theme }) => theme.color.gray};
+      ${'' /* color: ${({ theme }) => theme.color.gray}; */}
+      color: rgba(72, 72, 72, 0.25);
       text-decoration: line-through;
       font-weight: 400;
+      cursor: initial;
 
       :hover {
         border: none;
