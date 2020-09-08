@@ -1,38 +1,58 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setSearchData } from '../../Modules/searchForm';
+import {
+  setResevationGuest,
+  setChangeInitialGuests,
+} from '../../Modules/reservation';
 import DetailGuestPopup from '../../Components/Detail/DetailGuestPopup';
 
 const DeatailGuestPopupContainer = ({ displayName, ...rest }) => {
-  const { guests } = useSelector(state => state.searchForm);
+  const {
+    adult: searchAdult,
+    child: searchChild,
+    infant: searchInfant,
+  } = useSelector(state => state.searchForm.guests);
+  const {
+    adult: reserveAdult,
+    child: reserveChild,
+    infant: reserveInfant,
+  } = useSelector(state => state.reservation.guests);
+  const { changeInitialGuests } = useSelector(state => state.reservation);
+  const { capacity } = useSelector(state => state.home.homeState.home);
   const dispatch = useDispatch();
   const [popupState, SetPopupState] = useState(false);
   const popup = useRef();
 
-  const changeSearchData = (name, value) => {
-    const data = { name, value };
-    dispatch(setSearchData(data));
+  const newAdult = (changeInitialGuests ? reserveAdult : searchAdult) || 1;
+  const newChild = changeInitialGuests ? reserveChild : searchChild;
+  const newInfant = changeInitialGuests ? reserveInfant : searchInfant;
+
+  const changeGuestData = (adult, child, infant) => {
+    const data = { adult, child, infant };
+    dispatch(setResevationGuest(data));
+    if (!changeInitialGuests) dispatch(setChangeInitialGuests());
   };
 
-  const increaseGuestCount = (guestsData, guestType) => {
-    let { adult, child, infant } = guestsData;
-    if (guestType === 'adult' || !adult) adult++;
-    if (guestType === 'child') {
-      child++;
-    } else if (guestType === 'infant') {
-      infant++;
+  const isFullCapacity = newAdult + newChild >= capacity;
+
+  const increaseGuestCount = guestType => {
+    if ((guestType === 'adult' || !newAdult) && !isFullCapacity) {
+      changeGuestData(newAdult + 1, newChild, newInfant);
+    } else if (guestType === 'child' && !isFullCapacity) {
+      changeGuestData(newAdult, newChild + 1, newInfant);
+    } else if (guestType === 'infant' && newInfant < 5) {
+      changeGuestData(newAdult, newChild, newInfant + 1);
     }
-    const value = { adult, child, infant };
-    changeSearchData('guests', value);
   };
 
-  const decreaseGuestCount = (guestsData, guestType) => {
-    let { adult, child, infant } = guestsData;
-    if (guestType === 'adult' && adult > 0) adult--;
-    else if (guestType === 'child' && child > 0) child--;
-    else if (guestType === 'infant' && infant > 0) infant--;
-    const value = { adult, child, infant };
-    changeSearchData('guests', value);
+  const decreaseGuestCount = guestType => {
+    if (guestType === 'adult' && newAdult > 1) {
+      changeGuestData(newAdult - 1, newChild, newInfant);
+    } else if (guestType === 'child' && newChild > 0) {
+      changeGuestData(newAdult, newChild - 1, newInfant);
+    } else if (guestType === 'infant' && newInfant > 0) {
+      changeGuestData(newAdult, newChild, newInfant - 1);
+    }
   };
 
   const onClosePopup = ({ target }) => {
@@ -55,13 +75,17 @@ const DeatailGuestPopupContainer = ({ displayName, ...rest }) => {
 
   return (
     <DetailGuestPopup
-      guests={guests}
+      adult={newAdult}
+      child={newChild}
+      infant={newInfant}
       popup={popup}
       onOpenPopup={onOpenPopup}
       popupState={popupState}
       onClosePopup={onClosePopup}
       increaseGuestCount={increaseGuestCount}
       decreaseGuestCount={decreaseGuestCount}
+      capacity={capacity}
+      isFullCapacity={isFullCapacity}
       displayName={displayName}
       {...rest}
     />

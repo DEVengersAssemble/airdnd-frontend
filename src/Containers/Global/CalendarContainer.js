@@ -11,6 +11,7 @@ const CalendarContainer = ({
   setChangeDataTrue,
   reservedDates = [],
   isDetailPage,
+  ...rest
 }) => {
   const [count, setCount] = useState(0);
 
@@ -54,16 +55,22 @@ const CalendarContainer = ({
   );
 
   // events
+  const checkinTime = new Date(checkin).getTime();
 
-  const checkBeforeCheckin = date => {
-    const targetTime = new Date(date).getTime();
-    const checkinTime = new Date(checkin).getTime();
-    return checkinTime > targetTime;
+  const beforeToday = dateTime => {
+    const todayTime = new Date().getTime();
+    return dateTime < todayTime;
   };
 
-  const checkAfterReserved = date => {
-    const checkinTime = new Date(checkin).getTime();
-    const dateTime = new Date(date).getTime();
+  const checkBeforeCheckin = dateTime => {
+    // const dateTime = new Date(date).getTime();
+    // const checkinTime = new Date(checkin).getTime();
+    return checkinTime > dateTime;
+  };
+
+  const checkAfterReserved = dateTime => {
+    // const checkinTime = new Date(checkin).getTime();
+    // const dateTime = new Date(date).getTime();
     const firstReserved = reservedDates.find(reservedDate => {
       const reservedTime = new Date(reservedDate).getTime();
       return reservedTime > checkinTime;
@@ -74,13 +81,12 @@ const CalendarContainer = ({
 
   const [hoverDate, setHoverDate] = useState('');
 
-  const getDiff = (date, getReserved) => {
+  const getDiff = (dateTime, getReserved) => {
     if (!checkin) return;
-    const dateTime = new Date(date).getTime();
-    const checkinTime = new Date(checkin).getTime();
+    // const dateTime = new Date(date).getTime();
+    // const checkinTime = new Date(checkin).getTime();
     const checkoutTime = new Date(checkout).getTime();
     const hoverDateTime = new Date(hoverDate).getTime();
-    // switch case
     if (getReserved) {
       return reservedDates.find(v => {
         const vTime = new Date(v).getTime();
@@ -93,22 +99,28 @@ const CalendarContainer = ({
     return dateTime >= checkinTime && dateTime <= checkoutTime;
   };
 
-  const onClickCheckDate = (e, reserved) => {
-    if (changeInitialDate === false) setChangeDataTrue(true);
+  const onClickCheckDate = (e, dateTime, reserved) => {
     const date = e.target.id.slice(7);
 
     if (date === reserved) return;
+    if (beforeToday(dateTime)) return;
+    if (changeInitialDate === false) setChangeDataTrue(true);
+
     if (!checkin) {
       console.log('■■■ checkin', date);
       setCheckinData(date);
       return;
     }
-    if (checkBeforeCheckin(date) && !isDetailPage) {
+    if (checkBeforeCheckin(dateTime) && !isDetailPage) {
       console.log('■■■ beforecheckin - mainPage', date);
       setCheckinData(date);
+<<<<<<< HEAD
+=======
+      // setCheckoutData('');
+>>>>>>> 0cf3eda401482882c37345cd27e1fc008c0108ee
       return;
     }
-    if (!checkout && getDiff(date, true)) {
+    if (!checkout && getDiff(dateTime, true)) {
       console.log('■■■ reject reserved', date);
       return;
     }
@@ -119,29 +131,32 @@ const CalendarContainer = ({
     if (checkout) {
       console.log('■■■ recheckin', date, checkout);
       setCheckinData(date);
+<<<<<<< HEAD
+=======
+      // setCheckoutData('');
+>>>>>>> 0cf3eda401482882c37345cd27e1fc008c0108ee
       return;
     }
-    if (checkin && !checkBeforeCheckin(date)) {
+    if (checkin && !checkBeforeCheckin(dateTime)) {
       console.log('■■■ checkout', date);
       setCheckoutData(date);
       return;
     }
-    if (checkBeforeCheckin(date) && isDetailPage) {
+    if (checkBeforeCheckin(dateTime) && isDetailPage) {
       console.log('■■■ reject beforecheckin - datailPage');
       return;
     }
   };
 
-  console.log('now rendering..');
-
   const onMouseenter = e => {
     if (!checkin || checkout) return;
     const date = e.target.id.slice(7);
-    if (checkAfterReserved(date)) {
+    const dateTime = new Date(date).getTime();
+    if (checkAfterReserved(dateTime)) {
       setHoverDate('');
       return;
     }
-    if (checkBeforeCheckin(date)) {
+    if (checkBeforeCheckin(dateTime)) {
       setHoverDate('');
       return;
     }
@@ -183,6 +198,8 @@ const CalendarContainer = ({
       onClickWrapper={onClickWrapper}
       checkAfterReserved={checkAfterReserved}
       checkBeforeCheckin={checkBeforeCheckin}
+      beforeToday={beforeToday}
+      {...rest}
     />
   );
 };

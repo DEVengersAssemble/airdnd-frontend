@@ -7,7 +7,6 @@ const GET_HOME_ERROR = 'home/GET_HOME_ERROR';
 const RESIZE_SCREEN = 'home/RESIZE_SCREEN';
 
 export const getHome = id => async dispatch => {
-  console.log('gethome');
   dispatch({ type: GET_HOME }); // 요청이 시작됨
   try {
     const home = await homeApi.getHome(id); // Api 호출
