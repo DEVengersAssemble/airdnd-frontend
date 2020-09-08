@@ -44,7 +44,8 @@ const HomeExplain = ({ isLoading, home }) => {
           </StExplainList>
 
           <StDescription readMore={readMore}>
-            <span>{home.description}</span>
+            {/* <span>{home.description}</span> */}
+            <span dangerouslySetInnerHTML={{ __html: home.description }}></span>
             {!readMore && <StMoreBtn onClick={onClick}>더 읽기</StMoreBtn>}
             <StToHostBtn>호스트에게 연락하기</StToHostBtn>
           </StDescription>
