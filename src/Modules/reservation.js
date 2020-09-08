@@ -3,12 +3,14 @@ const SET_CHECKOUT = 'reservation/SET_CHECKOUT';
 const SET_GUESTS = 'reservation/SET_GUESTS';
 const DELETE_CHECKINOUT = 'reservation/DELETE_CHECKINOUT';
 const CHANGE_INITIAL_DATE = 'reservation/CHANGE_INITIAL_DATE';
+const CHANGE_INITIAL_GUESTS = 'reservation/CHANGE_INITIAL_GUESTS';
 
 export const setCheckin = checkin => ({ type: SET_CHECKIN, checkin });
 export const setCheckout = checkout => ({ type: SET_CHECKOUT, checkout });
-export const setGuests = guests => ({ type: SET_CHECKIN, guests });
+export const setResevationGuest = guests => ({ type: SET_GUESTS, guests });
 export const deleteCheckInOut = () => ({ type: DELETE_CHECKINOUT });
 export const setChangeInitialDate = () => ({ type: CHANGE_INITIAL_DATE });
+export const setChangeInitialGuests = () => ({ type: CHANGE_INITIAL_GUESTS });
 
 const getDateDiff = (date1, date2) => {
   if (!date1 || !date2) return 0;
@@ -26,12 +28,14 @@ const initialState = {
     '2020.08.15',
     '2020.08.16',
     '2020.09.20',
-    '2020.09.25',
+    '2020.09.28',
+    '2020.10.20',
     '2020.10.25',
   ],
   guests: { adult: 1, child: 0, infant: 0 },
   totalGuest: 0,
   changeInitialDate: false,
+  changeInitialGuests: false,
 };
 
 const reservation = (state = initialState, action) => {
@@ -68,6 +72,12 @@ const reservation = (state = initialState, action) => {
       return {
         ...state,
         changeInitialDate: true,
+      };
+    }
+    case CHANGE_INITIAL_GUESTS: {
+      return {
+        ...state,
+        changeInitialGuests: true,
       };
     }
     default:

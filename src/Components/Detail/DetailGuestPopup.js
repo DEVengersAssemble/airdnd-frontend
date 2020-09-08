@@ -1,23 +1,25 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { GoPlus } from 'react-icons/go';
 import { GoDash } from 'react-icons/go';
 import Popup from '../Global/Popup';
 import Button from '../Global/Button';
 
 const DetailGuestPopup = ({
+  adult,
+  child,
+  infant,
   popup,
   onOpenPopup,
   popupState,
   onClosePopup,
   increaseGuestCount,
   decreaseGuestCount,
-  guests,
+  capacity,
+  isFullCapacity,
   displayName,
   ...rest
 }) => {
-  const { adult, child, infant } = guests;
-
   return (
     <StGuests tabIndex="0" ref={popup} onClick={onOpenPopup} {...rest}>
       {displayName && <StName>인원</StName>}
@@ -30,15 +32,17 @@ const DetailGuestPopup = ({
           <StCountGuest>
             <div>성인</div>
             <StCountBtn
+              dimmed={adult <= 1}
               btnType="circle"
-              onClick={() => decreaseGuestCount(guests, 'adult')}
+              onClick={() => decreaseGuestCount('adult')}
             >
               <GoDash />
             </StCountBtn>
             <div>{adult}</div>
             <StCountBtn
+              dimmed={isFullCapacity}
               btnType="circle"
-              onClick={() => increaseGuestCount(guests, 'adult')}
+              onClick={() => increaseGuestCount('adult')}
             >
               <GoPlus />
             </StCountBtn>
@@ -48,15 +52,17 @@ const DetailGuestPopup = ({
               어린이<div>2~12세</div>
             </div>
             <StCountBtn
+              dimmed={!child}
               btnType="circle"
-              onClick={() => decreaseGuestCount(guests, 'child')}
+              onClick={() => decreaseGuestCount('child')}
             >
               <GoDash />
             </StCountBtn>
             <div>{child}</div>
             <StCountBtn
+              dimmed={isFullCapacity}
               btnType="circle"
-              onClick={() => increaseGuestCount(guests, 'child')}
+              onClick={() => increaseGuestCount('child')}
             >
               <GoPlus />
             </StCountBtn>
@@ -66,20 +72,25 @@ const DetailGuestPopup = ({
               유아<div>2세 미만</div>
             </div>
             <StCountBtn
+              dimmed={!infant}
               btnType="circle"
-              onClick={() => decreaseGuestCount(guests, 'infant')}
+              onClick={() => decreaseGuestCount('infant')}
             >
               <GoDash />
             </StCountBtn>
             <div>{infant}</div>
             <StCountBtn
+              dimmed={infant >= 5}
               btnType="circle"
-              onClick={() => increaseGuestCount(guests, 'infant')}
+              onClick={() => increaseGuestCount('infant')}
             >
               <GoPlus />
             </StCountBtn>
           </StCountGuest>
         </ul>
+        <StCapacityMsg>
+          최대 {capacity}명. 유아는 숙박인원에 포함되지 않습니다.
+        </StCapacityMsg>
         <StCloseBtn
           btnType="underlined"
           fontWeight="600"
@@ -87,7 +98,7 @@ const DetailGuestPopup = ({
         >
           닫기
         </StCloseBtn>
-      </StPopup>{' '}
+      </StPopup>
     </StGuests>
   );
 };
@@ -113,10 +124,10 @@ const StGuests = styled.div`
     z-index: 1;
     /* padding: 25px 11px 10px; */
 
-    & > div:first-child {
-      /* top: 9px;
-      left: 11px; */
-    }
+    /* & > div:first-child {
+      top: 9px;
+      left: 11px;
+    } */
   }
 `;
 
@@ -165,19 +176,35 @@ const StCountGuest = styled.li`
   }
 `;
 
+const dimmedStyle = css`
+  border-color: ${({ theme }) => theme.color.line};
+  color: ${({ theme }) => theme.color.line};
+  cursor: not-allowed;
+  :hover {
+    border-color: ${({ theme }) => theme.color.line};
+    color: ${({ theme }) => theme.color.line};
+  }
+`;
+
 const StCountBtn = styled(Button)`
   width: 32px;
   height: 32px;
   color: ${({ theme }) => theme.color.darkGray};
-
   :hover {
     border-color: ${({ theme }) => theme.color.black};
     color: ${({ theme }) => theme.color.black};
   }
-
   svg {
     font-size: 14px;
   }
+  ${({ dimmed }) => dimmed && dimmedStyle}
+`;
+
+const StCapacityMsg = styled.div`
+  display: block;
+  margin-bottom: 16px;
+  color: ${({ theme }) => theme.color.darkGray};
+  font-size: 14px;
 `;
 
 const StCloseBtn = styled(Button)`
