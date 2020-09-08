@@ -18,7 +18,7 @@ const MainRouter = () => {
       <Route path="/Reservation" component={ReservationPage} />
       <Route path="/message" component={MessagePage} />
       <Route path="/trips" component={TripsPage} />
-      <Route path="/trips/v1" component={TripsPage} />
+      <Route path="/trips/:version" component={TripsPage} />
       <Route path="/wishlists" component={WishlistsPage} />
       {/* how to use global component */}
       <Route path="/HowToUseInput" component={HowToUseInput} />
