@@ -59,8 +59,7 @@ const StWrapper = styled.div`
   background: transparent;
   position: relative;
   width: 320px;
-  height: fit-content;
-  padding: 1.5rem;
+  padding: 1.5rem 1.5rem 0;
   top: 1.5rem;
   right: 1.5rem;
 `;
@@ -79,8 +78,8 @@ const Caption = styled(HomeCaption)`
 
 const Heart = styled(CkHeart)`
   position: absolute;
-  top: 2rem;
-  right: 1.1em;
+  top: 2.1rem;
+  right: 1.2em;
 `;
 
 export default HomePopup;

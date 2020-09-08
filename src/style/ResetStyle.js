@@ -160,6 +160,13 @@ a {
   height: 100%;
   width: 100%;
 }
+div.infoBox {
+  overflow-x: hidden;
+  overflow-y: hidden;
+  height: 430px;
+  position: relative;
+  top: 1.5rem;
+}
 html {
   font-size: 10px;
 }
