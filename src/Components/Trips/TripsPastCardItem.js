@@ -11,12 +11,13 @@ const TripsPastCardItem = ({
   homeImage,
   addr,
   withGuest,
-  guest,
   dateDiff,
   ci,
   co,
   myLastName,
   myProfileImg,
+  guestLastName,
+  guestProfileImg,
 }) => {
   return (
     <TripsPastCardItemWrapper>
@@ -26,14 +27,14 @@ const TripsPastCardItem = ({
           {withGuest && (
             <TripsProfileWrapper>
               <Profile
-                lastName={`${myLastName}`}
+                lastName={myLastName}
                 size="4.3rem"
                 profileImg={myProfileImg}
               />
               <Profile
-                // lastName={`${gstLastName}`}
+                lastName={guestLastName}
                 size="4.3rem"
-                // profileImg={gstProfileImg}
+                profileImg={guestProfileImg}
               />
             </TripsProfileWrapper>
           )}

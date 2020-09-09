@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Popup from '../Global/Popup';
 import Button from '../Global/Button';
+import { Link } from 'react-router-dom';
 
 const MsgListFilterPopup = ({
   openPopup,
@@ -9,9 +10,11 @@ const MsgListFilterPopup = ({
   onClickAll,
   onClickHide,
   onClickUnread,
-  allMsg,
-  hideMsg,
-  unreadMsg,
+  allMsgCount,
+  hiddenMsgCount,
+  unreadMsgCount,
+  onClickFilterPopup,
+  id,
 }) => {
   return (
     <MsgListFilterPopupWrapper ref={popupRef}>
@@ -21,21 +24,27 @@ const MsgListFilterPopup = ({
         left="12rem"
         padding="1rem 0rem"
       >
-        <StMsgListFilterPopupButton onClick={onClickAll}>
-          <MsgListFilterPopupButtonText>
-            모든 메시지 ({allMsg})
-          </MsgListFilterPopupButtonText>
-        </StMsgListFilterPopupButton>
-        <StMsgListFilterPopupButton onClick={onClickHide}>
-          <MsgListFilterPopupButtonText>
-            숨긴 메시지 ({hideMsg})
-          </MsgListFilterPopupButtonText>
-        </StMsgListFilterPopupButton>
-        <StMsgListFilterPopupButton onClick={onClickUnread}>
-          <MsgListFilterPopupButtonText>
-            읽지 않은 메시지 ({unreadMsg})
-          </MsgListFilterPopupButtonText>
-        </StMsgListFilterPopupButton>
+        <Link to={`/guest/inbox/${id}?filter=all`}>
+          <StMsgListFilterPopupButton onClick={onClickFilterPopup}>
+            <MsgListFilterPopupButtonText>
+              모든 메시지 ({allMsgCount})
+            </MsgListFilterPopupButtonText>
+          </StMsgListFilterPopupButton>
+        </Link>
+        <Link to={`/guest/inbox/${id}?filter=hidden`}>
+          <StMsgListFilterPopupButton onClick={onClickFilterPopup}>
+            <MsgListFilterPopupButtonText>
+              숨긴 메시지 ({hiddenMsgCount})
+            </MsgListFilterPopupButtonText>
+          </StMsgListFilterPopupButton>
+        </Link>
+        <Link to={`/guest/inbox/${id}?filter=unread`}>
+          <StMsgListFilterPopupButton onClick={onClickFilterPopup}>
+            <MsgListFilterPopupButtonText>
+              읽지 않은 메시지 ({unreadMsgCount})
+            </MsgListFilterPopupButtonText>
+          </StMsgListFilterPopupButton>
+        </Link>
       </StMsgListFilterPopup>
     </MsgListFilterPopupWrapper>
   );
