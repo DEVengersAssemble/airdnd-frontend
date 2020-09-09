@@ -16,15 +16,12 @@ const SearchPaginationContainer = () => {
     (_, i) => i + 1,
   );
 
-  const onNavPage = e => {
-    queryObj.page = e.target.firstChild.data;
+  const onNavPage = newPage => {
+    queryObj.page = newPage;
     history.replace(`?${qs.stringify(queryObj)}`);
-    dispatch(navigatePage(+e.target.firstChild.data));
-    dispatch(fetchData(query));
+    dispatch(fetchData(`?${qs.stringify(queryObj)}`));
+    dispatch(navigatePage(newPage));
   };
-
-  const onPrevPage = () => dispatch(navigatePage(page - 1));
-  const onNextPage = () => dispatch(navigatePage(page + 1));
 
   return (
     <SearchPagination
@@ -32,8 +29,6 @@ const SearchPaginationContainer = () => {
       dataTotal={data.dataTotal}
       pageArray={pageArray}
       onNavPage={onNavPage}
-      onPrevPage={onPrevPage}
-      onNextPage={onNextPage}
     />
   );
 };
