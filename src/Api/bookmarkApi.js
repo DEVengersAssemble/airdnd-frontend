@@ -6,5 +6,8 @@ export const fetchWishlistsData = async () => {
   return response.data;
 };
 
-export const postWishlists = async payload =>
-  await axios.post('/back/wishlists_insert', payload);
+export const postWishlists = async payload => {
+  const response = await axios.post('/back/wishlists_insert', payload);
+  console.log('---------------------------------------------', response);
+  return response.data;
+};

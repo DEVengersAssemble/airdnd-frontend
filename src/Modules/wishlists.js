@@ -11,6 +11,8 @@ const FETCH_BOOKMARKLISTS_SUCCESS = 'wishlists/FETCH_BOOKMARKLISTS_SUCCESS';
 const FETCH_BOOKMARKLISTS_ERROR = 'wishlists/FETCH_BOOKMARKLISTS_ERROR';
 
 const CREATE_BOOKMARKLIST = 'wishlists/CREATE_BOOKMARKLIST';
+const CREATE_BOOKMARKLIST_SUCCESS = 'wishlists/CREATE_BOOKMARKLIST_SUCCESS';
+const CREATE_BOOKMARKLIST_ERROR = 'wishlists/CREATE_BOOKMARKLIST_ERROR';
 const ADD_BOOKMARK_OLD_LIST = 'wishlists/ADD_BOOKMARK_OLD_LIST';
 const ADD_BOOKMARK_NEW_LIST = 'wishlists/ADD_BOOKMARK_NEW_LIST';
 const REMOVE_BOOKMARK = 'wishlists/REMOVE_BOOKMARK';
@@ -25,16 +27,19 @@ export const fetchBookmarkLists = fetchDataThunk(
   FETCH_BOOKMARKLISTS,
   api.fetchWishlistsData,
 );
-
+export const createBookmarkList = fetchDataThunk(
+  CREATE_BOOKMARKLIST,
+  api.postWishlists,
+);
 let id = 5;
-export const createBookmarkList = value => ({
-  type: CREATE_BOOKMARKLIST,
-  bookmarkList: {
-    bookmarkListId: id++,
-    bookmarkListTitle: value,
-    bookmarks: [],
-  },
-});
+// export const createBookmarkList = value => ({
+//   type: CREATE_BOOKMARKLIST,
+//   bookmarkList: {
+//     bookmarkListId: id++,
+//     bookmarkListTitle: value,
+//     bookmarks: [],
+//   },
+// });
 
 export const addBookmarkOldList = bookmarkListId => ({
   type: ADD_BOOKMARK_OLD_LIST,
@@ -165,10 +170,19 @@ const wishlists = (state = initialState, action) => {
       return handleAsyncActions(FETCH_BOOKMARKLISTS)(state, action);
 
     case CREATE_BOOKMARKLIST:
+    case CREATE_BOOKMARKLIST_SUCCESS:
+    case CREATE_BOOKMARKLIST_ERROR:
       return {
         ...state,
-        bookmarkLists: state.bookmarkLists.concat(action.bookmarkList),
+        ...handleAsyncActions(FETCH_BOOKMARKLISTS)(state, action),
+        // ...state.data.bookmarkLists.concat(action.bookmarkList),
       };
+
+    // case CREATE_BOOKMARKLIST:
+    //   return {
+    //     ...state,
+    //     ...state.data.bookmarkLists.concat(action.bookmarkList),
+    //   };
 
     case ADD_BOOKMARK_OLD_LIST:
       return {

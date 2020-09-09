@@ -2,6 +2,7 @@ export const fetchDataThunk = (type, promiseCreator) => {
   const [SUCCESS, ERROR] = [`${type}_SUCCESS`, `${type}_ERROR`];
 
   return param => async dispatch => {
+    console.log(param);
     dispatch({ type });
     try {
       const payload = await promiseCreator(param); // API 호출

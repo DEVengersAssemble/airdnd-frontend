@@ -8,12 +8,11 @@ import { fetchTrips } from '../../Modules/trips';
 const TripsMainContainer = () => {
   // ! redux
   const { data, loading, error } = useSelector(state => state.trips);
-  console.log(data && data);
   const dispatch = useDispatch();
 
   // ! hook
-  const location = useLocation();
-  const { tab } = qs.parse(location.search, {
+  const query = useLocation();
+  const { tab } = qs.parse(query.search, {
     ignoreQueryPrefix: true,
   });
 
