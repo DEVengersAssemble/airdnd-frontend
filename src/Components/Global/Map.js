@@ -61,7 +61,14 @@ const Map = compose(
         onZoomChange(refs.map.getZoom());
       },
       getBounds: () => () => {
-        console.log(refs.map.getBounds());
+        const bounds = refs.map.getBounds();
+        console.log(bounds);
+        return {
+          swLat: bounds.Za.i,
+          swLng: bounds.Va.i,
+          neLat: bounds.Za.j,
+          neLng: bounds.Va.j,
+        };
       },
     };
   }),
@@ -82,6 +89,7 @@ const Map = compose(
     onHideMap,
     onCloseMap,
     getBounds,
+    changeBounds,
     checkMapSearch,
     openFilterModal,
     updateZoom,
@@ -100,9 +108,9 @@ const Map = compose(
         onZoomChanged={() => {
           setZoom();
           updateZoom(zoom);
-          getBounds();
+          changeBounds(getBounds());
         }}
-        onDragEnd={getBounds}
+        onDragEnd={changeBounds}
       >
         <StStickyWrapper>
           <MapCloseButton

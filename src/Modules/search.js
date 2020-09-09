@@ -28,6 +28,7 @@ const ZOOM_SET = 'search/ZOOM_SET';
 const OPEN_MARKER = 'search/OPEN_MARKER';
 const CLOSE_MARKER = 'search/CLOSE_MARKER';
 const SET_MAP_SEARCH = 'search/SET_MAP_SEARCH';
+const SET_MAP_BOUNDS = 'search/SET_MAP_BOUNDS';
 
 const OPEN_POPUP = 'search/OPEN_POPUP';
 const CLOSE_POPUP = 'search/CLOSE_POPUP';
@@ -69,6 +70,7 @@ export const zoomSet = zoom => ({ type: ZOOM_SET, zoom });
 export const openMarker = id => ({ type: OPEN_MARKER, id });
 export const closeMarker = () => ({ type: CLOSE_MARKER });
 export const setMapSearch = () => ({ type: SET_MAP_SEARCH });
+export const setMapBounds = mapBounds => ({ type: SET_MAP_BOUNDS, mapBounds });
 
 export const openPopup = name => ({ type: OPEN_POPUP, name });
 export const closePopup = (name, isApplied) => ({
@@ -181,7 +183,7 @@ const initialState = {
   mapSearch: true,
   mapState: true,
   mapZoom: 12,
-  mapBound: {
+  mapBounds: {
     swLat: 0,
     swLng: 0,
     neLat: 0,
@@ -254,8 +256,8 @@ const search = (state = initialState, action) => {
           modal: modals.some(key => action.searchForm[key]),
           all: false,
         },
-        mapBound: {
-          ...state.mapBound,
+        mapBounds: {
+          ...state.mapBounds,
           swLat: action.searchForm.swLat,
           swLng: action.searchForm.swLng,
           neLat: action.searchForm.neLat,
@@ -359,6 +361,11 @@ const search = (state = initialState, action) => {
       return {
         ...state,
         mapSearch: !state.mapSearch,
+      };
+    case SET_MAP_BOUNDS:
+      return {
+        ...state,
+        mapBounds: action.mapBounds,
       };
     case OPEN_POPUP:
       return {
