@@ -77,7 +77,11 @@ const MapMarker = ({
         )}
       </OverlayView>
       {isOpen && (
-        <InfoBox options={{ closeBoxURL: '', enableEventPropagation: true }}>
+        <InfoBox
+          className="InfoBox"
+          // style={{ overflow: 'hidden !important', maxHeight: '400px' }}
+          options={{ closeBoxURL: '', enableEventPropagation: true }}
+        >
           <HomePopupContainer
             home={marker}
             store={store}
