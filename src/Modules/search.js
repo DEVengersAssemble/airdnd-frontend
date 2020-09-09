@@ -350,7 +350,7 @@ const search = (state = initialState, action) => {
     case SET_MAP_SEARCH:
       return {
         ...state,
-        mapSearch: !state.mapsearch,
+        mapSearch: !state.mapSearch,
       };
     case OPEN_POPUP:
       return {
