@@ -59,6 +59,8 @@ const Map = compose(
       },
       setZoom: ({ onZoomChange }) => () => {
         onZoomChange(refs.map.getZoom());
+      },
+      getBounds: () => () => {
         console.log(refs.map.getBounds());
       },
     };
@@ -79,6 +81,7 @@ const Map = compose(
     onZoomChange,
     onHideMap,
     onCloseMap,
+    getBounds,
     checkMapSearch,
     openFilterModal,
     updateZoom,
@@ -97,7 +100,9 @@ const Map = compose(
         onZoomChanged={() => {
           setZoom();
           updateZoom(zoom);
+          getBounds();
         }}
+        onDragEnd={getBounds}
       >
         <StStickyWrapper>
           <MapCloseButton

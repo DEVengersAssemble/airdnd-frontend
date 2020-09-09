@@ -226,11 +226,6 @@ const search = (state = initialState, action) => {
       return {
         ...state,
         ...reducerUtils.success(action.payload),
-        // filterApplied: {
-        // ...modalFilterInit(action.payload.filterCondition),
-        // ..._.pick(state.searchForm, [...all, 'page']),
-        // ...state.filterApplied,
-        // },
         isFilterChanged: false,
       };
     case FETCH_DATA_ERROR:

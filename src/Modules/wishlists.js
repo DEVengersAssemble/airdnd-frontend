@@ -4,28 +4,23 @@ import {
   reducerUtils,
   handleAsyncActions,
 } from '../lib/asyncUtils';
-
 // action type
 const FETCH_BOOKMARKLISTS = 'wishlists/FETCH_BOOKMARKLISTS';
 const FETCH_BOOKMARKLISTS_SUCCESS = 'wishlists/FETCH_BOOKMARKLISTS_SUCCESS';
 const FETCH_BOOKMARKLISTS_ERROR = 'wishlists/FETCH_BOOKMARKLISTS_ERROR';
-
 const CREATE_BOOKMARKLIST = 'wishlists/CREATE_BOOKMARKLIST';
 const ADD_BOOKMARK_OLD_LIST = 'wishlists/ADD_BOOKMARK_OLD_LIST';
 const ADD_BOOKMARK_NEW_LIST = 'wishlists/ADD_BOOKMARK_NEW_LIST';
 const REMOVE_BOOKMARK = 'wishlists/REMOVE_BOOKMARK';
-
 const OPEN_LIST_MODAL = 'wishlists/OPEN_LIST_MODAL';
 const CLOSE_LIST_MODAL = 'wishlists/CLOSE_LIST_MODAL';
 const OPEN_NEW_MODAL = 'wishlists/OPEN_NEW_MODAL';
 const CLOSE_NEW_MODAL = 'wishlists/CLOSE_NEW_MODAL';
-
 // action creator
 export const fetchBookmarkLists = fetchDataThunk(
   FETCH_BOOKMARKLISTS,
   api.fetchWishlistsData,
 );
-
 let id = 5;
 export const createBookmarkList = value => ({
   type: CREATE_BOOKMARKLIST,
@@ -35,12 +30,10 @@ export const createBookmarkList = value => ({
     bookmarks: [],
   },
 });
-
 export const addBookmarkOldList = bookmarkListId => ({
   type: ADD_BOOKMARK_OLD_LIST,
   bookmarkListId,
 });
-
 export const addBookmarkNewList = title => ({
   type: ADD_BOOKMARK_NEW_LIST,
   bookmarkList: {
@@ -48,9 +41,7 @@ export const addBookmarkNewList = title => ({
     bookmarkListTitle: title,
   },
 });
-
 export const removeBookmark = homeId => ({ type: REMOVE_BOOKMARK, homeId });
-
 export const openListModal = (homeId, homeImg) => ({
   type: OPEN_LIST_MODAL,
   homeId,
@@ -59,15 +50,13 @@ export const openListModal = (homeId, homeImg) => ({
 export const closeListModal = () => ({ type: CLOSE_LIST_MODAL });
 export const openNewModal = () => ({ type: OPEN_NEW_MODAL });
 export const closeNewModal = () => ({ type: CLOSE_NEW_MODAL });
-
 // initial state
 const initialState = {
+  ...reducerUtils.initial(),
   listModal: false,
   newModal: false,
   selectedId: null,
   selectedImg: '',
-  bookmarkLists: reducerUtils.initial(),
-
   // bookmarkLists: [
   //   {
   //     bookmarkListId: 1,
@@ -155,24 +144,18 @@ const initialState = {
   //   },
   // ],
 };
-
 // reducer
 const wishlists = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_BOOKMARKLISTS:
     case FETCH_BOOKMARKLISTS_SUCCESS:
     case FETCH_BOOKMARKLISTS_ERROR:
-      return handleAsyncActions(FETCH_BOOKMARKLISTS, 'bookmarkLists')(
-        state,
-        action,
-      );
-
+      return handleAsyncActions(FETCH_BOOKMARKLISTS)(state, action);
     case CREATE_BOOKMARKLIST:
       return {
         ...state,
-        bookmarkLists: state.bookmarkLists.concat(action.bookmarkList),
+        ...state.data.bookmarkLists.concat(action.bookmarkList),
       };
-
     case ADD_BOOKMARK_OLD_LIST:
       return {
         ...state,
@@ -236,10 +219,8 @@ const wishlists = (state = initialState, action) => {
         listModal: true,
         newModal: false,
       };
-
     default:
       return state;
   }
 };
-
 export default wishlists;
