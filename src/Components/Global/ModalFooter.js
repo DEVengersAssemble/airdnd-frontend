@@ -25,4 +25,4 @@ const StModalFooter = styled.footer`
   font-weight: 600;
 `;
 
-export default ModalFooter;
+export default React.memo(ModalFooter);

@@ -1,44 +1,37 @@
 import React, { useEffect, useRef } from 'react';
 import { RoomTypePopup } from '../../Components/Search/FilterPopup';
 import { useSelector, useDispatch } from 'react-redux';
-import { saveFilter, setFilter, resetFilter } from '../../Modules/search';
+import { unsaveFilter, resetFilter, closePopup } from '../../Modules/search';
 
-// let prevFilter = {};
-
-const RoomTypePopupContainer = ({ popupState, onClose }) => {
-  const { roomType } = useSelector(state => state.search.filterApplied);
+const RoomTypePopupContainer = () => {
+  const { filterApplied, popupState } = useSelector(state => state.search);
+  const { roomTypeHouse, roomTypePrivate, roomTypeShared } = filterApplied;
+  const isDisabled = !roomTypeHouse && !roomTypePrivate && !roomTypeShared;
   const dispatch = useDispatch();
+  const popupRef = useRef();
 
-  const onChange = type =>
-    dispatch(setFilter('roomType', { ...roomType, [type]: !roomType[type] }));
   const onReset = () => dispatch(resetFilter('roomType'));
-  const onSave = () => dispatch(saveFilter('roomType', roomType));
-  const isDisabled =
-    roomType && !roomType.house && !roomType.private && !roomType.shared;
+  const onClose = () => dispatch(closePopup('roomType', !isDisabled));
+  const onUnsave = () => dispatch(unsaveFilter('roomType'));
 
-  const popup = useRef();
-  const closePopup = ({ target }) => {
-    if (!popupState || popup.current.contains(target)) return;
-    // dispatch(saveFilter('roomType'), prevFilter);
-    onClose('roomType');
+  const onClosePopup = ({ target }) => {
+    if (!popupState.roomType || popupRef.current.contains(target)) return;
+    onUnsave();
   };
 
   useEffect(() => {
-    // prevFilter = { ...roomType };
-    document.addEventListener('click', closePopup);
+    document.addEventListener('click', onClosePopup);
     return () => {
-      document.removeEventListener('click', closePopup);
+      document.removeEventListener('click', onClosePopup);
     };
-  }, [closePopup]);
+  }, [onClosePopup]);
 
   return (
-    <div ref={popup}>
+    <div ref={popupRef}>
       <RoomTypePopup
-        check={roomType}
-        popupState={popupState}
+        popupState={popupState.roomType}
         isDisabled={isDisabled}
-        onSave={onSave}
-        onChange={onChange}
+        onSave={onClose}
         onReset={onReset}
       />
     </div>

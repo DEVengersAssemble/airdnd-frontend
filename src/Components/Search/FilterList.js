@@ -8,10 +8,21 @@ import PricePopupContainer from '../../Containers/Search/PricePopupContainer';
 import RoomTypePopupContainer from '../../Containers/Search/RoomTypePopupContainer';
 import RefundPopupContainer from '../../Containers/Search/RefundPopupContainer';
 
-export const FilterButton = ({ children, text, onClick, isApplied }) => {
+export const FilterButton = ({
+  children,
+  text,
+  onClick,
+  isOpen,
+  isApplied,
+}) => {
   return (
     <StFilterWrapper>
-      <FilterBtn btnType="oval" onClick={onClick} isApplied={isApplied}>
+      <FilterBtn
+        btnType="oval"
+        onClick={onClick}
+        isApplied={isApplied}
+        isOpen={isOpen}
+      >
         {text}
       </FilterBtn>
       {children}
@@ -19,30 +30,25 @@ export const FilterButton = ({ children, text, onClick, isApplied }) => {
   );
 };
 
-export const FilterList = ({ popupState, mapState, onShowMap, dateDiff }) => {
+export const FilterList = ({ mapState, onShowMap, dateDiff, dataTotal }) => {
   return (
     <StWrapper>
-      <FilterButtonContainer
-        name="refund"
-        text="유연한 환불 정책"
-        popupState={popupState}
-      >
-        <RefundPopupContainer />
-      </FilterButtonContainer>
-      <FilterButtonContainer
-        name="roomType"
-        text="숙소 유형"
-        popupState={popupState}
-      >
-        <RoomTypePopupContainer />
-      </FilterButtonContainer>
-      <FilterButtonContainer name="price" text="요금" popupState={popupState}>
+      {dataTotal !== 0 && (
+        <FilterButtonContainer name="refund" text="유연한 환불 정책">
+          <RefundPopupContainer />
+        </FilterButtonContainer>
+      )}
+      {dataTotal !== 0 && (
+        <FilterButtonContainer name="roomType" text="숙소 유형">
+          <RoomTypePopupContainer />
+        </FilterButtonContainer>
+      )}
+      <FilterButtonContainer name="price" text="요금">
         {dateDiff ? <PricePopupContainer /> : <SetDatePopupContainer />}
       </FilterButtonContainer>
       <FilterButtonContainer
         name="modal"
         text="필터 추가하기"
-        popupState={popupState}
       ></FilterButtonContainer>
       <MapButton mapState={mapState} onShowMap={onShowMap} />
     </StWrapper>
@@ -52,8 +58,8 @@ export const FilterList = ({ popupState, mapState, onShowMap, dateDiff }) => {
 const FilterBtn = styled(Button)`
   margin-right: 1rem;
   font-size: 14px;
-  ${({ isApplied, theme }) =>
-    isApplied &&
+  ${({ isApplied, isOpen, theme }) =>
+    (isApplied || isOpen) &&
     css`
       border: 2px solid ${theme.color.black};
       background: ${theme.color.lightGray};
@@ -67,7 +73,7 @@ const StWrapper = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 3rem 0 2rem;
+  padding: 2rem 0 3rem;
 `;
 
 const StFilterWrapper = styled.div`

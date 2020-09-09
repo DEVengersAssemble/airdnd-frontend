@@ -22,7 +22,6 @@ const Map = compose(
           width: '100%',
           height: `100vh`,
           position: 'sticky',
-          // position: 'absolute',
           top: '0',
         }}
       />
@@ -33,7 +32,6 @@ const Map = compose(
           width: '100%',
           height: `100vh`,
           position: 'sticky',
-          // position: 'absolute',
           top: '0',
         }}
       />
@@ -44,13 +42,12 @@ const Map = compose(
           width: '100%',
           height: `100vh`,
           position: 'sticky',
-          // position: 'absolute',
           top: '0',
         }}
       />
     ),
   }),
-  withState('zoom', 'onZoomChange', 10),
+  withState('zoom', 'onZoomChange', 13),
   withHandlers(() => {
     const refs = {
       map: undefined,
@@ -62,6 +59,7 @@ const Map = compose(
       },
       setZoom: ({ onZoomChange }) => () => {
         onZoomChange(refs.map.getZoom());
+        console.log(refs.map.getBounds());
       },
     };
   }),
@@ -72,6 +70,7 @@ const Map = compose(
     view,
     center,
     markers,
+    mapSearch,
     zoom,
     mapZoom,
     setZoom,
@@ -80,6 +79,7 @@ const Map = compose(
     onZoomChange,
     onHideMap,
     onCloseMap,
+    checkMapSearch,
     openFilterModal,
     updateZoom,
     setRef,
@@ -88,7 +88,7 @@ const Map = compose(
       <GoogleMap
         ref={setRef}
         zoom={mapZoom}
-        defaultZoom={10}
+        defaultZoom={13}
         defaultCenter={{
           lat: center.lat,
           lng: center.lng,
@@ -105,7 +105,7 @@ const Map = compose(
             onCloseMap={onCloseMap}
             view={view}
           />
-          <MapCheckbox />
+          <MapCheckbox checked={mapSearch} onCheck={checkMapSearch} />
           <StBtnSetWrapper>
             {view === 'map' && (
               <MapFilterButton openFilterModal={openFilterModal} />

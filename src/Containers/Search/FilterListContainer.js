@@ -1,36 +1,43 @@
 /* eslint-disable react/display-name */
-import React, { Children, cloneElement } from 'react';
+import React from 'react';
 import { FilterList, FilterButton } from '../../Components/Search/FilterList';
 import { useSelector, useDispatch } from 'react-redux';
 import { closePopup, openPopup, showMap } from '../../Modules/search';
 
 const FilterButtonContainer = React.memo(({ name, text, children }) => {
-  const { popup, filterDisabled } = useSelector(state => state.search);
+  const { popupState, popupApplied } = useSelector(state => state.search);
+  const isApplied = popupApplied[name];
+  const isOpen = popupState[name];
+
   const dispatch = useDispatch();
-  const onClose = name => dispatch(closePopup(name));
   const onClick = () =>
-    dispatch(popup[name] ? closePopup(name) : openPopup(name));
-  const isApplied = !filterDisabled[name];
+    dispatch(popupState[name] ? closePopup(name) : openPopup(name));
 
   return (
-    <FilterButton text={text} isApplied={isApplied} onClick={onClick}>
-      {Children.map(children, child => {
-        return cloneElement(child, {
-          popupState: popup[name],
-          onClose,
-        });
-      })}
+    <FilterButton
+      text={text}
+      isOpen={isOpen}
+      isApplied={isApplied}
+      onClick={onClick}
+    >
+      {children}
     </FilterButton>
   );
 });
 
 const FilterListContainer = React.memo(({ mapState }) => {
-  const { dateDiff } = useSelector(state => state.searchForm);
+  const { searchForm, data } = useSelector(state => state.search);
+
   const dispatch = useDispatch();
   const onShowMap = () => dispatch(showMap());
 
   return (
-    <FilterList mapState={mapState} onShowMap={onShowMap} dateDiff={dateDiff} />
+    <FilterList
+      mapState={mapState}
+      dateDiff={searchForm.dateDiff}
+      dataTotal={data.dataTotal}
+      onShowMap={onShowMap}
+    />
   );
 });
 

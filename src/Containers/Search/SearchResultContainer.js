@@ -4,20 +4,25 @@ import { openMap } from '../../Modules/search';
 import SearchResult from '../../Components/Search/SearchResult';
 
 const SearchResultContainer = () => {
-  const { mapState, viewState, data } = useSelector(state => state.search);
-  const { location, guests } = useSelector(state => state.search.searchForm);
-  const { dataTotal } = data;
-  const dispatch = useDispatch();
+  const { mapState, viewState, searchForm, data } = useSelector(
+    state => state.search,
+  );
 
+  const dispatch = useDispatch();
   const onOpenMap = () => dispatch(openMap());
+  const convertDate = date => {
+    const mm = parseInt(date.split('.')[1], 10);
+    const dd = parseInt(date.split('.')[2], 10);
+    return `${mm}월 ${dd}일`;
+  };
 
   return (
     <SearchResult
       mapState={mapState}
       view={viewState}
-      dataTotal={dataTotal}
-      location={location}
-      guestCount={guests}
+      dataTotal={data.dataTotal}
+      searchForm={searchForm}
+      convertDate={convertDate}
       onOpenMap={onOpenMap}
     />
   );

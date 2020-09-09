@@ -1,13 +1,12 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import TripsUpcomingContainer from '../Containers/Trips/TripsUpcomingContainer';
-import TripsPage from '../Pages/TripsPage';
+import MessagePage from '../Pages/MessagePage';
 
 const SubRouter = () => {
   return (
     <Switch>
-      <Route exact path="/trips" component={TripsPage} />
-      <Route path="/trips/v1" component={TripsUpcomingContainer} />
+      <Route path="/guest/inbox" component={MessagePage} exact />
+      <Route path="/guest/inbox/:id" component={MessagePage} />
       <Route
         render={({ location }) => (
           <div>

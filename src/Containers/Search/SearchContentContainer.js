@@ -1,23 +1,37 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchData } from '../../Modules/search';
+import { fetchData, getSearchForm, all } from '../../Modules/search';
 import SearchContent from '../../Components/Search/SearchContent';
 import qs from 'qs';
+import _ from 'lodash';
 
 const SearchContentContainer = () => {
   const { loading, data, error } = useSelector(state => state.search);
   const dispatch = useDispatch();
-  const query = useLocation();
-  const searchForm = qs.parse(query.search, {
-    ignoreQueryPrefix: true,
-  });
+  const { search: query } = useLocation();
+  const queryObj = qs.parse(query, { ignoreQueryPrefix: true });
 
-  console.log('렌더링시작한다~~~~~~~~~~', data);
+  const changeType = (key, obj) => {
+    switch (key) {
+      case 'amenityList':
+      case 'facilityList':
+      case 'hostLangList':
+        return obj[key] && obj[key].split('-');
+      default:
+        return parseInt(obj[key], 10);
+    }
+  };
+
+  const searchForm = _.mapValues(queryObj, (value, key) =>
+    [...all, 'page'].includes(key) ? changeType(key, queryObj) : value,
+  );
+
+  console.log('렌더링시작한다~~~~~~~~~~', searchForm);
 
   useEffect(() => {
-    dispatch(fetchData(searchForm));
-    // dispatch(fetchCenter(searchForm.location));
+    dispatch(fetchData(query));
+    dispatch(getSearchForm(searchForm));
     // window.scrollTo(0, 0);
   }, []);
 

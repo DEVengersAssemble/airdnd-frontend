@@ -1,19 +1,29 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
-import { NextButton } from '../Global/SlideButton';
+import styled from 'styled-components';
+import { NextButton, PrevButton } from '../Global/SlideButton';
 
-const SearchPagenation = () => {
+const SearchPagination = ({ dataTotal, page, pageArray, onNavPage }) => {
   return (
     <StWrapper>
       <StNumberWrapper>
-        <StNumber style={{ background: 'black', color: 'white' }}>1</StNumber>
-        <StNumber>2</StNumber>
-        <StNumber>3</StNumber>
-        <span>···</span>
-        <StNumber>6</StNumber>
-        <NextButton></NextButton>
+        {page > 1 && <PrevButton onClick={() => onNavPage(page - 1)} />}
+        {pageArray.map(i => (
+          <StNumber
+            key={i}
+            active={page === i}
+            onClick={e => onNavPage(+e.target.firstChild.data)}
+          >
+            {i}
+          </StNumber>
+        ))}
+        {page !== pageArray.length && (
+          <NextButton onClick={() => onNavPage(page + 1)} />
+        )}
       </StNumberWrapper>
-      <StBlackSpan>숙소 110개 중 1 – 20</StBlackSpan>
+      <StBlackSpan>
+        숙소 {dataTotal}개 중 {(page - 1) * 20 + 1} –{' '}
+        {(page - 1) * 20 + 20 > dataTotal ? dataTotal : (page - 1) * 20 + 20}
+      </StBlackSpan>
       <StGraySpan>
         전체 요금을 보려면 날짜를 입력하세요. 추가 요금이 적용되고 세금이 추가될
         수 있습니다.
@@ -39,6 +49,8 @@ const StNumberWrapper = styled.div`
 `;
 
 const StNumber = styled.div`
+  background: ${({ theme, active }) => active && theme.color.black};
+  color: ${({ theme, active }) => active && theme.color.white};
   width: 32px;
   line-height: 32px;
   text-align: center;
@@ -61,4 +73,4 @@ const StGraySpan = styled.span`
   color: ${({ theme }) => theme.color.gray};
 `;
 
-export default SearchPagenation;
+export default SearchPagination;

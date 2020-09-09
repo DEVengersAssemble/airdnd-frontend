@@ -1,45 +1,43 @@
 import React, { useEffect, useRef } from 'react';
 import { RefundPopup } from '../../Components/Search/FilterPopup';
 import { useSelector, useDispatch } from 'react-redux';
-import { saveFilter, resetFilter } from '../../Modules/search';
+import { unsaveFilter, resetFilter, closePopup } from '../../Modules/search';
 
-// let prevFilter = {};
-
-const RefundPopupContainer = ({ popupState, onClose }) => {
-  const { refund } = useSelector(state => state.search.filterApplied);
+const RefundPopupContainer = () => {
+  const { filterApplied, popupState } = useSelector(state => state.search);
+  const { refund } = filterApplied;
   const isDisabled = !refund;
+  const popupRef = useRef();
   const dispatch = useDispatch();
 
+  const onClose = () => dispatch(closePopup('refund', !isDisabled));
   const onReset = () => dispatch(resetFilter('refund'));
-  const onSave = () => dispatch(saveFilter('refund', refund, isDisabled));
+  const onUnsave = () => dispatch(unsaveFilter('refund'));
 
-  const popup = useRef();
-  const closePopup = ({ target }) => {
+  const onClosePopup = ({ target }) => {
     if (
-      !popupState ||
-      popup.current.contains(target) ||
+      !popupState.refund ||
+      popupRef.current.contains(target) ||
       target.nodeName === 'svg' ||
       target.nodeName === 'path'
     )
       return;
-    // dispatch(saveFilter('refund'), prevFilter);
-    onClose('refund');
+    onUnsave();
   };
 
   useEffect(() => {
-    // prevFilter = refund;
-    document.addEventListener('click', closePopup);
+    document.addEventListener('click', onClosePopup);
     return () => {
-      document.removeEventListener('click', closePopup);
+      document.removeEventListener('click', onClosePopup);
     };
-  }, [closePopup]);
+  }, [onClosePopup]);
 
   return (
-    <div ref={popup}>
+    <div ref={popupRef}>
       <RefundPopup
-        popupState={popupState}
+        popupState={popupState.refund}
         isDisabled={isDisabled}
-        onSave={onSave}
+        onSave={onClose}
         onReset={onReset}
       />
     </div>

@@ -5,16 +5,21 @@ import TripsSubFooter from './TripsSubFooter';
 import Button from '../Global/Button';
 import TripsCanceledItemContainer from '../../Containers/Trips/TripsCanceledItemContainer';
 
-const TripsCanceled = ({ canceledTrips }) => {
+const TripsCanceled = ({ canceledTrips, tripsCount }) => {
   return (
     <>
-      <TripsCanceledWrapper>
-        <TripsCanceledLists>
-          {canceledTrips.map(trip => (
-            <TripsCanceledItemContainer key={trip.reservationId} trip={trip} />
-          ))}
-        </TripsCanceledLists>
-      </TripsCanceledWrapper>
+      {tripsCount && (
+        <TripsCanceledWrapper>
+          <TripsCanceledLists>
+            {canceledTrips.map(trip => (
+              <TripsCanceledItemContainer
+                key={trip.reservationId}
+                trip={trip}
+              />
+            ))}
+          </TripsCanceledLists>
+        </TripsCanceledWrapper>
+      )}
       <TripsSubFooter>
         환불과 관련하여 질문이 있나요?{' '}
         <Button btnType="underlined" hover="none" padding="0" fontSize="1.5rem">

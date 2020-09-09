@@ -2,9 +2,8 @@ export const fetchDataThunk = (type, promiseCreator) => {
   const [SUCCESS, ERROR] = [`${type}_SUCCESS`, `${type}_ERROR`];
 
   return param => async dispatch => {
-    // param은 필요할 때만 쓰세요
     console.log(param);
-    dispatch({ type, param });
+    dispatch({ type });
     try {
       const payload = await promiseCreator(param); // API 호출
       console.log('할당햇고요!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', payload);
@@ -42,6 +41,19 @@ export const reducerUtils = {
 // type 은 액션의 타입, key 는 상태의 key (예: posts, post) 입니다.
 export const handleAsyncActions = (type, key) => {
   const [SUCCESS, ERROR] = [`${type}_SUCCESS`, `${type}_ERROR`];
+  if (!key)
+    return (state, action) => {
+      switch (action.type) {
+        case type:
+          return reducerUtils.loading();
+        case SUCCESS:
+          return reducerUtils.success(action.payload);
+        case ERROR:
+          return reducerUtils.error(action.payload);
+        default:
+          return state;
+      }
+    };
   return (state, action) => {
     switch (action.type) {
       case type:

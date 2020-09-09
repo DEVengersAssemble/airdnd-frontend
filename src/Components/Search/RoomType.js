@@ -9,8 +9,8 @@ const RoomType = ({ check, onChange, isModal }) => {
       <StCheckboxWrapper>
         <Checkbox
           value
-          checked={check.house}
-          onChange={() => onChange('house')}
+          checked={check.roomTypeHouse}
+          onChange={() => onChange('roomTypeHouse')}
         >
           <StContentWrapper content="roomType">
             <StLargeSpan>집 전체</StLargeSpan>
@@ -21,8 +21,8 @@ const RoomType = ({ check, onChange, isModal }) => {
       <StCheckboxWrapper>
         <Checkbox
           value
-          checked={check.private}
-          onChange={() => onChange('private')}
+          checked={check.roomTypePrivate}
+          onChange={() => onChange('roomTypePrivate')}
         >
           <StContentWrapper content="roomType">
             <StLargeSpan>개인실</StLargeSpan>
@@ -36,8 +36,8 @@ const RoomType = ({ check, onChange, isModal }) => {
       <StCheckboxWrapper>
         <Checkbox
           value
-          checked={check.shared}
-          onChange={() => onChange('shared')}
+          checked={check.roomTypeShared}
+          onChange={() => onChange('roomTypeShared')}
         >
           <StContentWrapper content="roomType">
             <StLargeSpan>다인실</StLargeSpan>

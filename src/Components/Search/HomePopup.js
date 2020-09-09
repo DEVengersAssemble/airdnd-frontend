@@ -56,11 +56,12 @@ const HomePopup = ({
 };
 
 const StWrapper = styled.div`
-  background: white;
+  background: transparent;
   position: relative;
-  width: 300px;
-  height: fit-content;
-  border-radius: 8px;
+  width: 320px;
+  padding: 1.5rem 1.5rem 0;
+  top: 1.5rem;
+  right: 1.5rem;
 `;
 
 const Carousel = styled(CarouselContainer)`
@@ -70,12 +71,15 @@ const Carousel = styled(CarouselContainer)`
 const Caption = styled(HomeCaption)`
   display: block;
   padding: 0.5rem 2rem 2rem;
+  background: ${({ theme }) => theme.color.white};
+  border-radius: 0 0 8px 8px;
+  margin-right: -1rem;
 `;
 
 const Heart = styled(CkHeart)`
   position: absolute;
-  top: 0.7rem;
-  right: 1.1em;
+  top: 2.1rem;
+  right: 1.2em;
 `;
 
 export default HomePopup;

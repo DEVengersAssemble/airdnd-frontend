@@ -9,16 +9,18 @@ import {
   zoomIn,
   zoomOut,
   openPopup,
+  setMapSearch,
 } from '../../Modules/search';
 
 const MapContainer = ({ markers }) => {
   const { mapCenter } = useSelector(state => state.search.data);
-  const { mapZoom, viewState } = useSelector(state => state.search);
+  const { mapZoom, viewState, mapSearch } = useSelector(state => state.search);
   const dispatch = useDispatch();
-  const openFilterModal = () => dispatch(openPopup('modal'));
+  const openFilterModal = () => dispatch(openPopup('all'));
   const updateZoom = zoom => dispatch(zoomSet(zoom));
   const onHideMap = () => dispatch(hideMap());
   const onCloseMap = () => dispatch(closeMap());
+  const checkMapSearch = () => dispatch(setMapSearch());
   const onZoomIn = () => dispatch(zoomIn());
   const onZoomOut = () => dispatch(zoomOut());
   const onCloseMarker = e => {
@@ -32,6 +34,8 @@ const MapContainer = ({ markers }) => {
         center={mapCenter}
         mapZoom={mapZoom}
         markers={markers}
+        mapSearch={mapSearch}
+        checkMapSearch={checkMapSearch}
         onCloseMap={onCloseMap}
         onHideMap={onHideMap}
         onZoomIn={onZoomIn}

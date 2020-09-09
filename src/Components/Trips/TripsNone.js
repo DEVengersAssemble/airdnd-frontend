@@ -6,6 +6,7 @@ import theme from '../../style/theme';
 import Button from '../Global/Button';
 
 const TripsNone = () => {
+  console.log('blajkjbkajlds');
   return (
     <TripsNoneWrapper>
       <TripsNoneText>

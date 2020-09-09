@@ -1,9 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import TripsSubRouter from '../../Routers/TripsSubRouter';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import TripsUpcomingContainer from '../../Containers/Trips/TripsUpcomingContainer';
+import TripsPastContainer from '../../Containers/Trips/TripsPastContainer';
+import TripsCanceledContainer from '../../Containers/Trips/TripsCanceledContainer';
 
-const TripsMain = () => {
+const TripsMain = ({ isActive }) => {
   return (
     <TripsMainWrapper>
       <TripsMainInner>
@@ -12,28 +15,44 @@ const TripsMain = () => {
         </TripsMainTitleWrapper>
         <TripsMainNav>
           <TripsMainNavList>
-            <StNavLink to="/trips/upcoming" activeClassName={'active'}>
+            <StLink
+              to="/trips/v1?tab=upcoming"
+              className={
+                isActive === 'upcoming' || isActive === undefined
+                  ? 'active'
+                  : ''
+              }
+            >
               <TripsMainNavItem>
                 <TripsMainNavItemInner>예정된 예약</TripsMainNavItemInner>
               </TripsMainNavItem>
-            </StNavLink>
+            </StLink>
           </TripsMainNavList>
           <TripsMainNavList>
-            <StNavLink to="/trips/past" activeClassName="active">
+            <StLink
+              to="/trips/v1?tab=past"
+              className={isActive === 'past' ? 'active' : ''}
+            >
               <TripsMainNavItem>
                 <TripsMainNavItemInner>이전 예약</TripsMainNavItemInner>
               </TripsMainNavItem>
-            </StNavLink>
+            </StLink>
           </TripsMainNavList>
           <TripsMainNavList>
-            <StNavLink to="/trips/canceled" activeClassName="active">
+            <StLink
+              to="/trips/v1?tab=canceled"
+              className={isActive === 'canceled' ? 'active' : ''}
+            >
               <TripsMainNavItem>
                 <TripsMainNavItemInner>취소됨</TripsMainNavItemInner>
               </TripsMainNavItem>
-            </StNavLink>
+            </StLink>
           </TripsMainNavList>
         </TripsMainNav>
-        <TripsSubRouter />
+        {isActive === 'upcoming' && <TripsUpcomingContainer />}
+        {isActive === 'past' && <TripsPastContainer />}
+        {isActive === 'canceled' && <TripsCanceledContainer />}
+        {/* <TripsSubRouter /> */}
       </TripsMainInner>
     </TripsMainWrapper>
   );
@@ -85,7 +104,7 @@ const TripsMainNavList = styled.li`
   }
 `;
 
-const StNavLink = styled(NavLink)`
+const StLink = styled(Link)`
   &.active {
     &:hover {
       background: none;

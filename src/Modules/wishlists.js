@@ -6,11 +6,13 @@ import {
 } from '../lib/asyncUtils';
 
 // action type
-const FETCH_BOOKMARKLISTS = 'wishlists/FETCH_BOOKMARKLISTS'; // 요청 시작
-const FETCH_BOOKMARKLISTS_SUCCESS = 'wishlists/FETCH_BOOKMARKLISTS_SUCCESS'; // 요청 성공
-const FETCH_BOOKMARKLISTS_ERROR = 'wishlists/FETCH_BOOKMARKLISTS_ERROR'; // 요청 실패
+const FETCH_BOOKMARKLISTS = 'wishlists/FETCH_BOOKMARKLISTS';
+const FETCH_BOOKMARKLISTS_SUCCESS = 'wishlists/FETCH_BOOKMARKLISTS_SUCCESS';
+const FETCH_BOOKMARKLISTS_ERROR = 'wishlists/FETCH_BOOKMARKLISTS_ERROR';
 
 const CREATE_BOOKMARKLIST = 'wishlists/CREATE_BOOKMARKLIST';
+const CREATE_BOOKMARKLIST_SUCCESS = 'wishlists/CREATE_BOOKMARKLIST_SUCCESS';
+const CREATE_BOOKMARKLIST_ERROR = 'wishlists/CREATE_BOOKMARKLIST_ERROR';
 const ADD_BOOKMARK_OLD_LIST = 'wishlists/ADD_BOOKMARK_OLD_LIST';
 const ADD_BOOKMARK_NEW_LIST = 'wishlists/ADD_BOOKMARK_NEW_LIST';
 const REMOVE_BOOKMARK = 'wishlists/REMOVE_BOOKMARK';
@@ -25,16 +27,19 @@ export const fetchBookmarkLists = fetchDataThunk(
   FETCH_BOOKMARKLISTS,
   api.fetchWishlistsData,
 );
-
+export const createBookmarkList = fetchDataThunk(
+  CREATE_BOOKMARKLIST,
+  api.postWishlists,
+);
 let id = 5;
-export const createBookmarkList = value => ({
-  type: CREATE_BOOKMARKLIST,
-  bookmarkList: {
-    bookmarkListId: id++,
-    bookmarkListTitle: value,
-    bookmarks: [],
-  },
-});
+// export const createBookmarkList = value => ({
+//   type: CREATE_BOOKMARKLIST,
+//   bookmarkList: {
+//     bookmarkListId: id++,
+//     bookmarkListTitle: value,
+//     bookmarks: [],
+//   },
+// });
 
 export const addBookmarkOldList = bookmarkListId => ({
   type: ADD_BOOKMARK_OLD_LIST,
@@ -62,11 +67,11 @@ export const closeNewModal = () => ({ type: CLOSE_NEW_MODAL });
 
 // initial state
 const initialState = {
+  ...reducerUtils.initial(),
   listModal: false,
   newModal: false,
   selectedId: null,
   selectedImg: '',
-  bookmarkLists: reducerUtils.initial(),
 
   // bookmarkLists: [
   //   {
@@ -162,16 +167,22 @@ const wishlists = (state = initialState, action) => {
     case FETCH_BOOKMARKLISTS:
     case FETCH_BOOKMARKLISTS_SUCCESS:
     case FETCH_BOOKMARKLISTS_ERROR:
-      return handleAsyncActions(FETCH_BOOKMARKLISTS, 'bookmarkLists')(
-        state,
-        action,
-      );
+      return handleAsyncActions(FETCH_BOOKMARKLISTS)(state, action);
 
     case CREATE_BOOKMARKLIST:
+    case CREATE_BOOKMARKLIST_SUCCESS:
+    case CREATE_BOOKMARKLIST_ERROR:
       return {
         ...state,
-        bookmarkLists: state.bookmarkLists.concat(action.bookmarkList),
+        ...handleAsyncActions(FETCH_BOOKMARKLISTS)(state, action),
+        // ...state.data.bookmarkLists.concat(action.bookmarkList),
       };
+
+    // case CREATE_BOOKMARKLIST:
+    //   return {
+    //     ...state,
+    //     ...state.data.bookmarkLists.concat(action.bookmarkList),
+    //   };
 
     case ADD_BOOKMARK_OLD_LIST:
       return {

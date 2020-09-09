@@ -1,4 +1,4 @@
-import * as api from '../Api/Api';
+import * as api from '../Api/searchApi';
 import { fetchDataThunk, reducerUtils } from '../lib/asyncUtils';
 
 const FETCH_CENTER = 'map/FETCH_CENTER';
