@@ -14,19 +14,23 @@ const SET_VALUE = 'signup/SET_VALUE';
 const SET_INVALID = 'signup/SET_INVALID';
 const SET_PWD_VALIDATION = 'signup/SET_PWD_VALIDATION';
 
+const sleep = n => new Promise(resolve => setTimeout(resolve, n));
+
 export const signupRequest = userInfo => async dispatch => {
   dispatch({ type: SIGN_UP });
   try {
-    const msg = await signupApi.sendSignUpReq(userInfo);
-    console.log('msg: ', msg);
-    dispatch({ type: SIGN_UP_SUCCESS, msg });
-    if (msg === 'Success') dispatch({ type: RESET_FORM });
+    const { result } = await signupApi.sendSignUpReq(userInfo);
+    console.log('result: ', result);
+    dispatch({ type: SIGN_UP_SUCCESS, result });
+    if (result === 'Success') {
+      dispatch({ type: RESET_FORM, result });
+    }
   } catch (error) {
     dispatch({ type: SIGN_UP_ERROR, error });
   }
 };
 
-export const resetForm = () => ({ type: RESET_FORM });
+export const resetForm = result => ({ type: RESET_FORM, result });
 
 export const setIsChecking = value => ({ type: SET_IS_CHECKING, value });
 
@@ -53,7 +57,7 @@ export const setPwdValidation = payload => ({
 const initialState = {
   loading: false,
   error: null,
-  msg: '',
+  result: '',
   isChecking: false,
   isPwdChanged: false,
   isPwdFocused: false,
@@ -74,27 +78,31 @@ const initialState = {
     firstName: null,
     lastName: null,
     pwd: null,
-    pwdValidation: {
-      pwdLevel: null,
-      pwdContain: null,
-      pwdLength: null,
-      pwdCase: null,
-    },
     birthYear: null,
     birthMonth: null,
     birthDay: null,
     phone: null,
     profileImg: null,
     description: null,
+    pwdValidation: {
+      pwdLevel: null,
+      pwdContain: null,
+      pwdLength: null,
+      pwdCase: null,
+    },
   },
 };
 
 const signup = (state = initialState, action) => {
   switch (action.type) {
     case SIGN_UP:
-      return { ...state, loading: true, isPwdFocused: false };
+      return { ...state, loading: true, result: '', isPwdFocused: false };
     case SIGN_UP_SUCCESS:
-      return { ...state, loading: false, msg: action.msg };
+      return {
+        ...state,
+        loading: false,
+        result: action.result,
+      };
     case SIGN_UP_ERROR:
       return { ...state, loading: false, error: action.error };
     case SET_IS_CHECKING:
@@ -110,7 +118,7 @@ const signup = (state = initialState, action) => {
         isPwdChanged: action.value,
       };
     case RESET_FORM:
-      return initialState;
+      return { ...initialState, result: action.result };
     case SET_VALUE:
       return {
         ...state,
