@@ -16,8 +16,10 @@ const MainRouter = () => {
       <Route path="/Search" component={SearchPage} />
       <Route path="/Detail" component={DetailPage} />
       <Route path="/Reservation" component={ReservationPage} />
-      <Route path="/message" component={MessagePage} />
-      <Route path="/trips/v1" component={TripsPage} />
+      <Route path="/guest/inbox" component={MessagePage} />
+      <Route path="/guest/inbox/:id" component={MessagePage} />
+      <Route path="/trips" component={TripsPage} />
+      <Route path="/trips/:version" component={TripsPage} />
       <Route path="/wishlists" component={WishlistsPage} />
       {/* how to use global component */}
       <Route path="/HowToUseInput" component={HowToUseInput} />

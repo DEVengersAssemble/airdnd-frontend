@@ -8,10 +8,7 @@ import {
 
 const WishlistsMainContainer = () => {
   // ! redux
-  const { data, loading, error } = useSelector(
-    state => state.wishlists.bookmarkLists,
-  );
-
+  const { data, loading, error } = useSelector(state => state.wishlists);
   const dispatch = useDispatch();
 
   // ! hook
@@ -25,7 +22,7 @@ const WishlistsMainContainer = () => {
 
   const onCreateBookMarkList = () => {
     if (!title) return;
-    dispatch(createBookmarkList(title));
+    dispatch(createBookmarkList({ title }));
     setTitle('');
     setOpenPopup(!openPopup);
   };

@@ -4,12 +4,12 @@ import TripsPastCardItem from '../../Components/Trips/TripsPastCardItem';
 
 const TripsPastCardItemContainer = ({ trip }) => {
   // ! redux
-  const { data } = useSelector(state => state.trips.trips);
+  const { data } = useSelector(state => state.trips);
 
   // ! variable
   const { title, homeImage, addr, withGuest, guest, checkin, checkout } = trip;
-  const myInfo = data.upcoming;
-  // const { lastName: myLastName, profileImg: myProfileImg } = myInfo;
+  const myInfo = data.past;
+  const { lastName: myLastName, profileImg: myProfileImg } = myInfo;
 
   const ciDate = new Date(checkin);
   const coDate = new Date(checkout);
@@ -26,12 +26,13 @@ const TripsPastCardItemContainer = ({ trip }) => {
       homeImage={homeImage}
       addr={addr}
       withGuest={withGuest}
-      guest={guest}
       ci={ci}
       co={co}
       dateDiff={dateDiff}
-      // myLastName={myLastName}
-      // myProfileImg={myProfileImg}
+      myLastName={myLastName}
+      myProfileImg={myProfileImg}
+      guestLastName={guest && guest.lastName}
+      guestProfileImg={guest && guest.profileImg}
     />
   );
 };

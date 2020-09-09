@@ -3,12 +3,9 @@ import styled, { css } from 'styled-components';
 import MsgListSectionHeaderContainer from '../../Containers/Message/MsgListSectionHeaderContainer';
 import MsgListSectionMainContainer from '../../Containers/Message/MsgListSectionMainContainer';
 
-const MessageListSection = ({ myRef, msgSectionStates }) => {
-  const { msgListSectionState, msgDetailSectionState } = msgSectionStates;
-
+const MessageListSection = ({ msgListSectionState, msgDetailSectionState }) => {
   return (
     <MessageListSectionWrapper
-      ref={myRef}
       msgListSectionState={msgListSectionState}
       msgDetailSectionState={msgDetailSectionState}
     >
@@ -23,16 +20,6 @@ const MessageListSectionWrapper = styled.section`
   flex-direction: column;
   min-width: 37.5rem;
   opacity: 1;
-
-  /* @media ${({ theme }) => theme.size.medium} {
-    transition: all 0.3s ease;
-    ${({ msgDetailSectionState }) =>
-      msgDetailSectionState &&
-      css`
-        opacity: 0;
-        min-width: 0;
-      `}
-  } */
 
   @media ${({ theme }) => theme.size.medium} {
     transition: all 0.3s ease;

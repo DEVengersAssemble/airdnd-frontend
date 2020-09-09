@@ -4,7 +4,7 @@ import TripsUpcoming from '../../Components/Trips/TripsUpcoming';
 
 const TripsUpcomingContainer = () => {
   // ! redux
-  const { data, loading, error } = useSelector(state => state.trips.trips);
+  const { data, loading, error } = useSelector(state => state.trips);
 
   // ! variable
   const upcomingTrips = data && data.upcoming && data.upcoming.reservations;

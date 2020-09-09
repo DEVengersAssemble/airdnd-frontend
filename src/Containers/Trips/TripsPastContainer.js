@@ -4,7 +4,7 @@ import TripsPast from '../../Components/Trips/TripsPast';
 
 const TripsPastContainer = () => {
   // ! redux
-  const { data, error, loading } = useSelector(state => state.trips.trips);
+  const { data, error, loading } = useSelector(state => state.trips);
 
   // ! variable
   const pastTrips = data && data.past && data.past.reservations;
