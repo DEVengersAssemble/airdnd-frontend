@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import styled, { css } from 'styled-components';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 
@@ -65,42 +65,48 @@ const StDropDownIconWrapper = styled.span`
   pointer-events: none;
 `;
 
-const DropDown = ({
-  name,
-  title,
-  options,
-  width,
-  height,
-  padding,
-  radius,
-  outline,
-  value,
-  ...rest
-}) => {
-  return (
-    <StDropDownWrapper width={width}>
-      <StDropDownSelect
-        name={name}
-        height={height}
-        padding={padding}
-        radius={radius}
-        outline={outline}
-        value={value}
-        {...rest}
-      >
-        <StDropDownOption key={0} disabled>
-          {title}
-        </StDropDownOption>
-        {options.map((option, i) => (
-          <StDropDownOption key={i + 1} value={option}>
-            {option}
+const DropDown = forwardRef(
+  (
+    {
+      name,
+      title,
+      options,
+      width,
+      height,
+      padding,
+      radius,
+      outline,
+      value,
+      ...rest
+    },
+    ref,
+  ) => {
+    return (
+      <StDropDownWrapper width={width}>
+        <StDropDownSelect
+          ref={ref}
+          name={name}
+          height={height}
+          padding={padding}
+          radius={radius}
+          outline={outline}
+          value={value}
+          {...rest}
+        >
+          <StDropDownOption key={0} disabled>
+            {title}
           </StDropDownOption>
-        ))}
-      </StDropDownSelect>
-      <StDropDownIconWrapper>
-        <MdKeyboardArrowDown></MdKeyboardArrowDown>
-      </StDropDownIconWrapper>
-    </StDropDownWrapper>
-  );
-};
+          {options.map((option, i) => (
+            <StDropDownOption key={i + 1} value={option}>
+              {option}
+            </StDropDownOption>
+          ))}
+        </StDropDownSelect>
+        <StDropDownIconWrapper>
+          <MdKeyboardArrowDown></MdKeyboardArrowDown>
+        </StDropDownIconWrapper>
+      </StDropDownWrapper>
+    );
+  },
+);
 export default DropDown;
