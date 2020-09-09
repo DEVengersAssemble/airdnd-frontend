@@ -38,7 +38,7 @@ const initialState = {
   location: '서울',
   checkIn: '2020.09.22',
   checkOut: '2020.09.25',
-  dateDiff: null,
+  dateDiff: 3,
   flexibleDate: 0,
   guests: {
     adult: 0,
