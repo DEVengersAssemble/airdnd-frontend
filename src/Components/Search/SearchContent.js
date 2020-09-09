@@ -13,8 +13,8 @@ const SearchContent = ({ view, openMap, closeMap }) => {
     <StContent>
       <SearchResultContainer view={view} openMap={openMap} />
       <SearchMapContainer view={view} closeMap={closeMap} />
-      {/* <BookmarkListModalContainer /> */}
-      {/* <NewBookmarkModalContainer /> */}
+      <BookmarkListModalContainer />
+      <NewBookmarkModalContainer />
       <FilterModalContainer />
     </StContent>
   );
