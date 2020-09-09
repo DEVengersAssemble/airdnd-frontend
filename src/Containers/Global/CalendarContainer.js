@@ -11,6 +11,7 @@ const CalendarContainer = ({
   setChangeDataTrue,
   reservedDates = [],
   isDetailPage,
+  ...rest
 }) => {
   const [count, setCount] = useState(0);
 
@@ -113,7 +114,7 @@ const CalendarContainer = ({
     if (checkBeforeCheckin(dateTime) && !isDetailPage) {
       console.log('■■■ beforecheckin - mainPage', date);
       setCheckinData(date);
-      setCheckoutData('');
+      // setCheckoutData('');
       return;
     }
     if (!checkout && getDiff(dateTime, true)) {
@@ -127,7 +128,7 @@ const CalendarContainer = ({
     if (checkout) {
       console.log('■■■ recheckin', date, checkout);
       setCheckinData(date);
-      setCheckoutData('');
+      // setCheckoutData('');
       return;
     }
     if (checkin && !checkBeforeCheckin(dateTime)) {
@@ -192,6 +193,7 @@ const CalendarContainer = ({
       checkAfterReserved={checkAfterReserved}
       checkBeforeCheckin={checkBeforeCheckin}
       beforeToday={beforeToday}
+      {...rest}
     />
   );
 };
