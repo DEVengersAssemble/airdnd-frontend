@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import Modal from '../Global/Modal';
 import Button from '../Global/Button';
 import DropDown from '../Global/DropDown';
+import Loader from '../Global/Loader';
 import { Input } from '../Global/Input';
 import { RiEyeCloseLine, RiMailLine, RiUserLine } from 'react-icons/ri';
 import { MdCheck, MdClose } from 'react-icons/md';
@@ -135,6 +136,11 @@ const StSubmitButton = styled(Button)`
     background: ${({ theme }) => theme.color.main};
     box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.25);
   }
+  ${({ isLoading }) =>
+    isLoading &&
+    css`
+      pointer-events: none;
+    `}
 `;
 
 const StLoginButtonWrapper = styled.div`
@@ -160,7 +166,31 @@ const StLoginButton = styled(Button)`
     background: transparent;
     text-decoration: underline;
   }
+  ${({ isLoading }) =>
+    isLoading &&
+    css`
+      pointer-events: none;
+    `}
 `;
+
+const StSubmitLoader = styled(Loader)`
+  top: -22px;
+`;
+
+const StResultWrapper = styled.div`
+  background: #d3f9d8;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  border: 2px solid ${({ theme }) => theme.color.warning};
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  height: 36px;
+  margin-top: 20px;
+`;
+
+const StResultText = styled.span``;
 
 const SignupEmailModal = ({
   modalVisible,
@@ -169,6 +199,7 @@ const SignupEmailModal = ({
   refObj,
   range,
   loading,
+  result,
   isPwdFocused,
   openLoginModal,
   closeModal,
@@ -190,8 +221,16 @@ const SignupEmailModal = ({
   const {
     pwdValidation: { pwdLevel, pwdLength, pwdContain, pwdCase },
   } = invalid;
-  const { emailRef, firstNameRef, lastNameRef, pwdRef } = refObj;
-
+  const {
+    emailRef,
+    firstNameRef,
+    lastNameRef,
+    pwdRef,
+    birthMonthRef,
+    birthDayRef,
+    birthYearRef,
+  } = refObj;
+  console.log('loading: ', loading);
   return (
     <StSignupEmailModal
       modalState={modalVisible}
@@ -364,6 +403,7 @@ const SignupEmailModal = ({
               onChange={({ target: { value } }) =>
                 onFormChange('birthMonth', value)
               }
+              ref={birthMonthRef}
             ></StBirthDayDropDown>
             <StBirthDayDropDown
               name="birthDay"
@@ -376,6 +416,7 @@ const SignupEmailModal = ({
               onChange={({ target: { value } }) =>
                 onFormChange('birthDay', value)
               }
+              ref={birthDayRef}
             ></StBirthDayDropDown>
             <StBirthDayDropDown
               name="birthYear"
@@ -388,6 +429,7 @@ const SignupEmailModal = ({
               onChange={({ target: { value } }) =>
                 onFormChange('birthYear', value)
               }
+              ref={birthYearRef}
             ></StBirthDayDropDown>
           </StBirthDayWrapper>
           {(isNaN(birthMonth) || isNaN(birthDay) || isNaN(birthYear)) &&
@@ -405,14 +447,28 @@ const SignupEmailModal = ({
                 아닙니다.
               </StValidationText>
             )}
-          <StSubmitButton border="none" type="submit">
-            가입하기
+          <StSubmitButton isLoading={loading} border="none" type="submit">
+            {loading ? <StSubmitLoader /> : '가입하기'}
           </StSubmitButton>
+          {result && (
+            <StResultWrapper result={result}>
+              {result === 'AlreadyEmail' && (
+                <StResultText>이메일이 이미 존재합니다. </StResultText>
+              )}
+              {result === 'Error' && (
+                <StResultText>회원가입에 실패하였습니다. </StResultText>
+              )}
+            </StResultWrapper>
+          )}
         </StSignupForm>
         <StDividerLine />
         <StLoginButtonWrapper>
           <StLoginText>이미 에어비앤비 계정이 있나요?</StLoginText>
-          <StLoginButton btnType="color" onClick={openLoginModal}>
+          <StLoginButton
+            isLoading={loading}
+            btnType="color"
+            onClick={openLoginModal}
+          >
             로그인
           </StLoginButton>
         </StLoginButtonWrapper>

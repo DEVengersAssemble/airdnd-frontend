@@ -13,17 +13,14 @@ import {
   setPwdValidation,
 } from '../../Modules/signup';
 
-let count = 0;
-
 const SignupModalContainer = () => {
-  console.log(++count);
   const dispatch = useDispatch();
   const { name } = useSelector(state => state.modal);
   const modalVisible = name === 'signup_email';
   const {
     loading,
     error,
-    msg,
+    result,
     isChecking,
     isPwdFocused,
     isPwdChanged,
@@ -151,15 +148,19 @@ const SignupModalContainer = () => {
   };
 
   const changeFocus = () => {
-    console.log('changeFocus()');
+    console.log('form', form);
+    console.log('invalid: ', invalid);
     const invalidCount = Object.values(invalid)
-      .slice(0, 6)
-      .reduce((acc, cur) => {
-        return acc + +cur.invalid;
-      }, 0);
+      .slice(0, 7)
+      .filter(v => v).length;
+    console.log('invalidCount: ', invalidCount);
     if (invalidCount) {
       refObj[
-        `${Object.entries(invalid).find(v => v[1].invalid)[0]}Ref`
+        `${
+          Object.entries(invalid)
+            .slice(0, 7)
+            .find(v => v[1])[0]
+        }Ref`
       ].current.focus();
       return;
     }
@@ -172,11 +173,14 @@ const SignupModalContainer = () => {
       firstName: checkName(firstName),
       lastName: checkName(lastName),
       pwd: !pwdLevel,
-      pwdValidation: checkPwd(),
-      birthYear: isNaN(birthYear) || checkDate(birthYear, birthMonth, birthDay),
       birthMonth:
         isNaN(birthMonth) || checkDate(birthYear, birthMonth, birthDay),
       birthDay: isNaN(birthDay) || checkDate(birthYear, birthMonth, birthDay),
+      birthYear: isNaN(birthYear) || checkDate(birthYear, birthMonth, birthDay),
+      phone: null,
+      profileImg: null,
+      description: null,
+      pwdValidation: checkPwd(),
     };
 
     dispatch(setInvalid(payload));
@@ -213,9 +217,7 @@ const SignupModalContainer = () => {
     dispatch(setIsChecking(false));
   }
 
-  useEffect(() => {
-    console.log('--- useEffect ---');
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <SignupEmailModal
@@ -225,6 +227,7 @@ const SignupModalContainer = () => {
       refObj={refObj}
       range={range}
       loading={loading}
+      result={result}
       isPwdFocused={isPwdFocused}
       openLoginModal={openLoginModal}
       closeModal={() => {
