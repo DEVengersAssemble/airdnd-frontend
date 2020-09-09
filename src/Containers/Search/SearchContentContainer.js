@@ -10,9 +10,7 @@ const SearchContentContainer = () => {
   const { loading, data, error } = useSelector(state => state.search);
   const dispatch = useDispatch();
   const { search: query } = useLocation();
-  const queryObj = qs.parse(query, {
-    ignoreQueryPrefix: true,
-  });
+  const queryObj = qs.parse(query, { ignoreQueryPrefix: true });
 
   const changeType = (key, obj) => {
     switch (key) {

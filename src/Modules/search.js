@@ -27,6 +27,7 @@ const ZOOM_OUT = 'search/ZOOM_OUT';
 const ZOOM_SET = 'search/ZOOM_SET';
 const OPEN_MARKER = 'search/OPEN_MARKER';
 const CLOSE_MARKER = 'search/CLOSE_MARKER';
+const SET_MAP_SEARCH = 'search/SET_MAP_SEARCH';
 
 const OPEN_POPUP = 'search/OPEN_POPUP';
 const CLOSE_POPUP = 'search/CLOSE_POPUP';
@@ -67,6 +68,7 @@ export const zoomOut = () => ({ type: ZOOM_OUT });
 export const zoomSet = zoom => ({ type: ZOOM_SET, zoom });
 export const openMarker = id => ({ type: OPEN_MARKER, id });
 export const closeMarker = () => ({ type: CLOSE_MARKER });
+export const setMapSearch = () => ({ type: SET_MAP_SEARCH });
 
 export const openPopup = name => ({ type: OPEN_POPUP, name });
 export const closePopup = (name, isApplied) => ({
@@ -176,6 +178,7 @@ const initialState = {
   searchForm: {},
   headerState: false,
   viewState: 'result',
+  mapSearch: true,
   mapState: true,
   mapZoom: 12,
   markerState: null,
@@ -343,6 +346,11 @@ const search = (state = initialState, action) => {
       return {
         ...state,
         markerState: null,
+      };
+    case SET_MAP_SEARCH:
+      return {
+        ...state,
+        mapSearch: !state.mapSearch,
       };
     case OPEN_POPUP:
       return {

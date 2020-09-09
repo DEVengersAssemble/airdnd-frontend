@@ -8,12 +8,7 @@ import {
   MapFilterButton,
 } from '../Search/MapButton';
 import { compose, withProps, withState, withHandlers } from 'recompose';
-import {
-  withScriptjs,
-  withGoogleMap,
-  GoogleMap,
-  Marker,
-} from 'react-google-maps';
+import { withScriptjs, withGoogleMap, GoogleMap } from 'react-google-maps';
 import theme from '../../style/theme';
 import MapMarkerContainer from '../../Containers/Search/MapMarkerContainer';
 
@@ -75,6 +70,7 @@ const Map = compose(
     view,
     center,
     markers,
+    mapSearch,
     zoom,
     mapZoom,
     setZoom,
@@ -83,6 +79,7 @@ const Map = compose(
     onZoomChange,
     onHideMap,
     onCloseMap,
+    checkMapSearch,
     openFilterModal,
     updateZoom,
     setRef,
@@ -108,7 +105,7 @@ const Map = compose(
             onCloseMap={onCloseMap}
             view={view}
           />
-          <MapCheckbox />
+          <MapCheckbox checked={mapSearch} onCheck={checkMapSearch} />
           <StBtnSetWrapper>
             {view === 'map' && (
               <MapFilterButton openFilterModal={openFilterModal} />

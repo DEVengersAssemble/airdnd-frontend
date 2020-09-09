@@ -4,7 +4,7 @@ import HomeList from '../../Components/Search/HomeList';
 import HomeContainer from './HomeContainer';
 import HomeCardContainer from './HomeCardContainer';
 import { useLocation, useHistory } from 'react-router-dom';
-import { fetchData } from '../../Modules/search';
+import { fetchData, navigatePage } from '../../Modules/search';
 import qs from 'qs';
 import _ from 'lodash';
 
@@ -36,8 +36,6 @@ const HomeListContainer = () => {
       case 'amenityList':
       case 'facilityList':
       case 'hostLangList':
-        console.log(fa[key]);
-        console.log(setListValues(key));
         return setListValues(key);
       default:
         return fa[key] ? 1 : 0;
@@ -54,6 +52,7 @@ const HomeListContainer = () => {
     const newQuery = `?${qs.stringify(newQueryObj)}`;
     history.replace(newQuery);
     dispatch(fetchData(newQuery));
+    dispatch(navigatePage(1));
   }, [isFilterChanged]);
 
   return (
