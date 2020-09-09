@@ -16,6 +16,7 @@ const login = (state = initialState, action) => {
       return { ...state, loading: false, msg: action.msg };
     case LOG_IN_ERROR:
       return { ...state, loading: false, error: action.error };
+
     default:
       return state;
   }
