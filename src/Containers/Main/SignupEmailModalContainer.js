@@ -148,12 +148,9 @@ const SignupModalContainer = () => {
   };
 
   const changeFocus = () => {
-    console.log('form', form);
-    console.log('invalid: ', invalid);
     const invalidCount = Object.values(invalid)
       .slice(0, 7)
       .filter(v => v).length;
-    console.log('invalidCount: ', invalidCount);
     if (invalidCount) {
       refObj[
         `${
@@ -186,6 +183,10 @@ const SignupModalContainer = () => {
     dispatch(setInvalid(payload));
   };
 
+  const cleanupModal = () => {
+    dispatch(resetForm(''));
+  };
+
   const handleSubmit = e => {
     e.preventDefault();
     checkForm();
@@ -206,13 +207,11 @@ const SignupModalContainer = () => {
   };
 
   if (isPwdChanged) {
-    console.log('updatePwd()...');
     updatePwd();
     dispatch(setIsPwdChanged(false));
   }
 
   if (isChecking) {
-    console.log('isChecking()...');
     changeFocus();
     dispatch(setIsChecking(false));
   }
@@ -233,6 +232,7 @@ const SignupModalContainer = () => {
       closeModal={() => {
         dispatch(closeModal());
       }}
+      cleanupModal={cleanupModal}
       onFormChange={onFormChange}
       handleSubmit={handleSubmit}
       onPwdFocused={onPwdFocused}

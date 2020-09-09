@@ -111,7 +111,9 @@ const StBirthDayDropDown = styled(DropDown)`
   ${({ isInvalid }) =>
     isInvalid &&
     css`
-      &:not(:focus) {
+      border: 1px solid ${({ theme }) => theme.color.warning};
+      background: #fff8f6;
+      &:focus {
         border: 1px solid ${({ theme }) => theme.color.warning};
         background: #fff8f6;
         & + span {
@@ -203,6 +205,7 @@ const SignupEmailModal = ({
   isPwdFocused,
   openLoginModal,
   closeModal,
+  cleanupModal,
   onFormChange,
   handleSubmit,
   onPwdFocused,
@@ -230,7 +233,6 @@ const SignupEmailModal = ({
     birthDayRef,
     birthYearRef,
   } = refObj;
-  console.log('loading: ', loading);
   return (
     <StSignupEmailModal
       modalState={modalVisible}
@@ -239,6 +241,7 @@ const SignupEmailModal = ({
       width="570px"
       height="670px"
       setModalState={closeModal}
+      cleanup={cleanupModal}
     >
       <StSignupFormWrapper>
         <StSignupForm onSubmit={handleSubmit}>
