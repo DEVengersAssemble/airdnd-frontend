@@ -6,21 +6,36 @@ import qs from 'qs';
 import { navigatePage, fetchData } from '../../Modules/search';
 
 const SearchPaginationContainer = () => {
-  const { dataTotal } = useSelector(state => state.search.data);
+  const { data, page } = useSelector(state => state.search);
   const dispatch = useDispatch();
   const history = useHistory();
   const { search: query } = useLocation();
   const queryObj = qs.parse(query, { ignoreQueryPrefix: true });
-  const pageArray = Array.from({ length: Math.ceil(dataTotal / 20) });
+  const pageArray = Array.from(
+    { length: Math.ceil(data.dataTotal / 20) },
+    (_, i) => i + 1,
+  );
 
   const onNavPage = e => {
-    queryObj.page = e.target.value;
+    queryObj.page = e.target.firstChild.data;
     history.replace(`?${qs.stringify(queryObj)}`);
+    dispatch(navigatePage(+e.target.firstChild.data));
     dispatch(fetchData(query));
-    dispatch(navigatePage(e.target.value));
   };
 
-  return <SearchPagination pageArray={pageArray} onNavPage={onNavPage} />;
+  const onPrevPage = () => dispatch(navigatePage(page - 1));
+  const onNextPage = () => dispatch(navigatePage(page + 1));
+
+  return (
+    <SearchPagination
+      page={page}
+      dataTotal={data.dataTotal}
+      pageArray={pageArray}
+      onNavPage={onNavPage}
+      onPrevPage={onPrevPage}
+      onNextPage={onNextPage}
+    />
+  );
 };
 
 export default SearchPaginationContainer;

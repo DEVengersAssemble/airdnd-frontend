@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FilterListContainer } from '../../Containers/Search/FilterListContainer';
-import SearchPagination from './SearchPagination';
 import { FloatingMapButton } from './MapButton';
 import HomeListContainer from '../../Containers/Search/HomeListContainer';
 import RecentHomeListContainer from '../../Containers/Search/RecentHomeListContainer';
+import SearchPaginationContainer from '../../Containers/Search/SearchPaginationContainer';
 
 const SearchResult = ({
   mapState,
@@ -26,7 +26,7 @@ const SearchResult = ({
       <FilterListContainer mapState={mapState} />
       <HomeListContainer />
       <RecentHomeListContainer />
-      <SearchPagination />
+      <SearchPaginationContainer />
       <FloatingMapButton onOpenMap={onOpenMap} />
     </StWrapper>
   );
