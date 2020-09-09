@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import ReservationBox from '../../Components/Detail/ReservationBox';
@@ -6,57 +6,107 @@ import ReservationBox from '../../Components/Detail/ReservationBox';
 const ReservationBoxContainer = ({ home }) => {
   const searchData = useSelector(state => state.searchForm);
   const {
+    dateDiff: searchDateDiff,
     checkIn: searchCheckin,
     checkOut: searchCheckout,
-    dateDiff: searchDateDiff,
   } = useSelector(state => state.searchForm);
-  const { checkin, checkout, dateDiff, changeInitialDate } = useSelector(
-    state => state.reservation,
+  const {
+    dateDiff,
+    checkin,
+    checkout,
+    changeInitialDate,
+    changeInitialGuests,
+  } = useSelector(state => state.reservation);
+  const { adult: searchAdult, child: searchChild } = useSelector(
+    state => state.searchForm.guests,
   );
-  const { price, reviews } = home;
+  const { adult: reserveAdult, child: reserveChild } = useSelector(
+    state => state.reservation.guests,
+  );
+  const { id, price, reviews } = home;
   const { rating, count } = reviews;
   const history = useHistory();
 
+  const reAssignedDateDiff = changeInitialDate ? dateDiff : searchDateDiff;
   const reAssignedCheckin = changeInitialDate ? checkin : searchCheckin;
   const reAssignedCheckout = changeInitialDate ? checkout : searchCheckout;
-  const reAssignedDateDiff = changeInitialDate ? dateDiff : searchDateDiff;
+  const notChecked = !reAssignedCheckin || !reAssignedCheckout;
+
+  const reAssignedAdult =
+    (changeInitialGuests ? reserveAdult : searchAdult) || 1;
+  const reAssignedChild = changeInitialGuests ? reserveChild : searchChild;
 
   const regExp = /\d/g;
   const removedCommaPrice = Number(price.match(regExp).join(''));
 
-  const getPercentage = price => {
-    return ((price / 100) * 12).toLocaleString(undefined, {
-      maximumFractionDigits: 0,
-    });
-  };
+  const pricePerPerson =
+    removedCommaPrice * (reAssignedAdult + reAssignedChild);
 
-  const getTotalPrice = (price, percentage) => {
-    const filteredPercentage = Number(percentage.match(regExp).join(''));
-    return (price + filteredPercentage).toLocaleString(undefined, {
-      maximumFractionDigits: 0,
-    });
-  };
+  const pricePerPersonToString = pricePerPerson.toLocaleString(undefined, {
+    maximumFractionDigits: 0,
+  });
 
-  const getmultipliedPrice = (price, dateDiff) => {
-    return (price * dateDiff).toLocaleString(undefined, {
+  const multipliedPrice = (pricePerPerson * reAssignedDateDiff).toLocaleString(
+    undefined,
+    {
       maximumFractionDigits: 0,
-    });
+    },
+  );
+
+  const percentage = (
+    ((pricePerPerson * reAssignedDateDiff) / 100) *
+    12
+  ).toLocaleString(undefined, {
+    maximumFractionDigits: 0,
+  });
+
+  const filteredPercentage = Number(percentage.match(regExp).join(''));
+
+  const totalPrice = (
+    pricePerPerson * reAssignedDateDiff +
+    filteredPercentage
+  ).toLocaleString(undefined, {
+    maximumFractionDigits: 0,
+  });
+
+  // const multipliedPrice = getmultipliedPrice(
+  //   pricePerPerson,
+  //   reAssignedDateDiff,
+  // );
+  // const percentage = getPercentage(pricePerPerson * reAssignedDateDiff);
+  // const totalPrice = getTotalPrice(
+  //   pricePerPerson * reAssignedDateDiff,
+  //   percentage,
+  // );
+
+  const checkPopupRef = useRef();
+
+  const onGoToReservation = () => {
+    if (notChecked) {
+      checkPopupRef.current.click();
+      console.log('test', checkPopupRef.current);
+      return;
+    }
+    history.push(`/Reservation/HouseRules/${id}`);
   };
 
   return (
     <ReservationBox
-      price={price}
-      removedCommaPrice={removedCommaPrice}
+      checkPopupRef={checkPopupRef}
+      price={pricePerPersonToString}
+      multipliedPrice={multipliedPrice}
+      percentage={percentage}
+      totalPrice={totalPrice}
+      // removedCommaPrice={removedCommaPrice}
       rating={rating}
       count={count}
-      getPercentage={getPercentage}
-      getTotalPrice={getTotalPrice}
-      getmultipliedPrice={getmultipliedPrice}
-      history={history}
+      // getPercentage={getPercentage}
+      // getTotalPrice={getTotalPrice}
+      // getmultipliedPrice={getmultipliedPrice}
       searchData={searchData}
       dateDiff={reAssignedDateDiff}
-      checkin={reAssignedCheckin}
-      checkout={reAssignedCheckout}
+      notChecked={notChecked}
+      onGoToReservation={onGoToReservation}
     />
   );
 };

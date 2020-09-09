@@ -24,6 +24,7 @@ const Calendar = ({
   checkAfterReserved,
   checkBeforeCheckin,
   beforeToday,
+  ...rest
 }) => {
   const addZero = num => ((num + '').length === 1 ? '0' + num : num);
 
@@ -86,7 +87,7 @@ const Calendar = ({
 
   return (
     <>
-      <StWrapper isDetailPage={isDetailPage}>
+      <StWrapper isDetailPage={isDetailPage} {...rest}>
         <StNextMonthBtn btnType="circle" onClick={onClickBeforeMonth}>
           <AiOutlineLeft />
         </StNextMonthBtn>
@@ -224,7 +225,6 @@ const StDateBtn = styled(Button)`
   ${({ reserved, beforeToday, beforeCheckin, afterReserved }) =>
     (reserved || beforeToday || beforeCheckin || afterReserved) &&
     css`
-      ${'' /* color: ${({ theme }) => theme.color.gray}; */}
       color: rgba(72, 72, 72, 0.25);
       text-decoration: line-through;
       font-weight: 400;
