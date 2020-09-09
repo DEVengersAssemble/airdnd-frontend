@@ -29,7 +29,7 @@ const BookmarkListModal = React.memo(
                 key={bookmarkListId}
                 onClick={() => onClickBookmark(bookmarkListId)}
               >
-                <StImage src={bookmarks && bookmarks[0].images} />
+                <StImage src={bookmarks[0] && bookmarks[0].images} />
                 <StContentWrapper>
                   <StTitle>{bookmarkListTitle}</StTitle>
                   <StCount>

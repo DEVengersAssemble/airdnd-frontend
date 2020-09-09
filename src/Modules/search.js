@@ -163,20 +163,6 @@ const popupInit = {
 
 const initialState = {
   ...reducerUtils.initial(),
-  // data: {
-  //   homes: [],
-  //   dataTotal: 0,
-  //   filterCondition: {
-  // superhost: false,
-  // amenityList: [],
-  // facilityList: [],
-  // hostLangList: [],
-  //   },
-  //   mapCenter: { lat: 0, lng: 0 },
-  //   priceArray: [],
-  //   averagePrice: 0,
-  //   recentHomes: [],
-  // },
   searchForm: {},
   headerState: false,
   viewState: 'result',
@@ -263,6 +249,7 @@ const search = (state = initialState, action) => {
           neLat: action.searchForm.neLat,
           neLng: action.searchForm.neLng,
         },
+        page: action.searchForm.page || 1,
       };
     case HOVER_HOME:
       return {
@@ -366,6 +353,7 @@ const search = (state = initialState, action) => {
       return {
         ...state,
         mapBounds: action.mapBounds,
+        page: 1,
       };
     case OPEN_POPUP:
       return {

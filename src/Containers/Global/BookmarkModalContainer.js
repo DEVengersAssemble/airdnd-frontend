@@ -15,8 +15,7 @@ import { changeHeart } from '../../Modules/search';
 
 const BookmarkListModalContainer = () => {
   const { data, listModal, selectedId } = useSelector(state => state.wishlists);
-  const { bookmarkLists } = data;
-  console.log(bookmarkLists);
+  const { bookmarkLists } = data || [];
   const dispatch = useDispatch();
   const closeBmListModal = () => dispatch(closeListModal());
   const openBmNewModal = () => dispatch(openNewModal());

@@ -36,6 +36,7 @@ const MapContainer = ({ markers }) => {
   };
 
   const changeBounds = bounds => {
+    console.log('3333333333333333', mapZoom);
     Object.keys(bounds).forEach(bound => (queryObj[bound] = bounds[bound]));
     history.replace(`?${qs.stringify(queryObj)}`);
     dispatch(fetchData(`?${qs.stringify(queryObj)}`));

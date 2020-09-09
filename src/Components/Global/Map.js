@@ -62,7 +62,6 @@ const Map = compose(
       },
       getBounds: () => () => {
         const bounds = refs.map.getBounds();
-        console.log(bounds);
         return {
           swLat: bounds.Za.i,
           swLng: bounds.Va.i,
@@ -104,13 +103,17 @@ const Map = compose(
           lat: center.lat,
           lng: center.lng,
         }}
-        options={{ disableDefaultUI: true }}
-        onZoomChanged={() => {
-          setZoom();
-          updateZoom(zoom);
+        options={{ disableDefaultUI: true, scrollwheel: false }}
+        // onZoomChanged={() => {
+        //   setZoom();
+        //   updateZoom(zoom);
+        //   console.log('11111111111111111', zoom);
+        //   changeBounds(getBounds());
+        // }}
+        // onDragEnd={() => changeBounds(getBounds())}
+        onDragEnd={() => {
           changeBounds(getBounds());
         }}
-        onDragEnd={changeBounds}
       >
         <StStickyWrapper>
           <MapCloseButton
@@ -126,11 +129,14 @@ const Map = compose(
             <MapZoomButton
               onZoomIn={() => {
                 onZoomIn();
-                onZoomChange(mapZoom + 1);
+                // onZoomChange(mapZoom + 1);
+                changeBounds(getBounds());
+                console.log('2222222222222', mapZoom + 1);
               }}
               onZoomOut={() => {
                 onZoomOut();
-                onZoomChange(mapZoom - 1);
+                // onZoomChange(mapZoom - 1);
+                changeBounds(getBounds());
               }}
             />
             <MapMarkerButton />
