@@ -181,6 +181,12 @@ const initialState = {
   mapSearch: true,
   mapState: true,
   mapZoom: 12,
+  mapBound: {
+    swLat: 0,
+    swLng: 0,
+    neLat: 0,
+    neLng: 0,
+  },
   markerState: null,
   hoveredHome: null,
   popupState: popupInit,
@@ -247,6 +253,13 @@ const search = (state = initialState, action) => {
           price: prices.some(key => action.searchForm[key]),
           modal: modals.some(key => action.searchForm[key]),
           all: false,
+        },
+        mapBound: {
+          ...state.mapBound,
+          swLat: action.searchForm.swLat,
+          swLng: action.searchForm.swLng,
+          neLat: action.searchForm.neLat,
+          neLng: action.searchForm.neLng,
         },
       };
     case HOVER_HOME:
