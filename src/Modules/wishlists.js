@@ -179,17 +179,19 @@ const wishlists = (state = initialState, action) => {
         listModal: false,
         selectedId: null,
         selectedImg: '',
-        bookmarkLists: state.bookmarkLists.map(bmList =>
-          bmList.bookmarkListId === action.bookmarkListId
-            ? {
-                ...bmList,
-                bookmarks: [
-                  ...bmList.bookmarks,
-                  { homeId: state.selectedId, images: state.selectedImg },
-                ],
-              }
-            : bmList,
-        ),
+        data: {
+          bookmarkLists: state.data.bookmarkLists.map(bmList =>
+            bmList.bookmarkListId === action.bookmarkListId
+              ? {
+                  ...bmList,
+                  bookmarks: [
+                    ...bmList.bookmarks,
+                    { homeId: state.selectedId, images: state.selectedImg },
+                  ],
+                }
+              : bmList,
+          ),
+        },
       };
     case ADD_BOOKMARK_NEW_LIST:
       return {
@@ -197,18 +199,26 @@ const wishlists = (state = initialState, action) => {
         newModal: false,
         selectedId: null,
         selectedImg: '',
-        bookmarkLists: state.bookmarkLists.concat({
-          ...action.bookmarkList,
-          bookmarks: [{ homeId: state.selectedId, images: state.selectedImg }],
-        }),
+        data: {
+          bookmarkLists: state.data.bookmarkLists.concat({
+            ...action.bookmarkList,
+            bookmarks: [
+              { homeId: state.selectedId, images: state.selectedImg },
+            ],
+          }),
+        },
       };
     case REMOVE_BOOKMARK:
       return {
         ...state,
-        bookmarkLists: state.bookmarkLists.map(bmList => ({
-          ...bmList,
-          bookmarks: bmList.bookmarks.filter(bm => bm.homeId !== action.homeId),
-        })),
+        data: {
+          bookmarkLists: state.data.bookmarkLists.map(bmList => ({
+            ...bmList,
+            bookmarks: bmList.bookmarks.filter(
+              bm => bm.homeId !== action.homeId,
+            ),
+          })),
+        },
       };
     case OPEN_LIST_MODAL:
       return {
