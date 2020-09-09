@@ -85,10 +85,10 @@ const initialState = {
     profileImg: null,
     description: null,
     pwdValidation: {
-      pwdLevel: null,
-      pwdContain: null,
-      pwdLength: null,
-      pwdCase: null,
+      pwdLevel: 0,
+      pwdContain: false,
+      pwdLength: false,
+      pwdCase: false,
     },
   },
 };
