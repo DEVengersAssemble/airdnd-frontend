@@ -91,6 +91,7 @@ const SearchFormContainer = ({ isSearchBtnClicked }) => {
     const guestCount = adult + child + infant;
     const url = `/search?location=${location}&checkIn=${newCheckIn}&checkOut=${newCheckOut}&dateDiff=${dateDiff}&flexibleDate=${flexibleDate}&guests=${guestCount}&adult=${adult}&child=${child}&infant=${infant}`;
     history.push(url);
+    history.go(0);
     window.scrollTo({ top: 0 });
   };
 

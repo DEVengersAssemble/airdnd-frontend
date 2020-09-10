@@ -8,6 +8,7 @@ import _ from 'lodash';
 import { fetchBookmarkLists } from '../../Modules/wishlists';
 
 const SearchContentContainer = () => {
+  const { id } = useSelector(state => state.user.data);
   const { loading, data, error } = useSelector(state => state.search);
   const dispatch = useDispatch();
   const { search: query } = useLocation();
@@ -43,7 +44,7 @@ const SearchContentContainer = () => {
     return <div style={{ width: '100%', height: 'calc(100vh - 8rem)' }}></div>;
   if (!data)
     return <div style={{ width: '100%', height: 'calc(100vh - 8rem)' }}></div>;
-  return <SearchContent />;
+  return <SearchContent isLoggedIn={id} />;
 };
 
 export default React.memo(SearchContentContainer);
