@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import styled, { css, keyframes } from 'styled-components';
 import { FaCrown } from 'react-icons/fa';
 import { FiShare } from 'react-icons/fi';
@@ -41,8 +42,8 @@ const Subject = ({ isLoading, home }) => {
             <StButton transition onClick={onClick}>
               <StHeart
                 size="smaller"
-                bgColor={bookmark ? 'main' : 'white'}
-                stroke={bookmark ? 'main' : 'black'}
+                bgColor={home.isBookmarked ? 'main' : 'white'}
+                stroke={home.isBookmarked ? 'main' : 'black'}
               />
               저장
             </StButton>
