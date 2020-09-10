@@ -114,10 +114,7 @@ const CalendarContainer = ({
     if (checkBeforeCheckin(dateTime) && !isDetailPage) {
       console.log('■■■ beforecheckin - mainPage', date);
       setCheckinData(date);
-<<<<<<< HEAD
-=======
       // setCheckoutData('');
->>>>>>> 0cf3eda401482882c37345cd27e1fc008c0108ee
       return;
     }
     if (!checkout && getDiff(dateTime, true)) {
@@ -131,10 +128,7 @@ const CalendarContainer = ({
     if (checkout) {
       console.log('■■■ recheckin', date, checkout);
       setCheckinData(date);
-<<<<<<< HEAD
-=======
       // setCheckoutData('');
->>>>>>> 0cf3eda401482882c37345cd27e1fc008c0108ee
       return;
     }
     if (checkin && !checkBeforeCheckin(dateTime)) {
