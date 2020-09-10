@@ -1,54 +1,32 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import MsgListSectionFilterPopup from '../../Components/Message/MsgListSectionFilterPopup';
-import {
-  allMsgList,
-  hideMsgList,
-  unreadMsgList,
-  fetchInbox,
-} from '../../Modules/message';
+import { fetchInbox, closePopup } from '../../Modules/message';
 import qs from 'qs';
-import { Filter } from 'styled-icons/boxicons-regular';
 
-const MsgListSectionFilterPopupContainer = ({
-  setOpenPopup,
-  openPopup,
-  popupRef,
-}) => {
+const MsgListSectionFilterPopupContainer = ({ popupState, popupRef }) => {
   // ! redux
-  const { messages, activeIndex } = useSelector(state => state.message);
+  const { data } = useSelector(state => state.message.messages);
   const dispatch = useDispatch();
 
   // ! variable
-  const allMsgCount = messages.filter(msg => msg.state === 'all').length;
-  const hiddenMsgCount = messages.filter(msg => msg.state === 'hide').length;
-  const unreadMsgCount = messages.filter(msg => msg.state === 'unread').length;
+  const allMsgCount = data && data.all.length;
+  const hiddenMsgCount = data && data.hidden.length;
+  const unreadMsgCount = data && data.unread.length;
 
   // ! event
   const onClickAll = () => {
-    dispatch(allMsgList(activeIndex));
-    setOpenPopup(false);
+    dispatch(closePopup('filter'));
   };
 
-  const onClickHide = () => {
-    dispatch(hideMsgList(activeIndex));
-    setOpenPopup(false);
+  const onClickHidden = () => {
+    dispatch(closePopup('filter'));
   };
 
   const onClickUnread = () => {
-    // ! 읽지않은 메시지는 activeIndex값을 빼서 포커스가 안잡히도록 설정
-    dispatch(unreadMsgList());
-    setOpenPopup(false);
+    dispatch(closePopup('filter'));
   };
-
-  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-  // ! redux
-  const { data, loading, error } = useSelector(state => state.message);
-
-  // ! variable
-  const id = [1, 2, 3, 4][0];
 
   // ! query
   const query = useLocation();
@@ -56,28 +34,18 @@ const MsgListSectionFilterPopupContainer = ({
     ignoreQueryPrefix: true,
   });
 
-  // ! event
-  const onClickFilterPopup = () => {
-    dispatch(fetchInbox(filter));
-    setOpenPopup(false);
-  };
-
-  if (loading) return <div>로딩중...</div>;
-  if (error) return <div>Error...</div>;
-  if (!data) return null;
-
   return (
     <MsgListSectionFilterPopup
-      openPopup={openPopup}
+      popupState={popupState}
       popupRef={popupRef}
       onClickAll={onClickAll}
-      onClickHide={onClickHide}
+      onClickHidden={onClickHidden}
       onClickUnread={onClickUnread}
       allMsgCount={allMsgCount}
       hiddenMsgCount={hiddenMsgCount}
       unreadMsgCount={unreadMsgCount}
-      onClickFilterPopup={onClickFilterPopup}
-      id={id}
+      // onClickFilterPopup={onClickFilterPopup}
+      // id={id}
     />
   );
 };

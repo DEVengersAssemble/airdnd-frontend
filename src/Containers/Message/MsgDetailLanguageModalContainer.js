@@ -4,19 +4,19 @@ import MsgDetailLanguageModal from '../../Components/Message/MsgDetailLanguageMo
 import { closeModal } from '../../Modules/message';
 
 const MsgDetailLanguageModalContainer = () => {
-  // ! redux
-  const language = useSelector(state => state.message.modalState.language);
-  const dispatch = useDispatch();
+  // // ! redux
+  // const language = useSelector(state => state.message.modalState.language);
+  // const dispatch = useDispatch();
 
-  // ! modal event
-  const onClickCloseModal = () => {
-    dispatch(closeModal('language'));
-  };
+  // // ! modal event
+  // const onClickCloseModal = () => {
+  //   dispatch(closeModal('language'));
+  // };
 
   return (
     <MsgDetailLanguageModal
-      modalState={language}
-      onClickCloseModal={onClickCloseModal}
+    // modalState={language}
+    // onClickCloseModal={onClickCloseModal}
     />
   );
 };

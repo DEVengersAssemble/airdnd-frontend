@@ -177,14 +177,25 @@ const wishlists = (state = initialState, action) => {
     case FETCH_BOOKMARKLISTS_ERROR:
       return handleAsyncActions(FETCH_BOOKMARKLISTS)(state, action);
     case CREATE_BOOKMARKLIST:
+      return {
+        ...state,
+        loading: true,
+      };
     case CREATE_BOOKMARKLIST_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        data: {
+          ...state.data,
+          bookmarkLists: state.data.bookmarkLists.concat(action.bookmarkLists),
+        },
+      };
     case CREATE_BOOKMARKLIST_ERROR:
       return {
         ...state,
-        ...handleAsyncActions(FETCH_BOOKMARKLISTS)(state, action),
-        // ...state.data.bookmarkLists.concat(action.bookmarkList),
+        loading: false,
+        error: action.payload,
       };
-
     // case CREATE_BOOKMARKLIST:
     //   return {
     //     ...state,
