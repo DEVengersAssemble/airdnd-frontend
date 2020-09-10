@@ -221,6 +221,7 @@ const search = (state = initialState, action) => {
         ...state,
         ...reducerUtils.success(action.payload),
         isFilterChanged: false,
+        headerState: false,
       };
     case FETCH_DATA_ERROR:
       return {
