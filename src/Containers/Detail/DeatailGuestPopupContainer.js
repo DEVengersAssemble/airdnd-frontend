@@ -23,7 +23,7 @@ const DeatailGuestPopupContainer = ({ displayName, ...rest }) => {
   const [popupState, SetPopupState] = useState(false);
   const popup = useRef();
 
-  const newAdult = changeInitialGuests ? reserveAdult : searchAdult;
+  const newAdult = (changeInitialGuests ? reserveAdult : searchAdult) || 1;
   const newChild = changeInitialGuests ? reserveChild : searchChild;
   const newInfant = changeInitialGuests ? reserveInfant : searchInfant;
 
