@@ -3,9 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import MsgListSectionItem from '../../Components/Message/MsgListSectionItem';
 import { showMsgDetailSection, setActiveId } from '../../Modules/message';
 
-const MsgListSectionItemContainer = ({ msg, index }) => {
+const MsgListSectionItemContainer = ({ msg }) => {
   // redux
-  const { activeIndex, activeId, msgDetailSectionState } = useSelector(
+  const { activeId, msgDetailSectionState } = useSelector(
     state => state.message,
   );
   const dispatch = useDispatch();

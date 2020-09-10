@@ -5,41 +5,39 @@ import Button from '../Global/Button';
 import { Link } from 'react-router-dom';
 
 const MsgListFilterPopup = ({
-  openPopup,
+  popupState,
   popupRef,
   onClickAll,
-  onClickHide,
+  onClickHidden,
   onClickUnread,
   allMsgCount,
   hiddenMsgCount,
   unreadMsgCount,
-  onClickFilterPopup,
-  id,
 }) => {
   return (
     <MsgListFilterPopupWrapper ref={popupRef}>
       <StMsgListFilterPopup
-        popupState={openPopup}
+        popupState={popupState}
         top="3.5rem"
         left="12rem"
         padding="1rem 0rem"
       >
-        <Link to={`/guest/inbox/${id}?filter=all`}>
-          <StMsgListFilterPopupButton onClick={onClickFilterPopup}>
+        <Link to={`/guest/inbox?filter=all`}>
+          <StMsgListFilterPopupButton onClick={onClickAll}>
             <MsgListFilterPopupButtonText>
               모든 메시지 ({allMsgCount})
             </MsgListFilterPopupButtonText>
           </StMsgListFilterPopupButton>
         </Link>
-        <Link to={`/guest/inbox/${id}?filter=hidden`}>
-          <StMsgListFilterPopupButton onClick={onClickFilterPopup}>
+        <Link to={`/guest/inbox?filter=hidden`}>
+          <StMsgListFilterPopupButton onClick={onClickHidden}>
             <MsgListFilterPopupButtonText>
               숨긴 메시지 ({hiddenMsgCount})
             </MsgListFilterPopupButtonText>
           </StMsgListFilterPopupButton>
         </Link>
-        <Link to={`/guest/inbox/${id}?filter=unread`}>
-          <StMsgListFilterPopupButton onClick={onClickFilterPopup}>
+        <Link to={`/guest/inbox?filter=unread`}>
+          <StMsgListFilterPopupButton onClick={onClickUnread}>
             <MsgListFilterPopupButtonText>
               읽지 않은 메시지 ({unreadMsgCount})
             </MsgListFilterPopupButtonText>
