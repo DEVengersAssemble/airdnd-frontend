@@ -40,7 +40,7 @@ const reservation = (state = initialState, action) => {
       return {
         ...state,
         checkin: action.checkin,
-        dateDiff: 0,
+        checkout: '',
       };
     }
     case SET_CHECKOUT: {
