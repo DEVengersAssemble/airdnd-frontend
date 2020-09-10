@@ -5,7 +5,12 @@ import Button from '../Global/Button';
 import DropDown from '../Global/DropDown';
 import Loader from '../Global/Loader';
 import { Input } from '../Global/Input';
-import { RiEyeCloseLine, RiMailLine, RiUserLine } from 'react-icons/ri';
+import {
+  RiEyeCloseLine,
+  RiMailLine,
+  RiUserLine,
+  RiErrorWarningLine,
+} from 'react-icons/ri';
 import { MdCheck, MdClose } from 'react-icons/md';
 
 const StSignupEmailModal = styled(Modal)`
@@ -180,19 +185,22 @@ const StSubmitLoader = styled(Loader)`
 `;
 
 const StResultWrapper = styled.div`
-  background: #d3f9d8;
+  background: #fff8f6;
   display: flex;
   align-items: center;
-  padding-left: 20px;
-  border: 2px solid ${({ theme }) => theme.color.warning};
+  padding-left: 10px;
+  border: 1px solid ${({ theme }) => theme.color.warning};
   border-radius: 8px;
-  font-size: 16px;
+  font-size: 24px;
   font-weight: 500;
-  height: 36px;
+  height: 48px;
   margin-top: 20px;
 `;
 
-const StResultText = styled.span``;
+const StResultText = styled.span`
+  font-size: 16px;
+  margin-left: 10px;
+`;
 
 const SignupEmailModal = ({
   modalVisible,
@@ -260,7 +268,7 @@ const SignupEmailModal = ({
                 이메일을 입력하세요.
               </StValidationText>
             )}
-            {email.length > 0 && invalid.email && (
+            {email.length > 0 && invalid.email && result !== 'AlreadyEmail' && (
               <StValidationText isInvalid={invalid.email}>
                 이메일 형식이 맞지 않습니다.
               </StValidationText>
@@ -453,8 +461,9 @@ const SignupEmailModal = ({
           <StSubmitButton isLoading={loading} border="none" type="submit">
             {loading ? <StSubmitLoader /> : '가입하기'}
           </StSubmitButton>
-          {result && (
+          {result && result !== 'Success' && (
             <StResultWrapper result={result}>
+              <RiErrorWarningLine></RiErrorWarningLine>
               {result === 'AlreadyEmail' && (
                 <StResultText>이메일이 이미 존재합니다. </StResultText>
               )}

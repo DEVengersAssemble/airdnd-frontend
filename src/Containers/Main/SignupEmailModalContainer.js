@@ -216,8 +216,6 @@ const SignupModalContainer = () => {
     dispatch(setIsChecking(false));
   }
 
-  useEffect(() => {}, []);
-
   return (
     <SignupEmailModal
       modalVisible={modalVisible}

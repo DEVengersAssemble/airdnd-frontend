@@ -12,18 +12,18 @@ const RESET_FORM = 'signup/RESET_FORM';
 
 const SET_VALUE = 'signup/SET_VALUE';
 const SET_INVALID = 'signup/SET_INVALID';
+const SET_INVALID_EMAIL = 'signup/SET_INVALID_EMAIL';
 const SET_PWD_VALIDATION = 'signup/SET_PWD_VALIDATION';
-
-const sleep = n => new Promise(resolve => setTimeout(resolve, n));
 
 export const signupRequest = userInfo => async dispatch => {
   dispatch({ type: SIGN_UP });
   try {
     const { result } = await signupApi.sendSignUpReq(userInfo);
-    console.log('result: ', result);
     dispatch({ type: SIGN_UP_SUCCESS, result });
     if (result === 'Success') {
       dispatch({ type: RESET_FORM, result });
+    } else if (result === 'AlreadyEmail') {
+      dispatch({ type: SET_INVALID_EMAIL });
     }
   } catch (error) {
     dispatch({ type: SIGN_UP_ERROR, error });
@@ -137,6 +137,14 @@ const signup = (state = initialState, action) => {
         ...state,
         invalid: action.payload,
         isChecking: true,
+      };
+    case SET_INVALID_EMAIL:
+      return {
+        ...state,
+        invalid: {
+          ...state.invalid,
+          email: true,
+        },
       };
     case SET_PWD_VALIDATION:
       return {
