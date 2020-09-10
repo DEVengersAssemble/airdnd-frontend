@@ -14,22 +14,32 @@ import {
 import { changeHeart } from '../../Modules/search';
 
 const BookmarkListModalContainer = () => {
-  const { data, listModal, selectedId } = useSelector(state => state.wishlists);
-  const { bookmarkLists } = data;
+  const { data, listModal, selectedId, selectedImg } = useSelector(
+    state => state.wishlists,
+  );
+
+  const { bookmarkLists } = data || [];
   const dispatch = useDispatch();
   const closeBmListModal = () => dispatch(closeListModal());
   const openBmNewModal = () => dispatch(openNewModal());
+
   const onClickBookmark = bookmarkListId => {
-    dispatch(addBookmarkOldList(bookmarkListId));
+    dispatch(
+      addBookmarkOldList({
+        bookmarkListId,
+        bookmarkHomeId: selectedId,
+        bookmarkImage: selectedImg,
+      }),
+    );
     dispatch(changeHeart(selectedId));
   };
 
   return (
     <BookmarkListModal
       modalState={listModal}
+      bookmarkLists={bookmarkLists}
       closeBmListModal={closeBmListModal}
       openBmNewModal={openBmNewModal}
-      bookmarkLists={bookmarkLists}
       onClickBookmark={onClickBookmark}
     />
   );
@@ -37,13 +47,23 @@ const BookmarkListModalContainer = () => {
 
 const NewBookmarkModalContainer = () => {
   const { location } = useSelector(state => state.searchForm);
-  const { newModal, selectedId } = useSelector(state => state.wishlists);
+  const { newModal, selectedId, selectedImg } = useSelector(
+    state => state.wishlists,
+  );
+
   const [value, setValue] = useState(location);
   const onChange = ({ target }) => setValue(target.value);
   const dispatch = useDispatch();
   const closeBmNewModal = () => dispatch(closeNewModal());
+
   const onClickNewList = title => {
-    dispatch(addBookmarkNewList(title));
+    dispatch(
+      addBookmarkNewList({
+        bookmarkListTitle: title,
+        bookmarkHomeId: selectedId,
+        bookmarkImage: selectedImg,
+      }),
+    );
     dispatch(changeHeart(selectedId));
   };
 

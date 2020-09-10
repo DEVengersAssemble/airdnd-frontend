@@ -22,7 +22,7 @@ const WishlistsMainContainer = () => {
 
   const onCreateBookMarkList = () => {
     if (!title) return;
-    dispatch(createBookmarkList({ title }));
+    dispatch(createBookmarkList({ bookmarkListTitle: title }));
     setTitle('');
     setOpenPopup(!openPopup);
   };

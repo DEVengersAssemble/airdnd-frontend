@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useLocation, useHistory } from 'react-router-dom';
 import qs from 'qs';
 import { navigatePage, fetchData } from '../../Modules/search';
+import _ from 'lodash';
 
 const SearchPaginationContainer = () => {
   const { data, page } = useSelector(state => state.search);
