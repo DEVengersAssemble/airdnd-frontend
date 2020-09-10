@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useLocation, useHistory } from 'react-router-dom';
 import qs from 'qs';
 import { navigatePage, fetchData } from '../../Modules/search';
+import _ from 'lodash';
 
 const SearchPaginationContainer = () => {
   const { data, page } = useSelector(state => state.search);
@@ -17,9 +18,10 @@ const SearchPaginationContainer = () => {
   );
 
   const onNavPage = newPage => {
-    queryObj.page = newPage;
-    history.replace(`?${qs.stringify(queryObj)}`);
-    dispatch(fetchData(`?${qs.stringify(queryObj)}`));
+    const newQueryObj = _.omit(queryObj, ['swLat', 'swLng', 'neLat', 'neLng']);
+    newQueryObj.page = newPage;
+    history.replace(`?${qs.stringify(newQueryObj)}`);
+    dispatch(fetchData(`?${qs.stringify(newQueryObj)}`));
     dispatch(navigatePage(newPage));
   };
 
