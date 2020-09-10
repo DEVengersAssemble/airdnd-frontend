@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchData, getSearchForm, all } from '../../Modules/search';
+import { fetchData, getFilterForm, all } from '../../Modules/search';
+import { getSearchForm } from '../../Modules/searchForm';
 import SearchContent from '../../Components/Search/SearchContent';
 import qs from 'qs';
 import _ from 'lodash';
@@ -13,6 +14,19 @@ const SearchContentContainer = () => {
   const dispatch = useDispatch();
   const { search: query } = useLocation();
   const queryObj = qs.parse(query, { ignoreQueryPrefix: true });
+
+  const searchFormObj = {
+    location: queryObj.location,
+    checkIn: queryObj.checkIn,
+    checkOut: queryObj.checkOut,
+    dateDiff: queryObj.dateDiff,
+    flexibleDate: queryObj.flexibleDate,
+    guests: {
+      adult: queryObj.adult,
+      child: queryObj.child,
+      infant: queryObj.infant,
+    },
+  };
 
   const changeType = (key, obj) => {
     switch (key) {
@@ -33,7 +47,8 @@ const SearchContentContainer = () => {
 
   useEffect(() => {
     dispatch(fetchData(query));
-    dispatch(getSearchForm(searchForm));
+    dispatch(getSearchForm(searchFormObj));
+    dispatch(getFilterForm(searchForm));
     dispatch(fetchBookmarkLists());
     window.scrollTo({ top: 0 });
   }, [

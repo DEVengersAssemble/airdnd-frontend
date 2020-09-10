@@ -6,7 +6,7 @@ import _ from 'lodash';
 const FETCH_DATA = 'search/FETCH_DATA';
 const FETCH_DATA_SUCCESS = 'search/FETCH_DATA_SUCCESS';
 const FETCH_DATA_ERROR = 'search/FETCH_DATA_ERROR';
-const GET_SEARCH_FORM = 'search/GET_SEARCH_FORM';
+const GET_FILTER_FORM = 'search/GET_FILTER_FORM';
 
 const HOVER_HOME = 'search/HOVER_HOME';
 const BLUR_HOME = 'search/BLUR_HOME';
@@ -45,9 +45,9 @@ const UNSAVE_MODAL_FILTER = 'search/UNSAVE_MODAL_FILTER';
 
 // action creator
 export const fetchData = fetchDataThunk(FETCH_DATA, api.fetchSearchedData);
-export const getSearchForm = searchForm => ({
-  type: GET_SEARCH_FORM,
-  searchForm,
+export const getFilterForm = filterForm => ({
+  type: GET_FILTER_FORM,
+  filterForm,
 });
 
 export const hoverHome = homeId => ({ type: HOVER_HOME, homeId });
@@ -163,7 +163,7 @@ const popupInit = {
 
 const initialState = {
   ...reducerUtils.initial(),
-  searchForm: {},
+  filterForm: {},
   headerState: false,
   viewState: 'result',
   mapSearch: true,
@@ -228,29 +228,29 @@ const search = (state = initialState, action) => {
         ...state,
         ...reducerUtils.error(action.payload),
       };
-    case GET_SEARCH_FORM:
+    case GET_FILTER_FORM:
       return {
         ...state,
-        searchForm: action.searchForm,
+        filterForm: action.filterForm,
         filterApplied: {
           ...state.filterApplied,
-          ..._.pick(action.searchForm, [...all, 'page']),
+          ..._.pick(action.filterForm, [...all, 'page']),
         },
         popupApplied: {
-          refund: action.searchForm.refund || false,
-          roomType: roomTypes.some(key => action.searchForm[key]),
-          price: prices.some(key => action.searchForm[key]),
-          modal: modals.some(key => action.searchForm[key]),
+          refund: action.filterForm.refund || false,
+          roomType: roomTypes.some(key => action.filterForm[key]),
+          price: prices.some(key => action.filterForm[key]),
+          modal: modals.some(key => action.filterForm[key]),
           all: false,
         },
         mapBounds: {
           ...state.mapBounds,
-          swLat: action.searchForm.swLat,
-          swLng: action.searchForm.swLng,
-          neLat: action.searchForm.neLat,
-          neLng: action.searchForm.neLng,
+          swLat: action.filterForm.swLat,
+          swLng: action.filterForm.swLng,
+          neLat: action.filterForm.neLat,
+          neLng: action.filterForm.neLng,
         },
-        page: action.searchForm.page || 1,
+        page: action.filterForm.page || 1,
       };
     case HOVER_HOME:
       return {

@@ -5,7 +5,7 @@ import { closeMarker, openMarker } from '../../Modules/search';
 import { store } from '../../index';
 
 const MapMarkerContainer = ({ marker, theme }) => {
-  const { dateDiff } = useSelector(state => state.search.searchForm);
+  const { dateDiff } = useSelector(state => state.searchForm);
   const { markerState, hoveredHome } = useSelector(state => state.search);
   const isHovered = hoveredHome === marker.homeId;
   const isOpen = markerState === marker.homeId;

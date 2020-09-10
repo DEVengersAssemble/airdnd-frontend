@@ -1,46 +1,44 @@
 import React, { useEffect, useState } from 'react';
 import { throttle } from 'lodash';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import SearchHeader from '../../Components/Search/SearchHeader';
 import qs from 'qs';
+import { closeHeader, openHeader } from '../../Modules/search';
 
 const SearchHeaderContainer = () => {
+  const { headerState } = useSelector(state => state.search);
+  const searchForm = useSelector(state => state.searchForm);
   const history = useHistory();
-  const { search: query } = useLocation();
-  const queryObj = qs.parse(query, { ignoreQueryPrefix: true });
-  const {
-    location,
-    checkIn,
-    checkOut,
-    dateDiff,
-    flexibleDate,
-    adult,
-    child,
-    infant,
-  } = queryObj;
-  const searchFormObj = {
-    location,
-    checkIn,
-    checkOut,
-    dateDiff,
-    flexibleDate,
-    guests: {
-      adult,
-      child,
-      infant,
-    },
-  };
-  const [isSearchBtnClicked, setIsSearchBtnClicked] = useState(false);
-  const [initAnimation, setInitAnimation] = useState(false);
-  const searchForm = searchFormObj;
+  // const { search: query } = useLocation();
+  // const queryObj = qs.parse(query, { ignoreQueryPrefix: true });
+  // const searchFormObj = {
+  //   location: queryObj.location,
+  //   checkIn: queryObj.checkIn,
+  //   checkOut: queryObj.checkOut,
+  //   dateDiff: queryObj.dateDiff,
+  //   flexibleDate: queryObj.flexibleDate,
+  //   guests: {
+  //     adult: queryObj.adult,
+  //     child: queryObj.child,
+  //     infant: queryObj.infant,
+  //   },
+  // };
 
-  const onScroll = () => {
-    setIsSearchBtnClicked(false);
+  const [initAnimation, setInitAnimation] = useState(false);
+  // const searchForm = searchFormObj;
+  const dispatch = useDispatch();
+  const onScroll = () => dispatch(closeHeader());
+  const handleSearchBtnClick = () => dispatch(openHeader());
+
+  const handleLogoClick = e => {
+    e.preventDefault();
+    history.push('/');
+    window.scrollTo({ top: 0 });
   };
 
   useEffect(() => {
-    if (!initAnimation && isSearchBtnClicked) {
+    if (!initAnimation && headerState) {
       setInitAnimation(true);
     }
     window.addEventListener('scroll', throttle(onScroll, 150));
@@ -49,22 +47,13 @@ const SearchHeaderContainer = () => {
     };
   }, [onScroll, initAnimation]);
 
-  const handleLogoClick = e => {
-    e.preventDefault();
-    history.push('/');
-    window.scrollTo({ top: 0 });
-  };
-
-  const handleSearchBtnClick = () => {
-    setIsSearchBtnClicked(true);
-  };
   return (
     <SearchHeader
+      searchForm={searchForm}
       initAnimation={initAnimation}
-      isSearchBtnClicked={isSearchBtnClicked}
+      isSearchBtnClicked={headerState}
       handleLogoClick={handleLogoClick}
       handleSearchBtnClick={handleSearchBtnClick}
-      searchForm={searchForm}
     ></SearchHeader>
   );
 };
