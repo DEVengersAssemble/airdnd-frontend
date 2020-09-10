@@ -33,7 +33,7 @@ export const createBookmarkList = fetchDataThunk(
   CREATE_BOOKMARKLIST,
   api.postWishlists,
 );
-let id = 5;
+// let id = 5;
 // export const createBookmarkList = value => ({
 //   type: CREATE_BOOKMARKLIST,
 //   bookmarkList: {

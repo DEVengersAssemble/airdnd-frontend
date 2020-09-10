@@ -104,13 +104,17 @@ const Map = compose(
           lat: center.lat,
           lng: center.lng,
         }}
-        options={{ disableDefaultUI: true, scrollwheel: false }}
-        onDblClick={() => {
-          // setZoom();
-          // updateZoom(zoom);
-          console.log('11111111111111111', zoom);
-          changeBounds(getBounds());
+        options={{
+          disableDefaultUI: true,
+          scrollwheel: false,
+          disableDoubleClickZoom: true,
         }}
+        // onDblClick={() => {
+        //   setZoom();
+        //   updateZoom(zoom);
+        //   console.log('11111111111111111', zoom);
+        //   changeBounds(getBounds());
+        // }}
         onDragEnd={() => changeBounds(getBounds())}
       >
         <StStickyWrapper>
