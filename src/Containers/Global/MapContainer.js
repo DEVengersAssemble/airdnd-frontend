@@ -43,6 +43,7 @@ const MapContainer = ({ markers }) => {
     history.replace(`?${qs.stringify(newQueryObj)}`);
     dispatch(fetchData(`?${qs.stringify(newQueryObj)}`));
     dispatch(setMapBounds(bounds));
+    window.scrollTo({ top: 0 });
   };
 
   return (

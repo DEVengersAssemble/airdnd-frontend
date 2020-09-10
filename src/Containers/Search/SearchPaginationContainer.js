@@ -22,6 +22,7 @@ const SearchPaginationContainer = () => {
     history.replace(`?${qs.stringify(queryObj)}`);
     dispatch(fetchData(`?${qs.stringify(queryObj)}`));
     dispatch(navigatePage(newPage));
+    window.scrollTo({ top: 0 });
   };
 
   return (

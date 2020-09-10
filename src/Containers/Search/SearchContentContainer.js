@@ -35,8 +35,14 @@ const SearchContentContainer = () => {
     dispatch(fetchData(query));
     dispatch(getSearchForm(searchForm));
     dispatch(fetchBookmarkLists());
-    // window.scrollTo(0, 0);
-  }, []);
+    window.scrollTo({ top: 0 });
+  }, [
+    queryObj.location,
+    queryObj.checkIn,
+    queryObj.checkOut,
+    queryObj.adult,
+    queryObj.child,
+  ]);
 
   if (loading)
     return <div style={{ width: '100%', height: 'calc(100vh - 8rem)' }}></div>;

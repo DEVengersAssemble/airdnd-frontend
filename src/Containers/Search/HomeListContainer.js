@@ -53,6 +53,7 @@ const HomeListContainer = () => {
     history.replace(newQuery);
     dispatch(fetchData(newQuery));
     dispatch(navigatePage(1));
+    window.scrollTo({ top: 0 });
   }, [isFilterChanged]);
 
   return (
