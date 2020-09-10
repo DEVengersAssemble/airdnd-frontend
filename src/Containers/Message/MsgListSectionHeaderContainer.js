@@ -1,27 +1,25 @@
-import React, { useState, useRef, useCallback, useEffect } from 'react';
+import React, { useRef, useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import MsgListSectionHeader from '../../Components/Message/MsgListSectionHeader';
+import { openPopup, closePopup } from '../../Modules/message';
 
 const MsgListSectionHeaderContainer = () => {
-  // redux
-  // !현재 작업 진행중
-  const { messages, filteredMsgs } = useSelector(state => state.message);
+  // ! redux
+  const { data } = useSelector(state => state.message.messages);
+  const popupState = useSelector(state => state.message.popupState.filter);
   const dispatch = useDispatch();
 
-  // variable
-  const allState = filteredMsgs.map(msg => msg.state)[0];
-  const hideState = filteredMsgs.map(msg => msg.state)[0];
-  const unreadState = filteredMsgs.map(msg => msg.state)[0];
-
-  // hook
-  const [openPopup, setOpenPopup] = useState(false);
+  // ! hook
   const popupBtnRef = useRef();
   const popupRef = useRef();
 
-  // event
+  // ! variable
+  const state = data && Object.keys(data)[0];
+
+  // ! event
   const onClickPopup = useCallback(() => {
-    setOpenPopup(!openPopup);
-  }, [openPopup, setOpenPopup]);
+    dispatch(openPopup('filter'));
+  }, [openPopup]);
 
   // ! onClickOutside: close popup when clicking outside
   const onClickOutSide = useCallback(
@@ -29,30 +27,26 @@ const MsgListSectionHeaderContainer = () => {
       if (!popupBtnRef.current || popupBtnRef.current.contains(target))
         return null;
       if (!popupRef.current || popupRef.current.contains(target)) return null;
-      return setOpenPopup(false);
+      return dispatch(closePopup('filter'));
     },
-    [setOpenPopup, popupBtnRef, popupRef],
+    [popupBtnRef, popupRef],
   );
 
+  // ! effect
   useEffect(() => {
+    // ! 렌더링 될때마다 effect 발생...
+    // ! 하은이가 알려준 방법 적용하기
     document.addEventListener('click', onClickOutSide);
     return () => {
       document.removeEventListener('click', onClickOutSide);
     };
   }, [onClickOutSide]);
 
-  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  // ! redux
-  const { data, loading, error } = useSelector(state => state.message.data);
-
   return (
     <MsgListSectionHeader
-      allState={allState}
-      hideState={hideState}
-      unreadState={unreadState}
-      openPopup={openPopup}
-      setOpenPopup={setOpenPopup}
+      state={state}
       onClickPopup={onClickPopup}
+      popupState={popupState}
       popupBtnRef={popupBtnRef}
       popupRef={popupRef}
     />
