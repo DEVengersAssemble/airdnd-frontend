@@ -13,10 +13,10 @@ const MsgListSectionMainContainer = () => {
   const filter = qs.parse(query.search, {
     ignoreQueryPrefix: true,
   });
-  console.log(filter);
-
+  console.log(filter === '' || filter);
+  console.log('이거 됨?', data[filter]);
   // ! variable
-  const hasMsgs = data && data.all.length;
+  const hasMsgs = (filter === '' || filter) && data && data.all.length;
 
   return <MsgListSectionMain hasMsgs={hasMsgs} messages={data && data.all} />;
 };

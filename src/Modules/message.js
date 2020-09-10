@@ -367,10 +367,10 @@ const initialState = {
 // REDUCER
 const message = (state = initialState, action) => {
   switch (action.type) {
-    // case FETCH_INBOX:
-    // case FETCH_INBOX_SUCCESS:
-    // case FETCH_INBOX_ERROR:
-    //   return handleAsyncActions(FETCH_INBOX, 'messages')(state, action);
+    case FETCH_INBOX:
+    case FETCH_INBOX_SUCCESS:
+    case FETCH_INBOX_ERROR:
+      return handleAsyncActions(FETCH_INBOX, 'messages')(state, action);
 
     case SHOW_MESSAGE_DETAIL_SECTION:
       return {

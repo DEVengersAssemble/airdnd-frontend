@@ -50,7 +50,7 @@ const MsgListFilterPopup = ({
 
 const MsgListFilterPopupWrapper = styled.div`
   position: absolute;
-  z-index: 9999;
+  z-index: 20;
 `;
 
 const StMsgListFilterPopup = styled(Popup)`
