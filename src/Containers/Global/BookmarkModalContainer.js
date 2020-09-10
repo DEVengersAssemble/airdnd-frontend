@@ -27,6 +27,7 @@ const BookmarkListModalContainer = () => {
     dispatch(
       addBookmarkOldList({
         bookmarkListId,
+        bookmarkListTitle: '',
         bookmarkHomeId: selectedId,
         bookmarkImage: selectedImg,
       }),
@@ -59,6 +60,7 @@ const NewBookmarkModalContainer = () => {
   const onClickNewList = title => {
     dispatch(
       addBookmarkNewList({
+        bookmarkListId: '',
         bookmarkListTitle: title,
         bookmarkHomeId: selectedId,
         bookmarkImage: selectedImg,

@@ -173,8 +173,8 @@ const SearchHeader = ({
       </StOnScrollSearchButton>
 
       <StButtonGroupWrapper>
-        {/* <SettingButtonContainer /> */}
-        {/* <MyPageButtonContainer /> */}
+        <SettingButtonContainer />
+        <MyPageButtonContainer />
       </StButtonGroupWrapper>
     </StSearchHeader>
   );
