@@ -60,7 +60,7 @@ const SearchContentContainer = () => {
     dispatch(fetchData(query));
     dispatch(getSearchForm(searchFormObj));
     dispatch(getFilterForm(filterFormObj));
-    // dispatch(fetchBookmarkLists());
+    dispatch(fetchBookmarkLists());
     window.scrollTo({ top: 0 });
   }, [
     queryObj.location,
