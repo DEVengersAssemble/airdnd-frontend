@@ -11,14 +11,14 @@ import {
 } from '../../Modules/socket';
 
 const MsgSectionFooterContainer = () => {
-  // ! redux
-  const { activeIndex, filteredMsgs } = useSelector(state => state.message);
-  const { firstName } = useSelector(state => state.trips);
+  // // ! redux
+  // const { activeIndex, filteredMsgs } = useSelector(state => state.message);
+  // const { firstName } = useSelector(state => state.trips);
 
-  // ! variable
-  const activeMsg = filteredMsgs.find(
-    (_, index) => filteredMsgs[index] === filteredMsgs[activeIndex],
-  );
+  // // ! variable
+  // const activeMsg = filteredMsgs.find(
+  //   (_, index) => filteredMsgs[index] === filteredMsgs[activeIndex],
+  // );
 
   // // ! socket msg
   // const socket = io.connect('http://localhost:4000');

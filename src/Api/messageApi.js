@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const fetchMessagesData = async ({ filter }) => {
+export const fetchMessagesData = async filter => {
   const response = await axios.get(`/back/guest/inbox?filter=${filter}`);
   console.log('Message By Filter==================', response);
   return response.data;

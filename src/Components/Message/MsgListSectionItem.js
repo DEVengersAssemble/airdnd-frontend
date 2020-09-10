@@ -2,10 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { ellipsis } from 'polished';
 import Profile from '../Global/Profile';
+import { Link } from 'react-router-dom';
 
 const MsgListSectionItem = ({
-  index,
-  activeIndex,
   hostname,
   hostProfileImg,
   lastMsg,
@@ -13,44 +12,53 @@ const MsgListSectionItem = ({
   ci,
   co,
   isCanceled,
-  onClickActive,
+  onClickList,
+  id,
+  activeId,
 }) => {
   return (
     <MsgListItemWrapper
-      index={index}
-      activeIndex={activeIndex}
-      onClick={onClickActive}
+      onClick={onClickList}
+      className={id === activeId ? 'active' : ''}
     >
-      <Profile size="4.2rem" lastName="Kim" profileImg={hostProfileImg} />
-      <LastMsgItemOuter>
-        <HostName>{hostname}</HostName>
-        <LastMsgItemInner>
-          <LastMsgItemText>{lastMsg}</LastMsgItemText>
-          <LastMsgItemDate>{lm}</LastMsgItemDate>
-        </LastMsgItemInner>
-        <MsgItemReservationWrapper>
-          <MsgItemReservedState isCanceled={isCanceled}>
-            {isCanceled ? '예약취소' : '완료'}
-          </MsgItemReservedState>
-          {' • '}
-          <MsgItemReservedDate>
-            {ci} - {co}
-          </MsgItemReservedDate>
-        </MsgItemReservationWrapper>
-      </LastMsgItemOuter>
+      <Link to={`/guest/inbox/${id}`}>
+        <StDiv>
+          <Profile size="4.2rem" lastName="Kim" profileImg={hostProfileImg} />
+          <LastMsgItemOuter>
+            <HostName>{hostname}</HostName>
+            <LastMsgItemInner>
+              <LastMsgItemText>{lastMsg}</LastMsgItemText>
+              <LastMsgItemDate>{lm}</LastMsgItemDate>
+            </LastMsgItemInner>
+            <MsgItemReservationWrapper>
+              <MsgItemReservedState isCanceled={isCanceled}>
+                {isCanceled ? '예약취소' : '완료'}
+              </MsgItemReservedState>
+              {' • '}
+              <MsgItemReservedDate>
+                {ci} - {co}
+              </MsgItemReservedDate>
+            </MsgItemReservationWrapper>
+          </LastMsgItemOuter>
+        </StDiv>
+      </Link>
     </MsgListItemWrapper>
   );
 };
 
 const MsgListItemWrapper = styled.li`
-  display: flex;
-  align-items: flex-start;
   border: none;
   border-radius: 12px;
-  background: ${({ activeIndex, index, theme }) =>
-    activeIndex === index ? theme.color.lightGray : 'none'};
   padding: 1rem;
   cursor: pointer;
+  &.active {
+    background: ${({ theme }) => theme.color.lightGray};
+  }
+`;
+
+const StDiv = styled.div`
+  display: flex;
+  align-items: flex-start;
 `;
 
 const LastMsgItemOuter = styled.div`

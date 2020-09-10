@@ -3,9 +3,7 @@ import styled, { css } from 'styled-components';
 import MsgDetailSectionHeaderContainer from '../../Containers/Message/MsgDetailSectionHeaderContainer';
 import MsgDetailSectionMainContainer from '../../Containers/Message/MsgDetailSectionMainContainer';
 
-const MessageDetailSection = ({ msgSectionStates }) => {
-  const { msgDetailSectionState } = msgSectionStates;
-
+const MessageDetailSection = ({ msgDetailSectionState }) => {
   return (
     <MessageDetailSectionWrapper msgDetailSectionState={msgDetailSectionState}>
       <MsgDetailSectionHeaderContainer />
