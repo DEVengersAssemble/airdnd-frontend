@@ -187,7 +187,7 @@ const wishlists = (state = initialState, action) => {
         loading: false,
         data: {
           ...state.data,
-          bookmarkLists: state.data.bookmarkLists.concat(action.bookmarkLists),
+          bookmarkLists: state.data.bookmarkLists.concat(action.payload),
         },
       };
     case CREATE_BOOKMARKLIST_ERROR:
@@ -208,6 +208,7 @@ const wishlists = (state = initialState, action) => {
         loading: true,
       };
     case ADD_BOOKMARK_OLD_LIST_SUCCESS:
+      console.log(action, action.type, action.param);
       return {
         ...state,
         loading: false,
@@ -216,12 +217,15 @@ const wishlists = (state = initialState, action) => {
         selectedImg: '',
         data: {
           bookmarkLists: state.data.bookmarkLists.map(bmList =>
-            bmList.bookmarkListId === action.bookmarkListId
+            bmList.bookmarkListId === action.param.bookmarkListId
               ? {
                   ...bmList,
                   bookmarks: [
                     ...bmList.bookmarks,
-                    { homeId: state.selectedId, images: state.selectedImg },
+                    {
+                      homeId: action.param.bookmarkHomeId,
+                      images: action.param.bookmarkImage,
+                    },
                   ],
                 }
               : bmList,
@@ -248,10 +252,13 @@ const wishlists = (state = initialState, action) => {
         selectedImg: '',
         data: {
           bookmarkLists: state.data.bookmarkLists.concat({
-            bookmarkListId: action.bookmarkListId,
-            bokmarkListTitle: action.bookmarkListTitle,
+            bookmarkListId: action.payload.bookmarkListId,
+            bokmarkListTitle: action.param.bookmarkListTitle,
             bookmarks: [
-              { homeId: state.selectedId, images: state.selectedImg },
+              {
+                homeId: action.param.bookmarkHomeId,
+                images: action.param.bookmarkHomeImage,
+              },
             ],
           }),
         },
@@ -275,7 +282,7 @@ const wishlists = (state = initialState, action) => {
           bookmarkLists: state.data.bookmarkLists.map(bmList => ({
             ...bmList,
             bookmarks: bmList.bookmarks.filter(
-              bm => bm.homeId !== action.homeId,
+              bm => bm.homeId !== action.param.homeId,
             ),
           })),
         },
