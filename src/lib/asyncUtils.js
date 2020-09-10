@@ -7,7 +7,7 @@ export const fetchDataThunk = (type, promiseCreator) => {
     try {
       const payload = await promiseCreator(param); // API 호출
       console.log('할당햇고요!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', payload);
-      dispatch({ type: SUCCESS, payload, param }); // 호출 성공
+      dispatch({ type: SUCCESS, payload }); // 호출 성공
     } catch (e) {
       console.log('에러 무슨일이야', e);
       dispatch({ type: ERROR, payload: e, error: true }); // 호출 실패

@@ -32,7 +32,6 @@ const BookmarkListModalContainer = () => {
         bookmarkImage: selectedImg,
       }),
     );
-    dispatch(changeHeart(selectedId));
   };
 
   return (
@@ -66,7 +65,6 @@ const NewBookmarkModalContainer = () => {
         bookmarkImage: selectedImg,
       }),
     );
-    dispatch(changeHeart(selectedId));
   };
 
   return (

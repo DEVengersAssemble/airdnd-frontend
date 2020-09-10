@@ -4,6 +4,8 @@ import {
   reducerUtils,
   handleAsyncActions,
 } from '../lib/asyncUtils';
+import { fetchBookmarkDataThunk } from '../lib/bookmarkUtils';
+
 // action type
 const FETCH_BOOKMARKLISTS = 'wishlists/FETCH_BOOKMARKLISTS';
 const FETCH_BOOKMARKLISTS_SUCCESS = 'wishlists/FETCH_BOOKMARKLISTS_SUCCESS';
@@ -33,37 +35,15 @@ export const createBookmarkList = fetchDataThunk(
   CREATE_BOOKMARKLIST,
   api.postWishlists,
 );
-// let id = 5;
-// export const createBookmarkList = value => ({
-//   type: CREATE_BOOKMARKLIST,
-//   bookmarkList: {
-//     bookmarkListId: id++,
-//     bookmarkListTitle: value,
-//     bookmarks: [],
-//   },
-// });
-
-// export const addBookmarkOldList = bookmarkListId => ({
-//   type: ADD_BOOKMARK_OLD_LIST,
-//   bookmarkListId,
-// });
-export const addBookmarkOldList = fetchDataThunk(
+export const addBookmarkOldList = fetchBookmarkDataThunk(
   ADD_BOOKMARK_OLD_LIST,
   api.postWishlists,
 );
-// export const addBookmarkNewList = title => ({
-//   type: ADD_BOOKMARK_NEW_LIST,
-//   bookmarkList: {
-//     bookmarkListId: id++,
-//     bookmarkListTitle: title,
-//   },
-// });
-export const addBookmarkNewList = fetchDataThunk(
+export const addBookmarkNewList = fetchBookmarkDataThunk(
   ADD_BOOKMARK_NEW_LIST,
   api.postWishlists,
 );
-// export const removeBookmark = homeId => ({ type: REMOVE_BOOKMARK, homeId });
-export const removeBookmark = fetchDataThunk(
+export const removeBookmark = fetchBookmarkDataThunk(
   REMOVE_BOOKMARK,
   api.deleteWishList,
 );
