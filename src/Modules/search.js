@@ -103,20 +103,6 @@ export const resetModalFilter = name => ({
   type: RESET_MODAL_FILTER,
   name,
 });
-export const modalFilterInit = filterCondition => {
-  const { amenityList, facilityList, hostLangList } = filterCondition;
-  const filter = {
-    instantBooking: 0,
-    bedCount: 0,
-    bedroomCount: 0,
-    bathroomCount: 0,
-    superhost: 0,
-  };
-  if (amenityList) filter.amenityList = [];
-  if (facilityList) filter.facilityList = [];
-  if (hostLangList) filter.hostLangList = [];
-  return filter;
-};
 
 // initial state
 const modals = [
@@ -196,13 +182,9 @@ const getFilterGroup = (key, state, keep) => {
     case 'price':
       return _.pick(obj, prices);
     case 'modal':
-      return keep
-        ? _.pick(obj, [...modals])
-        : modalFilterInit(state.data.filterCondition);
+      return keep ? _.pick(obj, [...modals]) : modalInit;
     case 'all':
-      return keep
-        ? obj
-        : { ...filterInit, ...modalFilterInit(state.data.filterCondition) };
+      return keep ? obj : { ...filterInit, ...modalInit };
     default:
       return { [key]: false };
   }

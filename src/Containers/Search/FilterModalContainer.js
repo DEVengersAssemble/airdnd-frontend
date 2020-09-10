@@ -9,7 +9,6 @@ import {
   applyCheckFilter,
   resetModalFilter,
   closePopup,
-  modalFilterInit,
 } from '../../Modules/search';
 import _ from 'lodash';
 

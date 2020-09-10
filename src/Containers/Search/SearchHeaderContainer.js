@@ -24,8 +24,9 @@ const SearchHeaderContainer = () => {
   useEffect(() => {
     if (!initAnimation && headerState) {
       setInitAnimation(true);
+    } else if (headerState) {
+      window.addEventListener('scroll', throttle(onScroll, 150));
     }
-    window.addEventListener('scroll', throttle(onScroll, 150));
     return () => {
       window.removeEventListener('scroll', onScroll);
     };
