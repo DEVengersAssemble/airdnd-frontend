@@ -7,6 +7,7 @@ import TripsSubFooter from './TripsSubFooter';
 import Button from '../Global/Button';
 
 const TripsPast = ({ pastTrips, tripsCount }) => {
+  console.log(tripsCount);
   return (
     <>
       {tripsCount ? (

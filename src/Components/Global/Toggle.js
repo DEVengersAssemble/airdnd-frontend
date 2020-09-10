@@ -56,7 +56,9 @@ const StToggleCircle = styled.span`
 const Toggle = ({ checked, handleClick }) => {
   return (
     <StToggleButton checked={checked} onClick={handleClick}>
-      <StToggleCircle checked={checked}>{checked && <MdDone />}</StToggleCircle>
+      <StToggleCircle checked={checked}>
+        {checked ? <MdDone /> : null}
+      </StToggleCircle>
     </StToggleButton>
   );
 };

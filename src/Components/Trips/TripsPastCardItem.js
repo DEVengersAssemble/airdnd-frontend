@@ -6,11 +6,19 @@ import Button from '../Global/Button';
 import Profile from '../Global/Profile';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 
-const TripsPastCardItem = ({ trip, myInfo, ci, co }) => {
-  const { title, homeImage, address, withGuest, guest } = trip;
-  const { lastName: myLastName, profileImg: myProfileImg } = myInfo;
-  const { lastName: gstLastName, profileImg: gstProfileImg } = guest;
-
+const TripsPastCardItem = ({
+  title,
+  homeImage,
+  addr,
+  withGuest,
+  dateDiff,
+  ci,
+  co,
+  myLastName,
+  myProfileImg,
+  guestLastName,
+  guestProfileImg,
+}) => {
   return (
     <TripsPastCardItemWrapper>
       <Link to="/schedule">
@@ -19,14 +27,14 @@ const TripsPastCardItem = ({ trip, myInfo, ci, co }) => {
           {withGuest && (
             <TripsProfileWrapper>
               <Profile
-                lastName={`${myLastName}`}
+                lastName={myLastName}
                 size="4.3rem"
                 profileImg={myProfileImg}
               />
               <Profile
-                lastName={`${gstLastName}`}
+                lastName={guestLastName}
                 size="4.3rem"
-                profileImg={gstProfileImg}
+                profileImg={guestProfileImg}
               />
             </TripsProfileWrapper>
           )}
@@ -35,30 +43,34 @@ const TripsPastCardItem = ({ trip, myInfo, ci, co }) => {
           <TripsPastCheckInOut>
             {ci} - {co}
           </TripsPastCheckInOut>
-          <TripsPastLocation>{address}</TripsPastLocation>
+          <TripsPastLocation>{addr}</TripsPastLocation>
         </TripsPastCkLcWrapper>
-        <Link to="/schedule/1">
-          <StButton>
-            <TripsPastButtonWrapper>
-              <TripsPastButtonInnerWrapper>
-                <TripsPastImgInButton src={`${homeImage[0]}`} alt="#" />
-                <TripsPastButtonText>{title}</TripsPastButtonText>
-              </TripsPastButtonInnerWrapper>
-              <MdKeyboardArrowRight />
-            </TripsPastButtonWrapper>
-          </StButton>
-        </Link>
-        <Link to="/schedues/2">
-          <StButton>
-            <TripsPastButtonWrapper>
-              <TripsPastButtonInnerWrapper>
-                <TripsPastImgInButton src={`${homeImage[0]}`} alt="#" />
-                <TripsPastButtonText>{title}</TripsPastButtonText>
-              </TripsPastButtonInnerWrapper>
-              <MdKeyboardArrowRight />
-            </TripsPastButtonWrapper>
-          </StButton>
-        </Link>
+        <StDiv>
+          <Link to="/schedule/1">
+            <StButton>
+              <TripsPastButtonWrapper>
+                <TripsPastButtonInnerWrapper>
+                  <TripsPastImgInButton src={`${homeImage}`} alt="#" />
+                  <TripsPastButtonText>{title}</TripsPastButtonText>
+                </TripsPastButtonInnerWrapper>
+                <MdKeyboardArrowRight />
+              </TripsPastButtonWrapper>
+            </StButton>
+          </Link>
+          {dateDiff > 1 && (
+            <Link to="/schedues/2">
+              <StButton>
+                <TripsPastButtonWrapper>
+                  <TripsPastButtonInnerWrapper>
+                    <TripsPastImgInButton src={`${homeImage}`} alt="#" />
+                    <TripsPastButtonText>{title}</TripsPastButtonText>
+                  </TripsPastButtonInnerWrapper>
+                  <MdKeyboardArrowRight />
+                </TripsPastButtonWrapper>
+              </StButton>
+            </Link>
+          )}
+        </StDiv>
       </Link>
       <Link to="/schedule">
         <StMoreButton border="none">여행 계획 더보기</StMoreButton>
@@ -89,7 +101,7 @@ const TripsPastCardItemWrapper = styled.li`
   @media ${({ theme }) => theme.size.iPad} {
     margin-right: 0rem;
   }
-  height: 45rem;
+  height: 46rem;
   box-shadow: 0rem 0rem 1rem ${({ theme }) => theme.color.gray};
   &:hover {
     /* hover시 자연스러운 shadow증가를 위해 transition효과 필요 */
@@ -104,7 +116,7 @@ const TripsPastImgWrapper = styled.div`
 const TripsPastImg = styled.div`
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  background: no-repeat center/100% url(${({ homeImage }) => homeImage[0]});
+  background: no-repeat center/100% url(${({ homeImage }) => homeImage});
   height: 20rem;
 `;
 
@@ -141,6 +153,12 @@ const TripsPastLocation = styled.div`
   padding: 0.5rem 0rem 0rem;
   font-size: 2.2rem;
   font-weight: 600;
+  line-height: 2.5rem;
+  ${ellipsis('32rem')};
+`;
+
+const StDiv = styled.div`
+  min-height: 12.5rem;
 `;
 
 const StButton = styled(Button)`

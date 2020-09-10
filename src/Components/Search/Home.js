@@ -4,7 +4,7 @@ import Rating from '../Global/Rating';
 import { CkHeart } from '../Global/Heart';
 import CarouselContainer from '../../Containers/Global/CarouselContainer';
 
-export const HomePrice = ({ type, price, dateDiff, theme }) => {
+export const HomePrice = React.memo(({ type, price, dateDiff, theme }) => {
   return (
     <StPriceWrapper type={type}>
       <StLargePrice>
@@ -15,7 +15,7 @@ export const HomePrice = ({ type, price, dateDiff, theme }) => {
       </StSmallPrice>
     </StPriceWrapper>
   );
-};
+});
 
 const Home = ({
   home,

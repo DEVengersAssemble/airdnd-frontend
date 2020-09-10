@@ -45,9 +45,9 @@ const MapFilterButton = ({ openFilterModal }) => {
   );
 };
 
-const MapCheckbox = () => {
+const MapCheckbox = ({ checked, onCheck }) => {
   return (
-    <StCheckbox map="map" value boxShadow checked={true}>
+    <StCheckbox map="map" value boxShadow checked={checked} onCheck={onCheck}>
       지도를 움직이며 검색하기
     </StCheckbox>
   );

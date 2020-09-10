@@ -23,7 +23,7 @@ const MsgListSectionHeaderContainer = () => {
     setOpenPopup(!openPopup);
   }, [openPopup, setOpenPopup]);
 
-  // onClickOutside: close popup when outside click
+  // ! onClickOutside: close popup when clicking outside
   const onClickOutSide = useCallback(
     ({ target }) => {
       if (!popupBtnRef.current || popupBtnRef.current.contains(target))
@@ -40,6 +40,10 @@ const MsgListSectionHeaderContainer = () => {
       document.removeEventListener('click', onClickOutSide);
     };
   }, [onClickOutSide]);
+
+  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  // ! redux
+  const { data, loading, error } = useSelector(state => state.message.data);
 
   return (
     <MsgListSectionHeader

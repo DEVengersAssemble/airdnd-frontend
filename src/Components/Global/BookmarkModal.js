@@ -5,87 +5,85 @@ import Button from './Button';
 import { NewInput } from './Input';
 import styled from 'styled-components';
 
-const BookmarkListModal = ({
-  modalState,
-  closeBmListModal,
-  openBmNewModal,
-  bookmarkLists,
-  onClickBookmark,
-}) => {
-  return (
-    <Modal
-      modalState={modalState}
-      setModalState={closeBmListModal}
-      width="520px"
-      height="90vh"
-      title="목록에 저장하기"
-      header
-    >
-      <StList>
-        {bookmarkLists.map(
-          ({ bookmarkListId, bookmarkListTitle, bookmarks }) =>
-            bookmarks && (
-              <StBookmark
-                key={bookmarkListId}
-                onClick={() => onClickBookmark(bookmarkListId)}
-              >
-                <StImage src={bookmarks[0] && bookmarks[0].images} />
-                <StContentWrapper>
-                  <StTitle>{bookmarkListTitle}</StTitle>
-                  <StCount>숙소 {bookmarks.length}개</StCount>
-                </StContentWrapper>
-              </StBookmark>
-            ),
-        )}
-      </StList>
-      <ModalFooter>
-        <Button
-          btnType="underlined"
-          width="100%"
-          fontWeight="500"
-          onClick={openBmNewModal}
-        >
-          목록 만들기
-        </Button>
-      </ModalFooter>
-    </Modal>
-  );
-};
+const BookmarkListModal = React.memo(
+  ({
+    modalState,
+    closeBmListModal,
+    openBmNewModal,
+    bookmarkLists,
+    onClickBookmark,
+  }) => {
+    return (
+      <Modal
+        modalState={modalState}
+        setModalState={closeBmListModal}
+        width="520px"
+        height="90vh"
+        title="목록에 저장하기"
+        header
+      >
+        <StList>
+          {bookmarkLists.map(
+            ({ bookmarkListId, bookmarkListTitle, bookmarks }) =>
+              bookmarks && (
+                <StBookmark
+                  key={bookmarkListId}
+                  onClick={() => onClickBookmark(bookmarkListId)}
+                >
+                  <StImage src={bookmarks[0] && bookmarks[0].images} />
+                  <StContentWrapper>
+                    <StTitle>{bookmarkListTitle}</StTitle>
+                    <StCount>숙소 {bookmarks.length}개</StCount>
+                  </StContentWrapper>
+                </StBookmark>
+              ),
+          )}
+        </StList>
+        <ModalFooter>
+          <Button
+            btnType="underlined"
+            width="100%"
+            fontWeight="500"
+            onClick={openBmNewModal}
+          >
+            목록 만들기
+          </Button>
+        </ModalFooter>
+      </Modal>
+    );
+  },
+);
 
-const NewBookmarkModal = ({
-  value,
-  onChange,
-  onClickNewList,
-  closeBmNewModal,
-  modalState,
-}) => {
-  return (
-    <Modal
-      modalState={modalState}
-      setModalState={closeBmNewModal}
-      width="520px"
-      height="305px"
-      title="목록 이름 작성하기"
-      header
-    >
-      <StContentWrapper padding>
-        <NewInput title="이름" animation value={value} onChange={onChange} />
-        <StSpan>최대 50자</StSpan>
-      </StContentWrapper>
-      <ModalFooter>
-        <Button
-          btnType="color"
-          color="black"
-          hover="background: #000"
-          width="100%"
-          onClick={() => onClickNewList(value)}
-        >
-          새로 만들기
-        </Button>
-      </ModalFooter>
-    </Modal>
-  );
-};
+const NewBookmarkModal = React.memo(
+  ({ value, onChange, onClickNewList, closeBmNewModal, modalState }) => {
+    return (
+      <Modal
+        modalState={modalState}
+        setModalState={closeBmNewModal}
+        width="520px"
+        height="305px"
+        title="목록 이름 작성하기"
+        header
+      >
+        <StContentWrapper padding>
+          <NewInput title="이름" animation value={value} onChange={onChange} />
+          <StSpan>최대 50자</StSpan>
+        </StContentWrapper>
+        <ModalFooter>
+          <Button
+            btnType="color"
+            color="black"
+            hover="background: #000"
+            width="100%"
+            onClick={() => onClickNewList(value)}
+          >
+            새로 만들기
+          </Button>
+        </ModalFooter>
+      </Modal>
+    );
+  },
+);
 
 const StList = styled.ul`
   padding: 2rem;
