@@ -55,6 +55,7 @@ const CarouselContainer = ({
   size,
   theme,
   homeId,
+  mapState,
   blockLink,
   isHovered,
   responsive,
@@ -91,14 +92,14 @@ const CarouselContainer = ({
   window.addEventListener('resize', throttle(setWidth, 300));
 
   useEffect(() => {
+    setWidth();
     dispatch({
       type: 'GET_MARKER',
       marker: getMarkerIndex(imageCount, currentIndex),
     });
     setTimeout(() => isSliding && dispatch({ type: 'END_SLIDE' }), 300);
-    console.log(width);
     return () => window.removeEventListener('resize', setWidth);
-  }, [isSliding, currentIndex, width]);
+  }, [isSliding, currentIndex, width, mapState]);
 
   return (
     <Carousel
