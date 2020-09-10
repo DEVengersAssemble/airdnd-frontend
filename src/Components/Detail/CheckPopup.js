@@ -1,7 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 import Popup from '../Global/Popup';
 import DetailCalendarContainer from '../../Containers/Detail/DetailCalendarContainer';
+import CalendarDeleteBtnContainer from '../../Containers/Detail/CalendarDeleteBtnContainer';
+import Button from '../Global/Button';
+import CalendarKeybordBtnContainer from '../../Containers/Detail/CalendarKeybordBtnContainer';
 
 const DetailPopupContainer = ({
   dateDiff,
@@ -14,9 +17,9 @@ const DetailPopupContainer = ({
   const onClosePopup = ({ target }) => {
     console.log('@@@@close popup', target);
     if (
-      checkPopupRef.current.contains(target) ||
-      target.textContent === '예약 가능 여부 보기' ||
-      target.textContent === '닫기'
+      (checkPopupRef.current.contains(target) ||
+        target.textContent === '예약 가능 여부 보기') &&
+      target.textContent !== '닫기'
     )
       return;
     setPopupState(false);
@@ -24,24 +27,36 @@ const DetailPopupContainer = ({
 
   useEffect(() => {
     console.log('popup 나타남');
-    window.addEventListener('click', onClosePopup);
+    document.addEventListener('click', onClosePopup);
     return () => {
-      window.removeEventListener('click', onClosePopup);
+      document.removeEventListener('click', onClosePopup);
     };
-  }, []);
+  }, [onClosePopup]);
 
-  // useEffect(() => {
-  //   setPopupState(false);
-  // }, [dateDiff]);
+  const [didMount, setDidMount] = useState(false);
+  useEffect(() => {
+    if (!didMount) {
+      setDidMount(true);
+    } else {
+      if (!checkout) return;
+      setPopupState(false);
+    }
+  }, [checkout]);
 
   // if (!popupState) return '';
 
   return (
-    <StPopup popupState={popupState} onClosePopup={onClosePopup}>
+    <StPopup popupState={true}>
       <StPopupTopWrapper>
         <StTextWrapper>
-          <StTitle>날짜 선택</StTitle>
-          <StSubText>여행 날짜를 입력하여 정확한 요금을 확인하세요.</StSubText>
+          <StTitle>
+            {checkin && checkout ? dateDiff + '박' : '날짜 선택'}
+          </StTitle>
+          <StSubText>
+            {checkin && checkout
+              ? `${checkin} - ${checkout}`
+              : '여행 날짜를 입력하여 정확한 요금을 확인하세요.'}
+          </StSubText>
         </StTextWrapper>
         <StInputsWrapper>
           <StPopupCheckIn>
@@ -55,6 +70,11 @@ const DetailPopupContainer = ({
         </StInputsWrapper>
       </StPopupTopWrapper>
       <StDetailCalendarContainer />
+      <StPopupbottomWrapper>
+        <CalendarKeybordBtnContainer />
+        <StCalendarDeleteBtnContainer />
+        <StButton>닫기</StButton>
+      </StPopupbottomWrapper>
     </StPopup>
   );
 };
@@ -81,33 +101,13 @@ const CheckPopup = ({
       {popupState && (
         <DetailPopupContainer
           dateDiff={dateDiff}
+          popupState={popupState}
           setPopupState={setPopupState}
           checkPopupRef={checkPopupRef}
           checkin={checkin}
           checkout={checkout}
         />
       )}
-      {/* <StPopup popupState={popupState}>
-        <StPopupTopWrapper>
-          <StTextWrapper>
-            <StTitle>날짜 선택</StTitle>
-            <StSubText>
-              여행 날짜를 입력하여 정확한 요금을 확인하세요.
-            </StSubText>
-          </StTextWrapper>
-          <StInputsWrapper>
-            <StPopupCheckIn>
-              <StName>체크인</StName>
-              <StContent>{checkin ? checkin : '날짜 추가'}</StContent>
-            </StPopupCheckIn>
-            <StPopupCheckOut>
-              <StName>체크아웃</StName>
-              <StContent>{checkout ? checkout : '날짜 추가'}</StContent>
-            </StPopupCheckOut>
-          </StInputsWrapper>
-        </StPopupTopWrapper>
-        <StDetailCalendarContainer />
-      </StPopup> */}
     </StCheckWrapper>
   );
 };
@@ -208,7 +208,30 @@ const StPopupCheckOut = styled(StCheckOut)`
 `;
 
 const StDetailCalendarContainer = styled(DetailCalendarContainer)`
-  /* background-color: lightgrey; */
   margin-left: -9px;
   width: calc(100% + 18px);
+`;
+
+const StPopupbottomWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4px;
+`;
+
+const StCalendarDeleteBtnContainer = styled(CalendarDeleteBtnContainer)`
+  margin-right: 8px;
+  margin-left: auto;
+`;
+
+const StButton = styled(Button)`
+  padding: 8px 16px;
+  border: none;
+  font-size: 14px;
+  color: ${({ theme }) => theme.color.white};
+  background-color: ${({ theme }) => theme.color.black};
+
+  :hover {
+    background-color: ${({ theme }) => theme.color.realBlack};
+  }
 `;
