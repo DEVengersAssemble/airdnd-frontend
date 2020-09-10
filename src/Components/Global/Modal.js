@@ -13,6 +13,7 @@ const Modal = ({
   title,
   modalState,
   setModalState,
+  cleanup,
   ...rest
 }) => {
   const [animate, setAnimate] = useState(false);
@@ -24,6 +25,9 @@ const Modal = ({
       setTimeout(() => setAnimate(false), 250);
     }
     setVisible(modalState);
+    return () => {
+      cleanup && cleanup();
+    };
   }, [modalState, visible]);
 
   if (!visible && !animate) return '';
