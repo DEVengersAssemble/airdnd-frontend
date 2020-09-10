@@ -30,6 +30,7 @@ const HomePopup = ({
       <Carousel
         size="large"
         theme={theme}
+        homeId={homeId}
         isHovered={isHovered}
         isSuperhost={isSuperhost}
         imageArray={imageArray}

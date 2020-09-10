@@ -11,9 +11,9 @@ const HomeCardContainer = ({ home, type }) => {
   const isHovered = hoveredHome === home.homeId;
   const dispatch = useDispatch();
 
+  const onBlurHome = () => dispatch(blurHome());
   const onHoverHome = () =>
     hoveredHome !== home.homeId && dispatch(hoverHome(home.homeId));
-  const onBlurHome = () => dispatch(blurHome());
 
   return (
     <HomeCard

@@ -54,6 +54,7 @@ const getMarkerIndex = (imageCount, currentIndex) => {
 const CarouselContainer = ({
   size,
   theme,
+  homeId,
   blockLink,
   isHovered,
   responsive,
@@ -103,6 +104,7 @@ const CarouselContainer = ({
     <Carousel
       size={size}
       theme={theme}
+      homeId={homeId}
       blockLink={blockLink}
       marker={marker}
       responsive={responsive}

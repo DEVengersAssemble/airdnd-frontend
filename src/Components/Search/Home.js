@@ -46,6 +46,7 @@ const Home = ({
     >
       <CarouselContainer
         size="large"
+        homeId={homeId}
         isHovered={isHovered}
         imageArray={imageArray}
         imageCount={imageCount}

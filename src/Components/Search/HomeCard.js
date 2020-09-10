@@ -73,6 +73,7 @@ const HomeCard = ({
     >
       <CarouselContainer
         responsive
+        homeId={homeId}
         getWidth={getWidth}
         isHovered={isHovered}
         isSuperhost={isSuperhost}
