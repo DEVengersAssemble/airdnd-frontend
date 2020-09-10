@@ -358,7 +358,10 @@ const search = (state = initialState, action) => {
           ...state.popupApplied,
           [action.name]: action.isApplied,
         },
-        isFilterChanged: !_.isEqual(state.filterPrevState, state.filterApplied),
+        isFilterChanged: !_.isEqual(
+          state.filterPrevState,
+          getFilterGroup(action.name, state, 'keep'),
+        ),
         filterPrevState: {},
       };
     case SET_FILTER:

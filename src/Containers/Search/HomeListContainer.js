@@ -44,6 +44,7 @@ const HomeListContainer = () => {
 
   useEffect(() => {
     if (!isFilterChanged) return;
+    console.log('00000000000', isFilterChanged);
     keys.forEach(key => (fa[key] = setValues(key)));
 
     const newQueryObj = _.omit(searchForm, [...deleteFromQuery(), 'page']);
