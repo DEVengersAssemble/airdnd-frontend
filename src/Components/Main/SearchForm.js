@@ -389,7 +389,7 @@ const SearchForm = ({
           <StTypeText>인원</StTypeText>
           <StContentText value={guestCount} name="guests">
             {guestCount
-              ? `게스트 ${adult + child}명, 유아 ${infant}명`
+              ? `게스트 ${+adult + +child}명, 유아 ${infant}명`
               : '게스트 추가'}
           </StContentText>
         </StTextWrapper>

@@ -131,7 +131,7 @@ const modals = [
 ];
 const roomTypes = ['roomTypeHouse', 'roomTypePrivate', 'roomTypeShared'];
 const prices = ['priceMin', 'priceMax'];
-export const all = [...modals, ...roomTypes, ...prices, 'refund'];
+const all = [...modals, ...roomTypes, ...prices, 'refund'];
 
 export const filterInit = {
   refund: 0,
@@ -142,7 +142,7 @@ export const filterInit = {
   priceMax: 1000000,
 };
 
-const modalInit = {
+export const modalInit = {
   instantBooking: 0,
   bedCount: 0,
   bedroomCount: 0,
