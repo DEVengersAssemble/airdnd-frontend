@@ -7,7 +7,12 @@ export const fetchWishlistsData = async () => {
 };
 
 export const postWishlists = async payload => {
-  const response = await axios.post('/back/wishlists_insert', payload);
+  const response = await axios.post('/back/wishlist_insert', payload);
   console.log('---------------------------------------------', response);
   return response.data;
+};
+
+export const deleteWishList = async payload => {
+  const response = await axios.delete('/back/wishlist_delete', payload);
+  console.log('=====================', response);
 };

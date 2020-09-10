@@ -62,10 +62,11 @@ const Map = compose(
       },
       getBounds: () => () => {
         const bounds = refs.map.getBounds();
+        // console.log(bounds);
         return {
-          swLat: bounds.Za.i,
+          swLat: bounds.ab.i,
           swLng: bounds.Va.i,
-          neLat: bounds.Za.j,
+          neLat: bounds.ab.j,
           neLng: bounds.Va.j,
         };
       },
@@ -105,15 +106,12 @@ const Map = compose(
         }}
         options={{ disableDefaultUI: true, scrollwheel: false }}
         onDblClick={() => {
-          setZoom();
-          updateZoom(zoom);
+          // setZoom();
+          // updateZoom(zoom);
           console.log('11111111111111111', zoom);
           changeBounds(getBounds());
         }}
-        // onDragEnd={() => changeBounds(getBounds())}
-        onDragEnd={() => {
-          changeBounds(getBounds());
-        }}
+        onDragEnd={() => changeBounds(getBounds())}
       >
         <StStickyWrapper>
           <MapCloseButton

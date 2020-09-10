@@ -12,8 +12,14 @@ const CREATE_BOOKMARKLIST = 'wishlists/CREATE_BOOKMARKLIST';
 const CREATE_BOOKMARKLIST_SUCCESS = 'wishlists/CREATE_BOOKMARKLIST_SUCCESS';
 const CREATE_BOOKMARKLIST_ERROR = 'wishlists/CREATE_BOOKMARKLIST_ERROR';
 const ADD_BOOKMARK_OLD_LIST = 'wishlists/ADD_BOOKMARK_OLD_LIST';
+const ADD_BOOKMARK_OLD_LIST_SUCCESS = 'wishlists/ADD_BOOKMARK_OLD_LIST_SUCCESS';
+const ADD_BOOKMARK_OLD_LIST_ERROR = 'wishlists/ADD_BOOKMARK_OLD_LIST_ERROR';
 const ADD_BOOKMARK_NEW_LIST = 'wishlists/ADD_BOOKMARK_NEW_LIST';
+const ADD_BOOKMARK_NEW_LIST_SUCCESS = 'wishlists/ADD_BOOKMARK_NEW_LIST_SUCCESS';
+const ADD_BOOKMARK_NEW_LIST_ERROR = 'wishlists/ADD_BOOKMARK_NEW_LIST_ERROR';
 const REMOVE_BOOKMARK = 'wishlists/REMOVE_BOOKMARK';
+const REMOVE_BOOKMARK_SUCCESS = 'wishlists/REMOVE_BOOKMARK_SUCCESS';
+const REMOVE_BOOKMARK_ERROR = 'wishlists/REMOVE_BOOKMARK_ERROR';
 const OPEN_LIST_MODAL = 'wishlists/OPEN_LIST_MODAL';
 const CLOSE_LIST_MODAL = 'wishlists/CLOSE_LIST_MODAL';
 const OPEN_NEW_MODAL = 'wishlists/OPEN_NEW_MODAL';
@@ -37,18 +43,30 @@ let id = 5;
 //   },
 // });
 
-export const addBookmarkOldList = bookmarkListId => ({
-  type: ADD_BOOKMARK_OLD_LIST,
-  bookmarkListId,
-});
-export const addBookmarkNewList = title => ({
-  type: ADD_BOOKMARK_NEW_LIST,
-  bookmarkList: {
-    bookmarkListId: id++,
-    bookmarkListTitle: title,
-  },
-});
-export const removeBookmark = homeId => ({ type: REMOVE_BOOKMARK, homeId });
+// export const addBookmarkOldList = bookmarkListId => ({
+//   type: ADD_BOOKMARK_OLD_LIST,
+//   bookmarkListId,
+// });
+export const addBookmarkOldList = fetchDataThunk(
+  ADD_BOOKMARK_OLD_LIST,
+  api.postWishlists,
+);
+// export const addBookmarkNewList = title => ({
+//   type: ADD_BOOKMARK_NEW_LIST,
+//   bookmarkList: {
+//     bookmarkListId: id++,
+//     bookmarkListTitle: title,
+//   },
+// });
+export const addBookmarkNewList = fetchDataThunk(
+  ADD_BOOKMARK_NEW_LIST,
+  api.postWishlists,
+);
+// export const removeBookmark = homeId => ({ type: REMOVE_BOOKMARK, homeId });
+export const removeBookmark = fetchDataThunk(
+  REMOVE_BOOKMARK,
+  api.deleteWishList,
+);
 export const openListModal = (homeId, homeImg) => ({
   type: OPEN_LIST_MODAL,
   homeId,
@@ -176,6 +194,12 @@ const wishlists = (state = initialState, action) => {
     case ADD_BOOKMARK_OLD_LIST:
       return {
         ...state,
+        loading: true,
+      };
+    case ADD_BOOKMARK_OLD_LIST_SUCCESS:
+      return {
+        ...state,
+        loading: false,
         listModal: false,
         selectedId: null,
         selectedImg: '',
@@ -193,24 +217,49 @@ const wishlists = (state = initialState, action) => {
           ),
         },
       };
+    case ADD_BOOKMARK_OLD_LIST_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
     case ADD_BOOKMARK_NEW_LIST:
       return {
         ...state,
+        loading: true,
+      };
+    case ADD_BOOKMARK_NEW_LIST_SUCCESS:
+      return {
+        ...state,
+        loading: false,
         newModal: false,
         selectedId: null,
         selectedImg: '',
         data: {
           bookmarkLists: state.data.bookmarkLists.concat({
-            ...action.bookmarkList,
+            bookmarkListId: action.bookmarkListId,
+            bokmarkListTitle: action.bookmarkListTitle,
             bookmarks: [
               { homeId: state.selectedId, images: state.selectedImg },
             ],
           }),
         },
       };
+    case ADD_BOOKMARK_NEW_LIST_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
     case REMOVE_BOOKMARK:
       return {
         ...state,
+        loading: true,
+      };
+    case REMOVE_BOOKMARK_SUCCESS:
+      return {
+        ...state,
+        loading: false,
         data: {
           bookmarkLists: state.data.bookmarkLists.map(bmList => ({
             ...bmList,
@@ -219,6 +268,12 @@ const wishlists = (state = initialState, action) => {
             ),
           })),
         },
+      };
+    case REMOVE_BOOKMARK_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
       };
     case OPEN_LIST_MODAL:
       return {

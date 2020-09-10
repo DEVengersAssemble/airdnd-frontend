@@ -15,6 +15,7 @@ import {
   setMapBounds,
 } from '../../Modules/search';
 import qs from 'qs';
+import _ from 'lodash';
 
 const MapContainer = ({ markers }) => {
   const { mapCenter } = useSelector(state => state.search.data);
@@ -37,9 +38,10 @@ const MapContainer = ({ markers }) => {
 
   const changeBounds = bounds => {
     console.log('3333333333333333', mapZoom);
-    Object.keys(bounds).forEach(bound => (queryObj[bound] = bounds[bound]));
-    history.replace(`?${qs.stringify(queryObj)}`);
-    dispatch(fetchData(`?${qs.stringify(queryObj)}`));
+    const newQueryObj = _.omit(queryObj, ['page']);
+    Object.keys(bounds).forEach(bound => (newQueryObj[bound] = bounds[bound]));
+    history.replace(`?${qs.stringify(newQueryObj)}`);
+    dispatch(fetchData(`?${qs.stringify(newQueryObj)}`));
     dispatch(setMapBounds(bounds));
   };
 

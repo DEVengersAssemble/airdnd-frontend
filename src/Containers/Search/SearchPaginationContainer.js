@@ -18,10 +18,9 @@ const SearchPaginationContainer = () => {
   );
 
   const onNavPage = newPage => {
-    const newQueryObj = _.omit(queryObj, ['swLat', 'swLng', 'neLat', 'neLng']);
-    newQueryObj.page = newPage;
-    history.replace(`?${qs.stringify(newQueryObj)}`);
-    dispatch(fetchData(`?${qs.stringify(newQueryObj)}`));
+    queryObj.page = newPage;
+    history.replace(`?${qs.stringify(queryObj)}`);
+    dispatch(fetchData(`?${qs.stringify(queryObj)}`));
     dispatch(navigatePage(newPage));
   };
 
