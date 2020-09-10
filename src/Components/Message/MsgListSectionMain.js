@@ -9,9 +9,10 @@ const MsgListSectionMain = ({ hasMsgs, messages }) => {
     <MsgListSectionMainWrapper>
       {hasMsgs ? (
         <MsgLists>
-          {messages.map((msg, index) => (
-            <MsgListSectionItemContainer key={index} msg={msg} />
-          ))}
+          {messages &&
+            messages.map((msg, index) => (
+              <MsgListSectionItemContainer key={index} msg={msg} />
+            ))}
         </MsgLists>
       ) : (
         <MsgListSectionNone />

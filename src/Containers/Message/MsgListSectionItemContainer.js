@@ -2,6 +2,8 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import MsgListSectionItem from '../../Components/Message/MsgListSectionItem';
 import { showMsgDetailSection, setActiveId } from '../../Modules/message';
+import { useLocation } from 'react-router';
+import qs from 'qs';
 
 const MsgListSectionItemContainer = ({ msg }) => {
   // redux
@@ -11,7 +13,7 @@ const MsgListSectionItemContainer = ({ msg }) => {
   const dispatch = useDispatch();
 
   // variable
-  const { hostname, id } = msg;
+  const { hostname, id, state } = msg;
   const {
     hostProfileImg,
     lastMsg,
@@ -32,6 +34,11 @@ const MsgListSectionItemContainer = ({ msg }) => {
   const ci = ciDate.toLocaleDateString('ko-KR', options);
   const co = coDate.toLocaleDateString('ko-KR', options);
 
+  const query = useLocation();
+  const { filter } = qs.parse(query.search, {
+    ignoreQueryPrefix: true,
+  });
+
   // event
   const onClickList = () => {
     // id에 맞는 메시지를 가져와야함...... 시발 어떻게 하지
@@ -51,6 +58,8 @@ const MsgListSectionItemContainer = ({ msg }) => {
       onClickList={onClickList}
       id={id}
       activeId={activeId}
+      filter={filter}
+      state={state}
     />
   );
 };

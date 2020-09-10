@@ -12,8 +12,8 @@ const MsgListSectionFilterPopupContainer = ({ popupState, popupRef }) => {
 
   // ! variable
   const allMsgCount = data && data.all.length;
-  const hiddenMsgCount = data && data.all.length;
-  const unreadMsgCount = data && data.all.length;
+  const hiddenMsgCount = data && data.hidden.length;
+  const unreadMsgCount = data && data.unread.length;
 
   // ! event
   const onClickAll = () => {
@@ -33,7 +33,6 @@ const MsgListSectionFilterPopupContainer = ({ popupState, popupRef }) => {
   const { filter } = qs.parse(query.search, {
     ignoreQueryPrefix: true,
   });
-  console.log(filter);
 
   return (
     <MsgListSectionFilterPopup

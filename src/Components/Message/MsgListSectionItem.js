@@ -15,13 +15,15 @@ const MsgListSectionItem = ({
   onClickList,
   id,
   activeId,
+  filter,
+  state,
 }) => {
   return (
     <MsgListItemWrapper
       onClick={onClickList}
       className={id === activeId ? 'active' : ''}
     >
-      <Link to={`/guest/inbox/${id}`}>
+      <Link to={`/guest/inbox/${id}?filter=${state}`}>
         <StDiv>
           <Profile size="4.2rem" lastName="Kim" profileImg={hostProfileImg} />
           <LastMsgItemOuter>
