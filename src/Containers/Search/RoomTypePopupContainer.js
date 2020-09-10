@@ -27,14 +27,18 @@ const RoomTypePopupContainer = () => {
   }, [onClosePopup]);
 
   return (
-    <div ref={popupRef}>
-      <RoomTypePopup
-        popupState={popupState.roomType}
-        isDisabled={isDisabled}
-        onSave={onClose}
-        onReset={onReset}
-      />
-    </div>
+    <>
+      {popupState.roomType && (
+        <div ref={popupRef}>
+          <RoomTypePopup
+            popupState={popupState.roomType}
+            isDisabled={isDisabled}
+            onSave={onClose}
+            onReset={onReset}
+          />
+        </div>
+      )}
+    </>
   );
 };
 

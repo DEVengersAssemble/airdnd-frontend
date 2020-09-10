@@ -55,4 +55,4 @@ const Logo = ({ isScrollTop, handleLogoClick }) => {
   );
 };
 
-export default Logo;
+export default React.memo(Logo);

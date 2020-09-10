@@ -18,6 +18,7 @@ const FilterButtonContainer = React.memo(({ name, text, children }) => {
       text={text}
       isOpen={isOpen}
       isApplied={isApplied}
+      popupState={popupState[name]}
       onClick={onClick}
     >
       {children}

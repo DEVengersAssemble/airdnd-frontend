@@ -33,14 +33,18 @@ const RefundPopupContainer = () => {
   }, [onClosePopup]);
 
   return (
-    <div ref={popupRef}>
-      <RefundPopup
-        popupState={popupState.refund}
-        isDisabled={isDisabled}
-        onSave={onClose}
-        onReset={onReset}
-      />
-    </div>
+    <>
+      {popupState.refund && (
+        <div ref={popupRef}>
+          <RefundPopup
+            popupState={popupState.refund}
+            isDisabled={isDisabled}
+            onSave={onClose}
+            onReset={onReset}
+          />
+        </div>
+      )}
+    </>
   );
 };
 

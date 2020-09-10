@@ -32,8 +32,6 @@ const MyPageButtonContainer = ({ isScrollTop }) => {
     history.push(`/${pageName}`);
   };
 
-  console.log('--------------스탑');
-
   return (
     <>
       <MyPageButton
@@ -54,4 +52,4 @@ const MyPageButtonContainer = ({ isScrollTop }) => {
   );
 };
 
-export default MyPageButtonContainer;
+export default React.memo(MyPageButtonContainer);
