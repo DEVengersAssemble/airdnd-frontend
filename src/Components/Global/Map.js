@@ -62,7 +62,7 @@ const Map = compose(
       },
       getBounds: () => () => {
         const bounds = refs.map.getBounds();
-        // console.log(bounds);
+        console.log(bounds);
         return {
           swLat: bounds.ab.i,
           swLng: bounds.Va.i,

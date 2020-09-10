@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect, useState } from 'react';
 import Carousel from '../../Components/Global/Carousel';
 import { throttle } from 'lodash';
 
@@ -76,7 +76,10 @@ const CarouselContainer = ({
     width: 0,
     marker: 0,
   };
+
   const [carouselState, dispatch] = useReducer(carouselReducer, carouselInit);
+  const [didMount, setDidMount] = useState(false);
+
   const {
     isSliding,
     direction,
@@ -85,6 +88,7 @@ const CarouselContainer = ({
     marker,
     currentIndex,
   } = carouselState;
+
   const onSlideNext = () => dispatch({ type: 'SLIDE_NEXT' });
   const onSlidePrev = () => dispatch({ type: 'SLIDE_PREV' });
   const setWidth = () =>
@@ -92,15 +96,20 @@ const CarouselContainer = ({
   window.addEventListener('resize', throttle(setWidth, 300));
 
   useEffect(() => {
+    setDidMount(true);
     setWidth();
     dispatch({
       type: 'GET_MARKER',
       marker: getMarkerIndex(imageCount, currentIndex),
     });
     setTimeout(() => isSliding && dispatch({ type: 'END_SLIDE' }), 300);
-    return () => window.removeEventListener('resize', setWidth);
+    return () => {
+      setDidMount(false);
+      window.removeEventListener('resize', setWidth);
+    };
   }, [isSliding, currentIndex, width, mapState]);
 
+  if (!didMount) return null;
   return (
     <Carousel
       size={size}
