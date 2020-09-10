@@ -34,8 +34,9 @@ const HomeExplain = ({ isLoading, home }) => {
                   focusable="false"
                   viewBox="0 0 32 32"
                   xmlns="http://www.w3.org/2000/svg"
-                  dangerouslySetInnerHTML={{ __html: explain.icon }}
-                />
+                >
+                  <path d={explain.icon} />
+                </svg>
                 <strong>{explain.text}</strong>
                 {explain.subText && <span>{explain.subText}</span>}
               </StExplain>
@@ -43,7 +44,8 @@ const HomeExplain = ({ isLoading, home }) => {
           </StExplainList>
 
           <StDescription readMore={readMore}>
-            <span>{home.description}</span>
+            {/* <span>{home.description}</span> */}
+            <span dangerouslySetInnerHTML={{ __html: home.description }}></span>
             {!readMore && <StMoreBtn onClick={onClick}>더 읽기</StMoreBtn>}
             <StToHostBtn>호스트에게 연락하기</StToHostBtn>
           </StDescription>

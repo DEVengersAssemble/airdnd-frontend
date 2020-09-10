@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { NextButton, PrevButton } from '../Global/SlideButton';
 
 const SearchPagination = ({ dataTotal, page, pageArray, onNavPage }) => {
+  if (!dataTotal) return null;
   return (
     <StWrapper>
       <StNumberWrapper>
@@ -16,7 +17,7 @@ const SearchPagination = ({ dataTotal, page, pageArray, onNavPage }) => {
             {i}
           </StNumber>
         ))}
-        {page !== pageArray.length && (
+        {page !== pageArray.length && pageArray.length > 1 && (
           <NextButton onClick={() => onNavPage(page + 1)} />
         )}
       </StNumberWrapper>

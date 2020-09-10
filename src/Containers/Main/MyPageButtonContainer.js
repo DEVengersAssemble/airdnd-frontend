@@ -15,7 +15,7 @@ const MyPageButtonContainer = ({ isScrollTop }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [popupVisible, setPopupVisible] = useState(false);
-  const isLoggedIn = true;
+  const isLoggedIn = false;
   const closePopup = () => {
     setPopupVisible(false);
   };

@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
 import search from './search';
 import user from './user';
+import signup from './signup';
+import login from './login';
 import searchForm from './searchForm';
 import wishlists from './wishlists';
 import trips from './trips';
@@ -13,6 +15,8 @@ import socket from './socket';
 
 const rootReducer = combineReducers({
   user,
+  signup,
+  login,
   search,
   searchForm,
   wishlists,

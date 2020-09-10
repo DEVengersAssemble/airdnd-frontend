@@ -28,6 +28,7 @@ const ZOOM_SET = 'search/ZOOM_SET';
 const OPEN_MARKER = 'search/OPEN_MARKER';
 const CLOSE_MARKER = 'search/CLOSE_MARKER';
 const SET_MAP_SEARCH = 'search/SET_MAP_SEARCH';
+const SET_MAP_BOUNDS = 'search/SET_MAP_BOUNDS';
 
 const OPEN_POPUP = 'search/OPEN_POPUP';
 const CLOSE_POPUP = 'search/CLOSE_POPUP';
@@ -69,6 +70,7 @@ export const zoomSet = zoom => ({ type: ZOOM_SET, zoom });
 export const openMarker = id => ({ type: OPEN_MARKER, id });
 export const closeMarker = () => ({ type: CLOSE_MARKER });
 export const setMapSearch = () => ({ type: SET_MAP_SEARCH });
+export const setMapBounds = mapBounds => ({ type: SET_MAP_BOUNDS, mapBounds });
 
 export const openPopup = name => ({ type: OPEN_POPUP, name });
 export const closePopup = (name, isApplied) => ({
@@ -161,26 +163,18 @@ const popupInit = {
 
 const initialState = {
   ...reducerUtils.initial(),
-  // data: {
-  //   homes: [],
-  //   dataTotal: 0,
-  //   filterCondition: {
-  // superhost: false,
-  // amenityList: [],
-  // facilityList: [],
-  // hostLangList: [],
-  //   },
-  //   mapCenter: { lat: 0, lng: 0 },
-  //   priceArray: [],
-  //   averagePrice: 0,
-  //   recentHomes: [],
-  // },
   searchForm: {},
   headerState: false,
   viewState: 'result',
   mapSearch: true,
   mapState: true,
   mapZoom: 12,
+  mapBounds: {
+    swLat: 0,
+    swLng: 0,
+    neLat: 0,
+    neLng: 0,
+  },
   markerState: null,
   hoveredHome: null,
   popupState: popupInit,
@@ -226,11 +220,6 @@ const search = (state = initialState, action) => {
       return {
         ...state,
         ...reducerUtils.success(action.payload),
-        // filterApplied: {
-        // ...modalFilterInit(action.payload.filterCondition),
-        // ..._.pick(state.searchForm, [...all, 'page']),
-        // ...state.filterApplied,
-        // },
         isFilterChanged: false,
       };
     case FETCH_DATA_ERROR:
@@ -253,6 +242,14 @@ const search = (state = initialState, action) => {
           modal: modals.some(key => action.searchForm[key]),
           all: false,
         },
+        mapBounds: {
+          ...state.mapBounds,
+          swLat: action.searchForm.swLat,
+          swLng: action.searchForm.swLng,
+          neLat: action.searchForm.neLat,
+          neLng: action.searchForm.neLng,
+        },
+        page: action.searchForm.page || 1,
       };
     case HOVER_HOME:
       return {
@@ -351,6 +348,12 @@ const search = (state = initialState, action) => {
       return {
         ...state,
         mapSearch: !state.mapSearch,
+      };
+    case SET_MAP_BOUNDS:
+      return {
+        ...state,
+        mapBounds: action.mapBounds,
+        page: 1,
       };
     case OPEN_POPUP:
       return {

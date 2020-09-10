@@ -3,36 +3,41 @@ import styled from 'styled-components';
 import Division from './Division';
 
 const Bedrooms = ({ home }) => {
+  const { bedrooms } = home;
   return (
-    <Division title="침대/침구 유형">
-      <StBedroomWrapper>
-        {home.bedrooms.map((bedroom, i) => (
-          <StBedroom key={i}>
-            {bedroom.icons.map((icon, i) => (
-              <svg
-                key={i}
-                viewBox="0 0 24 24"
-                role="presentation"
-                aria-hidden="true"
-                focusable="false"
-                dangerouslySetInnerHTML={{ __html: icon }}
-              ></svg>
-            ))}
-            <strong>{bedroom.room}</strong>
-            <span>{bedroom.size}</span>
-          </StBedroom>
-        ))}
-      </StBedroomWrapper>
-    </Division>
+    !!bedrooms.length && (
+      <Division title="침대/침구 유형">
+        <StBedroomWrapper>
+          {bedrooms.map((bedroom, i) => (
+            <StBedroom key={i}>
+              {bedroom.icons.map((icon, i) => (
+                <svg
+                  key={i}
+                  viewBox="0 0 24 24"
+                  role="presentation"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path d={icon} />
+                </svg>
+              ))}
+              <strong>{bedroom.room}</strong>
+              <span>{bedroom.size}</span>
+            </StBedroom>
+          ))}
+        </StBedroomWrapper>
+      </Division>
+    )
   );
 };
 
 const StBedroomWrapper = styled.div`
+  display: flex;
   margin: 0 -0.4rem;
+  flex-wrap: wrap;
 `;
 
 const StBedroom = styled.div`
-  display: inline-block;
   width: 32.1%;
   padding: 2.4rem;
   margin: 0 0.4rem;
@@ -45,6 +50,7 @@ const StBedroom = styled.div`
     height: 2.4rem;
     margin-bottom: 16px;
     margin-right: 8px;
+    fill: currentcolor;
   }
 
   strong {

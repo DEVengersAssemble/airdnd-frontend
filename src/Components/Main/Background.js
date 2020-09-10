@@ -44,7 +44,9 @@ const Background = () => {
         <StDomesticTripContent>
           그동안 몰랐던 국내 여행지의 아름다움을 발견해보세요.
         </StDomesticTripContent>
-        <Button border="none">알아보기</Button>
+        <Button border="none" transition>
+          알아보기
+        </Button>
       </StDomesticTripSection>
     </StBackgroundWrapper>
   );

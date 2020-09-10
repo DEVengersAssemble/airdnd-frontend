@@ -1,47 +1,31 @@
-import React, { useEffect, useState, useRef, useReducer } from 'react';
+import React, { useEffect, useRef } from 'react';
+import LoginModal from '../../Components/Main/LoginModal';
 import { useSelector, useDispatch } from 'react-redux';
 import { openModal, closeModal } from '../../Modules/modal';
-import LoginModal from '../../Components/Main/LoginModal';
-
-const initialState = {
-  email: {
-    value: '',
-    invalid: null,
-  },
-  pwd: {
-    value: '',
-    invalid: null,
-  },
-};
-
-const loginReducer = (state, action) => {
-  switch (action.type) {
-    case 'CHECK_ALL_VALIDATION':
-      return action.payload;
-    case 'UPDATE_VALUE':
-      return {
-        ...state,
-        [action.key]: {
-          value: action.payload,
-          invalid: false,
-        },
-      };
-    case 'RESET':
-      return initialState;
-    default:
-      return state;
-  }
-};
+import {
+  loginRequest,
+  resetForm,
+  setIsChecking,
+  setIsPwdShown,
+  setValue,
+  setInvalid,
+} from '../../Modules/login';
 
 const LoginModalContainer = () => {
+  console.log('loginModalContainer');
   const dispatch = useDispatch();
   const { name } = useSelector(state => state.modal);
   const modalVisible = name === 'login';
-  const [showPwd, setShowPwd] = useState(false);
-  const [loginForm, _dispatch] = useReducer(loginReducer, initialState);
-  const [isChecking, setIsChecking] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const { email, pwd } = loginForm;
+  const {
+    loading,
+    result,
+    isChecking,
+    isPwdShown,
+    form,
+    invalid,
+  } = useSelector(state => state.login);
+
+  const { email, pwd } = form;
 
   const emailRef = useRef();
   const pwdRef = useRef();
@@ -49,85 +33,89 @@ const LoginModalContainer = () => {
     emailRef,
     pwdRef,
   };
-  const onChangeForm = ({ target }, key) => {
-    const value = target.value;
-    _dispatch({ type: 'UPDATE_VALUE', key, payload: value });
-  };
-
-  const onToggleShowPwd = () => {
-    setShowPwd(prevState => !prevState);
-  };
 
   const openSignupMenuModal = () => {
     dispatch(openModal('signup_menu'));
   };
 
+  const onToggleShowPwd = () => {
+    dispatch(setIsPwdShown());
+  };
+
+  const onFormChange = (key, value) => {
+    dispatch(setValue(key, value));
+  };
+
+  const checkEmail = email => {
+    const emailRegExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+    return !emailRegExp.test(email);
+  };
+
+  const checkPwd = pwd => {
+    return pwd.length < 8;
+  };
+
   const onSuccess = () => {
-    console.log('===로그인 성공!====');
-    _dispatch({ type: 'RESET' });
+    console.log('===로그인 시도!====');
+    const userInfo = {
+      email,
+      pwd,
+    };
+    console.log('userInfo: ', userInfo);
+    dispatch(loginRequest(userInfo));
   };
 
   const changeFocus = () => {
-    const invalidCount = Object.values(loginForm)
-      .slice(0, 4)
-      .reduce((acc, cur) => {
-        return acc + +cur.invalid;
-      }, 0);
+    const invalidCount = Object.values(invalid).filter(v => v).length;
     if (invalidCount) {
       refObj[
-        `${Object.entries(loginForm).find(v => v[1].invalid)[0]}Ref`
+        `${Object.entries(invalid).find(v => v[1])[0]}Ref`
       ].current.focus();
       return;
     }
     onSuccess();
   };
 
-  const checkFormValidation = () => {
-    const emailRegExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-    const emailObj = {
-      value: email.value,
-      invalid: !emailRegExp.test(email.value),
-    };
-    const pwdObj = {
-      value: pwd.value,
-      invalid: pwd.value.length < 8,
-    };
+  const checkForm = () => {
     const payload = {
-      email: emailObj,
-      pwd: pwdObj,
+      email: checkEmail(email),
+      pwd: checkPwd(pwd),
     };
-    _dispatch({ type: 'CHECK_ALL_VALIDATION', payload });
-    setIsChecking(true);
+
+    dispatch(setInvalid(payload));
+  };
+
+  const cleanupModal = () => {
+    dispatch(resetForm(''));
   };
 
   const handleSubmit = e => {
     e.preventDefault();
-    checkFormValidation();
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 3000);
+    checkForm();
   };
-  useEffect(() => {
-    isChecking && changeFocus();
 
-    setIsChecking(false);
-  }, [isChecking, loginForm]);
+  if (isChecking) {
+    changeFocus();
+    dispatch(setIsChecking(false));
+  }
 
   return (
     <LoginModal
       modalVisible={modalVisible}
+      form={form}
+      invalid={invalid}
+      refObj={refObj}
+      loading={loading}
+      result={result}
+      isPwdShown={isPwdShown}
       openSignupMenuModal={openSignupMenuModal}
       closeModal={() => {
         dispatch(closeModal());
       }}
-      loginForm={loginForm}
-      showPwd={showPwd}
+      cleanupModal={cleanupModal}
+      onFormChange={onFormChange}
       onToggleShowPwd={onToggleShowPwd}
-      loading={loading}
       handleSubmit={handleSubmit}
-      onChangeForm={onChangeForm}
-      refObj={refObj}
     ></LoginModal>
   );
 };

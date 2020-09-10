@@ -154,6 +154,7 @@ const OnlineExp = () => {
             color="color"
             border="1px solid white"
             hover={{ background: 'darkgray', 'font-weight': '500' }}
+            transition
           >
             모두 둘러보기
           </Button>

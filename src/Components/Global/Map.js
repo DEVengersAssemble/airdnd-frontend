@@ -59,7 +59,16 @@ const Map = compose(
       },
       setZoom: ({ onZoomChange }) => () => {
         onZoomChange(refs.map.getZoom());
-        console.log(refs.map.getBounds());
+      },
+      getBounds: () => () => {
+        const bounds = refs.map.getBounds();
+        // console.log(bounds);
+        return {
+          swLat: bounds.ab.i,
+          swLng: bounds.Va.i,
+          neLat: bounds.ab.j,
+          neLng: bounds.Va.j,
+        };
       },
     };
   }),
@@ -79,6 +88,8 @@ const Map = compose(
     onZoomChange,
     onHideMap,
     onCloseMap,
+    getBounds,
+    changeBounds,
     checkMapSearch,
     openFilterModal,
     updateZoom,
@@ -93,11 +104,14 @@ const Map = compose(
           lat: center.lat,
           lng: center.lng,
         }}
-        options={{ disableDefaultUI: true }}
-        onZoomChanged={() => {
-          setZoom();
-          updateZoom(zoom);
+        options={{ disableDefaultUI: true, scrollwheel: false }}
+        onDblClick={() => {
+          // setZoom();
+          // updateZoom(zoom);
+          console.log('11111111111111111', zoom);
+          changeBounds(getBounds());
         }}
+        onDragEnd={() => changeBounds(getBounds())}
       >
         <StStickyWrapper>
           <MapCloseButton
@@ -114,10 +128,13 @@ const Map = compose(
               onZoomIn={() => {
                 onZoomIn();
                 onZoomChange(mapZoom + 1);
+                changeBounds(getBounds());
+                console.log('2222222222222', mapZoom + 1);
               }}
               onZoomOut={() => {
                 onZoomOut();
                 onZoomChange(mapZoom - 1);
+                changeBounds(getBounds());
               }}
             />
             <MapMarkerButton />

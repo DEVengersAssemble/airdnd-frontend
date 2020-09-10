@@ -14,6 +14,7 @@ const HostInfo = ({ home }) => {
     signupDate,
     reviewCount,
     identityVerified,
+    selfExplanation,
     communication,
     responseRate,
     responseTime,
@@ -47,8 +48,13 @@ const HostInfo = ({ home }) => {
             </li>
           )}
         </StMarkList>
-        <strong>숙박 중 게스트와의 교류</strong>
-        <span>{communication}</span>
+        {selfExplanation && <span>{selfExplanation}</span>}
+        {communication && (
+          <>
+            <strong>숙박 중 게스트와의 교류</strong>
+            <span>{communication}</span>
+          </>
+        )}
         {isSupperhost && (
           <>
             <strong>제주도님은 슈퍼호스트입니다.</strong>
