@@ -28,20 +28,16 @@ const PricePopupContainer = () => {
   }, [onClosePopup]);
 
   return (
-    <>
-      {popupState.price && (
-        <div ref={popupRef}>
-          <PricePopup
-            popupState={popupState.price}
-            isDisabled={isDisabled}
-            range={range}
-            setRange={setRange}
-            onSave={onClose}
-            onReset={onReset}
-          />
-        </div>
-      )}
-    </>
+    <div ref={popupRef}>
+      <PricePopup
+        popupState={popupState.price}
+        isDisabled={isDisabled}
+        range={range}
+        setRange={setRange}
+        onSave={onClose}
+        onReset={onReset}
+      />
+    </div>
   );
 };
 

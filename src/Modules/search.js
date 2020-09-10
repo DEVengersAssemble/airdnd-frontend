@@ -342,7 +342,7 @@ const search = (state = initialState, action) => {
       return {
         ...state,
         popupState: {
-          ...state.popupState,
+          ...popupInit,
           [action.name]: true,
         },
         filterPrevState: getFilterGroup(action.name, state, 'keep'),

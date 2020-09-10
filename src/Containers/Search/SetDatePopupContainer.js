@@ -23,13 +23,9 @@ const SetDatePopupContainer = () => {
   }, [onClosePopup]);
 
   return (
-    <>
-      {popupState.price && (
-        <div ref={popupRef}>
-          <SetDatePopup popupState={popupState.price} onSetDate={onSetDate} />
-        </div>
-      )}
-    </>
+    <div ref={popupRef}>
+      <SetDatePopup popupState={popupState.price} onSetDate={onSetDate} />
+    </div>
   );
 };
 
