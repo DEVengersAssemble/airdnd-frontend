@@ -15,7 +15,7 @@ const MyPageButtonContainer = ({ isScrollTop }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [popupVisible, setPopupVisible] = useState(false);
-  const isLoggedIn = false;
+  const isLoggedIn = true;
   const closePopup = () => {
     setPopupVisible(false);
   };
@@ -52,4 +52,4 @@ const MyPageButtonContainer = ({ isScrollTop }) => {
   );
 };
 
-export default MyPageButtonContainer;
+export default React.memo(MyPageButtonContainer);

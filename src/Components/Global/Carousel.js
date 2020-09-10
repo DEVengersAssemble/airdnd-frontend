@@ -6,6 +6,7 @@ import { PrevButton, NextButton } from './SlideButton';
 const Carousel = ({
   size,
   theme,
+  homeId,
   blockLink,
   responsive,
   homeWidth,
@@ -49,8 +50,8 @@ const Carousel = ({
       ) : null}
       <StLink
         rel="noopener noreferrer"
-        target={!blockLink && '_blank'}
-        href={!blockLink && `http://localhost:3000/detail/${''}`}
+        target={!blockLink && '_self'}
+        href={!blockLink && `http://localhost:3000/detail/${homeId}`}
       >
         {isSuperhost && <StBadge theme={theme}>슈퍼호스트</StBadge>}
         <StImageList
