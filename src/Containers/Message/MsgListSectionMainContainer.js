@@ -6,19 +6,17 @@ import qs from 'qs';
 
 const MsgListSectionMainContainer = () => {
   // ! redux
-  const { data, loading, error } = useSelector(state => state.message.messages);
+  const { data } = useSelector(state => state.message.messages);
 
+  // ! query
   const query = useLocation();
   const filter = qs.parse(query.search, {
     ignoreQueryPrefix: true,
   });
+  console.log(filter);
 
   // ! variable
   const hasMsgs = data && data.all.length;
-
-  if (loading) return <div>로딩중...</div>;
-  if (error) return <div>에러...</div>;
-  if (!data) return null;
 
   return <MsgListSectionMain hasMsgs={hasMsgs} messages={data && data.all} />;
 };

@@ -5,7 +5,8 @@ import { openPopup, closePopup } from '../../Modules/message';
 
 const MsgListSectionHeaderContainer = () => {
   // ! redux
-  const { data, loading, error } = useSelector(state => state.message.messages);
+  const { data } = useSelector(state => state.message.messages);
+  const popupState = useSelector(state => state.message.popupState.filter);
   const dispatch = useDispatch();
 
   // ! hook
@@ -14,7 +15,6 @@ const MsgListSectionHeaderContainer = () => {
 
   // ! variable
   const state = data && Object.keys(data)[0];
-  const popupState = useSelector(state => state.message.popupState.filter);
 
   // ! event
   const onClickPopup = useCallback(() => {
@@ -41,10 +41,6 @@ const MsgListSectionHeaderContainer = () => {
       document.removeEventListener('click', onClickOutSide);
     };
   }, [onClickOutSide]);
-
-  if (loading) return <div>로딩중</div>;
-  if (error) return <div>에러</div>;
-  if (!data) return null;
 
   return (
     <MsgListSectionHeader

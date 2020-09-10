@@ -7,7 +7,7 @@ import qs from 'qs';
 
 const MsgListSectionFilterPopupContainer = ({ popupState, popupRef }) => {
   // ! redux
-  const { data, loading, error } = useSelector(state => state.message.messages);
+  const { data } = useSelector(state => state.message.messages);
   const dispatch = useDispatch();
 
   // ! variable
@@ -25,7 +25,6 @@ const MsgListSectionFilterPopupContainer = ({ popupState, popupRef }) => {
   };
 
   const onClickUnread = () => {
-    // ! 읽지않은 메시지는 activeIndex값을 빼서 포커스가 안잡히도록 설정
     dispatch(closePopup('filter'));
   };
 
@@ -34,16 +33,7 @@ const MsgListSectionFilterPopupContainer = ({ popupState, popupRef }) => {
   const { filter } = qs.parse(query.search, {
     ignoreQueryPrefix: true,
   });
-
-  // // ! event
-  // const onClickFilterPopup = () => {
-  //   dispatch(fetchInbox(filter));
-  //   setOpenPopup(false);
-  // };
-
-  if (loading) return <div>로딩중...</div>;
-  if (error) return <div>Error...</div>;
-  if (!data) return null;
+  console.log(filter);
 
   return (
     <MsgListSectionFilterPopup
