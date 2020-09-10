@@ -176,17 +176,20 @@ const StSignupButton = styled(Button)`
 
 const LoginModal = ({
   modalVisible,
+  form,
+  invalid,
+  refObj,
+  loading,
+  result,
+  isPwdShown,
+  onFormChange,
+  cleanupModal,
   openSignupMenuModal,
   closeModal,
-  loginForm,
-  showPwd,
   onToggleShowPwd,
-  loading,
   handleSubmit,
-  onChangeForm,
-  refObj,
 }) => {
-  const { email, pwd } = loginForm;
+  const { email, pwd } = form;
   const { emailRef, pwdRef } = refObj;
   return (
     <StLoginModal
@@ -196,6 +199,7 @@ const LoginModal = ({
       height="545px"
       title="로그인"
       setModalState={closeModal}
+      cleanup={cleanupModal}
     >
       <StLoginModalWrapper>
         <GoogleLogin
@@ -227,50 +231,50 @@ const LoginModal = ({
         <StLoginForm onSubmit={handleSubmit}>
           <StInputWrapper>
             <StInput
-              value={email.value}
-              onChange={e => onChangeForm(e, 'email')}
+              value={email}
+              onChange={({ target: { value } }) => onFormChange('email', value)}
               focusBorderColor
               placeholder="이메일 주소"
               ref={emailRef}
-              isInvalid={email.invalid}
+              isInvalid={invalid.email}
             ></StInput>
             <RiMailLine />
-            {email.value.length === 0 && email.invalid && (
-              <StValidationText isInvalid={email.invalid}>
+            {email.length === 0 && invalid.email && (
+              <StValidationText isInvalid={invalid.email}>
                 이메일을 입력하세요.
               </StValidationText>
             )}
-            {email.value.length > 0 && email.invalid && (
-              <StValidationText isInvalid={email.invalid}>
+            {email.length > 0 && invalid.email && (
+              <StValidationText isInvalid={invalid.email}>
                 이메일 형식이 맞지 않습니다.
               </StValidationText>
             )}
           </StInputWrapper>
           <StInputWrapper name="password">
             <StInput
-              type={showPwd ? 'text' : 'password'}
-              value={pwd.value}
-              onChange={e => onChangeForm(e, 'pwd')}
+              type={isPwdShown ? 'text' : 'password'}
+              value={pwd}
+              onChange={({ target: { value } }) => onFormChange('pwd', value)}
               focusBorderColor
               placeholder="비밀번호"
               ref={pwdRef}
-              isInvalid={pwd.invalid}
+              isInvalid={invalid.pwd}
             ></StInput>
             <RiLock2Line />
-            {pwd.value.length === 0 && pwd.invalid && (
-              <StValidationText isInvalid={pwd.invalid}>
+            {pwd.length === 0 && invalid.pwd && (
+              <StValidationText isInvalid={invalid.pwd}>
                 비밀번호를 입력하세요.
               </StValidationText>
             )}
-            {pwd.value.length > 0 && pwd.invalid && (
-              <StValidationText isInvalid={pwd.invalid}>
+            {pwd.length > 0 && invalid.pwd && (
+              <StValidationText isInvalid={invalid.pwd}>
                 비밀번호는 최소 8글자 이상이어야 합니다. 다시 시도해 주세요.
               </StValidationText>
             )}
           </StInputWrapper>
           <StShowPwdButtonWrapper>
             <StShowPwdButton onClick={onToggleShowPwd}>
-              {showPwd ? '비밀번호 숨기기' : '비밀번호 보이기'}
+              {isPwdShown ? '비밀번호 숨기기' : '비밀번호 보이기'}
             </StShowPwdButton>
           </StShowPwdButtonWrapper>
           <StSubmitButton border="none" type="submit" disabled={loading}>
