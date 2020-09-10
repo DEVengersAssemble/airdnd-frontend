@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { throttle } from 'lodash';
 import Subject from '../../Components/Detail/Subject';
@@ -10,12 +11,14 @@ const DetailMainContainer = () => {
   const { isLoading, home, error } = useSelector(state => state.home.homeState);
   const { isScreenMedium } = useSelector(state => state.home.screenState);
   const dispatch = useDispatch();
+  const { id } = useParams();
+  console.log('params', id);
 
   const resize = () => dispatch(onResize());
 
   useEffect(() => {
     if (home) return;
-    dispatch(getHome());
+    dispatch(getHome(id));
     window.addEventListener('resize', throttle(resize, 300));
 
     return () => {
@@ -23,7 +26,7 @@ const DetailMainContainer = () => {
     };
   }, [dispatch]);
 
-  if (error) return <div>에러 발생! 새로고침을 해주세요</div>;
+  if (error) return <div>에러 발생! 잘못된 요청입니다.</div>;
 
   return (
     <>

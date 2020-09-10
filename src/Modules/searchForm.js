@@ -36,9 +36,9 @@ const getDateDiff = (date1, date2) => {
 // initialState
 const initialState = {
   location: '서울',
-  checkIn: '2020.09.02',
-  checkOut: '2020.09.05',
-  dateDiff: null,
+  checkIn: '2020.09.22',
+  checkOut: '2020.09.25',
+  dateDiff: 3,
   flexibleDate: 0,
   guests: {
     adult: 0,

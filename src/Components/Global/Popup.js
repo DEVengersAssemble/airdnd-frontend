@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 // Popup 사용방법
@@ -15,8 +15,17 @@ const Popup = ({
   right,
   padding,
   radius,
+  onClosePopup,
   ...rest
 }) => {
+  useEffect(() => {
+    console.log('popup 나타남 (새로고침시 나타나면 안돼!)');
+    window.addEventListener('click', onClosePopup);
+    return () => {
+      window.removeEventListener('click', onClosePopup);
+    };
+  }, [onClosePopup]);
+
   if (!popupState) return '';
 
   return (

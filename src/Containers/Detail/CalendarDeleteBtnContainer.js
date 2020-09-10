@@ -6,7 +6,7 @@ import {
   setChangeInitialDate,
 } from '../../Modules/reservation';
 
-const CalendarDeleteBtnContainer = () => {
+const CalendarDeleteBtnContainer = ({ ...rest }) => {
   const { changeInitialDate, checkin, checkout } = useSelector(
     state => state.reservation,
   );
@@ -17,7 +17,7 @@ const CalendarDeleteBtnContainer = () => {
     if (changeInitialDate === false) dispatch(setChangeInitialDate());
   };
 
-  return <CalendarDeleteBtn onClick={onClick} />;
+  return <CalendarDeleteBtn onClick={onClick} {...rest} />;
 };
 
 export default CalendarDeleteBtnContainer;

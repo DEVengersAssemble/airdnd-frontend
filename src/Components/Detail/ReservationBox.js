@@ -1,32 +1,36 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import Rating from '../Global/Rating';
 import Button from '../Global/Button';
 import DeatailGuestPopupContainer from '../../Containers/Detail/DeatailGuestPopupContainer';
+import CheckPopupContainer from '../../Containers/Detail/CheckPopupContainer';
 
 const ReservationBox = ({
+  checkPopupRef,
   price,
-  removedCommaPrice,
+  multipliedPrice,
+  percentage,
+  totalPrice,
+  // removedCommaPrice,
   rating,
   count,
-  getPercentage,
-  getTotalPrice,
-  getmultipliedPrice,
-  history,
+  // getPercentage,
+  // getTotalPrice,
+  // getmultipliedPrice,
   dateDiff,
-  checkin,
-  checkout,
+  notChecked,
+  onGoToReservation,
 }) => {
-  const multipliedPrice = getmultipliedPrice(removedCommaPrice, dateDiff);
-  const percentage = getPercentage(removedCommaPrice * dateDiff);
-  const totalPrice = getTotalPrice(removedCommaPrice * dateDiff, percentage);
+  // const multipliedPrice = getmultipliedPrice(removedCommaPrice, dateDiff);
+  // const percentage = getPercentage(removedCommaPrice * dateDiff);
+  // const totalPrice = getTotalPrice(removedCommaPrice * dateDiff, percentage);
 
   return (
     <StWarpper>
       <StStickyWrapper>
         <StReserveBox>
           <h3>
-            {dateDiff ? (
+            {!notChecked ? (
               <>
                 ₩{price}
                 <span>/박</span>
@@ -38,7 +42,8 @@ const ReservationBox = ({
           <Rating rate={rating} count={count} />
 
           <StWriteWrapper>
-            <StCheckWrapper tabIndex="0">
+            <CheckPopupContainer checkPopupRef={checkPopupRef} />
+            {/* <StCheckWrapper tabIndex="0">
               <StCheckIn>
                 <StName>체크인</StName>
                 <StContent>{checkin ? checkin : '날짜 추가'}</StContent>
@@ -47,7 +52,7 @@ const ReservationBox = ({
                 <StName>체크아웃</StName>
                 <StContent>{checkout ? checkout : '날짜 추가'}</StContent>
               </StCheckOut>
-            </StCheckWrapper>
+            </StCheckWrapper> */}
 
             <DeatailGuestPopupContainer displayName />
           </StWriteWrapper>
@@ -58,10 +63,11 @@ const ReservationBox = ({
             width="100%"
             padding="14px"
             hover
+            onClick={onGoToReservation}
           >
-            {dateDiff ? '예약하기' : '예약 가능 여부 보기'}
+            {!notChecked ? '예약하기' : '예약 가능 여부 보기'}
           </StReserveBtn>
-          {!!dateDiff && (
+          {!notChecked && (
             <>
               <StChargeMsg>
                 예약 확정 전에는 요금이 청구되지 않습니다.
@@ -87,9 +93,7 @@ const ReservationBox = ({
             </>
           )}
         </StReserveBox>
-        <StButton onClick={() => history.push('Reservation/HouseRules/1')}>
-          숙소 신고하기
-        </StButton>
+        <StButton>숙소 신고하기</StButton>
       </StStickyWrapper>
     </StWarpper>
   );
@@ -147,47 +151,47 @@ const StWriteWrapper = styled.div`
     /* border: 1px solid ${({ theme }) => theme.color.gray}; */
   `;
 
-const StCheckWrapper = styled.div`
-  position: relative;
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: center;
-  width: 100%;
-  outline: none;
-`;
+// const StCheckWrapper = styled.div`
+//   position: relative;
+//   display: flex;
+//   flex-wrap: nowrap;
+//   align-items: center;
+//   width: 100%;
+//   outline: none;
+// `;
 
-const commonWrapper = css`
-  position: relative;
-  width: 50%;
-  height: 56px;
-  padding: 26px 12px 10px;
-  border: 1px solid ${({ theme }) => theme.color.gray};
-`;
+// const commonWrapper = css`
+//   position: relative;
+//   width: 50%;
+//   height: 56px;
+//   padding: 26px 12px 10px;
+//   border: 1px solid ${({ theme }) => theme.color.gray};
+// `;
 
-const StCheckIn = styled.div`
-  ${commonWrapper}
-  border-right: none;
-  border-top-left-radius: 8px;
-`;
+// const StCheckIn = styled.div`
+//   ${commonWrapper}
+//   border-right: none;
+//   border-top-left-radius: 8px;
+// `;
 
-const StCheckOut = styled.div`
-  ${commonWrapper}
-  border-top-right-radius: 8px;
-`;
+// const StCheckOut = styled.div`
+//   ${commonWrapper}
+//   border-top-right-radius: 8px;
+// `;
 
-const StName = styled.div`
-  position: absolute;
-  top: 10px;
-  left: 12px;
-  font-size: 10px;
-  font-weight: 600;
-  line-height: 12px;
-`;
+// const StName = styled.div`
+//   position: absolute;
+//   top: 10px;
+//   left: 12px;
+//   font-size: 10px;
+//   font-weight: 600;
+//   line-height: 12px;
+// `;
 
-const StContent = styled.div`
-  font-size: 14px;
-  color: ${({ theme }) => theme.color.darkGray};
-`;
+// const StContent = styled.div`
+//   font-size: 14px;
+//   color: ${({ theme }) => theme.color.darkGray};
+// `;
 
 const StReserveBtn = styled(Button)`
   margin-top: 16px;
