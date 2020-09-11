@@ -12,6 +12,7 @@ import modal from './modal';
 import map from './map';
 import reservation from './reservation';
 import socket from './socket';
+import mouseEvents from './mouseEvents';
 
 const rootReducer = combineReducers({
   user,
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   map,
   reservation,
   socket,
+  mouseEvents,
 });
 
 export default rootReducer;

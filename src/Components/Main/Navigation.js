@@ -104,4 +104,4 @@ const Navigation = ({ isScrollTop, isSearchBtnClicked }) => {
   );
 };
 
-export default Navigation;
+export default React.memo(Navigation);

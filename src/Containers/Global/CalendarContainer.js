@@ -118,7 +118,6 @@ const CalendarContainer = ({
     if (checkBeforeCheckin(dateTime) && !isDetailPage) {
       console.log('■■■ beforecheckin - mainPage', date);
       setCheckinData(date);
-      // setCheckoutData('');
       return;
     }
     if (!checkout && getDiff(dateTime, true)) {
@@ -132,7 +131,6 @@ const CalendarContainer = ({
     if (checkout) {
       console.log('■■■ recheckin', date, checkout);
       setCheckinData(date);
-      // setCheckoutData('');
       return;
     }
     if (checkin && !checkBeforeCheckin(dateTime)) {

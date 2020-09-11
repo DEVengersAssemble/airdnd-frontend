@@ -79,7 +79,6 @@ const MapMarker = ({
       {isOpen && (
         <InfoBox
           className="InfoBox"
-          // style={{ overflow: 'hidden !important', maxHeight: '400px' }}
           options={{ closeBoxURL: '', enableEventPropagation: true }}
         >
           <HomePopupContainer

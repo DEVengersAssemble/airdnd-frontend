@@ -7,13 +7,14 @@ import qs from 'qs';
 
 const MsgListSectionItemContainer = ({ msg }) => {
   // redux
-  const { activeId, msgDetailSectionState } = useSelector(
-    state => state.message,
+  const { activeId, activeMsg } = useSelector(state => state.message);
+  const { msgDetailSectionState } = useSelector(
+    state => state.message.mediaState,
   );
   const dispatch = useDispatch();
 
   // variable
-  const { hostname, id, state } = msg;
+  const { hostname, id } = msg;
   const {
     hostProfileImg,
     lastMsg,
@@ -41,7 +42,6 @@ const MsgListSectionItemContainer = ({ msg }) => {
 
   // event
   const onClickList = () => {
-    // id에 맞는 메시지를 가져와야함...... 시발 어떻게 하지
     dispatch(setActiveId(id));
     !msgDetailSectionState && dispatch(showMsgDetailSection());
   };
@@ -59,7 +59,7 @@ const MsgListSectionItemContainer = ({ msg }) => {
       id={id}
       activeId={activeId}
       filter={filter}
-      state={state}
+      state={activeMsg.state}
     />
   );
 };

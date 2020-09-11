@@ -16,8 +16,8 @@ const MsgListSectionHeader = ({
   return (
     <MsgListSectionHeaderWrapper>
       <MsgListSectionHeaderTitle>
-        {state === 'all' && '메시지 주고받기'}
-        {state === 'hide' && '보관 처리됨'}
+        {(state === 'all' || state === undefined) && '메시지 주고받기'}
+        {state === 'hidden' && '보관 처리됨'}
         {state === 'unread' && '읽지 않음'}
       </MsgListSectionHeaderTitle>
       <StMsgListSectionHeaderFilterButton

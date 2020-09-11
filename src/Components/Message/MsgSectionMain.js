@@ -2,18 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 import MsgSectionChatItemContainer from '../../Containers/Message/MsgSectionChatItemContainer';
 
-const MsgSectionMain = ({ activeMsg, chatHistory, isHost, chat }) => {
+const MsgSectionMain = ({ myRef, activeMsg, chatHistory, chat }) => {
   return (
     <MsgSectionMainWrapper>
       <MsgSectionMainChattingWrapper>
         {chatHistory && (
-          <MsgSectionMainChattingBox>
-            {chatHistory.map(chat => (
+          <MsgSectionMainChattingBox ref={myRef}>
+            {chatHistory.map((chat, i) => (
               <MsgSectionChatItemContainer
                 activeMsg={activeMsg}
-                key={chat.id}
+                key={i}
                 chat={chat}
-                isHost={isHost}
               />
             ))}
           </MsgSectionMainChattingBox>
@@ -55,7 +54,6 @@ const MsgSectionMainChattingWrapper = styled.div`
 `;
 
 const MsgSectionMainChattingBox = styled.ul`
-  /* border: 1px solid red; */
   width: 100%;
   max-width: 57rem;
   min-width: 37.5rem;

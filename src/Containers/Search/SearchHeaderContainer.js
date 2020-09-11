@@ -23,14 +23,23 @@ const SearchHeaderContainer = () => {
     dispatch(reset());
   };
 
+  console.log(
+    'stop rendering!!!!!!!!!!!!!',
+    '\n headerState',
+    headerState,
+    '\n initAnimation',
+    initAnimation,
+  );
+
+  // 이게 어제 무한 렌더링 고쳤던 부분 ㅠㅠ
   useEffect(() => {
     if (!initAnimation && headerState) {
       setInitAnimation(true);
     } else if (headerState) {
-      window.addEventListener('scroll', throttle(onScroll, 150));
+      window.addEventListener('scroll', throttle(onScroll, 150), true);
     }
     return () => {
-      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('scroll', onScroll, true);
     };
   }, [onScroll, initAnimation]);
 

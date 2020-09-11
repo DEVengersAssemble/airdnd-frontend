@@ -4,9 +4,13 @@ import {
   reducerUtils,
   handleAsyncActions,
 } from '../lib/asyncUtils';
-import { fetchBookmarkDataThunk } from '../lib/bookmarkUtils';
+import {
+  fetchBookmarkDataThunk,
+  createBookmarkDataThunk,
+} from '../lib/bookmarkUtils';
 
 // action type
+const SET_BOOKMARKLISTS = 'wishlists/SET_BOOKMARKLISTS';
 const FETCH_BOOKMARKLISTS = 'wishlists/FETCH_BOOKMARKLISTS';
 const FETCH_BOOKMARKLISTS_SUCCESS = 'wishlists/FETCH_BOOKMARKLISTS_SUCCESS';
 const FETCH_BOOKMARKLISTS_ERROR = 'wishlists/FETCH_BOOKMARKLISTS_ERROR';
@@ -27,11 +31,15 @@ const CLOSE_LIST_MODAL = 'wishlists/CLOSE_LIST_MODAL';
 const OPEN_NEW_MODAL = 'wishlists/OPEN_NEW_MODAL';
 const CLOSE_NEW_MODAL = 'wishlists/CLOSE_NEW_MODAL';
 // action creator
+export const setBookmarkLists = bookmarkLists => ({
+  type: SET_BOOKMARKLISTS,
+  bookmarkLists,
+});
 export const fetchBookmarkLists = fetchDataThunk(
   FETCH_BOOKMARKLISTS,
   api.fetchWishlistsData,
 );
-export const createBookmarkList = fetchDataThunk(
+export const createBookmarkList = createBookmarkDataThunk(
   CREATE_BOOKMARKLIST,
   api.postWishlists,
 );
@@ -152,6 +160,13 @@ const initialState = {
 // reducer
 const wishlists = (state = initialState, action) => {
   switch (action.type) {
+    case SET_BOOKMARKLISTS:
+      return {
+        ...state,
+        data: {
+          bookmarkLists: action.bookmarkLists,
+        },
+      };
     case FETCH_BOOKMARKLISTS:
     case FETCH_BOOKMARKLISTS_SUCCESS:
     case FETCH_BOOKMARKLISTS_ERROR:
@@ -162,12 +177,15 @@ const wishlists = (state = initialState, action) => {
         loading: true,
       };
     case CREATE_BOOKMARKLIST_SUCCESS:
+      console.log(action, action.type, action.param);
       return {
         ...state,
         loading: false,
         data: {
           ...state.data,
-          bookmarkLists: state.data.bookmarkLists.concat(action.payload),
+          bookmarkLists: state.data.bookmarkLists.concat({
+            bookmarkListTitle: action.param.bookmarkListTitle,
+          }),
         },
       };
     case CREATE_BOOKMARKLIST_ERROR:

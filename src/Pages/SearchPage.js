@@ -7,7 +7,7 @@ import SearchHeaderContainer from '../Containers/Search/SearchHeaderContainer';
 const SearchPage = () => {
   return (
     <StWrapper>
-      <SearchHeaderContainer></SearchHeaderContainer>
+      <SearchHeaderContainer />
       <SearchContentContainer />
       <Footer />
     </StWrapper>
