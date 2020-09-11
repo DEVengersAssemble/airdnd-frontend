@@ -27,7 +27,6 @@ const MapContainer = ({ markers }) => {
   const dispatch = useDispatch();
   const openFilterModal = () => dispatch(openPopup('all'));
   const updateZoom = zoom => dispatch(zoomSet(zoom));
-  const onHideMap = () => dispatch(hideMap());
   const onCloseMap = () => dispatch(closeMap());
   const checkMapSearch = () => dispatch(setMapSearch());
   const onZoomIn = () => dispatch(zoomIn());
@@ -36,13 +35,21 @@ const MapContainer = ({ markers }) => {
     e.target.nodeName === 'DIV' && dispatch(closeMarker());
   };
 
+  const onHideMap = () => {
+    dispatch(hideMap());
+    queryObj.mapState = 0;
+    history.replace(`?${qs.stringify(queryObj)}`);
+    window.scrollTo({ top: 0 });
+  };
+
   const changeBounds = bounds => {
-    console.log('3333333333333333', mapZoom);
+    if (!mapSearch) return;
     const newQueryObj = _.omit(queryObj, ['page']);
     Object.keys(bounds).forEach(bound => (newQueryObj[bound] = bounds[bound]));
     history.replace(`?${qs.stringify(newQueryObj)}`);
     dispatch(fetchData(`?${qs.stringify(newQueryObj)}`));
     dispatch(setMapBounds(bounds));
+    window.scrollTo({ top: 0 });
   };
 
   return (

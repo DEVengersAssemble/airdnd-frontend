@@ -138,7 +138,7 @@ const SearchHeader = ({
   const [, checkOutMonth, checkOutDay] =
     checkOut && checkOut.replace(/\b0/g, '').split('.');
   const { adult, child } = guests;
-  const guestCount = adult + child;
+  const guestCount = +adult + +child;
   return (
     <StSearchHeader isSearchBtnClicked={isSearchBtnClicked}>
       <Logo handleLogoClick={handleLogoClick}></Logo>

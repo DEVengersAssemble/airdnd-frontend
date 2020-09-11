@@ -1,23 +1,30 @@
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import MsgListSectionMain from '../../Components/Message/MsgListSectionMain';
-import { allMsgList } from '../../Modules/message';
+import { useLocation } from 'react-router';
+import qs from 'qs';
+import { setActiveId } from '../../Modules/message';
 
 const MsgListSectionMainContainer = () => {
-  // ! 작업중
-  // redux
-  const { filteredMsgs } = useSelector(state => state.message);
+  // ! redux
+  const { data } = useSelector(state => state.message.messages);
   const dispatch = useDispatch();
+  // ! query
+  const query = useLocation();
+  const { filter } = qs.parse(query.search, {
+    ignoreQueryPrefix: true,
+  });
 
-  // variable
-  const hasMsgs = filteredMsgs.length;
+  // ! variable
+  const hasMsgs = data && data[`${filter || 'all'}`].length;
+  const messages = (data && data[`${filter}`]) || data.all;
+  const { id } = messages[0];
 
-  // 마운트 되었을 때 allMsgList가 바로 렌더링
   useEffect(() => {
-    dispatch(allMsgList(0));
+    dispatch(setActiveId(id));
   }, [dispatch]);
 
-  return <MsgListSectionMain hasMsgs={hasMsgs} filteredMsgs={filteredMsgs} />;
+  return <MsgListSectionMain hasMsgs={hasMsgs} messages={messages} />;
 };
 
 export default MsgListSectionMainContainer;

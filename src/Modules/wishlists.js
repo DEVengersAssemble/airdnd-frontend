@@ -4,6 +4,8 @@ import {
   reducerUtils,
   handleAsyncActions,
 } from '../lib/asyncUtils';
+import { fetchBookmarkDataThunk } from '../lib/bookmarkUtils';
+
 // action type
 const FETCH_BOOKMARKLISTS = 'wishlists/FETCH_BOOKMARKLISTS';
 const FETCH_BOOKMARKLISTS_SUCCESS = 'wishlists/FETCH_BOOKMARKLISTS_SUCCESS';
@@ -33,37 +35,15 @@ export const createBookmarkList = fetchDataThunk(
   CREATE_BOOKMARKLIST,
   api.postWishlists,
 );
-let id = 5;
-// export const createBookmarkList = value => ({
-//   type: CREATE_BOOKMARKLIST,
-//   bookmarkList: {
-//     bookmarkListId: id++,
-//     bookmarkListTitle: value,
-//     bookmarks: [],
-//   },
-// });
-
-// export const addBookmarkOldList = bookmarkListId => ({
-//   type: ADD_BOOKMARK_OLD_LIST,
-//   bookmarkListId,
-// });
-export const addBookmarkOldList = fetchDataThunk(
+export const addBookmarkOldList = fetchBookmarkDataThunk(
   ADD_BOOKMARK_OLD_LIST,
   api.postWishlists,
 );
-// export const addBookmarkNewList = title => ({
-//   type: ADD_BOOKMARK_NEW_LIST,
-//   bookmarkList: {
-//     bookmarkListId: id++,
-//     bookmarkListTitle: title,
-//   },
-// });
-export const addBookmarkNewList = fetchDataThunk(
+export const addBookmarkNewList = fetchBookmarkDataThunk(
   ADD_BOOKMARK_NEW_LIST,
   api.postWishlists,
 );
-// export const removeBookmark = homeId => ({ type: REMOVE_BOOKMARK, homeId });
-export const removeBookmark = fetchDataThunk(
+export const removeBookmark = fetchBookmarkDataThunk(
   REMOVE_BOOKMARK,
   api.deleteWishList,
 );
@@ -177,14 +157,25 @@ const wishlists = (state = initialState, action) => {
     case FETCH_BOOKMARKLISTS_ERROR:
       return handleAsyncActions(FETCH_BOOKMARKLISTS)(state, action);
     case CREATE_BOOKMARKLIST:
+      return {
+        ...state,
+        loading: true,
+      };
     case CREATE_BOOKMARKLIST_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        data: {
+          ...state.data,
+          bookmarkLists: state.data.bookmarkLists.concat(action.payload),
+        },
+      };
     case CREATE_BOOKMARKLIST_ERROR:
       return {
         ...state,
-        ...handleAsyncActions(FETCH_BOOKMARKLISTS)(state, action),
-        // ...state.data.bookmarkLists.concat(action.bookmarkList),
+        loading: false,
+        error: action.payload,
       };
-
     // case CREATE_BOOKMARKLIST:
     //   return {
     //     ...state,
@@ -197,6 +188,7 @@ const wishlists = (state = initialState, action) => {
         loading: true,
       };
     case ADD_BOOKMARK_OLD_LIST_SUCCESS:
+      console.log(action, action.type, action.param);
       return {
         ...state,
         loading: false,
@@ -205,12 +197,15 @@ const wishlists = (state = initialState, action) => {
         selectedImg: '',
         data: {
           bookmarkLists: state.data.bookmarkLists.map(bmList =>
-            bmList.bookmarkListId === action.bookmarkListId
+            bmList.bookmarkListId === action.param.bookmarkListId
               ? {
                   ...bmList,
                   bookmarks: [
                     ...bmList.bookmarks,
-                    { homeId: state.selectedId, images: state.selectedImg },
+                    {
+                      homeId: action.param.bookmarkHomeId,
+                      images: action.param.bookmarkImage,
+                    },
                   ],
                 }
               : bmList,
@@ -237,10 +232,13 @@ const wishlists = (state = initialState, action) => {
         selectedImg: '',
         data: {
           bookmarkLists: state.data.bookmarkLists.concat({
-            bookmarkListId: action.bookmarkListId,
-            bokmarkListTitle: action.bookmarkListTitle,
+            bookmarkListId: action.payload.result,
+            bookmarkListTitle: action.param.bookmarkListTitle,
             bookmarks: [
-              { homeId: state.selectedId, images: state.selectedImg },
+              {
+                homeId: action.param.bookmarkHomeId,
+                images: action.param.bookmarkImage,
+              },
             ],
           }),
         },
@@ -264,7 +262,7 @@ const wishlists = (state = initialState, action) => {
           bookmarkLists: state.data.bookmarkLists.map(bmList => ({
             ...bmList,
             bookmarks: bmList.bookmarks.filter(
-              bm => bm.homeId !== action.homeId,
+              bm => bm.homeId !== action.param.homeId,
             ),
           })),
         },

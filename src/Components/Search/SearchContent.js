@@ -8,13 +8,13 @@ import {
 } from '../../Containers/Global/BookmarkModalContainer';
 import FilterModalContainer from '../../Containers/Search/FilterModalContainer';
 
-const SearchContent = ({ view, openMap, closeMap }) => {
+const SearchContent = ({ isLoggedIn }) => {
   return (
     <StContent>
-      <SearchResultContainer view={view} openMap={openMap} />
-      <SearchMapContainer view={view} closeMap={closeMap} />
-      <BookmarkListModalContainer />
-      <NewBookmarkModalContainer />
+      <SearchResultContainer />
+      <SearchMapContainer />
+      {isLoggedIn && <BookmarkListModalContainer />}
+      {isLoggedIn && <NewBookmarkModalContainer />}
       <FilterModalContainer />
     </StContent>
   );

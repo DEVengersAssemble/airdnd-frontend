@@ -10,6 +10,7 @@ import WishlistsPage from '../Pages/WishlistsPage';
 import HowToUseInput from '../Components/Global/HowToUseInput';
 
 const MainRouter = () => {
+  const login = true;
   return (
     <Switch>
       <Route path="/" component={MainPage} exact />
@@ -17,11 +18,11 @@ const MainRouter = () => {
       <Route path="/Detail/:id" component={DetailPage} />
       <Route path="/Detail" component={DetailPage} />
       <Route path="/Reservation" component={ReservationPage} />
-      <Route path="/guest/inbox" component={MessagePage} />
-      <Route path="/guest/inbox/:id" component={MessagePage} />
-      <Route path="/trips" component={TripsPage} />
-      <Route path="/trips/:version" component={TripsPage} />
-      <Route path="/wishlists" component={WishlistsPage} />
+      {login && <Route path="/guest/inbox" component={MessagePage} />}
+      {login && <Route path="/guest/inbox/:id" component={MessagePage} />}
+      {login && <Route path="/trips" component={TripsPage} />}
+      {login && <Route path="/trips/:version" component={TripsPage} />}
+      {login && <Route path="/wishlists" component={WishlistsPage} />}
       {/* how to use global component */}
       <Route path="/HowToUseInput" component={HowToUseInput} />
       <Route

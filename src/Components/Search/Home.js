@@ -46,12 +46,13 @@ const Home = ({
     >
       <CarouselContainer
         size="large"
+        homeId={homeId}
         isHovered={isHovered}
         imageArray={imageArray}
         imageCount={imageCount}
         isSuperhost={isSuperhost}
       />
-      <StHome target="_blank" href={`http://localhost:3000/detail/${homeId}`}>
+      <StHome href={`http://localhost:3000/detail/${homeId}`}>
         <StDetailWrapper>
           <StDetail>{subTitle}</StDetail>
           <StTitle>{title}</StTitle>

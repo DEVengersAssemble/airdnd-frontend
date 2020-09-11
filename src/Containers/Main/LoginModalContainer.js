@@ -120,4 +120,4 @@ const LoginModalContainer = () => {
   );
 };
 
-export default LoginModalContainer;
+export default React.memo(LoginModalContainer);

@@ -1,20 +1,19 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import MsgListSectionItem from '../../Components/Message/MsgListSectionItem';
-import {
-  allMsgList,
-  hideMsgList,
-  unreadMsgList,
-  showMsgDetailSection,
-} from '../../Modules/message';
+import { showMsgDetailSection, setActiveId } from '../../Modules/message';
+import { useLocation } from 'react-router';
+import qs from 'qs';
 
-const MsgListSectionItemContainer = ({ msg, index }) => {
+const MsgListSectionItemContainer = ({ msg }) => {
   // redux
-  const { activeIndex } = useSelector(state => state.message);
+  const { activeId, msgDetailSectionState } = useSelector(
+    state => state.message,
+  );
   const dispatch = useDispatch();
 
   // variable
-  const { hostname } = msg;
+  const { hostname, id, state } = msg;
   const {
     hostProfileImg,
     lastMsg,
@@ -35,26 +34,20 @@ const MsgListSectionItemContainer = ({ msg, index }) => {
   const ci = ciDate.toLocaleDateString('ko-KR', options);
   const co = coDate.toLocaleDateString('ko-KR', options);
 
+  const query = useLocation();
+  const { filter } = qs.parse(query.search, {
+    ignoreQueryPrefix: true,
+  });
+
   // event
-  const onClickActive = useCallback(() => {
-    if (msg.state === 'all') {
-      dispatch(allMsgList(index));
-      dispatch(showMsgDetailSection());
-    }
-    if (msg.state === 'hide') {
-      dispatch(hideMsgList(index));
-      dispatch(showMsgDetailSection());
-    }
-    if (msg.state === 'unread') {
-      dispatch(unreadMsgList(index));
-      dispatch(showMsgDetailSection());
-    }
-  }, [dispatch, index, msg]);
+  const onClickList = () => {
+    // id에 맞는 메시지를 가져와야함...... 시발 어떻게 하지
+    dispatch(setActiveId(id));
+    !msgDetailSectionState && dispatch(showMsgDetailSection());
+  };
 
   return (
     <MsgListSectionItem
-      index={index}
-      activeIndex={activeIndex}
       hostname={hostname}
       hostProfileImg={hostProfileImg}
       lastMsg={lastMsg}
@@ -62,7 +55,11 @@ const MsgListSectionItemContainer = ({ msg, index }) => {
       ci={ci}
       co={co}
       isCanceled={isCanceled}
-      onClickActive={onClickActive}
+      onClickList={onClickList}
+      id={id}
+      activeId={activeId}
+      filter={filter}
+      state={state}
     />
   );
 };

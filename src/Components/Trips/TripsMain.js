@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import TripsSubRouter from '../../Routers/TripsSubRouter';
 import { Link } from 'react-router-dom';
 import TripsUpcomingContainer from '../../Containers/Trips/TripsUpcomingContainer';
 import TripsPastContainer from '../../Containers/Trips/TripsPastContainer';
@@ -52,7 +51,6 @@ const TripsMain = ({ isActive }) => {
         {isActive === 'upcoming' && <TripsUpcomingContainer />}
         {isActive === 'past' && <TripsPastContainer />}
         {isActive === 'canceled' && <TripsCanceledContainer />}
-        {/* <TripsSubRouter /> */}
       </TripsMainInner>
     </TripsMainWrapper>
   );
