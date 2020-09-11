@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import HouseRulesContainer from '../Containers/Reservation/HouseRulesContainer';
-import Payment from '../Components/Reservation/Payment';
 import GuestInfoContainer from '../Containers/Reservation/GuestInfoContainer';
+import Payment from '../Components/Reservation/Payment';
 
 const ReservationSubRouter = () => {
   return (
