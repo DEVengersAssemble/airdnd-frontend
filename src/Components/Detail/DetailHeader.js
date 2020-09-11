@@ -10,14 +10,14 @@ import { FiSearch } from 'react-icons/fi';
 
 const StDetailHeaderWrapper = styled.div`
   width: 100vw;
-  z-index: 100;
-  position: relative;
   background: ${({ theme }) => theme.color.white};
   border-bottom: 1px solid ${({ theme }) => theme.color.line};
 `;
 
 const StDetailHeader = styled.header`
+  position: relative;
   display: flex;
+  z-index: 100;
   max-width: 1200px;
   padding: 20px 40px 15px 40px;
   margin: 0 auto;
