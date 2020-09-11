@@ -14,7 +14,7 @@ const initialState = {
     id: 1,
     email: '',
     pwd: '',
-    fistName: '',
+    firstName: '',
     lastName: '',
     phone: '',
     birthDay: '',
