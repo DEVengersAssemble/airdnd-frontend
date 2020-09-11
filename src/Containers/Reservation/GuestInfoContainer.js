@@ -7,6 +7,16 @@ import {
   setChangeInitialMessage,
 } from '../../Modules/reservation';
 
+const payload = {
+  homeId: 1,
+  checkin: '2020.09.22',
+  checkout: '2020.09.25',
+  adult: 1,
+  child: 0,
+  infant: 0,
+  toHostMessage: '',
+};
+
 const GuestInfoContainer = () => {
   const {
     id,
