@@ -1,16 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const MsgDetailTitleBox = ({ hostname, address }) => {
-  // Canceled props일때 render 작업 필요
-
+const MsgDetailTitleBox = ({ hostname, addr, ci, co }) => {
   return (
     <MsgDetailTitleBoxWrapper>
       <MsgDetailTitleBoxSection>
-        <DitTitleBoxLocation>{address}</DitTitleBoxLocation>
+        <DitTitleBoxLocation>{addr}</DitTitleBoxLocation>
         {' · '}
         <MsgDetailTitleBoxReservedDate>
-          8월 17일 - 8월 18일
+          {ci} - {co}
         </MsgDetailTitleBoxReservedDate>
         <MsgDetailTitleBoxTitle>{hostname}님의 숙소</MsgDetailTitleBoxTitle>
       </MsgDetailTitleBoxSection>

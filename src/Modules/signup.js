@@ -1,5 +1,5 @@
 import * as signupApi from '../Api/signupApi';
-
+import { openModal } from './modal';
 const SIGN_UP = 'signup/SIGN_UP';
 const SIGN_UP_SUCCESS = 'signup/SIGN_UP_SUCCESS';
 const SIGN_UP_ERROR = 'signup/SIGN_UP_ERROR';
@@ -8,6 +8,7 @@ const SET_IS_CHECKING = 'signup/SET_IS_CHECKING';
 const SET_IS_PWD_FOCUSED = 'signup/SET_IS_PWD_FOCUSED';
 const SET_IS_PWD_CHANGED = 'signup/SET_IS_PWD_CHANGED';
 
+const SET_FORM = 'signup/SET_FORM';
 const RESET_FORM = 'signup/RESET_FORM';
 
 const SET_VALUE = 'signup/SET_VALUE';
@@ -22,6 +23,7 @@ export const signupRequest = userInfo => async dispatch => {
     dispatch({ type: SIGN_UP_SUCCESS, result });
     if (result === 'Success') {
       dispatch({ type: RESET_FORM, result });
+      dispatch(openModal('login'));
     } else if (result === 'AlreadyEmail') {
       dispatch({ type: SET_INVALID_EMAIL });
     }
@@ -29,6 +31,8 @@ export const signupRequest = userInfo => async dispatch => {
     dispatch({ type: SIGN_UP_ERROR, error });
   }
 };
+
+export const setForm = form => ({ type: SET_FORM, form });
 
 export const resetForm = result => ({ type: RESET_FORM, result });
 
@@ -117,6 +121,8 @@ const signup = (state = initialState, action) => {
         ...state,
         isPwdChanged: action.value,
       };
+    case SET_FORM:
+      return { ...initialState, form: action.form };
     case RESET_FORM:
       return { ...initialState, result: action.result };
     case SET_VALUE:

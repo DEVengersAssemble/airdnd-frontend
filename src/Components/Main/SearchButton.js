@@ -23,19 +23,10 @@ const StSearchButton = styled(Button)`
   background: ${({ theme }) => theme.color.main};
 `;
 
-const StSearchButtonText = styled.span`
-  font-size: 16px;
-  margin: 4px 0 0 6px;
-  @media ${({ theme }) => theme.size.iPad} {
-    display: none;
-  }
-`;
-
 const SearchButton = () => {
   return (
     <StSearchButton type="submit" btnType="circle">
       <FiSearch></FiSearch>
-      {/* <StSearchButtonText></StSearchButtonText> */}
     </StSearchButton>
   );
 };

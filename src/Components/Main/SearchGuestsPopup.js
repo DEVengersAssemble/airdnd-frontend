@@ -162,4 +162,4 @@ const SearchGuestsPopup = forwardRef(
   },
 );
 
-export default SearchGuestsPopup;
+export default React.memo(SearchGuestsPopup);

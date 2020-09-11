@@ -109,4 +109,4 @@ const DropDown = forwardRef(
     );
   },
 );
-export default DropDown;
+export default React.memo(DropDown);

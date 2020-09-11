@@ -247,8 +247,7 @@ const SearchForm = ({
   decreaseGuestCount,
   refObj,
 }) => {
-  // console.log('[SEARCHFORM]', type);
-  const { location, checkIn, checkOut, flexibleDate, guests } = searchData;
+  const { location, checkIn, checkOut, guests } = searchData;
   const { adult, child, infant } = guests;
   const guestCount = adult + child + infant;
 
@@ -389,7 +388,9 @@ const SearchForm = ({
           <StTypeText>인원</StTypeText>
           <StContentText value={guestCount} name="guests">
             {guestCount
-              ? `게스트 ${+adult + +child}명, 유아 ${infant}명`
+              ? !infant
+                ? `게스트 ${+adult + +child}명`
+                : `게스트 ${+adult + +child}명, 유아 ${infant}명`
               : '게스트 추가'}
           </StContentText>
         </StTextWrapper>

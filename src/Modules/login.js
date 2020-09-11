@@ -1,12 +1,11 @@
 import * as loginApi from '../Api/loginApi';
+import { setUser } from './user';
+import { closeModal } from './modal';
+import { setBookmarkLists } from './wishlists';
 
 const LOG_IN = 'login/LOG_IN';
 const LOG_IN_SUCCESS = 'login/LOG_IN_SUCCESS';
 const LOG_IN_ERROR = 'login/LOG_IN_ERROR';
-
-const LOG_OUT = 'login/LOG_OUT';
-const LOG_OUT_SUCCESS = 'login/LOG_OUT_SUCCESS';
-const LOG_OUT_ERROR = 'login/LOG_OUT_ERROR';
 
 const SET_IS_CHECKING = 'login/SET_IS_CHECKING';
 const SET_IS_PWD_SHOWN = 'login/SET_IS_PWD_SHOWN';
@@ -19,9 +18,16 @@ const SET_INVALID = 'login/SET_INVALID';
 export const loginRequest = userInfo => async dispatch => {
   dispatch({ type: LOG_IN });
   try {
-    const { result } = await loginApi.sendLoginReq(userInfo);
-    console.log('[login] ', result);
+    const data = await loginApi.sendLoginReq(userInfo);
+    console.log('[login] ', data);
+    const { result, user, bookmarkLists } = data;
     dispatch({ type: LOG_IN_SUCCESS, result });
+    if (result === 'Success') {
+      dispatch(setUser(user));
+      dispatch(setBookmarkLists(bookmarkLists));
+      dispatch(resetForm(''));
+      dispatch(closeModal());
+    }
   } catch (error) {
     dispatch({ type: LOG_IN_ERROR, error });
   }

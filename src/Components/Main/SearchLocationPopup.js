@@ -50,17 +50,7 @@ const StItemText = styled.span`
 `;
 
 const SearchLocationPopup = forwardRef(
-  (
-    {
-      type,
-      changeType,
-      searchData,
-      locationResult,
-      changeSearchData,
-      // changeFocus,
-    },
-    ref,
-  ) => {
+  ({ type, changeType, searchData, locationResult, changeSearchData }, ref) => {
     const { location } = searchData;
     return (
       <StSearchLocationPopupWrapper>
@@ -75,7 +65,6 @@ const SearchLocationPopup = forwardRef(
                   onClick={() => {
                     changeSearchData('location', item);
                     changeType('checkIn');
-                    // changeFocus('checkIn');
                   }}
                 >
                   <StSearchLocationIconWrapper>
@@ -92,4 +81,4 @@ const SearchLocationPopup = forwardRef(
   },
 );
 
-export default SearchLocationPopup;
+export default React.memo(SearchLocationPopup);

@@ -11,32 +11,27 @@ import {
 } from '../../Modules/socket';
 
 const MsgSectionFooterContainer = () => {
-  // // ! redux
-  // const { activeIndex, filteredMsgs } = useSelector(state => state.message);
-  // const { firstName } = useSelector(state => state.trips);
+  // ! redux
+  // const { activeMsg } = useSelector(state => state.message);
+  const { firstName } = useSelector(state => state.trips);
 
-  // // ! variable
-  // const activeMsg = filteredMsgs.find(
-  //   (_, index) => filteredMsgs[index] === filteredMsgs[activeIndex],
-  // );
-
-  // // ! socket msg
+  // ! socket
   // const socket = io.connect('http://localhost:4000');
 
-  // const { msg } = useSelector(state => state.socket);
-  // const dispatch = useDispatch();
+  const { msg } = useSelector(state => state.socket);
+  const dispatch = useDispatch();
 
-  // const onTextChange = e => {
-  //   dispatch(sendChat(e.target.value));
-  //   // setMsg(e.target.value);
-  // };
+  const onTextChange = e => {
+    dispatch(sendChat(e.target.value));
+    // setMsg(e.target.value);
+  };
 
-  // const onMsgSubmit = e => {
-  //   e.preventDefault();
-  //   console.log(msg);
-  //   socket.emit('chat message', msg);
-  //   dispatch(clearInput());
-  // };
+  const onMsgSubmit = e => {
+    e.preventDefault();
+    console.log(msg);
+    // socket.emit('chat message', msg);
+    dispatch(clearInput());
+  };
 
   // React.useEffect(() => {
   //   socket.on('chat message', message => {
@@ -47,9 +42,9 @@ const MsgSectionFooterContainer = () => {
 
   return (
     <MsgSectionFooter
-    // onTextChange={onTextChange}
-    // onMsgSubmit={onMsgSubmit}
-    // msg={msg}
+      onTextChange={onTextChange}
+      onMsgSubmit={onMsgSubmit}
+      // msg={msg}
     />
   );
 };
