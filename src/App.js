@@ -10,10 +10,10 @@ const checkCookie = cname => {
   const cookieArr = decodedCookies.split(';');
   for (let i = 0; i < cookieArr.length; i++) {
     let c = cookieArr[i];
-    while (c.charAt(0) == ' ') {
+    while (c.charAt(0) === ' ') {
       c = c.substring(1);
     }
-    if (c.indexOf(name) == 0) {
+    if (c.indexOf(name) === 0) {
       return true;
     }
   }
