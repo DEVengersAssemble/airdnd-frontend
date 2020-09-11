@@ -4,8 +4,9 @@ import { openMap } from '../../Modules/search';
 import SearchResult from '../../Components/Search/SearchResult';
 
 const SearchResultContainer = () => {
-  const { mapState, viewState, data } = useSelector(state => state.search);
-  const searchForm = useSelector(state => state.searchForm);
+  const { mapState, viewState, data, filterForm } = useSelector(
+    state => state.search,
+  );
 
   const dispatch = useDispatch();
   const onOpenMap = () => dispatch(openMap());
@@ -19,8 +20,9 @@ const SearchResultContainer = () => {
     <SearchResult
       mapState={mapState}
       view={viewState}
+      location={filterForm.location}
       dataTotal={data.dataTotal}
-      searchForm={searchForm}
+      searchForm={filterForm}
       convertDate={convertDate}
       onOpenMap={onOpenMap}
     />

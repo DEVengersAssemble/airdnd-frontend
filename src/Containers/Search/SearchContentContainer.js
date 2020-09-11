@@ -3,10 +3,10 @@ import { useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchData, getFilterForm } from '../../Modules/search';
 import { getSearchForm } from '../../Modules/searchForm';
+import { fetchBookmarkLists } from '../../Modules/wishlists';
 import SearchContent from '../../Components/Search/SearchContent';
 import qs from 'qs';
 import _ from 'lodash';
-import { fetchBookmarkLists } from '../../Modules/wishlists';
 
 const SearchContentContainer = () => {
   const { id } = useSelector(state => state.user.data);
@@ -30,6 +30,12 @@ const SearchContentContainer = () => {
 
   const changeType = (key, obj) => {
     switch (key) {
+      case 'location':
+      case 'checkIn':
+      case 'checkOut':
+      case 'adult':
+      case 'child':
+        return obj[key];
       case 'amenityList':
       case 'facilityList':
       case 'hostLangList':
@@ -40,17 +46,7 @@ const SearchContentContainer = () => {
   };
 
   const filterFormObj = _.mapValues(
-    _.omit(queryObj, [
-      'location',
-      'checkIn',
-      'checkOut',
-      'dateDiff',
-      'felxibleDate',
-      'guests',
-      'adult',
-      'child',
-      'infant',
-    ]),
+    _.omit(queryObj, ['dateDiff', 'flexibleDate', 'guests']),
     (value, key) => changeType(key, queryObj),
   );
 
@@ -60,15 +56,10 @@ const SearchContentContainer = () => {
     dispatch(fetchData(query));
     dispatch(getSearchForm(searchFormObj));
     dispatch(getFilterForm(filterFormObj));
+    // fetch bookmark lists 없애기
     dispatch(fetchBookmarkLists());
     window.scrollTo({ top: 0 });
-  }, [
-    queryObj.location,
-    queryObj.checkIn,
-    queryObj.checkOut,
-    queryObj.adult,
-    queryObj.child,
-  ]);
+  }, [queryObj.location]);
 
   if (loading)
     return <div style={{ width: '100%', height: 'calc(100vh - 8rem)' }}></div>;
