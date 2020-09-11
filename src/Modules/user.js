@@ -13,7 +13,7 @@ const SET_IS_LOGGED_IN = 'user/SET_IS_LOGGED_IN';
 // action creators
 export const setIsLoggedIn = value => ({ type: SET_IS_LOGGED_IN, value });
 
-export const getUser = data => ({
+export const setUser = data => ({
   type: SET_USER,
   data,
 });
