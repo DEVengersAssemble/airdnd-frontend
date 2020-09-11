@@ -15,12 +15,13 @@ const SearchResult = ({
   convertDate,
 }) => {
   const { location, guests, checkIn, checkOut } = searchForm;
+  const guestCount = +guests.adult + +guests.child;
   return (
     <StWrapper mapState={mapState} view={view}>
       <StSpan>
         숙박 {dataTotal}건{' '}
         {checkIn && ` · ${convertDate(checkIn)} - ${convertDate(checkOut)}`}
-        {guests > 0 && ` · 게스트 ${guests}명`}
+        {guestCount > 0 && ` · 게스트 ${guestCount}명`}
       </StSpan>
       <StHeader>{location}의 숙소</StHeader>
       <FilterListContainer mapState={mapState} />
