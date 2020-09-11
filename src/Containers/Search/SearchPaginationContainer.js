@@ -4,10 +4,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useLocation, useHistory } from 'react-router-dom';
 import qs from 'qs';
 import { navigatePage, fetchData } from '../../Modules/search';
-import _ from 'lodash';
 
 const SearchPaginationContainer = () => {
   const { data, page } = useSelector(state => state.search);
+  const { dateDiff } = useSelector(state => state.searchForm);
   const dispatch = useDispatch();
   const history = useHistory();
   const { search: query } = useLocation();
@@ -28,6 +28,7 @@ const SearchPaginationContainer = () => {
   return (
     <SearchPagination
       page={page}
+      dateDiff={dateDiff}
       dataTotal={data.dataTotal}
       pageArray={pageArray}
       onNavPage={onNavPage}
