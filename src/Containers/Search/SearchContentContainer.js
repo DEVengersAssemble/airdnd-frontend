@@ -7,6 +7,7 @@ import { fetchBookmarkLists } from '../../Modules/wishlists';
 import SearchContent from '../../Components/Search/SearchContent';
 import qs from 'qs';
 import _ from 'lodash';
+import Loader from '../../Components/Global/Loader';
 
 const SearchContentContainer = () => {
   const { id } = useSelector(state => state.user.data);
