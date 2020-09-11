@@ -3,10 +3,14 @@ import ReservationSubRouter from '../../Routers/ReservationSubRouter';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { getHome } from '../../Modules/home';
+import { openModal } from '../../Modules/modal';
+import LoginModalContainer from '../Main/LoginModalContainer';
+import ReservationNotLogIn from '../../Components/Reservation/ReservationNotLogIn';
 
 const ReservationMainContainer = () => {
-  const dispatch = useDispatch();
+  const { isLoggedIn } = useSelector(state => state.user);
   const { home } = useSelector(state => state.home.homeState);
+  const dispatch = useDispatch();
 
   const { pathname } = useLocation();
   const regExp = /\d/g;
@@ -17,6 +21,17 @@ const ReservationMainContainer = () => {
     dispatch(getHome(filteredHomeId));
   }, []);
 
+  const onClick = () => dispatch(openModal('login'));
+
+  if (isLoggedIn) {
+    dispatch(openModal('login'));
+    return (
+      <>
+        <ReservationNotLogIn onClick={onClick} />
+        <LoginModalContainer />
+      </>
+    );
+  }
   if (!home) return <div style={{ padding: '300px 0' }} />;
 
   return <ReservationSubRouter />;

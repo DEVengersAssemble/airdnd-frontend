@@ -8,14 +8,16 @@ const Aside = ({
   title,
   subTitle,
   price,
+  multipliedPrice,
+  percentage,
+  totalPrice,
   image,
   reviewCount,
-  getPercentage,
-  getTotalPrice,
+  dateDiff,
+  checkinString,
+  checkoutString,
+  countGuest,
 }) => {
-  const percentage = getPercentage(price);
-  const totalPrice = getTotalPrice(price, percentage);
-
   return (
     <StWrapper>
       <StSubjectWrapper>
@@ -42,19 +44,20 @@ const Aside = ({
               fillRule="evenodd"
             ></path>
           </svg>
-          게스트 1명
+          게스트 {countGuest}명
         </div>
         <div>
           <AiOutlineCalendar />
-          <span className="a11yHidden">체크인</span>2020년 9월 20일
+          <span className="a11yHidden">체크인</span>
+          {checkinString}
           <StArrowIcon />
-          <span className="a11yHidden">체크아웃</span>2020년 9월 22일
+          <span className="a11yHidden">체크아웃</span>
+          {checkoutString}
         </div>
       </StInfoWrapper>
       <StChargeList>
         <li>
-          ₩{price} x 2박
-          <span>₩{price}</span>
+          ₩{price} x {dateDiff}박<span>₩{multipliedPrice}</span>
         </li>
         <li>
           서비스 수수료
@@ -73,6 +76,7 @@ const StWrapper = styled.div`
   width: 37%;
   margin-left: 5%;
   border: 1px solid ${({ theme }) => theme.color.line};
+  border-radius: 8px;
   padding: 24px;
 `;
 
@@ -120,6 +124,7 @@ const StHomeImage = styled.img`
   min-height: 1px;
   object-fit: cover;
   vertical-align: top;
+  border-radius: 4px;
 
   @media ${({ theme }) => theme.size.medium} {
     order: -1;

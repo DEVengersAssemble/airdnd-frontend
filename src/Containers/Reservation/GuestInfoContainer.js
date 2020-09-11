@@ -2,14 +2,27 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import GuestInfo from '../../Components/Reservation/GuestInfo';
+import {
+  setToHostMessage,
+  setChangeInitialMessage,
+} from '../../Modules/reservation';
 
 const GuestInfoContainer = () => {
-  const { id, hostFirstName, profileImg, isSupperhost } = useSelector(
+  const {
+    id,
+    hostFirstName,
+    profileImg,
+    isSupperhost,
+    toHostMessage,
+    changeInitialMessage,
+  } = useSelector(
     state => ({
       id: state.home.homeState.home.id,
       hostFirstName: state.home.homeState.home.host.hostFirstName,
       profileImg: state.home.homeState.home.host.profileImg,
       isSupperhost: state.home.homeState.home.host.isSupperhost,
+      toHostMessage: state.reservation.toHostMessage,
+      changeInitialMessage: state.reservation.changeInitialMessage,
     }),
     shallowEqual,
   );
@@ -18,10 +31,15 @@ const GuestInfoContainer = () => {
   const [toggle, setToggle] = useState(false);
 
   const onToggle = () => setToggle(!toggle);
-  const onNextPage = () => history.push(`/Reservation/Payment/${id}`);
+  const onNextPage = () => {
+    if (!changeInitialMessage) dispatch(setChangeInitialMessage());
+    if (!toHostMessage) return;
+    history.push(`/Reservation/Payment/${id}`);
+  };
 
-  const onBlur = e => {
-    // return e.target.textContent ?
+  const onSetMessage = ({ target }) => {
+    if (!changeInitialMessage) dispatch(setChangeInitialMessage());
+    dispatch(setToHostMessage(target.value));
   };
 
   return (
@@ -30,9 +48,11 @@ const GuestInfoContainer = () => {
       profileImg={profileImg}
       isSupperhost={isSupperhost}
       onNextPage={onNextPage}
-      onBlur={onBlur}
+      onSetMessage={onSetMessage}
       onToggle={onToggle}
       toggle={toggle}
+      toHostMessage={toHostMessage}
+      blankMessage={changeInitialMessage && !toHostMessage}
     />
   );
 };

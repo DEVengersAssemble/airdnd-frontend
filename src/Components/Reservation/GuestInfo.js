@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import CommonLayout from './CommonLayout';
 import Toggle from '../Global/Toggle';
 import Profile from '../Global/Profile';
@@ -11,9 +11,11 @@ const GuestInfo = ({
   profileImg,
   isSupperhost,
   onNextPage,
-  onBlur,
+  onSetMessage,
   onToggle,
   toggle,
+  toHostMessage,
+  blankMessage,
 }) => {
   return (
     <CommonLayout title="일행이 있나요?">
@@ -42,10 +44,15 @@ const GuestInfo = ({
         />
       </StToHostWrapper>
       <StTextarea
-        onBlur={onBlur}
+        value={toHostMessage}
+        onBlur={onSetMessage}
+        onChange={onSetMessage}
         placeholder={`${hostFirstName}님, 안녕하세요! 숙소에서 보낼 멋진 2박이 기다려집니다!`}
+        blankMessage={blankMessage}
       ></StTextarea>
-      <StWarningMsg>호스트에게 전할 메세지를 입력하세요</StWarningMsg>
+      {blankMessage && (
+        <StWarningMsg>호스트에게 전할 메세지를 입력하세요</StWarningMsg>
+      )}
       <StButton btnType="color" color="main" onClick={onNextPage}>
         계속하기
       </StButton>
@@ -119,6 +126,13 @@ const StTextarea = styled.textarea`
   &:focus {
     border-color: ${({ theme }) => theme.color.green};
   }
+
+  ${({ blankMessage }) =>
+    blankMessage &&
+    css`
+      background-color: #fff8f6;
+      border-color: ${({ theme }) => theme.color.warning} !important;
+    `}
 `;
 
 const StWarningMsg = styled.div`

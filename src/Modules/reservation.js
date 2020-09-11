@@ -4,6 +4,8 @@ const SET_GUESTS = 'reservation/SET_GUESTS';
 const DELETE_CHECKINOUT = 'reservation/DELETE_CHECKINOUT';
 const CHANGE_INITIAL_DATE = 'reservation/CHANGE_INITIAL_DATE';
 const CHANGE_INITIAL_GUESTS = 'reservation/CHANGE_INITIAL_GUESTS';
+const SET_TO_HOST_MESSAGE = 'reservation/SET_TO_HOST_MESSAGE';
+const CHANGE_INITIAL_MESSAGE = 'reservation/CHANGE_INITIAL_MESSAGE';
 
 export const setCheckin = checkin => ({ type: SET_CHECKIN, checkin });
 export const setCheckout = checkout => ({ type: SET_CHECKOUT, checkout });
@@ -11,6 +13,8 @@ export const setResevationGuest = guests => ({ type: SET_GUESTS, guests });
 export const deleteCheckInOut = () => ({ type: DELETE_CHECKINOUT });
 export const setChangeInitialDate = () => ({ type: CHANGE_INITIAL_DATE });
 export const setChangeInitialGuests = () => ({ type: CHANGE_INITIAL_GUESTS });
+export const setToHostMessage = text => ({ type: SET_TO_HOST_MESSAGE, text });
+export const setChangeInitialMessage = () => ({ type: CHANGE_INITIAL_MESSAGE });
 
 const getDateDiff = (date1, date2) => {
   if (!date1 || !date2) return 0;
@@ -21,9 +25,9 @@ const getDateDiff = (date1, date2) => {
 };
 
 const initialState = {
-  checkin: '',
-  checkout: '',
-  dateDiff: 0,
+  checkin: '2020.09.22',
+  checkout: '2020.09.25',
+  dateDiff: 3,
   reservedDates: [
     '2020.08.15',
     '2020.08.16',
@@ -33,9 +37,10 @@ const initialState = {
     '2020.10.25',
   ],
   guests: { adult: 1, child: 0, infant: 0 },
-  // totalGuest: 0,
   changeInitialDate: false,
   changeInitialGuests: false,
+  toHostMessage: '',
+  changeInitialMessage: false,
 };
 
 const reservation = (state = initialState, action) => {
@@ -78,6 +83,18 @@ const reservation = (state = initialState, action) => {
       return {
         ...state,
         changeInitialGuests: true,
+      };
+    }
+    case SET_TO_HOST_MESSAGE: {
+      return {
+        ...state,
+        toHostMessage: action.text,
+      };
+    }
+    case CHANGE_INITIAL_MESSAGE: {
+      return {
+        ...state,
+        changeInitialMessage: true,
       };
     }
     default:
