@@ -58,4 +58,4 @@ const SettingPopup = ({ popupVisible, closePopup }) => {
   );
 };
 
-export default SettingPopup;
+export default React.memo(SettingPopup);

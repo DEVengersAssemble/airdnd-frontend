@@ -164,4 +164,4 @@ const SignupMenuModal = ({
   );
 };
 
-export default SignupMenuModal;
+export default React.memo(SignupMenuModal);

@@ -509,4 +509,4 @@ const SignupEmailModal = ({
   );
 };
 
-export default SignupEmailModal;
+export default React.memo(SignupEmailModal);

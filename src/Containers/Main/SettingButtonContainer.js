@@ -27,4 +27,4 @@ const SettingButtonContainer = ({ isScrollTop }) => {
   );
 };
 
-export default SettingButtonContainer;
+export default React.memo(SettingButtonContainer);

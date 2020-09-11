@@ -55,12 +55,10 @@ const LoginModalContainer = () => {
   };
 
   const onSuccess = () => {
-    console.log('===로그인 시도!====');
     const userInfo = {
       email,
       pwd,
     };
-    console.log('userInfo: ', userInfo);
     dispatch(loginRequest(userInfo));
   };
 

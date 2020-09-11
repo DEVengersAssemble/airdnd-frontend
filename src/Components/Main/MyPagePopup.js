@@ -160,4 +160,4 @@ const MyPagePopup = ({
   );
 };
 
-export default MyPagePopup;
+export default React.memo(MyPagePopup);

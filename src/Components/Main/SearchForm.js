@@ -247,8 +247,7 @@ const SearchForm = ({
   decreaseGuestCount,
   refObj,
 }) => {
-  // console.log('[SEARCHFORM]', type);
-  const { location, checkIn, checkOut, flexibleDate, guests } = searchData;
+  const { location, checkIn, checkOut, guests } = searchData;
   const { adult, child, infant } = guests;
   const guestCount = adult + child + infant;
 

@@ -352,4 +352,4 @@ const LoginModal = ({
   );
 };
 
-export default LoginModal;
+export default React.memo(LoginModal);
