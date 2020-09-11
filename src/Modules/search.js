@@ -7,6 +7,7 @@ const FETCH_DATA = 'search/FETCH_DATA';
 const FETCH_DATA_SUCCESS = 'search/FETCH_DATA_SUCCESS';
 const FETCH_DATA_ERROR = 'search/FETCH_DATA_ERROR';
 const GET_FILTER_FORM = 'search/GET_FILTER_FORM';
+const UPDATE_FILTER_FORM = 'search/UPDATE_FILTER_FORM';
 
 const HOVER_HOME = 'search/HOVER_HOME';
 const BLUR_HOME = 'search/BLUR_HOME';
@@ -47,6 +48,10 @@ const UNSAVE_MODAL_FILTER = 'search/UNSAVE_MODAL_FILTER';
 export const fetchData = fetchDataThunk(FETCH_DATA, api.fetchSearchedData);
 export const getFilterForm = filterForm => ({
   type: GET_FILTER_FORM,
+  filterForm,
+});
+export const updateFilterForm = filterForm => ({
+  type: UPDATE_FILTER_FORM,
   filterForm,
 });
 
@@ -237,6 +242,15 @@ const search = (state = initialState, action) => {
           action.filterForm.mapState === undefined
             ? 1
             : action.filterForm.mapState,
+      };
+    case UPDATE_FILTER_FORM:
+      return {
+        ...state,
+        filterForm: {
+          ...state.filterForm,
+          ...action.filterForm,
+        },
+        page: 1,
       };
     case HOVER_HOME:
       return {

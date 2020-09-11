@@ -9,13 +9,13 @@ import SearchPaginationContainer from '../../Containers/Search/SearchPaginationC
 const SearchResult = ({
   mapState,
   view,
-  onOpenMap,
   dataTotal,
   searchForm,
   convertDate,
+  onOpenMap,
 }) => {
-  const { location, guests, checkIn, checkOut } = searchForm;
-  const guestCount = +guests.adult + +guests.child;
+  const { adult, child, location, checkIn, checkOut } = searchForm;
+  const guestCount = +adult + +child;
   return (
     <StWrapper mapState={mapState} view={view}>
       <StSpan>
