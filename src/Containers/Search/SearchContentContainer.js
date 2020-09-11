@@ -56,6 +56,7 @@ const SearchContentContainer = () => {
     dispatch(fetchData(query));
     dispatch(getSearchForm(searchFormObj));
     dispatch(getFilterForm(filterFormObj));
+    // fetch bookmark lists 없애기
     dispatch(fetchBookmarkLists());
     window.scrollTo({ top: 0 });
   }, [queryObj.location]);

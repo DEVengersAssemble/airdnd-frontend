@@ -66,9 +66,7 @@ const HomeListContainer = () => {
       dispatch(navigatePage(1));
       window.scrollTo({ top: 0 });
     } else if (isFormChanged) {
-      console.log(queryObj, filterForm);
       dispatch(fetchData(query));
-      console.log(checkIn, checkOut, adult, child, updateFilterForm);
       dispatch(updateFilterForm({ checkIn, checkOut, adult, child }));
       window.scrollTo({ top: 0 });
     }
