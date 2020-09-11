@@ -5,7 +5,7 @@ import Button from './Button';
 import { FaBox } from 'react-icons/fa';
 import { MdCheckCircle } from 'react-icons/md';
 
-const Toast = ({ state, toast, onClickUndo, fmLength, ...rest }) => {
+const Toast = ({ state, toast, onClickUndo, hasMsgs, ...rest }) => {
   // Message에서 archive box클릭시 토스트 알람
   return (
     <ToastWrapper toast={toast}>

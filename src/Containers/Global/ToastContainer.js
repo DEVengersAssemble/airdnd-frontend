@@ -1,18 +1,27 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Toast, UndoToast } from '../../Components/Global/Toast';
-
+import qs from 'qs';
 const ToastContainer = ({ state, onClickUndo }) => {
-  // const filteredMsgs = useSelector(state => state.message.filteredMsgs);
-  // const toast = useSelector(state => state.message.toast);
+  // ! redux
+  const { data } = useSelector(state => state.message.messages);
+  const { toast } = useSelector(state => state.message.toastState);
 
-  // const fmLength = filteredMsgs.length;
+  // ! query
+  const query = useLocation();
+  const { filter } = qs.parse(query.search, {
+    ignoreQueryPrefix: true,
+  });
+
+  const hasMsgs = data && data[`${filter || 'all'}`].length;
+
   return (
     <Toast
-    // state={state}
-    // toast={toast}
-    // onClickUndo={onClickUndo}
-    // fmLength={fmLength}
+      state={state}
+      toast={toast}
+      onClickUndo={onClickUndo}
+      hasMsgs={hasMsgs}
     />
   );
 };

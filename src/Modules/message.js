@@ -433,7 +433,7 @@ const message = (state = initialState, action) => {
       return {
         ...state,
         popupState: {
-          ...state.modalState,
+          ...state.popupState,
           [action.name]: true,
         },
       };
@@ -441,7 +441,7 @@ const message = (state = initialState, action) => {
       return {
         ...state,
         popupState: {
-          ...state.modalState,
+          ...state.popupState,
           [action.name]: false,
         },
       };
@@ -485,7 +485,7 @@ const message = (state = initialState, action) => {
       return {
         ...state,
         toastState: {
-          ...state,
+          ...state.toastState,
           toast: true,
         },
       };
@@ -493,23 +493,44 @@ const message = (state = initialState, action) => {
       return {
         ...state,
         toastState: {
-          ...state,
+          ...state.toastState,
           toast: false,
         },
       };
+
     case UNDO:
       return {
         ...state,
-        messages: state.messages.data['all'].map(msg =>
-          msg.id === action.id ? { ...msg, state: action.state } : msg,
-        ),
-        tempMsg: {},
+        messages: {
+          ...state.messages,
+          data: {
+            ...state.messages.data,
+            all: state.messages.data[action.state].filter(
+              msg => msg.id !== action.msg.id,
+            ),
+            hidden: state.messages.data[action.state].concat({
+              ...action.msg,
+              state: action.state,
+            }),
+          },
+        },
+        tempMsg: { ...action.msg },
       };
+
+    // case UNDO2:
+    //   return {
+    //     ...state,
+    //     messages: state.messages.data['all'].map(msg =>
+    //       msg.id === action.id ? { ...msg, state: action.state } : msg,
+    //     ),
+    //     tempMsg: {},
+    //   };
+
     case SHOW_UNDO_TOAST:
       return {
         ...state,
         toastState: {
-          ...state,
+          ...state.toastState,
           undoToast: true,
         },
       };
@@ -517,7 +538,7 @@ const message = (state = initialState, action) => {
       return {
         ...state,
         toastState: {
-          ...state,
+          ...state.toastState,
           undoToast: false,
         },
       };
