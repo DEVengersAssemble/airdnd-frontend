@@ -35,7 +35,7 @@ const initialState = {
     id: null,
     email: '',
     pwd: '',
-    fistName: '',
+    firstName: '',
     lastName: '',
     phone: '',
     birthDay: '',
