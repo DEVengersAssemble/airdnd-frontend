@@ -4,7 +4,10 @@ import {
   reducerUtils,
   handleAsyncActions,
 } from '../lib/asyncUtils';
-import { fetchBookmarkDataThunk } from '../lib/bookmarkUtils';
+import {
+  fetchBookmarkDataThunk,
+  createBookmarkDataThunk,
+} from '../lib/bookmarkUtils';
 
 // action type
 const FETCH_BOOKMARKLISTS = 'wishlists/FETCH_BOOKMARKLISTS';
@@ -31,7 +34,7 @@ export const fetchBookmarkLists = fetchDataThunk(
   FETCH_BOOKMARKLISTS,
   api.fetchWishlistsData,
 );
-export const createBookmarkList = fetchDataThunk(
+export const createBookmarkList = createBookmarkDataThunk(
   CREATE_BOOKMARKLIST,
   api.postWishlists,
 );
@@ -162,12 +165,15 @@ const wishlists = (state = initialState, action) => {
         loading: true,
       };
     case CREATE_BOOKMARKLIST_SUCCESS:
+      console.log(action, action.type, action.param);
       return {
         ...state,
         loading: false,
         data: {
           ...state.data,
-          bookmarkLists: state.data.bookmarkLists.concat(action.payload),
+          bookmarkLists: state.data.bookmarkLists.concat({
+            bookmarkListTitle: action.param.bookmarkListTitle,
+          }),
         },
       };
     case CREATE_BOOKMARKLIST_ERROR:

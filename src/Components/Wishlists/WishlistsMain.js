@@ -37,8 +37,8 @@ const WishlistsMain = ({
         </WishlistsTitleWrapper>
         <WishlistsItems>
           {bookmarkLists &&
-            bookmarkLists.map(bmList => (
-              <WishlistContainer key={bmList.bookmarkListId} bmList={bmList} />
+            bookmarkLists.map((bmList, i) => (
+              <WishlistContainer key={i} bmList={bmList} />
             ))}
         </WishlistsItems>
       </WishlistsMainInner>

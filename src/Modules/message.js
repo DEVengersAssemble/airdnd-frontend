@@ -11,8 +11,10 @@ const FETCH_INBOX_SUCCESS = 'message/FETCH_INBOX_SUCCESS';
 const FETCH_INBOX_ERROR = 'message/FETCH_INBOX_ERROR';
 
 const SET_ACTIVE_ID = 'message/SET_ACTIVE_ID';
+const SET_ACTIVE_MSG = 'message/SET_ACTIVE_MSG';
 const OPEN_POPUP = 'message/OPEN_POPUP';
 const CLOSE_POPUP = 'message/CLOSE_POPUP';
+const ACTIVE_RESERVATION = 'message/ACTIVE_RESERVATION';
 
 const SHOW_MESSAGE_DETAIL_SECTION = 'message/SHOW_MESSAGE_DETAIL_SECTION';
 const HIDE_MESSAGE_DETAIL_SECTION = 'message/HIDE_MESSAGE_DETAIL_SECTION';
@@ -39,9 +41,13 @@ const PDF_INPUT = 'message/PDF_INPUT';
 // ACTION CREATOR
 export const fetchInbox = fetchDataThunk(FETCH_INBOX, api.fetchMessagesData);
 export const setActiveId = id => ({ type: SET_ACTIVE_ID, id });
+export const setActiveMsg = msg => ({ type: SET_ACTIVE_MSG, msg });
 export const openPopup = name => ({ type: OPEN_POPUP, name });
 export const closePopup = name => ({ type: CLOSE_POPUP, name });
-
+export const activeReservation = reservation => ({
+  type: ACTIVE_RESERVATION,
+  reservation,
+});
 export const showMsgDetailSection = () => ({
   type: SHOW_MESSAGE_DETAIL_SECTION,
 });
@@ -52,17 +58,17 @@ export const showMsgListSection = () => ({ type: SHOW_MESSAGE_LIST_SECTION });
 export const hideMsgListSection = () => ({ type: HIDE_MESSAGE_LIST_SECTION });
 export const changeMediaSize = media => ({ type: CHANGE_MEDIA_SIZE, media });
 
-export const archiveMsg = (index, id, state) => ({
+export const archiveMsg = (msg, activeState, state) => ({
   type: ARCHAIVE_MESSAGE,
-  index,
-  id,
+  msg,
+  activeState,
   state,
 });
 
-export const unarchiveMsg = (index, id, state) => ({
+export const unarchiveMsg = (msg, activeState, state) => ({
   type: UNARCHAIVE_MESSAGE,
-  index,
-  id,
+  msg,
+  activeState,
   state,
 });
 
@@ -112,15 +118,11 @@ const initialState = {
   popupState: popupInit,
   modalState: modalInit,
   toastState: toastInit,
-  toast: false,
-  undoToast: false,
   isHost: false,
-  msgDetailSectionState: true,
-  msgListSectionState: true,
-  media: 'large',
   activeId: 0,
-  activeIndex: 0, // popup filter를 통해 걸러진 messages
-  tempMsgs: [], // 숨김 취소했을 시 tempMsgs 불러옴
+  activeMsg: {},
+  activeReservation: {},
+  tempMsg: {}, // archived or unarchived msg
   profileImg:
     'https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cg_face%2Cq_auto:good%2Cw_300/MTY2MzU3Nzk2OTM2MjMwNTkx/elon_musk_royal_society.jpg',
 
@@ -375,32 +377,57 @@ const message = (state = initialState, action) => {
     case SHOW_MESSAGE_DETAIL_SECTION:
       return {
         ...state,
-        msgDetailSectionState: true,
+        mediaState: {
+          ...state.mediaState,
+          msgDetailSectionState: true,
+        },
       };
     case HIDE_MESSAGE_DETAIL_SECTION:
       return {
         ...state,
-        msgDetailSectionState: false,
+        mediaState: {
+          ...state.mediaState,
+          msgDetailSectionState: false,
+        },
       };
     case SHOW_MESSAGE_LIST_SECTION:
       return {
         ...state,
-        msgListSectionState: true,
+        mediaState: {
+          ...state.mediaState,
+          msgListSectionState: true,
+        },
       };
     case HIDE_MESSAGE_LIST_SECTION:
       return {
         ...state,
-        msgListSectionState: false,
+        mediaState: {
+          ...state.mediaState,
+          msgListSectionState: false,
+        },
       };
     case CHANGE_MEDIA_SIZE:
       return {
         ...state,
-        media: action.media,
+        mediaStata: {
+          ...state.mediaState,
+          media: action.media,
+        },
       };
     case SET_ACTIVE_ID:
       return {
         ...state,
         activeId: action.id,
+      };
+    case SET_ACTIVE_MSG:
+      return {
+        ...state,
+        activeMsg: { ...action.msg },
+      };
+    case ACTIVE_RESERVATION:
+      return {
+        ...state,
+        activeReservation: { ...action.reservation },
       };
     case OPEN_POPUP:
       return {
@@ -418,83 +445,82 @@ const message = (state = initialState, action) => {
           [action.name]: false,
         },
       };
-    // case ARCHAIVE_MESSAGE:
-    //   return {
-    //     ...state,
-    //     messages: state.messages.map(msg =>
-    //       msg.id === action.id ? { ...msg, state: action.state } : msg,
-    //     ),
-    //     tempMsgs: state.filteredMsgs,
-    //     filteredMsgs: state.filteredMsgs.filter(
-    //       (_, index) => index !== action.index,
-    //     ),
-    //   };
-    // case UNARCHAIVE_MESSAGE:
-    //   return {
-    //     ...state,
-    //     messages: state.messages.map(msg =>
-    //       msg.id === action.id ? { ...msg, state: action.state } : msg,
-    //     ),
-    //     tempMsgs: state.filteredMsgs,
-    //     filteredMsgs: state.filteredMsgs.filter(
-    //       (_, index) => index !== action.index,
-    //     ),
-    //   };
-
+    case ARCHAIVE_MESSAGE:
+      return {
+        ...state,
+        messages: {
+          ...state.messages,
+          data: {
+            ...state.messages.data,
+            all: state.messages.data.all.filter(
+              msg => msg.id !== action.msg.id,
+            ),
+            hidden: state.messages.data.hidden.concat({
+              ...action.msg,
+              state: action.state,
+            }),
+          },
+        },
+        tempMsg: { ...action.msg },
+      };
+    case UNARCHAIVE_MESSAGE:
+      return {
+        ...state,
+        messages: {
+          ...state.messages,
+          data: {
+            ...state.messages.data,
+            all: state.messages.data.hidden.filter(
+              msg => msg.id !== action.msg.id,
+            ),
+            hidden: state.messages.data.all.concat({
+              ...action.msg,
+              state: action.state,
+            }),
+          },
+        },
+        tempMsg: { ...action.msg },
+      };
     case SHOW_TOAST:
       return {
         ...state,
-        toast: true,
+        toastState: {
+          ...state,
+          toast: true,
+        },
       };
     case HIDE_TOAST:
       return {
         ...state,
-        toast: false,
+        toastState: {
+          ...state,
+          toast: false,
+        },
       };
-
-    // case UNDO:
-    //   return {
-    //     ...state,
-    //     messages: state.messages.map(msg =>
-    //       msg.id === action.id ? { ...msg, state: action.state } : msg,
-    //     ),
-    //     tempMsgs: [],
-    //     filteredMsgs: state.tempMsgs,
-    //   };
-
+    case UNDO:
+      return {
+        ...state,
+        messages: state.messages.data['all'].map(msg =>
+          msg.id === action.id ? { ...msg, state: action.state } : msg,
+        ),
+        tempMsg: {},
+      };
     case SHOW_UNDO_TOAST:
       return {
         ...state,
-        undoToast: true,
+        toastState: {
+          ...state,
+          undoToast: true,
+        },
       };
     case HIDE_UNDO_TOAST:
       return {
         ...state,
-        undoToast: false,
+        toastState: {
+          ...state,
+          undoToast: false,
+        },
       };
-
-    // case ALL_MESSAGE_LIST:
-    //   return {
-    //     ...state,
-    //     activeIndex:
-    //       state.activeIndex === action.index ? state.activeIndex : action.index,
-    //     filteredMsgs: state.messages.filter(msg => msg.state === 'all'),
-    //   };
-    // case HIDE_MESSAGE_LIST:
-    //   return {
-    //     ...state,
-    //     activeIndex:
-    //       state.activeIndex === action.index ? state.activeIndex : action.index,
-    //     filteredMsgs: state.messages.filter(msg => msg.state === 'hide'),
-    //   };
-    // case UNREAD_MESSAGE_LIST:
-    //   return {
-    //     ...state,
-    //     activeIndex:
-    //       state.activeIndex === action.index ? state.activeIndex : action.index,
-    //     filteredMsgs: state.messages.filter(msg => msg.state === 'unread'),
-    //   };
-
     case OPEN_MODAL:
       return {
         ...state,

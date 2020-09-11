@@ -4,10 +4,9 @@ import MessageListSection from '../../Components/Message/MessageListSection';
 
 const MessageListSectionContainer = () => {
   // ! redux
-  const msgSectionStates = useSelector(state => state.message);
-
-  // ! variable
-  const { msgListSectionState, msgDetailSectionState } = msgSectionStates;
+  const { msgListSectionState, msgDetailSectionState } = useSelector(
+    state => state.message.mediaState,
+  );
 
   return (
     <MessageListSection
