@@ -12,7 +12,6 @@ import {
 } from '../../Modules/login';
 
 const LoginModalContainer = () => {
-  console.log('loginModalContainer');
   const dispatch = useDispatch();
   const { name } = useSelector(state => state.modal);
   const modalVisible = name === 'login';

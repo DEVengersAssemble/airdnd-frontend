@@ -39,6 +39,8 @@ const StFacebookButton = styled(Button)`
   transition: 0.125s all ease-in;
   height: 52px;
   margin-bottom: 12px;
+  border: none;
+
   &:hover {
     background: #4568b1;
     box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.25);
@@ -101,11 +103,14 @@ const StLoginButton = styled(Button)`
     text-decoration: underline;
   }
 `;
+
 const SignupMenuModal = ({
   modalVisible,
   openLoginModal,
   openSignupEmailModal,
   closeModal,
+  onSuccessGoogle,
+  onFailureGoogle,
 }) => {
   return (
     <StSignupMenuModal
@@ -120,10 +125,10 @@ const SignupMenuModal = ({
         <GoogleLogin
           clientId={process.env.REACT_APP_GOOGLE_LOGIN_API_KEY}
           cookiePolicy={'single_host_origin'}
-          onSuccess={res => console.log(res)}
-          onFailure={res => console.log(res)}
-          render={() => (
-            <StFacebookButton>
+          onSuccess={onSuccessGoogle}
+          onFailure={onFailureGoogle}
+          render={renderProps => (
+            <StFacebookButton onClick={renderProps.onClick}>
               <FaFacebookF />
               <StButtonText>페이스북 계정으로 회원 가입</StButtonText>
             </StFacebookButton>
@@ -132,10 +137,10 @@ const SignupMenuModal = ({
         <GoogleLogin
           clientId={process.env.REACT_APP_GOOGLE_LOGIN_API_KEY}
           cookiePolicy={'single_host_origin'}
-          onSuccess={res => console.log(res)}
-          onFailure={res => console.log(res)}
-          render={() => (
-            <StGoogleButton>
+          onSuccess={onSuccessGoogle}
+          onFailure={onFailureGoogle}
+          render={renderProps => (
+            <StGoogleButton onClick={renderProps.onClick}>
               <FcGoogle />
               <StButtonText>구글 계정으로 회원 가입</StButtonText>
             </StGoogleButton>

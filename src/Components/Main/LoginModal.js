@@ -44,6 +44,7 @@ const StFacebookButton = styled(Button)`
   transition: 0.125s all ease-in;
   height: 52px;
   margin-bottom: 12px;
+  border: none;
   &:hover {
     background: #4568b1;
     box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.25);

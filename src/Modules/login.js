@@ -1,12 +1,9 @@
 import * as loginApi from '../Api/loginApi';
+import { setIsLoggedIn } from './user';
 
 const LOG_IN = 'login/LOG_IN';
 const LOG_IN_SUCCESS = 'login/LOG_IN_SUCCESS';
 const LOG_IN_ERROR = 'login/LOG_IN_ERROR';
-
-const LOG_OUT = 'login/LOG_OUT';
-const LOG_OUT_SUCCESS = 'login/LOG_OUT_SUCCESS';
-const LOG_OUT_ERROR = 'login/LOG_OUT_ERROR';
 
 const SET_IS_CHECKING = 'login/SET_IS_CHECKING';
 const SET_IS_PWD_SHOWN = 'login/SET_IS_PWD_SHOWN';
@@ -22,6 +19,7 @@ export const loginRequest = userInfo => async dispatch => {
     const { result } = await loginApi.sendLoginReq(userInfo);
     console.log('[login] ', result);
     dispatch({ type: LOG_IN_SUCCESS, result });
+    dispatch(setIsLoggedIn(true));
   } catch (error) {
     dispatch({ type: LOG_IN_ERROR, error });
   }
