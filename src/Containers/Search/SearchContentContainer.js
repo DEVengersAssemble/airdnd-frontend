@@ -45,7 +45,7 @@ const SearchContentContainer = () => {
       'checkIn',
       'checkOut',
       'dateDiff',
-      'felxibleDate',
+      'flexibleDate',
       'guests',
       'adult',
       'child',

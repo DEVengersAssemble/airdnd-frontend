@@ -154,7 +154,7 @@ const initialState = {
   viewState: 'result',
   mapSearch: true,
   mapState: true,
-  mapZoom: 12,
+  mapZoom: 11,
   mapBounds: {
     swLat: 0,
     swLng: 0,
