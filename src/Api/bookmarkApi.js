@@ -13,6 +13,9 @@ export const postWishlists = async payload => {
 };
 
 export const deleteWishList = async payload => {
-  const response = await axios.delete('/back/wishlist_delete', payload);
+  const response = await axios.delete(
+    `/back/wishlist_delete/${payload}`,
+    payload,
+  );
   console.log('=====================', response);
 };
