@@ -9,8 +9,8 @@ function App() {
   const { isLoggedIn } = useSelector(state => state.user);
   const [cookies, setCookie, removeCookie] = useCookies(['AirdndSES']);
   console.log(' --- [App] --- ');
-  console.log('cookie: ', cookies);
   useEffect(() => {
+    console.log('cookie: ', cookies);
     console.log('isLoggedIn', isLoggedIn);
     if (!isLoggedIn && cookies['AirdndSES']) {
       console.log('COOKIE YES!!!');
