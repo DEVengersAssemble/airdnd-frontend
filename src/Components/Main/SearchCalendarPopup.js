@@ -55,4 +55,4 @@ const SearchCalendarPopup = forwardRef(
   },
 );
 
-export default SearchCalendarPopup;
+export default React.memo(SearchCalendarPopup);

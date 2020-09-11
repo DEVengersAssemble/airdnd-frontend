@@ -10,6 +10,7 @@ import {
 } from '../lib/bookmarkUtils';
 
 // action type
+const SET_BOOKMARKLISTS = 'wishlists/SET_BOOKMARKLISTS';
 const FETCH_BOOKMARKLISTS = 'wishlists/FETCH_BOOKMARKLISTS';
 const FETCH_BOOKMARKLISTS_SUCCESS = 'wishlists/FETCH_BOOKMARKLISTS_SUCCESS';
 const FETCH_BOOKMARKLISTS_ERROR = 'wishlists/FETCH_BOOKMARKLISTS_ERROR';
@@ -30,6 +31,10 @@ const CLOSE_LIST_MODAL = 'wishlists/CLOSE_LIST_MODAL';
 const OPEN_NEW_MODAL = 'wishlists/OPEN_NEW_MODAL';
 const CLOSE_NEW_MODAL = 'wishlists/CLOSE_NEW_MODAL';
 // action creator
+export const setBookmarkLists = bookmarkLists => ({
+  type: SET_BOOKMARKLISTS,
+  bookmarkLists,
+});
 export const fetchBookmarkLists = fetchDataThunk(
   FETCH_BOOKMARKLISTS,
   api.fetchWishlistsData,
@@ -155,6 +160,13 @@ const initialState = {
 // reducer
 const wishlists = (state = initialState, action) => {
   switch (action.type) {
+    case SET_BOOKMARKLISTS:
+      return {
+        ...state,
+        data: {
+          bookmarkLists: action.bookmarkLists,
+        },
+      };
     case FETCH_BOOKMARKLISTS:
     case FETCH_BOOKMARKLISTS_SUCCESS:
     case FETCH_BOOKMARKLISTS_ERROR:

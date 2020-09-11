@@ -132,13 +132,12 @@ const SignupModalContainer = () => {
   };
 
   const onSuccess = async () => {
-    console.log('===회원가입 시도====');
     const userInfo = {
       email,
       firstName,
       lastName,
       pwd,
-      birthday: `${birthYear}/${birthMonth}/${birthDay}`,
+      birthday: `${birthYear}-${birthMonth}-${birthDay}`,
       phone,
       profileImg,
       description,
@@ -181,10 +180,6 @@ const SignupModalContainer = () => {
     };
 
     dispatch(setInvalid(payload));
-  };
-
-  const cleanupModal = () => {
-    dispatch(resetForm(''));
   };
 
   const handleSubmit = e => {
@@ -230,7 +225,6 @@ const SignupModalContainer = () => {
       closeModal={() => {
         dispatch(closeModal());
       }}
-      cleanupModal={cleanupModal}
       onFormChange={onFormChange}
       handleSubmit={handleSubmit}
       onPwdFocused={onPwdFocused}
