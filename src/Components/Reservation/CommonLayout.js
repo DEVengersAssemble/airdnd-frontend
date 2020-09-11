@@ -27,14 +27,16 @@ const StTitle = styled.h2`
   line-height: 1.125em;
 `;
 
-const CommonLayout = ({ children, title }) => {
+const CommonLayout = ({ children, title, hidden }) => {
   const almostFull = true;
 
   return (
     <StMain>
       <StLeftWrapper>
         <StTitle>{title}</StTitle>
-        {almostFull && <LuckyChance lastName="haeun" margin="16px 0 36px" />}
+        {almostFull && !hidden && (
+          <LuckyChance lastName="haeun" margin="16px 0 36px" />
+        )}
         {children}
       </StLeftWrapper>
       <AsideContainer />
