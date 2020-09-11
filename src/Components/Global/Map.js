@@ -95,14 +95,15 @@ const Map = compose(
     updateZoom,
     setRef,
   }) => {
+    console.log(center);
     return (
       <GoogleMap
         ref={setRef}
         zoom={mapZoom}
         defaultZoom={13}
         defaultCenter={{
-          lat: center.lat,
-          lng: center.lng,
+          lat: center && center.lat,
+          lng: center && center.lng,
         }}
         options={{
           disableDefaultUI: true,

@@ -51,6 +51,7 @@ const SearchHeaderContainer = () => {
     } else if (!headerState) {
       setInitAnimation(false);
       window.removeEventListener('scroll', onScroll);
+      // return;
     }
     return () => {
       window.removeEventListener('scroll', onScroll);

@@ -18,8 +18,10 @@ import qs from 'qs';
 import _ from 'lodash';
 
 const MapContainer = ({ markers }) => {
-  const { mapCenter } = useSelector(state => state.search.data);
+  const fetchedMapCenter = useSelector(state => state.map.data);
+  const mapCenter = useSelector(state => state.search.data.mapCenter);
   const { mapZoom, viewState, mapSearch } = useSelector(state => state.search);
+
   const history = useHistory();
   const { search: query } = useLocation();
   const queryObj = qs.parse(query, { ignoreQueryPrefix: true });
@@ -56,7 +58,7 @@ const MapContainer = ({ markers }) => {
     <div onClick={onCloseMarker}>
       <Map
         view={viewState}
-        center={mapCenter}
+        center={mapCenter || fetchedMapCenter}
         mapZoom={mapZoom}
         markers={markers}
         mapSearch={mapSearch}
