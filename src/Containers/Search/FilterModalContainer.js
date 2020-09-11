@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import FilterModal from '../../Components/Search/FilterModal';
 import { useSelector, useDispatch } from 'react-redux';
 import {
+  filterInit,
+  modalInit,
   applyToggleFilter,
   applyCounterFilter,
   applyCheckFilter,
   resetModalFilter,
   closePopup,
-  modalFilterInit,
 } from '../../Modules/search';
 import _ from 'lodash';
 
@@ -26,31 +27,22 @@ const FilterModalContainer = () => {
     state => state.search,
   );
 
-  const {
-    instantBooking,
-    bedroom,
-    convenience,
-    convenienceList,
-    facilityList,
-    hostLangList,
-  } = filterApplied;
-  const current = {
-    instantBooking,
-    bedroom,
-    convenience,
-    convenienceList,
-    facilityList,
-    hostLangList,
-  };
-
-  const isDisabled = _.isEqual(current, modalFilterInit(filterCondition));
   const name = viewState === 'map' ? 'all' : 'modal';
+  const isDisabled = name => {
+    if (name === 'modal')
+      return _.isEqual(
+        _.pick(filterApplied, Object.keys(modalInit)),
+        modalInit,
+      );
+    if (name === 'all')
+      return _.isEqual(filterApplied, { ...filterInit, ...modalInit });
+  };
 
   const { priceMin: min, priceMax: max } = filterApplied;
   const [range, setRange] = useState({ value: [min, max] });
 
   const dispatch = useDispatch();
-  const onClose = () => dispatch(closePopup(name, !isDisabled));
+  const onClose = () => dispatch(closePopup(name, !isDisabled(name)));
   const onToggle = (name, value) => dispatch(applyToggleFilter(name, value));
   const onCounter = (name, value) => dispatch(applyCounterFilter(name, value));
   const onCheck = (list, name, value) =>

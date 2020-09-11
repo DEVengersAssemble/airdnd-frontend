@@ -40,4 +40,4 @@ const SearchButton = () => {
   );
 };
 
-export default SearchButton;
+export default React.memo(SearchButton);

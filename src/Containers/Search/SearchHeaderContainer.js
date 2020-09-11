@@ -1,28 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { throttle } from 'lodash';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import SearchHeader from '../../Components/Search/SearchHeader';
+import { closeHeader, openHeader } from '../../Modules/search';
 
 const SearchHeaderContainer = () => {
-  const history = useHistory();
-  const [isSearchBtnClicked, setIsSearchBtnClicked] = useState(false);
-  const [initAnimation, setInitAnimation] = useState(false);
+  const { headerState } = useSelector(state => state.search);
   const searchForm = useSelector(state => state.searchForm);
+  const history = useHistory();
 
-  const onScroll = () => {
-    setIsSearchBtnClicked(false);
-  };
-
-  useEffect(() => {
-    if (!initAnimation && isSearchBtnClicked) {
-      setInitAnimation(true);
-    }
-    window.addEventListener('scroll', throttle(onScroll, 150));
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-    };
-  }, [onScroll, initAnimation]);
+  const [initAnimation, setInitAnimation] = useState(false);
+  const dispatch = useDispatch();
+  const onScroll = () => dispatch(closeHeader());
+  const handleSearchBtnClick = () => dispatch(openHeader());
 
   const handleLogoClick = e => {
     e.preventDefault();
@@ -30,16 +21,24 @@ const SearchHeaderContainer = () => {
     window.scrollTo({ top: 0 });
   };
 
-  const handleSearchBtnClick = () => {
-    setIsSearchBtnClicked(true);
-  };
+  useEffect(() => {
+    if (!initAnimation && headerState) {
+      setInitAnimation(true);
+    } else if (headerState) {
+      window.addEventListener('scroll', throttle(onScroll, 150));
+    }
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+    };
+  }, [onScroll, initAnimation]);
+
   return (
     <SearchHeader
+      searchForm={searchForm}
       initAnimation={initAnimation}
-      isSearchBtnClicked={isSearchBtnClicked}
+      isSearchBtnClicked={headerState}
       handleLogoClick={handleLogoClick}
       handleSearchBtnClick={handleSearchBtnClick}
-      searchForm={searchForm}
     ></SearchHeader>
   );
 };

@@ -27,11 +27,11 @@ const BookmarkListModalContainer = () => {
     dispatch(
       addBookmarkOldList({
         bookmarkListId,
+        bookmarkListTitle: '',
         bookmarkHomeId: selectedId,
         bookmarkImage: selectedImg,
       }),
     );
-    dispatch(changeHeart(selectedId));
   };
 
   return (
@@ -59,12 +59,12 @@ const NewBookmarkModalContainer = () => {
   const onClickNewList = title => {
     dispatch(
       addBookmarkNewList({
+        bookmarkListId: '',
         bookmarkListTitle: title,
         bookmarkHomeId: selectedId,
         bookmarkImage: selectedImg,
       }),
     );
-    dispatch(changeHeart(selectedId));
   };
 
   return (
