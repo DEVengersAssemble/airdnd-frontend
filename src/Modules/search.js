@@ -167,7 +167,7 @@ const initialState = {
     neLng: 0,
   },
   markerState: null,
-  hoveredHome: null,
+  // hoveredHome: null,
   popupState: popupInit,
   popupApplied: popupInit,
   filterApplied: {
@@ -202,13 +202,13 @@ const search = (state = initialState, action) => {
       return {
         ...state,
         ...reducerUtils.loading(),
+        headerState: false,
       };
     case FETCH_DATA_SUCCESS:
       return {
         ...state,
         ...reducerUtils.success(action.payload),
         isFilterChanged: false,
-        headerState: false,
       };
     case FETCH_DATA_ERROR:
       return {

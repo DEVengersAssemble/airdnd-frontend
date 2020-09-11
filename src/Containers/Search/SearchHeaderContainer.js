@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import { throttle } from 'lodash';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -32,30 +32,16 @@ const SearchHeaderContainer = () => {
   );
 
   // 이게 어제 무한 렌더링 고쳤던 부분 ㅠㅠ
-  // useEffect(() => {
-  //   if (!initAnimation && headerState) {
-  //     setInitAnimation(true);
-  //   } else if (headerState) {
-  //     window.addEventListener('scroll', throttle(onScroll, 150));
-  //   }
-  //   return () => {
-  //     window.removeEventListener('scroll', onScroll);
-  //   };
-  // }, [onScroll, initAnimation]);
-
   useEffect(() => {
     if (!initAnimation && headerState) {
       setInitAnimation(true);
     } else if (headerState) {
-      window.addEventListener('scroll', throttle(onScroll, 150));
-    } else if (!headerState) {
-      setInitAnimation(false);
-      window.removeEventListener('scroll', onScroll);
+      window.addEventListener('scroll', throttle(onScroll, 150), true);
     }
     return () => {
-      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('scroll', onScroll, true);
     };
-  }, [onScroll]);
+  }, [onScroll, initAnimation]);
 
   return (
     <SearchHeader

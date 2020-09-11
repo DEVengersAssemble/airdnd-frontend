@@ -7,6 +7,7 @@ import { fetchBookmarkLists } from '../../Modules/wishlists';
 import SearchContent from '../../Components/Search/SearchContent';
 import qs from 'qs';
 import _ from 'lodash';
+import Loader from '../../Components/Global/Loader';
 
 const SearchContentContainer = () => {
   const { id } = useSelector(state => state.user.data);
@@ -57,7 +58,7 @@ const SearchContentContainer = () => {
     dispatch(getSearchForm(searchFormObj));
     dispatch(getFilterForm(filterFormObj));
     // fetch bookmark lists 없애기
-    dispatch(fetchBookmarkLists());
+    // dispatch(fetchBookmarkLists());
     window.scrollTo({ top: 0 });
   }, [queryObj.location]);
 

@@ -6,7 +6,8 @@ import { store } from '../../index';
 
 const MapMarkerContainer = ({ marker, theme }) => {
   const { dateDiff } = useSelector(state => state.searchForm);
-  const { markerState, hoveredHome } = useSelector(state => state.search);
+  const { markerState } = useSelector(state => state.search);
+  const { hoveredHome } = useSelector(state => state.mouseEvents);
   const isHovered = hoveredHome === marker.homeId;
   const isOpen = markerState === marker.homeId;
   const dispatch = useDispatch();

@@ -172,4 +172,4 @@ const StBtnSetWrapper = styled.div`
   z-index: 10;
 `;
 
-export default Map;
+export default React.memo(Map);
