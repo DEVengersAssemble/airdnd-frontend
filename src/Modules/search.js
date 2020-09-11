@@ -233,6 +233,7 @@ const search = (state = initialState, action) => {
           neLng: action.filterForm.neLng,
         },
         page: action.filterForm.page || 1,
+        mapState: action.filterForm.mapState,
       };
     case HOVER_HOME:
       return {

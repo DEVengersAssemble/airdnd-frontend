@@ -100,7 +100,7 @@ const FilterModal = ({
           transition
           onClick={onSave}
         >
-          <span>300개 이상</span>의 숙소 보기
+          숙소 결과 보기
         </Button>
       </StFooter>
     </StModal>
