@@ -5,6 +5,7 @@ import { fetchData, getSearchForm, all } from '../../Modules/search';
 import SearchContent from '../../Components/Search/SearchContent';
 import qs from 'qs';
 import _ from 'lodash';
+import { fetchBookmarkLists } from '../../Modules/wishlists';
 
 const SearchContentContainer = () => {
   const { loading, data, error } = useSelector(state => state.search);
@@ -27,11 +28,12 @@ const SearchContentContainer = () => {
     [...all, 'page'].includes(key) ? changeType(key, queryObj) : value,
   );
 
-  console.log('렌더링시작한다~~~~~~~~~~', searchForm);
+  // console.log('렌더링시작한다~~~~~~~~~~', searchForm);
 
   useEffect(() => {
     dispatch(fetchData(query));
     dispatch(getSearchForm(searchForm));
+    dispatch(fetchBookmarkLists());
     // window.scrollTo(0, 0);
   }, []);
 
