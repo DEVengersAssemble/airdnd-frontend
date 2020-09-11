@@ -41,8 +41,8 @@ const Home = ({
 
   return (
     <StWrapper
-    // onMouseOver={() => onHoverHome(homeId)}
-    // onMouseLeave={onBlurHome}
+      onMouseOver={() => onHoverHome(homeId)}
+      onMouseLeave={onBlurHome}
     >
       <CarouselContainer
         size="large"
