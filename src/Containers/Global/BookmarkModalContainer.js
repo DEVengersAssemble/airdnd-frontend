@@ -11,7 +11,6 @@ import {
   closeListModal,
   closeNewModal,
 } from '../../Modules/wishlists';
-import { changeHeart } from '../../Modules/search';
 
 const BookmarkListModalContainer = () => {
   const { data, listModal, selectedId, selectedImg } = useSelector(
