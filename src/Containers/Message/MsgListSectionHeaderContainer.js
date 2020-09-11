@@ -2,19 +2,23 @@ import React, { useRef, useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import MsgListSectionHeader from '../../Components/Message/MsgListSectionHeader';
 import { openPopup, closePopup } from '../../Modules/message';
+import { useLocation } from 'react-router';
+import qs from 'qs';
 
 const MsgListSectionHeaderContainer = () => {
   // ! redux
-  const { data } = useSelector(state => state.message.messages);
   const popupState = useSelector(state => state.message.popupState.filter);
   const dispatch = useDispatch();
-
+  console.log(popupState);
   // ! hook
   const popupBtnRef = useRef();
   const popupRef = useRef();
 
-  // ! variable
-  const state = data && Object.keys(data)[0];
+  // ! query
+  const query = useLocation();
+  const { filter } = qs.parse(query.search, {
+    ignoreQueryPrefix: true,
+  });
 
   // ! event
   const onClickPopup = useCallback(() => {
@@ -36,15 +40,16 @@ const MsgListSectionHeaderContainer = () => {
   useEffect(() => {
     // ! 렌더링 될때마다 effect 발생...
     // ! 하은이가 알려준 방법 적용하기
+    if (!popupState) return;
     document.addEventListener('click', onClickOutSide);
     return () => {
       document.removeEventListener('click', onClickOutSide);
     };
-  }, [onClickOutSide]);
+  }, [onClickOutSide, popupState]);
 
   return (
     <MsgListSectionHeader
-      state={state}
+      state={filter}
       onClickPopup={onClickPopup}
       popupState={popupState}
       popupBtnRef={popupBtnRef}

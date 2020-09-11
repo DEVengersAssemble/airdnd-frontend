@@ -8,19 +8,19 @@ import { FaBox } from 'react-icons/fa';
 import { MdKeyboardArrowLeft } from 'react-icons/md';
 
 const MsgSectionHeader = ({
+  activeMsg,
   media,
   msgDetailSectionState,
   onClickShowList,
-  onClickDetail,
+  onClickToggleDetail,
   onClickArchive,
-  activeMsg,
   hostname,
   state,
 }) => {
   return (
     <MsgSectionHeaderWrapper>
       <MsgSectionHeaderTitle>
-        {media === 'medium' && msgDetailSectionState && (
+        {activeMsg && media === 'medium' && msgDetailSectionState && (
           <Button
             btnType="circle"
             border="none"
@@ -57,7 +57,7 @@ const MsgSectionHeader = ({
                 backgroundColor: `${theme.color.lightGray}`,
                 fontWeight: '600',
               }}
-              onClick={onClickDetail}
+              onClick={onClickToggleDetail}
             >
               세부 정보 숨기기
             </Button>
@@ -69,7 +69,7 @@ const MsgSectionHeader = ({
             hover={{ border: `1px solid ${theme.color.black}` }}
             fontSize="1.2rem"
             style={{ fontWeight: '400' }}
-            onClick={onClickDetail}
+            onClick={onClickToggleDetail}
           >
             세부 정보 보기
           </Button>

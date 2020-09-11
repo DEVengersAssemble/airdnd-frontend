@@ -4,17 +4,17 @@ import MsgDetailSupportModal from '../../Components/Message/MsgDetailSupportModa
 import { closeModal } from '../../Modules/message';
 
 const MsgDetailSupportModalContainer = () => {
-  // const support = useSelector(state => state.message.modalState.support);
-  // const dispatch = useDispatch();
+  const support = useSelector(state => state.message.modalState.support);
+  const dispatch = useDispatch();
 
-  // const onClickCloseModal = () => {
-  //   dispatch(closeModal('support'));
-  // };
+  const onClickCloseModal = () => {
+    dispatch(closeModal('support'));
+  };
 
   return (
     <MsgDetailSupportModal
-    // modalState={support}
-    // onClickCloseModal={onClickCloseModal}
+      modalState={support}
+      onClickCloseModal={onClickCloseModal}
     />
   );
 };
