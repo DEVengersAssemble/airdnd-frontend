@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import HouseRulesContainer from '../Containers/Reservation/HouseRulesContainer';
 import GuestInfoContainer from '../Containers/Reservation/GuestInfoContainer';
-import Payment from '../Components/Reservation/Payment';
+import PaymentContainer from '../Containers/Reservation/PaymentContainer';
 
 const ReservationSubRouter = () => {
   return (
@@ -10,7 +10,7 @@ const ReservationSubRouter = () => {
       <Route exact path="/Reservation" component={HouseRulesContainer} />
       <Route path="/Reservation/HouseRules" component={HouseRulesContainer} />
       <Route path="/Reservation/GuestInfo" component={GuestInfoContainer} />
-      <Route path="/Reservation/Payment" component={Payment} />
+      <Route path="/Reservation/Payment" component={PaymentContainer} />
       <Route
         render={({ location }) => (
           <div>
