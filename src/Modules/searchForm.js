@@ -1,5 +1,5 @@
 // action types
-const REFRESH = 'searchForm/REFRESH';
+const RESET = 'searchForm/RESET';
 const SET_LOCATION = 'searchForm/SET_LOCATION';
 const SET_CHECKIN = 'searchForm/SET_CHECKIN';
 const SET_CHECKOUT = 'searchForm/SET_CHECKOUT';
@@ -8,7 +8,7 @@ const SET_GUESTS = 'searchForm/SET_GUESTS';
 const GET_SEARCH_FORM = 'searchForm/GET_SEARCH_FORM';
 
 // action creators
-export const refresh = () => ({ type: REFRESH });
+export const reset = () => ({ type: RESET });
 
 export const setSearchData = data => {
   const payload = data.value;
@@ -58,7 +58,7 @@ const initialState = {
 // reducer
 const searchForm = (state = initialState, action) => {
   switch (action.type) {
-    case REFRESH:
+    case RESET:
       return initialState;
     case SET_LOCATION:
       return {

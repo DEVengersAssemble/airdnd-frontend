@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import SearchHeader from '../../Components/Search/SearchHeader';
 import { closeHeader, openHeader } from '../../Modules/search';
-import { refresh } from '../../Modules/searchForm';
+import { reset } from '../../Modules/searchForm';
 
 const SearchHeaderContainer = () => {
   const { headerState } = useSelector(state => state.search);
@@ -20,7 +20,7 @@ const SearchHeaderContainer = () => {
     e.preventDefault();
     history.push('/');
     window.scrollTo({ top: 0 });
-    dispatch(refresh());
+    dispatch(reset());
   };
 
   useEffect(() => {

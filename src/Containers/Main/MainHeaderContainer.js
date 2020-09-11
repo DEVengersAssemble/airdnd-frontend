@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { throttle } from 'lodash';
 import MainHeader from '../../Components/Main/MainHeader';
-import { refresh } from '../../Modules/searchForm';
+import { reset } from '../../Modules/searchForm';
 import { useDispatch } from 'react-redux';
 
 const MainHeaderContainer = () => {
@@ -27,7 +27,7 @@ const MainHeaderContainer = () => {
   const handleLogoClick = e => {
     e.preventDefault();
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    dispatch(refresh());
+    dispatch(reset());
   };
 
   const handleSearchBtnClick = () => {
