@@ -7,7 +7,7 @@ import { toggleBookmark } from '../../lib/bookmarkUtils';
 const HomeContainer = ({ home }) => {
   const { id } = useSelector(state => state.user.data);
   const { dateDiff } = useSelector(state => state.searchForm);
-  const { hoveredHome } = useSelector(state => state.mouseEvents);
+  const hoveredHome = useSelector(state => state.mouseEvents);
   const isHovered = hoveredHome === home.homeId;
   const dispatch = useDispatch();
 

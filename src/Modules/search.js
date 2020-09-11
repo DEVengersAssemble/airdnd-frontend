@@ -9,8 +9,8 @@ const FETCH_DATA_ERROR = 'search/FETCH_DATA_ERROR';
 const GET_FILTER_FORM = 'search/GET_FILTER_FORM';
 const UPDATE_FILTER_FORM = 'search/UPDATE_FILTER_FORM';
 
-// const HOVER_HOME = 'search/HOVER_HOME';
-// const BLUR_HOME = 'search/BLUR_HOME';
+const HOVER_HOME = 'search/HOVER_HOME';
+const BLUR_HOME = 'search/BLUR_HOME';
 
 const CHANGE_HEART = 'search/CHANGE_HEART';
 const NAVIGATE_PAGE = 'search/NAVIGATE_PAGE';
@@ -55,8 +55,8 @@ export const updateFilterForm = filterForm => ({
   filterForm,
 });
 
-// export const hoverHome = homeId => ({ type: HOVER_HOME, homeId });
-// export const blurHome = () => ({ type: BLUR_HOME });
+export const hoverHome = homeId => ({ type: HOVER_HOME, homeId });
+export const blurHome = () => ({ type: BLUR_HOME });
 
 export const changeHeart = homeId => ({ type: CHANGE_HEART, homeId });
 export const navigatePage = page => ({ type: NAVIGATE_PAGE, page });
@@ -202,13 +202,13 @@ const search = (state = initialState, action) => {
       return {
         ...state,
         ...reducerUtils.loading(),
+        headerState: false,
       };
     case FETCH_DATA_SUCCESS:
       return {
         ...state,
         ...reducerUtils.success(action.payload),
         isFilterChanged: false,
-        headerState: false,
       };
     case FETCH_DATA_ERROR:
       return {
@@ -252,16 +252,16 @@ const search = (state = initialState, action) => {
         },
         page: 1,
       };
-    // case HOVER_HOME:
-    //   return {
-    //     ...state,
-    //     hoveredHome: action.homeId,
-    //   };
-    // case BLUR_HOME:
-    //   return {
-    //     ...state,
-    //     hoveredHome: null,
-    //   };
+    case HOVER_HOME:
+      return {
+        ...state,
+        hoveredHome: action.homeId,
+      };
+    case BLUR_HOME:
+      return {
+        ...state,
+        hoveredHome: null,
+      };
     case CHANGE_HEART:
       return {
         ...state,
