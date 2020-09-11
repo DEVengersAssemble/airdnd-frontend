@@ -9,7 +9,7 @@ export const getHome = async id => {
 };
 
 export const postReservation = async payload => {
-  console.log(payload);
+  console.log('payload', payload);
   const response = await axios.post(`/back/book`, payload);
   // const response = await axios.get(`/back/home?home_idx=22638651`);
   console.log('===================== post reservation ====================');
