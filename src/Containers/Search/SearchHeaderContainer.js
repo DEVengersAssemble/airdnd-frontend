@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import { throttle } from 'lodash';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -51,7 +51,7 @@ const SearchHeaderContainer = () => {
     } else if (!headerState) {
       setInitAnimation(false);
       window.removeEventListener('scroll', onScroll);
-      // return;
+      return;
     }
     return () => {
       window.removeEventListener('scroll', onScroll);

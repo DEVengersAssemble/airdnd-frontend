@@ -17,11 +17,11 @@ const SearchMapContainer = () => {
     dispatch(fetchCenter(filterForm.location));
   }, [mapCenter]);
 
-  if (loading)
+  if (!mapCenter && loading)
     return <div style={{ width: '100%', height: 'calc(100vh - 8rem)' }}></div>;
-  if (error)
+  if (!mapCenter && error)
     return <div style={{ width: '100%', height: 'calc(100vh - 8rem)' }}></div>;
-  if (!data)
+  if (!mapCenter && !data)
     return <div style={{ width: '100%', height: 'calc(100vh - 8rem)' }}></div>;
 
   return <SearchMap view={viewState} markers={homes} mapState={mapState} />;

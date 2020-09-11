@@ -95,15 +95,14 @@ const Map = compose(
     updateZoom,
     setRef,
   }) => {
-    console.log(center);
     return (
       <GoogleMap
         ref={setRef}
         zoom={mapZoom}
         defaultZoom={13}
         defaultCenter={{
-          lat: center && center.lat,
-          lng: center && center.lng,
+          lat: center.lat,
+          lng: center.lng,
         }}
         options={{
           disableDefaultUI: true,
@@ -173,4 +172,4 @@ const StBtnSetWrapper = styled.div`
   z-index: 10;
 `;
 
-export default Map;
+export default React.memo(Map);
