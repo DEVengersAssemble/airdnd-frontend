@@ -61,7 +61,7 @@ const FilterBtn = styled(Button)`
     css`
       border: 2px solid ${theme.color.black};
       background: ${theme.color.lightGray};
-      /* padding: 0.8rem 1.8rem; */
+      padding: 0.8rem 1.8rem;
       &:hover {
         border: 2px solid ${theme.color.black};
       }

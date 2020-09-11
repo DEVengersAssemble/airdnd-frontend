@@ -5,13 +5,9 @@ import Button from '../Global/Button';
 import DropDown from '../Global/DropDown';
 import Loader from '../Global/Loader';
 import { Input } from '../Global/Input';
-import {
-  RiEyeCloseLine,
-  RiMailLine,
-  RiUserLine,
-  RiErrorWarningLine,
-} from 'react-icons/ri';
+import { RiEyeCloseLine, RiMailLine, RiUserLine } from 'react-icons/ri';
 import { MdCheck, MdClose } from 'react-icons/md';
+import { AiOutlineWarning } from 'react-icons/ai';
 
 const StSignupEmailModal = styled(Modal)`
   overflow-y: scroll;
@@ -185,21 +181,41 @@ const StSubmitLoader = styled(Loader)`
 `;
 
 const StResultWrapper = styled.div`
-  background: #fff8f6;
   display: flex;
   align-items: center;
-  padding-left: 10px;
-  border: 1px solid ${({ theme }) => theme.color.warning};
   border-radius: 8px;
+  overflow: hidden;
   font-size: 24px;
   font-weight: 500;
-  height: 48px;
-  margin-top: 20px;
+  height: 66px;
+  margin-bottom: 20px;
 `;
 
+const StErrorWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 52px;
+  height: 100%;
+  padding: 20px 8px;
+  font-size: 24px;
+  background: #fc642e;
+  color: ${({ theme }) => theme.color.white};
+`;
+
+const StResultTextWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  border-color: ${({ theme }) => theme.color.line};
+  border-style: solid;
+  border-width: 2px 2px 2px 0;
+  border-radius: 0 8px 8px 0;
+  padding: 20px 8px;
+`;
 const StResultText = styled.span`
-  font-size: 16px;
+  font-size: 14px;
+  line-height: 14px;
   margin-left: 10px;
+  vertical-align: middle;
 `;
 
 const SignupEmailModal = ({
@@ -253,6 +269,21 @@ const SignupEmailModal = ({
     >
       <StSignupFormWrapper>
         <StSignupForm onSubmit={handleSubmit}>
+          {result && result !== 'Success' && (
+            <StResultWrapper result={result}>
+              <StErrorWrapper>
+                <AiOutlineWarning></AiOutlineWarning>
+              </StErrorWrapper>
+              <StResultTextWrapper>
+                {result === 'AlreadyEmail' && (
+                  <StResultText>이메일이 이미 존재합니다.</StResultText>
+                )}
+                {result === 'Error' && (
+                  <StResultText>회원가입에 실패하였습니다.</StResultText>
+                )}
+              </StResultTextWrapper>
+            </StResultWrapper>
+          )}
           <StInputWrapper>
             <StInput
               value={email}
@@ -461,17 +492,6 @@ const SignupEmailModal = ({
           <StSubmitButton isLoading={loading} border="none" type="submit">
             {loading ? <StSubmitLoader /> : '가입하기'}
           </StSubmitButton>
-          {result && result !== 'Success' && (
-            <StResultWrapper result={result}>
-              <RiErrorWarningLine></RiErrorWarningLine>
-              {result === 'AlreadyEmail' && (
-                <StResultText>이메일이 이미 존재합니다. </StResultText>
-              )}
-              {result === 'Error' && (
-                <StResultText>회원가입에 실패하였습니다. </StResultText>
-              )}
-            </StResultWrapper>
-          )}
         </StSignupForm>
         <StDividerLine />
         <StLoginButtonWrapper>
@@ -489,4 +509,4 @@ const SignupEmailModal = ({
   );
 };
 
-export default SignupEmailModal;
+export default React.memo(SignupEmailModal);
