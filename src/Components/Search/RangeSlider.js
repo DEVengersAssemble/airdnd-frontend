@@ -173,7 +173,7 @@ const StGraph = styled.ul`
 const StStick = styled.li`
   width: 5%;
   z-index: -1;
-  height: ${({ height }) => `${height * 0.8}px`};
+  height: ${({ height }) => `${height * 3}px`};
   margin: 0 1px -1px;
   border-radius: 1px;
   background: ${({ theme, inRange }) =>

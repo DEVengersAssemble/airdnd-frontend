@@ -2,7 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import { NextButton, PrevButton } from '../Global/SlideButton';
 
-const SearchPagination = ({ dataTotal, page, pageArray, onNavPage }) => {
+const SearchPagination = ({
+  dataTotal,
+  dateDiff,
+  page,
+  pageArray,
+  onNavPage,
+}) => {
   if (!dataTotal) return null;
   return (
     <StWrapper>
@@ -26,8 +32,9 @@ const SearchPagination = ({ dataTotal, page, pageArray, onNavPage }) => {
         {(page - 1) * 20 + 20 > dataTotal ? dataTotal : (page - 1) * 20 + 20}
       </StBlackSpan>
       <StGraySpan>
-        전체 요금을 보려면 날짜를 입력하세요. 추가 요금이 적용되고 세금이 추가될
-        수 있습니다.
+        {dateDiff
+          ? '추가 수수료가 부과됩니다. 세금도 부과될 수 있습니다.'
+          : '전체 요금을 보려면 날짜를 입력하세요. 추가 요금이 적용되고 세금이 추가될 수 있습니다.'}
       </StGraySpan>
     </StWrapper>
   );
