@@ -74,10 +74,11 @@ const Aside = ({
 
 const StWrapper = styled.div`
   width: 37%;
+  padding: 24px;
   margin-left: 5%;
+  margin-bottom: 40px;
   border: 1px solid ${({ theme }) => theme.color.line};
   border-radius: 8px;
-  padding: 24px;
 `;
 
 const StSubjectWrapper = styled.div`
