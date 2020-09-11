@@ -153,6 +153,12 @@ const StReview = styled.li`
 
   p {
     line-height: 2.4rem;
+    overflow: hidden;
+    text-align: left;
+    word-wrap: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 10;
+    -webkit-box-orient: vertical;
     /* word-wrap: break-word;
     display: -webkit-box;
     -webkit-line-clamp: 6;

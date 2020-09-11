@@ -26,7 +26,12 @@ const DetailMainContainer = () => {
     };
   }, [dispatch]);
 
-  if (error) return <div>에러 발생! 잘못된 요청입니다.</div>;
+  if (error)
+    return (
+      <div style={{ padding: '30px 30px 300px' }}>
+        에러 발생! 잘못된 요청입니다.
+      </div>
+    );
 
   return (
     <>

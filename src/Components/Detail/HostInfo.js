@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { FaCrown } from 'react-icons/fa';
 import { AiFillStar, AiFillSafetyCertificate } from 'react-icons/ai';
 import Division from './Division';
@@ -29,12 +29,14 @@ const HostInfo = ({ home }) => {
           <span>회원 가입일: {signupDate}</span>
         </div>
       </StHostWrapper>
-      <StInfoWrapper>
+      <StInfoWrapper notContent={!selfExplanation && !communication}>
         <StMarkList>
-          <li>
-            <AiFillStar />
-            후기 {reviewCount}개
-          </li>
+          {!!reviewCount && (
+            <li>
+              <AiFillStar />
+              후기 {reviewCount}개
+            </li>
+          )}
           {identityVerified && (
             <li>
               <FaCrown />
@@ -66,8 +68,9 @@ const HostInfo = ({ home }) => {
         )}
       </StInfoWrapper>
       <StSafetyWrapper>
-        <span>응답률: {responseRate}</span>
-        <span>응답시간: {responseTime}</span>
+        {responseRate && <span>응답률: {responseRate}</span>}
+        {responseTime && <span>응답시간: {responseTime}</span>}
+        <span>언어: 한국어</span>
         <Button padding="13px 23px" transition>
           호스트에게 연락하기
         </Button>
@@ -152,6 +155,12 @@ const StInfoWrapper = styled.div`
     display: block;
     margin-bottom: 24px;
   }
+
+  ${({ notContent }) =>
+    notContent &&
+    css`
+      display: block;
+    `}
 `;
 
 const StSafetyWrapper = styled.div`
@@ -159,12 +168,12 @@ const StSafetyWrapper = styled.div`
   width: 50%;
   vertical-align: top;
 
-  span {
+  > span {
     display: block;
     margin-bottom: 16px;
 
-    &:nth-of-type(2) {
-      margin-bottom: 48px;
+    &:last-of-type {
+      margin-bottom: 32px;
     }
   }
 `;

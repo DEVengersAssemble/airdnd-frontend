@@ -43,6 +43,16 @@ const DetailPopupContainer = ({
     }
   }, [checkout]);
 
+  const checkinDate = new Date(checkin);
+  const checkoutDate = new Date(checkout);
+  const options = {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  };
+  const checkinString = checkinDate.toLocaleDateString('ko-KR', options);
+  const checkoutString = checkoutDate.toLocaleDateString('ko-KR', options);
+
   // if (!popupState) return '';
 
   return (
@@ -54,7 +64,7 @@ const DetailPopupContainer = ({
           </StTitle>
           <StSubText>
             {checkin && checkout
-              ? `${checkin} - ${checkout}`
+              ? `${checkinString} - ${checkoutString}`
               : '여행 날짜를 입력하여 정확한 요금을 확인하세요.'}
           </StSubText>
         </StTextWrapper>

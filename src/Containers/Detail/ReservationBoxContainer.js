@@ -1,10 +1,16 @@
 import React, { useRef } from 'react';
-import { useSelector } from 'react-redux';
+import { openModal } from '../../Modules/modal';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import ReservationBox from '../../Components/Detail/ReservationBox';
+import {
+  setCheckin,
+  setCheckout,
+  setResevationGuest,
+} from '../../Modules/reservation';
 
 const ReservationBoxContainer = ({ home }) => {
-  const searchData = useSelector(state => state.searchForm);
+  const { isLoggedIn } = useSelector(state => state.user);
   const {
     dateDiff: searchDateDiff,
     checkIn: searchCheckin,
@@ -17,15 +23,14 @@ const ReservationBoxContainer = ({ home }) => {
     changeInitialDate,
     changeInitialGuests,
   } = useSelector(state => state.reservation);
-  const { adult: searchAdult, child: searchChild } = useSelector(
-    state => state.searchForm.guests,
-  );
-  const { adult: reserveAdult, child: reserveChild } = useSelector(
-    state => state.reservation.guests,
-  );
+  const searchGuests = useSelector(state => state.searchForm.guests);
+  const reserveGuests = useSelector(state => state.reservation.guests);
+  const { adult: searchAdult, child: searchChild } = searchGuests;
+  const { adult: reserveAdult, child: reserveChild } = reserveGuests;
   const { id, price, reviews } = home;
   const { rating, count } = reviews;
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const reAssignedDateDiff = changeInitialDate ? dateDiff : searchDateDiff;
   const reAssignedCheckin = changeInitialDate ? checkin : searchCheckin;
@@ -69,23 +74,24 @@ const ReservationBoxContainer = ({ home }) => {
     maximumFractionDigits: 0,
   });
 
-  // const multipliedPrice = getmultipliedPrice(
-  //   pricePerPerson,
-  //   reAssignedDateDiff,
-  // );
-  // const percentage = getPercentage(pricePerPerson * reAssignedDateDiff);
-  // const totalPrice = getTotalPrice(
-  //   pricePerPerson * reAssignedDateDiff,
-  //   percentage,
-  // );
-
   const checkPopupRef = useRef();
 
   const onGoToReservation = () => {
     if (notChecked) {
       checkPopupRef.current.click();
-      console.log('test', checkPopupRef.current);
       return;
+    }
+    if (isLoggedIn) {
+      dispatch(openModal('login'));
+      return;
+    }
+    if (!changeInitialDate) {
+      dispatch(setCheckin(searchCheckin));
+      dispatch(setCheckout(searchCheckout));
+    }
+    if (!changeInitialGuests) {
+      const _searchGuests = { ...searchGuests, adult: reAssignedAdult || 1 };
+      dispatch(setResevationGuest(_searchGuests));
     }
     history.push(`/Reservation/HouseRules/${id}`);
   };
@@ -103,7 +109,6 @@ const ReservationBoxContainer = ({ home }) => {
       // getPercentage={getPercentage}
       // getTotalPrice={getTotalPrice}
       // getmultipliedPrice={getmultipliedPrice}
-      searchData={searchData}
       dateDiff={reAssignedDateDiff}
       notChecked={notChecked}
       onGoToReservation={onGoToReservation}
