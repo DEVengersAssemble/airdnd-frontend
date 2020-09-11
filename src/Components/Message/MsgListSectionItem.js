@@ -15,7 +15,6 @@ const MsgListSectionItem = ({
   onClickList,
   id,
   activeId,
-  filter,
   state,
 }) => {
   return (

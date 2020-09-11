@@ -187,7 +187,7 @@ const wishlists = (state = initialState, action) => {
         loading: false,
         data: {
           ...state.data,
-          bookmarkLists: state.data.bookmarkLists.concat(action.bookmarkLists),
+          bookmarkLists: state.data.bookmarkLists.concat(action.payload),
         },
       };
     case CREATE_BOOKMARKLIST_ERROR:
