@@ -2,14 +2,29 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import MainRouter from './Routers/MainRouter';
 import ResetStyle from './style/ResetStyle';
-import { useCookies } from 'react-cookie';
 import { setIsLoggedIn } from './Modules/user';
+
+const checkCookie = cname => {
+  const name = `${cname}=`;
+  const decodedCookies = decodeURIComponent(document.cookie);
+  const cookieArr = decodedCookies.split(';');
+  for (let i = 0; i < cookieArr.length; i++) {
+    let c = cookieArr[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return true;
+    }
+  }
+  return false;
+};
+
 function App() {
   const dispatch = useDispatch();
   const { isLoggedIn } = useSelector(state => state.user);
-  const [cookies, setCookie, removeCookie] = useCookies(['AirdndSES']);
   useEffect(() => {
-    if (!isLoggedIn && cookies['AirdndSES']) {
+    if (!isLoggedIn && checkCookie('AirdndSES')) {
       dispatch(setIsLoggedIn(true));
     }
   }, [isLoggedIn]);

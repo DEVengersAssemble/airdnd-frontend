@@ -7,7 +7,6 @@ const LOG_OUT = 'user/LOG_OUT';
 const LOG_OUT_SUCCESS = 'user/LOG_OUT_SUCCESS';
 const LOG_OUT_ERROR = 'user/LOG_OUT_ERROR';
 
-// testing
 const SET_IS_LOGGED_IN = 'user/SET_IS_LOGGED_IN';
 
 // action creators
@@ -56,7 +55,7 @@ const user = (state = initialState, action) => {
     case LOG_OUT_ERROR:
       return state;
     case LOG_OUT_SUCCESS:
-      return { ...initialState };
+      return initialState;
     case SET_IS_LOGGED_IN:
       return {
         ...state,
