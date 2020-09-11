@@ -62,7 +62,7 @@ const Map = compose(
       },
       getBounds: () => () => {
         const bounds = refs.map.getBounds();
-        // console.log(bounds);
+        console.log(bounds);
         return {
           swLat: bounds.ab.i,
           swLng: bounds.Va.i,
@@ -104,13 +104,17 @@ const Map = compose(
           lat: center.lat,
           lng: center.lng,
         }}
-        options={{ disableDefaultUI: true, scrollwheel: false }}
-        onDblClick={() => {
-          // setZoom();
-          // updateZoom(zoom);
-          console.log('11111111111111111', zoom);
-          changeBounds(getBounds());
+        options={{
+          disableDefaultUI: true,
+          scrollwheel: false,
+          disableDoubleClickZoom: true,
         }}
+        // onDblClick={() => {
+        //   setZoom();
+        //   updateZoom(zoom);
+        //   console.log('11111111111111111', zoom);
+        //   changeBounds(getBounds());
+        // }}
         onDragEnd={() => changeBounds(getBounds())}
       >
         <StStickyWrapper>

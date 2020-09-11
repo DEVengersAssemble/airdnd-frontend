@@ -37,12 +37,13 @@ const MapContainer = ({ markers }) => {
   };
 
   const changeBounds = bounds => {
-    console.log('3333333333333333', mapZoom);
+    if (!mapSearch) return;
     const newQueryObj = _.omit(queryObj, ['page']);
     Object.keys(bounds).forEach(bound => (newQueryObj[bound] = bounds[bound]));
     history.replace(`?${qs.stringify(newQueryObj)}`);
     dispatch(fetchData(`?${qs.stringify(newQueryObj)}`));
     dispatch(setMapBounds(bounds));
+    window.scrollTo({ top: 0 });
   };
 
   return (

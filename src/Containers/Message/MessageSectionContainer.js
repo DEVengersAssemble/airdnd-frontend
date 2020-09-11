@@ -7,8 +7,8 @@ import { debounce } from 'lodash';
 const MessageSectionContainer = () => {
   // ! redux
   const msgSectionStates = useSelector(state => state.message);
-
   const dispatch = useDispatch();
+
   // ! variable
   const { msgDetailSectionState, msgListSectionState } = msgSectionStates;
 
@@ -25,8 +25,8 @@ const MessageSectionContainer = () => {
   };
 
   useEffect(() => {
-    window.addEventListener('resize', debounce(onResizeMedia, 1000));
-    window.addEventListener('resize', debounce(onResizeLarge, 1000));
+    window.addEventListener('resize', debounce(onResizeMedia, 200));
+    window.addEventListener('resize', debounce(onResizeLarge, 200));
     return () => {
       window.removeEventListener('resize', onResizeMedia);
       window.removeEventListener('resize', onResizeLarge);

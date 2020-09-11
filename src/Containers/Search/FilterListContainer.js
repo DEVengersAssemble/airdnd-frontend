@@ -18,6 +18,7 @@ const FilterButtonContainer = React.memo(({ name, text, children }) => {
       text={text}
       isOpen={isOpen}
       isApplied={isApplied}
+      popupState={popupState[name]}
       onClick={onClick}
     >
       {children}
@@ -26,7 +27,8 @@ const FilterButtonContainer = React.memo(({ name, text, children }) => {
 });
 
 const FilterListContainer = React.memo(({ mapState }) => {
-  const { searchForm, data } = useSelector(state => state.search);
+  const { data } = useSelector(state => state.search);
+  const searchForm = useSelector(state => state.searchForm);
 
   const dispatch = useDispatch();
   const onShowMap = () => dispatch(showMap());

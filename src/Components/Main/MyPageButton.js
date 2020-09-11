@@ -40,4 +40,4 @@ const MyPageButton = ({ isScrollTop, togglePopup }) => {
   );
 };
 
-export default MyPageButton;
+export default React.memo(MyPageButton);
