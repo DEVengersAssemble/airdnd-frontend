@@ -1,6 +1,8 @@
 import * as loginApi from '../Api/loginApi';
 import { setUser } from './user';
 import { closeModal } from './modal';
+import { setBookmarkLists } from './wishlists';
+
 const LOG_IN = 'login/LOG_IN';
 const LOG_IN_SUCCESS = 'login/LOG_IN_SUCCESS';
 const LOG_IN_ERROR = 'login/LOG_IN_ERROR';
@@ -22,6 +24,7 @@ export const loginRequest = userInfo => async dispatch => {
     dispatch({ type: LOG_IN_SUCCESS, result });
     if (result === 'Success') {
       dispatch(setUser(user));
+      dispatch(setBookmarkLists(bookmarkLists));
       dispatch(resetForm(''));
       dispatch(closeModal());
     }
