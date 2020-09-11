@@ -58,7 +58,11 @@ const CalendarContainer = ({
   const checkinTime = new Date(checkin).getTime();
 
   const beforeToday = dateTime => {
-    const todayTime = new Date().getTime();
+    const todayTime = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate(),
+    ).getTime();
     return dateTime < todayTime;
   };
 
