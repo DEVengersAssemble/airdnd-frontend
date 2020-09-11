@@ -238,12 +238,12 @@ const wishlists = (state = initialState, action) => {
         selectedImg: '',
         data: {
           bookmarkLists: state.data.bookmarkLists.concat({
-            bookmarkListId: action.payload.bookmarkListId,
-            bokmarkListTitle: action.param.bookmarkListTitle,
+            bookmarkListId: action.payload.result,
+            bookmarkListTitle: action.param.bookmarkListTitle,
             bookmarks: [
               {
                 homeId: action.param.bookmarkHomeId,
-                images: action.param.bookmarkHomeImage,
+                images: action.param.bookmarkImage,
               },
             ],
           }),

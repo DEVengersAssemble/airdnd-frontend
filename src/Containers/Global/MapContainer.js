@@ -27,13 +27,19 @@ const MapContainer = ({ markers }) => {
   const dispatch = useDispatch();
   const openFilterModal = () => dispatch(openPopup('all'));
   const updateZoom = zoom => dispatch(zoomSet(zoom));
-  const onHideMap = () => dispatch(hideMap());
   const onCloseMap = () => dispatch(closeMap());
   const checkMapSearch = () => dispatch(setMapSearch());
   const onZoomIn = () => dispatch(zoomIn());
   const onZoomOut = () => dispatch(zoomOut());
   const onCloseMarker = e => {
     e.target.nodeName === 'DIV' && dispatch(closeMarker());
+  };
+
+  const onHideMap = () => {
+    dispatch(hideMap());
+    queryObj.mapState = 0;
+    history.replace(`?${qs.stringify(queryObj)}`);
+    window.scrollTo({ top: 0 });
   };
 
   const changeBounds = bounds => {
