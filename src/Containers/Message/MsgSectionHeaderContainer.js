@@ -24,13 +24,8 @@ const MsgSectionHeaderContainer = () => {
   const dispatch = useDispatch();
 
   // ! variable
-  // const selectIndex = data.findIndex(
-  //   (_, index) => data[index] === data[activeIndex],
-  // );
-  // const tempMsg = tempMsgs.find(
-  //   (_, index) => tempMsgs[index] === tempMsgs[activeIndex],
-  // );
-
+  const { state: activeState, hostname } = activeMsg;
+  const { state: tempState, id: tempId } = tempMsg;
   // ! event
   const onClickShowList = () => {
     dispatch(hideMsgDetailSection());
@@ -61,15 +56,15 @@ const MsgSectionHeaderContainer = () => {
   };
 
   const onClickArchive = () => {
-    if (activeMsg.state === 'all') {
+    if (activeState === 'all') {
       // ! 1번 온클릭이벤트 발생하면 archive or unarchive
-      dispatch(archiveMsg(activeMsg, activeMsg.state, 'hidden'));
+      dispatch(archiveMsg(activeMsg, activeState, 'hidden'));
       // ! 2번 Toast 발생
       emitToast();
     }
-    if (activeMsg.state === 'hide') {
+    if (activeState === 'hidden') {
       // ! 1번 온클릭이벤트 발생하면 archive or unarchive
-      dispatch(unarchiveMsg(activeMsg, activeMsg.state, 'all'));
+      dispatch(unarchiveMsg(activeMsg, activeState, 'all'));
       // ! 2번 Toast 발생
       emitToast();
     }
@@ -83,7 +78,7 @@ const MsgSectionHeaderContainer = () => {
     // ! 5번 이전 상태의 MsgList로 돌려놓음
     // ! messages의 all => hide로 바뀐 msg도 원래대로 복원
     // ! messages의 hide => msg 바뀐 msg도 원래대로 복원
-    dispatch(undo(tempMsg.id, tempMsg.state));
+    dispatch(undo(tempId, tempState));
     // ! 6번 UndoToast 발생
     emitUndoToast();
   };
@@ -92,15 +87,15 @@ const MsgSectionHeaderContainer = () => {
     <>
       <MsgSectionHeader
         activeMsg={activeMsg}
-        hostname={activeMsg.hostname}
-        state={activeMsg.state}
+        hostname={hostname}
+        state={activeState}
         media={media}
         msgDetailSectionState={msgDetailSectionState}
         onClickToggleDetail={onClickToggleDetail}
         onClickShowList={onClickShowList}
         onClickArchive={onClickArchive}
       />
-      <ToastContainer state={activeMsg.state} onClickUndo={onClickUndo} />
+      <ToastContainer state={activeState} onClickUndo={onClickUndo} />
       <UndoToastContainer />
     </>
   );

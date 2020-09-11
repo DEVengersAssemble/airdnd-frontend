@@ -20,7 +20,7 @@ const MsgSectionHeader = ({
   return (
     <MsgSectionHeaderWrapper>
       <MsgSectionHeaderTitle>
-        {media === 'medium' && msgDetailSectionState && (
+        {activeMsg && media === 'medium' && msgDetailSectionState && (
           <Button
             btnType="circle"
             border="none"

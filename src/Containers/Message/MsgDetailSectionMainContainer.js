@@ -3,18 +3,15 @@ import { useSelector } from 'react-redux';
 import MsgDetailSectionMain from '../../Components/Message/MsgDetailSectionMain';
 
 const MsgDetailSectionMainContainer = () => {
-  // // ! redux
-  // const { activeIndex, filteredMsgs } = useSelector(state => state.message);
-
-  // // ! variable
-  // const activeMsg = filteredMsgs.find(
-  //   (_, index) => filteredMsgs[index] === filteredMsgs[activeIndex],
-  // );
+  // ! redux
+  const { activeMsg } = useSelector(state => state.message);
+  const { contents } = activeMsg;
+  console.log(contents && !contents.isCanceled);
 
   return (
     <MsgDetailSectionMain
-    // activeMsg={activeMsg && activeMsg}
-    // isCanceled={activeMsg && activeMsg.contents.isCanceled}
+      activeMsg={activeMsg}
+      isCanceled={contents && contents.isCanceled}
     />
   );
 };

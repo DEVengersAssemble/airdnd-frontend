@@ -18,9 +18,9 @@ const MsgListSectionMainContainer = () => {
   });
 
   // ! variable
-  const hasMsgs = data && data['all'].length;
+  const hasMsgs = data && data[`${filter || 'all'}`].length;
   const messages = data && data[`${filter || 'all'}`];
-  const { id } = messages[0];
+  const { id } = messages[0] || 0;
   const msg =
     data && data[`${filter || 'all'}`].find(msg => msg.id === activeId);
 
@@ -35,4 +35,4 @@ const MsgListSectionMainContainer = () => {
   return <MsgListSectionMain hasMsgs={hasMsgs} messages={messages} />;
 };
 
-export default React.memo(MsgListSectionMainContainer);
+export default MsgListSectionMainContainer;

@@ -1,9 +1,7 @@
-import React, { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import MsgListSectionFilterPopup from '../../Components/Message/MsgListSectionFilterPopup';
-import { fetchInbox, closePopup } from '../../Modules/message';
-import qs from 'qs';
+import { closePopup } from '../../Modules/message';
 
 const MsgListSectionFilterPopupContainer = ({ popupState, popupRef }) => {
   // ! redux
@@ -28,12 +26,6 @@ const MsgListSectionFilterPopupContainer = ({ popupState, popupRef }) => {
     dispatch(closePopup('filter'));
   };
 
-  // ! query
-  const query = useLocation();
-  const { filter } = qs.parse(query.search, {
-    ignoreQueryPrefix: true,
-  });
-
   return (
     <MsgListSectionFilterPopup
       popupState={popupState}
@@ -44,8 +36,6 @@ const MsgListSectionFilterPopupContainer = ({ popupState, popupRef }) => {
       allMsgCount={allMsgCount}
       hiddenMsgCount={hiddenMsgCount}
       unreadMsgCount={unreadMsgCount}
-      // onClickFilterPopup={onClickFilterPopup}
-      // id={id}
     />
   );
 };

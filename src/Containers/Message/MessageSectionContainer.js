@@ -6,12 +6,12 @@ import { debounce } from 'lodash';
 
 const MessageSectionContainer = () => {
   // ! redux
-  const msgSectionStates = useSelector(state => state.message);
+  const { msgDetailSectionState, msgListSectionState } = useSelector(
+    state => state.message.mediaState,
+  );
   const dispatch = useDispatch();
 
   // ! variable
-  const { msgDetailSectionState, msgListSectionState } = msgSectionStates;
-
   const onResizeMedia = () => {
     if (window.innerWidth <= 1127) {
       dispatch(changeMediaSize('medium'));

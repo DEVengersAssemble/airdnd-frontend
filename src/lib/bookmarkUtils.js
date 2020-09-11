@@ -28,3 +28,19 @@ export const fetchBookmarkDataThunk = (type, promiseCreator) => {
     }
   };
 };
+
+export const createBookmarkDataThunk = (type, promiseCreator) => {
+  const [SUCCESS, ERROR] = [`${type}_SUCCESS`, `${type}_ERROR`];
+  return param => async dispatch => {
+    console.log(param);
+    dispatch({ type });
+    try {
+      const payload = await promiseCreator(param);
+      console.log('할당햇고요!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', payload);
+      dispatch({ type: SUCCESS, payload, param });
+    } catch (e) {
+      console.log('에러 무슨일이야', e);
+      dispatch({ type: ERROR, payload: e, error: true });
+    }
+  };
+};
