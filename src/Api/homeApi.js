@@ -3,7 +3,16 @@ import axios from 'axios';
 export const getHome = async id => {
   const response = await axios.get(`/back/home?home_idx=${id}`);
   // const response = await axios.get(`/back/home?home_idx=22638651`);
-  console.log('======================== home get =======================');
+  console.log('======================== get home =======================');
+  console.log(response);
+  return response.data;
+};
+
+export const postReservation = async payload => {
+  console.log(payload);
+  const response = await axios.post(`/back/book`, payload);
+  // const response = await axios.get(`/back/home?home_idx=22638651`);
+  console.log('===================== post reservation ====================');
   console.log(response);
   return response.data;
 };
