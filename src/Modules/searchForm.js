@@ -59,6 +59,7 @@ const searchForm = (state = initialState, action) => {
       return {
         ...state,
         checkIn: action.payload,
+        checkOut: '',
         dateDiff: getDateDiff(action.payload, state.checkOut),
       };
     }
