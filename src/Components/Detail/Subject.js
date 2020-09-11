@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import styled, { css, keyframes } from 'styled-components';
 import { FaCrown } from 'react-icons/fa';
 import { FiShare } from 'react-icons/fi';
@@ -7,11 +7,15 @@ import Rating from '../Global/Rating';
 import Button from '../Global/Button';
 import HomePhotos from './HomePhotos';
 import { Heart } from '../Global/Heart';
+import { toggleBookmark } from '../../lib/bookmarkUtils';
 
 const Subject = ({ isLoading, home }) => {
+  const { id } = useSelector(state => state.user.data);
+  const dispatch = useDispatch();
   const [bookmark, setBookmark] = useState(false);
 
-  const onClick = () => setBookmark(!bookmark);
+  const onClickBookmark = () => setBookmark(!bookmark);
+  // const onClickBookmark = () => toggleBookmark(id, home, dispatch);
 
   return (
     <StDetailTitle>
@@ -39,7 +43,7 @@ const Subject = ({ isLoading, home }) => {
               <FiShare />
               공유하기
             </StButton>
-            <StButton transition onClick={onClick}>
+            <StButton transition onClick={onClickBookmark}>
               <StHeart
                 size="smaller"
                 bgColor={home.isBookmarked ? 'main' : 'white'}
