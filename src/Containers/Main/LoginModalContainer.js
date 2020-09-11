@@ -111,7 +111,7 @@ const LoginModalContainer = () => {
       closeModal={() => {
         dispatch(closeModal());
       }}
-      cleanupModal={cleanupModal}
+      // cleanupModal={cleanupModal}
       onFormChange={onFormChange}
       onToggleShowPwd={onToggleShowPwd}
       handleSubmit={handleSubmit}
