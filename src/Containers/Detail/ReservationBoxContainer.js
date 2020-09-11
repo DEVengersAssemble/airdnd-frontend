@@ -81,7 +81,7 @@ const ReservationBoxContainer = ({ home }) => {
       checkPopupRef.current.click();
       return;
     }
-    if (isLoggedIn) {
+    if (!isLoggedIn) {
       dispatch(openModal('login'));
       return;
     }

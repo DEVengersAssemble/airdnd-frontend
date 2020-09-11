@@ -23,7 +23,7 @@ const ReservationMainContainer = () => {
 
   const onClick = () => dispatch(openModal('login'));
 
-  if (isLoggedIn) {
+  if (!isLoggedIn) {
     dispatch(openModal('login'));
     return (
       <>
