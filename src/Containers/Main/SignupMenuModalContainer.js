@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import SignupMenuModal from '../../Components/Main/SignupMenuModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { openModal, closeModal } from '../../Modules/modal';
-
+import { setForm } from '../../Modules/signup';
 const SignupMenuModalContainer = () => {
   const dispatch = useDispatch();
   const { name } = useSelector(state => state.modal);
@@ -16,15 +16,29 @@ const SignupMenuModalContainer = () => {
   };
 
   const onSuccessGoogle = res => {
-    console.log('[onSuccess]');
+    console.log('[onSuccessGoogle]');
     console.log('res: ', res);
-    console.log('currentUser: ', res.profileObj);
+    console.log('profileObj: ', res.profileObj);
+    const { email, familyName, givenName, imageUrl } = res.profileObj;
+    const form = {
+      email,
+      firstName: givenName || '',
+      lastName: familyName || '',
+      pwd: '',
+      birthYear: '년',
+      birthMonth: '월',
+      birthDay: '일',
+      phone: '',
+      profileImg: imageUrl || '',
+      description: '',
+    };
+    dispatch(setForm(form));
+    dispatch(openModal('signup_email'));
   };
 
-  const onFailureGoogle = res => {
+  const onFailureGoogle = ({ profileObj }) => {
     console.log('[onFailure]');
-    console.log('res: ', res);
-    console.log('currentUser: ', res.profileObj);
+    console.log('profileObj: ', profileObj);
   };
 
   return (

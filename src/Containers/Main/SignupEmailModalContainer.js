@@ -138,7 +138,7 @@ const SignupModalContainer = () => {
       firstName,
       lastName,
       pwd,
-      birthday: `${birthYear}/${birthMonth}/${birthDay}`,
+      birthday: `${birthYear}-${birthMonth}-${birthDay}`,
       phone,
       profileImg,
       description,
@@ -230,7 +230,7 @@ const SignupModalContainer = () => {
       closeModal={() => {
         dispatch(closeModal());
       }}
-      cleanupModal={cleanupModal}
+      // cleanupModal={cleanupModal}
       onFormChange={onFormChange}
       handleSubmit={handleSubmit}
       onPwdFocused={onPwdFocused}
