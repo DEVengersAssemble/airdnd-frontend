@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { throttle } from 'lodash';
 import MainHeader from '../../Components/Main/MainHeader';
+import { refresh } from '../../Modules/searchForm';
+import { useDispatch } from 'react-redux';
 
 const MainHeaderContainer = () => {
+  const dispatch = useDispatch();
   const [isScrollTop, setIsScrollTop] = useState(window.scrollY < 40);
   const [isSearchBtnClicked, setIsSearchBtnClicked] = useState(false);
   const [initAnimation, setInitAnimation] = useState(false);
@@ -24,6 +27,7 @@ const MainHeaderContainer = () => {
   const handleLogoClick = e => {
     e.preventDefault();
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    dispatch(refresh());
   };
 
   const handleSearchBtnClick = () => {
