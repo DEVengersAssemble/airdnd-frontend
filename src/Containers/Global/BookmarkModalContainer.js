@@ -11,25 +11,34 @@ import {
   closeListModal,
   closeNewModal,
 } from '../../Modules/wishlists';
-import { changeHeart } from '../../Modules/search';
 
 const BookmarkListModalContainer = () => {
-  const { data, listModal, selectedId } = useSelector(state => state.wishlists);
-  const { bookmarkLists } = data;
+  const { data, listModal, selectedId, selectedImg } = useSelector(
+    state => state.wishlists,
+  );
+
+  const { bookmarkLists } = data || [];
   const dispatch = useDispatch();
   const closeBmListModal = () => dispatch(closeListModal());
   const openBmNewModal = () => dispatch(openNewModal());
+
   const onClickBookmark = bookmarkListId => {
-    dispatch(addBookmarkOldList(bookmarkListId));
-    dispatch(changeHeart(selectedId));
+    dispatch(
+      addBookmarkOldList({
+        bookmarkListId,
+        bookmarkListTitle: '',
+        bookmarkHomeId: selectedId,
+        bookmarkImage: selectedImg,
+      }),
+    );
   };
 
   return (
     <BookmarkListModal
       modalState={listModal}
+      bookmarkLists={bookmarkLists}
       closeBmListModal={closeBmListModal}
       openBmNewModal={openBmNewModal}
-      bookmarkLists={bookmarkLists}
       onClickBookmark={onClickBookmark}
     />
   );
@@ -37,14 +46,24 @@ const BookmarkListModalContainer = () => {
 
 const NewBookmarkModalContainer = () => {
   const { location } = useSelector(state => state.searchForm);
-  const { newModal, selectedId } = useSelector(state => state.wishlists);
+  const { newModal, selectedId, selectedImg } = useSelector(
+    state => state.wishlists,
+  );
+
   const [value, setValue] = useState(location);
   const onChange = ({ target }) => setValue(target.value);
   const dispatch = useDispatch();
   const closeBmNewModal = () => dispatch(closeNewModal());
+
   const onClickNewList = title => {
-    dispatch(addBookmarkNewList(title));
-    dispatch(changeHeart(selectedId));
+    dispatch(
+      addBookmarkNewList({
+        bookmarkListId: '',
+        bookmarkListTitle: title,
+        bookmarkHomeId: selectedId,
+        bookmarkImage: selectedImg,
+      }),
+    );
   };
 
   return (

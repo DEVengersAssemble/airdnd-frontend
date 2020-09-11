@@ -6,7 +6,8 @@ import _ from 'lodash';
 const FETCH_DATA = 'search/FETCH_DATA';
 const FETCH_DATA_SUCCESS = 'search/FETCH_DATA_SUCCESS';
 const FETCH_DATA_ERROR = 'search/FETCH_DATA_ERROR';
-const GET_SEARCH_FORM = 'search/GET_SEARCH_FORM';
+const GET_FILTER_FORM = 'search/GET_FILTER_FORM';
+const UPDATE_FILTER_FORM = 'search/UPDATE_FILTER_FORM';
 
 const HOVER_HOME = 'search/HOVER_HOME';
 const BLUR_HOME = 'search/BLUR_HOME';
@@ -28,6 +29,7 @@ const ZOOM_SET = 'search/ZOOM_SET';
 const OPEN_MARKER = 'search/OPEN_MARKER';
 const CLOSE_MARKER = 'search/CLOSE_MARKER';
 const SET_MAP_SEARCH = 'search/SET_MAP_SEARCH';
+const SET_MAP_BOUNDS = 'search/SET_MAP_BOUNDS';
 
 const OPEN_POPUP = 'search/OPEN_POPUP';
 const CLOSE_POPUP = 'search/CLOSE_POPUP';
@@ -44,9 +46,13 @@ const UNSAVE_MODAL_FILTER = 'search/UNSAVE_MODAL_FILTER';
 
 // action creator
 export const fetchData = fetchDataThunk(FETCH_DATA, api.fetchSearchedData);
-export const getSearchForm = searchForm => ({
-  type: GET_SEARCH_FORM,
-  searchForm,
+export const getFilterForm = filterForm => ({
+  type: GET_FILTER_FORM,
+  filterForm,
+});
+export const updateFilterForm = filterForm => ({
+  type: UPDATE_FILTER_FORM,
+  filterForm,
 });
 
 export const hoverHome = homeId => ({ type: HOVER_HOME, homeId });
@@ -69,6 +75,7 @@ export const zoomSet = zoom => ({ type: ZOOM_SET, zoom });
 export const openMarker = id => ({ type: OPEN_MARKER, id });
 export const closeMarker = () => ({ type: CLOSE_MARKER });
 export const setMapSearch = () => ({ type: SET_MAP_SEARCH });
+export const setMapBounds = mapBounds => ({ type: SET_MAP_BOUNDS, mapBounds });
 
 export const openPopup = name => ({ type: OPEN_POPUP, name });
 export const closePopup = (name, isApplied) => ({
@@ -101,20 +108,6 @@ export const resetModalFilter = name => ({
   type: RESET_MODAL_FILTER,
   name,
 });
-export const modalFilterInit = filterCondition => {
-  const { amenityList, facilityList, hostLangList } = filterCondition;
-  const filter = {
-    instantBooking: 0,
-    bedCount: 0,
-    bedroomCount: 0,
-    bathroomCount: 0,
-    superhost: 0,
-  };
-  if (amenityList) filter.amenityList = [];
-  if (facilityList) filter.facilityList = [];
-  if (hostLangList) filter.hostLangList = [];
-  return filter;
-};
 
 // initial state
 const modals = [
@@ -129,7 +122,7 @@ const modals = [
 ];
 const roomTypes = ['roomTypeHouse', 'roomTypePrivate', 'roomTypeShared'];
 const prices = ['priceMin', 'priceMax'];
-export const all = [...modals, ...roomTypes, ...prices, 'refund'];
+const all = [...modals, ...roomTypes, ...prices, 'refund'];
 
 export const filterInit = {
   refund: 0,
@@ -140,7 +133,7 @@ export const filterInit = {
   priceMax: 1000000,
 };
 
-const modalInit = {
+export const modalInit = {
   instantBooking: 0,
   bedCount: 0,
   bedroomCount: 0,
@@ -161,26 +154,18 @@ const popupInit = {
 
 const initialState = {
   ...reducerUtils.initial(),
-  // data: {
-  //   homes: [],
-  //   dataTotal: 0,
-  //   filterCondition: {
-  // superhost: false,
-  // amenityList: [],
-  // facilityList: [],
-  // hostLangList: [],
-  //   },
-  //   mapCenter: { lat: 0, lng: 0 },
-  //   priceArray: [],
-  //   averagePrice: 0,
-  //   recentHomes: [],
-  // },
-  searchForm: {},
+  filterForm: {},
   headerState: false,
   viewState: 'result',
   mapSearch: true,
   mapState: true,
-  mapZoom: 12,
+  mapZoom: 11,
+  mapBounds: {
+    swLat: 0,
+    swLng: 0,
+    neLat: 0,
+    neLng: 0,
+  },
   markerState: null,
   hoveredHome: null,
   popupState: popupInit,
@@ -202,13 +187,9 @@ const getFilterGroup = (key, state, keep) => {
     case 'price':
       return _.pick(obj, prices);
     case 'modal':
-      return keep
-        ? _.pick(obj, [...modals])
-        : modalFilterInit(state.data.filterCondition);
+      return keep ? _.pick(obj, [...modals]) : modalInit;
     case 'all':
-      return keep
-        ? obj
-        : { ...filterInit, ...modalFilterInit(state.data.filterCondition) };
+      return keep ? obj : { ...filterInit, ...modalInit };
     default:
       return { [key]: false };
   }
@@ -226,33 +207,50 @@ const search = (state = initialState, action) => {
       return {
         ...state,
         ...reducerUtils.success(action.payload),
-        // filterApplied: {
-        // ...modalFilterInit(action.payload.filterCondition),
-        // ..._.pick(state.searchForm, [...all, 'page']),
-        // ...state.filterApplied,
-        // },
         isFilterChanged: false,
+        headerState: false,
       };
     case FETCH_DATA_ERROR:
       return {
         ...state,
         ...reducerUtils.error(action.payload),
       };
-    case GET_SEARCH_FORM:
+    case GET_FILTER_FORM:
       return {
         ...state,
-        searchForm: action.searchForm,
+        filterForm: action.filterForm,
         filterApplied: {
           ...state.filterApplied,
-          ..._.pick(action.searchForm, [...all, 'page']),
+          ..._.pick(action.filterForm, [...all, 'page']),
         },
         popupApplied: {
-          refund: action.searchForm.refund || false,
-          roomType: roomTypes.some(key => action.searchForm[key]),
-          price: prices.some(key => action.searchForm[key]),
-          modal: modals.some(key => action.searchForm[key]),
+          refund: action.filterForm.refund || false,
+          roomType: roomTypes.some(key => action.filterForm[key]),
+          price: prices.some(key => action.filterForm[key]),
+          modal: modals.some(key => action.filterForm[key]),
           all: false,
         },
+        mapBounds: {
+          ...state.mapBounds,
+          swLat: action.filterForm.swLat,
+          swLng: action.filterForm.swLng,
+          neLat: action.filterForm.neLat,
+          neLng: action.filterForm.neLng,
+        },
+        page: action.filterForm.page || 1,
+        mapState:
+          action.filterForm.mapState === undefined
+            ? 1
+            : action.filterForm.mapState,
+      };
+    case UPDATE_FILTER_FORM:
+      return {
+        ...state,
+        filterForm: {
+          ...state.filterForm,
+          ...action.filterForm,
+        },
+        page: 1,
       };
     case HOVER_HOME:
       return {
@@ -352,11 +350,17 @@ const search = (state = initialState, action) => {
         ...state,
         mapSearch: !state.mapSearch,
       };
+    case SET_MAP_BOUNDS:
+      return {
+        ...state,
+        mapBounds: action.mapBounds,
+        page: 1,
+      };
     case OPEN_POPUP:
       return {
         ...state,
         popupState: {
-          ...state.popupState,
+          ...popupInit,
           [action.name]: true,
         },
         filterPrevState: getFilterGroup(action.name, state, 'keep'),
@@ -372,7 +376,10 @@ const search = (state = initialState, action) => {
           ...state.popupApplied,
           [action.name]: action.isApplied,
         },
-        isFilterChanged: !_.isEqual(state.filterPrevState, state.filterApplied),
+        isFilterChanged: !_.isEqual(
+          state.filterPrevState,
+          getFilterGroup(action.name, state, 'keep'),
+        ),
         filterPrevState: {},
       };
     case SET_FILTER:

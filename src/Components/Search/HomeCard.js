@@ -19,7 +19,6 @@ export const HomeCaption = ({
   return (
     <a
       rel="noopener noreferrer"
-      target="_blank"
       href={`http://localhost:3000/detail/${homeId}`}
       {...rest}
     >
@@ -73,6 +72,8 @@ const HomeCard = ({
     >
       <CarouselContainer
         responsive
+        mapState={mapState}
+        homeId={homeId}
         getWidth={getWidth}
         isHovered={isHovered}
         isSuperhost={isSuperhost}

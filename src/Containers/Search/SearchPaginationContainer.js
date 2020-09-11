@@ -7,6 +7,7 @@ import { navigatePage, fetchData } from '../../Modules/search';
 
 const SearchPaginationContainer = () => {
   const { data, page } = useSelector(state => state.search);
+  const { dateDiff } = useSelector(state => state.searchForm);
   const dispatch = useDispatch();
   const history = useHistory();
   const { search: query } = useLocation();
@@ -21,11 +22,13 @@ const SearchPaginationContainer = () => {
     history.replace(`?${qs.stringify(queryObj)}`);
     dispatch(fetchData(`?${qs.stringify(queryObj)}`));
     dispatch(navigatePage(newPage));
+    window.scrollTo({ top: 0 });
   };
 
   return (
     <SearchPagination
       page={page}
+      dateDiff={dateDiff}
       dataTotal={data.dataTotal}
       pageArray={pageArray}
       onNavPage={onNavPage}

@@ -4,24 +4,15 @@ import MsgDetailAddressBox from '../../Components/Message/MsgDetailAddressBox';
 
 const MsgDetailAddressBoxContainer = () => {
   // ! redux
-  const { activeIndex, filteredMsgs } = useSelector(state => state.message);
-  const { reservations } = useSelector(state => state.trips);
-
-  // ! variable
-  const activeMsg = filteredMsgs.find(
-    (_, index) => filteredMsgs[index] === filteredMsgs[activeIndex],
-  );
-
-  const reservation = reservations.find(
-    reservation =>
-      reservation.reservationId === (activeMsg && activeMsg.reservationId),
+  const { activeReservation: reservation } = useSelector(
+    state => state.message,
   );
 
   return (
     <MsgDetailAddressBox
-      address={reservation && reservation.address}
-      lat={reservation && reservation.location.lat}
-      lng={reservation && reservation.location.lng}
+      addr={reservation && reservation.addr}
+      lat={reservation.location && reservation.location.lat}
+      lng={reservation.location && reservation.location.lng}
     />
   );
 };

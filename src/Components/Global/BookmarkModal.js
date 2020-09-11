@@ -23,9 +23,9 @@ const BookmarkListModal = React.memo(
         header
       >
         <StList>
-          {bookmarkLists.map(
-            ({ bookmarkListId, bookmarkListTitle, bookmarks }) =>
-              bookmarks && (
+          {bookmarkLists &&
+            bookmarkLists.map(
+              ({ bookmarkListId, bookmarkListTitle, bookmarks }) => (
                 <StBookmark
                   key={bookmarkListId}
                   onClick={() => onClickBookmark(bookmarkListId)}
@@ -33,11 +33,15 @@ const BookmarkListModal = React.memo(
                   <StImage src={bookmarks[0] && bookmarks[0].images} />
                   <StContentWrapper>
                     <StTitle>{bookmarkListTitle}</StTitle>
-                    <StCount>숙소 {bookmarks.length}개</StCount>
+                    <StCount>
+                      {bookmarks
+                        ? `숙소 ${bookmarks.length}개`
+                        : '저장된 항목 없음'}
+                    </StCount>
                   </StContentWrapper>
                 </StBookmark>
               ),
-          )}
+            )}
         </StList>
         <ModalFooter>
           <Button
@@ -108,6 +112,7 @@ const StImage = styled.img`
   object-fit: cover;
   margin-right: 2rem;
   border-radius: 8px;
+  background: ${({ theme }) => theme.color.shadow};
 `;
 
 const StTitle = styled.span`

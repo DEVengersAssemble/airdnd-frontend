@@ -88,7 +88,7 @@ const SearchFormContainer = ({ isSearchBtnClicked }) => {
       changeSearchData('checkIn', payload);
     }
     const { adult, child, infant } = guests;
-    const guestCount = adult + child + infant;
+    const guestCount = +adult + +child + +infant;
     const url = `/search?location=${location}&checkIn=${newCheckIn}&checkOut=${newCheckOut}&dateDiff=${dateDiff}&flexibleDate=${flexibleDate}&guests=${guestCount}&adult=${adult}&child=${child}&infant=${infant}`;
     history.push(url);
     window.scrollTo({ top: 0 });

@@ -67,6 +67,7 @@ const MyPagePopup = ({
   isLoggedIn,
   openModalByName,
   movePage,
+  onClickLogout,
 }) => {
   const popupRef = useRef();
   const handlePopup = ({ target }) => {
@@ -148,7 +149,9 @@ const MyPagePopup = ({
           </StMyPageOptionItem>
           {isLoggedIn && (
             <StMyPageOptionItem>
-              <StMyPageOptionButton>로그아웃</StMyPageOptionButton>
+              <StMyPageOptionButton onClick={onClickLogout}>
+                로그아웃
+              </StMyPageOptionButton>
             </StMyPageOptionItem>
           )}
         </StMyPageOptionList>
@@ -157,4 +160,4 @@ const MyPagePopup = ({
   );
 };
 
-export default MyPagePopup;
+export default React.memo(MyPagePopup);

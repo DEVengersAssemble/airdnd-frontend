@@ -4,21 +4,32 @@ import HomeList from '../../Components/Search/HomeList';
 import HomeContainer from './HomeContainer';
 import HomeCardContainer from './HomeCardContainer';
 import { useLocation, useHistory } from 'react-router-dom';
-import { fetchData, navigatePage } from '../../Modules/search';
+import {
+  fetchData,
+  navigatePage,
+  updateFilterForm,
+} from '../../Modules/search';
 import qs from 'qs';
 import _ from 'lodash';
 
 const HomeListContainer = () => {
-  const { mapState, isFilterChanged, filterApplied, data } = useSelector(
-    state => state.search,
-  );
+  const {
+    mapState,
+    isFilterChanged,
+    filterApplied,
+    filterForm,
+    data,
+  } = useSelector(state => state.search);
 
   const dispatch = useDispatch();
   const history = useHistory();
-  const { search } = useLocation();
-  const searchForm = qs.parse(search, {
-    ignoreQueryPrefix: true,
-  });
+  const { search: query } = useLocation();
+  const queryObj = qs.parse(query, { ignoreQueryPrefix: true });
+
+  const { checkIn, checkOut, adult, child } = queryObj;
+  const isFormChanged = !['checkIn', 'checkOut', 'adult', 'child'].every(
+    query => queryObj[query] === filterForm[query],
+  );
 
   const fa = { ...filterApplied };
   const keys = Object.keys(fa);
@@ -43,17 +54,23 @@ const HomeListContainer = () => {
   };
 
   useEffect(() => {
-    if (!isFilterChanged) return;
-    keys.forEach(key => (fa[key] = setValues(key)));
+    if (isFilterChanged) {
+      keys.forEach(key => (fa[key] = setValues(key)));
 
-    const newQueryObj = _.omit(searchForm, [...deleteFromQuery(), 'page']);
-    applyToQuery(newQueryObj);
+      const newQueryObj = _.omit(queryObj, [...deleteFromQuery(), 'page']);
+      applyToQuery(newQueryObj);
 
-    const newQuery = `?${qs.stringify(newQueryObj)}`;
-    history.replace(newQuery);
-    dispatch(fetchData(newQuery));
-    dispatch(navigatePage(1));
-  }, [isFilterChanged]);
+      const newQuery = `?${qs.stringify(newQueryObj)}`;
+      history.replace(newQuery);
+      dispatch(fetchData(newQuery));
+      dispatch(navigatePage(1));
+      window.scrollTo({ top: 0 });
+    } else if (isFormChanged) {
+      dispatch(fetchData(query));
+      dispatch(updateFilterForm({ checkIn, checkOut, adult, child }));
+      window.scrollTo({ top: 0 });
+    }
+  }, [isFilterChanged, checkIn, checkOut, adult, child]);
 
   return (
     <>

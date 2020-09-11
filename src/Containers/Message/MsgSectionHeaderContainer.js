@@ -1,7 +1,6 @@
 import React from 'react';
 import MsgSectionHeader from '../../Components/Message/MsgSectionHeader';
 import { ToastContainer, UndoToastContainer } from '../Global/ToastContainer';
-
 import { useSelector, useDispatch } from 'react-redux';
 import {
   hideMsgDetailSection,
@@ -17,33 +16,22 @@ import {
 
 const MsgSectionHeaderContainer = () => {
   // ! redux
-  const msgDetailSectionState = useSelector(
-    state => state.message.msgDetailSectionState,
+  const { msgDetailSectionState, media } = useSelector(
+    state => state.message.mediaState,
   );
-  const media = useSelector(state => state.message.media);
-  const { activeIndex, filteredMsgs } = useSelector(state => state.message);
-  const { tempMsgs } = useSelector(state => state.message);
+  const { activeMsg } = useSelector(state => state.message);
+  const { tempMsg } = useSelector(state => state.message);
   const dispatch = useDispatch();
 
   // ! variable
-  // ! activeMsg 구조할당 하면.. 망함... ㅠㅠ
-  const activeMsg = filteredMsgs.find(
-    (_, index) => filteredMsgs[index] === filteredMsgs[activeIndex],
-  );
-  const selectIndex = filteredMsgs.findIndex(
-    (_, index) => filteredMsgs[index] === filteredMsgs[activeIndex],
-  );
-  const tempMsg = tempMsgs.find(
-    (_, index) => tempMsgs[index] === tempMsgs[activeIndex],
-  );
-
+  const { state: activeState, hostname } = activeMsg;
+  const { state: tempState, id: tempId } = tempMsg;
   // ! event
   const onClickShowList = () => {
     dispatch(hideMsgDetailSection());
   };
 
-  const onClickDetail = () => {
-    console.log(media);
+  const onClickToggleDetail = () => {
     if (msgDetailSectionState) return dispatch(hideMsgDetailSection());
     if (!msgDetailSectionState) return dispatch(showMsgDetailSection());
   };
@@ -68,15 +56,15 @@ const MsgSectionHeaderContainer = () => {
   };
 
   const onClickArchive = () => {
-    if (activeMsg && activeMsg.state === 'all') {
-      // ! 1번 온클릭이벤트 발생하면 archive or un archive
-      dispatch(archiveMsg(selectIndex, activeMsg.id, 'hide'));
+    if (activeState === 'all') {
+      // ! 1번 온클릭이벤트 발생하면 archive or unarchive
+      dispatch(archiveMsg(activeMsg, activeState, 'hidden'));
       // ! 2번 Toast 발생
       emitToast();
     }
-    if (activeMsg && activeMsg.state === 'hide') {
-      // ! 1번 온클릭이벤트 발생하면 archive or un archive
-      dispatch(unarchiveMsg(selectIndex, activeMsg.id, 'all'));
+    if (activeState === 'hidden') {
+      // ! 1번 온클릭이벤트 발생하면 archive or unarchive
+      dispatch(unarchiveMsg(activeMsg, activeState, 'all'));
       // ! 2번 Toast 발생
       emitToast();
     }
@@ -90,7 +78,7 @@ const MsgSectionHeaderContainer = () => {
     // ! 5번 이전 상태의 MsgList로 돌려놓음
     // ! messages의 all => hide로 바뀐 msg도 원래대로 복원
     // ! messages의 hide => msg 바뀐 msg도 원래대로 복원
-    dispatch(undo(tempMsg.id, tempMsg.state));
+    dispatch(undo(tempId, tempState));
     // ! 6번 UndoToast 발생
     emitUndoToast();
   };
@@ -98,19 +86,16 @@ const MsgSectionHeaderContainer = () => {
   return (
     <>
       <MsgSectionHeader
+        activeMsg={activeMsg}
+        hostname={hostname}
+        state={activeState}
         media={media}
         msgDetailSectionState={msgDetailSectionState}
-        onClickDetail={onClickDetail}
+        onClickToggleDetail={onClickToggleDetail}
         onClickShowList={onClickShowList}
         onClickArchive={onClickArchive}
-        activeMsg={activeMsg}
-        hostname={activeMsg && activeMsg.hostname}
-        state={activeMsg && activeMsg.state}
       />
-      <ToastContainer
-        state={activeMsg && activeMsg.state}
-        onClickUndo={onClickUndo}
-      />
+      <ToastContainer state={activeState} onClickUndo={onClickUndo} />
       <UndoToastContainer />
     </>
   );

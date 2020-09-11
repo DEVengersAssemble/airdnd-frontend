@@ -1,11 +1,15 @@
 // action types
+const RESET = 'searchForm/RESET';
 const SET_LOCATION = 'searchForm/SET_LOCATION';
 const SET_CHECKIN = 'searchForm/SET_CHECKIN';
 const SET_CHECKOUT = 'searchForm/SET_CHECKOUT';
 const SET_FLEXIBLE_DATE = 'searchForm/SET_FLEXIBLE_DATE';
 const SET_GUESTS = 'searchForm/SET_GUESTS';
+const GET_SEARCH_FORM = 'searchForm/GET_SEARCH_FORM';
 
 // action creators
+export const reset = () => ({ type: RESET });
+
 export const setSearchData = data => {
   const payload = data.value;
   switch (data.name) {
@@ -24,9 +28,13 @@ export const setSearchData = data => {
   }
 };
 
+export const getSearchForm = searchForm => ({
+  type: GET_SEARCH_FORM,
+  searchForm,
+});
+
 const getDateDiff = (date1, date2) => {
-  console.log('dates: ', date1, date2);
-  if (!date1 || !date2) return 0;
+  if (!date1 || !date2) return '';
   const checkIn = new Date(date1);
   const checkOut = new Date(date2);
   const timeDiff = checkOut.getTime() - checkIn.getTime();
@@ -35,10 +43,10 @@ const getDateDiff = (date1, date2) => {
 
 // initialState
 const initialState = {
-  location: '서울',
-  checkIn: '2020.09.22',
-  checkOut: '2020.09.25',
-  dateDiff: 3,
+  location: '',
+  checkIn: '',
+  checkOut: '',
+  dateDiff: '',
   flexibleDate: 0,
   guests: {
     adult: 0,
@@ -50,6 +58,8 @@ const initialState = {
 // reducer
 const searchForm = (state = initialState, action) => {
   switch (action.type) {
+    case RESET:
+      return initialState;
     case SET_LOCATION:
       return {
         ...state,
@@ -81,6 +91,10 @@ const searchForm = (state = initialState, action) => {
         guests: action.payload,
       };
     }
+    case GET_SEARCH_FORM:
+      return {
+        ...action.searchForm,
+      };
     default:
       return state;
   }

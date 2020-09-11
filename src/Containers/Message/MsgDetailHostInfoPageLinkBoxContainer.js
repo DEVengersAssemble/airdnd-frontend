@@ -4,23 +4,15 @@ import MsgDetailHostInfoPageLinkBox from '../../Components/Message/MsgDetailHost
 
 const MsgDetailHostInfoPageLinkBoxContainer = () => {
   // ! redux
-  const { activeIndex, filteredMsgs } = useSelector(state => state.message);
-  const { reservations } = useSelector(state => state.trips);
-
-  // ! variable
-  const activeMsg = filteredMsgs.find(
-    (_, index) => filteredMsgs[index] === filteredMsgs[activeIndex],
-  );
-
-  const reservation = reservations.find(
-    reservation =>
-      reservation.reservationId === (activeMsg && activeMsg.reservationId),
+  const { activeMsg } = useSelector(state => state.message);
+  const { activeReservation: reservation } = useSelector(
+    state => state.message,
   );
 
   return (
     <MsgDetailHostInfoPageLinkBox
       hostname={reservation && reservation.hostname}
-      hostProfileImg={activeMsg && activeMsg.contents.hostProfileImg}
+      hostProfileImg={activeMsg.contents && activeMsg.contents.hostProfileImg}
     />
   );
 };

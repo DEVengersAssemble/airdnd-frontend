@@ -38,4 +38,4 @@ const SettingButton = ({ isScrollTop, togglePopup }) => {
   );
 };
 
-export default SettingButton;
+export default React.memo(SettingButton);

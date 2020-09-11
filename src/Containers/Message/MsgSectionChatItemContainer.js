@@ -5,7 +5,7 @@ import { openModal } from '../../Modules/message';
 
 const MsgSectionChatItemContainer = ({ activeMsg, chat, msg }) => {
   // ! redux
-  const profileImg = useSelector(state => state.message.profileImg);
+  const { profileImg } = useSelector(state => state.user.data);
   const dispatch = useDispatch();
 
   // ! variable
@@ -13,9 +13,9 @@ const MsgSectionChatItemContainer = ({ activeMsg, chat, msg }) => {
   const chatDate = new Date(timeStamp);
   const hour = chatDate.getHours();
   const min = chatDate.getMinutes();
-  const host = chat.name !== 'Jay' && true;
+  const host = chat.name === activeMsg.hostname && true;
   const h = hour >= 12 ? `오후 ${hour - 12}` : `오전 ${hour}`;
-  const m = min < 10 && `0${min}`;
+  const m = min < 10 ? `0${min}` : min;
 
   // ! modal event
   const onClickOpenModal = () => {

@@ -4,22 +4,15 @@ import MsgDetailReservedHomeBox from '../../Components/Message/MsgDetailReserved
 
 const MsgDetailReservedHomeBoxContainer = () => {
   // ! redux
-  const { activeIndex, filteredMsgs } = useSelector(state => state.message);
-  const { reservations } = useSelector(state => state.trips);
+  const { activeMsg } = useSelector(state => state.message);
+  const { activeReservation: reservation } = useSelector(
+    state => state.message,
+  );
 
   // ! hook
   const [hover, setHover] = useState(false);
 
   // ! variable
-  const activeMsg = filteredMsgs.find(
-    (_, index) => filteredMsgs[index] === filteredMsgs[activeIndex],
-  );
-
-  const reservation = reservations.find(
-    reservation =>
-      reservation.reservationId === (activeMsg && activeMsg.reservationId),
-  );
-
   const checkIn = reservation && reservation.checkin;
   const ciDate = new Date(checkIn);
   const ciDateString = ciDate.toLocaleDateString('ko-KR', {
@@ -67,17 +60,17 @@ const MsgDetailReservedHomeBoxContainer = () => {
       coDayName={coDayName}
       coH={coH}
       coM={coM}
-      hostProfileImg={activeMsg && activeMsg.contents.hostProfileImg}
+      hostProfileImg={activeMsg.contents && activeMsg.contents.hostProfileImg}
       hostname={reservation && reservation.hostname}
       address={reservation && reservation.address}
-      guest={reservation && reservation.guest.length}
+      guest={reservation.guest && reservation.guest.length}
       price={reservation && reservation.price}
       isCanceled={reservation && reservation.isCanceled}
       hover={hover}
       onMouseOver={onMouseOver}
       onMouseLeave={onMouseLeave}
       imageArray={reservation && reservation.homeImage}
-      imageCount={reservation && reservation.homeImage.length}
+      imageCount={reservation.homeImage && reservation.homeImage.length}
     />
   );
 };

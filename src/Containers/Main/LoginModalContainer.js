@@ -12,7 +12,6 @@ import {
 } from '../../Modules/login';
 
 const LoginModalContainer = () => {
-  console.log('loginModalContainer');
   const dispatch = useDispatch();
   const { name } = useSelector(state => state.modal);
   const modalVisible = name === 'login';
@@ -56,12 +55,10 @@ const LoginModalContainer = () => {
   };
 
   const onSuccess = () => {
-    console.log('===로그인 시도!====');
     const userInfo = {
       email,
       pwd,
     };
-    console.log('userInfo: ', userInfo);
     dispatch(loginRequest(userInfo));
   };
 
@@ -112,7 +109,7 @@ const LoginModalContainer = () => {
       closeModal={() => {
         dispatch(closeModal());
       }}
-      cleanupModal={cleanupModal}
+      // cleanupModal={cleanupModal}
       onFormChange={onFormChange}
       onToggleShowPwd={onToggleShowPwd}
       handleSubmit={handleSubmit}
@@ -120,4 +117,4 @@ const LoginModalContainer = () => {
   );
 };
 
-export default LoginModalContainer;
+export default React.memo(LoginModalContainer);

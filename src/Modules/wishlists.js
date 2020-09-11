@@ -4,58 +4,57 @@ import {
   reducerUtils,
   handleAsyncActions,
 } from '../lib/asyncUtils';
+import {
+  fetchBookmarkDataThunk,
+  createBookmarkDataThunk,
+} from '../lib/bookmarkUtils';
 
 // action type
+const SET_BOOKMARKLISTS = 'wishlists/SET_BOOKMARKLISTS';
 const FETCH_BOOKMARKLISTS = 'wishlists/FETCH_BOOKMARKLISTS';
 const FETCH_BOOKMARKLISTS_SUCCESS = 'wishlists/FETCH_BOOKMARKLISTS_SUCCESS';
 const FETCH_BOOKMARKLISTS_ERROR = 'wishlists/FETCH_BOOKMARKLISTS_ERROR';
-
 const CREATE_BOOKMARKLIST = 'wishlists/CREATE_BOOKMARKLIST';
 const CREATE_BOOKMARKLIST_SUCCESS = 'wishlists/CREATE_BOOKMARKLIST_SUCCESS';
 const CREATE_BOOKMARKLIST_ERROR = 'wishlists/CREATE_BOOKMARKLIST_ERROR';
 const ADD_BOOKMARK_OLD_LIST = 'wishlists/ADD_BOOKMARK_OLD_LIST';
+const ADD_BOOKMARK_OLD_LIST_SUCCESS = 'wishlists/ADD_BOOKMARK_OLD_LIST_SUCCESS';
+const ADD_BOOKMARK_OLD_LIST_ERROR = 'wishlists/ADD_BOOKMARK_OLD_LIST_ERROR';
 const ADD_BOOKMARK_NEW_LIST = 'wishlists/ADD_BOOKMARK_NEW_LIST';
+const ADD_BOOKMARK_NEW_LIST_SUCCESS = 'wishlists/ADD_BOOKMARK_NEW_LIST_SUCCESS';
+const ADD_BOOKMARK_NEW_LIST_ERROR = 'wishlists/ADD_BOOKMARK_NEW_LIST_ERROR';
 const REMOVE_BOOKMARK = 'wishlists/REMOVE_BOOKMARK';
-
+const REMOVE_BOOKMARK_SUCCESS = 'wishlists/REMOVE_BOOKMARK_SUCCESS';
+const REMOVE_BOOKMARK_ERROR = 'wishlists/REMOVE_BOOKMARK_ERROR';
 const OPEN_LIST_MODAL = 'wishlists/OPEN_LIST_MODAL';
 const CLOSE_LIST_MODAL = 'wishlists/CLOSE_LIST_MODAL';
 const OPEN_NEW_MODAL = 'wishlists/OPEN_NEW_MODAL';
 const CLOSE_NEW_MODAL = 'wishlists/CLOSE_NEW_MODAL';
-
 // action creator
+export const setBookmarkLists = bookmarkLists => ({
+  type: SET_BOOKMARKLISTS,
+  bookmarkLists,
+});
 export const fetchBookmarkLists = fetchDataThunk(
   FETCH_BOOKMARKLISTS,
   api.fetchWishlistsData,
 );
-export const createBookmarkList = fetchDataThunk(
+export const createBookmarkList = createBookmarkDataThunk(
   CREATE_BOOKMARKLIST,
   api.postWishlists,
 );
-let id = 5;
-// export const createBookmarkList = value => ({
-//   type: CREATE_BOOKMARKLIST,
-//   bookmarkList: {
-//     bookmarkListId: id++,
-//     bookmarkListTitle: value,
-//     bookmarks: [],
-//   },
-// });
-
-export const addBookmarkOldList = bookmarkListId => ({
-  type: ADD_BOOKMARK_OLD_LIST,
-  bookmarkListId,
-});
-
-export const addBookmarkNewList = title => ({
-  type: ADD_BOOKMARK_NEW_LIST,
-  bookmarkList: {
-    bookmarkListId: id++,
-    bookmarkListTitle: title,
-  },
-});
-
-export const removeBookmark = homeId => ({ type: REMOVE_BOOKMARK, homeId });
-
+export const addBookmarkOldList = fetchBookmarkDataThunk(
+  ADD_BOOKMARK_OLD_LIST,
+  api.postWishlists,
+);
+export const addBookmarkNewList = fetchBookmarkDataThunk(
+  ADD_BOOKMARK_NEW_LIST,
+  api.postWishlists,
+);
+export const removeBookmark = fetchBookmarkDataThunk(
+  REMOVE_BOOKMARK,
+  api.deleteWishList,
+);
 export const openListModal = (homeId, homeImg) => ({
   type: OPEN_LIST_MODAL,
   homeId,
@@ -64,7 +63,6 @@ export const openListModal = (homeId, homeImg) => ({
 export const closeListModal = () => ({ type: CLOSE_LIST_MODAL });
 export const openNewModal = () => ({ type: OPEN_NEW_MODAL });
 export const closeNewModal = () => ({ type: CLOSE_NEW_MODAL });
-
 // initial state
 const initialState = {
   ...reducerUtils.initial(),
@@ -72,7 +70,6 @@ const initialState = {
   newModal: false,
   selectedId: null,
   selectedImg: '',
-
   // bookmarkLists: [
   //   {
   //     bookmarkListId: 1,
@@ -160,24 +157,43 @@ const initialState = {
   //   },
   // ],
 };
-
 // reducer
 const wishlists = (state = initialState, action) => {
   switch (action.type) {
+    case SET_BOOKMARKLISTS:
+      return {
+        ...state,
+        data: {
+          bookmarkLists: action.bookmarkLists,
+        },
+      };
     case FETCH_BOOKMARKLISTS:
     case FETCH_BOOKMARKLISTS_SUCCESS:
     case FETCH_BOOKMARKLISTS_ERROR:
       return handleAsyncActions(FETCH_BOOKMARKLISTS)(state, action);
-
     case CREATE_BOOKMARKLIST:
+      return {
+        ...state,
+        loading: true,
+      };
     case CREATE_BOOKMARKLIST_SUCCESS:
+      console.log(action, action.type, action.param);
+      return {
+        ...state,
+        loading: false,
+        data: {
+          ...state.data,
+          bookmarkLists: state.data.bookmarkLists.concat({
+            bookmarkListTitle: action.param.bookmarkListTitle,
+          }),
+        },
+      };
     case CREATE_BOOKMARKLIST_ERROR:
       return {
         ...state,
-        ...handleAsyncActions(FETCH_BOOKMARKLISTS)(state, action),
-        // ...state.data.bookmarkLists.concat(action.bookmarkList),
+        loading: false,
+        error: action.payload,
       };
-
     // case CREATE_BOOKMARKLIST:
     //   return {
     //     ...state,
@@ -187,39 +203,93 @@ const wishlists = (state = initialState, action) => {
     case ADD_BOOKMARK_OLD_LIST:
       return {
         ...state,
+        loading: true,
+      };
+    case ADD_BOOKMARK_OLD_LIST_SUCCESS:
+      console.log(action, action.type, action.param);
+      return {
+        ...state,
+        loading: false,
         listModal: false,
         selectedId: null,
         selectedImg: '',
-        bookmarkLists: state.bookmarkLists.map(bmList =>
-          bmList.bookmarkListId === action.bookmarkListId
-            ? {
-                ...bmList,
-                bookmarks: [
-                  ...bmList.bookmarks,
-                  { homeId: state.selectedId, images: state.selectedImg },
-                ],
-              }
-            : bmList,
-        ),
+        data: {
+          bookmarkLists: state.data.bookmarkLists.map(bmList =>
+            bmList.bookmarkListId === action.param.bookmarkListId
+              ? {
+                  ...bmList,
+                  bookmarks: [
+                    ...bmList.bookmarks,
+                    {
+                      homeId: action.param.bookmarkHomeId,
+                      images: action.param.bookmarkImage,
+                    },
+                  ],
+                }
+              : bmList,
+          ),
+        },
+      };
+    case ADD_BOOKMARK_OLD_LIST_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
       };
     case ADD_BOOKMARK_NEW_LIST:
       return {
         ...state,
+        loading: true,
+      };
+    case ADD_BOOKMARK_NEW_LIST_SUCCESS:
+      return {
+        ...state,
+        loading: false,
         newModal: false,
         selectedId: null,
         selectedImg: '',
-        bookmarkLists: state.bookmarkLists.concat({
-          ...action.bookmarkList,
-          bookmarks: [{ homeId: state.selectedId, images: state.selectedImg }],
-        }),
+        data: {
+          bookmarkLists: state.data.bookmarkLists.concat({
+            bookmarkListId: action.payload.result,
+            bookmarkListTitle: action.param.bookmarkListTitle,
+            bookmarks: [
+              {
+                homeId: action.param.bookmarkHomeId,
+                images: action.param.bookmarkImage,
+              },
+            ],
+          }),
+        },
+      };
+    case ADD_BOOKMARK_NEW_LIST_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
       };
     case REMOVE_BOOKMARK:
       return {
         ...state,
-        bookmarkLists: state.bookmarkLists.map(bmList => ({
-          ...bmList,
-          bookmarks: bmList.bookmarks.filter(bm => bm.homeId !== action.homeId),
-        })),
+        loading: true,
+      };
+    case REMOVE_BOOKMARK_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        data: {
+          bookmarkLists: state.data.bookmarkLists.map(bmList => ({
+            ...bmList,
+            bookmarks: bmList.bookmarks.filter(
+              bm => bm.homeId !== action.param.homeId,
+            ),
+          })),
+        },
+      };
+    case REMOVE_BOOKMARK_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
       };
     case OPEN_LIST_MODAL:
       return {
@@ -247,10 +317,8 @@ const wishlists = (state = initialState, action) => {
         listModal: true,
         newModal: false,
       };
-
     default:
       return state;
   }
 };
-
 export default wishlists;

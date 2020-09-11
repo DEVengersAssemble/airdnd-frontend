@@ -4,22 +4,21 @@ import MsgDetailTitleBox from '../../Components/Message/MsgDetailTitleBox';
 
 const MsgDetailTitleBoxContainer = () => {
   // ! redux
-  const { activeIndex, filteredMsgs } = useSelector(state => state.message);
-  const reservations = useSelector(state => state.trips.reservations);
-
-  // ! variable
-  const activeMsg = filteredMsgs.find(
-    (_, index) => filteredMsgs[index] === filteredMsgs[activeIndex],
+  const { activeReservation: reservation } = useSelector(
+    state => state.message,
   );
+  const checkin = new Date(reservation.checkin);
+  const checkout = new Date(reservation.checkout);
+  const options = { month: 'long', day: 'numeric' };
+  const ci = checkin.toLocaleDateString('ko-KR', options);
+  const co = checkout.toLocaleDateString('ko-KR', options);
 
-  const reservation = reservations.find(
-    reservation =>
-      reservation.reservationId === (activeMsg && activeMsg.reservationId),
-  );
   return (
     <MsgDetailTitleBox
       hostname={reservation && reservation.hostname}
-      address={reservation && reservation.address}
+      addr={reservation && reservation.addr}
+      ci={ci}
+      co={co}
     />
   );
 };

@@ -5,13 +5,8 @@ import { openModal } from '../../Modules/message';
 
 const MsgDetailAirbnbSupportTeamBoxContainer = () => {
   // ! redux
-  const { activeIndex, filteredMsgs } = useSelector(state => state.message);
+  const { activeMsg } = useSelector(state => state.message);
   const dispatch = useDispatch();
-
-  // ! variable
-  const activeMsg = filteredMsgs.find(
-    (_, index) => filteredMsgs[index] === filteredMsgs[activeIndex],
-  );
 
   // ! modal event
   const onClickOpenModal = () => {
@@ -24,7 +19,7 @@ const MsgDetailAirbnbSupportTeamBoxContainer = () => {
 
   return (
     <MsgDetailAirbnbSupportTeamBox
-      isCanceled={activeMsg && activeMsg.contents.isCanceled}
+      isCanceled={activeMsg.contents && activeMsg.contents.isCanceled}
       onClickOpenModal={onClickOpenModal}
       onClickOpenFlagModal={onClickOpenFlagModal}
     />

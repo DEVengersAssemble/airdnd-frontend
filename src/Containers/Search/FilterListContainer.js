@@ -3,6 +3,8 @@ import React from 'react';
 import { FilterList, FilterButton } from '../../Components/Search/FilterList';
 import { useSelector, useDispatch } from 'react-redux';
 import { closePopup, openPopup, showMap } from '../../Modules/search';
+import qs from 'qs';
+import { useLocation, useHistory } from 'react-router-dom';
 
 const FilterButtonContainer = React.memo(({ name, text, children }) => {
   const { popupState, popupApplied } = useSelector(state => state.search);
@@ -18,6 +20,7 @@ const FilterButtonContainer = React.memo(({ name, text, children }) => {
       text={text}
       isOpen={isOpen}
       isApplied={isApplied}
+      popupState={popupState[name]}
       onClick={onClick}
     >
       {children}
@@ -26,10 +29,18 @@ const FilterButtonContainer = React.memo(({ name, text, children }) => {
 });
 
 const FilterListContainer = React.memo(({ mapState }) => {
-  const { searchForm, data } = useSelector(state => state.search);
+  const { data } = useSelector(state => state.search);
+  const searchForm = useSelector(state => state.searchForm);
+  const history = useHistory();
+  const { search: query } = useLocation();
+  const queryObj = qs.parse(query, { ignoreQueryPrefix: true });
 
   const dispatch = useDispatch();
-  const onShowMap = () => dispatch(showMap());
+  const onShowMap = () => {
+    dispatch(showMap());
+    queryObj.mapState = 1;
+    history.replace(`?${qs.stringify(queryObj)}`);
+  };
 
   return (
     <FilterList
