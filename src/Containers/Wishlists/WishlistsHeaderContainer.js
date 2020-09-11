@@ -1,10 +1,10 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import MessageHeader from '../../Components/Message/MessageHeader';
+import WishlistsHeader from '../../Components/Wishlists/WishlistsHeader';
 import { useDispatch } from 'react-redux';
 import { reset } from '../../Modules/searchForm';
 
-const MessageHeaderContainer = () => {
+const WishlistsHeaderContainer = () => {
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -15,7 +15,7 @@ const MessageHeaderContainer = () => {
     dispatch(reset());
   };
 
-  return <MessageHeader handleLogoClick={handleLogoClick}></MessageHeader>;
+  return <WishlistsHeader handleLogoClick={handleLogoClick}></WishlistsHeader>;
 };
 
-export default MessageHeaderContainer;
+export default WishlistsHeaderContainer;

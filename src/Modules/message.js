@@ -14,6 +14,7 @@ const SET_ACTIVE_ID = 'message/SET_ACTIVE_ID';
 const SET_ACTIVE_MSG = 'message/SET_ACTIVE_MSG';
 const OPEN_POPUP = 'message/OPEN_POPUP';
 const CLOSE_POPUP = 'message/CLOSE_POPUP';
+const ACTIVE_RESERVATION = 'message/ACTIVE_RESERVATION';
 
 const SHOW_MESSAGE_DETAIL_SECTION = 'message/SHOW_MESSAGE_DETAIL_SECTION';
 const HIDE_MESSAGE_DETAIL_SECTION = 'message/HIDE_MESSAGE_DETAIL_SECTION';
@@ -43,7 +44,10 @@ export const setActiveId = id => ({ type: SET_ACTIVE_ID, id });
 export const setActiveMsg = msg => ({ type: SET_ACTIVE_MSG, msg });
 export const openPopup = name => ({ type: OPEN_POPUP, name });
 export const closePopup = name => ({ type: CLOSE_POPUP, name });
-
+export const activeReservation = reservation => ({
+  type: ACTIVE_RESERVATION,
+  reservation,
+});
 export const showMsgDetailSection = () => ({
   type: SHOW_MESSAGE_DETAIL_SECTION,
 });
@@ -117,6 +121,7 @@ const initialState = {
   isHost: false,
   activeId: 0,
   activeMsg: {},
+  activeReservation: {},
   tempMsg: {}, // archived or unarchived msg
   profileImg:
     'https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cg_face%2Cq_auto:good%2Cw_300/MTY2MzU3Nzk2OTM2MjMwNTkx/elon_musk_royal_society.jpg',
@@ -418,6 +423,11 @@ const message = (state = initialState, action) => {
       return {
         ...state,
         activeMsg: { ...action.msg },
+      };
+    case ACTIVE_RESERVATION:
+      return {
+        ...state,
+        activeReservation: { ...action.reservation },
       };
     case OPEN_POPUP:
       return {

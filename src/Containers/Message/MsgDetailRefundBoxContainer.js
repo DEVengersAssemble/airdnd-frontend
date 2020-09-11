@@ -5,36 +5,27 @@ import { openModal } from '../../Modules/message';
 import RECEIPT from '../../Assets/docs/receipt.pdf';
 
 const MsgDetailRefundBoxContainer = () => {
-  // // ! redux
-  // const { activeIndex, filteredMsgs } = useSelector(state => state.message);
-  // const { reservations } = useSelector(state => state.trips);
-  // const dispatch = useDispatch();
+  // ! redux
+  const { activeReservation: reservation } = useSelector(
+    state => state.message,
+  );
+  const dispatch = useDispatch();
 
-  // // ! variable
-  // const activeMsg = filteredMsgs.find(
-  //   (_, index) => filteredMsgs[index] === filteredMsgs[activeIndex],
-  // );
+  // ! modal event
+  const onClickOpenModal = () => {
+    dispatch(openModal('business'));
+  };
 
-  // const reservation = reservations.find(
-  //   reservation =>
-  //     reservation.reservationId === (activeMsg && activeMsg.reservationId),
-  // );
-
-  // // ! modal event
-  // const onClickOpenModal = () => {
-  //   dispatch(openModal('business'));
-  // };
-
-  // // ! pdf open event
-  // const onClickOpenReceiptPDF = () => {
-  //   window.open(RECEIPT, '_blank');
-  // };
+  // ! pdf open event
+  const onClickOpenReceiptPDF = () => {
+    window.open(RECEIPT, '_blank');
+  };
 
   return (
     <MsgDetailRefundBox
-    // price={reservation && reservation.price}
-    // onClickOpenModal={onClickOpenModal}
-    // onClickOpenReceiptPDF={onClickOpenReceiptPDF}
+      price={reservation && reservation.price}
+      onClickOpenModal={onClickOpenModal}
+      onClickOpenReceiptPDF={onClickOpenReceiptPDF}
     />
   );
 };

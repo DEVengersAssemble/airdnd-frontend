@@ -31,6 +31,9 @@ const MsgDetailReservedHomeBox = ({
 }) => {
   return (
     <MsgDetailRhBoxWrapper>
+      <div>
+        <img src="" alt="#" />
+      </div>
       {/* <div onMouseOver={onMouseOver} onMouseLeave={onMouseLeave}>
         <CarouselContainer
           size="superLarge"
