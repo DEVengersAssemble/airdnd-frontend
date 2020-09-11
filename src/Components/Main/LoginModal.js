@@ -8,6 +8,7 @@ import { GoogleLogin } from 'react-google-login';
 import { FaFacebookF } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { RiMailLine, RiLock2Line } from 'react-icons/ri';
+import { AiOutlineWarning } from 'react-icons/ai';
 
 const StLoginModal = styled(Modal)`
   overflow-y: scroll;
@@ -175,6 +176,45 @@ const StSignupButton = styled(Button)`
   }
 `;
 
+const StResultWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 24px;
+  font-weight: 500;
+  height: 66px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+`;
+
+const StErrorWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 52px;
+  height: 100%;
+  padding: 20px 8px;
+  font-size: 24px;
+  background: #fc642e;
+  color: ${({ theme }) => theme.color.white};
+`;
+
+const StResultTextWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  border-color: ${({ theme }) => theme.color.line};
+  border-style: solid;
+  border-width: 2px 2px 2px 0;
+  border-radius: 0 8px 8px 0;
+  padding: 20px 8px;
+`;
+const StResultText = styled.span`
+  font-size: 14px;
+  line-height: 14px;
+  margin-left: 10px;
+  vertical-align: middle;
+`;
+
 const LoginModal = ({
   modalVisible,
   form,
@@ -230,6 +270,24 @@ const LoginModal = ({
         <StDividerLine />
         <StDividerText>또는</StDividerText>
         <StLoginForm onSubmit={handleSubmit}>
+          {result && result !== 'Success' && (
+            <StResultWrapper result={result}>
+              <StErrorWrapper>
+                <AiOutlineWarning></AiOutlineWarning>
+              </StErrorWrapper>
+              <StResultTextWrapper>
+                {result === 'NoId' && (
+                  <StResultText>
+                    이 이메일 주소와 연결된 계정이 없습니다. 다른 이메일 주소를
+                    사용해 보세요.
+                  </StResultText>
+                )}
+                {result === 'WrongPwd' && (
+                  <StResultText>비밀번호가 틀립니다.</StResultText>
+                )}
+              </StResultTextWrapper>
+            </StResultWrapper>
+          )}
           <StInputWrapper>
             <StInput
               value={email}
