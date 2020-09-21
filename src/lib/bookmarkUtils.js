@@ -3,8 +3,8 @@ import { changeHeart } from '../Modules/search';
 import { removeBookmark, openListModal } from '../Modules/wishlists';
 
 export const toggleBookmark = (userId, home, dispatch) => {
-  const homeId = home.homeId;
-  const imageArray = home.imageArray;
+  const homeId = home.homeId || home.id;
+  const imageArray = home.imageArray || home.images;
   if (!userId) return dispatch(openModal('login'));
   if (home.isBookmarked) {
     dispatch(removeBookmark(homeId));
