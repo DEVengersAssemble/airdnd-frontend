@@ -3,12 +3,14 @@ import { changeHeart } from '../Modules/search';
 import { removeBookmark, openListModal } from '../Modules/wishlists';
 
 export const toggleBookmark = (userId, home, dispatch) => {
+  const homeId = home.homeId;
+  const imageArray = home.imageArray;
   if (!userId) return dispatch(openModal('login'));
   if (home.isBookmarked) {
-    dispatch(removeBookmark(home.homeId));
+    dispatch(removeBookmark(homeId));
     return;
   }
-  dispatch(openListModal(home.homeId, home.imageArray[0]));
+  dispatch(openListModal(homeId, imageArray[0]));
 };
 
 export const fetchBookmarkDataThunk = (type, promiseCreator) => {
