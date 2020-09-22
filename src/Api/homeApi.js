@@ -16,7 +16,6 @@ export const postReservation = async payload => {
   console.log(response);
   return response.data;
 };
-
 // http://3.131.42.14:8080/back/home?home_idx=761408
 // /back/home?home_idx=761408
 
