@@ -7,6 +7,7 @@ import { GrNext } from 'react-icons/gr';
 
 const ReservationHeader = () => {
   const { home } = useSelector(state => state.home.homeState);
+  const homeId = home ? home.id : '';
 
   return (
     <StHeader>
@@ -26,7 +27,7 @@ const ReservationHeader = () => {
         <ol>
           <li>
             <NavLink
-              to={`/Reservation/HouseRules/${home ? home.id : ''}`}
+              to={`/Reservation/HouseRules/${homeId}`}
               activeClassName="active"
             >
               1. 숙소 이용규칙 확인
@@ -34,7 +35,7 @@ const ReservationHeader = () => {
           </li>
           <li>
             <NavLink
-              to={`/Reservation/GuestInfo/${home ? home.id : ''}`}
+              to={`/Reservation/GuestInfo/${homeId}`}
               activeClassName="active"
             >
               <GrNext />
@@ -43,7 +44,7 @@ const ReservationHeader = () => {
           </li>
           <li>
             <NavLink
-              to={`/Reservation/Payment/${home ? home.id : ''}`}
+              to={`/Reservation/Payment/${homeId}`}
               activeClassName="active"
             >
               <GrNext />
