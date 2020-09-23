@@ -4,9 +4,12 @@ import { removeBookmark, openListModal } from '../Modules/wishlists';
 
 export const toggleBookmark = (userId, home, dispatch) => {
   const homeId = home.homeId || home.id;
-  const imageArray = home.imageArray || home.images;
+  const imageArray = home.imageArray;
+  console.log(imageArray);
+  const isBookmarked =
+    typeof home.isBookmarked === 'boolean' ? home.isBookmarked : false;
   if (!userId) return dispatch(openModal('login'));
-  if (home.isBookmarked) {
+  if (isBookmarked) {
     dispatch(removeBookmark(homeId));
     return;
   }

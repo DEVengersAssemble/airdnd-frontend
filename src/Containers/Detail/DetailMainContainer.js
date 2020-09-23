@@ -6,13 +6,17 @@ import Subject from '../../Components/Detail/Subject';
 import HomeInfos from '../../Components/Detail/HomeInfos';
 import FullsizeWrapper from '../../Components/Detail/FullsizeWrapper';
 import { getHome, onResize } from '../../Modules/home';
+import {
+  BookmarkListModalContainer,
+  NewBookmarkModalContainer,
+} from '../../Containers/Global/BookmarkModalContainer';
 
 const DetailMainContainer = () => {
   const { isLoading, home, error } = useSelector(state => state.home.homeState);
   const { isScreenMedium } = useSelector(state => state.home.screenState);
+  const { isLoggedIn } = useSelector(state => state.user);
   const dispatch = useDispatch();
   const { id } = useParams();
-  console.log('params', id);
 
   const resize = () => dispatch(onResize());
 
@@ -42,6 +46,8 @@ const DetailMainContainer = () => {
         isScreenMedium={isScreenMedium}
       />
       {!isLoading && home && <FullsizeWrapper home={home} />}
+      {isLoggedIn && <BookmarkListModalContainer />}
+      {isLoggedIn && <NewBookmarkModalContainer />}
     </>
   );
 };

@@ -10,12 +10,14 @@ import { Heart } from '../Global/Heart';
 import { toggleBookmark } from '../../lib/bookmarkUtils';
 
 const Subject = ({ isLoading, home }) => {
-  const { id } = useSelector(state => state.user.data);
+  const { isLoggedIn } = useSelector(state => state.user);
   const dispatch = useDispatch();
-  const [bookmark, setBookmark] = useState(false);
+  // const [bookmark, setBookmark] = useState(false);
+  // const onClickBookmark = () => setBookmark(!bookmark);
 
-  const onClickBookmark = () => setBookmark(!bookmark);
-  // const onClickBookmark = () => toggleBookmark(id, home, dispatch);
+  const onClickBookmark = () => toggleBookmark(isLoggedIn, home, dispatch);
+  const isBookmarked = home && home.isBookmarked;
+  console.log(isBookmarked);
 
   return (
     <StDetailTitle>
@@ -46,8 +48,12 @@ const Subject = ({ isLoading, home }) => {
             <StButton transition onClick={onClickBookmark}>
               <StHeart
                 size="smaller"
-                bgColor={home.isBookmarked ? 'main' : 'white'}
-                stroke={home.isBookmarked ? 'main' : 'black'}
+                // bgColor={'white'}
+                // stroke={'black'}
+                bgColor={isBookmarked === 'true' ? 'main' : 'white'}
+                stroke={isBookmarked === 'true' ? 'main' : 'black'}
+                // bgColor="white"
+                // stroke="black"
               />
               저장
             </StButton>
