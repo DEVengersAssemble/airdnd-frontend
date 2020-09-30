@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled, { css, keyframes } from 'styled-components';
 import { FaCrown } from 'react-icons/fa';
@@ -12,12 +12,10 @@ import { toggleBookmark } from '../../lib/bookmarkUtils';
 const Subject = ({ isLoading, home }) => {
   const { isLoggedIn } = useSelector(state => state.user);
   const dispatch = useDispatch();
-  // const [bookmark, setBookmark] = useState(false);
-  // const onClickBookmark = () => setBookmark(!bookmark);
 
   const onClickBookmark = () => toggleBookmark(isLoggedIn, home, dispatch);
   const isBookmarked = home && home.isBookmarked;
-  console.log(isBookmarked);
+  console.log(isBookmarked, typeof isBookmarked);
 
   return (
     <StDetailTitle>
@@ -48,12 +46,8 @@ const Subject = ({ isLoading, home }) => {
             <StButton transition onClick={onClickBookmark}>
               <StHeart
                 size="smaller"
-                // bgColor={'white'}
-                // stroke={'black'}
-                bgColor={isBookmarked === 'true' ? 'main' : 'white'}
-                stroke={isBookmarked === 'true' ? 'main' : 'black'}
-                // bgColor="white"
-                // stroke="black"
+                bgColor={isBookmarked === 'false' ? 'white' : 'main'}
+                stroke={isBookmarked === 'false' ? 'black' : 'main'}
               />
               저장
             </StButton>
