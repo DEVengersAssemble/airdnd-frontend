@@ -1,0 +1,5 @@
+div[controlheight="81"] {
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  background-color: red !important;
+}
