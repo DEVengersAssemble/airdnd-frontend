@@ -46,8 +46,8 @@ const DetailMainContainer = () => {
         isScreenMedium={isScreenMedium}
       />
       {!isLoading && home && <FullsizeWrapper home={home} />}
-      <BookmarkListModalContainer />
-      <NewBookmarkModalContainer />
+      {isLoggedIn && <BookmarkListModalContainer />}
+      {isLoggedIn && <NewBookmarkModalContainer />}
     </>
   );
 };
