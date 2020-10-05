@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import Calendar from '../../Components/Global/Calendar';
 
 const CalendarContainer = ({
@@ -13,6 +14,8 @@ const CalendarContainer = ({
   isDetailPage,
   ...rest
 }) => {
+  const { minimumStay } = useSelector(state => state.home.homeState.home);
+
   const [count, setCount] = useState(0);
 
   const onClickBeforeMonth = () => setCount(count - 1);
@@ -56,6 +59,7 @@ const CalendarContainer = ({
 
   // events
   const checkinTime = new Date(checkin).getTime();
+  const addZero = num => ((num + '').length === 1 ? '0' + num : num);
 
   const beforeToday = dateTime => {
     const todayTime = new Date(
@@ -67,21 +71,33 @@ const CalendarContainer = ({
   };
 
   const checkBeforeCheckin = dateTime => {
-    // const dateTime = new Date(date).getTime();
-    // const checkinTime = new Date(checkin).getTime();
     return checkinTime > dateTime;
   };
 
   const checkAfterReserved = dateTime => {
-    // const checkinTime = new Date(checkin).getTime();
-    // const dateTime = new Date(date).getTime();
-    const firstReserved = reservedDates.find(reservedDate => {
+    const firstReserved = reservedDates.sort().find(reservedDate => {
       const reservedTime = new Date(reservedDate).getTime();
       return reservedTime > checkinTime;
     });
     const firstReservedTime = new Date(firstReserved).getTime();
     return firstReservedTime < dateTime;
   };
+
+  const [stayDates, setStayDates] = useState([]);
+
+  const getMinStayDates = strDate => {
+    const date = new Date(strDate);
+    const minStayDates = Array.from({ length: minimumStay - 1 }, () => {
+      date.setDate(date.getDate() + 1);
+      return `${date.getFullYear()}.${addZero(date.getMonth() + 1)}.${addZero(
+        date.getDate(),
+      )}`;
+    });
+    // setStayDates(minStayDates)
+    return minStayDates;
+  };
+
+  console.log(minimumStay, stayDates);
 
   const [hoverDate, setHoverDate] = useState('');
 
@@ -113,11 +129,13 @@ const CalendarContainer = ({
     if (!checkin) {
       console.log('■■■ checkin', date);
       setCheckinData(date);
+      setStayDates(getMinStayDates(date));
       return;
     }
     if (checkBeforeCheckin(dateTime) && !isDetailPage) {
       console.log('■■■ beforecheckin - mainPage', date);
       setCheckinData(date);
+      setStayDates(getMinStayDates(date));
       return;
     }
     if (!checkout && getDiff(dateTime, true)) {
@@ -128,14 +146,20 @@ const CalendarContainer = ({
       console.log('■■■ reject sameDate checkin checkout');
       return;
     }
+    if (stayDates.find(v => v === date)) {
+      console.log('■■■ reject minimumStay date');
+      return;
+    }
     if (checkout) {
       console.log('■■■ recheckin', date, checkout);
       setCheckinData(date);
+      setStayDates(getMinStayDates(date));
       return;
     }
     if (checkin && !checkBeforeCheckin(dateTime)) {
       console.log('■■■ checkout', date);
       setCheckoutData(date);
+      setStayDates([]);
       return;
     }
     if (checkBeforeCheckin(dateTime) && isDetailPage) {
@@ -195,6 +219,8 @@ const CalendarContainer = ({
       checkAfterReserved={checkAfterReserved}
       checkBeforeCheckin={checkBeforeCheckin}
       beforeToday={beforeToday}
+      stayDates={stayDates}
+      minimumStay={minimumStay}
       {...rest}
     />
   );
