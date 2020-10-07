@@ -46,8 +46,8 @@ const Subject = ({ isLoading, home }) => {
             <StButton transition onClick={onClickBookmark}>
               <StHeart
                 size="smaller"
-                bgColor={isBookmarked === 'false' ? 'white' : 'main'}
-                stroke={isBookmarked === 'false' ? 'black' : 'main'}
+                bgColor={isBookmarked ? 'main' : 'white'}
+                stroke={isBookmarked ? 'main' : 'black'}
               />
               저장
             </StButton>
