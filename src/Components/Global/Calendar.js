@@ -26,6 +26,7 @@ const Calendar = ({
   beforeToday,
   stayDates,
   minimumStay,
+  isReservationBox,
   ...rest
 }) => {
   const addZero = num => ((num + '').length === 1 ? '0' + num : num);
@@ -67,6 +68,12 @@ const Calendar = ({
                 checkout={isCheckout}
                 hoverDate={hoverDate === nowDate}
                 stayDate={stayDate}
+                reserved={reserved}
+                beforeToday={beforeToday(dateTime)}
+                afterReserved={isAfterReserved && !checkout}
+                beforeCheckin={
+                  isDetailPage && !checkout && checkBeforeCheckin(dateTime)
+                }
               >
                 <StDateBtn
                   id={`dateId-${nowMonth.year}.${_nowMonth}.${_date}`}
@@ -75,12 +82,6 @@ const Calendar = ({
                   checkin={isCheckin}
                   checkout={isCheckout}
                   hoverDate={hoverDate === nowDate && !isAfterReserved}
-                  reserved={reserved}
-                  beforeToday={beforeToday(dateTime)}
-                  afterReserved={isAfterReserved && !checkout}
-                  beforeCheckin={
-                    isDetailPage && !checkout && checkBeforeCheckin(dateTime)
-                  }
                   stayDate={stayDate}
                   btnType="circle"
                 >
@@ -122,7 +123,8 @@ const Calendar = ({
           <AiOutlineRight />
         </StNextMonthBtn>
         {renderCalendar(thisMonthDates, thisMonth)}
-        {!responsiveScreen && renderCalendar(nextMonthDates, nextMonth)}
+        {(!responsiveScreen || isReservationBox) &&
+          renderCalendar(nextMonthDates, nextMonth)}
       </StWrapper>
     </>
   );
@@ -136,7 +138,6 @@ const StWrapper = styled.div`
   min-width: 308px;
   min-height: 300px;
   margin-top: 30px;
-  cursor: pointer;
 
   ${({ isDetailPage }) =>
     isDetailPage &&
@@ -234,6 +235,24 @@ const StDateWrapper = styled.div`
       border-bottom-right-radius: 50%;
     `}
 
+
+  ${({ reserved, beforeToday, beforeCheckin, afterReserved }) =>
+    (reserved || beforeToday || beforeCheckin || afterReserved) &&
+    css`
+      cursor: initial;
+
+      & button {
+        color: rgba(72, 72, 72, 0.25);
+        text-decoration: line-through;
+        font-weight: 400;
+        cursor: initial;
+
+        :hover {
+          border: none;
+        }
+      }
+    `}
+
     
   ${({ checkin, checkout, stayDate }) =>
     (checkin || checkout || stayDate) &&
@@ -294,19 +313,6 @@ const StDateBtn = styled(Button)`
     css`
       background-color: ${({ theme }) => theme.color.black};
       color: ${({ theme }) => theme.color.white};
-    `}
-
-  ${({ reserved, beforeToday, beforeCheckin, afterReserved }) =>
-    (reserved || beforeToday || beforeCheckin || afterReserved) &&
-    css`
-      color: rgba(72, 72, 72, 0.25);
-      text-decoration: line-through;
-      font-weight: 400;
-      cursor: initial;
-
-      :hover {
-        border: none;
-      }
     `}
 
   ${({ stayDate }) =>
