@@ -1,17 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import Division from './Division';
 import Checkbox from '../Global/Checkbox';
 import Button from '../Global/Button';
 import HomeMapContainer from '../../Containers/Detail/HomeMapContainer';
+import { setScrollLocationY } from '../../Modules/home';
 
 const HomeLocation = ({ home }) => {
   const [check, setCheck] = useState(false);
   const [zoom, setZoom] = useState(15);
+  const ref = useRef();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setScrollLocationY('locationRef', ref.current));
+  }, []);
 
   const onToggle = e => setCheck(e.target.checked);
   return (
-    <Division title="위치">
+    <Division title="위치" sentRef={ref}>
       <HomeMapContainer zoom={zoom}>
         <StScaleBtn>
           <Button onClick={() => setZoom(zoom + 1)}>
@@ -39,15 +47,6 @@ const HomeLocation = ({ home }) => {
     </Division>
   );
 };
-
-/* const StMap = styled(Map)` */
-const StMap = styled.div`
-  background-color: #e3e8d6;
-  position: relative;
-  width: 100%;
-  height: 480px;
-  /* margin-bottom: 32px; */
-`;
 
 const StCheckbox = styled(Checkbox)`
   position: absolute;
