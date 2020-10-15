@@ -23,7 +23,7 @@ const DetailMainContainer = () => {
   useEffect(() => {
     if (home) return;
     dispatch(getHome(id));
-    window.addEventListener('resize', throttle(resize, 300));
+    window.addEventListener('resize', throttle(resize, 150));
 
     return () => {
       window.removeEventListener('resize', resize);
