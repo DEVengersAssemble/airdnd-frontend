@@ -6,6 +6,8 @@ const GET_HOME_SUCCESS = 'home/GET_HOME_SUCCESS';
 const GET_HOME_ERROR = 'home/GET_HOME_ERROR';
 const RESIZE_SCREEN = 'home/RESIZE_SCREEN';
 const TOGGLE_IS_BOOKMARKED = 'home/TOGGLE_IS_BOOKMARKED';
+const SET_SCROLL_LOCATION_Y = 'home/SET_SCROLL_LOCATION_Y';
+const SET_POPUP_STATE = 'home/SET_POPUP_STATE';
 
 export const getHome = id => async dispatch => {
   dispatch({ type: GET_HOME }); // 요청이 시작됨
@@ -26,12 +28,27 @@ export const onResize = () => {
 
 export const toggleIsBookmarked = () => ({ type: TOGGLE_IS_BOOKMARKED });
 
+export const setScrollLocationY = (name, top) => ({
+  type: SET_SCROLL_LOCATION_Y,
+  name,
+  top,
+});
+
+export const setPopupState = boolean => ({ type: SET_POPUP_STATE, boolean });
+
 const initialState = {
   homeState: { isLoading: false, home: null, error: null },
   screenState: {
     isScreenMedium: window.matchMedia('screen and (max-width: 1127px)').matches,
     isScreenLarge: window.matchMedia('screen and (max-width: 1200px)').matches,
   },
+  scrollState: {
+    amenitiesRef: null,
+    reviewsRef: null,
+    locationRef: null,
+    checkPopupRef: null,
+  },
+  popupState: false,
 };
 
 // 리듀서
@@ -81,6 +98,19 @@ const home = (state = initialState, action) => {
             isBookmarked: !state.homeState.home.isBookmarked,
           },
         },
+      };
+    case SET_SCROLL_LOCATION_Y:
+      return {
+        ...state,
+        scrollState: {
+          ...state.scrollState,
+          [action.name]: action.top,
+        },
+      };
+    case SET_POPUP_STATE:
+      return {
+        ...state,
+        popupState: action.boolean,
       };
     default:
       return state;
