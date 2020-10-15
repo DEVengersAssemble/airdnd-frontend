@@ -101,7 +101,7 @@ const CalendarContainer = ({
     return minStayDates;
   };
 
-  console.log(minimumStay, stayDates);
+  // console.log(minimumStay, stayDates);
 
   const [hoverDate, setHoverDate] = useState('');
 
