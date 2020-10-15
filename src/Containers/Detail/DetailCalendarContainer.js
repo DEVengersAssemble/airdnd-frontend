@@ -7,7 +7,7 @@ import {
   setChangeInitialDate,
 } from '../../Modules/reservation';
 
-const DetailCalendarContainer = ({ ...rest }) => {
+const DetailCalendarContainer = ({ isReservationBox, ...rest }) => {
   const { isScreenLarge } = useSelector(state => state.home.screenState);
   const { checkin, checkout, changeInitialDate, reservedDates } = useSelector(
     state => state.reservation,
@@ -34,6 +34,7 @@ const DetailCalendarContainer = ({ ...rest }) => {
       setChangeDataTrue={setChangeDataTrue}
       reservedDates={reservedDates}
       isDetailPage={true}
+      isReservationBox={isReservationBox}
       {...rest}
     />
   );

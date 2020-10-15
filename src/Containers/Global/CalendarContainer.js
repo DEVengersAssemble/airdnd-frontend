@@ -12,9 +12,12 @@ const CalendarContainer = ({
   setChangeDataTrue,
   reservedDates = [],
   isDetailPage,
+  isReservationBox,
   ...rest
 }) => {
-  const { minimumStay } = useSelector(state => state.home.homeState.home);
+  const minimumStay = useSelector(state =>
+    state.home.homeState.home ? state.home.homeState.home.minimumStay : 0,
+  );
 
   const [count, setCount] = useState(0);
 
@@ -86,6 +89,7 @@ const CalendarContainer = ({
   const [stayDates, setStayDates] = useState([]);
 
   const getMinStayDates = strDate => {
+    if (!isDetailPage) return [];
     const date = new Date(strDate);
     const minStayDates = Array.from({ length: minimumStay - 1 }, () => {
       date.setDate(date.getDate() + 1);
@@ -215,6 +219,7 @@ const CalendarContainer = ({
       hoverDate={hoverDate}
       reservedDates={reservedDates}
       isDetailPage={isDetailPage}
+      isReservationBox={isReservationBox}
       onClickWrapper={onClickWrapper}
       checkAfterReserved={checkAfterReserved}
       checkBeforeCheckin={checkBeforeCheckin}
