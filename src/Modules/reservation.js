@@ -41,16 +41,16 @@ const getDateDiff = (date1, date2) => {
 };
 
 const initialState = {
-  checkin: '2020.09.22',
-  checkout: '2020.09.25',
+  checkin: '2020.10.28',
+  checkout: '2020.10.30',
   dateDiff: 3,
   reservedDates: [
-    '2020.08.15',
-    '2020.08.16',
-    '2020.09.20',
-    '2020.09.28',
     '2020.10.20',
     '2020.10.25',
+    '2020.11.15',
+    '2020.11.16',
+    '2020.11.20',
+    '2020.12.28',
   ],
   guests: { adult: 1, child: 0, infant: 0 },
   changeInitialDate: false,

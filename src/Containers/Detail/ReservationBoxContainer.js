@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { openModal } from '../../Modules/modal';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -8,6 +8,7 @@ import {
   setCheckout,
   setResevationGuest,
 } from '../../Modules/reservation';
+import { setScrollLocationY } from '../../Modules/home';
 
 const ReservationBoxContainer = ({ home }) => {
   const { isLoggedIn } = useSelector(state => state.user);
@@ -95,6 +96,10 @@ const ReservationBoxContainer = ({ home }) => {
     }
     history.push(`/Reservation/HouseRules/${id}`);
   };
+
+  useEffect(() => {
+    dispatch(setScrollLocationY('checkPopupRef', checkPopupRef.current));
+  }, []);
 
   return (
     <ReservationBox
