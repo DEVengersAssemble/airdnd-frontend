@@ -14,10 +14,10 @@ const DetailHeaderContainer = () => {
   );
   // const [scrollY, setScrollY] = useState(window.scrollY);
   const [isScrollTop, setIsScrollTop] = useState(
-    window.scrollY < (homeInfosRef ? homeInfosRef.offsetTop : 643),
+    window.pageYOffset < (homeInfosRef ? homeInfosRef.offsetTop : 643),
   );
   const [isScrollUnderBox, setIsScrollUnderBox] = useState(
-    window.scrollY > 2569,
+    window.pageYOffset > 2569,
   );
   const [isSearchBtnClicked, setIsSearchBtnClicked] = useState(false);
   const [initAnimation, setInitAnimation] = useState(false);
@@ -31,13 +31,13 @@ const DetailHeaderContainer = () => {
     // console.log(isScrollUnderBox, popupState, window.scrollY > 2569);
     // if (isScrollUnderBox && popupState) dispatch(setPopupState(false));
     setIsScrollTop(
-      window.scrollY < (homeInfosRef ? homeInfosRef.offsetTop : 643),
+      window.pageYOffset < (homeInfosRef ? homeInfosRef.offsetTop : 643),
     );
-    setIsScrollUnderBox(window.scrollY > 2569);
+    setIsScrollUnderBox(window.pageYOffset > 2569);
     setIsSearchBtnClicked(false);
   };
 
-  console.log(window.scrollY, homeInfosRef);
+  console.log(window.pageYOffset, homeInfosRef);
 
   useEffect(() => {
     // console.log(isSearchBtnClicked);
