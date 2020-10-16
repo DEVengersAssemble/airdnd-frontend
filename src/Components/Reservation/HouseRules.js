@@ -7,34 +7,44 @@ import icons from '../../lib/icons';
 
 const HouseRules = ({
   address,
-  checkin,
-  checkout,
+  checkinTime,
+  checkoutTime,
   rules,
   readMore,
   onReadMore,
   onNextPage,
+  checkin,
+  checkout,
 }) => {
+  const checkinMon = checkin.split('.')[1];
+  const checkoutMon = checkout.split('.')[1];
+  const checkinDate = new Date(checkin);
+  const checkoutDate = new Date(checkout);
+  const options = { weekday: 'long' };
+
   return (
     <CommonLayout title="숙소 이용규칙 확인하기">
       <StSubTitle>{address} 2박</StSubTitle>
       <StCheckWrapper>
         <StDateWrapper>
-          <span>9월</span>
-          <span>14</span>
+          <span>{+checkinMon > 9 ? checkinMon : checkinMon.slice(1)}월</span>
+          <span>{checkin.split('.')[2]}</span>
         </StDateWrapper>
         <StTextWrapper>
-          <span>일요일 체크인</span>
-          <span>{checkin}</span>
+          <span>{checkinDate.toLocaleDateString('ko-KR', options)} 체크인</span>
+          <span>{checkinTime}</span>
         </StTextWrapper>
       </StCheckWrapper>
       <StCheckWrapper>
         <StDateWrapper>
-          <span>9월</span>
-          <span>14</span>
+          <span>{+checkoutMon > 9 ? checkoutMon : checkoutMon.slice(1)}월</span>
+          <span>{checkout.split('.')[2]}</span>
         </StDateWrapper>
         <StTextWrapper>
-          <span>화요일 체크아웃</span>
-          <span>{checkout}</span>
+          <span>
+            {checkoutDate.toLocaleDateString('ko-KR', options)} 체크아웃
+          </span>
+          <span>{checkoutTime}</span>
         </StTextWrapper>
       </StCheckWrapper>
       <StSubTitle border>주의할 사항</StSubTitle>
@@ -65,10 +75,12 @@ const HouseRules = ({
           );
         })}
       </StRuleList>
-      <StReadmoreBtn readMore={readMore} hover onClick={onReadMore}>
-        <span>{readMore ? '숨기기' : '더 보기'}</span>
-        <FiChevronDown />
-      </StReadmoreBtn>
+      {rules.length > 4 && (
+        <StReadmoreBtn readMore={readMore} hover onClick={onReadMore}>
+          <span>{readMore ? '숨기기' : '더 보기'}</span>
+          <FiChevronDown />
+        </StReadmoreBtn>
+      )}
       <StButton btnType="color" color="main" onClick={onNextPage}>
         동의 및 계속하기
       </StButton>
@@ -105,7 +117,7 @@ const StCheckWrapper = styled.div`
 
 const StDateWrapper = styled.div`
   display: inline-block;
-  width: 56px;
+  width: 58px;
   height: 56px;
   padding: 7px 16px;
   text-align: center;

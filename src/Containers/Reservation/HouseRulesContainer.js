@@ -4,13 +4,23 @@ import { useHistory } from 'react-router-dom';
 import HouseRules from '../../Components/Reservation/HouseRules';
 
 const HouseRulesContainer = () => {
-  const { id, address, checkin, checkout, rules } = useSelector(
+  const {
+    id,
+    address,
+    checkinTime,
+    checkoutTime,
+    rules,
+    checkin,
+    checkout,
+  } = useSelector(
     state => ({
       id: state.home.homeState.home.id,
       address: state.home.homeState.home.address,
-      checkin: state.home.homeState.home.checkin,
-      checkout: state.home.homeState.home.checkout,
+      checkinTime: state.home.homeState.home.checkin,
+      checkoutTime: state.home.homeState.home.checkout,
       rules: state.home.homeState.home.notice.rules,
+      checkin: state.reservation.checkin,
+      checkout: state.reservation.checkout,
     }),
     shallowEqual,
   );
@@ -26,12 +36,14 @@ const HouseRulesContainer = () => {
   return (
     <HouseRules
       address={shortAddress}
-      checkin={checkin}
-      checkout={checkout}
+      checkinTime={checkinTime}
+      checkoutTime={checkoutTime}
       rules={rules}
       readMore={readMore}
       onReadMore={onReadMore}
       onNextPage={onNextPage}
+      checkin={checkin}
+      checkout={checkout}
     />
   );
 };
