@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import qs from 'qs';
 import { throttle } from 'lodash';
 import Subject from '../../Components/Detail/Subject';
 import HomeInfos from '../../Components/Detail/HomeInfos';
@@ -17,6 +18,10 @@ const DetailMainContainer = () => {
   const { isLoggedIn } = useSelector(state => state.user);
   const dispatch = useDispatch();
   const { id } = useParams();
+  const location = useLocation();
+  const queryObj = qs.parse(location.search, { ignoreQueryPrefix: true });
+
+  console.log(location, queryObj);
 
   const resize = () => dispatch(onResize());
 
