@@ -7,14 +7,17 @@ import { toggleBookmark } from '../../lib/bookmarkUtils';
 const HomeCardContainer = ({ home, type }) => {
   const { id } = useSelector(state => state.user.data);
   const { dateDiff } = useSelector(state => state.searchForm);
-  const { mapState } = useSelector(state => state.search);
+  const { mapState, filterForm } = useSelector(state => state.search);
   const { hoveredHome } = useSelector(state => state.mouseEvents);
+  const { checkIn, checkOut, adult, child, infant } = filterForm;
   const isHovered = hoveredHome === home.homeId;
   const dispatch = useDispatch();
 
   const onBlurHome = () => dispatch(blurHome());
   const onHoverHome = () =>
     hoveredHome !== home.homeId && dispatch(hoverHome(home.homeId));
+
+  const href = `http://localhost:3000/detail/${home.homeId}?checkIn=${checkIn}&checkOut=${checkOut}&adult=${adult}&child=${child}&infant=${infant}`;
 
   return (
     <HomeCard
@@ -26,6 +29,7 @@ const HomeCardContainer = ({ home, type }) => {
       onClickHeart={() => toggleBookmark(id, home, dispatch)}
       onHoverHome={onHoverHome}
       onBlurHome={onBlurHome}
+      href={href}
     />
   );
 };
