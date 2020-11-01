@@ -18,11 +18,11 @@ const HomeContainer = ({ home }) => {
     hoveredHome !== home.homeId && dispatch(hoverHome(home.homeId));
   const onBlurHome = () => dispatch(blurHome());
 
-  const href = `http://localhost:3000/detail/${home.homeId}?${
-    checkIn && 'checkIn=' + checkIn
-  }${checkOut && '&checkOut=' + checkOut}${+adult ? '&adult=' + adult : ''}${
-    +child ? '&child=' + child : ''
-  }${+infant ? '&infant=' + infant : ''}`;
+  const href = `/detail/${home.homeId}?${checkIn && 'checkIn=' + checkIn}${
+    checkOut && '&checkOut=' + checkOut
+  }${+adult ? '&adult=' + adult : ''}${+child ? '&child=' + child : ''}${
+    +infant ? '&infant=' + infant : ''
+  }`;
 
   return (
     <Home
