@@ -8,8 +8,8 @@ const CalendarContainer = ({
   setCheckoutData,
   checkin,
   checkout,
-  changeInitialDate,
-  setChangeDataTrue,
+  // changeInitialDate,
+  // setChangeDataTrue,
   reservedDates = [],
   isDetailPage,
   isReservationBox,
@@ -128,7 +128,7 @@ const CalendarContainer = ({
 
     if (date === reserved) return;
     if (beforeToday(dateTime)) return;
-    if (changeInitialDate === false) setChangeDataTrue(true);
+    // if (changeInitialDate === false) setChangeDataTrue(true);
 
     if (!checkin) {
       console.log('■■■ checkin', date);

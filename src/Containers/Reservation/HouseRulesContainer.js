@@ -12,6 +12,9 @@ const HouseRulesContainer = () => {
     rules,
     checkin,
     checkout,
+    adult,
+    child,
+    infant,
   } = useSelector(
     state => ({
       id: state.home.homeState.home.id,
@@ -21,6 +24,9 @@ const HouseRulesContainer = () => {
       rules: state.home.homeState.home.notice.rules,
       checkin: state.reservation.checkin,
       checkout: state.reservation.checkout,
+      adult: state.reservation.guests.adult,
+      child: state.reservation.guests.child,
+      infant: state.reservation.guests.infant,
     }),
     shallowEqual,
   );
@@ -31,7 +37,14 @@ const HouseRulesContainer = () => {
   const shortAddress = address.split(',')[0];
 
   const onReadMore = () => setReadMore(!readMore);
-  const onNextPage = () => history.push(`/Reservation/GuestInfo/${id}`);
+  const onNextPage = () =>
+    history.push(
+      `/Reservation/GuestInfo/${id}?${checkin && 'checkIn=' + checkin}${
+        checkout && '&checkOut=' + checkout
+      }${+adult ? '&adult=' + adult : ''}${+child ? '&child=' + child : ''}${
+        +infant ? '&infant=' + infant : ''
+      }`,
+    );
 
   return (
     <HouseRules
