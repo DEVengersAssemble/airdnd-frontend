@@ -123,11 +123,11 @@ const reservation = (state = initialState, action) => {
     case SET_INITIAL_DATAS: {
       return {
         ...state,
-        checkin: action.data.checkIn || 0,
-        checkout: action.data.checkOut || 0,
+        checkin: action.data.checkIn || '',
+        checkout: action.data.checkOut || '',
         dateDiff: getDateDiff(action.data.checkIn, action.data.checkOut),
         guests: {
-          adult: +action.data.adult || 0,
+          adult: +action.data.adult || 1,
           child: +action.data.child || 0,
           infant: +action.data.infant || 0,
         },
