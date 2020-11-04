@@ -5,19 +5,19 @@ import { setPopupState } from '../../Modules/home';
 
 const CheckPopupContainer = ({ checkPopupRef }) => {
   const dispatch = useDispatch();
-  const {
-    dateDiff: searchDateDiff,
-    checkIn: searchCheckin,
-    checkOut: searchCheckout,
-  } = useSelector(state => state.searchForm);
-  const { dateDiff, checkin, checkout, changeInitialDate } = useSelector(
+  // const {
+  //   dateDiff: searchDateDiff,
+  //   checkIn: searchCheckin,
+  //   checkOut: searchCheckout,
+  // } = useSelector(state => state.searchForm);
+  const { dateDiff, checkin, checkout } = useSelector(
     state => state.reservation,
   );
   const { popupState } = useSelector(state => state.home);
 
-  const reAssignedDateDiff = changeInitialDate ? dateDiff : searchDateDiff;
-  const reAssignedCheckin = changeInitialDate ? checkin : searchCheckin;
-  const reAssignedCheckout = changeInitialDate ? checkout : searchCheckout;
+  // const reAssignedDateDiff = changeInitialDate ? dateDiff : searchDateDiff;
+  // const reAssignedCheckin = changeInitialDate ? checkin : searchCheckin;
+  // const reAssignedCheckout = changeInitialDate ? checkout : searchCheckout;
 
   // const CheckPopupRef = useRef();
   // const [popupState, setPopupState] = useState(false);
@@ -56,9 +56,9 @@ const CheckPopupContainer = ({ checkPopupRef }) => {
   return (
     <CheckPopup
       checkPopupRef={checkPopupRef}
-      checkin={reAssignedCheckin}
-      checkout={reAssignedCheckout}
-      dateDiff={reAssignedDateDiff}
+      checkin={checkin}
+      checkout={checkout}
+      dateDiff={dateDiff}
       setPopupState={dpSetPopupState}
       popupState={popupState}
       onOpenPopup={onOpenPopup}
