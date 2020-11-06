@@ -3,6 +3,7 @@
 2020.08.03부터 2020.09.12까지 6주간 진행한 airbnb 클론 코딩 프로젝트입니다.   
 기획 1주, 개발 5주의 일정으로 진행하였습니다.
 <br>
+<br>
 [![aidnd](/src/Assets/Img/airdndCapture.png)](https://www.youtube.com/watch?v=iB43qkoJuB0)   
 유튜브 링크 : <https://www.youtube.com/watch?v=iB43qkoJuB0>
 
