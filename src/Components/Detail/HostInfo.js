@@ -127,7 +127,6 @@ const StHostWrapper = styled.div`
 
 const StMarkList = styled.ul`
   li {
-    /* display: inline-block; */
     display: inline-flex;
     align-items: center;
     margin: 0 24px 24px 0;
@@ -135,7 +134,6 @@ const StMarkList = styled.ul`
 
   li:nth-of-type(1) svg {
     font-size: 18px;
-    /* vertical-align: bottom; */
   }
 
   svg {
