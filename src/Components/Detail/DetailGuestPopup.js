@@ -117,17 +117,10 @@ const StGuests = styled.div`
 
   :focus {
     margin-top: -1px;
-    /* border: 2px solid ${({ theme }) => theme.color.black}; */
     box-shadow: 0 0 0 2px ${({ theme }) => theme.color.black};
     border-radius: 8px;
     border: 1px solid rgba(0 0 0 0);
     z-index: 1;
-    /* padding: 25px 11px 10px; */
-
-    /* & > div:first-child {
-      top: 9px;
-      left: 11px;
-    } */
   }
 `;
 

@@ -38,7 +38,6 @@ const skeleton = keyframes`
 
 const StImgsWrapper = styled.div`
   position: relative;
-  /* margin-bottom: 4.8rem; */
   height: calc(60vh - 64px);
   max-height: 507px;
   border-radius: 1.2rem;

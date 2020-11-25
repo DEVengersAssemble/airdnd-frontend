@@ -148,7 +148,6 @@ const StButton = styled(Button)`
   padding: 0.8rem;
   font-size: 14px;
   text-decoration: underline;
-  /* font-weight: 500; */
 
   & svg {
     margin-right: 8px;
