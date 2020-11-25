@@ -11,7 +11,7 @@ const Payment = ({ onClickPayment, payState, postState }) => {
   return (
     <CommonLayout title="확인 및 결제" hidden>
       <StWrapper>
-        {payState === 'paying' && '결제를 진행하는 중입니다.'}
+        {payState === 'paying' && isLoading && '결제를 진행하는 중입니다.'}
         {payState === 'payError' && (
           <>
             <div>결제에 실패하셨습니다. 다시 시도해주세요.</div>
@@ -20,7 +20,7 @@ const Payment = ({ onClickPayment, payState, postState }) => {
             </StButton>
           </>
         )}
-        {payState === 'paySuccess' && (
+        {payState === 'paySuccess' && success && (
           <>
             <div>결제를 완료하셨습니다.</div>
             <StButton

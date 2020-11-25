@@ -120,7 +120,6 @@ const StReserveBox = styled.div`
       font-weight: 400;
       font-size: 16px;
       vertical-align: top;
-      /* line-height: 20px; */
       white-space: nowrap;
       padding-left: 4px;
     }
@@ -128,52 +127,9 @@ const StReserveBox = styled.div`
 `;
 
 const StWriteWrapper = styled.div`
-    width: 100%;
-    border-radius: 8px;
-    /* border: 1px solid ${({ theme }) => theme.color.gray}; */
-  `;
-
-// const StCheckWrapper = styled.div`
-//   position: relative;
-//   display: flex;
-//   flex-wrap: nowrap;
-//   align-items: center;
-//   width: 100%;
-//   outline: none;
-// `;
-
-// const commonWrapper = css`
-//   position: relative;
-//   width: 50%;
-//   height: 56px;
-//   padding: 26px 12px 10px;
-//   border: 1px solid ${({ theme }) => theme.color.gray};
-// `;
-
-// const StCheckIn = styled.div`
-//   ${commonWrapper}
-//   border-right: none;
-//   border-top-left-radius: 8px;
-// `;
-
-// const StCheckOut = styled.div`
-//   ${commonWrapper}
-//   border-top-right-radius: 8px;
-// `;
-
-// const StName = styled.div`
-//   position: absolute;
-//   top: 10px;
-//   left: 12px;
-//   font-size: 10px;
-//   font-weight: 600;
-//   line-height: 12px;
-// `;
-
-// const StContent = styled.div`
-//   font-size: 14px;
-//   color: ${({ theme }) => theme.color.darkGray};
-// `;
+  width: 100%;
+  border-radius: 8px;
+`;
 
 const StReserveBtn = styled(Button)`
   margin-top: 16px;
