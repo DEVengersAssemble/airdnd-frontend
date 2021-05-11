@@ -12,7 +12,7 @@
     "eslint-config-prettier": "^6.11.0",
     "express": "^4.17.1",
     "jquery": "^3.5.1",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "polished": "^3.6.5",
     "proxy": "^1.0.2",
     "qs": "^6.9.4",
