@@ -10,7 +10,7 @@
     "engine.io-client": "^3.4.3",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-config-prettier": "^6.11.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "jquery": "^3.5.1",
     "lodash": "^4.17.20",
     "polished": "^3.6.5",
